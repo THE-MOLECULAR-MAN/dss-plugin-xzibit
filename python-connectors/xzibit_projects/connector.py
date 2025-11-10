@@ -26,8 +26,8 @@ class MyConnector(Connector):
         object 'plugin_config' to the constructor
         """
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
-        self.client = api_client()
         try:
+            self.client = api_client()
             self.projects_list = self.client.list_projects()
         except Exception as e:
             print('whatever')
