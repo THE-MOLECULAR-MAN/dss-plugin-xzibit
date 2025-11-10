@@ -8,10 +8,10 @@
     // Meta data for display purposes:
     "meta": {
         // label: name of the plugin as displayed, should be short
-        "label": "Xzibit - The Inception of DSS",
+        "label": "Xzibit - DSS Inception",
 
         // description: longer string to help end users understand what this plugin does
-        "description": "",
+        "description": "So I heard you like Dataiku datasets, so I put a dataset of datasets in your Dataiku",
 
         "author": "Tim H",
 
