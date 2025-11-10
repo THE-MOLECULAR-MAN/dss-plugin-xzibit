@@ -1,4 +1,8 @@
 
+# pretty print dictionaries for debugging - don't remove at this time.
+from pprint import pprint as pp
+
+
 def get_values_for_key(ld, k):
     """
     Extract the unique values for a given key from a list of dictionaries.

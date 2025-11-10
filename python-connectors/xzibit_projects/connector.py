@@ -1,12 +1,19 @@
-# This file is the actual code for the custom Python dataset dss-internals_code-envs
+# This file is the actual code for the custom Python dataset xzibit_projects
+from datetime import datetime
 
-# import the base class for the custom dataset
-from dataiku.connector import Connector
+# import pprint
+
 from dataiku import api_client
+from dataiku.connector import Connector
 from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key
 
 """
 A custom Python dataset is a subclass of Connector.
+
+The parameters it expects and some flags to control its handling by DSS are
+specified in the connector.json file.
+
+Note: the name of the class itself is not relevant.
 """
 class MyConnector(Connector):
 
@@ -20,6 +27,7 @@ class MyConnector(Connector):
         """
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
         self.client = api_client()
+    
 
     def get_read_schema(self):
         """
@@ -40,10 +48,8 @@ class MyConnector(Connector):
 
         Supported types are: string, int, bigint, float, double, date, boolean
         """
-
-        # In this example, we don't specify a schema here, so DSS will infer the schema
-        # from the columns actually returned by the generate_rows method
         return None
+
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
@@ -55,21 +61,13 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        for code_env_info in self.client.list_code_envs():
-            next_code_env = flatten_dict(code_env_info, 
-                               include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner', 'isUptodate'])
-            env_lang = next_code_env['envLang']
-            env_name = next_code_env['envName']
-            
-            code_env_handle = self.client.get_code_env(env_lang, env_name)
-            list_of_usages = code_env_handle.list_usages()
+        for project_info in self.client.list_projects():
+            next_project = flatten_dict(project_info, 
+                               include_keys=['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 'projectLocation', 'projectStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialProject'])
+            next_project = remove_prefix_from_keys(next_project, 'versionTag.')
+            next_project['lastModifiedOn'] = datetime.fromtimestamp(next_project['lastModifiedOn'] // 1000)
+            yield next_project
 
-            if len(list_of_usages) == 0:
-                next_code_env['usages'] = []
-            else:
-                next_code_env['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
-
-            yield next_code_env
 
     def get_partitioning(self):
         """
@@ -100,4 +98,4 @@ class MyConnector(Connector):
         Implementation is only required if the corresponding flag is set to True
         in the connector definition
         """
-        return len(self.client.list_code_envs())
+        return len(self.client.list_projects())
