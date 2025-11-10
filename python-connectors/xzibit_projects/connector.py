@@ -22,7 +22,6 @@ class MyConnector(Connector):
         finally:
             assert isinstance(self.objects_list, list), "self.objects_list must be of type list"
             self.count = len(self.objects_list)
-
     
 
     def get_read_schema(self):
