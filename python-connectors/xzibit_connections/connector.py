@@ -48,7 +48,7 @@ class MyConnector(Connector):
                 next_row = list_to_error_dict(keys)
                 next_row['name'] = connection_info.get('name', 'NO_NAME')
             finally:
-                yield next_plugin
+                yield next_row
 
 
     def get_partitioning(self):
