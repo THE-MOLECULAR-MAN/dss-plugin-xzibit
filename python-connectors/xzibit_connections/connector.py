@@ -98,4 +98,4 @@ class MyConnector(Connector):
         Implementation is only required if the corresponding flag is set to True
         in the connector definition
         """
-        return len(self.client.list_projects())
+        return len(self.client.list_connections(as_type='listitems')())
