@@ -68,7 +68,6 @@ class MyConnector(Connector):
             next_project = remove_prefix_from_keys(next_project, 'versionTag.')
             next_project['lastModifiedOn'] = datetime.fromtimestamp(next_project['lastModifiedOn'] / 1000)
             
-            # project_handle = self.client.get_project(next_project['id'])
             yield next_project
 
 
