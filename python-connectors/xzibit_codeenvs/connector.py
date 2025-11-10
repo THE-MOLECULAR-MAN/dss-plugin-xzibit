@@ -70,7 +70,7 @@ class MyConnector(Connector):
             env_name = next_code_env['envName']
             
             code_env_handle = self.client.get_code_env(env_lang, env_name)
-            list_of_usages = code_env_handle.list_usages().get_raw()['usages']
+            list_of_usages = code_env_handle.list_code_env_usages().get_raw()['usages']
             if len(list_of_usages) == 0:
                 next_code_env['usages'] = []
             else:
