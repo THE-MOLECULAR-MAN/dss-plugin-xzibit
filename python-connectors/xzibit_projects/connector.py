@@ -61,11 +61,11 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        for project_info in self.client.list_projects():
-            next_project = flatten_dict(project_info, 
-                               include_keys=['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 'projectLocation', 'projectStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialProject'])
-            next_project = remove_prefix_from_keys(next_project, 'versionTag.')
-            next_project['lastModifiedOn'] = datetime.fromtimestamp(next_project['lastModifiedOn'] // 1000)
+#         for project_info in self.client.list_projects():
+#             next_project = flatten_dict(project_info, 
+#                                include_keys=['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 'projectLocation', 'projectStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialProject'])
+#             next_project = remove_prefix_from_keys(next_project, 'versionTag.')
+#             next_project['lastModifiedOn'] = datetime.fromtimestamp(next_project['lastModifiedOn'] // 1000)
             yield next_project
             
        
