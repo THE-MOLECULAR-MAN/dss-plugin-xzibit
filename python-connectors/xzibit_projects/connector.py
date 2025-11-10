@@ -1,8 +1,8 @@
 # This file is the actual code for the custom Python dataset xzibit_projects
 
-# import the base class for the custom dataset
-from six.moves import xrange
+from dataiku import api_client
 from dataiku.connector import Connector
+from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key
 
 """
 A custom Python dataset is a subclass of Connector.
@@ -23,9 +23,8 @@ class MyConnector(Connector):
         object 'plugin_config' to the constructor
         """
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
-
-        # perform some more initialization
-        self.theparam1 = self.config.get("parameter1", "defaultValue")
+        self.client = api_client()
+    
 
     def get_read_schema(self):
         """
@@ -46,10 +45,8 @@ class MyConnector(Connector):
 
         Supported types are: string, int, bigint, float, double, date, boolean
         """
-
-        # In this example, we don't specify a schema here, so DSS will infer the schema
-        # from the columns actually returned by the generate_rows method
         return None
+
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
@@ -61,24 +58,17 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        for i in xrange(1,10):
-            yield { "first_col" : str(i), "my_string" : "Yes" }
-
-
-    def get_writer(self, dataset_schema=None, dataset_partitioning=None,
-                         partition_id=None, write_mode="OVERWRITE"):
-        """
-        Returns a writer object to write in the dataset (or in a partition).
-
-        The dataset_schema given here will match the the rows given to the writer below.
-
-        write_mode can either be OVERWRITE or APPEND.
-        It will not be APPEND unless the plugin explicitly supports append mode. See flag supportAppend in connector.json.
-        If applicable, the write_mode should be handled in the plugin code.
-
-        Note: the writer is responsible for clearing the partition, if relevant.
-        """
-        raise NotImplementedError
+        for plugin_info in self.client.list_plugins():
+            next_plugin = flatten_dict(plugin_info, 
+                               include_keys=['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev'])
+            next_plugin = remove_prefix_from_keys(next_plugin, 'meta.')
+            plugin_handle = self.client.get_plugin(next_plugin['id'])
+            list_of_usages = plugin_handle.list_usages().get_raw()['usages']
+            if len(list_of_usages) == 0:
+                next_plugin['usages'] = []
+            else:
+                next_plugin['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+            yield next_plugin
 
 
     def get_partitioning(self):
@@ -110,19 +100,4 @@ class MyConnector(Connector):
         Implementation is only required if the corresponding flag is set to True
         in the connector definition
         """
-        raise NotImplementedError
-
-
-class CustomDatasetWriter(object):
-    def __init__(self):
-        pass
-
-    def write_row(self, row):
-        """
-        Row is a tuple with N + 1 elements matching the schema passed to get_writer.
-        The last element is a dict of columns not found in the schema
-        """
-        raise NotImplementedError
-
-    def close(self):
-        pass
+        return len(self.client.list_plugins())
