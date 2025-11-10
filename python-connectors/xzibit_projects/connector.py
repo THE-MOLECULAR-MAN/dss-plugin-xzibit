@@ -21,8 +21,9 @@ class MyConnector(Connector):
         except Exception as e:
             print(f"CONSTRUCTOR EXCEPTION: {e}")
         finally:
-            self.count = len(self.objects_list)
             assert isinstance(self.objects_list, list), "self.objects_list must be of type list"
+            self.count = len(self.objects_list)
+
     
 
     def get_read_schema(self):
