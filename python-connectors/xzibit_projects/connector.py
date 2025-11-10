@@ -27,6 +27,12 @@ class MyConnector(Connector):
         """
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
         self.client = api_client()
+        try:
+            self.projects_list = self.client.list_projects()
+        except Exception as e:
+            print('whatever')
+        finally:
+            self.count = len(self.projects_list)
     
 
     def get_read_schema(self):
