@@ -18,6 +18,7 @@ class MyConnector(Connector):
         """
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
         self.client = api_client()
+        self.primary_key_field_name = 'appId'
     
 
     def get_read_schema(self):
