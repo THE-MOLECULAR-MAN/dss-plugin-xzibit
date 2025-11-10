@@ -3,7 +3,7 @@
 # import the base class for the custom dataset
 from dataiku.connector import Connector
 from dataiku import api_client
-from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key, get_path_size, pp
+from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key, get_path_size_megabytes, pp
 
 """
 A custom Python dataset is a subclass of Connector.
