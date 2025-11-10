@@ -5,7 +5,6 @@ from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_pre
 
 """
 A custom Python dataset is a subclass of Connector.
-Note: the name of the class itself is not relevant.
 """
 class MyConnector(Connector):
 
