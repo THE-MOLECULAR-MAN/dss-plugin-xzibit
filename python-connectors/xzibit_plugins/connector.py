@@ -75,8 +75,8 @@ class MyConnector(Connector):
             except Exception as e:
                 print(f"Exception {e} with plugin_info:")
                 pprint(plugin_info)
-                next_row['project_usages'] = None
-                next_row['total_usages']   = None
+                next_row['project_usages'] = 'ERROR'
+                next_row['total_usages']   = 'ERROR'
             finally:
                 yield next_row
 
