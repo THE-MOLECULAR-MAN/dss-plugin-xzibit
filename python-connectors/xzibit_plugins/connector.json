@@ -27,16 +27,5 @@
 
     For the full list and for more details, see the documentation: https://doc.dataiku.com/dss/latest/plugins/reference/params.html
     */
-    "params": [
-        /*
-        {
-            "name": "dss_instance_url",
-            "label": "DSS Instance URL",
-            "type": "STRING",
-            "description": "URL for accessing the DSS instance. Defaults to local instance. Ex: https://dev-design.int.company.com:8443",
-            "mandatory": true,
-            "defaultValue": "localhost"
-        },
-        */
-    ]
+    "params": []
 }
