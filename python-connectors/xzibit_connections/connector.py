@@ -42,8 +42,7 @@ class MyConnector(Connector):
             # pp(connection_info)
             keys = ['name', 'type', 'usableBy', 'allowWrite', 'allowedGroups', 'credentialsMode', 'name', 'type', 'usableBy']
             try:
-                next_row = flatten_dict(connection_info, 
-                                   include_keys=keys)
+                next_row = flatten_dict(connection_info, include_keys=keys)
             except Exception as e:
                 next_row = list_to_error_dict(keys)
             finally:
