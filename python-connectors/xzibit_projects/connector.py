@@ -30,7 +30,7 @@ class MyConnector(Connector):
             self.client = api_client()
             self.projects_list = self.client.list_projects()
         except Exception as e:
-            print('whatever')
+            print('ignored')
         finally:
             self.count = len(self.projects_list)
     
