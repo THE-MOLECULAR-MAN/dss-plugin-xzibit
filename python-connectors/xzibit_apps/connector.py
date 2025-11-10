@@ -61,7 +61,7 @@ class MyConnector(Connector):
         for app_info in self.client.list_apps():
             pprint.print(app_info)
             next_app = flatten_dict(app_info, 
-                               include_keys=['appKey', 'ownerLogin', 'appStatus', 'contributors', 'name', 'appLocation', 'appStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialapp'])
+                               include_keys=['appKey'])
             next_app = remove_prefix_from_keys(next_app, 'versionTag.')
             next_app['lastModifiedOn'] = datetime.fromtimestamp(next_app['lastModifiedOn'] // 1000)
             yield next_app
