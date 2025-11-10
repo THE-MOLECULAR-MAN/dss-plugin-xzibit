@@ -62,7 +62,7 @@ class MyConnector(Connector):
         """
         # print("xzibit_codeenvs - generate_rows START")
         for code_env_info in self.client.list_code_envs():
-            #print("xzibit_codeenvs - generate_rows code_env_info: ")
+            print("xzibit_codeenvs - generate_rows code_env_info: ")
             print(code_env_info)
             next_code_env = flatten_dict(code_env_info, 
                                include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner', 'isUptodate'])
