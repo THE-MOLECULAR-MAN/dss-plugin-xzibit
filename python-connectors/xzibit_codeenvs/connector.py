@@ -1,7 +1,6 @@
 # This file is the actual code for the custom Python dataset dss-internals_code-envs
 
 # import the base class for the custom dataset
-# from six.moves import xrange
 from dataiku.connector import Connector
 from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key
 
