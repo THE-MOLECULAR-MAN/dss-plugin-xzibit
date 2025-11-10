@@ -4,7 +4,7 @@ from pprint import pprint as pp
 
 import os
 
-def list_to_error_dict(strings: list[str]) -> dict[str, str]:
+def list_to_error_dict(strings: list[str], value="error") -> dict[str, str]:
     """
     Convert a list of strings into a dictionary where each string is a key
     and each value is the default string 'error'.
@@ -15,7 +15,7 @@ def list_to_error_dict(strings: list[str]) -> dict[str, str]:
     Returns:
         dict[str, str]: Dictionary with each key mapped to 'error'.
     """
-    return {s: "error" for s in strings}
+    return {s: value for s in strings}
 
 def get_path_size_megabytes(path):
     # Convert bytes → megabytes (1 MB = 1024 * 1024 bytes)
