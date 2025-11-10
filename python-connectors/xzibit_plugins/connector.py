@@ -53,9 +53,10 @@ class MyConnector(Connector):
         """
         The main reading method.
         """
+        keys = ['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev']
         for plugin_info in self.client.list_plugins():
             next_plugin = flatten_dict(plugin_info, 
-                               include_keys=['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev'])
+                               include_keys=keys)
             next_plugin = remove_prefix_from_keys(next_plugin, 'meta.')
             try:
                 plugin_handle = self.client.get_plugin(next_plugin['id'])
