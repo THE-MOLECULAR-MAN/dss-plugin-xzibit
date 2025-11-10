@@ -58,17 +58,21 @@ class MyConnector(Connector):
                                include_keys=['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev'])
             next_plugin = remove_prefix_from_keys(next_plugin, 'meta.')
             plugin_handle = self.client.get_plugin(next_plugin['id'])
-            raw =  plugin_handle.list_usages().get_raw()
-            pp(raw)
-            
-            list_of_usages = plugin_handle.list_usages().get_raw()['usages']
-            
-            if len(list_of_usages) == 0:
-                next_plugin['project_usages'] = []
-            else:
-                next_plugin['project_usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+            try:
+                raw =  plugin_handle.list_usages().get_raw()
+                # pp(raw)
 
-            next_plugin['total_usages'] = len(list_of_usages)
+                list_of_usages = plugin_handle.list_usages().get_raw()['usages']
+
+                if len(list_of_usages) == 0:
+                    next_plugin['project_usages'] = []
+                else:
+                    next_plugin['project_usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+
+                next_plugin['total_usages'] = len(list_of_usages)
+            except Exception as e:
+                next_plugin['project_usages'] = []
+                next_plugin['total_usages']   = 0
             yield next_plugin
 
 
