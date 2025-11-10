@@ -29,7 +29,6 @@ class MyConnector(Connector):
             env_lang = next_row['envLang']
             env_name = next_row['envName']
             try:
-
                 code_env_handle = self.client.get_code_env(env_lang, env_name)
                 settings = code_env_handle.get_settings().get_raw()
                 next_row['corePackagesSet'] = settings.get('desc',[]).get('corePackagesSet',[])
