@@ -57,9 +57,10 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        import pprint
+        from pprint import pprint as pp
+
         for app_info in self.client.list_apps():
-            pprint.print(app_info)
+            pp(app_info)
             next_app = flatten_dict(app_info, 
                                include_keys=['appKey'])
             #next_app = remove_prefix_from_keys(next_app, 'versionTag.')
