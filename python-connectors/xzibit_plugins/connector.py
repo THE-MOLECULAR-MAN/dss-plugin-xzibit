@@ -70,10 +70,10 @@ class MyConnector(Connector):
             list_of_usages = plugin_handle.list_usages().get_raw()['usages']
             if len(list_of_usages) == 0:
                 next_plugin['project_usages'] = []
-                next_plugin['num_total_usages'] = 0
+                next_plugin['total_usages'] = 0
             else:
                 next_plugin['project_usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
-                next_plugin['num_total_usages'] = len(list_of_usages)
+                next_plugin['total_usages'] = len(list_of_usages)
             yield next_plugin
 
 
