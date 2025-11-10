@@ -66,9 +66,14 @@ class MyConnector(Connector):
             #print(code_env_info)
             next_code_env = flatten_dict(code_env_info, 
                                include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner', 'isUptodate'])
-            # next_code_env = remove_prefix_from_keys(next_code_env, 'meta.')
-            #print("xzibit_codeenvs - generate_rows next_code_env: ")
-            #print(next_code_env)
+#             next_code_env = remove_prefix_from_keys(next_code_env, 'meta.')
+            code_env_handle = self.client.get_code_env(next_code_env['id'])
+            list_of_usages = code_env_handle.list_usages().get_raw()['usages']
+            if len(list_of_usages) == 0:
+                next_code_env['usages'] = []
+            else:
+                next_code_env['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+
             yield next_code_env
 
 
