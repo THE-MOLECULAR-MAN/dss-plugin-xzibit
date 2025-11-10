@@ -16,6 +16,10 @@ class MyConnector(Connector):
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
         try:
             self.client = api_client()
+            self.unique_id_key_name = 'projectKey'
+            self.keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
+                'projectLocation', 'projectStatus', 'shortDesc', 
+                'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
             self.objects_list = self.client.list_projects()
         except Exception as e:
             print(f"CONSTRUCTOR EXCEPTION: {e}")
