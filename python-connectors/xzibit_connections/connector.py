@@ -45,8 +45,7 @@ class MyConnector(Connector):
                 next_row = flatten_dict(connection_info, 
                                    include_keys=keys)
             except Exception as e:
-                next_row['project_usages'] = None
-                next_row['total_usages']   = None
+                next_row = list_to_error_dict(keys)
             finally:
             	yield next_plugin
 
