@@ -7,7 +7,7 @@
         // description: longer string to help end users understand what this dataset type is
         "description": "a dataset describing the plugins installed on this DSS instance",
 
-        // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/docs/
+        // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/icons/code?o=r&s=solid
         "icon": "fas fa-plug"
     },
 
