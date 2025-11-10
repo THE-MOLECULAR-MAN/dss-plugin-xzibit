@@ -66,8 +66,11 @@ class MyConnector(Connector):
             print(code_env_info)
             next_code_env = flatten_dict(code_env_info, 
                                include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner', 'isUptodate'])
-            i = next_code_env['envName']
+            env_lang = next_code_env['envLang']
+            env_name = next_code_env['envName']
+            
             print(i)
+            get_code_env(env_lang, env_name)
             code_env_handle = self.client.get_code_env(i)
             list_of_usages = code_env_handle.list_usages().get_raw()['usages']
             if len(list_of_usages) == 0:
