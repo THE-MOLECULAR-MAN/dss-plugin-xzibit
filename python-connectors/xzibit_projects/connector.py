@@ -17,7 +17,6 @@ class MyConnector(Connector):
         try:
             self.client = api_client()
             self.objects_list = self.client.list_projects()
-            
         except Exception as e:
             print(f"CONSTRUCTOR EXCEPTION: {e}")
         finally:
