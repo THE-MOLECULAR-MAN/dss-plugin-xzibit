@@ -34,7 +34,7 @@ class MyConnector(Connector):
         """
         # from pprint import pprint as pp
             
-        keys = ['appId', 'appVersion', 'label', 'origin', 'shortDesc', 
+        keys = [self.primary_key_field_name, 'appVersion', 'label', 'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
                 'onlyLimitedVisibility']
         for app_info in self.client.list_apps():            
@@ -45,7 +45,7 @@ class MyConnector(Connector):
                 print(f"Exception {e} with app_info:")
                 pp(app_info)
                 next_row = list_to_error_dict(keys)
-                next_row['appId'] = connection_info.get('appId', 'NO_NAME')
+                next_row[self.primary_key_field_name] = connection_info.get(self.primary_key_field_name, 'NO_NAME')
             finally:
                 yield next_row
 
