@@ -11,7 +11,7 @@
         "label": "Datasets about Dataiku Instance",
 
         // description: longer string to help end users understand what this plugin does
-        "description": "Generate datasets about the local Dataiku instance, including: Code Environments, Projects, Plugins, and more using the Dataiku Python API.",
+        "description": "Generate datasets about the local Dataiku instance, including: Code Environments, Projects, Plugins, and more using the Dataiku Python API. Designed to help with monitoring usage, maintenence, and migrations.",
 
         "author": "Tim H",
 
