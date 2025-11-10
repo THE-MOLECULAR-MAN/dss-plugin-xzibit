@@ -77,6 +77,7 @@ class MyConnector(Connector):
         for item_info in iteration_list:
             try:
                 next_row = flatten_dict(item_info, include_keys=keys)
+                next_row = remove_prefix_from_keys(next_row, 'versionTag.')
             except Exception as e:
                 print(f"Exception {e} with item_info:")
                 pp(item_info)
