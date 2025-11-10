@@ -5,10 +5,6 @@ from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_pre
 
 """
 A custom Python dataset is a subclass of Connector.
-
-The parameters it expects and some flags to control its handling by DSS are
-specified in the connector.json file.
-
 Note: the name of the class itself is not relevant.
 """
 class MyConnector(Connector):
@@ -27,22 +23,6 @@ class MyConnector(Connector):
 
     def get_read_schema(self):
         """
-        Returns the schema that this connector generates when returning rows.
-
-        The returned schema may be None if the schema is not known in advance.
-        In that case, the dataset schema will be infered from the first rows.
-
-        If you do provide a schema here, all columns defined in the schema
-        will always be present in the output (with None value),
-        even if you don't provide a value in generate_rows
-
-        The schema must be a dict, with a single key: "columns", containing an array of
-        {'name':name, 'type' : type}.
-
-        Example:
-            return {"columns" : [ {"name": "col1", "type" : "string"}, {"name" :"col2", "type" : "float"}]}
-
-        Supported types are: string, int, bigint, float, double, date, boolean
         """
         return None
 
@@ -51,11 +31,6 @@ class MyConnector(Connector):
                             partition_id=None, records_limit = -1):
         """
         The main reading method.
-
-        Returns a generator over the rows of the dataset (or partition)
-        Each yielded row must be a dictionary, indexed by column name.
-
-        The dataset schema and partitioning are given for information purpose.
         """
         from pprint import pprint as pp
 
