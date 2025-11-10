@@ -66,7 +66,6 @@ class MyConnector(Connector):
             print(code_env_info)
             next_code_env = flatten_dict(code_env_info, 
                                include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner', 'isUptodate'])
-#             next_code_env = remove_prefix_from_keys(next_code_env, 'meta.')
             i = next_code_env['envName']
             print(i)
             code_env_handle = self.client.get_code_env(i)
