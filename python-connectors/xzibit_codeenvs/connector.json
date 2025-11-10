@@ -2,7 +2,7 @@
 {
     "meta" : {
         // label: name of the dataset type as displayed, should be short
-        "label": "DSS Code Environments",
+        "label": "DSS Code Environments 2",
 
         // description: longer string to help end users understand what this dataset type is
         "description": "DSS Code Environments",
