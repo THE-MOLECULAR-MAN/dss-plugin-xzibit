@@ -44,7 +44,8 @@ class MyConnector(Connector):
                 'onlyLimitedVisibility']
         for app_info in self.client.list_apps():            
             try:
-                next_row = flatten_dict(connection_info, include_keys=keys)
+                next_row = flatten_dict(app_info, 
+                               include_keys=keys)
             except Exception as e:
                 print(f"Exception {e} with connection_info:")
                 pp(connection_info)
