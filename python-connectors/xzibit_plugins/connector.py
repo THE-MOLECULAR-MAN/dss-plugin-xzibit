@@ -76,6 +76,7 @@ class MyConnector(Connector):
             except Exception as e:
                 #print(f"Exception {e} with plugin_info:")
                 #pprint(plugin_info)
+                next_row = list_to_error_dict
                 next_row['project_usages'] = 'ERROR'
                 next_row['total_usages']   = 'ERROR'
             finally:
