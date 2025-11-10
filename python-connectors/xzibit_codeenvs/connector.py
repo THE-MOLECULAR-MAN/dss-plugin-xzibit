@@ -65,7 +65,7 @@ class MyConnector(Connector):
             print("xzibit_codeenvs - generate_rows code_env_info: ")
             print(code_env_info)
             next_code_env = flatten_dict(code_env_info, 
-                               include_keys=['envName', 'envLang', 'language'])
+                               include_keys=['envName', 'envLang', 'deploymentMode'])
             # next_code_env = remove_prefix_from_keys(next_code_env, 'meta.')
             print("xzibit_codeenvs - generate_rows next_code_env: ")
             print(next_code_env)
