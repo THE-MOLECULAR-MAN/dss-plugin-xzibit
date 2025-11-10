@@ -30,7 +30,7 @@ class MyConnector(Connector):
 
     def get_read_schema(self):
         """
-        Returns the schema that this connector generates when returning rows.
+        Returns the schema but has issues, it's better to set it to None
         """
         return None
 
