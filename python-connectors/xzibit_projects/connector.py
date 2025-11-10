@@ -77,10 +77,10 @@ class MyConnector(Connector):
             try:
                 next_row = flatten_dict(item_info, include_keys=keys)
             except Exception as e:
-                print(f"Exception {e} with connection_info:")
-                pp(connection_info)
+                print(f"Exception {e} with item_info:")
+                pp(item_info)
                 next_row = list_to_error_dict(keys)
-                next_row['name'] = connection_info.get('name', 'NO_NAME')
+                
             finally:
                 yield next_row
 
