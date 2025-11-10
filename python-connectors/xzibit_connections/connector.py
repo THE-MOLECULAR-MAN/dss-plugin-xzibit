@@ -41,7 +41,7 @@ class MyConnector(Connector):
         for connection_info in self.client.list_connections(as_type='listitems'):
             pp(connection_info)
             next_connection = flatten_dict(connection_info, 
-                               include_keys=['connectionKey', 'ownerLogin', 'connectionStatus', 'contributors', 'name', 'connectionLocation', 'connectionStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialconnection'])
+                               include_keys=['connectionKey'])
             #next_connection = remove_prefix_from_keys(next_connection, 'versionTag.')
             
             yield next_connection
