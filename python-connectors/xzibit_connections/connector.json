@@ -8,7 +8,7 @@
         "description": "Connections",
 
         // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/docs/
-        "icon": "fas fa-puzzle-piece"
+        "icon": "fa-solid fa-link"
     },
 
     /* Can this connector read data ? */
