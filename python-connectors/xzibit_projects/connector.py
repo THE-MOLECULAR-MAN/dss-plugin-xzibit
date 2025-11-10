@@ -29,7 +29,7 @@ class MyConnector(Connector):
         try:
             self.client = api_client()
             self.objects_list = self.client.list_projects()
-            assert 
+            assert isinstance(self.objects_list, list), "self.objects_list must be of type list"
         except Exception as e:
             print('ignored')
         finally:
