@@ -47,7 +47,7 @@ class MyConnector(Connector):
             except Exception as e:
                 next_row = list_to_error_dict(keys)
             finally:
-            	yield next_plugin
+                yield next_plugin
 
 
     def get_partitioning(self):
