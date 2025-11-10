@@ -69,8 +69,9 @@ class MyConnector(Connector):
             yield next_project
             
        
-        keys = ['name', 'type', 'usableBy', 'allowWrite', 'allowedGroups', 
-                'credentialsMode', 'name', 'type', 'usableBy']
+        keys = ['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 
+                'projectLocation', 'projectStatus', 'shortDesc', 
+                'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         
         iteration_list = self.client.list_projects()
         for item_info in iteration_list:
