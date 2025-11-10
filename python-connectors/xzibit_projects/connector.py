@@ -78,6 +78,8 @@ class MyConnector(Connector):
             try:
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, 'versionTag.')
+                next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
+
             except Exception as e:
                 print(f"Exception {e} with item_info:")
                 pp(item_info)
