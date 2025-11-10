@@ -36,13 +36,7 @@ class MyConnector(Connector):
         """
         The main reading method.
         """
-#         for project_info in self.client.list_projects():
-#             next_project = flatten_dict(project_info, 
-#                                include_keys=['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 'projectLocation', 'projectStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialProject'])
-#             next_project = remove_prefix_from_keys(next_project, 'versionTag.')
-#             next_project['lastModifiedOn'] = datetime.fromtimestamp(next_project['lastModifiedOn'] // 1000)
-#             yield next_project
-            
+
        
         keys = ['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 
                 'projectLocation', 'projectStatus', 'shortDesc', 
