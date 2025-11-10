@@ -1,5 +1,5 @@
 # This file is the actual code for the custom Python dataset xzibit_plugins
-# import the base class for the custom dataset
+
 from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key
