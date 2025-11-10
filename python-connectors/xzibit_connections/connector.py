@@ -39,11 +39,12 @@ class MyConnector(Connector):
         """
         
         for connection_info in self.client.list_connections(as_type='listitems'):
-            pp(connection_info)
-            next_connection = flatten_dict(connection_info, 
-                               include_keys=['name', 'type', 'usableBy', 'allowWrite', 'allowedGroups', 'credentialsMode', 'name', 'type', 'usableBy'])
-            #next_connection = remove_prefix_from_keys(next_connection, 'versionTag.')
-            
+            # pp(connection_info)
+            try:
+                next_connection = flatten_dict(connection_info, 
+                                   include_keys=['name', 'type', 'usableBy', 'allowWrite', 'allowedGroups', 'credentialsMode', 'name', 'type', 'usableBy'])
+                #next_connection = remove_prefix_from_keys(next_connection, 'versionTag.')
+
             yield next_connection
 
 
