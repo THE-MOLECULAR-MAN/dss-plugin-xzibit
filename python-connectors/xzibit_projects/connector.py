@@ -66,16 +66,14 @@ class MyConnector(Connector):
 
 
     def list_partitions(self, partitioning):
-        """Return the list of partitions for the partitioning scheme
-        passed as parameter"""
+        """
+        Return the list of partitions for the partitioning scheme
+        """
         return []
 
 
     def partition_exists(self, partitioning, partition_id):
         """Return whether the partition passed as parameter exists
-
-        Implementation is only required if the corresponding flag is set to True
-        in the connector definition
         """
         raise NotImplementedError
 
@@ -83,8 +81,5 @@ class MyConnector(Connector):
     def get_records_count(self, partitioning=None, partition_id=None):
         """
         Returns the count of records for the dataset (or a partition).
-
-        Implementation is only required if the corresponding flag is set to True
-        in the connector definition
         """
         return self.count
