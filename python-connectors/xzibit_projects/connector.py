@@ -1,7 +1,7 @@
 # This file is the actual code for the custom Python dataset xzibit_projects
 from datetime import datetime
 
-import pprint
+# import pprint
 
 from dataiku import api_client
 from dataiku.connector import Connector
