@@ -19,11 +19,7 @@ class MyConnector(Connector):
 
     def __init__(self, config, plugin_config):
         """
-        The configuration parameters set up by the user in the settings tab of the
-        dataset are passed as a json object 'config' to the constructor.
-        The static configuration parameters set up by the developer in the optional
-        file settings.json at the root of the plugin directory are passed as a json
-        object 'plugin_config' to the constructor
+        Constructor
         """
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
         self.client = api_client()
