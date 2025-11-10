@@ -57,12 +57,12 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        for project_info in self.client.list_projects():
-            next_project = flatten_dict(project_info, 
-                               include_keys=['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 'projectLocation', 'projectStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialProject'])
-            next_project = remove_prefix_from_keys(next_project, 'versionTag.')
-            next_project['lastModifiedOn'] = datetime.fromtimestamp(next_project['lastModifiedOn'] // 1000)
-            yield next_project
+        for app_info in self.client.list_apps():
+            next_app = flatten_dict(app_info, 
+                               include_keys=['appKey', 'ownerLogin', 'appStatus', 'contributors', 'name', 'appLocation', 'appStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialapp'])
+            next_app = remove_prefix_from_keys(next_app, 'versionTag.')
+            next_app['lastModifiedOn'] = datetime.fromtimestamp(next_app['lastModifiedOn'] // 1000)
+            yield next_app
 
 
     def get_partitioning(self):
