@@ -31,7 +31,7 @@ class MyConnector(Connector):
             self.objects_list = self.client.list_projects()
             assert isinstance(self.objects_list, list), "self.objects_list must be of type list"
         except Exception as e:
-            print('CONSTRUCTOR EXCEPTION')
+            print(f"CONSTRUCTOR EXCEPTION: {e}")
         finally:
             self.count = len(self.objects_list)
     
