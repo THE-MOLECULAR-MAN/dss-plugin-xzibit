@@ -1,5 +1,6 @@
 
-import pprint
+from pprint import pprint as pp
+
 
 
 def get_values_for_key(ld, k):
