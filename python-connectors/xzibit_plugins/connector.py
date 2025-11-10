@@ -77,9 +77,6 @@ class MyConnector(Connector):
                 #print(f"Exception {e} with plugin_info:")
                 #pprint(plugin_info)
                 next_row = list_to_error_dict(keys)
-                next_row['name'] = connection_info.get('name', 'NO_NAME')
-                next_row['project_usages'] = 'ERROR'
-                next_row['total_usages']   = 'ERROR'
             finally:
                 yield next_row
 
