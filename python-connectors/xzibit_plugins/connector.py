@@ -61,7 +61,7 @@ class MyConnector(Connector):
             try:
                 plugin_handle = self.client.get_plugin(next_row['id'])
 
-                raw =  plugin_handle.list_usages().get_raw()
+                # raw =  plugin_handle.list_usages().get_raw()
                 # pp(raw)
 
                 list_of_usages = plugin_handle.list_usages().get_raw()['usages']
