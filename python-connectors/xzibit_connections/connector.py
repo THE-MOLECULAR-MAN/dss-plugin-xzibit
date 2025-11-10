@@ -41,7 +41,6 @@ class MyConnector(Connector):
                 'credentialsMode', 'name', 'type', 'usableBy']
         for connection_info in self.client.list_connections(as_type='listitems'):
             try:
-                # pp(connection_info)
                 next_row = flatten_dict(connection_info, include_keys=keys)
             except Exception as e:
                 print(f"Exception {e} with connection_info:")
