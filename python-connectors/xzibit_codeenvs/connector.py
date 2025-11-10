@@ -1,8 +1,9 @@
-# This file is the actual code for the custom Python dataset xzibit_codeenvs
+# This file is the actual code for the custom Python dataset dss-internals_code-envs
 
 # import the base class for the custom dataset
-from six.moves import xrange
+# from six.moves import xrange
 from dataiku.connector import Connector
+from dss_internals_plugins.connector import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key
 
 """
 A custom Python dataset is a subclass of Connector.
@@ -23,9 +24,7 @@ class MyConnector(Connector):
         object 'plugin_config' to the constructor
         """
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
-
-        # perform some more initialization
-        self.theparam1 = self.config.get("parameter1", "defaultValue")
+        self.client = api_client()
 
     def get_read_schema(self):
         """
@@ -61,24 +60,19 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        for i in xrange(1,10):
-            yield { "first_col" : str(i), "my_string" : "Yes" }
+        for code_env_info in self.client.list_code_envs():
+            next_code_env = flatten_dict(code_env_info, 
+                               include_keys=['name', 'type', 'language'])
+            #next_code_env = remove_prefix_from_keys(next_code_env, 'meta.')
+            # code_env_handle = self.client.get_code_env(next_code_env['id'])
+            #list_of_usages = code_env_handle.list_usages().get_raw()['usages']
+            #if len(list_of_usages) == 0:
+            #    next_code_env['usages'] = []
+            #else:
+                next_code_env['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+            yield next_code_env
 
 
-    def get_writer(self, dataset_schema=None, dataset_partitioning=None,
-                         partition_id=None, write_mode="OVERWRITE"):
-        """
-        Returns a writer object to write in the dataset (or in a partition).
-
-        The dataset_schema given here will match the the rows given to the writer below.
-
-        write_mode can either be OVERWRITE or APPEND.
-        It will not be APPEND unless the plugin explicitly supports append mode. See flag supportAppend in connector.json.
-        If applicable, the write_mode should be handled in the plugin code.
-
-        Note: the writer is responsible for clearing the partition, if relevant.
-        """
-        raise NotImplementedError
 
 
     def get_partitioning(self):
@@ -110,19 +104,4 @@ class MyConnector(Connector):
         Implementation is only required if the corresponding flag is set to True
         in the connector definition
         """
-        raise NotImplementedError
-
-
-class CustomDatasetWriter(object):
-    def __init__(self):
-        pass
-
-    def write_row(self, row):
-        """
-        Row is a tuple with N + 1 elements matching the schema passed to get_writer.
-        The last element is a dict of columns not found in the schema
-        """
-        raise NotImplementedError
-
-    def close(self):
-        pass
+        return len(self.client.list_code_envs())
