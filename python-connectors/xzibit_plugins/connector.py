@@ -4,7 +4,7 @@ import json
 from dataiku import api_client
 from dataiku.connector import Connector
 
-from xzibit.connector import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key
+from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key
 # def get_values_for_key(ld, k):
 #     """
 #     Extract the unique values for a given key from a list of dictionaries.
