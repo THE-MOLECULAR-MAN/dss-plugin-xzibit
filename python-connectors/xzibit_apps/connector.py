@@ -62,8 +62,8 @@ class MyConnector(Connector):
             pprint.print(app_info)
             next_app = flatten_dict(app_info, 
                                include_keys=['appKey'])
-            next_app = remove_prefix_from_keys(next_app, 'versionTag.')
-            next_app['lastModifiedOn'] = datetime.fromtimestamp(next_app['lastModifiedOn'] // 1000)
+            #next_app = remove_prefix_from_keys(next_app, 'versionTag.')
+            #next_app['lastModifiedOn'] = datetime.fromtimestamp(next_app['lastModifiedOn'] // 1000)
             yield next_app
 
 
