@@ -2,6 +2,39 @@
 # pretty print dictionaries for debugging - don't remove at this time.
 from pprint import pprint as pp
 
+import os
+
+def get_path_size(path):
+    """
+    Recursively calculate the total size of a file or directory (in bytes).
+
+    Args:
+        path (str): Absolute path to a file or directory on the local filesystem.
+
+    Returns:
+        int: Total size in bytes.
+    """
+    total_size = 0
+
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Path does not exist: {path}")
+
+    # If it's a file, just return its size directly
+    if os.path.isfile(path):
+        return os.path.getsize(path)
+
+    # Otherwise, walk through all subdirectories and files
+    for dirpath, dirnames, filenames in os.walk(path, onerror=None, followlinks=False):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            try:
+                total_size += os.path.getsize(fp)
+            except (OSError, FileNotFoundError):
+                # Ignore files that disappear or are unreadable
+                pass
+
+    return total_size
+
 
 def get_values_for_key(ld, k):
     """
