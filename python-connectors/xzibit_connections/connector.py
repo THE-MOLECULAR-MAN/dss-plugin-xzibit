@@ -37,7 +37,8 @@ class MyConnector(Connector):
         """
         The main reading method.
         """
-        keys = ['name', 'type', 'usableBy', 'allowWrite', 'allowedGroups', 'credentialsMode', 'name', 'type', 'usableBy']
+        keys = ['name', 'type', 'usableBy', 'allowWrite', 'allowedGroups', 
+                'credentialsMode', 'name', 'type', 'usableBy']
         for connection_info in self.client.list_connections(as_type='listitems'):
             try:
                 # pp(connection_info)
