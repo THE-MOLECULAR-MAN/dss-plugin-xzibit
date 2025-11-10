@@ -65,7 +65,7 @@ class MyConnector(Connector):
             plugin_handle = self.client.get_plugin(next_plugin['id'])
             raw =  plugin_handle.list_usages().get_raw()
             pp(raw)
-                        
+            
             list_of_usages = plugin_handle.list_usages().get_raw()['usages']
             if len(list_of_usages) == 0:
                 next_plugin['project_usages'] = []
