@@ -4,6 +4,11 @@ from pprint import pprint as pp
 
 import os
 
+def get_path_size_megabytes(path):
+    # Convert bytes → megabytes (1 MB = 1024 * 1024 bytes)
+    size_mb = get_path_size(path) / (1024 * 1024)
+    return round(size_mb, 1)
+
 def get_path_size(path):
     """
     Recursively calculate the total size of a file or directory (in bytes).
