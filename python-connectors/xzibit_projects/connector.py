@@ -132,4 +132,4 @@ class MyConnector(Connector):
         Implementation is only required if the corresponding flag is set to True
         in the connector definition
         """
-        return len(self.client.list_projects())
+        return self.count
