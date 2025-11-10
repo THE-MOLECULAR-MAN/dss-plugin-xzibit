@@ -43,11 +43,6 @@ class MyConnector(Connector):
                             partition_id=None, records_limit = -1):
         """
         The main reading method.
-
-        Returns a generator over the rows of the dataset (or partition)
-        Each yielded row must be a dictionary, indexed by column name.
-
-        The dataset schema and partitioning are given for information purpose.
         """
 #         for project_info in self.client.list_projects():
 #             next_project = flatten_dict(project_info, 
