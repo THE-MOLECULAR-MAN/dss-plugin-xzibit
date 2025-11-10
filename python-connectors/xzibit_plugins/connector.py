@@ -74,8 +74,8 @@ class MyConnector(Connector):
 
                 next_row['total_usages'] = len(list_of_usages)
             except Exception as e:
-                print(f"Exception {e} with plugin_info:")
-                pprint(plugin_info)
+                #print(f"Exception {e} with plugin_info:")
+                #pprint(plugin_info)
                 next_row['project_usages'] = 'ERROR'
                 next_row['total_usages']   = 'ERROR'
             finally:
