@@ -77,6 +77,7 @@ class MyConnector(Connector):
         try:
             iteration_list = self.client.list_projects()
         except Exception as e:
+            # just supressing a Dataiku internal issue?
             print(f"Exception occurred in generate_rows during enumeration: {e}")
             
         for item_info in iteration_list:
