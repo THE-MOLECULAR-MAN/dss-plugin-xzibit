@@ -32,12 +32,6 @@ class MyConnector(Connector):
         The main reading method.
         """
         # from pprint import pprint as pp
-
-        for app_info in self.client.list_apps():
-            # pp(app_info)
-            next_app = flatten_dict(app_info, 
-                               include_keys=)
-            yield next_app
             
         keys = ['appId', 'appVersion', 'label', 'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
