@@ -73,6 +73,7 @@ class MyConnector(Connector):
                 'projectLocation', 'projectStatus', 'shortDesc', 
                 'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         
+        # seems like next line causes the kubernetes cluster exception?
         iteration_list = self.client.list_projects()
         for item_info in iteration_list:
             try:
