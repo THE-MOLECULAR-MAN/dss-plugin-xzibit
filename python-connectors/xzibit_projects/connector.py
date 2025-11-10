@@ -58,17 +58,17 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        for plugin_info in self.client.list_plugins():
-            next_plugin = flatten_dict(plugin_info, 
+        for project_info in self.client.list_projects():
+            next_project = flatten_dict(project_info, 
                                include_keys=['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev'])
-            next_plugin = remove_prefix_from_keys(next_plugin, 'meta.')
-            plugin_handle = self.client.get_plugin(next_plugin['id'])
-            list_of_usages = plugin_handle.list_usages().get_raw()['usages']
+            next_project = remove_prefix_from_keys(next_project, 'meta.')
+            project_handle = self.client.get_project(next_project['id'])
+            list_of_usages = project_handle.list_usages().get_raw()['usages']
             if len(list_of_usages) == 0:
-                next_plugin['usages'] = []
+                next_project['usages'] = []
             else:
-                next_plugin['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
-            yield next_plugin
+                next_project['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+            yield next_project
 
 
     def get_partitioning(self):
