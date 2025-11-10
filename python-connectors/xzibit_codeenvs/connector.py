@@ -70,8 +70,8 @@ class MyConnector(Connector):
             env_name = next_code_env['envName']
             
             print(i)
-            get_code_env(env_lang, env_name)
-            code_env_handle = self.client.get_code_env(i)
+            
+            code_env_handle = self.client.get_code_env(env_lang, env_name)
             list_of_usages = code_env_handle.list_usages().get_raw()['usages']
             if len(list_of_usages) == 0:
                 next_code_env['usages'] = []
