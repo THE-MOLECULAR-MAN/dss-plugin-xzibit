@@ -5,7 +5,7 @@
         "label": "DSS Code Environments 2",
 
         // description: longer string to help end users understand what this dataset type is
-        "description": "DSS Code Environments",
+        "description": "DSS Code Environments 2",
 
         // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/docs/
         "icon": "fas fa-puzzle-piece"
