@@ -62,7 +62,7 @@ class MyConnector(Connector):
         for app_info in self.client.list_apps():
             pp(app_info)
             next_app = flatten_dict(app_info, 
-                               include_keys=['appKey'])
+                               include_keys=['appId', 'appVersion'])
             #next_app = remove_prefix_from_keys(next_app, 'versionTag.')
             #next_app['lastModifiedOn'] = datetime.fromtimestamp(next_app['lastModifiedOn'] // 1000)
             yield next_app
