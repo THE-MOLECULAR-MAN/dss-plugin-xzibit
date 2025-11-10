@@ -1,4 +1,4 @@
-# Xzibit - DSS Datasets Plugin
+# Datasets about Dataiku Instance - Plugin
 
 This Dataiku DSS plugin provides read datasets to various Dataiku objects such as:
 * Apps
