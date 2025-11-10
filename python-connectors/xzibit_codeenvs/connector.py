@@ -24,31 +24,31 @@ class MyConnector(Connector):
         """
         for code_env_info in self.client.list_code_envs():
             # pp(code_env_info)
-            next_code_env = flatten_dict(code_env_info, 
+            next_row = flatten_dict(code_env_info, 
                                include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner'])
-            env_lang = next_code_env['envLang']
-            env_name = next_code_env['envName']
+            env_lang = next_row['envLang']
+            env_name = next_row['envName']
             try:
 
                 code_env_handle = self.client.get_code_env(env_lang, env_name)
                 settings = code_env_handle.get_settings().get_raw()
-                next_code_env['corePackagesSet'] = settings.get('desc',[]).get('corePackagesSet',[])
-                next_code_env['path']            = settings.get('path', None)
+                next_row['corePackagesSet'] = settings.get('desc',[]).get('corePackagesSet',[])
+                next_row['path']            = settings.get('path', None)
 
                 # pp(settings)
-                next_code_env['disk_size_megabytes'] = get_path_size_megabytes(next_code_env['path'])
+                next_row['disk_size_megabytes'] = get_path_size_megabytes(next_row['path'])
 
                 list_of_usages = code_env_handle.list_usages()
 
                 if len(list_of_usages) == 0:
-                    next_code_env['usages'] = []
+                    next_row['usages'] = []
                 else:
-                    next_code_env['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+                    next_row['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
             except Exception as e:
                 print(f"Exception {e} with code_env_info:")
                 pp(code_env_info)
 
-            yield next_code_env
+            yield next_row
 
     def get_partitioning(self):
         """
