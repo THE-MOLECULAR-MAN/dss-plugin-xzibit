@@ -78,6 +78,7 @@ class MyConnector(Connector):
             iteration_list = self.client.list_projects()
         except Exception as e:
             print(f"Exception occurred in generate_rows during enumeration: {e}")
+            
         for item_info in iteration_list:
             try:
                 next_row = flatten_dict(item_info, include_keys=keys)
