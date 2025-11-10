@@ -36,8 +36,22 @@ class MyConnector(Connector):
         for app_info in self.client.list_apps():
             # pp(app_info)
             next_app = flatten_dict(app_info, 
-                               include_keys=['appId', 'appVersion', 'label', 'origin', 'shortDesc', 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 'onlyLimitedVisibility'])
+                               include_keys=)
             yield next_app
+            
+        keys = ['appId', 'appVersion', 'label', 'origin', 'shortDesc', 
+                'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 'onlyLimitedVisibility']
+        for connection_info in self.client.list_connections(as_type='listitems'):
+            try:
+                next_row = flatten_dict(connection_info, include_keys=keys)
+            except Exception as e:
+                print(f"Exception {e} with connection_info:")
+                pp(connection_info)
+                next_row = list_to_error_dict(keys)
+                next_row['name'] = connection_info.get('name', 'NO_NAME')
+            finally:
+                yield next_row
+
 
 
     def get_partitioning(self):
