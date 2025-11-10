@@ -26,7 +26,7 @@
         "tags": ["Internal", "Dataiku", "DSS"], //for example: ["Machine Learning", "NLP"]
 
         // URL where the user can learn more about the plugin
-        "url": "https://github.com/THE-MOLECULAR-MAN/dss-plugin-dss-internals",
+        "url": "https://github.com/THE-MOLECULAR-MAN/dss-plugin-xzibit",
 
         "licenseInfo": "Apache Software License"
     }
