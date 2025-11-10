@@ -11,21 +11,10 @@ A custom Python dataset is a subclass of Connector.
 class MyConnector(Connector):
 
     def __init__(self, config, plugin_config):
-        """
-
-        object 'plugin_config' to the constructor
-        """
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
         self.client = api_client()
 
     def get_read_schema(self):
-        """
-
-        Supported types are: string, int, bigint, float, double, date, boolean
-        """
-
-        # In this example, we don't specify a schema here, so DSS will infer the schema
-        # from the columns actually returned by the generate_rows method
         return None
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
