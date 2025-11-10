@@ -42,7 +42,7 @@ class MyConnector(Connector):
         keys = ['appId', 'appVersion', 'label', 'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
                 'onlyLimitedVisibility']
-        for connection_info in self.client.list_connections(as_type='listitems'):
+        for app_info in self.client.list_apps():            
             try:
                 next_row = flatten_dict(connection_info, include_keys=keys)
             except Exception as e:
