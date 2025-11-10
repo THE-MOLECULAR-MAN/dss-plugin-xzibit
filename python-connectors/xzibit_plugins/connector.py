@@ -72,7 +72,7 @@ class MyConnector(Connector):
                 next_plugin['project_usages'] = []
             else:
                 next_plugin['project_usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
-                
+
             next_plugin['total_usages'] = len(list_of_usages)
             yield next_plugin
 
