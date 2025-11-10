@@ -67,6 +67,24 @@ class MyConnector(Connector):
             next_project = remove_prefix_from_keys(next_project, 'versionTag.')
             next_project['lastModifiedOn'] = datetime.fromtimestamp(next_project['lastModifiedOn'] // 1000)
             yield next_project
+            
+       
+        keys = ['name', 'type', 'usableBy', 'allowWrite', 'allowedGroups', 
+                'credentialsMode', 'name', 'type', 'usableBy']
+        
+        iteration_list = self.client.list_projects()
+        for item_info in iteration_list:
+            try:
+                next_row = flatten_dict(item_info, include_keys=keys)
+            except Exception as e:
+                print(f"Exception {e} with connection_info:")
+                pp(connection_info)
+                next_row = list_to_error_dict(keys)
+                next_row['name'] = connection_info.get('name', 'NO_NAME')
+            finally:
+                yield next_row
+
+
 
 
     def get_partitioning(self):
