@@ -80,7 +80,6 @@ class MyConnector(Connector):
                 'projectLocation', 'projectStatus', 'shortDesc', 
                 'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         
-      
         for item_info in self.objects_list:
             try:
                 next_row = flatten_dict(item_info, include_keys=keys)
