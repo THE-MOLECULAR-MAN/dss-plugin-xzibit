@@ -2,7 +2,7 @@
 {
     "meta" : {
         // label: name of the dataset type as displayed, should be short
-        "label": "Dataiku Projects",
+        "label": "Dataiku Projects dataset",
 
         // description: longer string to help end users understand what this dataset type is
         "description": "a dataset describing the Project on this DSS instance",
