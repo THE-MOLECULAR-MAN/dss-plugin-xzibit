@@ -15,7 +15,7 @@
 
         "author": "Tim H",
 
-        // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/docs/
+        // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/search?ic=free&o=r
         "icon": "fas fa-cogs",
 
         // recipesCategory: optional, can be one of 'visual', 'code', 'genai' or 'other'
