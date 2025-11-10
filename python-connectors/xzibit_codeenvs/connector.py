@@ -60,7 +60,7 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        print("xzibit_codeenvs - generate_rows START")
+        # print("xzibit_codeenvs - generate_rows START")
         for code_env_info in self.client.list_code_envs():
             #print("xzibit_codeenvs - generate_rows code_env_info: ")
             #print(code_env_info)
