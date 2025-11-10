@@ -37,9 +37,10 @@ class MyConnector(Connector):
         """
         The main reading method.
         """
+        keys = ['name', 'type', 'usableBy', 'allowWrite', 'allowedGroups', 'credentialsMode', 'name', 'type', 'usableBy']
         for connection_info in self.client.list_connections(as_type='listitems'):
             # pp(connection_info)
-            keys = ['name', 'type', 'usableBy', 'allowWrite', 'allowedGroups', 'credentialsMode', 'name', 'type', 'usableBy']
+
             try:
                 next_row = flatten_dict(connection_info, include_keys=keys)
             except Exception as e:
