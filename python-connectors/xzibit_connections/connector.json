@@ -5,8 +5,8 @@
         "label": "Dataiku Connections",
 
         // description: longer string to help end users understand what this dataset type is
-        "description": "Dataset of Connections in this Dataiku instance",
-
+        "description": "a dataset describing the Connections on this DSS instance",
+        
         // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/docs/
         "icon": "fa-solid fa-link"
     },
