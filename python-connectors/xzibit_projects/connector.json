@@ -2,11 +2,11 @@
 {
     "meta" : {
         // label: name of the dataset type as displayed, should be short
-        "label": "Custom dataset xzibit_projects",
+        "label": "Dataiku Projects",
 
         // description: longer string to help end users understand what this dataset type is
-        "description": "Projects",
-
+        "description": "a dataset describing the Project on this DSS instance",
+        
         // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/docs/
         "icon": "fas fa-puzzle-piece"
     },
