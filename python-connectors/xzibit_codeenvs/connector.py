@@ -68,7 +68,7 @@ class MyConnector(Connector):
             next_code_env['path']            = settings.get('path', None)
             
             # pp(settings)
-            next_code_env['size_bytes'] = get_path_size(next_code_env['path'])
+            next_code_env['size_bytes'] = get_path_size_megabytes(next_code_env['path'])
             
             list_of_usages = code_env_handle.list_usages()
 
