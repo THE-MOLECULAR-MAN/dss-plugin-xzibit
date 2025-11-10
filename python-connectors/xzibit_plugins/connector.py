@@ -71,7 +71,7 @@ class MyConnector(Connector):
 
                 next_plugin['total_usages'] = len(list_of_usages)
             except Exception as e:
-                next_plugin['project_usages'] = []
+                next_plugin['project_usages'] = None
                 next_plugin['total_usages']   = 0
             yield next_plugin
 
