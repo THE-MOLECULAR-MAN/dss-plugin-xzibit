@@ -73,7 +73,8 @@ class MyConnector(Connector):
 
 
     def partition_exists(self, partitioning, partition_id):
-        """Return whether the partition passed as parameter exists
+        """
+        Return whether the partition passed as parameter exists
         """
         raise NotImplementedError
 
