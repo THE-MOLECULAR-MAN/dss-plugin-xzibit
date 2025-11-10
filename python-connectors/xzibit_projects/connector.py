@@ -81,7 +81,7 @@ class MyConnector(Connector):
         
         # seems like next line causes the kubernetes cluster exception?
         try:
-            iteration_list = self.client.list_projects()
+            iteration_list = self.projects_list
         except Exception as e:
             # just supressing a Dataiku internal issue?
             print(f"Exception occurred in generate_rows during enumeration: {e}")
