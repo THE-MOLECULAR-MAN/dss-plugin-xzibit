@@ -54,10 +54,11 @@ class MyConnector(Connector):
         The main reading method.
         """
         for plugin_info in self.client.list_plugins():
-            next_plugin = flatten_dict(plugin_info, 
-                               include_keys=['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev'])
-            next_plugin = remove_prefix_from_keys(next_plugin, 'meta.')
             try:
+                next_plugin = flatten_dict(plugin_info, 
+                                   include_keys=['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev'])
+                next_plugin = remove_prefix_from_keys(next_plugin, 'meta.')
+
                 plugin_handle = self.client.get_plugin(next_plugin['id'])
 
                 raw =  plugin_handle.list_usages().get_raw()
@@ -74,7 +75,8 @@ class MyConnector(Connector):
             except Exception as e:
                 next_plugin['project_usages'] = None
                 next_plugin['total_usages']   = None
-            yield next_plugin
+            finally:
+                yield next_plugin
 
 
     def get_partitioning(self):
