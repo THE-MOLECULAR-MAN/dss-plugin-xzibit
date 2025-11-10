@@ -63,7 +63,7 @@ class MyConnector(Connector):
         for project_info in self.client.list_projects():
             pprint.pprint(project_info)
             next_project = flatten_dict(project_info, 
-                               include_keys=['projectKey', 'ownerLogin', 'projectStatus'])
+                               include_keys=['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name'])
             # next_project = remove_prefix_from_keys(next_project, 'meta.')
             # project_handle = self.client.get_project(next_project['id'])
             yield next_project
