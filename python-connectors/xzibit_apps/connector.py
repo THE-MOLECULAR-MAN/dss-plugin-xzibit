@@ -40,7 +40,8 @@ class MyConnector(Connector):
             yield next_app
             
         keys = ['appId', 'appVersion', 'label', 'origin', 'shortDesc', 
-                'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 'onlyLimitedVisibility']
+                'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
+                'onlyLimitedVisibility']
         for connection_info in self.client.list_connections(as_type='listitems'):
             try:
                 next_row = flatten_dict(connection_info, include_keys=keys)
