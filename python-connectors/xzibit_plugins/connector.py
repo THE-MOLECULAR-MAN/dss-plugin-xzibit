@@ -55,10 +55,11 @@ class MyConnector(Connector):
         """
         keys = ['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev']
         for plugin_info in self.client.list_plugins():
-            next_row = flatten_dict(plugin_info, 
-                               include_keys=keys)
-            next_row = remove_prefix_from_keys(next_row, 'meta.')
             try:
+                next_row = flatten_dict(plugin_info, 
+                                   include_keys=keys)
+                next_row = remove_prefix_from_keys(next_row, 'meta.')
+
                 plugin_handle = self.client.get_plugin(next_row['id'])
 
                 # raw =  plugin_handle.list_usages().get_raw()
