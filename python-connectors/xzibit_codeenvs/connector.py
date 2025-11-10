@@ -68,6 +68,7 @@ class MyConnector(Connector):
                                include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner', 'isUptodate'])
 #             next_code_env = remove_prefix_from_keys(next_code_env, 'meta.')
             i = next_code_env['envName']
+            print(i)
             code_env_handle = self.client.get_code_env(i)
             list_of_usages = code_env_handle.list_usages().get_raw()['usages']
             if len(list_of_usages) == 0:
