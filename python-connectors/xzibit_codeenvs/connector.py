@@ -63,7 +63,7 @@ class MyConnector(Connector):
         for code_env_info in self.client.list_code_envs():
             next_code_env = flatten_dict(code_env_info, 
                                include_keys=['name', 'type', 'language'])
-            #next_code_env = remove_prefix_from_keys(next_code_env, 'meta.')
+            # next_code_env = remove_prefix_from_keys(next_code_env, 'meta.')
             code_env_handle = self.client.get_code_env(next_code_env['id'])
             list_of_usages = code_env_handle.list_usages().get_raw()['usages']
             if len(list_of_usages) == 0:
