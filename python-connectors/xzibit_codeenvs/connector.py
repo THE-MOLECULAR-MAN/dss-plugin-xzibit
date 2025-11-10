@@ -58,7 +58,7 @@ class MyConnector(Connector):
         for code_env_info in self.client.list_code_envs():
             # pp(code_env_info)
             next_code_env = flatten_dict(code_env_info, 
-                               include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner', 'isUptodate'])
+                               include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner'])
             env_lang = next_code_env['envLang']
             env_name = next_code_env['envName']
             
