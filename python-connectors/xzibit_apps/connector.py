@@ -18,7 +18,7 @@ class MyConnector(Connector):
         """
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
         self.client = api_client()
-        self.primary_key_field_name = 'appId'
+        self.unique_id_name = 'appId'
     
 
     def get_read_schema(self):
@@ -34,7 +34,7 @@ class MyConnector(Connector):
         """
         # from pprint import pprint as pp
             
-        keys = [self.primary_key_field_name, 'appVersion', 'label', 'origin', 'shortDesc', 
+        keys = [self.unique_id_name, 'appVersion', 'label', 'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
                 'onlyLimitedVisibility']
         
@@ -46,7 +46,7 @@ class MyConnector(Connector):
                 print(f"Exception {e} with app_info:")
                 pp(app_info)
                 next_row = list_to_error_dict(keys)
-                # next_row[self.primary_key_field_name] = app_info.get(self.primary_key_field_name, 'NO_NAME')
+                # next_row[self.unique_id_name] = app_info.get(self.unique_id_name, 'NO_NAME')
             finally:
                 yield next_row
 
