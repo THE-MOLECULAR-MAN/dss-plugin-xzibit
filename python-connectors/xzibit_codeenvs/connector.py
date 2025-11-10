@@ -3,7 +3,7 @@
 # import the base class for the custom dataset
 from dataiku.connector import Connector
 from dataiku import api_client
-from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key
+from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key, get_path_size_megabytes, pp
 
 """
 A custom Python dataset is a subclass of Connector.
@@ -56,12 +56,20 @@ class MyConnector(Connector):
         The dataset schema and partitioning are given for information purpose.
         """
         for code_env_info in self.client.list_code_envs():
+            # pp(code_env_info)
             next_code_env = flatten_dict(code_env_info, 
-                               include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner', 'isUptodate'])
+                               include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner'])
             env_lang = next_code_env['envLang']
             env_name = next_code_env['envName']
             
             code_env_handle = self.client.get_code_env(env_lang, env_name)
+            settings = code_env_handle.get_settings().get_raw()
+            next_code_env['corePackagesSet'] = settings.get('desc',[]).get('corePackagesSet',[])
+            next_code_env['path']            = settings.get('path', None)
+            
+            # pp(settings)
+            next_code_env['disk_size_megabytes'] = get_path_size_megabytes(next_code_env['path'])
+            
             list_of_usages = code_env_handle.list_usages()
 
             if len(list_of_usages) == 0:
