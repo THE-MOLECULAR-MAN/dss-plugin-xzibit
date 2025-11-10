@@ -41,14 +41,9 @@ class MyConnector(Connector):
         The main reading method.
         """
 
-       
-        keys = ['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 
-                'projectLocation', 'projectStatus', 'shortDesc', 
-                'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
-        
         for item_info in self.objects_list:
             try:
-                next_row = flatten_dict(item_info, include_keys=keys)
+                next_row = flatten_dict(item_info, include_keys=self.keys)
                 next_row = remove_prefix_from_keys(next_row, 'versionTag.')
                 next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
 
