@@ -28,7 +28,8 @@ class MyConnector(Connector):
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
         try:
             self.client = api_client()
-            self.projects_list = self.client.list_projects()
+            self.objects_list = self.client.list_projects()
+            assert 
         except Exception as e:
             print('ignored')
         finally:
@@ -79,14 +80,8 @@ class MyConnector(Connector):
                 'projectLocation', 'projectStatus', 'shortDesc', 
                 'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         
-        # seems like next line causes the kubernetes cluster exception?
-        try:
-            iteration_list = self.projects_list
-        except Exception as e:
-            # just supressing a Dataiku internal issue?
-            print(f"Exception occurred in generate_rows during enumeration: {e}")
-            
-        for item_info in iteration_list:
+      
+        for item_info in self.objects_list:
             try:
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, 'versionTag.')
