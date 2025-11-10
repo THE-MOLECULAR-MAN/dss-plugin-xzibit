@@ -28,21 +28,25 @@ class MyConnector(Connector):
                                include_keys=['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner'])
             env_lang = next_code_env['envLang']
             env_name = next_code_env['envName']
-            
-            code_env_handle = self.client.get_code_env(env_lang, env_name)
-            settings = code_env_handle.get_settings().get_raw()
-            next_code_env['corePackagesSet'] = settings.get('desc',[]).get('corePackagesSet',[])
-            next_code_env['path']            = settings.get('path', None)
-            
-            # pp(settings)
-            next_code_env['disk_size_megabytes'] = get_path_size_megabytes(next_code_env['path'])
-            
-            list_of_usages = code_env_handle.list_usages()
+            try:
 
-            if len(list_of_usages) == 0:
-                next_code_env['usages'] = []
-            else:
-                next_code_env['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+                code_env_handle = self.client.get_code_env(env_lang, env_name)
+                settings = code_env_handle.get_settings().get_raw()
+                next_code_env['corePackagesSet'] = settings.get('desc',[]).get('corePackagesSet',[])
+                next_code_env['path']            = settings.get('path', None)
+
+                # pp(settings)
+                next_code_env['disk_size_megabytes'] = get_path_size_megabytes(next_code_env['path'])
+
+                list_of_usages = code_env_handle.list_usages()
+
+                if len(list_of_usages) == 0:
+                    next_code_env['usages'] = []
+                else:
+                    next_code_env['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+            except Exception as e:
+                print(f"Exception {e} with connection_info:")
+                pp(connection_info)
 
             yield next_code_env
 
