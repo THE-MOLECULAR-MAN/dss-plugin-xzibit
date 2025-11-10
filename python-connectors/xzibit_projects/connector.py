@@ -33,7 +33,7 @@ class MyConnector(Connector):
         except Exception as e:
             print('CONSTRUCTOR EXCEPTION')
         finally:
-            self.count = len(self.projects_list)
+            self.count = len(self.objects_list)
     
 
     def get_read_schema(self):
