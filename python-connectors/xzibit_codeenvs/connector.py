@@ -72,7 +72,7 @@ class MyConnector(Connector):
             yield next_code_env
 
 
-        print("xzibit_codeenvs - generate_rows END")
+        #print("xzibit_codeenvs - generate_rows END")
 
     def get_partitioning(self):
         """
