@@ -62,8 +62,8 @@ class MyConnector(Connector):
             print(project_info)
             next_project = flatten_dict(project_info, 
                                include_keys=['projectKey'])
-            next_project = remove_prefix_from_keys(next_project, 'meta.')
-            project_handle = self.client.get_project(next_project['id'])
+            # next_project = remove_prefix_from_keys(next_project, 'meta.')
+            # project_handle = self.client.get_project(next_project['id'])
             yield next_project
 
 
