@@ -63,11 +63,6 @@ class MyConnector(Connector):
                                include_keys=['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev'])
             next_project = remove_prefix_from_keys(next_project, 'meta.')
             project_handle = self.client.get_project(next_project['id'])
-            list_of_usages = project_handle.list_usages().get_raw()['usages']
-            if len(list_of_usages) == 0:
-                next_project['usages'] = []
-            else:
-                next_project['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
             yield next_project
 
 
