@@ -57,8 +57,9 @@ class MyConnector(Connector):
             next_plugin = flatten_dict(plugin_info, 
                                include_keys=['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev'])
             next_plugin = remove_prefix_from_keys(next_plugin, 'meta.')
-            plugin_handle = self.client.get_plugin(next_plugin['id'])
             try:
+                plugin_handle = self.client.get_plugin(next_plugin['id'])
+
                 raw =  plugin_handle.list_usages().get_raw()
                 # pp(raw)
 
