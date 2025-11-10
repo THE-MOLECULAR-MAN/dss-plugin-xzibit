@@ -36,7 +36,8 @@ def get_path_size(path):
     total_size = 0
 
     if not os.path.exists(path):
-        raise FileNotFoundError(f"Path does not exist: {path}")
+        return 0
+        # raise FileNotFoundError(f"Path does not exist: {path}")
 
     # If it's a file, just return its size directly
     if os.path.isfile(path):
