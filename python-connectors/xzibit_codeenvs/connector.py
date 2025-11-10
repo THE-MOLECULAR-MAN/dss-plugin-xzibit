@@ -64,7 +64,6 @@ class MyConnector(Connector):
             next_code_env = flatten_dict(code_env_info, 
                                include_keys=['name', 'type', 'language'])
             # next_code_env = remove_prefix_from_keys(next_code_env, 'meta.')
-            
             yield next_code_env
 
 
