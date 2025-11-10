@@ -60,6 +60,7 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
+        print("xzibit_codeenvs - generate_rows START")
         for code_env_info in self.client.list_code_envs():
             next_code_env = flatten_dict(code_env_info, 
                                include_keys=['name', 'type', 'language'])
@@ -69,7 +70,7 @@ class MyConnector(Connector):
             yield next_code_env
 
 
-
+        print("xzibit_codeenvs - generate_rows END")
 
     def get_partitioning(self):
         """
