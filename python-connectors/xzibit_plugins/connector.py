@@ -66,11 +66,14 @@ class MyConnector(Connector):
             raw =  plugin_handle.list_usages().get_raw()
             pp(raw)
             
+            
             list_of_usages = plugin_handle.list_usages().get_raw()['usages']
             if len(list_of_usages) == 0:
                 next_plugin['usages'] = []
+                next_plugin['num_usages'] = 0
             else:
                 next_plugin['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+                next_plugin['num_usages'] = len(list_of_usages)
             yield next_plugin
 
 
