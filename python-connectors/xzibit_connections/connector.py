@@ -15,6 +15,7 @@ specified in the connector.json file.
 
 Note: the name of the class itself is not relevant.
 """
+
 class MyConnector(Connector):
 
     def __init__(self, config, plugin_config):
@@ -36,12 +37,12 @@ class MyConnector(Connector):
         """
         The main reading method.
         """
-        for project_info in self.client.list_projects():
-            next_project = flatten_dict(project_info, 
-                               include_keys=['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 'projectLocation', 'projectStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialProject'])
-            next_project = remove_prefix_from_keys(next_project, 'versionTag.')
-            next_project['lastModifiedOn'] = datetime.fromtimestamp(next_project['lastModifiedOn'] // 1000)
-            yield next_project
+        for connection_info in self.client.list_connections():
+            next_connection = flatten_dict(connection_info, 
+                               include_keys=['connectionKey', 'ownerLogin', 'connectionStatus', 'contributors', 'name', 'connectionLocation', 'connectionStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialconnection'])
+            #next_connection = remove_prefix_from_keys(next_connection, 'versionTag.')
+            
+            yield next_connection
 
 
     def get_partitioning(self):
