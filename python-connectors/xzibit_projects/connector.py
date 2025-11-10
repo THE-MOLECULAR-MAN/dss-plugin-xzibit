@@ -61,7 +61,7 @@ class MyConnector(Connector):
         The dataset schema and partitioning are given for information purpose.
         """
         for project_info in self.client.list_projects():
-            print(project_info)
+            pprint.pprint(project_info)
             next_project = flatten_dict(project_info, 
                                include_keys=['projectKey', 'ownerLogin', 'projectStatus'])
             # next_project = remove_prefix_from_keys(next_project, 'meta.')
