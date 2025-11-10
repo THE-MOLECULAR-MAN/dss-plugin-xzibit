@@ -38,7 +38,7 @@ class MyConnector(Connector):
         The main reading method.
         """
         
-        for connection_info in self.client.list_connections():
+        for connection_info in self.client.list_connections(as_type='listitems')):
             next_connection = flatten_dict(connection_info, 
                                include_keys=['connectionKey', 'ownerLogin', 'connectionStatus', 'contributors', 'name', 'connectionLocation', 'connectionStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialconnection'])
             #next_connection = remove_prefix_from_keys(next_connection, 'versionTag.')
