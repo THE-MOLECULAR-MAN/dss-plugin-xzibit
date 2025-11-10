@@ -64,6 +64,7 @@ class MyConnector(Connector):
             
             code_env_handle = self.client.get_code_env(env_lang, env_name)
             settings = code_env_handle.get_settings().get_raw()
+            next_code_env['corePackagesSet'] = settings['desc']['corePackagesSet']
             pp(settings)
             
             list_of_usages = code_env_handle.list_usages()
