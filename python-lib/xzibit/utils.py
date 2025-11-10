@@ -1,4 +1,3 @@
-# from dssinternals.utils import sanitize_name, timestamp_now
 
 def get_values_for_key(ld, k):
     """
