@@ -46,7 +46,7 @@ class MyConnector(Connector):
                 print(f"Exception {e} with app_info:")
                 pp(app_info)
                 next_row = list_to_error_dict(keys)
-                next_row[self.primary_key_field_name] = connection_info.get(self.primary_key_field_name, 'NO_NAME')
+                next_row[self.primary_key_field_name] = app_info.get(self.primary_key_field_name, 'NO_NAME')
             finally:
                 yield next_row
 
