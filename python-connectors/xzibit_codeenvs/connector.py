@@ -69,7 +69,7 @@ class MyConnector(Connector):
             #if len(list_of_usages) == 0:
             #    next_code_env['usages'] = []
             #else:
-                next_code_env['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+            next_code_env['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
             yield next_code_env
 
 
