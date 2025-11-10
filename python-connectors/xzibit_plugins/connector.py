@@ -55,11 +55,11 @@ class MyConnector(Connector):
         """
         keys = ['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev']
         for plugin_info in self.client.list_plugins():
-            new_row = flatten_dict(plugin_info, 
+            next_row = flatten_dict(plugin_info, 
                                include_keys=keys)
-            new_row = remove_prefix_from_keys(new_row, 'meta.')
+            next_row = remove_prefix_from_keys(next_row, 'meta.')
             try:
-                plugin_handle = self.client.get_plugin(new_row['id'])
+                plugin_handle = self.client.get_plugin(next_row['id'])
 
                 raw =  plugin_handle.list_usages().get_raw()
                 # pp(raw)
@@ -67,16 +67,16 @@ class MyConnector(Connector):
                 list_of_usages = plugin_handle.list_usages().get_raw()['usages']
 
                 if len(list_of_usages) == 0:
-                    new_row['project_usages'] = []
+                    next_row['project_usages'] = []
                 else:
-                    new_row['project_usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+                    next_row['project_usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
 
-                new_row['total_usages'] = len(list_of_usages)
+                next_row['total_usages'] = len(list_of_usages)
             except Exception as e:
-                new_row['project_usages'] = None
-                new_row['total_usages']   = None
+                next_row['project_usages'] = None
+                next_row['total_usages']   = None
             finally:
-                yield new_row
+                yield next_row
 
 
     def get_partitioning(self):
