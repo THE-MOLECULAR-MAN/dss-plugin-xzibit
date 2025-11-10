@@ -2,7 +2,7 @@
 {
     "meta" : {
         // label: name of the dataset type as displayed, should be short
-        "label": "Dataiku installed plugins dataset",
+        "label": "Dataiku Plugins dataset",
 
         // description: longer string to help end users understand what this dataset type is
         "description": "a dataset describing the plugins installed on this DSS instance",
