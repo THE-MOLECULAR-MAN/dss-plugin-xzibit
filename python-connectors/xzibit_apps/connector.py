@@ -37,6 +37,7 @@ class MyConnector(Connector):
         keys = [self.primary_key_field_name, 'appVersion', 'label', 'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
                 'onlyLimitedVisibility']
+        
         for app_info in self.client.list_apps():            
             try:
                 next_row = flatten_dict(app_info, 
