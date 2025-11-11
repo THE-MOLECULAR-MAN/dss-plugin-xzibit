@@ -1,9 +1,16 @@
-from datetime import datetime
-
+####################################################################
+# Same imports for all dataset classes
+####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key
 from xzibit.utils import pp
+
+
+####################################################################
+# Unique imports for this Class
+####################################################################
+from datetime import datetime
 
 class MyConnector(Connector):
 
