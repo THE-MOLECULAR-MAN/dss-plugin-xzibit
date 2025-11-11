@@ -4,6 +4,22 @@ from pprint import pprint as pp
 
 import os
 
+def get_jq_value(data: dict, jq_path: str):
+    """
+    Traverse a nested dict using a jq-style path like 'a.b.c'.
+    Returns the value if found, else None.
+    """
+    try:
+        keys = jq_path.split('.')
+        for key in keys:
+            if isinstance(data, dict) and key in data:
+                data = data[key]
+            else:
+                return None
+        return data
+    except Exception:
+        return None
+
 def list_to_error_dict(strings: list[str], value="error") -> dict[str, str]:
     """
     Convert a list of strings into a dictionary where each string is a key
