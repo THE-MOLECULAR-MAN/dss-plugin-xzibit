@@ -30,11 +30,6 @@ class MyConnector(Connector):
             self.count = len(self.objects_list)
     
 
-    def get_read_schema(self):
-        """
-        Returns the schema but has issues, it's better to set it to None
-        """
-        return None
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
@@ -71,3 +66,6 @@ class MyConnector(Connector):
 
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
+
+    def get_read_schema(self):
+        return None
