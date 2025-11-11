@@ -12,9 +12,7 @@ Python Class for Projects dataset
 class MyConnector(Connector):
 
     def __init__(self, config, plugin_config):
-        """
-        Constructor
-        """
+        """Constructor"""
         Connector.__init__(self, config, plugin_config)
         try:
             self.client = api_client()
@@ -28,9 +26,6 @@ class MyConnector(Connector):
         finally:
             assert isinstance(self.objects_list, list), "self.objects_list must be of type list"
             self.count = len(self.objects_list)
-    
-
-
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
