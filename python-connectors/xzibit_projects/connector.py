@@ -18,7 +18,6 @@ class ConnectorProjects(Connector):
     # Code that has to be custom written for this class
     ####################################################################
     def __init__(self, config, plugin_config):
-        """Constructor"""
         Connector.__init__(self, config, plugin_config)
         self.client = api_client()
         self.unique_id_key_name = 'projectKey'
