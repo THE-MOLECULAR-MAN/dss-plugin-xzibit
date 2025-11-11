@@ -43,7 +43,7 @@ class ConnectorRecipes(Connector):
                 next_row = {'projectKey': pk,
                            'type': recipe['type'],
                            'name': recipe['name'],
-                           'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref')
+                           # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
                            }
             
             # return a single row
