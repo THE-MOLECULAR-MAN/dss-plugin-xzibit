@@ -36,6 +36,16 @@ class ConnectorPlugins(Connector):
             # custom things for this specific class:
             next_row = remove_prefix_from_keys(next_row, 'meta.')
 
+            plugin_handle = self.client.get_plugin(next_row['id'])
+
+            list_of_usages = plugin_handle.list_usages().get_raw()['usages']
+
+            if len(list_of_usages) == 0:
+                next_row['project_usages'] = []
+            else:
+                next_row['project_usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+
+            next_row['total_usages'] = len(list_of_usages)
             
             # return a single row
             yield next_row
