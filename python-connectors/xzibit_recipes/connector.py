@@ -43,7 +43,7 @@ class ConnectorRecipes(Connector):
             for r in proj_recipes:
                 recipe_id = r['id']
                 recipe_handle = project.get_recipe(recipe_id)
-                recipe = recipe.get_settings()
+                raw_data = recipe_handle.get_settings().get_recipe_raw_definition()
                 print(str(type(recipe))) # dataikuapi.dss.recipe.SyncRecipeSettings
                 pp(recipe)
                 #next_row = flatten_dict(recipe, include_keys=self.keys)
