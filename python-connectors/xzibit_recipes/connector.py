@@ -38,6 +38,7 @@ class ConnectorRecipes(Connector):
         for pk, proj_recipes in self.objects_list.items():
             # next_row = flatten_dict(item_info, include_keys=self.keys)
             for recipe in proj_recipes:
+                next_row = flatten_dict(item_info, include_keys=self.keys)
                 pp(recipe)
                 next_row = {'projectkey': pk,
                            'type': recipe['type'],
