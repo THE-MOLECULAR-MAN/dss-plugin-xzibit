@@ -20,7 +20,7 @@ class ConnectorCodeEnvs(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.client = api_client()
-        self.unique_id_key_name = ''
+        self.unique_id_key_name = 'envName'
         self.keys   = [self.unique_id_key_name, ]
         self.objects_list = self.client.()
 
