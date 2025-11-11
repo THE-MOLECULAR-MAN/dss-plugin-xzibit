@@ -50,11 +50,11 @@ class ConnectorRecipes(Connector):
                 
                 input_datasets_raw = recipe_settings_handle.get_flat_input_refs()
                 
-                if len(input_datasets_raw) > 0:
+                #if len(input_datasets_raw) > 0:
                     # has inputs:
-                    input_datasets = input_datasets_raw
-                else:
-                    input_datasets = None
+                input_datasets = input_datasets_raw
+                #else:
+                #    input_datasets = None
                 
                 
                 
