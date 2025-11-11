@@ -18,6 +18,7 @@ class MyConnector(Connector):
         """
         Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
         self.client = api_client()
+        self.unique_id_name = 'appId'
     
 
     def get_read_schema(self):
@@ -32,12 +33,23 @@ class MyConnector(Connector):
         The main reading method.
         """
         # from pprint import pprint as pp
+            
+        keys = [self.unique_id_name, 'appVersion', 'label', 'origin', 'shortDesc', 
+                'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
+                'onlyLimitedVisibility']
+        
+        for app_info in self.client.list_apps():            
+            try:
+                next_row = flatten_dict(app_info, 
+                               include_keys=keys)
+            except Exception as e:
+                print(f"Exception {e} with app_info:")
+                pp(app_info)
+                next_row = list_to_error_dict(keys)
+                # next_row[self.unique_id_name] = app_info.get(self.unique_id_name, 'NO_NAME')
+            finally:
+                yield next_row
 
-        for app_info in self.client.list_apps():
-            # pp(app_info)
-            next_app = flatten_dict(app_info, 
-                               include_keys=['appId', 'appVersion', 'label', 'origin', 'shortDesc', 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 'onlyLimitedVisibility'])
-            yield next_app
 
 
     def get_partitioning(self):

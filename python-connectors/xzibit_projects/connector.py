@@ -1,52 +1,38 @@
 # This file is the actual code for the custom Python dataset xzibit_projects
-from datetime import datetime
 
-# import pprint
+from datetime import datetime
 
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key
+from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key, pp
 
 """
-A custom Python dataset is a subclass of Connector.
-
-The parameters it expects and some flags to control its handling by DSS are
-specified in the connector.json file.
-
-Note: the name of the class itself is not relevant.
+Python Class for Projects dataset
 """
 class MyConnector(Connector):
 
     def __init__(self, config, plugin_config):
         """
-        The configuration parameters set up by the user in the settings tab of the
-        dataset are passed as a json object 'config' to the constructor.
-        The static configuration parameters set up by the developer in the optional
-        file settings.json at the root of the plugin directory are passed as a json
-        object 'plugin_config' to the constructor
+        Constructor
         """
-        Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
-        self.client = api_client()
+        Connector.__init__(self, config, plugin_config)
+        try:
+            self.client = api_client()
+            self.unique_id_key_name = 'projectKey'
+            self.keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
+                'projectLocation', 'projectStatus', 'shortDesc', 
+                'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
+            self.objects_list = self.client.list_projects()
+        except Exception as e:
+            print(f"CONSTRUCTOR EXCEPTION: {e}")
+        finally:
+            assert isinstance(self.objects_list, list), "self.objects_list must be of type list"
+            self.count = len(self.objects_list)
     
 
     def get_read_schema(self):
         """
-        Returns the schema that this connector generates when returning rows.
-
-        The returned schema may be None if the schema is not known in advance.
-        In that case, the dataset schema will be infered from the first rows.
-
-        If you do provide a schema here, all columns defined in the schema
-        will always be present in the output (with None value),
-        even if you don't provide a value in generate_rows
-
-        The schema must be a dict, with a single key: "columns", containing an array of
-        {'name':name, 'type' : type}.
-
-        Example:
-            return {"columns" : [ {"name": "col1", "type" : "string"}, {"name" :"col2", "type" : "float"}]}
-
-        Supported types are: string, int, bigint, float, double, date, boolean
+        Returns the schema but has issues, it's better to set it to None
         """
         return None
 
@@ -54,19 +40,24 @@ class MyConnector(Connector):
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         """
-        The main reading method.
-
-        Returns a generator over the rows of the dataset (or partition)
-        Each yielded row must be a dictionary, indexed by column name.
-
-        The dataset schema and partitioning are given for information purpose.
+        Generator for row by row with yield
         """
-        for project_info in self.client.list_projects():
-            next_project = flatten_dict(project_info, 
-                               include_keys=['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 'projectLocation', 'projectStatus', 'shortDesc', 'tags', 'versionTag.lastModifiedOn', 'tutorialProject'])
-            next_project = remove_prefix_from_keys(next_project, 'versionTag.')
-            next_project['lastModifiedOn'] = datetime.fromtimestamp(next_project['lastModifiedOn'] // 1000)
-            yield next_project
+
+        for item_info in self.objects_list:
+            try:
+                next_row = flatten_dict(item_info, include_keys=self.keys)
+                next_row = remove_prefix_from_keys(next_row, 'versionTag.')
+                next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
+
+            except Exception as e:
+                print(f"Exception {e} with item_info:")
+                pp(item_info)
+                next_row = list_to_error_dict(keys)
+                
+            finally:
+                yield next_row
+
+
 
 
     def get_partitioning(self):
@@ -77,16 +68,15 @@ class MyConnector(Connector):
 
 
     def list_partitions(self, partitioning):
-        """Return the list of partitions for the partitioning scheme
-        passed as parameter"""
+        """
+        Return the list of partitions for the partitioning scheme
+        """
         return []
 
 
     def partition_exists(self, partitioning, partition_id):
-        """Return whether the partition passed as parameter exists
-
-        Implementation is only required if the corresponding flag is set to True
-        in the connector definition
+        """
+        Return whether the partition passed as parameter exists
         """
         raise NotImplementedError
 
@@ -94,8 +84,5 @@ class MyConnector(Connector):
     def get_records_count(self, partitioning=None, partition_id=None):
         """
         Returns the count of records for the dataset (or a partition).
-
-        Implementation is only required if the corresponding flag is set to True
-        in the connector definition
         """
-        return len(self.client.list_projects())
+        return self.count

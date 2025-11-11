@@ -2,7 +2,7 @@
 
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key
+from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_prefix_from_keys, get_values_for_key, list_to_error_dict, pp
 
 """
 A custom Python dataset is a subclass of Connector.
@@ -52,23 +52,33 @@ class MyConnector(Connector):
                             partition_id=None, records_limit = -1):
         """
         The main reading method.
-
-        Returns a generator over the rows of the dataset (or partition)
-        Each yielded row must be a dictionary, indexed by column name.
-
-        The dataset schema and partitioning are given for information purpose.
         """
+        keys = ['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev']
         for plugin_info in self.client.list_plugins():
-            next_plugin = flatten_dict(plugin_info, 
-                               include_keys=['meta.label', 'id', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev'])
-            next_plugin = remove_prefix_from_keys(next_plugin, 'meta.')
-            plugin_handle = self.client.get_plugin(next_plugin['id'])
-            list_of_usages = plugin_handle.list_usages().get_raw()['usages']
-            if len(list_of_usages) == 0:
-                next_plugin['usages'] = []
-            else:
-                next_plugin['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
-            yield next_plugin
+            try:
+                next_row = flatten_dict(plugin_info, 
+                                   include_keys=keys)
+                next_row = remove_prefix_from_keys(next_row, 'meta.')
+
+                plugin_handle = self.client.get_plugin(next_row['id'])
+
+                # raw =  plugin_handle.list_usages().get_raw()
+                # pp(raw)
+
+                list_of_usages = plugin_handle.list_usages().get_raw()['usages']
+
+                if len(list_of_usages) == 0:
+                    next_row['project_usages'] = []
+                else:
+                    next_row['project_usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+
+                next_row['total_usages'] = len(list_of_usages)
+            except Exception as e:
+                print(f"Exception {e} with plugin_info:")
+                # pprint(plugin_info)
+                next_row = list_to_error_dict(keys)
+            finally:
+                yield next_row
 
 
     def get_partitioning(self):

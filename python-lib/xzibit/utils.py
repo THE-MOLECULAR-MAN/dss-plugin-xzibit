@@ -4,6 +4,19 @@ from pprint import pprint as pp
 
 import os
 
+def list_to_error_dict(strings: list[str], value="error") -> dict[str, str]:
+    """
+    Convert a list of strings into a dictionary where each string is a key
+    and each value is the default string 'error'.
+
+    Args:
+        strings (list[str]): List of strings to use as dictionary keys.
+
+    Returns:
+        dict[str, str]: Dictionary with each key mapped to 'error'.
+    """
+    return {s: value for s in strings}
+
 def get_path_size_megabytes(path):
     # Convert bytes → megabytes (1 MB = 1024 * 1024 bytes)
     size_mb = get_path_size(path) / (1024 * 1024)
@@ -23,7 +36,8 @@ def get_path_size(path):
     total_size = 0
 
     if not os.path.exists(path):
-        raise FileNotFoundError(f"Path does not exist: {path}")
+        return 0
+        # raise FileNotFoundError(f"Path does not exist: {path}")
 
     # If it's a file, just return its size directly
     if os.path.isfile(path):

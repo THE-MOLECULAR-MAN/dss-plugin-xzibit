@@ -37,14 +37,18 @@ class MyConnector(Connector):
         """
         The main reading method.
         """
-        
+        keys = ['name', 'type', 'usableBy', 'allowWrite', 'allowedGroups', 
+                'credentialsMode', 'name', 'type', 'usableBy']
         for connection_info in self.client.list_connections(as_type='listitems'):
-            pp(connection_info)
-            next_connection = flatten_dict(connection_info, 
-                               include_keys=['name', 'type', 'usableBy', 'allowWrite', 'allowedGroups', 'credentialsMode', 'name', 'type', 'usableBy'])
-            #next_connection = remove_prefix_from_keys(next_connection, 'versionTag.')
-            
-            yield next_connection
+            try:
+                next_row = flatten_dict(connection_info, include_keys=keys)
+            except Exception as e:
+                print(f"Exception {e} with connection_info:")
+                pp(connection_info)
+                next_row = list_to_error_dict(keys)
+                next_row['name'] = connection_info.get('name', 'NO_NAME')
+            finally:
+                yield next_row
 
 
     def get_partitioning(self):
