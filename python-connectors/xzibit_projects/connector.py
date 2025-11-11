@@ -15,7 +15,7 @@ from datetime import datetime
 class ConnectorProjects(Connector):
 
     ####################################################################
-    # Code that has to be custom written for this class
+    # Code that has to be customized for this specific class
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
