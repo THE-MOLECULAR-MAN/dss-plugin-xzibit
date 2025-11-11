@@ -22,7 +22,7 @@ class ConnectorRecipes(Connector):
         
         self.client = api_client()
         self.unique_id_key_name = 'name'
-        self.keys   = [self.unique_id_key_name, 'name', ]
+        self.keys   = [self.unique_id_key_name, 'type', 'params.engineType']
         self.projectkeys = self.client.list_project_keys()
         self.objects_list = {}
         
