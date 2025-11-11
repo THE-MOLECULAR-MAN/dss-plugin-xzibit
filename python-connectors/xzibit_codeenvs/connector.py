@@ -50,9 +50,11 @@ class ConnectorCodeEnvs(Connector):
                     next_row['usages'] = []
                 else:
                     next_row['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+
             except Exception as e:
                 print(f"Exception {e} with code_env_info:")
                 pp(code_env_info)
+                
             finally:
                 # return a single row
                 yield next_row
