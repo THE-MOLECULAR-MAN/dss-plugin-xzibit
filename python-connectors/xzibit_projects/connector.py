@@ -57,24 +57,17 @@ class MyConnector(Connector):
             finally:
                 yield next_row
                 
-####################################################################
-#
-####################################################################
-
     def get_records_count(self, partitioning=None, partition_id=None):
         return self.count
 
-
-
+####################################################################
+# Intentionally not implemented, not needed for this type
+####################################################################
     def get_partitioning(self):
         raise NotImplementedError
-
 
     def list_partitions(self, partitioning):
         return []
 
-
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
-
-
