@@ -21,8 +21,8 @@ class ConnectorMeanings(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.client = api_client()
-        self.unique_id_key_name = 'name'
-        self.keys   = [self.unique_id_key_name]
+        self.unique_id_key_name = 'label'
+        self.keys   = [self.unique_id_key_name, 'description']
         self.objects_list = self.client.list_meanings()
 
 
