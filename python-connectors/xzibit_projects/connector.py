@@ -1,5 +1,3 @@
-# This file is the actual code for the custom Python dataset xzibit_projects
-
 from datetime import datetime
 
 from dataiku import api_client
