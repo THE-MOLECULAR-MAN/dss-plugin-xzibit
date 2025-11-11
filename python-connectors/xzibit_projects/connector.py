@@ -7,7 +7,9 @@ from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_pre
 class MyConnector(Connector):
 
     ####################################################################
-    # 
+    # Code that has to be custom written for this
+    ####################################################################
+
 
     def __init__(self, config, plugin_config):
         """Constructor"""
