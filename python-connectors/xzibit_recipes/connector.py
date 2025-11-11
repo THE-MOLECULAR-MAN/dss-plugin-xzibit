@@ -48,15 +48,15 @@ class ConnectorRecipes(Connector):
                 raw_data = recipe_handle.get_settings().get_recipe_raw_definition()
                 
                 
-                next_row = flatten_dict(raw_data, include_keys=self.keys)
+                #next_row = flatten_dict(raw_data, include_keys=self.keys)
                 
-#                 next_row = {'projectKey': pk,
-#                             'id': recipe_id,
-#                            #'type': recipe['type'],
-#                            #'name': recipe.name,
-#                            # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
-#                             #'engineType': recipe['params']['engineType']
-#                            }
+                next_row = {'projectKey': pk,
+                            'id': recipe_id,
+                           #'type': recipe['type'],
+                           #'name': recipe.name,
+                           # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
+                            #'engineType': recipe['params']['engineType']
+                           }
                 if 'params.basename' in next_row:
                     pp(raw_data)
                     pp(next_row)
