@@ -12,7 +12,7 @@ from xzibit.utils import pp
 ####################################################################
 from datetime import datetime
 
-class MyConnector(Connector):
+class ConnectorProjects(Connector):
 
     ####################################################################
     # Code that has to be custom written for this class
