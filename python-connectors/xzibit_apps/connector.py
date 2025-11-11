@@ -10,7 +10,7 @@ from xzibit.utils import pp
 ####################################################################
 # Unique imports for this Class
 ####################################################################
-from datetime import datetime
+# none.
 
 class ConnectorApps(Connector):
 
