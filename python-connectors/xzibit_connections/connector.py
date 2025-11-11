@@ -24,7 +24,7 @@ class ConnectorConnections(Connector):
         self.unique_id_key_name = 'name'
         self.keys   = [self.unique_id_key_name, 'type', 'usableBy', 'allowWrite', 'allowedGroups', 
                 'credentialsMode', 'type', 'usableBy']
-        self.objects_list = self.client.list_projects()
+        self.objects_list = self.client.list_connections(as_type='listitems')
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
