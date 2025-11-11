@@ -40,7 +40,8 @@ class ConnectorRecipes(Connector):
             for recipe in project_recipes:
                 pp(recipe)
 #                next_row = {}
-                next_row = {'projectkey': pk, 'name', recipe['']}
+                next_row = {'projectkey': pk, 'name'}
+    # , recipe['']
             
             # return a single row
             yield next_row
