@@ -22,7 +22,7 @@ class ConnectorMeanings(Connector):
         
         self.client = api_client()
         self.unique_id_key_name = 'label'
-        self.keys   = [self.unique_id_key_name, 'description', 'detectable', 'type']
+        self.keys   = [self.unique_id_key_name, 'description', 'detectable', 'type', 'id']
         self.objects_list = self.client.list_meanings()
 
 
