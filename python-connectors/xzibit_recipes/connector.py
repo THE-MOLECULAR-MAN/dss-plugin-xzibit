@@ -49,9 +49,9 @@ class ConnectorRecipes(Connector):
                             'input_datasets': recipe_settings_handle.get_flat_input_refs(),
                             'output_datasets': recipe_settings_handle.get_flat_output_refs(),
                 }
-                if 'params.basename' in next_row:
-                    pp(raw_data)
-                    pp(next_row)
+
+                pp(raw_data)
+                pp(next_row)
                 # return a single row
                 yield next_row
 
