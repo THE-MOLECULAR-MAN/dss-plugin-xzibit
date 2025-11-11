@@ -26,6 +26,9 @@ class ConnectorRecipes(Connector):
         self.projectkeys = self.client.list_project_keys()
         self.objects_list = {}
         
+        for pk in self.projectkeys:
+            project_handle = self.client.get_project(pk)
+            self.objects_list[pk] = project_handle.list_recipes(as_type='listitems')
         
         self.objects_list = self.client.list_apps()
 
