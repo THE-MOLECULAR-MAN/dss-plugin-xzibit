@@ -66,6 +66,7 @@ class ConnectorRecipes(Connector):
                             'type': raw_data['type'],
                             'name': recipe_handle.name,
                             'tags': raw_data['tags'],
+                            'input_datasets': input_datasets
                             # 'engineType': raw_data.get('params',None)# .get('engineType',None)
                             # 'lastModifiedOn': raw_data.get('versionTag',None).get('lastModifiedOn',None),
                     
