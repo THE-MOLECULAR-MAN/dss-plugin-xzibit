@@ -21,8 +21,8 @@ class ConnectorRecipes(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.client = api_client()
-        self.unique_id_key_name = 'id'
-        self.keys   = [self.unique_id_key_name, 'name']
+        self.unique_id_key_name = 'name'
+        self.keys   = [self.unique_id_key_name, 'name', ]
         self.projectkeys = self.client.list_project_keys()
         self.objects_list = {}
         
@@ -44,6 +44,7 @@ class ConnectorRecipes(Connector):
                            'type': recipe['type'],
                            'name': recipe['name'],
                            # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
+                            'engineType': recipe['']
                            }
             
             # return a single row
