@@ -39,6 +39,7 @@ class ConnectorProjects(Connector):
             next_row = remove_prefix_from_keys(next_row, 'versionTag.')
             next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
             
+            # return a single row
             yield next_row
 
             
