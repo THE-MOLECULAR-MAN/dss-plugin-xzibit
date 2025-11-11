@@ -22,7 +22,7 @@ class ConnectorRecipes(Connector):
         
         self.client = api_client()
         self.unique_id_key_name = 'name'
-        #self.keys   = [self.unique_id_key_name, 'type',  'tags', 'labels', 'projectKey'] 
+        self.keys   = [self.unique_id_key_name, 'type',  'tags', 'labels', 'projectKey'] 
         #'params.engineType', 'creationTag.lastModifiedOn', 'versionTag.lastModifiedOn', 
         self.projectkeys = self.client.list_project_keys()
         self.objects_list = {}
@@ -45,9 +45,9 @@ class ConnectorRecipes(Connector):
                 recipe_id = r.id
                 recipe_handle = project_handle.get_recipe(recipe_id)
                 raw_data = recipe_handle.get_settings().get_recipe_raw_definition()
-                print(str(type(raw_data))) # dataikuapi.dss.recipe.SyncRecipeSettings
+                
                 pp(raw_data)
-                #next_row = flatten_dict(recipe, include_keys=self.keys)
+                #next_row = flatten_dict(raw_data, include_keys=self.keys)
                 
                 next_row = {'projectKey': pk,
                             'id': recipe_id,
