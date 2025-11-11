@@ -40,7 +40,9 @@ class ConnectorRecipes(Connector):
         # iterate through each object
         for pk, proj_recipes in self.objects_list.items():
 
-            for recipe in proj_recipes:
+            for r in proj_recipes:
+                recipe_id = r['id']
+                recipe_handle = project.get_recipe(recipe_id)
                 recipe = recipe.get_settings()
                 print(str(type(recipe))) # dataikuapi.dss.recipe.SyncRecipeSettings
                 pp(recipe)
