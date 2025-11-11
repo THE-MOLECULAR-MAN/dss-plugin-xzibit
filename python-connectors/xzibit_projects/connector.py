@@ -6,6 +6,9 @@ from xzibit.utils import get_values_from_list_of_dicts, flatten_dict, remove_pre
 
 class MyConnector(Connector):
 
+    ####################################################################
+    # 
+
     def __init__(self, config, plugin_config):
         """Constructor"""
         Connector.__init__(self, config, plugin_config)
@@ -25,7 +28,10 @@ class MyConnector(Connector):
             next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
             yield next_row
 
-
+            
+####################################################################
+# Same for all instances:
+####################################################################
     def get_records_count(self, partitioning=None, partition_id=None):
         return len(self.objects_list)
 
