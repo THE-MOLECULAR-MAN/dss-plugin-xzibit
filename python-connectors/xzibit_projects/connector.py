@@ -22,6 +22,7 @@ class MyConnector(Connector):
             assert isinstance(self.objects_list, list), "self.objects_list must be of type list"
             self.count = len(self.objects_list)
 
+            
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         """Generator for row by row with yield"""
@@ -39,7 +40,8 @@ class MyConnector(Connector):
                 
             finally:
                 yield next_row
-                
+
+
     def get_records_count(self, partitioning=None, partition_id=None):
         return self.count
 
