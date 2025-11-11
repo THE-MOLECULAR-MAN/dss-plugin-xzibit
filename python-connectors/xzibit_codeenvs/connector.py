@@ -35,30 +35,29 @@ class ConnectorCodeEnvs(Connector):
             # custom things for this specific class:
             
             
-#             env_lang = next_row['envLang']
-#             env_name = next_row['envName']
-#             try:
-#                 code_env_handle = self.client.get_code_env(env_lang, env_name)
-#                 settings = code_env_handle.get_settings().get_raw()
-#                 next_row['corePackagesSet'] = settings.get('desc',[]).get('corePackagesSet',[])
-#                 next_row['path']            = settings.get('path', None)
+            env_lang = next_row['envLang']
+            env_name = next_row['envName']
+            try:
+                code_env_handle = self.client.get_code_env(env_lang, env_name)
+                settings = code_env_handle.get_settings().get_raw()
+                next_row['corePackagesSet'] = settings.get('desc',[]).get('corePackagesSet',[])
+                next_row['path']            = settings.get('path', None)
 
-#                 # pp(settings)
-#                 next_row['disk_size_megabytes'] = get_path_size_megabytes(next_row['path'])
+                # pp(settings)
+                next_row['disk_size_megabytes'] = get_path_size_megabytes(next_row['path'])
 
-#                 list_of_usages = code_env_handle.list_usages()
+                list_of_usages = code_env_handle.list_usages()
 
-#                 if len(list_of_usages) == 0:
-#                     next_row['usages'] = []
-#                 else:
-#                     next_row['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
-#             except Exception as e:
-#                 print(f"Exception {e} with code_env_info:")
-#                 pp(code_env_info)
-
-            
-            # return a single row
-            yield next_row
+                if len(list_of_usages) == 0:
+                    next_row['usages'] = []
+                else:
+                    next_row['usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+            except Exception as e:
+                print(f"Exception {e} with code_env_info:")
+                pp(code_env_info)
+            finally:
+                # return a single row
+                yield next_row
 
             
 ####################################################################
