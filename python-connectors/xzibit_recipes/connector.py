@@ -52,7 +52,7 @@ class ConnectorRecipes(Connector):
                             'engineType': recipe['params']['engineType']
                            }
                 pp(next_row)
-            # return a single row
+                # return a single row
                 yield next_row
 
             
