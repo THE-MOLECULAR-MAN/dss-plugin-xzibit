@@ -32,7 +32,7 @@ class ConnectorPlugins(Connector):
         # iterate through each object
         for item_info in self.objects_list:
             try:
-                pp(item_info)
+                # pp(item_info)
                 next_row = flatten_dict(item_info, include_keys=self.keys)
                 pp(next_row)
 
