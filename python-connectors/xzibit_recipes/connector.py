@@ -48,9 +48,6 @@ class ConnectorRecipes(Connector):
                             'tags': raw_data['tags'],
                             'input_datasets': recipe_settings_handle.get_flat_input_refs(),
                             'output_datasets': recipe_settings_handle.get_flat_output_refs(),
-                            # 'engineType': raw_data.get('params',None)# .get('engineType',None)
-                            # 'lastModifiedOn': raw_data.get('versionTag',None).get('lastModifiedOn',None),
-                    
                 }
                 if 'params.basename' in next_row:
                     pp(raw_data)
