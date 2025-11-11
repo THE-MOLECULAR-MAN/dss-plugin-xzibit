@@ -22,9 +22,7 @@ class ConnectorPlugins(Connector):
         
         self.client = api_client()
         self.unique_id_key_name = 'projectKey'
-        self.keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
-            'projectLocation', 'projectStatus', 'shortDesc', 
-            'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
+        self.keys   = [self.unique_id_key_name, ]
         self.objects_list = self.client.list_projects()
 
             
