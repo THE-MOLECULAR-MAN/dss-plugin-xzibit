@@ -45,9 +45,9 @@ class ConnectorRecipes(Connector):
             for r in proj_recipes:
                 recipe_id = r.id
                 recipe_handle = project_handle.get_recipe(recipe_id)
-                recipe_settings_handle = raw_data = recipe_handle.get_settings()
-                raw_data = recipe_settings_handle.get_settings()
-                .get_recipe_raw_definition()
+                recipe_settings_handle = recipe_handle.get_settings()
+                raw_data = recipe_settings_handle.get_recipe_raw_definition()
+                
                 
                 
                 
