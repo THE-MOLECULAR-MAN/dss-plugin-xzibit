@@ -15,7 +15,6 @@ class MyConnector(Connector):
             'projectLocation', 'projectStatus', 'shortDesc', 
             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         self.objects_list = self.client.list_projects()
-        self.count = len(self.objects_list)
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
