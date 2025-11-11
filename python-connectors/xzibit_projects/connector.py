@@ -19,6 +19,7 @@ class ConnectorProjects(Connector):
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
+        
         self.client = api_client()
         self.unique_id_key_name = 'projectKey'
         self.keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
