@@ -48,7 +48,7 @@ class ConnectorRecipes(Connector):
                 recipe_settings_handle = recipe_handle.get_settings()
                 raw_data = recipe_settings_handle.get_recipe_raw_definition()
                 
-                input_datasets_raw = recipe_settings_handle.get_flat_input_refs()
+                input_datasets_raw = 
                 
                 #if len(input_datasets_raw) > 0:
                     # has inputs:
@@ -66,7 +66,8 @@ class ConnectorRecipes(Connector):
                             'type': raw_data['type'],
                             'name': recipe_handle.name,
                             'tags': raw_data['tags'],
-                            'input_datasets': input_datasets
+                            'input_datasets': recipe_settings_handle.get_flat_input_refs(),
+                            'output_datasets': recipe_settings_handle.get_flat_output_refs(),
                             # 'engineType': raw_data.get('params',None)# .get('engineType',None)
                             # 'lastModifiedOn': raw_data.get('versionTag',None).get('lastModifiedOn',None),
                     
