@@ -32,7 +32,7 @@ class ConnectorMeanings(Connector):
         # iterate through each object
         for item_info in self.objects_list:
             next_row = flatten_dict(item_info, include_keys=self.keys)
-            pp(item_info)
+
             # return a single row
             yield next_row
 
