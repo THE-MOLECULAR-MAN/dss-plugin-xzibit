@@ -21,9 +21,6 @@ class ConnectorRecipes(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.client = api_client()
-        # self.unique_id_key_name = 'name'
-        # self.keys   = [self.unique_id_key_name, 'projectKey'] 
-        # projectkeys = 
         self.objects_list = {}
         
         for pk in self.client.list_project_keys():
