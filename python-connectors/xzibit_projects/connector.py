@@ -30,6 +30,7 @@ class ConnectorProjects(Connector):
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
+        
         for item_info in self.objects_list:
             next_row = flatten_dict(item_info, include_keys=self.keys)
             next_row = remove_prefix_from_keys(next_row, 'versionTag.')
