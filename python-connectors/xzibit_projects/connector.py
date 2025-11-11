@@ -15,10 +15,8 @@ from datetime import datetime
 class MyConnector(Connector):
 
     ####################################################################
-    # Code that has to be custom written for this
+    # Code that has to be custom written for this class
     ####################################################################
-
-
     def __init__(self, config, plugin_config):
         """Constructor"""
         Connector.__init__(self, config, plugin_config)
