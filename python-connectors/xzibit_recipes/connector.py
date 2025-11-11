@@ -49,7 +49,6 @@ class ConnectorRecipes(Connector):
                             'input_datasets': recipe_settings_handle.get_flat_input_refs(),
                             'output_datasets': recipe_settings_handle.get_flat_output_refs(),
                 }
-
                 pp(raw_data)
                 pp(next_row)
                 # return a single row
