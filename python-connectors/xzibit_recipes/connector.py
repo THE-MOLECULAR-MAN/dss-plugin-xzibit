@@ -41,7 +41,9 @@ class ConnectorRecipes(Connector):
                 pp(recipe)
 #                next_row = {}
                 next_row = {'projectkey': pk,
-                           'type': recipe['type']}
+                           'type': recipe['type'],
+                           'name': recipe['name']
+                           }
     # , recipe['']
             
             # return a single row
