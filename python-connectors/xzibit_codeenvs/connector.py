@@ -42,7 +42,6 @@ class ConnectorCodeEnvs(Connector):
                 next_row['corePackagesSet'] = settings.get('desc',[]).get('corePackagesSet',[])
                 next_row['path']            = settings.get('path', None)
 
-                # pp(settings)
                 next_row['disk_size_megabytes'] = get_path_size_megabytes(next_row['path'])
 
                 list_of_usages = code_env_handle.list_usages()
