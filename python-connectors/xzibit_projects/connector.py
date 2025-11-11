@@ -24,9 +24,7 @@ class MyConnector(Connector):
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
-        """
-        Generator for row by row with yield
-        """
+        """Generator for row by row with yield"""
 
         for item_info in self.objects_list:
             try:
