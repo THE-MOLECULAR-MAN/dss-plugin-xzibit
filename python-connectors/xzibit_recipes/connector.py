@@ -52,9 +52,9 @@ class ConnectorRecipes(Connector):
                 
                 if len(input_datasets_raw) > 0:
                     # has inputs:
-                    raw_data['input_datasets'] = input_datasets_raw
+                    input_datasets = input_datasets_raw
                 else:
-                    raw_data['input_datasets'] = None
+                    input_datasets = None
                 
                 
                 
