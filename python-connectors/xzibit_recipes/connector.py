@@ -41,6 +41,8 @@ class ConnectorRecipes(Connector):
                 recipe_settings_handle = recipe_handle.get_settings()
                 raw_data = recipe_settings_handle.get_recipe_raw_definition()
                 
+                if 'params' in raw_data and 
+                
                 next_row = {
                             'projectKey': pk,
                             'type': raw_data['type'],
