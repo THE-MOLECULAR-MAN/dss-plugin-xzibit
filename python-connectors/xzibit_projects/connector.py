@@ -1,5 +1,5 @@
 ####################################################################
-# Same imports for all dataset classes
+# Same imports for all dataset Classes
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
