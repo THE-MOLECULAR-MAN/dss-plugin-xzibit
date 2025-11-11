@@ -34,7 +34,7 @@ class ConnectorPlugins(Connector):
             next_row = flatten_dict(item_info, include_keys=self.keys)
             
             # custom things for this specific class:
-            next_row = remove_prefix_from_keys(next_row, 'versionTag.')
+            next_row = remove_prefix_from_keys(next_row, 'meta.')
 
             
             # return a single row
