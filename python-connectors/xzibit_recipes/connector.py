@@ -41,7 +41,7 @@ class ConnectorRecipes(Connector):
 
             for recipe in proj_recipes:
                 recipe = recipe.get_settings()
-                #print(str(type(recipe)))
+                print(str(type(recipe)))
                 #pp(recipe)
                 #next_row = flatten_dict(recipe, include_keys=self.keys)
                 
