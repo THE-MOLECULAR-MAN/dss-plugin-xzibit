@@ -34,12 +34,12 @@ class ConnectorPlugins(Connector):
             try:
                 # pp(item_info)
                 next_row = flatten_dict(item_info, include_keys=self.keys)
-                pp(next_row)
+                # pp(next_row)
 
                 # custom things for this specific class:
                 next_row = remove_prefix_from_keys(next_row, 'meta.')
 
-                pp(next_row)
+                # pp(next_row)
 
                 plugin_handle = self.client.get_plugin(next_row['id'])
 
