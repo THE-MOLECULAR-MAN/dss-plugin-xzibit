@@ -39,6 +39,7 @@ class ConnectorRecipes(Connector):
         for pk, proj_recipes in self.objects_list.items():
 
             for recipe in proj_recipes:
+
                 next_row = flatten_dict(recipe, include_keys=self.keys)
                 pp(recipe)
 #                 next_row = {'projectKey': pk,
@@ -49,7 +50,7 @@ class ConnectorRecipes(Connector):
 #                            }
             
             # return a single row
-            yield next_row
+                yield next_row
 
             
 ####################################################################
