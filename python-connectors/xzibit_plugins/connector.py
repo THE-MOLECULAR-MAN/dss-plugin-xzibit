@@ -53,6 +53,7 @@ class ConnectorPlugins(Connector):
                 next_row = list_to_error_dict(keys)
             finally:
                 yield next_row
+
 ####################################################################
 # Same for all instances:
 ####################################################################
