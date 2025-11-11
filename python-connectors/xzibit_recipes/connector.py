@@ -48,6 +48,7 @@ class ConnectorRecipes(Connector):
                 raw_data = recipe_handle.get_settings().get_recipe_raw_definition()
                 
                 
+                
                 #next_row = flatten_dict(raw_data, include_keys=self.keys)
                 
                 next_row = {
