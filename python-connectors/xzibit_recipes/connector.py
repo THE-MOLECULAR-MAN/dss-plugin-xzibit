@@ -23,8 +23,10 @@ class ConnectorRecipes(Connector):
         self.client = api_client()
         self.unique_id_key_name = 'id'
         self.keys   = [self.unique_id_key_name, 'name']
+        self.projectkeys = self.client.list_project_keys()
+        
+        
         self.objects_list = self.client.list_apps()
-
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
