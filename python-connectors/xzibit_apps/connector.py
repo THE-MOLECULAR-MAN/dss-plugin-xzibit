@@ -25,7 +25,7 @@ class ConnectorProjects(Connector):
         self.keys   = [self.unique_id_key_name, 'appVersion', 'label', 'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
                 'onlyLimitedVisibility']
-        self.objects_list = self.client.list_projects()
+        self.objects_list = self.client.list_apps()
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
