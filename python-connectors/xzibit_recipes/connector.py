@@ -23,10 +23,10 @@ class ConnectorRecipes(Connector):
         self.client = api_client()
         # self.unique_id_key_name = 'name'
         # self.keys   = [self.unique_id_key_name, 'projectKey'] 
-        self.projectkeys = self.client.list_project_keys()
+        projectkeys = self.client.list_project_keys()
         self.objects_list = {}
         
-        for pk in self.projectkeys:
+        for pk in projectkeys:
             project_handle = self.client.get_project(pk)
             self.objects_list[pk] = project_handle.list_recipes(as_type='objects')
         
