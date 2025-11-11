@@ -51,7 +51,6 @@ class ConnectorRecipes(Connector):
                 #next_row = flatten_dict(raw_data, include_keys=self.keys)
                 
                 next_row = {'projectKey': pk,
-                            # 'id': recipe_id,
                            'type': raw_data['type'],
                            'name': recipe.name,
                             # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
