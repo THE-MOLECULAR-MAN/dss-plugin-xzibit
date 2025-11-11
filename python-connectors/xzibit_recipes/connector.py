@@ -40,7 +40,7 @@ class ConnectorRecipes(Connector):
         for pk, proj_recipes in self.objects_list.items():
 
             for recipe in proj_recipes:
-                #recipe = recipe.get_settings()
+                recipe = recipe.get_settings()
                 #print(str(type(recipe)))
                 #pp(recipe)
                 #next_row = flatten_dict(recipe, include_keys=self.keys)
