@@ -48,16 +48,6 @@ class ConnectorRecipes(Connector):
                 recipe_settings_handle = recipe_handle.get_settings()
                 raw_data = recipe_settings_handle.get_recipe_raw_definition()
                 
-                input_datasets_raw = 
-                
-                #if len(input_datasets_raw) > 0:
-                    # has inputs:
-                input_datasets = input_datasets_raw
-                #else:
-                #    input_datasets = None
-                
-                
-                
                 
                 #next_row = flatten_dict(raw_data, include_keys=self.keys)
                 
