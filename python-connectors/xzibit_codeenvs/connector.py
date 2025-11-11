@@ -54,7 +54,7 @@ class ConnectorCodeEnvs(Connector):
             except Exception as e:
                 print(f"Exception {e} with code_env_info:")
                 pp(code_env_info)
-                
+
             finally:
                 # return a single row
                 yield next_row
