@@ -9,18 +9,13 @@ class MyConnector(Connector):
     def __init__(self, config, plugin_config):
         """Constructor"""
         Connector.__init__(self, config, plugin_config)
-        try:
-            self.client = api_client()
-            self.unique_id_key_name = 'projectKey'
-            self.keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
-                'projectLocation', 'projectStatus', 'shortDesc', 
-                'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
-            self.objects_list = self.client.list_projects()
-        except Exception as e:
-            print(f"CONSTRUCTOR EXCEPTION: {e}")
-        finally:
-            assert isinstance(self.objects_list, list), "self.objects_list must be of type list"
-            self.count = len(self.objects_list)
+        self.client = api_client()
+        self.unique_id_key_name = 'projectKey'
+        self.keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
+            'projectLocation', 'projectStatus', 'shortDesc', 
+            'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
+        self.objects_list = self.client.list_projects()
+        self.count = len(self.objects_list)
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
