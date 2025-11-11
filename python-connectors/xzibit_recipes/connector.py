@@ -49,7 +49,8 @@ class ConnectorRecipes(Connector):
                            'type': recipe['type'],
                            'name': recipe.name,
                            # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
-                            'engineType': recipe['']
+                            
+                            'engineType': recipe['params']['engineType']
                            }
             
             # return a single row
