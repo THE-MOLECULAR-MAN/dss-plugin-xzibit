@@ -30,7 +30,8 @@ class ConnectorRecipes(Connector):
         for pk in self.projectkeys:
             project_handle = self.client.get_project(pk)
             # class 'dataikuapi.dss.recipe.DSSRecipeListItem
-            self.objects_list[pk] = project_handle.list_recipes(as_type='listitems')
+            # self.objects_list[pk] = project_handle.list_recipes(as_type='listitems')
+            self.objects_list[pk] = project_handle.list_recipes(as_type='objects')
         
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
