@@ -56,7 +56,7 @@ class ConnectorRecipes(Connector):
                             'name': recipe_handle.name,
                             'tags': raw_data['tags'],
                             # 'engineType': raw_data.get('params',None)# .get('engineType',None)
-                            # 'lastModifiedOn': raw_data.get('versionTag',None).get('lastModifiedOn',None),
+                            'lastModifiedOn': raw_data.get('versionTag',None).get('lastModifiedOn',None),
                     
                 }
                 if 'params.basename' in next_row:
