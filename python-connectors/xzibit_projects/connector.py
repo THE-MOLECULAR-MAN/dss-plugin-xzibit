@@ -56,33 +56,25 @@ class MyConnector(Connector):
                 
             finally:
                 yield next_row
+                
+####################################################################
+#
+####################################################################
 
+    def get_records_count(self, partitioning=None, partition_id=None):
+        return self.count
 
 
 
     def get_partitioning(self):
-        """
-        Return the partitioning schema that the connector defines.
-        """
         raise NotImplementedError
 
 
     def list_partitions(self, partitioning):
-        """
-        Return the list of partitions for the partitioning scheme
-        """
         return []
 
 
     def partition_exists(self, partitioning, partition_id):
-        """
-        Return whether the partition passed as parameter exists
-        """
         raise NotImplementedError
 
 
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """
-        Returns the count of records for the dataset (or a partition).
-        """
-        return self.count
