@@ -34,10 +34,6 @@ class ConnectorConnections(Connector):
         for item_info in self.objects_list:
             next_row = flatten_dict(item_info, include_keys=self.keys)
             
-            # custom things for this specific class:
-            next_row = remove_prefix_from_keys(next_row, 'versionTag.')
-            next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
-            
             # return a single row
             yield next_row
 
