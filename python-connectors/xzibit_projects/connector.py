@@ -21,18 +21,10 @@ class MyConnector(Connector):
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         for item_info in self.objects_list:
-            try:
-                next_row = flatten_dict(item_info, include_keys=self.keys)
-                next_row = remove_prefix_from_keys(next_row, 'versionTag.')
-                next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
-
-            except Exception as e:
-                print(f"Exception {e} with item_info:")
-                pp(item_info)
-                next_row = list_to_error_dict(keys)
-                
-            finally:
-                yield next_row
+            next_row = flatten_dict(item_info, include_keys=self.keys)
+            next_row = remove_prefix_from_keys(next_row, 'versionTag.')
+            next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
+            yield next_row
 
 
     def get_records_count(self, partitioning=None, partition_id=None):
