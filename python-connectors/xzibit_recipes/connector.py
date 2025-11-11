@@ -53,7 +53,7 @@ class ConnectorRecipes(Connector):
                 next_row = {
                             'projectKey': pk,
                             'type': raw_data['type'],
-                            'name': recipe.name,
+                            'name': recipe_handle.name,
                             # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
                             #'engineType': recipe['params']['engineType']
                            }
