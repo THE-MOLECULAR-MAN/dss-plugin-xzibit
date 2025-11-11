@@ -33,8 +33,6 @@ class ConnectorCodeEnvs(Connector):
             next_row = flatten_dict(item_info, include_keys=self.keys)
             
             # custom things for this specific class:
-            
-            
             env_lang = next_row['envLang']
             env_name = next_row['envName']
             try:
