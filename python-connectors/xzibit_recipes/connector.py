@@ -47,7 +47,7 @@ class ConnectorRecipes(Connector):
                 pp(next_row)
                 next_row = {'projectKey': pk,
                            'type': recipe['type'],
-                           'name': recipe['name'],
+                           'name': recipe.name
                            # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
                             'engineType': recipe['']
                            }
