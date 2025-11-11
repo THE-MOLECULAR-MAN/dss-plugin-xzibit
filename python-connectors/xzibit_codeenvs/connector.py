@@ -22,7 +22,7 @@ class ConnectorCodeEnvs(Connector):
         self.client = api_client()
         self.unique_id_key_name = 'envName'
         self.keys   = [self.unique_id_key_name, 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner' ]
-        self.objects_list = self.client.()
+        self.objects_list = self.client.list_code_envs()
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
