@@ -40,12 +40,12 @@ class ConnectorRecipes(Connector):
             for recipe in proj_recipes:
                 next_row = flatten_dict(recipe, include_keys=self.keys)
                 pp(recipe)
-                next_row = {'projectKey': pk,
-                           'type': recipe['type'],
-                           'name': recipe['name'],
-                           # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
-                            'engineType': recipe['']
-                           }
+#                 next_row = {'projectKey': pk,
+#                            'type': recipe['type'],
+#                            'name': recipe['name'],
+#                            # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
+#                             'engineType': recipe['']
+#                            }
             
             # return a single row
             yield next_row
