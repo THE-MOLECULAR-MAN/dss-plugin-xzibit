@@ -40,17 +40,17 @@ class ConnectorRecipes(Connector):
         for pk, proj_recipes in self.objects_list.items():
 
             for recipe in proj_recipes:
-                recipe = recipe.get_settings()
-                print(str(type(recipe)))
-                pp(recipe)
-                next_row = flatten_dict(recipe, include_keys=self.keys)
+                #recipe = recipe.get_settings()
+                #print(str(type(recipe)))
+                #pp(recipe)
+                #next_row = flatten_dict(recipe, include_keys=self.keys)
                 pp(next_row)
-#                 next_row = {'projectKey': pk,
-#                            'type': recipe['type'],
-#                            'name': recipe['name'],
-#                            # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
-#                             'engineType': recipe['']
-#                            }
+                next_row = {'projectKey': pk,
+                           'type': recipe['type'],
+                           'name': recipe['name'],
+                           # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
+                            'engineType': recipe['']
+                           }
             
             # return a single row
                 yield next_row
