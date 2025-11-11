@@ -33,6 +33,7 @@ class ConnectorPlugins(Connector):
         for item_info in self.objects_list:
             pp(item_info)
             next_row = flatten_dict(item_info, include_keys=self.keys)
+            pp(next_row)
             
             # custom things for this specific class:
             next_row = remove_prefix_from_keys(next_row, 'meta.')
