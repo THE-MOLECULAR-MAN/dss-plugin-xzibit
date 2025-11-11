@@ -44,7 +44,6 @@ class ConnectorRecipes(Connector):
                            'type': recipe['type'],
                            'name': recipe['name']
                            }
-    # , recipe['']
             
             # return a single row
             yield next_row
