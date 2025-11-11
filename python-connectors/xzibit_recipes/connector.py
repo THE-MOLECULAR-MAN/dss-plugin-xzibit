@@ -24,6 +24,7 @@ class ConnectorRecipes(Connector):
         self.unique_id_key_name = 'id'
         self.keys   = [self.unique_id_key_name, 'name']
         self.projectkeys = self.client.list_project_keys()
+        self.objects_list = {}
         
         
         self.objects_list = self.client.list_apps()
