@@ -54,9 +54,9 @@ class ConnectorRecipes(Connector):
                             'projectKey': pk,
                             'type': raw_data['type'],
                             'name': recipe_handle.name,
-                            # 'output_dataset': recipe.get('outputs',None).get('main',None).get('items',None).get('ref'),
-                            #'engineType': recipe['params']['engineType']
-                           }
+                            ''
+
+                }
                 if 'params.basename' in next_row:
                     pp(raw_data)
                     pp(next_row)
