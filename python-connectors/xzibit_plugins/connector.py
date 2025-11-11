@@ -23,7 +23,7 @@ class ConnectorPlugins(Connector):
         self.client = api_client()
         self.unique_id_key_name = 'id'
         self.keys   = [self.unique_id_key_name, 'meta.label', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev']
-        self.objects_list = self.client.list_projects()
+        self.objects_list = self.client.list_plugins()
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
