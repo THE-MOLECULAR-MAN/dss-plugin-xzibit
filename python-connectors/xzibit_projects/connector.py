@@ -28,7 +28,7 @@ class MyConnector(Connector):
 
 
     def get_records_count(self, partitioning=None, partition_id=None):
-        return self.count
+        return len(self.objects_list)
 
 ####################################################################
 # Intentionally not implemented, not needed for this type
