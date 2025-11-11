@@ -31,30 +31,32 @@ class ConnectorPlugins(Connector):
         
         # iterate through each object
         for item_info in self.objects_list:
-            pp(item_info)
-            next_row = flatten_dict(item_info, include_keys=self.keys)
-            pp(next_row)
-            
-            # custom things for this specific class:
-            next_row = remove_prefix_from_keys(next_row, 'meta.')
-            
-            pp(next_row)
+            try:
+                pp(item_info)
+                next_row = flatten_dict(item_info, include_keys=self.keys)
+                pp(next_row)
 
-            plugin_handle = self.client.get_plugin(next_row['id'])
+                # custom things for this specific class:
+                next_row = remove_prefix_from_keys(next_row, 'meta.')
 
-            list_of_usages = plugin_handle.list_usages().get_raw()['usages']
+                pp(next_row)
 
-            if len(list_of_usages) == 0:
-                next_row['project_usages'] = []
-            else:
-                next_row['project_usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+                plugin_handle = self.client.get_plugin(next_row['id'])
 
-            next_row['total_usages'] = len(list_of_usages)
-            
-            # return a single row
-            yield next_row
+                list_of_usages = plugin_handle.list_usages().get_raw()['usages']
 
-            
+                if len(list_of_usages) == 0:
+                    next_row['project_usages'] = []
+                else:
+                    next_row['project_usages'] = list(get_values_for_key(list_of_usages, 'projectKey')) 
+
+                next_row['total_usages'] = len(list_of_usages)
+            except Exception as e:
+#                 print(f"Exception {e} with plugin_info:")
+#                 # pprint(plugin_info)
+#                 next_row = list_to_error_dict(keys)
+            finally:
+                yield next_row
 ####################################################################
 # Same for all instances:
 ####################################################################
