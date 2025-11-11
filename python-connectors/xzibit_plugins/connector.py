@@ -52,9 +52,9 @@ class ConnectorPlugins(Connector):
 
                 next_row['total_usages'] = len(list_of_usages)
             except Exception as e:
-#                 print(f"Exception {e} with plugin_info:")
-#                 # pprint(plugin_info)
-#                 next_row = list_to_error_dict(keys)
+                print(f"Exception {e} with plugin_info:")
+                # pprint(plugin_info)
+                next_row = list_to_error_dict(keys)
             finally:
                 yield next_row
 ####################################################################
