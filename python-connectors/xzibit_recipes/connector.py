@@ -54,7 +54,7 @@ class ConnectorRecipes(Connector):
                             'projectKey': pk,
                             'type': raw_data['type'],
                             'name': recipe_handle.name,
-                            ''
+                            'tags': raw_data['tags'],
 
                 }
                 if 'params.basename' in next_row:
