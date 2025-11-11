@@ -28,7 +28,7 @@ class ConnectorApps(Connector):
                 'onlyLimitedVisibility']
         self.objects_list = self.client.list_apps()
 
-            
+
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
