@@ -19,7 +19,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         
         
         
-        info = r.get_info().get_raw() # returns dict
+        info = dataset_handle.get_info().get_raw() # returns dict
 
 
         
