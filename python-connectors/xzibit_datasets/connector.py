@@ -46,6 +46,7 @@ class ConnectorDatasets(Connector):
                                 'id':   r.id,
                                 'type': raw_data['type'],
                                 'name': dataset_handle.name,
+                                'is_feature_group': raw_data['is_feature_group']
                                 #'tags': raw_data['tags'],
                                 #'input_datasets': dataset_settings_handle.get_flat_input_refs(),
                                 #'output_datasets': dataset_settings_handle.get_flat_output_refs(),
