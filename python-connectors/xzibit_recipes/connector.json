@@ -8,7 +8,7 @@
         "description": "a dataset describing the Recipes on this DSS instance",
         
         // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/search?ic=free&o=r
-        "icon": "fas fa-brom"
+        "icon": "fas fa-broom"
     },
 
     /* Can this connector read data ? */
