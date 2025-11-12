@@ -45,20 +45,20 @@ class ConnectorDatasets(Connector):
             project_handle = self.client.get_project(pk)
 
             for r in proj_datasets:
-                try:
-                    dataset_handle = project_handle.get_dataset(r.id)
-                    dataset_settings_handle = dataset_handle.get_settings()
-                    raw_data = dataset_settings_handle.get_raw()
-                    
-                    # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
+               # try:
+                dataset_handle = project_handle.get_dataset(r.id)
+                dataset_settings_handle = dataset_handle.get_settings()
+                raw_data = dataset_settings_handle.get_raw()
 
-                    next_row = extract_nested_keys(raw_data, self.__keys)
-                    
-                    next_row['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
-                    next_row['num_columns']        = len(raw_data.get('schema').get('columns', []))
-                    next_row['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
-                    next_row['creationTag.lastModifiedOn'] = int_to_datetime(next_row.get('creationTag.lastModifiedOn', None))
-                    next_row['versionTag.lastModifiedOn']  = int_to_datetime(next_row.get('versionTag.lastModifiedOn',  None))
+                # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
+
+                next_row = extract_nested_keys(raw_data, self.__keys)
+
+                next_row['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
+                next_row['num_columns']        = len(raw_data.get('schema').get('columns', []))
+                next_row['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
+                next_row['creationTag.lastModifiedOn'] = int_to_datetime(next_row.get('creationTag.lastModifiedOn', None))
+                next_row['versionTag.lastModifiedOn']  = int_to_datetime(next_row.get('versionTag.lastModifiedOn',  None))
 
                 #except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
