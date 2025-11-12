@@ -40,13 +40,13 @@ class MyRunnable(Runnable):
     def _upgrade_plugins(self):
         """x"""
         
-        for plugin_info in self._client.list_plugins():
+        for plugin_info in self.__client.list_plugins():
             plugin_id = plugin_info['id']
 
             #if plugin_id in plugins_to_skip_update:
              #   continue
 
-            plugin_handle = self._client.get_plugin(plugin_id)
+            plugin_handle = self.__client.get_plugin(plugin_id)
 
             try:
                 print(f'Attempting to update plugin {plugin_id} ... ')
