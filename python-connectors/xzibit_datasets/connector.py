@@ -53,7 +53,7 @@ class ConnectorDatasets(Connector):
                         md = r.get_metadata() # returns dict
                         info = r.get_info() # returns dataikuapi.dss.dataset.DSSDatasetInfo
                         print(md)
-                        print(info)
+                        print(info.get_raw())
                         yield {'projectKey': pk,
                                'name':       r.id,
                                'dataset_exists': False
