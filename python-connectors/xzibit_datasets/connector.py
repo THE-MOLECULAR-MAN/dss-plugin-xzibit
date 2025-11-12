@@ -47,7 +47,7 @@ class ConnectorDatasets(Connector):
             for r in proj_datasets:
                # try:
                 dataset_handle = project_handle.get_dataset(r.id)
-                dataset_settings_handle = dataset_handle.get_settings()
+                dataset_settings_handle = dataset_handle.get_settings() # can throw exception if dataset does not exist
                 raw_data = dataset_settings_handle.get_raw()
 
                 # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
