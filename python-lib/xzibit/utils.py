@@ -2,7 +2,7 @@ import os
 import re
 from datetime import datetime
 
-from dataiku import api_client
+import dataikuapi
 
 
 # pretty print dictionaries for debugging - don't remove at this time.
@@ -12,7 +12,7 @@ from json   import dumps  as jd
 def safe_extract_dataset_metadata(dataset_handle):
     """x"""
     print('safe_extract_dataset_metadata START')
-    assert isinstance(dataset, dataset_handle), f"Expected DSSDataset, got {type(dataset)}"
+    assert isinstance(dataikuapi.dss.dataset.DSSDataset, dataset_handle), f"Expected DSSDataset, got {type(dataset)}"
     try:
         dataset_metadata = {}
         # these should always work, even if dataset does not exist. These should not throw an exception:
