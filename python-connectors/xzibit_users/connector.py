@@ -38,7 +38,7 @@ class ConnectorUsers(Connector):
             item_id = next_row[self.unique_id_key_name]
             item_handle = self.client.get_user(item_info[self.unique_id_key_name])
             
-            x = item_handle.get_activity().last_successful_login
+            x = str(item_handle.get_activity().last_successful_login)
             print(x)
             print(str(type(x)))
             
