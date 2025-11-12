@@ -53,10 +53,12 @@ class ConnectorDatasets(Connector):
                     
                     num_metrics_checks = len(raw_data.get('metricsChecks').get('checks', []))
                     num_columns        = len(raw_data.get('schema').get('columns', []))
+                    column_names       =  [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
                     
                     next_row['num_metrics_checks'] = num_metrics_checks
                     next_row['num_columns']        = num_columns
                     #schema.columns.name[]
+                    
                     
                     # ['Filesystem', 'Snowflake', 'S3', 'UploadedFiles', 'PostgreSQL', 'Inline', 'FilesInFolder', 'StatsDB', 'CustomPython_googlesheets-sheet', 'CustomPython_xzibit_datasets']
                     # 'Snowflake'
