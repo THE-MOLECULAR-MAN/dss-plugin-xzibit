@@ -51,7 +51,7 @@ class ConnectorDatasets(Connector):
                     yield next_row
 
                 except Exception as e:
-                    print(f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} .Dataset metadata:")
+                    print(f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} ")
 #                     md = r.get_metadata() # returns dict
 #                     info = r.get_info() # returns dataikuapi.dss.dataset.DSSDatasetInfo
 #                     print(md)
