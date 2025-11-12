@@ -46,7 +46,6 @@ class ConnectorDatasets(Connector):
 
             for r in proj_datasets:
                 try:
-                    
                     dataset_handle = project_handle.get_dataset(r.id)
                     dataset_settings_handle = dataset_handle.get_settings()
                     raw_data = dataset_settings_handle.get_raw()
@@ -60,7 +59,6 @@ class ConnectorDatasets(Connector):
                     next_row['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
                     next_row['creationTag.lastModifiedOn'] = int_to_datetime(next_row.get('creationTag.lastModifiedOn', None))
                     next_row['versionTag.lastModifiedOn']  = int_to_datetime(next_row.get('versionTag.lastModifiedOn',  None))
-
 
                 except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
