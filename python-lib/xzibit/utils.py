@@ -9,6 +9,7 @@ from json   import dumps  as jd
 def safe_extract_dataset_metadata(dataset_handle):
     """x"""
     try:
+        print('safe_extract_dataset_metadata START')
         assert isinstance(dataset, dataset_handle), f"Expected DSSDataset, got {type(dataset)}"        
         dataset_metadata = {}
 
@@ -17,6 +18,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         dataset_metadata['name']   = dataset_handle.name
         dataset_metadata['exists'] = False # failsafe in case next line throws exception
         dataset_metadata['exists'] = dataset_handle.exists()
+        print('safe_extract_dataset_metadata 10')
 
         raw_data = dataset_handle.get_info().get_raw() # returns dict
 
@@ -42,7 +44,7 @@ def safe_extract_dataset_metadata(dataset_handle):
 
     except Exception as e:
         print(f"safe_extract_dataset_metadata - GENERIC EXCEPTION: {e}")
-        return dataset_metadata
+    return dataset_metadata
 
 
 
