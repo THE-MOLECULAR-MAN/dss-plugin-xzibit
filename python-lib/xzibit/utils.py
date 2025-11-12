@@ -18,8 +18,6 @@ def safe_extract_dataset_metadata(dataset_handle):
         dataset_metadata['exists'] = False # failsafe in case next line throws exception
         dataset_metadata['exists'] = dataset_handle.exists()
         
-        
-        
         raw_data = dataset_handle.get_info().get_raw() # returns dict
         
         
