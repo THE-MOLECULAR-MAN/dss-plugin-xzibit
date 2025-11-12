@@ -39,7 +39,9 @@ class MyRunnable(Runnable):
 
     def _upgrade_plugins(self):
         """x"""
+        plugins = self._client.list_plugins()
         
+
 
     def run(self, progress_callback):
         """
