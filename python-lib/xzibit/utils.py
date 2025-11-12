@@ -35,11 +35,11 @@ def safe_extract_dataset_metadata(dataset_handle):
 
         dataset_metadata = extract_nested_keys(raw_data, keys)
 
-        dataset_metadata['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
-        dataset_metadata['num_columns']        = len(raw_data.get('schema').get('columns', []))
-        dataset_metadata['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
-        dataset_metadata['creationTag.lastModifiedOn'] = int_to_datetime(dataset_metadata.get('creationTag.lastModifiedOn', None))
-        dataset_metadata['versionTag.lastModifiedOn']  = int_to_datetime(dataset_metadata.get('versionTag.lastModifiedOn',  None))
+#         dataset_metadata['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
+#         dataset_metadata['num_columns']        = len(raw_data.get('schema').get('columns', []))
+#         dataset_metadata['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
+#         dataset_metadata['creationTag.lastModifiedOn'] = int_to_datetime(dataset_metadata.get('creationTag.lastModifiedOn', None))
+#         dataset_metadata['versionTag.lastModifiedOn']  = int_to_datetime(dataset_metadata.get('versionTag.lastModifiedOn',  None))
         # dataset_metadata['dataset_exists'] = True
 
     except Exception as e:
