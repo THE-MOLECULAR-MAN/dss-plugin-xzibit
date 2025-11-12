@@ -51,10 +51,10 @@ class ConnectorDatasets(Connector):
 
                 except Exception as e:
                     print(f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} .Dataset metadata:")
-                    md = r.get_metadata() # returns dict
-                    info = r.get_info() # returns dataikuapi.dss.dataset.DSSDatasetInfo
-                    print(md)
-                    print(info.get_raw())
+#                     md = r.get_metadata() # returns dict
+#                     info = r.get_info() # returns dataikuapi.dss.dataset.DSSDatasetInfo
+#                     print(md)
+#                     print(info.get_raw())
                     # r is of type "dataikuapi.dss.dataset.DSSDataset"
                     # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
                     yield {'projectKey': pk,
