@@ -59,7 +59,7 @@ class ConnectorDatasets(Connector):
                     # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
                     yield {'projectKey': pk,
                                'name':       r.id,
-                               'dataset_exists': False
+                               'dataset_exists': 'EXCEPTION'
                               }
 
                 # return a single row
