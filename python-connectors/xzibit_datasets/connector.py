@@ -37,15 +37,20 @@ class ConnectorDatasets(Connector):
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
+        key_mapping = set()
+        
          # iterate through each object
         for pk, proj_datasets in self.objects_list.items():
             project_handle = self.client.get_project(pk)
 
             for r in proj_datasets:
                 try:
+                    
                     dataset_handle = project_handle.get_dataset(r.id)
                     dataset_settings_handle = dataset_handle.get_settings()
                     raw_data = dataset_settings_handle.get_raw()
+                    
+                    keys_list = list_keys_recursive(raw_data)
 
                     # len(metricsChecks.checks)
                     # len(schema.columns)
@@ -54,6 +59,7 @@ class ConnectorDatasets(Connector):
                     num_metrics_checks = len(raw_data.get('metricsChecks').get('checks', []))
                     num_columns        = len(raw_data.get('schema').get('columns', []))
                     column_names       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
+                    
                     
                     next_row['num_metrics_checks'] = num_metrics_checks
                     next_row['num_columns']        = num_columns
