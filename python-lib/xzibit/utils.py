@@ -19,8 +19,8 @@ def safe_extract_dataset_metadata(dataset_handle):
         
         
         
-        info = dataset_handle.get_info().get_raw() # returns dict
-         
+        raw_data = dataset_handle.get_info().get_raw() # returns dict
+        
         
 
         
@@ -33,11 +33,6 @@ def safe_extract_dataset_metadata(dataset_handle):
                        'params.folderSmartId', 'tags', 'featureGroup',
                       ]
         
-
-
-        dataset_settings_handle = dataset_handle.get_info() # does not throw exception if dataset does not exist
-        raw_data = dataset_settings_handle.get_raw()
-
         # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
 
         next_row = extract_nested_keys(raw_data, self.__keys)
