@@ -51,20 +51,20 @@ class ConnectorDatasets(Connector):
                     # params.path
                     # )
                     keys = ['name', 'type', 'tags', 'projectKey']
-                    next_row = extract_nested_keys(raw_data, )
+                    next_row = extract_nested_keys(raw_data, keys)
 
-                    next_row = {
-                        'projectKey': pk,
-                        'id':   r.id,
-                        'type': raw_data.get('type', None),
-                        'name': dataset_handle.name,
-                        #'is_feature_group': raw_data.get('is_feature_group', None),
-                        #'data_steward': raw_data.get('data_steward', None),
-                        'formatType':  raw_data.get('formatType', None),
-                        'managed':  raw_data.get('managed', None),
-                        'tags':  raw_data.get('tags', None),
+#                     next_row = {
+#                         'projectKey': pk,
+#                         'id':   r.id,
+#                         'type': raw_data.get('type', None),
+#                         'name': dataset_handle.name,
+#                         #'is_feature_group': raw_data.get('is_feature_group', None),
+#                         #'data_steward': raw_data.get('data_steward', None),
+#                         'formatType':  raw_data.get('formatType', None),
+#                         'managed':  raw_data.get('managed', None),
+#                         'tags':  raw_data.get('tags', None),
                         
-                    }
+#                     }
                     
                 except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
