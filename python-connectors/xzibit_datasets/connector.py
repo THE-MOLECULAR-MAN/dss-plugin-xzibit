@@ -70,8 +70,8 @@ class ConnectorDatasets(Connector):
                     
                     # ['Filesystem', 'Snowflake', 'S3', 'UploadedFiles', 'PostgreSQL', 'Inline', 'FilesInFolder', 'StatsDB', 'CustomPython_googlesheets-sheet', 'CustomPython_xzibit_datasets']
                     # 'Snowflake'
-#                     if next_row['type'] in ['PostgreSQL']:
-#                         pp(raw_data)
+                    if next_row['type'] in ['PostgreSQL']:
+                        pp(raw_data)
 
                 except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
