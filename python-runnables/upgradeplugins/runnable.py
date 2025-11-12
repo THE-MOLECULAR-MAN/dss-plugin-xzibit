@@ -23,10 +23,10 @@ class MyRunnable(Runnable):
         :param config: the dict of the configuration of the object
         :param plugin_config: contains the plugin settings
         """
-        self.__project_key = project_key
-        self.__config = config
+        self.__project_key   = project_key
+        self.__config        = config
         self.__plugin_config = plugin_config
-        self.__client = dataiku.api_client()
+        self.__client        = dataiku.api_client()
         
     def get_progress_target(self):
         """
