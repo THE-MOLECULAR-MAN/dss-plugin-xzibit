@@ -55,24 +55,12 @@ class ConnectorDatasets(Connector):
 
                     next_row = extract_nested_keys(raw_data, self.__keys)
                     
-                    num_metrics_checks = len(raw_data.get('metricsChecks').get('checks', []))
-                    num_columns        = len(raw_data.get('schema').get('columns', []))
-                    column_names       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
-                    
-                    
-                    next_row['num_metrics_checks'] = num_metrics_checks
-                    next_row['num_columns']        = num_columns
-                    next_row['column_names']       = column_names
+                    next_row['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
+                    next_row['num_columns']        = len(raw_data.get('schema').get('columns', []))
+                    next_row['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
                     next_row['creationTag.lastModifiedOn'] = int_to_datetime(next_row.get('creationTag.lastModifiedOn', None))
                     next_row['versionTag.lastModifiedOn']  = int_to_datetime(next_row.get('versionTag.lastModifiedOn',  None))
 
-                    
-                    
-                    # ['Filesystem', 'Snowflake', 'S3', 'UploadedFiles', 'PostgreSQL', 'Inline', 'FilesInFolder', 'StatsDB', 'CustomPython_googlesheets-sheet', 'CustomPython_xzibit_datasets']
-                    # 'Snowflake'
-                    if next_row['name'] == 'code_env_PSQL':
-                        print("HERE!")
-                        pp(raw_data)
 
                 except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
