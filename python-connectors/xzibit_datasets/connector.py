@@ -64,7 +64,7 @@ class ConnectorDatasets(Connector):
                     next_row['num_metrics_checks'] = num_metrics_checks
                     next_row['num_columns']        = num_columns
                     next_row['column_names']       = column_names
-                    next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
+                    next_row['creationTag.lastModifiedOn'] = int_to_datetime(next_row.get('creationTag.lastModifiedOn', None))
 
                     
                     # ['Filesystem', 'Snowflake', 'S3', 'UploadedFiles', 'PostgreSQL', 'Inline', 'FilesInFolder', 'StatsDB', 'CustomPython_googlesheets-sheet', 'CustomPython_xzibit_datasets']
