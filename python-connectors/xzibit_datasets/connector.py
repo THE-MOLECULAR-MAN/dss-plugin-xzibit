@@ -71,6 +71,7 @@ class ConnectorDatasets(Connector):
                     next_row['dataset_exists'] = True
 
                 except Exception as e:
+                    print(r)
                     # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
                     # print(f"Exception with dataset {r.id} in project {pk}: {e}")
                     yield {'projectKey': pk,
