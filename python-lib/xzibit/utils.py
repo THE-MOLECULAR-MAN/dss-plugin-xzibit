@@ -15,6 +15,15 @@ def safe_extract_dataset_metadata(dataset_handle):
     """x"""
     print('safe_extract_dataset_metadata START')
     assert isinstance(dataset_handle, dataikuapi.dss.dataset.DSSDataset), f"safe_extract_dataset_metadata - Assertion failed: Expecting DSSDataset, got {type(dataset_handle)}"
+    
+    keys = ['name', 'type', 'formatType', 'params.connection',
+                       'managed', 'params.mode', 'params.table', 'params.schema', 'params.database',
+                       'params.path', 
+                       'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn',
+                       'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn',
+                       'shortDesc', 'description', 'params.metastoreDatabaseName',
+                       'params.folderSmartId', 'tags', 'featureGroup',
+                      ]
     try:
         dataset_metadata = {}
         # these should always work, even if dataset does not exist. These should not throw an exception:
@@ -38,14 +47,7 @@ def safe_extract_dataset_metadata(dataset_handle):
             
         print('safe_extract_dataset_metadata 30')
         
-        keys = ['name', 'type', 'formatType', 'params.connection',
-                       'managed', 'params.mode', 'params.table', 'params.schema', 'params.database',
-                       'params.path', 
-                       'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn',
-                       'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn',
-                       'shortDesc', 'description', 'params.metastoreDatabaseName',
-                       'params.folderSmartId', 'tags', 'featureGroup',
-                      ]
+        
 
         # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
 
