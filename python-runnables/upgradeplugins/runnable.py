@@ -14,6 +14,7 @@ import dataikuapi
 
 
 
+
 class MyRunnable(Runnable):
     """The base interface for a Python runnable"""
 
@@ -34,6 +35,10 @@ class MyRunnable(Runnable):
         (target, unit) where unit is one of: SIZE, FILES, RECORDS, NONE
         """
         return None
+    
+    def _upgrade_plugins(self):
+        """x"""
+        
 
     def run(self, progress_callback):
         """
