@@ -5,6 +5,30 @@ from datetime import datetime
 # pretty print dictionaries for debugging - don't remove at this time.
 from pprint import pprint as pp
 
+def extract_nested_keys(d: dict, keys: list[str]) -> dict[str, object]:
+    """
+    Extract nested keys (dot-separated) from a dictionary.
+    If a key path does not exist, its value is None in the returned dictionary.
+
+    Args:
+        d (dict): The source dictionary.
+        keys (list[str]): List of (possibly nested) keys, separated by dots.
+
+    Returns:
+        dict[str, object]: Dictionary of {key_path: value or None}.
+    """
+
+    def get_nested_value(data, key_path):
+        """Safely get a nested value from a dict using dot-separated keys."""
+        for key in key_path.split('.'):
+            if isinstance(data, dict) and key in data:
+                data = data[key]
+            else:
+                return None
+        return data
+
+    return {key: get_nested_value(d, key) for key in keys}
+
 
 def int_to_datetime(timestamp: int) -> datetime:
     """
