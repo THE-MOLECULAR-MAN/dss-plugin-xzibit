@@ -8,6 +8,19 @@ import re
 
 from datetime import datetime
 
+
+def int_to_datetime(timestamp: int) -> datetime:
+    """
+    Convert an integer timestamp (in seconds or milliseconds)
+    into a datetime.datetime object (UTC).
+    """
+    # Detect if the timestamp is in milliseconds
+    if timestamp > 1e12:
+        timestamp /= 1000  # convert to seconds
+    
+    return datetime.utcfromtimestamp(timestamp)
+
+
 def parse_user_datetime(dt_str: str) -> datetime:
     """
     Convert a string like '2025-11-11 15:08:36.439000+00:00'
