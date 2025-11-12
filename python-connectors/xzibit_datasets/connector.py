@@ -22,7 +22,7 @@ class ConnectorDatasets(Connector):
         self.client = api_client()        
         self.objects_list = {}
         self.__keys = ['projectKey', 'name', 'type', 'formatType', 'params.connection',
-                       'managed', 'params.mode', 'params.table', 'params.schema', 'params.database'
+                       'managed', 'params.mode', 'params.table', 'params.schema', 
                        'params.path', 
                        'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn',
                        'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn',
