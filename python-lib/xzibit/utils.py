@@ -11,8 +11,10 @@ def safe_extract_dataset_metadata(dataset_handle):
      try:
         assert isinstance(dataset, dataset_handle), f"Expected DSSDataset, got {type(dataset)}"        
         dataset_metadata = {}
-        dataset_metadata['id'] = dataset_handle.id
-        dataset_metadata['name'] = dataset_handle.name
+
+        # these should always work, even if dataset does not exist. These should not throw an exception:
+        dataset_metadata['id']     = dataset_handle.id
+        dataset_metadata['name']   = dataset_handle.name
         dataset_metadata['exists'] = dataset_handle.exists()
         
         
