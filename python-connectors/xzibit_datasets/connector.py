@@ -38,7 +38,7 @@ class ConnectorDatasets(Connector):
             for r in proj_datasets:
                 dataset_handle = project_handle.get_dataset(r.id)
                 dataset_settings_handle = dataset_handle.get_settings()
-                raw_data = dataset_settings_handle.get_dataset_raw_definition()
+                raw_data = dataset_settings_handle.get_raw()
                 
                 next_row = {
                             'projectKey': pk,
