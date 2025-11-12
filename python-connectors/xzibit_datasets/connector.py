@@ -20,10 +20,11 @@ class ConnectorDatasets(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         
-        self.client = api_client()
-        self.unique_id_key_name = 'appId'
-        self.keys   = [self.unique_id_key_name]
-        self.objects_list = #self.client.list_apps()
+        self.client = api_client()        
+        self.objects_list = {}
+        for pk in self.client.list_project_keys():
+            project_handle = self.client.get_project(pk)
+            self.objects_list[pk] = project_handle.list_recipes(as_type='objects')
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
