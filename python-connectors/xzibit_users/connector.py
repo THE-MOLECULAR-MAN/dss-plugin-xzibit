@@ -40,7 +40,7 @@ class ConnectorUsers(Connector):
             
             next_row['last_successful_login'] = str(item_handle.get_activity().last_successful_login)
             next_row['last_session_activity'] = str(item_handle.get_activity().last_session_activity)            
-            pp(item_info)
+            # pp(item_info)
             # return a single row
             yield next_row
 
