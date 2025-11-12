@@ -49,6 +49,7 @@ class ConnectorDatasets(Connector):
                     dataset_handle = project_handle.get_dataset(r.id)
                     print("generate_rows - got dataset handle.")
                     next_row = safe_extract_dataset_metadata(dataset_handle)
+                    print("generate_rows - END.")
                     yield next_row
 
                 except Exception as e:
