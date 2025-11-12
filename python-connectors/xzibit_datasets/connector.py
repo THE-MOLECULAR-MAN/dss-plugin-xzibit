@@ -41,7 +41,7 @@ class ConnectorDatasets(Connector):
                     dataset_settings_handle = dataset_handle.get_settings()
                     raw_data = dataset_settings_handle.get_raw()
 
-                    pp(raw_data)
+                    # pp(raw_data)
                     # params.connection
                     # len(metricsChecks.checks)
                     # len(schema.columns)
