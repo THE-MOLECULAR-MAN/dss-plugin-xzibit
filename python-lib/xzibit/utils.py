@@ -8,7 +8,7 @@ from json   import dumps  as jd
 
 def safe_extract_dataset_metadata(dataset_handle):
     """x"""
-     try:
+    try:
         assert isinstance(dataset, dataset_handle), f"Expected DSSDataset, got {type(dataset)}"        
         dataset_metadata = {}
 
@@ -17,9 +17,9 @@ def safe_extract_dataset_metadata(dataset_handle):
         dataset_metadata['name']   = dataset_handle.name
         dataset_metadata['exists'] = False # failsafe in case next line throws exception
         dataset_metadata['exists'] = dataset_handle.exists()
-        
+
         raw_data = dataset_handle.get_info().get_raw() # returns dict
-        
+
         keys = ['name', 'type', 'formatType', 'params.connection',
                        'managed', 'params.mode', 'params.table', 'params.schema', 'params.database',
                        'params.path', 
@@ -28,7 +28,7 @@ def safe_extract_dataset_metadata(dataset_handle):
                        'shortDesc', 'description', 'params.metastoreDatabaseName',
                        'params.folderSmartId', 'tags', 'featureGroup',
                       ]
-        
+
         # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
 
         dataset_metadata = extract_nested_keys(raw_data, keys)
