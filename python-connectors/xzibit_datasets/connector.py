@@ -50,7 +50,8 @@ class ConnectorDatasets(Connector):
                     dataset_settings_handle = dataset_handle.get_settings()
                     raw_data = dataset_settings_handle.get_raw()
                     
-                    keys_list = list_keys_recursive(raw_data)
+                    key_mapping.update(list_keys_recursive(raw_data))
+                    
 
                     # len(metricsChecks.checks)
                     # len(schema.columns)
