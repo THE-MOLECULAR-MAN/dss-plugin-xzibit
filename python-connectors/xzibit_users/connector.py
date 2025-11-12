@@ -37,6 +37,7 @@ class ConnectorUsers(Connector):
             next_row = flatten_dict(item_info, include_keys=self.keys)
             item_id = next_row[self.unique_id_key_name]
             item_handle = self.client.get_user(item_info[self.unique_id_key_name])
+            activity_handle = item_handle.get_activity()
 
             next_row['last_successful_login'] = parse_user_datetime(str(item_handle.get_activity().last_successful_login))
             next_row['last_session_activity'] = parse_user_datetime(str(item_handle.get_activity().last_session_activity))
