@@ -47,14 +47,15 @@ def safe_extract_dataset_metadata(dataset_handle):
 
             
         
-        
 
         # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
 
         # append
         try:
             x = extract_nested_keys(raw_data, keys)
+            print('safe_extract_dataset_metadata 40')            
             dataset_metadata = dataset_metadata | x
+            print('safe_extract_dataset_metadata 50')            
         except Exception as e:
             print{f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys"}
 
@@ -73,7 +74,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         print(f"safe_extract_dataset_metadata - GENERIC EXCEPTION: {e}")
         dataset_metadata['exists'] = "EXCEPTION"
     finally:
-        print('safe_extract_dataset_metadata END')
+        print('safe_extract_dataset_metadata FINALLY')
         return dataset_metadata
 
 
