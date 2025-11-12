@@ -40,6 +40,7 @@ class ConnectorUsers(Connector):
 
             next_row['last_successful_login'] = parse_user_datetime(str(item_handle.get_activity().last_successful_login))
             next_row['last_session_activity'] = parse_user_datetime(str(item_handle.get_activity().last_session_activity))
+            next_row['creationDate'] = int_to_datetime(next_row['creationDate'])
             # pp(item_info)
             # return a single row
             yield next_row
