@@ -16,7 +16,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         # these should always work, even if dataset does not exist. These should not throw an exception:
         dataset_metadata['id']     = dataset_handle.id
         dataset_metadata['name']   = dataset_handle.name
-        dataset_metadata['exists'] = False # failsafe in case next line throws exception
+        # dataset_metadata['exists'] = False # failsafe in case next line throws exception
         dataset_metadata['exists'] = dataset_handle.exists()
         print('safe_extract_dataset_metadata 10')
 
