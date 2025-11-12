@@ -43,7 +43,6 @@ class ConnectorDatasets(Connector):
 
                     # len(metricsChecks.checks)
                     # len(schema.columns)
-                    if 
                     keys = ['name', 'type', 'tags', 'projectKey', 'params.connection', 'creationTag.lastModifiedOn', 'creationTag.lastModifiedBy.login', 'params.path']
                     next_row = extract_nested_keys(raw_data, keys)
                     
