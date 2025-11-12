@@ -48,7 +48,7 @@ class ConnectorDatasets(Connector):
                 try:
                     dataset_handle = project_handle.get_dataset(r.id)
                     if not dataset_handle.exists():
-                        print('TRAPPED!')
+                        print(f"TRAPPED EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} .Dataset:")
                         print(r)
                         yield {'projectKey': pk,
                                'name':       r.id,
@@ -70,7 +70,7 @@ class ConnectorDatasets(Connector):
                     next_row['dataset_exists'] = True
 
                 except Exception as e:
-                    print(f"EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} .Dataset:")
+                    print(f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} .Dataset:")
                     print(r)
                     # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
                     yield {'projectKey': pk,
