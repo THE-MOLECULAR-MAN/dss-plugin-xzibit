@@ -57,6 +57,7 @@ class ConnectorDatasets(Connector):
                     
                     next_row['num_metrics_checks'] = num_metrics_checks
                     next_row['num_columns']        = num_columns
+                    next_row['column_names']       = column_names
                     #schema.columns.name[]
                     
                     
