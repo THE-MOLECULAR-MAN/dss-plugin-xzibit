@@ -33,6 +33,7 @@ def safe_extract_dataset_metadata(dataset_handle):
 
         # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
 
+        # append
         dataset_metadata = dataset_metadata | extract_nested_keys(raw_data, keys)
 
 #         dataset_metadata['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
