@@ -43,32 +43,16 @@ class MyRunnable(Runnable):
         for plugin_info in self._client.list_plugins():
             plugin_id = plugin_info['id']
 
-            if plugin_id in plugins_to_skip_update:
-                continue
+            #if plugin_id in plugins_to_skip_update:
+             #   continue
 
-            plugin = client.get_plugin(plugin_id)
-
-            version_before = plugin_info.get('version', 'unknown')
+            plugin_handle = self._client.get_plugin(plugin_id)
 
             try:
-                # 5. Install updates when available
                 print(f'Attempting to update plugin {plugin_id} ... ', end="")
-                future = plugin.update_from_store()
+                future = plugin_handle.update_from_store()
                 future.wait_for_result()
 
-                version_after = get_installed_version_of_plugin(plugin_id)
-
-                if version_before == version_after:
-                    print(f' No update available.')
-                else:
-                    print(f" Updated plugin: {plugin_id} from {version_before} to version {version_after}")
-
-    #             # 6. Rebuild code environments if necessary
-    #             if 'bundle' in latest_version_info:
-    #                 print(f"Rebuilding code environment for plugin: {plugin_id}")
-    #                 env_future = plugin.rebuild_bundle_env()
-    #                 env_future.wait_for_result()
-    #                 print(f"Rebuilt code environment for plugin: {plugin_id}")
             except Exception as e:
                 print(f"Failed to update {plugin_id}: {str(e)}")
 
