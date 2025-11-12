@@ -47,4 +47,4 @@ class MyRunnable(Runnable):
         """
         # raise Exception("unimplemented")
         self.run()
-        
+        return None
