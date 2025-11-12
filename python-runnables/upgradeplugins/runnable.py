@@ -36,7 +36,7 @@ class MyRunnable(Runnable):
         """
         return None
 
-    
+
     def _upgrade_plugins(self):
         """x"""
         
