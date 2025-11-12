@@ -46,7 +46,8 @@ class ConnectorDatasets(Connector):
                     # len(schema.columns)
                     next_row = extract_nested_keys(raw_data, self.__keys)
                     
-                    if next_row['type'] in ['PostgreSQL', 'Snowflake']:
+                    # 'Snowflake'
+                    if next_row['type'] in ['PostgreSQL']:
                         pp(raw_data)
 
 #                         #'data_steward': raw_data.get('data_steward', None),
