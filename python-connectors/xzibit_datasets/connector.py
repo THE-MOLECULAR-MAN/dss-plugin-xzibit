@@ -50,7 +50,7 @@ class ConnectorDatasets(Connector):
                         pp(raw_data)
 
 #                         #'data_steward': raw_data.get('data_steward', None),
-#                         'formatType':  raw_data.get('formatType', None),
+
                     
                 except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
