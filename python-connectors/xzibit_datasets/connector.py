@@ -27,7 +27,7 @@ class ConnectorDatasets(Connector):
                        'params.path', 
                        'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn',
                        'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn',
-                       'shortDesc', 'description',
+                       'shortDesc', 'description', 'params.metastoreDatabaseName'
                        'params.folderSmartId', 'tags', 'featureGroup'
                       ]
 
