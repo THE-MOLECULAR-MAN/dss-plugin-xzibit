@@ -39,7 +39,7 @@ class ConnectorDatasets(Connector):
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
-        key_mapping = set()
+        # key_mapping = set()
         
          # iterate through each object
         for pk, proj_datasets in self.objects_list.items():
@@ -52,7 +52,7 @@ class ConnectorDatasets(Connector):
                     dataset_settings_handle = dataset_handle.get_settings()
                     raw_data = dataset_settings_handle.get_raw()
                     
-                    key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
+                    # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
                     
 
                     # len(metricsChecks.checks)
@@ -84,7 +84,7 @@ class ConnectorDatasets(Connector):
                 # return a single row
                 yield next_row
                 
-        print_sorted_strings(key_mapping)
+        # print_sorted_strings(key_mapping)
             
 ####################################################################
 # Same for all instances:
