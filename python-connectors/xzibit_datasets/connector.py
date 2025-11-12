@@ -48,7 +48,7 @@ class ConnectorDatasets(Connector):
                 try:
                     dataset_handle = project_handle.get_dataset(r.id)
                     if not dataset_handle.exists():
-                        print('TRAPPED!')
+                        # print('TRAPPED!')
                         yield {'projectKey': pk,
                                'name':       r.id,
                                'dataset_exists': False
@@ -71,7 +71,7 @@ class ConnectorDatasets(Connector):
 
                 except Exception as e:
                     # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
-                    print(f"Exception with dataset {r.id} in project {pk}: {e}")
+                    # print(f"Exception with dataset {r.id} in project {pk}: {e}")
                     yield {'projectKey': pk,
                                'name':       r.id,
                                'dataset_exists': False
