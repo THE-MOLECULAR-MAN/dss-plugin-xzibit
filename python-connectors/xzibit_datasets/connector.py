@@ -36,20 +36,24 @@ class ConnectorDatasets(Connector):
             project_handle = self.client.get_project(pk)
 
             for r in proj_datasets:
-                dataset_handle = project_handle.get_dataset(r.id)
-                dataset_settings_handle = dataset_handle.get_settings()
-                raw_data = dataset_settings_handle.get_raw()
-                
-                next_row = {
-                            'projectKey': pk,
-                            'id':   r.id,
-                            #'type': raw_data['type'],
-                            'name': dataset_handle.name,
-                            #'tags': raw_data['tags'],
-                            #'input_datasets': dataset_settings_handle.get_flat_input_refs(),
-                            #'output_datasets': dataset_settings_handle.get_flat_output_refs(),
-                }
-               
+                try:
+                    dataset_handle = project_handle.get_dataset(r.id)
+                    dataset_settings_handle = dataset_handle.get_settings()
+                    raw_data = dataset_settings_handle.get_raw()
+
+                    next_row = {
+                                'projectKey': pk,
+                                'id':   r.id,
+                                #'type': raw_data['type'],
+                                'name': dataset_handle.name,
+                                #'tags': raw_data['tags'],
+                                #'input_datasets': dataset_settings_handle.get_flat_input_refs(),
+                                #'output_datasets': dataset_settings_handle.get_flat_output_refs(),
+                    }
+                    
+                except Exception as e:
+                    # com.dataiku.dip.server.controllers.NotFoundException
+
                 # return a single row
                 yield next_row
             
