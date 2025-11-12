@@ -34,6 +34,8 @@ def safe_extract_dataset_metadata(dataset_handle):
         except Exception as e:
             print{f"safe_extract_dataset_metadata - EXCEPTION at dataset_handle.get_info().get_raw()"}
             yield dataset_metadata
+
+            
         print('safe_extract_dataset_metadata 30')
         
         keys = ['name', 'type', 'formatType', 'params.connection',
