@@ -49,8 +49,6 @@ class ConnectorDatasets(Connector):
                     if next_row['type'] in ['PostgreSQL', 'Snowflake']:
                         pp(raw_data)
 
-#                     next_row = {
-#                         'name': dataset_handle.name,
 #                         #'data_steward': raw_data.get('data_steward', None),
 #                         'formatType':  raw_data.get('formatType', None),
                     
