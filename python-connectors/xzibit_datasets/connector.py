@@ -55,7 +55,6 @@ class ConnectorDatasets(Connector):
                                'dataset_exists': False
                               }
 
-
                     dataset_settings_handle = dataset_handle.get_settings() # can throw exception if dataset does not exist
                     raw_data = dataset_settings_handle.get_raw()
 
