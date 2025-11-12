@@ -23,7 +23,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         
 
         
-        ['projectKey', 'name', 'type', 'formatType', 'params.connection',
+        keys = ['name', 'type', 'formatType', 'params.connection',
                        'managed', 'params.mode', 'params.table', 'params.schema', 'params.database',
                        'params.path', 
                        'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn',
@@ -34,7 +34,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         
         # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
 
-        next_row = extract_nested_keys(raw_data, self.__keys)
+        next_row = extract_nested_keys(raw_data, keys)
 
         next_row['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
         next_row['num_columns']        = len(raw_data.get('schema').get('columns', []))
