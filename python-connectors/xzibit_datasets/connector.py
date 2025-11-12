@@ -47,12 +47,14 @@ class ConnectorDatasets(Connector):
                     # tags
 
                     next_row = {
-                                'projectKey': pk,
-                                'id':   r.id,
-                                'type': raw_data.get('type', None),
-                                'name': dataset_handle.name,
-                                'is_feature_group': raw_data.get('is_feature_group', None),
-                                'data_steward': raw_data.get('data_steward', None)
+                        'projectKey': pk,
+                        'id':   r.id,
+                        'type': raw_data.get('type', None),
+                        'name': dataset_handle.name,
+                        'is_feature_group': raw_data.get('is_feature_group', None),
+                        'data_steward': raw_data.get('data_steward', None),
+                        
+
                     }
                     
                 except Exception as e:
