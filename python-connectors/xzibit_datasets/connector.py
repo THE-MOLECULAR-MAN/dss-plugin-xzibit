@@ -49,7 +49,8 @@ class ConnectorDatasets(Connector):
                 dataset_handle = project_handle.get_dataset(r.id)
                 if not dataset_handle.exists():
                     yield {'projectKey': pk,
-                           'name':       r.id}
+                           'name':       r.id,
+                           'dataset_exists': False}
                     
                     
                 dataset_settings_handle = dataset_handle.get_settings() # can throw exception if dataset does not exist
