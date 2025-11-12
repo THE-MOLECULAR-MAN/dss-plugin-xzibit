@@ -50,7 +50,7 @@ class ConnectorDatasets(Connector):
                     dataset_settings_handle = dataset_handle.get_settings()
                     raw_data = dataset_settings_handle.get_raw()
                     
-                    key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of 
+                    key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
                     
 
                     # len(metricsChecks.checks)
