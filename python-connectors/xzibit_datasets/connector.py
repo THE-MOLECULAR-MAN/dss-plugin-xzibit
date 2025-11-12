@@ -22,15 +22,15 @@ class ConnectorDatasets(Connector):
         
         self.client = api_client()        
         self.objects_list = {}
-        self.__keys = ['name', 'type', 'tags', 'description', 'featureGroup', 
+        self.__keys = ['name', 'type', 'tags', 'featureGroup', 
                        'managed', 'formatType', 'projectKey', 'params.connection', 
-                       'params.mode', 'params.table', 'shortDesc', 
-                       , # , 
-                       , , 'params.path',
+                       'params.mode', 'params.table', 
+                       'params.path',
                        'params.folderSmartId' 
                        
-                      'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn'
-                      'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn'
+                      'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn',
+                      'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn',
+                      'shortDesc', 'description', 
                       ]
 
         for pk in self.client.list_project_keys():
