@@ -54,7 +54,7 @@ class ConnectorDatasets(Connector):
                     
                     # ['Filesystem', 'Snowflake', 'S3', 'UploadedFiles', 'PostgreSQL', 'Inline', 'FilesInFolder', 'StatsDB', 'CustomPython_googlesheets-sheet', 'CustomPython_xzibit_datasets']
                     # 'Snowflake'
-                    if next_row['type'] in ['PostgreSQL']:
+                    if next_row['type'] in ['FilesInFolder']:
                         pp(raw_data)
 
                 except Exception as e:
