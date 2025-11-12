@@ -56,9 +56,6 @@ class ConnectorDatasets(Connector):
                     if next_row['type'] in ['PostgreSQL']:
                         pp(raw_data)
 
-#                         #'data_steward': raw_data.get('data_steward', None),
-
-                    
                 except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
                     print(f"Exception with dataset {r.id} in project {pk}: {e}")
