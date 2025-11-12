@@ -26,7 +26,7 @@ class ConnectorClusters(Connector):
                       'userProfile', 'groups', 'sourceType', 'email',
                       'creationDate', 'enabled', 'resultingUserProfile',
                       'userProfile']
-        self.objects_list = self.client.get_clusters()
+        self.objects_list = self.client.list_clusters()
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
