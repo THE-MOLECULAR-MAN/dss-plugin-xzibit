@@ -54,8 +54,8 @@ class ConnectorDatasets(Connector):
                     keys = ['name', 'type', 'tags', 'projectKey', 'params.connection', 'creationTag.lastModifiedOn', 'creationTag.lastModifiedBy.login', 'params.path']
                     next_row = extract_nested_keys(raw_data, keys)
                     
-                    if next_row['type'] in ['PostgreSQL', 'Snowflake']
-                    # pp(next_row)
+                    if next_row['type'] in ['PostgreSQL', 'Snowflake']:
+                        pp(raw_data)
 
 #                     next_row = {
 #                         'projectKey': pk,
