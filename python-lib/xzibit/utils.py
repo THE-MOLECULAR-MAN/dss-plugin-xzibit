@@ -27,6 +27,12 @@ def list_keys_recursive(d: dict, parent_key: str = '') -> list[str]:
         list[str]: List of all keys in dot-delimited form.
     """
     keys = []
+    if not isinstance(d, dict):
+        t = str(type(d))
+        print(f"ERROR: list_keys_recursive - not a dict: {d} - {t}")
+        return None
+    
+    
     for k, v in d.items():
         full_key = f"{parent_key}.{k}" if parent_key else k
         keys.append(full_key)
