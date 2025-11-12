@@ -25,9 +25,13 @@ class ConnectorDatasets(Connector):
         self.__keys = ['name', 'type', 'tags', 'description', 'featureGroup', 
                        'managed', 'formatType', 'projectKey', 'params.connection', 
                        'params.mode', 'params.table', 'shortDesc', 
-                       'versionTag.lastModifiedBy.login', # 'versionTag.lastModifiedBy.lastModifiedOn', 
-                       'creationTag.lastModifiedOn', 'creationTag.lastModifiedBy.login', 'params.path',
-                       'params.folderSmartId' ]
+                       , # , 
+                       , , 'params.path',
+                       'params.folderSmartId' 
+                       
+                      'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn'
+                      'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn'
+                      ]
 
         for pk in self.client.list_project_keys():
             project_handle = self.client.get_project(pk)
