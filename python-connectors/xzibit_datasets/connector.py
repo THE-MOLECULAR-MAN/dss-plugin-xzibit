@@ -22,6 +22,7 @@ class ConnectorDatasets(Connector):
         
         self.client = api_client()        
         self.objects_list = {}
+        self.keys = ['keys']
         for pk in self.client.list_project_keys():
             project_handle = self.client.get_project(pk)
             self.objects_list[pk] = project_handle.list_datasets(as_type='objects', include_shared=True)
