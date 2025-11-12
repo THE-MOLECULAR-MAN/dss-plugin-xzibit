@@ -20,7 +20,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         
         
         info = dataset_handle.get_info().get_raw() # returns dict
-
+        
 
         
         ['projectKey', 'name', 'type', 'formatType', 'params.connection',
