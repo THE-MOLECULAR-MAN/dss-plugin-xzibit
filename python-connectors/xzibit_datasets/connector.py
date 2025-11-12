@@ -46,8 +46,8 @@ class ConnectorDatasets(Connector):
                     # len(schema.columns)
                     next_row = extract_nested_keys(raw_data, self.__keys)
                     
-                    num_metrics_checks = len(raw_data.get('metricsChecks').get('checks'))
-                    num_columns = len(raw_data.get('schema').get('columns'))
+                    num_metrics_checks = len(raw_data.get('metricsChecks').get('checks', []))
+                    num_columns = len(raw_data.get('schema').get('columns', []))
                     
                     # 'Snowflake'
                     if next_row['type'] in ['PostgreSQL']:
