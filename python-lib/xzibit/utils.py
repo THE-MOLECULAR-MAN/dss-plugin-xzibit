@@ -48,7 +48,7 @@ def safe_extract_dataset_metadata(dataset_handle):
 
     except Exception as e:
         print(f"GENERIC EXCEPTION")
-        yield dataset_metadata
+        return dataset_metadata
 
 
 
