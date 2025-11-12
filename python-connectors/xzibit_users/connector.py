@@ -35,6 +35,8 @@ class ConnectorUsers(Connector):
         # iterate through each object
         for item_info in self.objects_list:
             next_row = flatten_dict(item_info, include_keys=self.keys)
+            item_id = next_row[self.unique_id_key_name]
+            item_handle = client.get_user(item_info[self.unique_id_key_name])
             pp(item_info)
             # return a single row
             yield next_row
