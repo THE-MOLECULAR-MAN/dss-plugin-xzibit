@@ -4,7 +4,6 @@
 from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
-from xzibit.utils import pp, jd
 
 
 ####################################################################
