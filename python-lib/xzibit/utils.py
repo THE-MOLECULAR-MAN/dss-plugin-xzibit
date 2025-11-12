@@ -15,6 +15,8 @@ def safe_extract_dataset_metadata(dataset_handle):
         dataset_metadata['name'] = dataset_handle.name
         dataset_metadata['exists'] = dataset_handle.exists()
         
+        
+        
         info = r.get_info().get_raw() # returns dict
 
 
