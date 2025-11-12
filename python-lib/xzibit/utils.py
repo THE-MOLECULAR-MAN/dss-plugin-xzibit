@@ -4,6 +4,24 @@ from pprint import pprint as pp
 
 import os
 
+import re
+
+from datetime import datetime
+
+def parse_datetime(dt_str: str) -> datetime:
+    """
+    Convert a string like '2025-11-11 15:08:36.439000+00:00'
+    into a timezone-aware datetime.datetime object.
+    Returns None if parsing fails.
+    """
+    try:
+        # Replace space with 'T' for fromisoformat compatibility
+        dt_str = dt_str.replace(" ", "T")
+        return datetime.fromisoformat(dt_str)
+    except ValueError:
+        return None
+
+    
 def get_jq_value(data: dict, jq_path: str):
     """
     Traverse a nested dict using a jq-style path like 'a.b.c'.
