@@ -34,7 +34,7 @@ class ConnectorClusters(Connector):
         
         # iterate through each object
         for item_info in self.objects_list:
-            get_settings
+#             get_settings
             pp(item_info)
             next_row = flatten_dict(item_info, include_keys=self.keys)
             
