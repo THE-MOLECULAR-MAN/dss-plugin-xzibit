@@ -69,7 +69,7 @@ class ConnectorDatasets(Connector):
                     
                 except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
-                    print(f"Exception with dataset in project {pk} with dataset {r.id}")
+                    print(f"Exception with dataset {r.id} in project {pk}")
                     continue
 
                 # return a single row
