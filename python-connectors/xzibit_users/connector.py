@@ -21,7 +21,7 @@ class ConnectorUsers(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.client = api_client()
-        self.unique_id_key_name = 'appId'
+        self.unique_id_key_name = 'login'
         self.keys   = [self.unique_id_key_name, 'appVersion', 'label', 
                        'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
