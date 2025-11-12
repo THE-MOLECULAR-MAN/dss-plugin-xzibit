@@ -5,10 +5,10 @@ from datetime import datetime
 # pretty print dictionaries for debugging - don't remove at this time.
 from pprint import pprint as pp
 from json   import dumps  as jd
-
 def list_keys_recursive(d: dict, parent_key: str = '') -> list[str]:
     """
-    Recursively list all keys in a nested dictionary using dot notation.
+    Recursively list all keys in a nested dictionary using dot notation,
+    ignoring list indices (e.g., schema.columns[0].name -> schema.columns.name).
 
     Args:
         d (dict): The dictionary to traverse.
@@ -21,14 +21,15 @@ def list_keys_recursive(d: dict, parent_key: str = '') -> list[str]:
     for k, v in d.items():
         full_key = f"{parent_key}.{k}" if parent_key else k
         keys.append(full_key)
+
         if isinstance(v, dict):
             keys.extend(list_keys_recursive(v, full_key))
         elif isinstance(v, list):
-            for i, item in enumerate(v):
+            for item in v:
                 if isinstance(item, dict):
-                    keys.extend(list_keys_recursive(item, f"{full_key}[{i}]"))
+                    # Recurse without adding an index
+                    keys.extend(list_keys_recursive(item, full_key))
     return keys
-
 def extract_nested_keys(d: dict, keys: list[str]) -> dict[str, object]:
     """
     Extract nested keys (dot-separated) from a dictionary.
