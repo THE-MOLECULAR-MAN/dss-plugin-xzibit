@@ -13,7 +13,7 @@ def print_sorted_strings(s: set[str]) -> None:
     """
     for item in sorted(s, key=str.lower):
         print(item)
-        
+
 def list_keys_recursive(d: dict, parent_key: str = '') -> list[str]:
     """
     Recursively list all keys in a nested dictionary using dot notation,
