@@ -23,9 +23,9 @@ class MyRunnable(Runnable):
         :param config: the dict of the configuration of the object
         :param plugin_config: contains the plugin settings
         """
-        self.project_key = project_key
-        self.config = config
-        self.plugin_config = plugin_config
+        self.__project_key = project_key
+        self.__config = config
+        self.__plugin_config = plugin_config
         
     def get_progress_target(self):
         """
