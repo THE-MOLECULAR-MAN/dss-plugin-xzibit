@@ -60,10 +60,10 @@ class ConnectorDatasets(Connector):
                     next_row['creationTag.lastModifiedOn'] = int_to_datetime(next_row.get('creationTag.lastModifiedOn', None))
                     next_row['versionTag.lastModifiedOn']  = int_to_datetime(next_row.get('versionTag.lastModifiedOn',  None))
 
-                except Exception as e:
+                #except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
-                    print(f"Exception with dataset {r.id} in project {pk}: {e}")
-                    continue
+                 #   print(f"Exception with dataset {r.id} in project {pk}: {e}")
+                 #   continue
 
                 # return a single row
                 yield next_row
