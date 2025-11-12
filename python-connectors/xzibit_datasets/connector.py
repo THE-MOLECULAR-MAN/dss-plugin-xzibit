@@ -71,8 +71,7 @@ class ConnectorDatasets(Connector):
                     next_row['dataset_exists'] = True
 
                 except Exception as e:
-                    print(f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} .Dataset:")
-                    print(r)
+                    print(f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} .Dataset metadata:")
                     md = r.get_metadata()
                     print(md)
                     # r is of type "dataikuapi.dss.dataset.DSSDataset"
