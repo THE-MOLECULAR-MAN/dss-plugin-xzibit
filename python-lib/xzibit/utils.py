@@ -34,14 +34,14 @@ def safe_extract_dataset_metadata(dataset_handle):
         
         # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
 
-        next_row = extract_nested_keys(raw_data, keys)
+        dataset_metadata = extract_nested_keys(raw_data, keys)
 
-        next_row['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
-        next_row['num_columns']        = len(raw_data.get('schema').get('columns', []))
-        next_row['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
-        next_row['creationTag.lastModifiedOn'] = int_to_datetime(next_row.get('creationTag.lastModifiedOn', None))
-        next_row['versionTag.lastModifiedOn']  = int_to_datetime(next_row.get('versionTag.lastModifiedOn',  None))
-        next_row['dataset_exists'] = True
+        dataset_metadata['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
+        dataset_metadata['num_columns']        = len(raw_data.get('schema').get('columns', []))
+        dataset_metadata['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
+        dataset_metadata['creationTag.lastModifiedOn'] = int_to_datetime(dataset_metadata.get('creationTag.lastModifiedOn', None))
+        dataset_metadata['versionTag.lastModifiedOn']  = int_to_datetime(dataset_metadata.get('versionTag.lastModifiedOn',  None))
+        # dataset_metadata['dataset_exists'] = True
 
     except Exception as e:
         print(f"safe_extract_dataset_metadata - GENERIC EXCEPTION: {e}")
