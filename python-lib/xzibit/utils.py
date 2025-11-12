@@ -8,7 +8,42 @@ from json   import dumps  as jd
 
 def safe_extract_dataset_metadata(dataset_handle):
     """x"""
-    
+     try:
+        dataset_metadata = {}
+        info = r.get_info().get_raw() # returns dict
+
+        dataset_metadata[]
+        
+        
+
+
+        dataset_settings_handle = dataset_handle.get_info() # does not throw exception if dataset does not exist
+        raw_data = dataset_settings_handle.get_raw()
+
+        # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
+
+        next_row = extract_nested_keys(raw_data, self.__keys)
+
+        next_row['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
+        next_row['num_columns']        = len(raw_data.get('schema').get('columns', []))
+        next_row['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
+        next_row['creationTag.lastModifiedOn'] = int_to_datetime(next_row.get('creationTag.lastModifiedOn', None))
+        next_row['versionTag.lastModifiedOn']  = int_to_datetime(next_row.get('versionTag.lastModifiedOn',  None))
+        next_row['dataset_exists'] = True
+
+    except Exception as e:
+        print(f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} .Dataset metadata:")
+        md = r.get_metadata() # returns dict
+        info = r.get_info() # returns dataikuapi.dss.dataset.DSSDatasetInfo
+        print(md)
+        print(info.get_raw())
+        # r is of type "dataikuapi.dss.dataset.DSSDataset"
+        # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
+        yield {'projectKey': pk,
+                   'name':       r.id,
+                   'dataset_exists': False
+                  }
+
 
 
 def print_sorted_strings(s: set[str]) -> None:
