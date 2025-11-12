@@ -49,6 +49,9 @@ class ConnectorDatasets(Connector):
                     num_metrics_checks = len(raw_data.get('metricsChecks').get('checks', []))
                     num_columns        = len(raw_data.get('schema').get('columns', []))
                     
+                    next_row['num_metrics_checks'] = num_metrics_checks
+                    next_row['num_columns']        = num_columns
+                    
                     # 'Snowflake'
                     if next_row['type'] in ['PostgreSQL']:
                         pp(raw_data)
