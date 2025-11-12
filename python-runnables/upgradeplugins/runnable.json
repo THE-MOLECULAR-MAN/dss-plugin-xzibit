@@ -2,7 +2,7 @@
 {
     "meta": {
         // label: name of the runnable as displayed, should be short
-        "label": "Upgrade plugin versions",
+        "label": "Upgrade store plugins",
 
         // description: longer string to help end users understand what this runnable does
         "description": "Install updates available for any plugin installed from the store",
