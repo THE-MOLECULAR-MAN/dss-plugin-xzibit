@@ -23,7 +23,7 @@ class ConnectorUsers(Connector):
         self.client = api_client()
         self.unique_id_key_name = 'login'
         self.keys   = [self.unique_id_key_name, 'displayName',
-                      'userProfile', 'trialStatus', 'groups', 'sourceType', 'email', 'creationDate', 'enabled', 'resultingUserProfile', 'userProfile']
+                      'userProfile', 'groups', 'sourceType', 'email', 'creationDate', 'enabled', 'resultingUserProfile', 'userProfile']
         self.objects_list = self.client.list_users()
 
 
