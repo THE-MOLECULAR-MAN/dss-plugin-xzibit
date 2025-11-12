@@ -68,12 +68,13 @@ class ConnectorDatasets(Connector):
                     next_row['num_columns']        = num_columns
                     next_row['column_names']       = column_names
                     #schema.columns.name[]
-                    
+                    next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
+
                     
                     # ['Filesystem', 'Snowflake', 'S3', 'UploadedFiles', 'PostgreSQL', 'Inline', 'FilesInFolder', 'StatsDB', 'CustomPython_googlesheets-sheet', 'CustomPython_xzibit_datasets']
                     # 'Snowflake'
-                    if next_row['type'] in ['FilesInFolder']:
-                        pp(raw_data)
+#                     if next_row['type'] in ['FilesInFolder']:
+#                         pp(raw_data)
 
                 except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
