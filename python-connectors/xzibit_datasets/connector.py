@@ -44,7 +44,7 @@ class ConnectorDatasets(Connector):
                     next_row = {
                                 'projectKey': pk,
                                 'id':   r.id,
-                                #'type': raw_data['type'],
+                                'type': raw_data['type'],
                                 'name': dataset_handle.name,
                                 #'tags': raw_data['tags'],
                                 #'input_datasets': dataset_settings_handle.get_flat_input_refs(),
