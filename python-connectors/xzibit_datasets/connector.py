@@ -22,7 +22,7 @@ class ConnectorDatasets(Connector):
         
         self.client = api_client()        
         self.objects_list = {}
-        self.__keys = ['name', 'type', 'tags', 'projectKey', 'params.connection', 'creationTag.lastModifiedOn', 'creationTag.lastModifiedBy.login', 'params.path']
+        self.__keys = ['name', 'type', 'tags', 'featureGroup', 'managed', 'formatType', 'projectKey', 'params.connection', 'creationTag.lastModifiedOn', 'creationTag.lastModifiedBy.login', 'params.path']
 
         for pk in self.client.list_project_keys():
             project_handle = self.client.get_project(pk)
@@ -54,13 +54,8 @@ class ConnectorDatasets(Connector):
 #                         'id':   r.id,
 #                         'type': raw_data.get('type', None),
 #                         'name': dataset_handle.name,
-#                         #'is_feature_group': raw_data.get('is_feature_group', None),
 #                         #'data_steward': raw_data.get('data_steward', None),
 #                         'formatType':  raw_data.get('formatType', None),
-#                         'managed':  raw_data.get('managed', None),
-#                         'tags':  raw_data.get('tags', None),
-                        
-#                     }
                     
                 except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
