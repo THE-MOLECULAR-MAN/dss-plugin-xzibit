@@ -25,7 +25,9 @@ def safe_extract_dataset_metadata(dataset_handle):
         dataset_metadata['exists'] = dataset_handle.exists()
         print('safe_extract_dataset_metadata 20')
         
-        # 
+        if dataset_metadata['exists']:
+            print('dataset ')
+            
 
         raw_data = dataset_handle.get_info().get_raw() # returns dict, can throw com.dataiku.dip.server.controllers.NotFoundException
         print('safe_extract_dataset_metadata 30')
