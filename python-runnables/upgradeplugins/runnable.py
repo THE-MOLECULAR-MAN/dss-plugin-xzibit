@@ -26,6 +26,7 @@ class MyRunnable(Runnable):
         self.__project_key = project_key
         self.__config = config
         self.__plugin_config = plugin_config
+        self.__client = dataiku.api_client()
         
     def get_progress_target(self):
         """
