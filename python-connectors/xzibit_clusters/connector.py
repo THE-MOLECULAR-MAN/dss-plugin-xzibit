@@ -32,11 +32,7 @@ class ConnectorClusters(Connector):
         
         # iterate through each object
         for item_info in self.objects_list:
-#             get_settings
-            pp(item_info)
-            next_row = flatten_dict(item_info, include_keys=self.keys)
-            
-            
+            next_row = flatten_dict(item_info, include_keys=self.keys)            
             # return a single row
             yield next_row
 
