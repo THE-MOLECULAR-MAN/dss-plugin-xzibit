@@ -9,6 +9,7 @@ from json   import dumps  as jd
 def safe_extract_dataset_metadata(dataset_handle):
     """x"""
      try:
+        assert isinstance(dataset, dataset_handle), f"Expected DSSDataset, got {type(dataset)}"        
         dataset_metadata = {}
         dataset_metadata['name'] = dataset_handle.name
         
