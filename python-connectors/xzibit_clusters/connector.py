@@ -26,7 +26,7 @@ class ConnectorClusters(Connector):
                       'userProfile', 'groups', 'sourceType', 'email',
                       'creationDate', 'enabled', 'resultingUserProfile',
                       'userProfile']
-        self.objects_list = self.client.list_users()
+        self.objects_list = self.client.get_clusters()
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
@@ -34,6 +34,7 @@ class ConnectorClusters(Connector):
         
         # iterate through each object
         for item_info in self.objects_list:
+            get_settings
             pp(item_info)
             next_row = flatten_dict(item_info, include_keys=self.keys)
             
