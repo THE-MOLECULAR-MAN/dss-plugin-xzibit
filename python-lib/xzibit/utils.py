@@ -8,7 +8,7 @@ import re
 
 from datetime import datetime
 
-def parse_datetime(dt_str: str) -> datetime:
+def parse_user_datetime(dt_str: str) -> datetime:
     """
     Convert a string like '2025-11-11 15:08:36.439000+00:00'
     into a timezone-aware datetime.datetime object.
