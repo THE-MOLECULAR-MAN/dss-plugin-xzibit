@@ -4,6 +4,53 @@ from pprint import pprint as pp
 
 import os
 
+import re
+
+from datetime import datetime
+
+
+def int_to_datetime(timestamp: int) -> datetime:
+    """
+    Convert an integer timestamp (in seconds or milliseconds)
+    into a datetime.datetime object (UTC).
+    """
+    # Detect if the timestamp is in milliseconds
+    if timestamp > 1e12:
+        timestamp /= 1000  # convert to seconds
+    
+    return datetime.utcfromtimestamp(timestamp)
+
+
+def parse_user_datetime(dt_str: str) -> datetime:
+    """
+    Convert a string like '2025-11-11 15:08:36.439000+00:00'
+    into a timezone-aware datetime.datetime object.
+    Returns None if parsing fails.
+    """
+    try:
+        # Replace space with 'T' for fromisoformat compatibility
+        dt_str = dt_str.replace(" ", "T")
+        return datetime.fromisoformat(dt_str)
+    except ValueError:
+        return None
+
+    
+def get_jq_value(data: dict, jq_path: str):
+    """
+    Traverse a nested dict using a jq-style path like 'a.b.c'.
+    Returns the value if found, else None.
+    """
+    try:
+        keys = jq_path.split('.')
+        for key in keys:
+            if isinstance(data, dict) and key in data:
+                data = data[key]
+            else:
+                return None
+        return data
+    except Exception:
+        return None
+
 def list_to_error_dict(strings: list[str], value="error") -> dict[str, str]:
     """
     Convert a list of strings into a dictionary where each string is a key

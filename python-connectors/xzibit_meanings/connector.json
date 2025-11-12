@@ -1,0 +1,22 @@
+/* This file is the descriptor for the Custom python dataset xzibit_apps */
+{
+    "meta" : {
+        // label: name of the dataset type as displayed, should be short
+        "label": "Dataiku Meanings dataset",
+
+        // description: longer string to help end users understand what this dataset type is
+        "description": "a dataset describing the Meanings on this DSS instance",
+        
+        // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/search?ic=free&o=r
+        "icon": "fas fa-window-restore"
+    },
+
+    /* Can this connector read data ? */
+    "readable": true,
+    /* Can this connector write data ? */
+    "writable": false,
+    /* Can this connector append data instead of overwriting it ? */
+    "supportAppend": false,
+
+    "params": []
+}
