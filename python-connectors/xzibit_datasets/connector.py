@@ -49,6 +49,7 @@ class ConnectorDatasets(Connector):
                     dataset_handle = project_handle.get_dataset(r.id)
                     if not dataset_handle.exists():
                         print(f"Dataset does not exist: dataset {r.id} in project {pk}: Dataset:")
+                        # r is of type "dataikuapi.dss.dataset.DSSDataset"
                         print(r)
                         yield {'projectKey': pk,
                                'name':       r.id,
