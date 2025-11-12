@@ -10,10 +10,20 @@ def safe_extract_dataset_metadata(dataset_handle):
     """x"""
      try:
         dataset_metadata = {}
+        dataset_metadata['name'] = dataset_handle.id
+        
         info = r.get_info().get_raw() # returns dict
 
-        dataset_metadata[]
+
         
+        ['projectKey', 'name', 'type', 'formatType', 'params.connection',
+                       'managed', 'params.mode', 'params.table', 'params.schema', 'params.database',
+                       'params.path', 
+                       'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn',
+                       'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn',
+                       'shortDesc', 'description', 'params.metastoreDatabaseName',
+                       'params.folderSmartId', 'tags', 'featureGroup',
+                      ]
         
 
 
