@@ -63,9 +63,6 @@ class ConnectorDatasets(Connector):
                                'dataset_exists': 'EXCEPTION'
                               }
 
-                # return a single row
-                
-                
         # print_sorted_strings(key_mapping)
             
 ####################################################################
