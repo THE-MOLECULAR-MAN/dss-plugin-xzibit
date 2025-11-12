@@ -50,7 +50,7 @@ class ConnectorDatasets(Connector):
                     # creationTag.lastModifiedBy.login
                     # params.path
                     # )
-                    keys = ['name', 'type', 'tags', 'projectKey', 'params.connection', 'creationTag.lastModifiedOn', 'creationTag.lastModifiedBy.login']
+                    keys = ['name', 'type', 'tags', 'projectKey', 'params.connection', 'creationTag.lastModifiedOn', 'creationTag.lastModifiedBy.login', 'params.path']
                     next_row = extract_nested_keys(raw_data, keys)
                     pp(next_row)
 
