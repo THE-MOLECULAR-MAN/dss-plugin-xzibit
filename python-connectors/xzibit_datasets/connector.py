@@ -48,6 +48,7 @@ class ConnectorDatasets(Connector):
                 try:
                     dataset_handle = project_handle.get_dataset(r.id)
                     next_row = safe_extract_dataset_metadata(dataset_handle)
+                    yield next_row
 
                 except Exception as e:
                     print(f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} .Dataset metadata:")
@@ -63,7 +64,7 @@ class ConnectorDatasets(Connector):
                               }
 
                 # return a single row
-                yield next_row
+                
                 
         # print_sorted_strings(key_mapping)
             
