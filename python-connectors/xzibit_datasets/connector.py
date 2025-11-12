@@ -51,7 +51,7 @@ class ConnectorDatasets(Connector):
                         print(f"Dataset does not exist: dataset {r.id} in project {pk}: Dataset:")
                         # r is of type "dataikuapi.dss.dataset.DSSDataset"
                         md = r.get_metadata()
-                        print(r)
+                        print(md)
                         yield {'projectKey': pk,
                                'name':       r.id,
                                'dataset_exists': False
