@@ -48,6 +48,7 @@ class ConnectorDatasets(Connector):
                # try:
                 dataset_handle = project_handle.get_dataset(r.id)
                 if not dataset_handle.exists():
+                    print('TRAPPED!')
                     yield {'projectKey': pk,
                            'name':       r.id,
                            'dataset_exists': False
