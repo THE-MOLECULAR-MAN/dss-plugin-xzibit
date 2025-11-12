@@ -16,11 +16,13 @@ def safe_extract_dataset_metadata(dataset_handle):
         dataset_metadata['id']     = dataset_handle.id
         dataset_metadata['name']   = dataset_handle.name
         # dataset_metadata['exists'] = False # failsafe in case next line throws exception
-        dataset_metadata['exists'] = dataset_handle.exists()
         print('safe_extract_dataset_metadata 10')
+        dataset_metadata['exists'] = dataset_handle.exists()
+        print('safe_extract_dataset_metadata 20')
 
         raw_data = dataset_handle.get_info().get_raw() # returns dict
-
+        print('safe_extract_dataset_metadata 30')
+        
         keys = ['name', 'type', 'formatType', 'params.connection',
                        'managed', 'params.mode', 'params.table', 'params.schema', 'params.database',
                        'params.path', 
@@ -34,7 +36,7 @@ def safe_extract_dataset_metadata(dataset_handle):
 
         # append
         dataset_metadata = dataset_metadata | extract_nested_keys(raw_data, keys)
-
+        print('safe_extract_dataset_metadata 40')
 #         dataset_metadata['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
 #         dataset_metadata['num_columns']        = len(raw_data.get('schema').get('columns', []))
 #         dataset_metadata['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
@@ -46,6 +48,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         print(f"safe_extract_dataset_metadata - GENERIC EXCEPTION: {e}")
         dataset_metadata['exists'] = "EXCEPTION"
     finally:
+        print('safe_extract_dataset_metadata END')
         return dataset_metadata
 
 
