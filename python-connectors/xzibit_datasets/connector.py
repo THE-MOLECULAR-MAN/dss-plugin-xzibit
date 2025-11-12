@@ -50,9 +50,6 @@ class ConnectorDatasets(Connector):
                         pp(raw_data)
 
 #                     next_row = {
-#                         'projectKey': pk,
-#                         'id':   r.id,
-#                         'type': raw_data.get('type', None),
 #                         'name': dataset_handle.name,
 #                         #'data_steward': raw_data.get('data_steward', None),
 #                         'formatType':  raw_data.get('formatType', None),
