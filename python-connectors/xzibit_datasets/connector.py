@@ -27,7 +27,7 @@ class ConnectorDatasets(Connector):
                        'params.mode', 'params.table', 'shortDesc', 
                        'versionTag.lastModifiedBy.login', 'versionTag.lastModifiedBy.lastModifiedOn', 
                        'creationTag.lastModifiedOn', 'creationTag.lastModifiedBy.login', 'params.path',
-                       'params.folderSmartId']
+                       'params.folderSmartId' ]
 
         for pk in self.client.list_project_keys():
             project_handle = self.client.get_project(pk)
