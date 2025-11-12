@@ -42,6 +42,13 @@ class ConnectorDatasets(Connector):
                     raw_data = dataset_settings_handle.get_raw()
 
                     pp(raw_data)
+                    # params.connection
+                    # len(metricsChecks.checks)
+                    # len(schema.columns)
+                    # date(creationTag.lastModifiedOn)
+                    # creationTag.lastModifiedBy.login
+                    # params.path
+                    # )
 
                     next_row = {
                         'projectKey': pk,
