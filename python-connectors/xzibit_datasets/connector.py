@@ -71,6 +71,7 @@ class ConnectorDatasets(Connector):
                     # ['Filesystem', 'Snowflake', 'S3', 'UploadedFiles', 'PostgreSQL', 'Inline', 'FilesInFolder', 'StatsDB', 'CustomPython_googlesheets-sheet', 'CustomPython_xzibit_datasets']
                     # 'Snowflake'
                     if next_row['name'] == 'code_env_PSQL':
+                        print("HERE!")
                         pp(raw_data)
 
                 except Exception as e:
