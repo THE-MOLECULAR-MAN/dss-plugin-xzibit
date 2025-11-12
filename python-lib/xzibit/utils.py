@@ -6,6 +6,28 @@ from datetime import datetime
 from pprint import pprint as pp
 from json   import dumps  as jd
 
+def list_keys_recursive(d: dict, parent_key: str = '') -> list[str]:
+    """
+    Recursively list all keys in a nested dictionary using dot notation.
+
+    Args:
+        d (dict): The dictionary to traverse.
+        parent_key (str): Used internally to build nested key paths.
+
+    Returns:
+        list[str]: List of all keys in dot-delimited form.
+    """
+    keys = []
+    for k, v in d.items():
+        full_key = f"{parent_key}.{k}" if parent_key else k
+        keys.append(full_key)
+        if isinstance(v, dict):
+            keys.extend(list_keys_recursive(v, full_key))
+        elif isinstance(v, list):
+            for i, item in enumerate(v):
+                if isinstance(item, dict):
+                    keys.extend(list_keys_recursive(item, f"{full_key}[{i}]"))
+    return keys
 
 def extract_nested_keys(d: dict, keys: list[str]) -> dict[str, object]:
     """
