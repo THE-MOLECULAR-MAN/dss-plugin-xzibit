@@ -20,9 +20,6 @@ def safe_extract_dataset_metadata(dataset_handle):
         
         raw_data = dataset_handle.get_info().get_raw() # returns dict
         
-        
-
-        
         keys = ['name', 'type', 'formatType', 'params.connection',
                        'managed', 'params.mode', 'params.table', 'params.schema', 'params.database',
                        'params.path', 
