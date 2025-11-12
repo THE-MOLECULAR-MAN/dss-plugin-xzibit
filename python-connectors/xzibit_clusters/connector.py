@@ -21,14 +21,12 @@ class ConnectorClusters(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.client = api_client()
-        self.unique_id_key_name = 'login'
-        self.keys   = [self.unique_id_key_name, 'displayName',
-                      'userProfile', 'groups', 'sourceType', 'email',
-                      'creationDate', 'enabled', 'resultingUserProfile',
-                      'userProfile']
+        self.unique_id_key_name = 'id'
+        self.keys   = [self.unique_id_key_name, 'architecture',
+                      'name', 'owner', 'state', 'type',
+                      'usedInProjects', 'usedInScenarios']
         self.objects_list = self.client.list_clusters()
-
-
+    
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
