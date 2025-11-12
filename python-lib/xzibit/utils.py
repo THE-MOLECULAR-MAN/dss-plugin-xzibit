@@ -71,6 +71,9 @@ def int_to_datetime(timestamp: int) -> datetime:
     into a datetime.datetime object (UTC).
     """
     # Detect if the timestamp is in milliseconds
+    if not isinstance(timestamp, int):
+        return None
+
     if timestamp > 1e12:
         timestamp /= 1000  # convert to seconds
     
