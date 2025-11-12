@@ -57,7 +57,7 @@ def safe_extract_dataset_metadata(dataset_handle):
             dataset_metadata = dataset_metadata | x
             print('safe_extract_dataset_metadata 50')            
         except Exception as e:
-            print{f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys"}
+            print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
 
         print('safe_extract_dataset_metadata 40')
 #         dataset_metadata['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
