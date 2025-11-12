@@ -6,6 +6,10 @@ from datetime import datetime
 from pprint import pprint as pp
 from json   import dumps  as jd
 
+def safe_extract_dataset_metadata(dataset_handle):
+    """x"""
+    
+
 
 def print_sorted_strings(s: set[str]) -> None:
     """
