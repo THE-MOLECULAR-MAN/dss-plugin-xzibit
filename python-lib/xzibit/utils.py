@@ -1,12 +1,9 @@
+import os
+import re
+from datetime import datetime
 
 # pretty print dictionaries for debugging - don't remove at this time.
 from pprint import pprint as pp
-
-import os
-
-import re
-
-from datetime import datetime
 
 
 def int_to_datetime(timestamp: int) -> datetime:
