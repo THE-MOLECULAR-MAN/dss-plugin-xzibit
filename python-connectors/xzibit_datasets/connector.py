@@ -40,7 +40,7 @@ class ConnectorDatasets(Connector):
                     dataset_handle = project_handle.get_dataset(r.id)
                     dataset_settings_handle = dataset_handle.get_settings()
                     raw_data = dataset_settings_handle.get_raw()
-                    
+                    pp(r)
                     pp(raw_data)
 
                     next_row = {
