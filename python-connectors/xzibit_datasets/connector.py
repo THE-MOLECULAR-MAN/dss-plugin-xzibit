@@ -53,9 +53,6 @@ class ConnectorDatasets(Connector):
                                 'name': dataset_handle.name,
                                 'is_feature_group': raw_data.get('is_feature_group', None),
                                 'data_steward': raw_data.get('data_steward', None)
-                                #'tags': raw_data['tags'],
-                                #'input_datasets': dataset_settings_handle.get_flat_input_refs(),
-                                #'output_datasets': dataset_settings_handle.get_flat_output_refs(),
                     }
                     
                 except Exception as e:
