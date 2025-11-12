@@ -75,7 +75,6 @@ class ConnectorDatasets(Connector):
                     print(f"EXCEPTION in xzibit_datasets/connector.py - generate_rows . Here's the dataset info for debugging:")
                     print(r)
                     # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
-
                     yield {'projectKey': pk,
                                'name':       r.id,
                                'dataset_exists': False
