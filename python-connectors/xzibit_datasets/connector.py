@@ -23,7 +23,7 @@ class ConnectorDatasets(Connector):
         self.client = api_client()
         self.unique_id_key_name = 'appId'
         self.keys   = [self.unique_id_key_name]
-        self.objects_list = self.client.list_apps()
+        self.objects_list = #self.client.list_apps()
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
