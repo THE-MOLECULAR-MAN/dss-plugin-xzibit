@@ -47,7 +47,7 @@ class ConnectorDatasets(Connector):
                     next_row = extract_nested_keys(raw_data, self.__keys)
                     
                     if next_row['type'] in ['PostgreSQL', 'Snowflake']:
-                        jd(raw_data)
+                        pp(raw_data)
 
 #                         #'data_steward': raw_data.get('data_steward', None),
 
