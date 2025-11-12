@@ -24,7 +24,7 @@ class ConnectorUsers(Connector):
         self.unique_id_key_name = 'login'
         self.keys   = [self.unique_id_key_name, 'displayName',
                       'userProfile', 'trialStatus', 'groups', 'sourceType', 'email']
-        self.objects_list = self.client.list_apps()
+        self.objects_list = self.client.list_users()
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
