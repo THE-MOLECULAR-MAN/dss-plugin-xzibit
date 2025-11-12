@@ -22,7 +22,8 @@ class ConnectorDatasets(Connector):
         
         self.client = api_client()        
         self.objects_list = {}
-        # self.keys = ['id', 'name']
+        self.__keys = ['name', 'type', 'tags', 'projectKey', 'params.connection', 'creationTag.lastModifiedOn', 'creationTag.lastModifiedBy.login', 'params.path']
+
         for pk in self.client.list_project_keys():
             project_handle = self.client.get_project(pk)
             self.objects_list[pk] = project_handle.list_datasets(as_type='objects', include_shared=True)
@@ -43,7 +44,6 @@ class ConnectorDatasets(Connector):
 
                     # len(metricsChecks.checks)
                     # len(schema.columns)
-                    keys = ['name', 'type', 'tags', 'projectKey', 'params.connection', 'creationTag.lastModifiedOn', 'creationTag.lastModifiedBy.login', 'params.path']
                     next_row = extract_nested_keys(raw_data, keys)
                     
                     if next_row['type'] in ['PostgreSQL', 'Snowflake']:
