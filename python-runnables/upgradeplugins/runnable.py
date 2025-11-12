@@ -1,5 +1,20 @@
 # This file is the actual code for the Python runnable upgradeplugins
+
+# This file is the actual code for the Python runnable auto-documentation-generation
+
+import json
+import sys
+
+# from json import dumps
+import traceback
+
+# import pandas as pd
+import dataiku
 from dataiku.runnables import Runnable
+from dataikuapi.utils import DataikuException
+import dataikuapi
+
+
 
 class MyRunnable(Runnable):
     """The base interface for a Python runnable"""
