@@ -19,8 +19,8 @@ class ConnectorDatasets(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         
-        self.client = api_client()        
-        self.objects_list = {}
+        self.__client = api_client()        
+        self.__objects_list = {}
         self.__keys = ['projectKey', 'name', 'type', 'formatType', 'params.connection',
                        'managed', 'params.mode', 'params.table', 'params.schema', 'params.database',
                        'params.path', 
@@ -30,9 +30,9 @@ class ConnectorDatasets(Connector):
                        'params.folderSmartId', 'tags', 'featureGroup',
                       ]
 
-        for pk in self.client.list_project_keys():
-            project_handle = self.client.get_project(pk)
-            self.objects_list[pk] = project_handle.list_datasets(as_type='objects', include_shared=True)
+        for pk in self.__client.list_project_keys():
+            project_handle = self.__client.get_project(pk)
+            self.__objects_list[pk] = project_handle.list_datasets(as_type='objects', include_shared=True)
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
@@ -41,8 +41,8 @@ class ConnectorDatasets(Connector):
         # key_mapping = set()
         
          # iterate through each object
-        for pk, proj_datasets in self.objects_list.items():
-            project_handle = self.client.get_project(pk)
+        for pk, proj_datasets in self.__objects_list.items():
+            project_handle = self.__client.get_project(pk)
 
             for r in proj_datasets:
                 try:
