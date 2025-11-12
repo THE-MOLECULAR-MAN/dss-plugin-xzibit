@@ -53,7 +53,7 @@ class ConnectorDatasets(Connector):
                         'name': dataset_handle.name,
                         'is_feature_group': raw_data.get('is_feature_group', None),
                         'data_steward': raw_data.get('data_steward', None),
-                        
+                        'formatType':  raw_data.get('formatType', None),
 
                     }
                     
