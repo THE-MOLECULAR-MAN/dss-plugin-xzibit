@@ -42,8 +42,8 @@ class ConnectorUsers(Connector):
             print(x)
             print(str(type(x)))
             
-            next_row['last_successful_login'] = parse_user_datetime()
-            next_row['last_session_activity'] = parse_user_datetime(item_handle.get_activity().last_session_activity)            
+            next_row['last_successful_login'] = parse_user_datetime(x)
+            # next_row['last_session_activity'] = parse_user_datetime(item_handle.get_activity().last_session_activity)            
             # pp(item_info)
             # return a single row
             yield next_row
