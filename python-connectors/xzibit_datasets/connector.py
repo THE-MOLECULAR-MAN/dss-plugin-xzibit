@@ -66,6 +66,7 @@ class ConnectorDatasets(Connector):
                 next_row['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
                 next_row['creationTag.lastModifiedOn'] = int_to_datetime(next_row.get('creationTag.lastModifiedOn', None))
                 next_row['versionTag.lastModifiedOn']  = int_to_datetime(next_row.get('versionTag.lastModifiedOn',  None))
+                next_row['dataset_exists'] = True
 
                 #except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
