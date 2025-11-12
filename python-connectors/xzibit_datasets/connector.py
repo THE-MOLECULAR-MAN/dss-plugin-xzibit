@@ -27,7 +27,7 @@ class ConnectorDatasets(Connector):
                        'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn',
                        'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn',
                        'shortDesc', 'description', 'params.metastoreDatabaseName',
-                       'params.folderSmartId', 'tags', 'featureGroup'
+                       'params.folderSmartId', 'tags', 'featureGroup',
                       ]
 
         for pk in self.client.list_project_keys():
