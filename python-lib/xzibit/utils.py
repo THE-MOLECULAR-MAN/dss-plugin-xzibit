@@ -2,6 +2,9 @@ import os
 import re
 from datetime import datetime
 
+from dataiku import api_client
+
+
 # pretty print dictionaries for debugging - don't remove at this time.
 from pprint import pprint as pp
 from json   import dumps  as jd
