@@ -24,7 +24,7 @@ class ConnectorDatasets(Connector):
         self.objects_list = {}
         for pk in self.client.list_project_keys():
             project_handle = self.client.get_project(pk)
-            self.objects_list[pk] = project_handle.list_recipes(as_type='objects')
+            self.objects_list[pk] = project_handle.list_datasets(as_type='objects', include_shared=True)
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
