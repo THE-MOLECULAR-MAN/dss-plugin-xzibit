@@ -8,7 +8,7 @@
         "description": "Install updates available for plugins installed from the store",
 
         // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/docs/
-        "icon": "fas fa-puzzle-piece"
+        "icon": "fas fa-upload"
     },
 
     /* whether the runnable's code is untrusted */
