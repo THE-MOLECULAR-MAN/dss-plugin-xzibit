@@ -43,7 +43,7 @@ class ConnectorRecipes(Connector):
                 
                 next_row = {
                             'projectKey': pk,
-                            'id': r.id,
+                            'id':   r.id,
                             'type': raw_data['type'],
                             'name': recipe_handle.name,
                             'tags': raw_data['tags'],
