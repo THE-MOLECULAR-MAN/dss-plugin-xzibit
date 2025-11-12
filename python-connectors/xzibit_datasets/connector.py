@@ -31,13 +31,27 @@ class ConnectorDatasets(Connector):
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
-        # iterate through each object
-        for item_info in self.objects_list:
-            next_row = flatten_dict(item_info, include_keys=self.keys)
-            
-            # return a single row
-            yield next_row
+         # iterate through each object
+        for pk, proj_datasets in self.objects_list.items():
+            project_handle = self.client.get_project(pk)
 
+            for r in proj_datasets:
+                dataset_handle = project_handle.get_dataset(r.id)
+                dataset_settings_handle = dataset_handle.get_settings()
+                raw_data = dataset_settings_handle.get_dataset_raw_definition()
+                
+                next_row = {
+                            'projectKey': pk,
+                            'id':   r.id,
+                            'type': raw_data['type'],
+                            'name': dataset_handle.name,
+                            'tags': raw_data['tags'],
+                            'input_datasets': dataset_settings_handle.get_flat_input_refs(),
+                            'output_datasets': dataset_settings_handle.get_flat_output_refs(),
+                }
+               
+                # return a single row
+                yield next_row
             
 ####################################################################
 # Same for all instances:
