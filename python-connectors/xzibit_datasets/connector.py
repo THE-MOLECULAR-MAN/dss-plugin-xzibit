@@ -81,7 +81,7 @@ class ConnectorDatasets(Connector):
                 # return a single row
                 yield next_row
                 
-         print(key_mapping)
+        print(key_mapping)
             
 ####################################################################
 # Same for all instances:
