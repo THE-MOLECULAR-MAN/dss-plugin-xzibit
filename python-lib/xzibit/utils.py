@@ -30,6 +30,7 @@ def list_keys_recursive(d: dict, parent_key: str = '') -> list[str]:
                     # Recurse without adding an index
                     keys.extend(list_keys_recursive(item, full_key))
     return keys
+
 def extract_nested_keys(d: dict, keys: list[str]) -> dict[str, object]:
     """
     Extract nested keys (dot-separated) from a dictionary.
