@@ -25,7 +25,7 @@ class ConnectorDatasets(Connector):
         self.__keys = ['name', 'type', 'tags', 'description', 'featureGroup', 
                        'managed', 'formatType', 'projectKey', 'params.connection', 
                        'params.mode', 'params.table', 'shortDesc', 
-                       'versionTag.lastModifiedBy.login', #'versionTag.lastModifiedBy.lastModifiedOn', 
+                       'versionTag.lastModifiedBy.login', # 'versionTag.lastModifiedBy.lastModifiedOn', 
                        'creationTag.lastModifiedOn', 'creationTag.lastModifiedBy.login', 'params.path',
                        'params.folderSmartId' ]
 
