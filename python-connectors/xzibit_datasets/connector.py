@@ -42,6 +42,9 @@ class ConnectorDatasets(Connector):
                     raw_data = dataset_settings_handle.get_raw()
                     pp(r)
                     pp(raw_data)
+                    # formatType
+                    # managed
+                    # tags
 
                     next_row = {
                                 'projectKey': pk,
