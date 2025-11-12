@@ -3,6 +3,8 @@ import re
 from datetime import datetime
 
 import dataikuapi
+from dataikuapi.utils import DataikuException
+
 
 
 # pretty print dictionaries for debugging - don't remove at this time.
@@ -48,7 +50,9 @@ def safe_extract_dataset_metadata(dataset_handle):
 #         dataset_metadata['creationTag.lastModifiedOn'] = int_to_datetime(dataset_metadata.get('creationTag.lastModifiedOn', None))
 #         dataset_metadata['versionTag.lastModifiedOn']  = int_to_datetime(dataset_metadata.get('versionTag.lastModifiedOn',  None))
         # dataset_metadata['dataset_exists'] = True
-
+    except DataikuException as e:
+        print(f"safe_extract_dataset_metadata - DataikuException")
+        
     except Exception as e:
         print(f"safe_extract_dataset_metadata - GENERIC EXCEPTION: {e}")
         dataset_metadata['exists'] = "EXCEPTION"
