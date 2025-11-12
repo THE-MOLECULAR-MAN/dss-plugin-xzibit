@@ -52,6 +52,7 @@ class ConnectorDatasets(Connector):
                     # )
                     keys = ['name', 'type', 'tags', 'projectKey']
                     next_row = extract_nested_keys(raw_data, keys)
+                    pp(next_row)
 
 #                     next_row = {
 #                         'projectKey': pk,
