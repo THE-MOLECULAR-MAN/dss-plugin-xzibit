@@ -62,6 +62,7 @@ class ConnectorDatasets(Connector):
 
                 #except Exception as e:
                     # com.dataiku.dip.server.controllers.NotFoundException
+                    # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist: HCP_TARGET_AGENTS.Sales_Marketing_queries
                  #   print(f"Exception with dataset {r.id} in project {pk}: {e}")
                  #   continue
 
