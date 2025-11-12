@@ -1,7 +1,5 @@
 # This file is the actual code for the Python runnable upgradeplugins
 
-# This file is the actual code for the Python runnable auto-documentation-generation
-
 import json
 import sys
 
