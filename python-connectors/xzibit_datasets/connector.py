@@ -76,7 +76,7 @@ class ConnectorDatasets(Connector):
 # Same for all instances:
 ####################################################################
     def get_records_count(self, partitioning=None, partition_id=None):
-        return len(self.objects_list)
+        return len(self.__objects_list)
 
 ####################################################################
 # Intentionally not implemented, not needed for this type
