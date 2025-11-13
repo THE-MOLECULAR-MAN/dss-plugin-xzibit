@@ -14,9 +14,6 @@ from dataiku.runnables import Runnable
 from dataikuapi.utils import DataikuException
 import dataikuapi
 
-
-
-
 class MyRunnable(Runnable):
     """The base interface for a Python runnable"""
 
@@ -67,7 +64,7 @@ class MyRunnable(Runnable):
 
         except Exception as e:
             try:
-                if not force_rebuild_env:
+                if not self.__force_rebuild_env:
                     # print(f'Failed to build {envName} without force rebuild, trying again with force rebuild...')
                     res = code_env.update_packages(force_rebuild_env=True)
                     print(f'Success: {envName} when Force rebuild')
