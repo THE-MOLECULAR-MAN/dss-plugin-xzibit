@@ -68,7 +68,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk):
         dataset_metadata['creationTag.lastModifiedOn'] = int_to_datetime(dataset_metadata.get('creationTag.lastModifiedOn', None))
         dataset_metadata['versionTag.lastModifiedOn']  = int_to_datetime(dataset_metadata.get('versionTag.lastModifiedOn',  None))
         
-        print(f"safe_extract_dataset_metadata successful end")
+        # print(f"safe_extract_dataset_metadata successful end")
 
     except DataikuException as e:
         print(f"safe_extract_dataset_metadata - Dataiku exception {e}")
@@ -79,7 +79,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk):
         dataset_metadata['exists'] = "EXCEPTION"
         return dataset_metadata
     finally:
-        print(f"safe_extract_dataset_metadata - FINALLY")        
+        # print(f"safe_extract_dataset_metadata - FINALLY")        
         return dataset_metadata
 
 
