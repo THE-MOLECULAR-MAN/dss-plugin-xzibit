@@ -26,10 +26,12 @@ class MyRunnable(Runnable):
         :param config: the dict of the configuration of the object
         :param plugin_config: contains the plugin settings
         """
+        # standard members
         self.__project_key   = project_key
         self.__config        = config
         self.__plugin_config = plugin_config
-        
+
+        # members specific to this class
         self.__client            = dataiku.api_client()
         self.__force_rebuild_env = False
         self.__num_threads       = 1
