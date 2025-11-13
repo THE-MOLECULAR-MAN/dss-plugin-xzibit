@@ -60,7 +60,7 @@ class MyRunnable(Runnable):
                 successful_builds.add(envName)
             else:
                 print(f"FAILED: {envName}")
-                failed_builds.add(envName)
+                self.__failed_builds.add(envName)
 
         except Exception as e:
             try:
