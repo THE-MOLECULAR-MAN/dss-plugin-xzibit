@@ -26,10 +26,8 @@ def safe_extract_dataset_metadata(dataset_handle):
                       ]
     try:
         dataset_metadata = {}
-        # these should always work, even if dataset does not exist. These should not throw an exception:
         dataset_metadata['id']     = dataset_handle.id
         dataset_metadata['name']   = dataset_handle.name
-        # dataset_metadata['exists'] = False # failsafe in case next line throws exception
         print('safe_extract_dataset_metadata 10')
         dataset_metadata['exists'] = dataset_handle.exists()
         print('safe_extract_dataset_metadata 20')
@@ -60,14 +58,10 @@ def safe_extract_dataset_metadata(dataset_handle):
 #         dataset_metadata['versionTag.lastModifiedOn']  = int_to_datetime(dataset_metadata.get('versionTag.lastModifiedOn',  None))
         # dataset_metadata['dataset_exists'] = True
     except DataikuException as e:
-        print(f"safe_extract_dataset_metadata - DataikuException")
         dataset_metadata['exists'] = "EXCEPTION DataikuException"
-
     except Exception as e:
-        print(f"safe_extract_dataset_metadata - GENERIC EXCEPTION: {e}")
         dataset_metadata['exists'] = "EXCEPTION"
     finally:
-        print('safe_extract_dataset_metadata FINALLY')
         return dataset_metadata
 
 
