@@ -14,7 +14,7 @@ from dataiku.runnables import Runnable
 from dataikuapi.utils import DataikuException
 import dataikuapi
 
-force_rebuild_env = False
+
 
 
 class MyRunnable(Runnable):
@@ -30,6 +30,7 @@ class MyRunnable(Runnable):
         self.__config        = config
         self.__plugin_config = plugin_config
         self.__client        = dataiku.api_client()
+        self.__force_rebuild_env = False
         
     def get_progress_target(self):
         """
@@ -41,9 +42,9 @@ class MyRunnable(Runnable):
 
     def _process_code_env(code_env_info):
         try:
-            client = dataiku.api_client()
+            
             envName = code_env_info['envName']
-            code_env = client.get_code_env(code_env_info['envLang'], envName)
+            code_env = self.__client.get_code_env(code_env_info['envLang'], envName)
 
             # print(f'Starting rebuilding {envName} ...')
             # env_path = os.path.join('/data/dataiku/dss_data/code-envs/python', envName)
