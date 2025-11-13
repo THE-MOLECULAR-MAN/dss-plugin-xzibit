@@ -35,7 +35,7 @@ def safe_extract_dataset_metadata(dataset_handle):
             return dataset_metadata
             
         try:
-            raw_data = dataset_handle.get_info().get_raw().get('dataset') # returns dict, can throw com.dataiku.dip.server.controllers.NotFoundException
+            raw_data = dataset_handle.get_info().get_raw() # returns dict, can throw com.dataiku.dip.server.controllers.NotFoundException
             # raw_data = raw_data.get('dataset', {}) # fix for get_info
         except Exception as e:
             print(f"safe_extract_dataset_metadata - EXCEPTION at dataset_handle.get_info().get_raw()")
