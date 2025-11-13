@@ -29,6 +29,7 @@ class ConnectorDatasets(Connector):
                        'shortDesc', 'description', 'params.metastoreDatabaseName',
                        'params.folderSmartId', 'tags', 'featureGroup',
                       ]
+        self.__count = 0
 
         for pk in self.__client.list_project_keys():
             project_handle = self.__client.get_project(pk)
