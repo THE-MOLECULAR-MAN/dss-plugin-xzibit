@@ -82,7 +82,9 @@ class MyRunnable(Runnable):
     
     def _rebuild_all_code_envs(self):
         """x"""
-        
+        with ThreadPoolExecutor(max_workers=self.__num_threads) as executor:
+            executor.map(_process_code_env, code_envs)
+
 
 
 
