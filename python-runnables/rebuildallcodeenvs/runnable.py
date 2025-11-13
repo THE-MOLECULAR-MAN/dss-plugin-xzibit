@@ -57,7 +57,7 @@ class MyRunnable(Runnable):
 
             if res['messages']['success']:
                 print(f'Success: {envName}')
-                successful_builds.add(envName)
+                self.__successful_builds.add(envName)
             else:
                 print(f"FAILED: {envName}")
                 self.__failed_builds.add(envName)
@@ -71,7 +71,7 @@ class MyRunnable(Runnable):
                     pass
             except Exception as e:
                 print(f"FAILED: {envName}, even with force rebuild")
-                failed_builds.add(envName) # potential bug where this doesn't happen, should use a finally clause
+                self.__failed_builds.add(envName) # potential bug where this doesn't happen, should use a finally clause
                 pass
 
 
