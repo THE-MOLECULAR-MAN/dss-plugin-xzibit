@@ -66,6 +66,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         dataset_metadata['exists'] = "EXCEPTION"
         return dataset_metadata
     finally:
+        print(f"safe_extract_dataset_metadata - FINALLY")        
         return dataset_metadata
 
 
