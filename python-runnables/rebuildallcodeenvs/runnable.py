@@ -14,7 +14,7 @@ from dataiku.runnables import Runnable
 from dataikuapi.utils import DataikuException
 import dataikuapi
 
-from xzibit.utils import *
+from xzibit.utils import clear_pip_tmp
 
 class MyRunnable(Runnable):
     """The base interface for a Python runnable"""
