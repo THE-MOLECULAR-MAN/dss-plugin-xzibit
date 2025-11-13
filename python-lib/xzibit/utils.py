@@ -39,6 +39,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk):
             raw_data = raw_data.get('dataset', {}) # fix for get_info
         except Exception as e:
             print(f"safe_extract_dataset_metadata - EXCEPTION at dataset_handle.get_info().get_raw()")
+            dataset_metadata['exists'] = "EXCEPTION 4"
             return dataset_metadata
 
         # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
@@ -51,6 +52,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk):
 
         except Exception as e:
             print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
+            dataset_metadata['exists'] = "EXCEPTION 1"
             return dataset_metadata
        
         dataset_metadata['num_metrics_checks'] = len(raw_data.get('metricsChecks', {}).get('checks', []))
@@ -61,11 +63,11 @@ def safe_extract_dataset_metadata(dataset_handle, pk):
 
     except DataikuException as e:
         print(f"safe_extract_dataset_metadata - Dataiku exception {e}")
-        dataset_metadata['exists'] = "EXCEPTION DataikuException"
+        dataset_metadata['exists'] = "EXCEPTION 2"
         return dataset_metadata
     except Exception as e:
         print(f"safe_extract_dataset_metadata - Generic exception {e}")
-        dataset_metadata['exists'] = "EXCEPTION Generic"
+        dataset_metadata['exists'] = "EXCEPTION 3"
         return dataset_metadata
     finally:
         return dataset_metadata
