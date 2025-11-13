@@ -14,7 +14,7 @@ from dataiku.runnables import Runnable
 from dataikuapi.utils import DataikuException
 import dataikuapi
 
-
+force_rebuild_env = False
 
 
 class MyRunnable(Runnable):
