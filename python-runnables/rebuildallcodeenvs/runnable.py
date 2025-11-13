@@ -41,7 +41,7 @@ class MyRunnable(Runnable):
         return None
     
 
-    def _process_code_env(code_env_info):
+    def _process_code_env(self.code_env_info):
         try:
             
             envName = code_env_info['envName']
