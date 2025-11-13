@@ -31,7 +31,9 @@ class MyRunnable(Runnable):
         self.__plugin_config = plugin_config
         self.__client        = dataiku.api_client()
         self.__force_rebuild_env = False
-        self.__num_threads   = 1
+        self.__num_threads       = 1
+        self.__failed_builds     = set()
+        self.__successful_builds = set()
         
     def get_progress_target(self):
         """
@@ -78,21 +80,6 @@ class MyRunnable(Runnable):
     def _rebuild_all_code_envs(self):
         """x"""
         
-        for plugin_info in self.__client.list_plugins():
-            plugin_id = plugin_info['id']
-
-            #if plugin_id in plugins_to_skip_update:
-             #   continue
-
-            plugin_handle = self.__client.get_plugin(plugin_id)
-
-            try:
-                print(f'Attempting to update plugin {plugin_id} ... ')
-                future = plugin_handle.update_from_store()
-                future.wait_for_result()
-
-            except Exception as e:
-                print(f"Failed to update {plugin_id}: {str(e)}")
 
 
 
