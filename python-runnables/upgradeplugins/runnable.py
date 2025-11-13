@@ -12,8 +12,6 @@ from dataiku.runnables import Runnable
 from dataikuapi.utils import DataikuException
 import dataikuapi
 
-from concurrent.futures import ThreadPoolExecutor
-
 
 
 
@@ -30,7 +28,6 @@ class MyRunnable(Runnable):
         self.__config        = config
         self.__plugin_config = plugin_config
         self.__client        = dataiku.api_client()
-        self.__num_threads   = 1
         
     def get_progress_target(self):
         """
