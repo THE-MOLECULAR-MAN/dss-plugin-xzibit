@@ -45,9 +45,9 @@ class MyRunnable(Runnable):
 
         projects_analysis = []
 
-        for iter_project_key in client.list_project_keys():
+        for iter_project_key in self.__client.list_project_keys():
             try:
-                proj = client.get_project(iter_project_key)
+                proj = self.__client.get_project(iter_project_key)
                 project_git = proj.get_project_git()
                 r = project_git.get_remote()
                 status = project_git.get_status()
@@ -66,7 +66,7 @@ class MyRunnable(Runnable):
                         continue
                     successful.add(iter_project_key)
                 else:
-                    # print(f"{iter_project_key} is not connected to GitHub")
+                    print(f"{iter_project_key} is not connected to GitHub")
                     not_connected.add(iter_project_key)
             except Exception as e:
                 print(f"[EXCEPTION] {iter_project_key}: {e}")
