@@ -44,9 +44,6 @@ def safe_extract_dataset_metadata(dataset_handle):
             print(f"safe_extract_dataset_metadata - EXCEPTION at dataset_handle.get_info().get_raw()")
             return dataset_metadata
 
-            
-        
-
         # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
 
         # append
@@ -56,7 +53,6 @@ def safe_extract_dataset_metadata(dataset_handle):
         except Exception as e:
             print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
 
-        print('safe_extract_dataset_metadata 40')
 #         dataset_metadata['num_metrics_checks'] = len(raw_data.get('metricsChecks').get('checks', []))
 #         dataset_metadata['num_columns']        = len(raw_data.get('schema').get('columns', []))
 #         dataset_metadata['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
