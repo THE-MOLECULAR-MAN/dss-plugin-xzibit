@@ -2,8 +2,140 @@ import os
 import re
 from datetime import datetime
 
+import dataikuapi
+from dataikuapi.utils import DataikuException
+
+
+
 # pretty print dictionaries for debugging - don't remove at this time.
 from pprint import pprint as pp
+from json   import dumps  as jd
+
+def safe_extract_dataset_metadata(dataset_handle, pk):
+    """x"""
+    assert isinstance(dataset_handle, dataikuapi.dss.dataset.DSSDataset), f"safe_extract_dataset_metadata - Assertion failed: Expecting DSSDataset, got {type(dataset_handle)}"
+    
+    keys = ['name', 'type', 'formatType', 'params.connection',
+           'managed', 'params.mode', 'params.table', 'params.schema',
+           'params.path', 
+           'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn',
+           'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn',
+           'shortDesc', 'description', 'params.metastoreDatabaseName',
+           'params.folderSmartId', 'tags', 'featureGroup'
+          ]
+    try:
+        dataset_metadata = {}
+        dataset_metadata['projectKey']     = pk
+        dataset_metadata['id']     = dataset_handle.id
+        dataset_metadata['name']   = dataset_handle.name
+        dataset_metadata['exists'] = dataset_handle.exists()
+        
+        if not dataset_metadata['exists']:
+            # print('safe_extract_dataset_metadata - dataset does NOT exist.')
+            return dataset_metadata
+            
+        try:
+            raw_data = dataset_handle.get_info().get_raw() # returns dict, can throw com.dataiku.dip.server.controllers.NotFoundException
+            raw_data = raw_data.get('dataset', {}) # fix for get_info
+        except Exception as e:
+            print(f"safe_extract_dataset_metadata - EXCEPTION at dataset_handle.get_info().get_raw()")
+            dataset_metadata['exists'] = "EXCEPTION 1"
+            return dataset_metadata
+
+        # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
+
+        try:
+            # pp(raw_data)
+            dataset_metadata_new = extract_nested_keys(raw_data, keys) # NOT causing exception
+            dataset_metadata.update(dataset_metadata_new) # def not causing exception
+            # pp(dataset_metadata) # def not causing exception
+
+        except Exception as e:
+            print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
+            dataset_metadata['exists'] = "EXCEPTION 2"
+            return dataset_metadata
+       
+        dataset_metadata['num_metrics_checks'] = len(raw_data.get('metricsChecks', {}).get('checks', []))
+        dataset_metadata['num_columns']        = len(raw_data.get('schema', {}).get('columns', []))
+        dataset_metadata['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
+        dataset_metadata['creationTag.lastModifiedOn'] = int_to_datetime(dataset_metadata.get('creationTag.lastModifiedOn', None))
+        dataset_metadata['versionTag.lastModifiedOn']  = int_to_datetime(dataset_metadata.get('versionTag.lastModifiedOn',  None))
+
+    except DataikuException as e:
+        print(f"safe_extract_dataset_metadata - Dataiku exception {e}")
+        dataset_metadata['exists'] = "EXCEPTION 3"
+        return dataset_metadata
+    except Exception as e:
+        print(f"safe_extract_dataset_metadata - Generic exception {e}")
+        dataset_metadata['exists'] = "EXCEPTION 4"
+        return dataset_metadata
+    finally:
+        return dataset_metadata
+
+
+
+def print_sorted_strings(s: set[str]) -> None:
+    """
+    Print all strings in a set, sorted alphabetically (case-insensitive), one per line.
+    """
+    for item in sorted(s, key=str.lower):
+        print(item)
+
+def list_keys_recursive(d: dict, parent_key: str = '') -> list[str]:
+    """
+    Recursively list all keys in a nested dictionary using dot notation,
+    ignoring list indices (e.g., schema.columns[0].name -> schema.columns.name).
+
+    Args:
+        d (dict): The dictionary to traverse.
+        parent_key (str): Used internally to build nested key paths.
+
+    Returns:
+        list[str]: List of all keys in dot-delimited form.
+    """
+    keys = []
+    if not isinstance(d, dict):
+        t = str(type(d))
+        print(f"ERROR: list_keys_recursive - not a dict: {d} - {t}")
+        return None
+    
+    
+    for k, v in d.items():
+        full_key = f"{parent_key}.{k}" if parent_key else k
+        keys.append(full_key)
+
+        if isinstance(v, dict):
+            keys.extend(list_keys_recursive(v, full_key))
+        elif isinstance(v, list):
+            for item in v:
+                if isinstance(item, dict):
+                    # Recurse without adding an index
+                    keys.extend(list_keys_recursive(item, full_key))
+    return keys
+
+def extract_nested_keys(d: dict, keys: list[str]) -> dict[str, object]:
+    """
+    Extract nested keys (dot-separated) from a dictionary.
+    If a key path does not exist, its value is None in the returned dictionary.
+
+    Args:
+        d (dict): The source dictionary.
+        keys (list[str]): List of (possibly nested) keys, separated by dots.
+
+    Returns:
+        dict[str, object]: Dictionary of {key_path: value or None}.
+    """
+
+    def get_nested_value(data, key_path):
+        """Safely get a nested value from a dict using dot-separated keys."""
+        for key in key_path.split('.'):
+            if isinstance(data, dict) and key in data:
+                data = data[key]
+            else:
+                return None
+        return data
+
+    return {key: get_nested_value(d, key) for key in keys}
 
 
 def int_to_datetime(timestamp: int) -> datetime:
@@ -12,6 +144,11 @@ def int_to_datetime(timestamp: int) -> datetime:
     into a datetime.datetime object (UTC).
     """
     # Detect if the timestamp is in milliseconds
+    if not isinstance(timestamp, int):
+        t = str(type(timestamp))
+        print(f"int_to_datetime - not an integer: {timestamp} - {t}")
+        return None
+
     if timestamp > 1e12:
         timestamp /= 1000  # convert to seconds
     
@@ -187,3 +324,23 @@ def remove_prefix_from_keys(d, prefix, recursive=True):
         else:
             new_dict[new_key] = v
     return new_dict
+
+
+def clear_pip_tmp():
+    """
+    This function deletes all the temporary files created by 
+    Pip during the installation process. They are not always cleared 
+    and when dealing with dozens of Code Environments, 
+    it can fill up the hard disk very quickly.
+    It assumpes they're located in /tmp/pip-*
+    """
+    import glob
+    import os
+    import shutil
+    
+    for d in glob.glob('/tmp/pip-*'):
+        # print(f'Deleting {d}...')
+        if os.path.isdir(d):
+            shutil.rmtree(d, ignore_errors=True)
+        else:
+            os.remove(d)
