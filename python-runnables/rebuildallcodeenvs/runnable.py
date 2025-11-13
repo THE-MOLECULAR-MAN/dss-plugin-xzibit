@@ -33,8 +33,8 @@ class MyRunnable(Runnable):
 
         # members specific to this class
         self.__client            = dataiku.api_client()
-        self.__force_rebuild_env = False
-        self.__num_threads       = 1
+        self.__force_rebuild_env = False # will be configurable in future release
+        self.__num_threads       = 1     # will be configurable in future release
         self.__failed_builds     = set()
         self.__successful_builds = set()
         
