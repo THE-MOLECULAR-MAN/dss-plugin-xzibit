@@ -34,6 +34,7 @@ class ConnectorDatasets(Connector):
         for pk in self.__client.list_project_keys():
             project_handle = self.__client.get_project(pk)
             self.__objects_list[pk] = project_handle.list_datasets(as_type='objects', include_shared=True)
+            self.__count += len(self.__objects_list[pk])
         
         print(f"Constructor num rows: {self.get_records_count()}")
 
