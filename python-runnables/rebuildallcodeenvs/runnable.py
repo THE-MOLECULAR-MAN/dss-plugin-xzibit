@@ -37,8 +37,42 @@ class MyRunnable(Runnable):
         (target, unit) where unit is one of: SIZE, FILES, RECORDS, NONE
         """
         return None
+    
+
+    def _process_code_env(code_env_info):
+        try:
+            client = dataiku.api_client()
+            envName = code_env_info['envName']
+            code_env = client.get_code_env(code_env_info['envLang'], envName)
+
+            # print(f'Starting rebuilding {envName} ...')
+            # env_path = os.path.join('/data/dataiku/dss_data/code-envs/python', envName)
+
+            # rebuild it
+            res = code_env.update_packages(force_rebuild_env=force_rebuild_env)
+
+            if res['messages']['success']:
+                print(f'Success: {envName}')
+                successful_builds.add(envName)
+            else:
+                print(f"FAILED: {envName}")
+                failed_builds.add(envName)
+
+        except Exception as e:
+            try:
+                if not force_rebuild_env:
+                    # print(f'Failed to build {envName} without force rebuild, trying again with force rebuild...')
+                    res = code_env.update_packages(force_rebuild_env=True)
+                    print(f'Success: {envName} when Force rebuild')
+                    pass
+            except Exception as e:
+                print(f"FAILED: {envName}, even with force rebuild")
+                failed_builds.add(envName) # potential bug where this doesn't happen, should use a finally clause
+                pass
 
 
+    
+    
     def _rebuild_all_code_envs(self):
         """x"""
         
