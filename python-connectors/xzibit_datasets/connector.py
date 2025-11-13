@@ -35,8 +35,6 @@ class ConnectorDatasets(Connector):
             project_handle = self.__client.get_project(pk)
             self.__objects_list[pk] = project_handle.list_datasets(as_type='objects', include_shared=True)
             self.__count += len(self.__objects_list[pk])
-        
-        # print(f"Constructor num rows: {self.__count}")
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
@@ -58,10 +56,6 @@ class ConnectorDatasets(Connector):
 
                 except Exception as e:
                     print(f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} ")
-#                     md = r.get_metadata() # returns dict
-#                     info = r.get_info() # returns dataikuapi.dss.dataset.DSSDatasetInfo
-#                     print(md)
-#                     print(info.get_raw())
                     # r is of type "dataikuapi.dss.dataset.DSSDataset"
                     # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
                     yield {'projectKey': pk,
