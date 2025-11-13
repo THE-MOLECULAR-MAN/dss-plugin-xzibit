@@ -336,6 +336,7 @@ def clear_pip_tmp():
     """
     import glob
     import os
+    import shutil
     
     for d in glob.glob('/tmp/pip-*'):
         # print(f'Deleting {d}...')
