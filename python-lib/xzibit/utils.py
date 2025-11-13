@@ -28,9 +28,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         dataset_metadata = {}
         dataset_metadata['id']     = dataset_handle.id
         dataset_metadata['name']   = dataset_handle.name
-        print('safe_extract_dataset_metadata 10')
         dataset_metadata['exists'] = dataset_handle.exists()
-        print('safe_extract_dataset_metadata 20')
         
         if not dataset_metadata['exists']:
             #print('dataset does NOT exist.')
