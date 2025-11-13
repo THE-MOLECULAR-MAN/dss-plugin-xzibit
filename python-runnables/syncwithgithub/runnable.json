@@ -2,7 +2,7 @@
 {
     "meta": {
         // label: name of the runnable as displayed, should be short
-        "label": "Sync Projects with remote Git repositories",
+        "label": "Sync Projects with remote repos",
 
         // description: longer string to help end users understand what this runnable does
         "description": "Push/Pull DSS Projects that are connected to remote Git repositories",
