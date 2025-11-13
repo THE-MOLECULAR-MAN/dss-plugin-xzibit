@@ -11,7 +11,7 @@ from dataikuapi.utils import DataikuException
 from pprint import pprint as pp
 from json   import dumps  as jd
 
-def safe_extract_dataset_metadata(dataset_handle):
+def safe_extract_dataset_metadata(dataset_handle, pk):
     """x"""
     # print('safe_extract_dataset_metadata START')
     assert isinstance(dataset_handle, dataikuapi.dss.dataset.DSSDataset), f"safe_extract_dataset_metadata - Assertion failed: Expecting DSSDataset, got {type(dataset_handle)}"
