@@ -50,7 +50,7 @@ class MyRunnable(Runnable):
             # env_path = os.path.join('/data/dataiku/dss_data/code-envs/python', envName)
 
             # rebuild it
-            res = code_env.update_packages(force_rebuild_env=force_rebuild_env)
+            res = code_env.update_packages(force_rebuild_env=self.__force_rebuild_env)
 
             if res['messages']['success']:
                 print(f'Success: {envName}')
