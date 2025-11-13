@@ -62,9 +62,6 @@ class ConnectorDatasets(Connector):
                                'name':       r.id,
                                'dataset_exists': 'EXCEPTION'
                               }
-        # print(f"generate_rows: Total number of rows: {num_rows}")
-
-        # print_sorted_strings(key_mapping)
             
 ####################################################################
 # Same for all instances:
