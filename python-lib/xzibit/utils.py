@@ -48,7 +48,7 @@ def safe_extract_dataset_metadata(dataset_handle):
             #dataset_metadata = dataset_metadata | x # Python 3.9+  # maybe causing exception
             #dataset_metadata = {**dataset_metadata, **x} # more compatible
             #pp(dataset_metadata)
-            dataset_metadata.update(dataset_metadata_new)
+            dataset_metadata.update(dataset_metadata_new) # not causing exception
 
         except Exception as e:
             print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
