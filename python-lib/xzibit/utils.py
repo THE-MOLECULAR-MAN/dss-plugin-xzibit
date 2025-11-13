@@ -44,6 +44,7 @@ def safe_extract_dataset_metadata(dataset_handle):
 
         try:
             # I NEED TO REWRITE KEYS?
+            pp(raw_data)
             dataset_metadata_new = extract_nested_keys(raw_data, keys) # NOT causing exception
             # pp(dataset_metadata) # NOT causing exception
             #dataset_metadata = dataset_metadata | x # Python 3.9+  # maybe causing exception
