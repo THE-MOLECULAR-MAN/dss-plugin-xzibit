@@ -39,6 +39,7 @@ class ConnectorDatasets(Connector):
                             partition_id=None, records_limit = -1):
         
         # key_mapping = set()
+        num_rows = 0
         
          # iterate through each object
         for pk, proj_datasets in self.__objects_list.items():
@@ -46,6 +47,7 @@ class ConnectorDatasets(Connector):
 
             for r in proj_datasets:
                 try:
+                    num_rows += 1
                     dataset_handle = project_handle.get_dataset(r.id)
                     print("generate_rows - got dataset handle.")
                     next_row = safe_extract_dataset_metadata(dataset_handle)
@@ -64,6 +66,7 @@ class ConnectorDatasets(Connector):
                                'name':       r.id,
                                'dataset_exists': 'EXCEPTION'
                               }
+        print(f"Total number of rows: {num_rows}")
 
         # print_sorted_strings(key_mapping)
             
