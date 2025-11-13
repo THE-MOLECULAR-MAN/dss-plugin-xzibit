@@ -334,6 +334,8 @@ def clear_pip_tmp():
     it can fill up the hard disk very quickly.
     It assumpes they're located in /tmp/pip-*
     """
+    import glob
+    import os
     
     for d in glob.glob('/tmp/pip-*'):
         # print(f'Deleting {d}...')
