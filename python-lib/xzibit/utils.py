@@ -45,7 +45,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         try:
             x = extract_nested_keys(raw_data, keys)
             dataset_metadata = dataset_metadata | x
-            dataset_metadata = {**dict1, **dict2}
+            dataset_metadata = {**dataset_metadata, **x}
         except Exception as e:
             print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
             return dataset_metadata
