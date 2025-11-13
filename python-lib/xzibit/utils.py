@@ -26,6 +26,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk):
           ]
     try:
         dataset_metadata = {}
+        dataset_metadata['primaryKey']     = dataset_handle.pk
         dataset_metadata['id']     = dataset_handle.id
         dataset_metadata['name']   = dataset_handle.name
         dataset_metadata['exists'] = dataset_handle.exists()
