@@ -35,12 +35,11 @@ def safe_extract_dataset_metadata(dataset_handle):
         print('safe_extract_dataset_metadata 20')
         
         if not dataset_metadata['exists']:
-            print('dataset does NOT exist.')
+            #print('dataset does NOT exist.')
             return dataset_metadata
             
         try:
             raw_data = dataset_handle.get_info().get_raw() # returns dict, can throw com.dataiku.dip.server.controllers.NotFoundException
-            print('safe_extract_dataset_metadata 30')
         except Exception as e:
             print(f"safe_extract_dataset_metadata - EXCEPTION at dataset_handle.get_info().get_raw()")
             return dataset_metadata
@@ -52,10 +51,8 @@ def safe_extract_dataset_metadata(dataset_handle):
 
         # append
         try:
-            x = extract_nested_keys(raw_data, keys)
-            print('safe_extract_dataset_metadata 40')            
+            x = extract_nested_keys(raw_data, keys)       
             dataset_metadata = dataset_metadata | x
-            print('safe_extract_dataset_metadata 50')            
         except Exception as e:
             print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
 
