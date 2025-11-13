@@ -59,8 +59,7 @@ class ConnectorDatasets(Connector):
                     # r is of type "dataikuapi.dss.dataset.DSSDataset"
                     # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
                     yield {'projectKey': pk,
-                               'name':       r.id,
-                               'dataset_exists': 'EXCEPTION'
+                               'name':       r.id
                               }
             
 ####################################################################
