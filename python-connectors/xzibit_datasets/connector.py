@@ -36,14 +36,14 @@ class ConnectorDatasets(Connector):
             self.__objects_list[pk] = project_handle.list_datasets(as_type='objects', include_shared=True)
             self.__count += len(self.__objects_list[pk])
         
-        print(f"Constructor num rows: {self.__count}")
+        # print(f"Constructor num rows: {self.__count}")
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
         # key_mapping = set()
-        num_rows = 0
+        # num_rows = 0
         
          # iterate through each object
         for pk, proj_datasets in self.__objects_list.items():
@@ -51,11 +51,9 @@ class ConnectorDatasets(Connector):
 
             for r in proj_datasets:
                 try:
-                    num_rows += 1
+#                    num_rows += 1
                     dataset_handle = project_handle.get_dataset(r.id)
-                    print("generate_rows - got dataset handle.")
                     next_row = safe_extract_dataset_metadata(dataset_handle)
-                    print("generate_rows - END.")
                     yield next_row
 
                 except Exception as e:
