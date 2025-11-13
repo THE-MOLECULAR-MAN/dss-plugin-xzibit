@@ -93,7 +93,7 @@ class MyRunnable(Runnable):
         Do stuff here. Can return a string or raise an exception.
         The progress_callback is a function expecting 1 value: current progress
         """
-        clear_pip_tmp()
+        # clear_pip_tmp()
         # raise Exception("unimplemented")
         self._rebuild_all_code_envs()
         return None
