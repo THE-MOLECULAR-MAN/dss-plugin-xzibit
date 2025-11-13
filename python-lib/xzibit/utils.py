@@ -47,6 +47,7 @@ def safe_extract_dataset_metadata(dataset_handle):
             print(dataset_metadata)
             dataset_metadata = dataset_metadata | x # Python 3.9+
            # dataset_metadata = {**dataset_metadata, **x} # more compatible
+            print(dataset_metadata)
         except Exception as e:
             print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
             return dataset_metadata
