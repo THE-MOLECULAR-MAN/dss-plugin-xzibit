@@ -37,21 +37,42 @@ class MyRunnable(Runnable):
     def _sync_with_github(self):
         """x"""
         
-        for plugin_info in self.__client.list_plugins():
-            plugin_id = plugin_info['id']
+        
+        projects = self.__client.list_projects()
+        successful = set()
+        not_connected = set()
+        errored = set()
 
-            #if plugin_id in plugins_to_skip_update:
-             #   continue
+        projects_analysis = []
 
-            plugin_handle = self.__client.get_plugin(plugin_id)
-
+        for iter_project_key in client.list_project_keys():
             try:
-                print(f'Attempting to update plugin {plugin_id} ... ')
-                future = plugin_handle.update_from_store()
-                future.wait_for_result()
+                proj = client.get_project(iter_project_key)
+                project_git = proj.get_project_git()
+                r = project_git.get_remote()
+                status = project_git.get_status()
 
+                has_github_repo = len(status.get('remotes',[])) > 0
+                projects_analysis.append({"key":iter_project_key, "has_github_repo": has_github_repo, "status": str(status), "remote": r})
+
+                if has_github_repo:
+                    res_push = project_git.push()
+                    res_pull = project_git.pull()
+
+                    if (not res_push.get('success',False)) or (not res_pull.get('success',False)):
+        #             if not res_push.get('success',False):
+                        print(f"[ERROR] pushing or pulling {iter_project_key}")
+                        errored.add(iter_project_key)
+                        continue
+                    successful.add(iter_project_key)
+                else:
+                    # print(f"{iter_project_key} is not connected to GitHub")
+                    not_connected.add(iter_project_key)
             except Exception as e:
-                print(f"Failed to update {plugin_id}: {str(e)}")
+                print(f"[EXCEPTION] {iter_project_key}: {e}")
+                errored.add(iter_project_key)
+                continue
+
 
 
 
