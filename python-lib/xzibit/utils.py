@@ -56,8 +56,10 @@ def safe_extract_dataset_metadata(dataset_handle):
         dataset_metadata['versionTag.lastModifiedOn']  = int_to_datetime(dataset_metadata.get('versionTag.lastModifiedOn',  None))
     except DataikuException as e:
         dataset_metadata['exists'] = "EXCEPTION DataikuException"
+        return dataset_metadata
     except Exception as e:
         dataset_metadata['exists'] = "EXCEPTION"
+        return dataset_metadata
     finally:
         return dataset_metadata
 
