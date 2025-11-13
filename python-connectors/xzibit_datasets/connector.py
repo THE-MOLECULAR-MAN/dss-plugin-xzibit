@@ -51,7 +51,7 @@ class ConnectorDatasets(Connector):
                 try:
 #                    num_rows += 1
                     dataset_handle = project_handle.get_dataset(r.id)
-                    next_row = safe_extract_dataset_metadata(dataset_handle)
+                    next_row = safe_extract_dataset_metadata(dataset_handle, pk)
                     yield next_row
 
                 except Exception as e:
