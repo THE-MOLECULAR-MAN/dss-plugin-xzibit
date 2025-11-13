@@ -31,6 +31,7 @@ class MyRunnable(Runnable):
         self.__plugin_config = plugin_config
         self.__client        = dataiku.api_client()
         self.__force_rebuild_env = False
+        self.__num_threads   = 1
         
     def get_progress_target(self):
         """
