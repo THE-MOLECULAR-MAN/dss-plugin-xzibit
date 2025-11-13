@@ -43,11 +43,13 @@ def safe_extract_dataset_metadata(dataset_handle):
         # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
 
         try:
-            dataset_metadata = extract_nested_keys(raw_data, keys) # NOT causing exception
+            dataset_metadata_new = extract_nested_keys(raw_data, keys) # NOT causing exception
             pp(dataset_metadata) # NOT causing exception
             #dataset_metadata = dataset_metadata | x # Python 3.9+  # maybe causing exception
             #dataset_metadata = {**dataset_metadata, **x} # more compatible
             #pp(dataset_metadata)
+            dataset_metadata.update(dataset_metadata_new)
+
         except Exception as e:
             print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
             return dataset_metadata
