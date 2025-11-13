@@ -58,6 +58,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         print(f"safe_extract_dataset_metadata successful end")
 
     except DataikuException as e:
+        print(f"safe_extract_dataset_metadata - Generic exception {e}")
         dataset_metadata['exists'] = "EXCEPTION DataikuException"
         return dataset_metadata
     except Exception as e:
