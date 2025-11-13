@@ -36,7 +36,7 @@ class ConnectorDatasets(Connector):
             self.__objects_list[pk] = project_handle.list_datasets(as_type='objects', include_shared=True)
             self.__count += len(self.__objects_list[pk])
         
-        print(f"Constructor num rows: {self.get_records_count()}")
+        print(f"Constructor num rows: {self.__count}")
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
