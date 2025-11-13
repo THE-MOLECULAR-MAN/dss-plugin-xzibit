@@ -30,8 +30,7 @@ class MyRunnable(Runnable):
         self.__config        = config
         self.__plugin_config = plugin_config
         
-        self.__client        = dataiku.api_client()
-        
+        self.__client            = dataiku.api_client()
         self.__force_rebuild_env = False
         self.__num_threads       = 1
         self.__failed_builds     = set()
