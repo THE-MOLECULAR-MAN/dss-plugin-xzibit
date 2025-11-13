@@ -31,7 +31,7 @@ def safe_extract_dataset_metadata(dataset_handle):
         dataset_metadata['exists'] = dataset_handle.exists()
         
         if not dataset_metadata['exists']:
-            #print('dataset does NOT exist.')
+            print('safe_extract_dataset_metadata - dataset does NOT exist.')
             return dataset_metadata
             
         try:
