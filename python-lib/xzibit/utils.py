@@ -324,3 +324,20 @@ def remove_prefix_from_keys(d, prefix, recursive=True):
         else:
             new_dict[new_key] = v
     return new_dict
+
+
+def clear_pip_tmp():
+    """
+    This function deletes all the temporary files created by 
+    Pip during the installation process. They are not always cleared 
+    and when dealing with dozens of Code Environments, 
+    it can fill up the hard disk very quickly.
+    It assumpes they're located in /tmp/pip-*
+    """
+    
+    for d in glob.glob('/tmp/pip-*'):
+        # print(f'Deleting {d}...')
+        if os.path.isdir(d):
+            shutil.rmtree(d, ignore_errors=True)
+        else:
+            os.remove(d)
