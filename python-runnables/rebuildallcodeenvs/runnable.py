@@ -35,7 +35,7 @@ class MyRunnable(Runnable):
         return None
 
 
-    def _upgrade_plugins(self):
+    def _rebuild_all_code_envs(self):
         """x"""
         
         for plugin_info in self.__client.list_plugins():
@@ -62,5 +62,5 @@ class MyRunnable(Runnable):
         The progress_callback is a function expecting 1 value: current progress
         """
         # raise Exception("unimplemented")
-        self._upgrade_plugins()
+        self._rebuild_all_code_envs()
         return None
