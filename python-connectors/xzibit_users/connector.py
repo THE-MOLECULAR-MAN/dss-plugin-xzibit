@@ -79,7 +79,7 @@ class ConnectorUsers(Connector):
                 },
                 {
                     "name":    "enabled", 
-                    "type":    "Boolean",
+                    "type":    "boolean",
                     "meaning": "Boolean"
                 },
                 {
