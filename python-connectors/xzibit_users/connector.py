@@ -79,8 +79,8 @@ class ConnectorUsers(Connector):
                 },
                 {
                     "name":    "enabled", 
-                    "type":    "string",
-                    "meaning": "Text"
+                    "type":    "Boolean",
+                    "meaning": "Boolean"
                 },
                 {
                     "name":    "resultingUserProfile", 
