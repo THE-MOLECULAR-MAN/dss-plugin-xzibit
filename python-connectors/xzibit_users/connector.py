@@ -92,7 +92,7 @@ class ConnectorUsers(Connector):
                 {
                     "name":    "creationDate", 
                     "type":    "date",
-                    "meaning": "Datetime no tz"
+                    "meaning": "Datetime no zone"
                 },
                 {
                     "name":    "last_successful_login", 
