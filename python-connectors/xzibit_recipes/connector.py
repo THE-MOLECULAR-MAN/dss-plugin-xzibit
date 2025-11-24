@@ -56,13 +56,41 @@ class ConnectorRecipes(Connector):
     def get_read_schema(self):
         return {
             "columns": [
-                {"name": "projectKey", "type": "string"},
-                {"name": "id", "type": "string"},
-                {"name": "type", "type": "string"},
-                {"name": "name", "type": "string"},
-                {"name": "tags", "type": "array"},
-                {"name": "input_datasets", "type": "array"},
-                {"name": "output_datasets", "type": "array"}
+                {
+                    "name": "projectKey", 
+                    "type": "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name": "type", 
+                    "type": "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name": "name", 
+                    "type": "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name": "tags", 
+                    "type": "array",
+                    "meaning": "array"
+                },
+                {
+                    "name": "tags", 
+                    "type": "array",
+                    "meaning": "array"
+                },
+                {
+                    "name": "input_datasets", 
+                    "type": "array",
+                    "meaning": "array"
+                },
+                {
+                    "name": "output_datasets", 
+                    "type": "array",
+                    "meaning": "array"
+                }
             ]
         }
         # return None
