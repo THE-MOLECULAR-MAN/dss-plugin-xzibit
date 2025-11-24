@@ -45,6 +45,7 @@ class ConnectorUsers(Connector):
             yield next_row
 
     def get_read_schema(self):
+        # https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         return {
             "columns": [
                 {
