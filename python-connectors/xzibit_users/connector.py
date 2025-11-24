@@ -94,18 +94,18 @@ class ConnectorUsers(Connector):
                 },
                 {
                     "name":    "creationDate", 
-                    "type":    "datetime no tz",
+                    "type":    "datetime",
                     "meaning": "Datetime no tz"
                 },
                 {
                     "name":    "last_successful_login", 
-                    "type":    "datetime no tz",
-                    "meaning": "array"
+                    "type":    "datetime",
+                    "meaning": "Datetime no tz"
                 },
                 {
                     "name": "last_session_activity", 
-                    "type": "datetime no tz",
-                    "meaning": "array"
+                    "type": "datetime",
+                    "meaning": "Datetime no tz"
                 }
             ]
         }
