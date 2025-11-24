@@ -43,20 +43,47 @@ class ConnectorUsers(Connector):
             # pp(item_info)
             # return a single row
             yield next_row
-            
-    def get_read_schema(self):
-#         return {
-#             "columns": [
-#                 {"name": "last_successful_login", "type": "string"},
-#                 {"name": "id", "type": "string"},
-#                 {"name": "type", "type": "string"},
-#                 {"name": "name", "type": "string"},
-#                 {"name": "tags", "type": "array"},
-#                 {"name": "input_datasets", "type": "array"},
-#                 {"name": "output_datasets", "type": "array"}
-#             ]
-#         }
 
+    def get_read_schema(self):
+        return {
+            "columns": [
+                {
+                    "name":   "projectKey", 
+                    "type":   "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name": "id", 
+                    "type": "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name": "type", 
+                    "type": "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name": "name", 
+                    "type": "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name": "tags", 
+                    "type": "array",
+                    "meaning": "array"
+                },
+                {
+                    "name": "input_datasets", 
+                    "type": "array",
+                    "meaning": "array"
+                },
+                {
+                    "name": "output_datasets", 
+                    "type": "array",
+                    "meaning": "array"
+                }
+            ]
+        }
             
 ####################################################################
 # Same for all instances:
