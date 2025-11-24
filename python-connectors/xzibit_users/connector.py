@@ -89,11 +89,6 @@ class ConnectorUsers(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "userProfile", 
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
                     "name":    "creationDate", 
                     "type":    "date",
                     "meaning": "Datetime no tz"
