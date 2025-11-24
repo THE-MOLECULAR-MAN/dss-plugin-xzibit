@@ -64,8 +64,8 @@ class ConnectorUsers(Connector):
                 },
                 {
                     "name": "groups", 
-                    "type": "string",
-                    "meaning": "Text"
+                    "type": "array",
+                    "meaning": "array"
                 },
                 {
                     "name":   "sourceType", 
@@ -75,7 +75,7 @@ class ConnectorUsers(Connector):
                 {
                     "name":   "email", 
                     "type":   "string",
-                    "meaning": "Text"
+                    "meaning": "Email"
                 },
                 {
                     "name":    "enabled", 
