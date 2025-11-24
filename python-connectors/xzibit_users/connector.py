@@ -67,7 +67,7 @@ class ConnectorUsers(Connector):
                 {
                     "name":    "groups", 
                     "type":    "array",
-                    "meaning": "Array"
+                    "meaning": "JSONArrayMeaning"
                 },
                 {
                     "name":    "sourceType", 
