@@ -103,8 +103,8 @@ class ConnectorUsers(Connector):
                     "meaning": "Datetime no tz"
                 },
                 {
-                    "name": "last_session_activity", 
-                    "type": "datetime.datetime",
+                    "name":    "last_session_activity", 
+                    "type":    "datetime.datetime",
                     "meaning": "Datetime no tz"
                 }
             ]
