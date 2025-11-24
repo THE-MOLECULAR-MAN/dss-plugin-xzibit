@@ -48,37 +48,45 @@ class ConnectorUsers(Connector):
         return {
             "columns": [
                 {
-                    "name":   "projectKey", 
+                    "name":   "login", 
                     "type":   "string",
                     "meaning": "Text"
                 },
                 {
-                    "name": "id", 
+                    "name": "displayName", 
                     "type": "string",
                     "meaning": "Text"
                 },
                 {
-                    "name": "type", 
+                    "name": "userProfile", 
                     "type": "string",
                     "meaning": "Text"
                 },
                 {
-                    "name": "name", 
+                    "name": "groups", 
                     "type": "string",
                     "meaning": "Text"
                 },
                 {
-                    "name": "tags", 
+                    "name":   "login", 
+                    "type":   "string",
+                    "meaning": "Text"
+                },
+
+                
+                
+                {
+                    "name": "creationDate", 
                     "type": "array",
                     "meaning": "array"
                 },
                 {
-                    "name": "input_datasets", 
+                    "name": "last_successful_login", 
                     "type": "array",
                     "meaning": "array"
                 },
                 {
-                    "name": "output_datasets", 
+                    "name": "last_session_activity", 
                     "type": "array",
                     "meaning": "array"
                 }
