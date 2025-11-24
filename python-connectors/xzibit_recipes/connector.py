@@ -62,6 +62,11 @@ class ConnectorRecipes(Connector):
                     "meaning": "Text"
                 },
                 {
+                    "name": "id", 
+                    "type": "string",
+                    "meaning": "Text"
+                },
+                {
                     "name": "type", 
                     "type": "string",
                     "meaning": "Text"
@@ -76,11 +81,7 @@ class ConnectorRecipes(Connector):
                     "type": "array",
                     "meaning": "array"
                 },
-                {
-                    "name": "tags", 
-                    "type": "array",
-                    "meaning": "array"
-                },
+                
                 {
                     "name": "input_datasets", 
                     "type": "array",
