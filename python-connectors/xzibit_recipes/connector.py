@@ -81,7 +81,6 @@ class ConnectorRecipes(Connector):
                     "type": "array",
                     "meaning": "array"
                 },
-                
                 {
                     "name": "input_datasets", 
                     "type": "array",
