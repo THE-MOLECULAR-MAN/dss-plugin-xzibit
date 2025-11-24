@@ -95,17 +95,17 @@ class ConnectorUsers(Connector):
                 },
                 {
                     "name":    "creationDate", 
-                    "type":    "datetime.datetime",
+                    "type":    "date",
                     "meaning": "Datetime no tz"
                 },
                 {
                     "name":    "last_successful_login", 
-                    "type":    "datetime.datetime",
+                    "type":    "date",
                     "meaning": "Datetime no tz"
                 },
                 {
                     "name":    "last_session_activity", 
-                    "type":    "datetime.datetime",
+                    "type":    "date",
                     "meaning": "Datetime no tz"
                 }
             ]
