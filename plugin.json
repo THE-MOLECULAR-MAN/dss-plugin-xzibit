@@ -16,7 +16,8 @@
         "author": "Tim H",
 
         // icon: must be one of the FontAwesome 5.15.4 icons, complete list here at https://fontawesome.com/v5/search?ic=free&o=r
-        "icon": "fas fa-cogs",
+        "icon": "dku-icon-chart-horizontal-stack-bar-24 marker-internal-stats",
+        // dku-icon-chart-horizontal-stack-bar-24 marker-internal-stats
 
         // recipesCategory: optional, can be one of 'visual', 'code', 'genai' or 'other'
         // defines the category of the plugin in the right panel
