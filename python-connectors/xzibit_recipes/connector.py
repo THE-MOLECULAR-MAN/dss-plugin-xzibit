@@ -82,6 +82,7 @@ class ConnectorRecipes(Connector):
                 {"name": "id", "type": "string"},
                 {"name": "type", "type": "string"},
                 {"name": "name", "type": "string"},
+                {"name": "tags", "type": "array"},
                 {"name": "input_datasets", "type": "array"},
                 {"name": "output_datasets", "type": "array"}
             ]
