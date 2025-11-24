@@ -82,10 +82,16 @@ class ConnectorUsers(Connector):
                     "type":    "string",
                     "meaning": "Text"
                 },
-
-                resultingUserProfile
-                userProfile
-                
+                {
+                    "name":    "resultingUserProfile", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "userProfile", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
                 {
                     "name": "creationDate", 
                     "type": "array",
