@@ -86,12 +86,4 @@ class ConnectorRecipes(Connector):
                 {"name": "output_datasets", "type": "array"}
             ]
         }
-'': ,
-'':   
-'type': 
-'name': 
-'tags': 
-'input_datasets': 
-'': 
-
-        return None
+        # return None
