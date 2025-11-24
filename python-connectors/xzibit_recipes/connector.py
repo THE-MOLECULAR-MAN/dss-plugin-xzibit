@@ -55,6 +55,21 @@ class ConnectorRecipes(Connector):
                 # return a single row
                 yield next_row
 
+                
+    def get_read_schema(self):
+        return {
+            "columns": [
+                {"name": "projectKey", "type": "string"},
+                {"name": "id", "type": "string"},
+                {"name": "type", "type": "string"},
+                {"name": "name", "type": "string"},
+                {"name": "tags", "type": "array"},
+                {"name": "input_datasets", "type": "array"},
+                {"name": "output_datasets", "type": "array"}
+            ]
+        }
+        # return None
+
             
 ####################################################################
 # Same for all instances:
@@ -74,17 +89,3 @@ class ConnectorRecipes(Connector):
 
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
-
-    def get_read_schema(self):
-        return {
-            "columns": [
-                {"name": "projectKey", "type": "string"},
-                {"name": "id", "type": "string"},
-                {"name": "type", "type": "string"},
-                {"name": "name", "type": "string"},
-                {"name": "tags", "type": "array"},
-                {"name": "input_datasets", "type": "array"},
-                {"name": "output_datasets", "type": "array"}
-            ]
-        }
-        # return None
