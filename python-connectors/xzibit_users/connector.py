@@ -68,12 +68,23 @@ class ConnectorUsers(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":   "login", 
+                    "name":   "sourceType", 
                     "type":   "string",
                     "meaning": "Text"
                 },
+                {
+                    "name":   "email", 
+                    "type":   "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "enabled", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
 
-                
+                resultingUserProfile
+                userProfile
                 
                 {
                     "name": "creationDate", 
