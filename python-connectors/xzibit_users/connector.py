@@ -46,7 +46,7 @@ class ConnectorUsers(Connector):
 
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: https://doc.dataiku.com/dss/latest/schemas/meanings-list.html
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date
         return {
             "columns": [
                 {
