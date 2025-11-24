@@ -48,33 +48,33 @@ class ConnectorUsers(Connector):
         return {
             "columns": [
                 {
-                    "name":   "login", 
-                    "type":   "string",
+                    "name":    "login", 
+                    "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name": "displayName", 
-                    "type": "string",
+                    "name":    "displayName", 
+                    "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name": "userProfile", 
-                    "type": "string",
+                    "name":    "userProfile", 
+                    "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name": "groups", 
-                    "type": "array",
+                    "name":    "groups", 
+                    "type":    "array",
                     "meaning": "array"
                 },
                 {
-                    "name":   "sourceType", 
-                    "type":   "string",
+                    "name":    "sourceType", 
+                    "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name":   "email", 
-                    "type":   "string",
+                    "name":    "email", 
+                    "type":    "string",
                     "meaning": "Email"
                 },
                 {
