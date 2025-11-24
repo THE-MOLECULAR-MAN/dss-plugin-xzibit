@@ -20,10 +20,14 @@ class ConnectorRecipes(Connector):
         
         self.client = api_client()
         self.objects_list = {}
+        self.count = 0
         
         for pk in self.client.list_project_keys():
             project_handle = self.client.get_project(pk)
             self.objects_list[pk] = project_handle.list_recipes(as_type='objects')
+            self.count += len(self.objects_list[pk])
+            
+
         
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
