@@ -43,6 +43,19 @@ class ConnectorUsers(Connector):
             # pp(item_info)
             # return a single row
             yield next_row
+            
+    def get_read_schema(self):
+#         return {
+#             "columns": [
+#                 {"name": "last_successful_login", "type": "string"},
+#                 {"name": "id", "type": "string"},
+#                 {"name": "type", "type": "string"},
+#                 {"name": "name", "type": "string"},
+#                 {"name": "tags", "type": "array"},
+#                 {"name": "input_datasets", "type": "array"},
+#                 {"name": "output_datasets", "type": "array"}
+#             ]
+#         }
 
             
 ####################################################################
@@ -63,5 +76,5 @@ class ConnectorUsers(Connector):
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
 
-    def get_read_schema(self):
-        return None
+    #def get_read_schema(self):
+    #    return None
