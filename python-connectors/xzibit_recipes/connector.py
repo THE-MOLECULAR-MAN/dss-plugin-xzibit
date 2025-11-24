@@ -57,8 +57,8 @@ class ConnectorRecipes(Connector):
         return {
             "columns": [
                 {
-                    "name": "projectKey", 
-                    "type": "string",
+                    "name":   "projectKey", 
+                    "type":   "string",
                     "meaning": "Text"
                 },
                 {
