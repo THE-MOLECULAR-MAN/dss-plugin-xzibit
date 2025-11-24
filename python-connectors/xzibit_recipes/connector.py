@@ -76,4 +76,22 @@ class ConnectorRecipes(Connector):
         raise NotImplementedError
 
     def get_read_schema(self):
+        return {
+            "columns": [
+                {"name": "projectKey", "type": "string"},
+                {"name": "id", "type": "string"},
+                {"name": "type", "type": "string"},
+                {"name": "name", "type": "string"},
+                {"name": "input_datasets", "type": "array"},
+                {"name": "output_datasets", "type": "array"}
+            ]
+        }
+'': ,
+'':   
+'type': 
+'name': 
+'tags': 
+'input_datasets': 
+'': 
+
         return None
