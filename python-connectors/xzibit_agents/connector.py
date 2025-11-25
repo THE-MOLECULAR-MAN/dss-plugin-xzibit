@@ -25,21 +25,32 @@ class ConnectorProjects(Connector):
             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         self.__objects_list = self.client.list_projects()
 
-            
+
+        
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
-        # iterate through each object
-        for item_info in self.__objects_list:
-            
-            next_row = flatten_dict(item_info, include_keys=self.keys)
-            
-            # custom things for this specific class:
-            
-            next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
-            
-            # return a single row
-            yield next_row
+        # key_mapping = set()
+        # num_rows = 0
+        
+         # iterate through each object
+        for pk, proj_datasets in self.__objects_list.items():
+            project_handle = self.__client.get_project(pk)
+
+            for r in proj_datasets:
+                try:
+#                    num_rows += 1
+                    dataset_handle = project_handle.get_dataset(r.id)
+                    next_row = safe_extract_dataset_metadata(dataset_handle, pk)
+                    yield next_row
+
+                except Exception as e:
+                    print(f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} ")
+                    # r is of type "dataikuapi.dss.dataset.DSSDataset"
+                    # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
+                    yield {'projectKey': pk,
+                               'name':       r.id
+                              }
 
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
