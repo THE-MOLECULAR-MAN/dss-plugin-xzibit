@@ -43,7 +43,7 @@ class ConnectorProjects(Connector):
 
                 for webapp in webapps:
 
-                    # pp(webapp)
+                    pp(webapp)
 
                     # Collect relevant metadata
                     next_row = {
