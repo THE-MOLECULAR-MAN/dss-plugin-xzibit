@@ -98,7 +98,7 @@ class ConnectorConnections(Connector):
                     "name":    "usableBy", 
                     "type":    "string",
                     "meaning": "Text"
-                },
+                }
             ]
         }
            
