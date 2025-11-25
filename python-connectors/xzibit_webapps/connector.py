@@ -55,7 +55,7 @@ class ConnectorProjects(Connector):
                         self.__count += 1
                         yield next_row
                     except Exception as e:
-                        print(f"Skipping webapp {webapp} due to error: {e}")                        
+                        print(f"Skipping webapp due to error: {e}")                        
 
             except Exception as e:
                 print(f"Skipping project {project_key} due to error: {e}")
