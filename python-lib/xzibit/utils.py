@@ -50,7 +50,8 @@ def get_dss_url_from_global_vars():
 
 
 def get_dss_base_url():
-    
+    url1 = get_dss_external_url()
+    if url:
     
 def safe_extract_dataset_metadata(dataset_handle, pk):
     """x"""
