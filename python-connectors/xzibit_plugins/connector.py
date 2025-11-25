@@ -77,21 +77,6 @@ class ConnectorPlugins(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "name", 
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "shortDesc", 
-                    "type":    "string",
-                    "meaning": "FreeText"
-                },
-                {
-                    "name":    "description", 
-                    "type":    "string",
-                    "meaning": "FreeText"
-                },
-                {
                     "name":    "tags", 
                     "type":    "array",
                     "meaning": "JSONArrayMeaning"
