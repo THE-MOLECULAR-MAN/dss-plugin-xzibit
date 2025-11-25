@@ -113,7 +113,7 @@ class ConnectorProjects(Connector):
                 print(f"[generate_rows] Exception {project_key}: {e_proj}")
                 pass
 
-        print("[generate_rows] END")
+        # print("[generate_rows] END")
                 
                 
     def get_read_schema(self):
