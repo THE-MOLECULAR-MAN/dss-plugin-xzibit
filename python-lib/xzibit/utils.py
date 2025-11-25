@@ -7,8 +7,8 @@ import dataikuapi
 from dataikuapi.utils import DataikuException
 
 # pretty print dictionaries for debugging - don't remove at this time.
-#from pprint import pprint as pp
-#from json   import dumps  as jd
+from pprint import pprint as pp
+from json   import dumps  as jd
 
 
 def get_dss_external_url():
