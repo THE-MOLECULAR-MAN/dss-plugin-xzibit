@@ -120,6 +120,3 @@ class ConnectorProjects(Connector):
 
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
-
-    def get_read_schema(self):
-        return None
