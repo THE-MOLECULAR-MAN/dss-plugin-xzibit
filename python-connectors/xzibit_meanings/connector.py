@@ -34,6 +34,44 @@ class ConnectorMeanings(Connector):
             # return a single row
             yield next_row
 
+    def get_read_schema(self):
+        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
+        return {
+            "columns": [
+                {
+                    "name":    "label", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "description", 
+                    "type":    "string",
+                    "meaning": "FreeText"
+                },
+                {
+                    "name":    "detectable", 
+                    "type":    "boolean",
+                    "meaning": "Boolean"
+                },
+                {
+                    "name":    "type", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "id", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "normalizationMode", 
+                    "type":    "string",
+                    "meaning": "Text"
+                }
+            ]
+        }
+            
             
 ####################################################################
 # Same for all instances:
@@ -52,6 +90,3 @@ class ConnectorMeanings(Connector):
 
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
-
-    def get_read_schema(self):
-        return None

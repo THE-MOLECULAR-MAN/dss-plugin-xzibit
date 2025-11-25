@@ -52,6 +52,60 @@ class ConnectorPlugins(Connector):
             finally:
                 yield next_row
 
+    def get_read_schema(self):
+        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
+        return {
+            "columns": [
+                {
+                    "name":    "id", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "label", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "version", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "author", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "tags", 
+                    "type":    "array",
+                    "meaning": "JSONArrayMeaning"
+                },
+                {
+                    "name":    "description", 
+                    "type":    "date",
+                    "meaning": "FreeText"
+                },
+                {
+                    "name":    "project_usages", 
+                    "type":    "array",
+                    "meaning": "JSONArrayMeaning"
+                },
+                {
+                    "name":    "isDev", 
+                    "type":    "boolean",
+                    "meaning": "Boolean"
+                },
+                {
+                    "name":    "total_usages", 
+                    "type":    "integer",
+                    "meaning": "LongMeaning"
+                }
+            ]
+        }
+            
+
 ####################################################################
 # Same for all instances:
 ####################################################################
@@ -69,6 +123,3 @@ class ConnectorPlugins(Connector):
 
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
-
-    def get_read_schema(self):
-        return None

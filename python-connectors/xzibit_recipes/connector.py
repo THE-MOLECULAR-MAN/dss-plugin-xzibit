@@ -20,11 +20,12 @@ class ConnectorRecipes(Connector):
         
         self.client = api_client()
         self.objects_list = {}
+        self.__count = 0
         
         for pk in self.client.list_project_keys():
             project_handle = self.client.get_project(pk)
             self.objects_list[pk] = project_handle.list_recipes(as_type='objects')
-        
+            self.__count += len(self.objects_list[pk])
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
@@ -51,12 +52,56 @@ class ConnectorRecipes(Connector):
                 # return a single row
                 yield next_row
 
+                
+    def get_read_schema(self):
+        return {
+            "columns": [
+                {
+                    "name":   "projectKey", 
+                    "type":   "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name": "id", 
+                    "type": "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name": "type", 
+                    "type": "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name": "name", 
+                    "type": "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name": "tags", 
+                    "type": "array",
+                    "meaning": "array"
+                },
+                {
+                    "name": "input_datasets", 
+                    "type": "array",
+                    "meaning": "array"
+                },
+                {
+                    "name": "output_datasets", 
+                    "type": "array",
+                    "meaning": "array"
+                }
+            ]
+        }
+        # return None
+
             
 ####################################################################
 # Same for all instances:
 ####################################################################
     def get_records_count(self, partitioning=None, partition_id=None):
-        return len(self.objects_list)
+        # return len(self.objects_list)
+        return self.__count
 
 ####################################################################
 # Intentionally not implemented, not needed for this type
@@ -69,6 +114,3 @@ class ConnectorRecipes(Connector):
 
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
-
-    def get_read_schema(self):
-        return None

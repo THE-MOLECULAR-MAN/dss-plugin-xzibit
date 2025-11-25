@@ -21,7 +21,7 @@ class ConnectorProjects(Connector):
         self.client = api_client()
         self.unique_id_key_name = 'projectKey'
         self.keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
-            'projectLocation', 'projectStatus', 'shortDesc', 
+            'shortDesc', 'description',
             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         self.objects_list = self.client.list_projects()
 
@@ -31,6 +31,7 @@ class ConnectorProjects(Connector):
         
         # iterate through each object
         for item_info in self.objects_list:
+            pp(item_info)
             next_row = flatten_dict(item_info, include_keys=self.keys)
             
             # custom things for this specific class:
@@ -40,6 +41,63 @@ class ConnectorProjects(Connector):
             # return a single row
             yield next_row
 
+    def get_read_schema(self):
+        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText
+        return {
+            "columns": [
+                {
+                    "name":    "projectKey", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "ownerLogin", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "projectStatus", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "contributors", 
+                    "type":    "array",
+                    "meaning": "JSONArrayMeaning"
+                },
+                {
+                    "name":    "name", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "shortDesc", 
+                    "type":    "string",
+                    "meaning": "FreeText"
+                },
+                {
+                    "name":    "description", 
+                    "type":    "string",
+                    "meaning": "FreeText"
+                },
+                {
+                    "name":    "tags", 
+                    "type":    "array",
+                    "meaning": "JSONArrayMeaning"
+                },
+                {
+                    "name":    "lastModifiedOn", 
+                    "type":    "date",
+                    "meaning": "DatetimeNoTz"
+                },
+                {
+                    "name":    "tutorialProject", 
+                    "type":    "boolean",
+                    "meaning": "Boolean"
+                }
+            ]
+        }
             
 ####################################################################
 # Same for all instances:
@@ -58,6 +116,3 @@ class ConnectorProjects(Connector):
 
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
-
-    def get_read_schema(self):
-        return None

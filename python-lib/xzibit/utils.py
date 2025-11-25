@@ -2,15 +2,57 @@ import os
 import re
 from datetime import datetime
 
+import dataiku
 import dataikuapi
 from dataikuapi.utils import DataikuException
-
-
 
 # pretty print dictionaries for debugging - don't remove at this time.
 from pprint import pprint as pp
 from json   import dumps  as jd
 
+
+def get_dss_external_url():
+    # 1. Initialize the client (connects to local instance)
+    client = dataiku.api_client()
+    
+    # 2. Retrieve General Settings (Requires Admin permissions)
+    # This corresponds to the "Administration > Settings > General" page
+    settings = client.get_general_settings()
+    
+    # 3. Extract the 'studioExternalUrl' from the raw settings dictionary
+    # This key holds the value of the "DSS URL" field
+    dss_url = settings.get_raw().get('studioExternalUrl')
+    
+    if dss_url:
+        return dss_url
+    else:
+        return None
+
+def get_dss_url_from_env():
+    # Attempt to retrieve host and port from environment variables
+    ext_host = os.environ.get('DKU_BACKEND_EXT_HOST')
+    base_port = os.environ.get('DKU_BASE_PORT')
+    
+    if ext_host and base_port:
+        # Note: You may need to infer the scheme (http vs https) 
+        # based on your knowledge of the instance setup.
+        return f"http://{ext_host}:{base_port}/"  
+    return None
+
+def get_dss_url_from_global_vars():
+    client = dataiku.api_client()
+    
+    # Retrieve global variables (accessible to all users)
+    global_vars = client.get_variables()
+    
+    # Check for common naming conventions like 'dss_url', 'public_url', or 'instance_url'
+    return global_vars.get('dss_url') or global_vars.get('public_url')
+
+
+def get_dss_base_url():
+    return get_dss_url_from_env() or get_dss_external_url() or get_dss_url_from_global_vars()
+
+    
 def safe_extract_dataset_metadata(dataset_handle, pk):
     """x"""
     assert isinstance(dataset_handle, dataikuapi.dss.dataset.DSSDataset), f"safe_extract_dataset_metadata - Assertion failed: Expecting DSSDataset, got {type(dataset_handle)}"

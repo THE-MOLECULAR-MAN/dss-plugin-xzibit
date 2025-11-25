@@ -1,0 +1,233 @@
+####################################################################
+# Same imports for all dataset Classes
+####################################################################
+from dataiku import api_client
+from dataiku.connector import Connector
+from xzibit.utils import *
+
+####################################################################
+# Unique imports for this Class
+####################################################################
+from datetime import datetime
+
+def get_agent_url(project_key, agent_id, agent_version): 
+    # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/savedmodels/0XpBITsO/agent/S-Data_Dictionary_and_DSS_Instance_datasets_test_project-0XpBITsO-v1
+    # https://honker-design-2.amer.dataiku-sandbox.io       /projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/savedmodels/0XpBITsO/agent/S-Data_Dictionary_and_DSS_Instance_datasets_test_project-0XpBITsO-v1
+    base_url = get_dss_base_url()
+    return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent/S-{project_key}-{agent_id}-{agent_version}"  
+
+def parse_llm_id(llm_string: str):
+    """
+    Splits a string by ':' into exactly 3 variables.
+    Returns None for missing fields.
+    """
+    if not llm_string:
+        return None, None, None
+
+    # Split the string
+    parts = llm_string.split(':')
+    
+    # Pad the list with None to ensure it has at least 3 elements, 
+    # then slice to take exactly the first 3.
+    # This handles cases with 1, 2, or 3+ segments gracefully.
+    padded = (parts + [None] * 3)[:3]
+    
+    return padded[0], padded[1], padded[2]
+
+
+class ConnectorProjects(Connector):
+
+    ####################################################################
+    # Code that has to be customized for this specific class
+    ####################################################################
+    def __init__(self, config, plugin_config):
+       #  print("[DEBUG agents] Constructor START")
+        Connector.__init__(self, config, plugin_config)
+        
+        self.__client = api_client()
+        #self.__unique_id_key_name = 'projectKey'
+        #self.__keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
+#             'shortDesc', 'description',
+#             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
+        self.__objects_list = self.__client.list_project_keys()
+        # print("[DEBUG agents] Constructor END")
+
+        
+    def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
+                            partition_id=None, records_limit = -1):       
+        # print("[generate_rows] START")
+        
+         # iterate through each object
+        for project_key in self.__objects_list:
+            # print(f"[generate_rows] Outer loop start on project key: {project_key}")
+            try:
+                project = self.__client.get_project(project_key)
+
+                # List all agents in the current project
+                # Note: This returns a list of DSSAgentListItem objects
+                agents = project.list_agents()
+
+                for agent_item in agents:
+                    try:
+                        # print(f"[generate_rows] Inner loop start on agent_item {agent_item}")                        
+                        # Get the full agent object and its settings
+                        # We need the full object to access .get_settings()
+                        agent = project.get_agent(agent_item.id)
+                        settings = agent.get_settings()
+                        raw_settings = settings.get_raw()
+
+                        # We typically want the LLM used by the *Active* version of the agent
+                        active_version_id = settings.active_version
+
+                        llm_model_id = "N/A"
+                        is_active_version = active_version_id == agent_item.get('activeVersion', 'Unknown')
+                        creation_user = 'Unknown'
+
+                        if active_version_id:
+                            # Retrieve settings for the active version
+                            version_settings = settings.get_version_settings(active_version_id)
+                            #print("[generate_rows] Version Settings")
+                            #pp(version_settings.get_raw())
+
+                            # 1. Try standard Visual Agent property
+                            try:
+                                llm_model_id = version_settings.llm_id
+                            except AttributeError:
+                                # 2. Fallback: Check raw settings (common for Code Agents)
+                                ver_raw = version_settings.get_raw()
+
+                                llm_model_id = ver_raw.get("llmId", None)
+
+                                # Sometimes stored under 'generation' block for complex setups
+                                if not llm_model_id and "generation" in ver_raw:
+                                    llm_model_id = ver_raw["generation"].get("llmId")
+                            
+                            print("[generate_rows] version_settings:")
+                            pp(version_settings.get_raw())
+
+                            creation_user = version_settings.get_raw().get("creationTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
+                            last_modified_on = datetime.fromtimestamp(version_settings.get_raw().get("versionTag", {}).get("lastModifiedOn", None) // 1000) 
+                            last_modified_user = version_settings.get_raw().get("versionTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
+
+
+                        # Append to our dataset list
+                        # FIX: Use raw_settings (from the full object) instead of agent_item.get_raw()
+                        #print("[generate_rows] raw_settings:")
+                        #pp(raw_settings)
+                        
+                        # creationTag.lastModifiedBy.login
+                        # creationTag.lastModifiedBy.lastModifiedOn
+                        agent_version = agent_item.get('activeVersion', 'Unknown')
+                        
+                        # llm_vendor, llm_connection_name, llm_model = split(llm_model_id, ":")
+                        llm_vendor, llm_connection_name, llm_model = parse_llm_id(llm_model_id)
+                        next_row = {
+                            "projectKey": project_key,
+                            "Agent Name": agent_item.name,
+                            "Agent ID": agent_item.id,
+                            "Created by user": creation_user, 
+                            "Last modified by user": last_modified_user,
+                            "Active Version": active_version_id,
+                            # "LLM Model ID": llm_model_id,
+                            "LLM Vendor": llm_vendor,
+                            "LLM Connection Name": llm_connection_name,
+                            "LLM Model Name": llm_model,
+                            "Agent Type": agent_item.get('type', 'Unknown'),
+                            "Agent Version": agent_version,
+                            "tags": agent_item.get('tags', 'Unknown'),
+                            "Last Modified timestamp": last_modified_on,
+                            # "Agent is active version": is_active_version,
+                            "Agent URL": get_agent_url(project_key, agent_item.id, agent_version)
+                        }
+                        yield next_row
+
+                    except Exception as e_agent:
+                        # Print minimal error to avoid cluttering logs
+                        print(f"[generate_rows] [Skipping Agent] {agent_item.name} in {project_key}: {e_agent}")
+
+            except Exception as e_proj:
+                # Pass on projects where we lack permissions or feature is disabled
+                print(f"[generate_rows] Exception {project_key}: {e_proj}")
+                pass
+
+        # print("[generate_rows] END")
+                
+                
+    def get_read_schema(self):
+        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText
+        return None
+#         return {
+#             "columns": [
+#                 {
+#                     "name":    "projectKey", 
+#                     "type":    "string",
+#                     "meaning": "Text"
+#                 },
+#                 {
+#                     "name":    "ownerLogin", 
+#                     "type":    "string",
+#                     "meaning": "Text"
+#                 },
+#                 {
+#                     "name":    "projectStatus", 
+#                     "type":    "string",
+#                     "meaning": "Text"
+#                 },
+#                 {
+#                     "name":    "contributors", 
+#                     "type":    "array",
+#                     "meaning": "JSONArrayMeaning"
+#                 },
+#                 {
+#                     "name":    "name", 
+#                     "type":    "string",
+#                     "meaning": "Text"
+#                 },
+#                 {
+#                     "name":    "shortDesc", 
+#                     "type":    "string",
+#                     "meaning": "FreeText"
+#                 },
+#                 {
+#                     "name":    "description", 
+#                     "type":    "string",
+#                     "meaning": "FreeText"
+#                 },
+#                 {
+#                     "name":    "tags", 
+#                     "type":    "array",
+#                     "meaning": "JSONArrayMeaning"
+#                 },
+#                 {
+#                     "name":    "lastModifiedOn", 
+#                     "type":    "date",
+#                     "meaning": "DatetimeNoTz"
+#                 },
+#                 {
+#                     "name":    "tutorialProject", 
+#                     "type":    "boolean",
+#                     "meaning": "Boolean"
+#                 }
+#             ]
+#         }
+
+            
+####################################################################
+# Same for all instances:
+####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        # return len(self.objects_list)
+        return None
+
+####################################################################
+# Intentionally not implemented, not needed for this type
+####################################################################
+    def get_partitioning(self):
+        raise NotImplementedError
+
+    def list_partitions(self, partitioning):
+        return []
+
+    def partition_exists(self, partitioning, partition_id):
+        raise NotImplementedError
