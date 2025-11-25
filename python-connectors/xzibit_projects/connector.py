@@ -91,14 +91,14 @@ class ConnectorProjects(Connector):
                     "meaning": "JSONArrayMeaning"
                 },
                 {
-                    "name":    "last_successful_login", 
+                    "name":    "lastModifiedOn", 
                     "type":    "date",
                     "meaning": "Date"
                 },
                 {
-                    "name":    "last_session_activity", 
-                    "type":    "date",
-                    "meaning": "Date"
+                    "name":    "tutorialProject", 
+                    "type":    "string",
+                    "meaning": "Text"
                 }
             ]
         }
