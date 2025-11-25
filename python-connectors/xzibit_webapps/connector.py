@@ -150,7 +150,6 @@ class ConnectorProjects(Connector):
                     "type":    "string",
                     "meaning": "Text"
                 },
-
                 {
                     "name":    "lastModifiedOn", 
                     "type":    "date",
