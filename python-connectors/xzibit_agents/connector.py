@@ -90,10 +90,12 @@ class ConnectorProjects(Connector):
 
                     except Exception as e_agent:
                         # Print minimal error to avoid cluttering logs
-                        print(f"  [Skipping Agent] {agent_item.name} in {project_key}: {e_agent}")
+                        print(f"[generate_rows] [Skipping Agent] {agent_item.name} in {project_key}: {e_agent}")
 
             except Exception as e_proj:
                 # Pass on projects where we lack permissions or feature is disabled
+                print(f"  [Skipping Agent] {agent_item.name} in {project_key}: {e_agent}")
+
                 pass
 
 
