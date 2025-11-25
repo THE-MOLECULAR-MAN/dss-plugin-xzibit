@@ -90,6 +90,16 @@ class ConnectorPlugins(Connector):
                     "name":    "isDev", 
                     "type":    "boolean",
                     "meaning": "Boolean"
+                },
+                {
+                    "name":    "project_usages", 
+                    "type":    "array",
+                    "meaning": "JSONArrayMeaning"
+                },
+                {
+                    "name":    "isDev", 
+                    "type":    "boolean",
+                    "meaning": "Boolean"
                 }
             ]
         }
