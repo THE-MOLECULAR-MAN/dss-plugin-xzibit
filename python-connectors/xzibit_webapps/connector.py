@@ -138,7 +138,7 @@ class ConnectorProjects(Connector):
                 {
                     "name":    "url", 
                     "type":    "string",
-                    "meaning": "Text"
+                    "meaning": "URL"
                 },
                 {
                     "name":    "created_on", 
