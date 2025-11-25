@@ -97,7 +97,7 @@ class ConnectorProjects(Connector):
                             "version": agent_item.get('activeVersion', 'Unknown'),
                             "tags": agent_item.get('tags', 'Unknown'),
                             "Agent is active version": is_active_version,
-                            "Agent URL": get_dss_base_url()
+                            "Agent URL": get_agent_url(project_key, agent_id, agent_version)
                         }
                         yield next_row
 
