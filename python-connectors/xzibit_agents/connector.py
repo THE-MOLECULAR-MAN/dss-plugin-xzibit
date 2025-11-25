@@ -125,7 +125,7 @@ class ConnectorProjects(Connector):
                             "Agent ID": agent_item.id,
                             "Created By": creation_user, 
                             "Active Version": active_version_id,
-                            "LLM Model ID": llm_model_id,
+                            # "LLM Model ID": llm_model_id,
                             "LLM Vendor": llm_vendor,
                             "LLM Connection Name": llm_connection_name,
                             "LLM Model Name": llm_model,
