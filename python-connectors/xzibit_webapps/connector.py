@@ -106,27 +106,27 @@ class ConnectorProjects(Connector):
         return {
             "columns": [
                 {
-                    "name":    "login", 
+                    "name":    "projectKey", 
                     "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name":    "displayName", 
+                    "name":    "webapp_name", 
                     "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name":    "userProfile", 
+                    "name":    "webapp_id", 
                     "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name":    "groups", 
-                    "type":    "array",
-                    "meaning": "JSONArrayMeaning"
+                    "name":    "type", 
+                    "type":    "string",
+                    "meaning": "Text"
                 },
                 {
-                    "name":    "sourceType", 
+                    "name":    "created_by_user", 
                     "type":    "string",
                     "meaning": "Text"
                 },
