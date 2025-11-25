@@ -84,11 +84,6 @@ class ConnectorConnections(Connector):
                     "name":    "credentialsMode", 
                     "type":    "string",
                     "meaning": "Text"
-                },
-                {
-                    "name":    "usableBy", 
-                    "type":    "string",
-                    "meaning": "Text"
                 }
             ]
         }
