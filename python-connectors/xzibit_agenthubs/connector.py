@@ -62,7 +62,7 @@ class ConnectorProjects(Connector):
 
                         # Collect relevant metadata
                         next_row = {
-                            "project_key": project_key,
+                            "projectKey": project_key,
                             "webapp_name": webapp.get("name"),
                             "webapp_id": webapp.get("id"),
                             # "type": webapp.get("type"),
