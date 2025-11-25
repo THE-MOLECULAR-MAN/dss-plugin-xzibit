@@ -82,12 +82,12 @@ class ConnectorPlugins(Connector):
                     "meaning": "JSONArrayMeaning"
                 },
                 {
-                    "name":    "lastModifiedOn", 
+                    "name":    "description", 
                     "type":    "date",
-                    "meaning": "DatetimeNoTz"
+                    "meaning": "FreeText"
                 },
                 {
-                    "name":    "tutorialProject", 
+                    "name":    "isDev", 
                     "type":    "boolean",
                     "meaning": "Boolean"
                 }
