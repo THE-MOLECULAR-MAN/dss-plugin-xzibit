@@ -46,7 +46,6 @@ class ConnectorProjects(Connector):
                             partition_id=None, records_limit = -1):
         # 1. Retrieve list of all projects (User is Admin per assumptions)
         project_keys = self.__client.list_project_keys()
-        # print(f"Scanning {len(project_keys)} projects for Agent Hub instances...")
 
         agent_hubs = []
 
@@ -59,7 +58,7 @@ class ConnectorProjects(Connector):
 
                 for webapp in webapps:
                     if is_agent_hub(webapp):
-                        # print(f"Found Agent Hub: {webapp['name']} in {project_key}")
+
                         pp(webapp)
 
                         # Collect relevant metadata
