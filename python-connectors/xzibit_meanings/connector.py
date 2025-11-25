@@ -55,6 +55,11 @@ class ConnectorMeanings(Connector):
                     "meaning": "Text"
                 },
                 {
+                    "name":    "type", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
                     "name":    "id", 
                     "type":    "string",
                     "meaning": "Text"
