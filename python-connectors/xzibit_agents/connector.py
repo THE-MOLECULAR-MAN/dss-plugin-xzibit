@@ -30,6 +30,7 @@ class ConnectorProjects(Connector):
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):       
+        print("[generate_rows] START")
         
          # iterate through each object
         for project_key in self.__objects_list:
