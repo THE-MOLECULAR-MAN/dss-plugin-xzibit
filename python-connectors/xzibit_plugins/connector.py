@@ -101,8 +101,6 @@ class ConnectorPlugins(Connector):
                     "type":    "integer",
                     "meaning": "Integer"
                 }
-                
-                
             ]
         }
             
