@@ -26,7 +26,7 @@ def get_dss_external_url():
     if dss_url:
         return dss_url
     else:
-        return "DSS URL is not configured in Administration settings."
+        return None
 
 def get_dss_url_from_env():
     # Attempt to retrieve host and port from environment variables
