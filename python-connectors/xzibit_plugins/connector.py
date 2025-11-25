@@ -57,24 +57,24 @@ class ConnectorPlugins(Connector):
         return {
             "columns": [
                 {
-                    "name":    "projectKey", 
+                    "name":    "id", 
                     "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name":    "ownerLogin", 
+                    "name":    "label", 
                     "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name":    "projectStatus", 
+                    "name":    "version", 
                     "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name":    "contributors", 
-                    "type":    "array",
-                    "meaning": "JSONArrayMeaning"
+                    "name":    "author", 
+                    "type":    "string",
+                    "meaning": "Text"
                 },
                 {
                     "name":    "name", 
