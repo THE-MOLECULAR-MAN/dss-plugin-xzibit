@@ -135,7 +135,7 @@ class ConnectorProjects(Connector):
                             "Agent Type": agent_item.get('type', 'Unknown'),
                             "Agent Version": agent_version,
                             "tags": agent_item.get('tags', 'Unknown'),
-                            "Last Modified": last_modified_on,
+                            "Last Modified On": last_modified_on,
                             # "Agent is active version": is_active_version,
                             "Agent URL": get_agent_url(project_key, agent_item.id, agent_version)
                         }
