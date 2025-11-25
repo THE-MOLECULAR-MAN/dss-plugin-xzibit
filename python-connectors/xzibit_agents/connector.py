@@ -107,6 +107,7 @@ class ConnectorProjects(Connector):
 
                             creation_user = version_settings.get_raw().get("creationTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
                             last_modified_on = version_settings.get_raw().get("versionTag", {}).get("lastModifiedOn", None)
+                            last_modified_user = version_settings.get_raw().get("versionTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
 
 
                         # Append to our dataset list
