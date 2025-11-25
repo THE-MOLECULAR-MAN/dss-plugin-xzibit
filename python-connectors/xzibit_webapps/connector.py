@@ -29,10 +29,8 @@ class ConnectorProjects(Connector):
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
-        # 1. Retrieve list of all projects (User is Admin per assumptions)
-        project_keys = self.__client.list_project_keys()
 
-        for project_key in project_keys:
+        for project_key in self.__client.list_project_keys():
             try:
                 project = self.__client.get_project(project_key)
 
