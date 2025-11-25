@@ -70,6 +70,7 @@ class ConnectorProjects(Connector):
                             "created_on": webapp.get("createdOn",None),
                             "lastModifiedBy": webapp.get("lastModifiedBy", {}).get('login',None)
                             "lastModifiedBy": webapp.get("lastModifiedOn", None)
+                            "tags": webapp.get("tags",[])
                             # "type": webapp.get("type"),
                             "created_by_user": webapp.get("createdBy", {}).get("login"),
                             # "creation_date": webapp.get("creationDate"),
