@@ -29,7 +29,6 @@ class ConnectorProjects(Connector):
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
-
         for project_key in self.__client.list_project_keys():
             try:
                 project = self.__client.get_project(project_key)
