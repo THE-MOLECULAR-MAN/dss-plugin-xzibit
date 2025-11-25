@@ -18,19 +18,19 @@ class ConnectorProjects(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         
-        self.client = api_client()
-        self.unique_id_key_name = 'projectKey'
-        self.keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
+        self.__client = api_client()
+        self.__unique_id_key_name = 'projectKey'
+        self.__keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
             'shortDesc', 'description',
             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
-        self.objects_list = self.client.list_projects()
+        self.__objects_list = self.client.list_projects()
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
         # iterate through each object
-        for item_info in self.objects_list:
+        for item_info in self.__objects_list:
             pp(item_info)
             next_row = flatten_dict(item_info, include_keys=self.keys)
             
