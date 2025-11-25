@@ -41,7 +41,7 @@ def make_url_friendly(text):
     text = re.sub(r'\s+', '-', text)
     
     # (Optional) Strip leading/trailing hyphens if spaces were at the ends
-    text = text.strip('-')
+    # text = text.strip('-')
     
     return text
 
