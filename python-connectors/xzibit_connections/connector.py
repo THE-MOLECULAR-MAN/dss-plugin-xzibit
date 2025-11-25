@@ -81,11 +81,6 @@ class ConnectorConnections(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "allowedGroups", 
-                    "type":    "string",
-                    "meaning": "JSONArrayMeaning"
-                },
-                {
                     "name":    "credentialsMode", 
                     "type":    "string",
                     "meaning": "Text"
