@@ -100,12 +100,14 @@ class ConnectorProjects(Connector):
                                 # Sometimes stored under 'generation' block for complex setups
                                 if not llm_model_id and "generation" in ver_raw:
                                     llm_model_id = ver_raw["generation"].get("llmId")
+                            
+                            creation_user = version_settings.get("creationTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
+
 
                         # Append to our dataset list
                         # FIX: Use raw_settings (from the full object) instead of agent_item.get_raw()
                         print("[generate_rows] raw_settings:")
                         pp(raw_settings)
-                        creation_user = raw_settings.get("version",{}).get("creationTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
                         
                         # creationTag.lastModifiedBy.login
                         # creationTag.lastModifiedBy.lastModifiedOn
