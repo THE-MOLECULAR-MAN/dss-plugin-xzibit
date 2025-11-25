@@ -42,7 +42,7 @@ class ConnectorProjects(Connector):
 
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
-                            partition_id=None, records_limit = -1):       
+                            partition_id=None, records_limit = -1):
         # 1. Retrieve list of all projects (User is Admin per assumptions)
         project_keys = client.list_project_keys()
         # print(f"Scanning {len(project_keys)} projects for Agent Hub instances...")
