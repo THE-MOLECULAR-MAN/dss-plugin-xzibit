@@ -59,7 +59,7 @@ class ConnectorProjects(Connector):
                 for webapp in webapps:
                     if is_agent_hub(webapp):
 
-                        pp(webapp)
+                        # pp(webapp)
 
                         # Collect relevant metadata
                         next_row = {
