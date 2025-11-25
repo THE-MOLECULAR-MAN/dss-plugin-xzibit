@@ -78,17 +78,17 @@ class ConnectorRecipes(Connector):
                 },
                 {
                     "name": "tags", 
-                    "type": "array",
+                    "type": "string",
                     "meaning": "JSONArrayMeaning"
                 },
                 {
                     "name": "input_datasets", 
-                    "type": "array",
+                    "type": "string",
                     "meaning": "JSONArrayMeaning"
                 },
                 {
                     "name": "output_datasets", 
-                    "type": "array",
+                    "type": "string",
                     "meaning": "JSONArrayMeaning"
                 }
             ]
