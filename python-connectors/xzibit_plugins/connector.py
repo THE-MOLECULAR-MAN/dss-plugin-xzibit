@@ -79,7 +79,7 @@ class ConnectorPlugins(Connector):
                 },
                 {
                     "name":    "tags", 
-                    "type":    "array",
+                    "type":    "string",
                     "meaning": "JSONArrayMeaning"
                 },
                 {
@@ -89,7 +89,7 @@ class ConnectorPlugins(Connector):
                 },
                 {
                     "name":    "project_usages", 
-                    "type":    "array",
+                    "type":    "string",
                     "meaning": "JSONArrayMeaning"
                 },
                 {
