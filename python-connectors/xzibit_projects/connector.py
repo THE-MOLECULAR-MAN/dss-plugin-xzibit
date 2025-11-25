@@ -71,11 +71,6 @@ class ConnectorProjects(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "projectLocation", 
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
                     "name":    "shortDesc", 
                     "type":    "string",
                     "meaning": "Text"
