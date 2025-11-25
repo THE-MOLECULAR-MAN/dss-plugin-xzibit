@@ -60,9 +60,9 @@ class ConnectorMeanings(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "total_usages", 
-                    "type":    "integer",
-                    "meaning": "LongMeaning"
+                    "name":    "normalizationMode", 
+                    "type":    "string",
+                    "meaning": "Text"
                 }
             ]
         }
