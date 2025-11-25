@@ -74,6 +74,7 @@ class ConnectorProjects(Connector):
                             except AttributeError:
                                 # 2. Fallback: Check raw settings (common for Code Agents)
                                 ver_raw = version_settings.get_raw()
+                                pp(ver_raw)
                                 llm_model_id = ver_raw.get("llmId", None)
 
                                 # Sometimes stored under 'generation' block for complex setups
