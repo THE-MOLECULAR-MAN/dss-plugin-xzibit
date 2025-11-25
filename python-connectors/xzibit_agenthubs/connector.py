@@ -24,12 +24,7 @@ class ConnectorProjects(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.__client = api_client()
-        #self.__unique_id_key_name = 'projectKey'
-        #self.__keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
-#             'shortDesc', 'description',
-#             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         self.__objects_list = self.__client.list_project_keys()
-        # print("[DEBUG agents] Constructor END")
 
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
