@@ -105,7 +105,7 @@ class ConnectorProjects(Connector):
                             print("[generate_rows] version_settings:")
                             pp(version_settings.get_raw())
 
-                            creation_user = version_settings.get("creationTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
+                            creation_user = version_settings.get_raw().get("creationTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
 
 
                         # Append to our dataset list
