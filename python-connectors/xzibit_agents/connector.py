@@ -83,6 +83,8 @@ class ConnectorProjects(Connector):
                         pp(raw_settings)
                         creation_user = raw_settings.get("creationTag", {}).get("user", "Unknown")
                         
+                        # creationTag.lastModifiedBy.login
+                        # creationTag.lastModifiedBy.lastModifiedOn
                         next_row = {
                             "projectKey": project_key,
                             "Agent Name": agent_item.name,
