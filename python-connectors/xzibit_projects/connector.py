@@ -77,6 +77,11 @@ class ConnectorProjects(Connector):
                     "meaning": "Text"
                 },
                 {
+                    "name":    "description", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
                     "name":    "tags", 
                     "type":    "array",
                     "meaning": "JSONArrayMeaning"
