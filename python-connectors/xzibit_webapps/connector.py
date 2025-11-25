@@ -141,12 +141,7 @@ class ConnectorProjects(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "resultingUserProfile", 
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "creationDate", 
+                    "name":    "created_on", 
                     "type":    "date",
                     "meaning": "DatetimeNoTz"
                 },
