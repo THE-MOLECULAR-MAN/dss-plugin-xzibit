@@ -95,10 +95,9 @@ class ConnectorProjects(Connector):
             except Exception as e_proj:
                 # Pass on projects where we lack permissions or feature is disabled
                 print(f"[generate_rows] Exception {project_key}: {e_proj}")
-
                 pass
 
-
+        print("[generate_rows] END")
                 
                 
     def get_read_schema(self):
