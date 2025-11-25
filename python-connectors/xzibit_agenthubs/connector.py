@@ -61,7 +61,7 @@ class ConnectorProjects(Connector):
                         # print(f"Found Agent Hub: {webapp['name']} in {project_key}")
 
                         # Collect relevant metadata
-                        agent_hubs.append({
+                        next_row = {
                             "project_key": project_key,
                             "webapp_name": webapp.get("name"),
                             "webapp_id": webapp.get("id"),
@@ -69,7 +69,8 @@ class ConnectorProjects(Connector):
                             "created_by": webapp.get("createdBy", {}).get("login"),
                             # "creation_date": webapp.get("creationDate"),
                             "url": f"/projects/{project_key}/webapps/{webapp.get('id')}/view"
-                        })
+                        }
+                        yield next_row
 
             except Exception as e:
                 print(f"Skipping project {project_key} due to error: {e}")
