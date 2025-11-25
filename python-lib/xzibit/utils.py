@@ -2,14 +2,36 @@ import os
 import re
 from datetime import datetime
 
+import dataiku
 import dataikuapi
 from dataikuapi.utils import DataikuException
-
-
 
 # pretty print dictionaries for debugging - don't remove at this time.
 from pprint import pprint as pp
 from json   import dumps  as jd
+
+
+def get_dss_external_url():
+    # 1. Initialize the client (connects to local instance)
+    client = dataiku.api_client()
+    
+    # 2. Retrieve General Settings (Requires Admin permissions)
+    # This corresponds to the "Administration > Settings > General" page
+    settings = client.get_general_settings()
+    
+    # 3. Extract the 'studioExternalUrl' from the raw settings dictionary
+    # This key holds the value of the "DSS URL" field
+    dss_url = settings.get_raw().get('studioExternalUrl')
+    
+    if dss_url:
+        return dss_url
+    else:
+        return "DSS URL is not configured in Administration settings."
+
+# --- Execution ---
+current_url = get_dss_external_url()
+print(f"Current DSS URL: {current_url}")
+    
 
 def safe_extract_dataset_metadata(dataset_handle, pk):
     """x"""
