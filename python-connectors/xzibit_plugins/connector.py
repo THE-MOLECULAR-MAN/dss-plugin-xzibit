@@ -84,7 +84,7 @@ class ConnectorPlugins(Connector):
                 },
                 {
                     "name":    "description", 
-                    "type":    "date",
+                    "type":    "string",
                     "meaning": "FreeText"
                 },
                 {
