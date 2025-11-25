@@ -16,6 +16,7 @@ class ConnectorProjects(Connector):
     # Code that has to be customized for this specific class
     ####################################################################
     def __init__(self, config, plugin_config):
+        print("[DEBUG agents] Constructor START")
         Connector.__init__(self, config, plugin_config)
         
         self.__client = api_client()
@@ -24,7 +25,7 @@ class ConnectorProjects(Connector):
 #             'shortDesc', 'description',
 #             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         self.__objects_list = self.__client.list_project_keys()
-
+        print("[DEBUG agents] Constructor END")
 
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
