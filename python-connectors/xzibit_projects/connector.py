@@ -40,6 +40,68 @@ class ConnectorProjects(Connector):
             # return a single row
             yield next_row
 
+    def get_read_schema(self):
+        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date
+        return {
+            "columns": [
+                {
+                    "name":    "projectKey", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "ownerLogin", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "projectStatus", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "contributors", 
+                    "type":    "array",
+                    "meaning": "JSONArrayMeaning"
+                },
+                {
+                    "name":    "name", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "projectLocation", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "projectStatus", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "resultingUserProfile", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "creationDate", 
+                    "type":    "date",
+                    "meaning": "DatetimeNoTz"
+                },
+                {
+                    "name":    "last_successful_login", 
+                    "type":    "date",
+                    "meaning": "Date"
+                },
+                {
+                    "name":    "last_session_activity", 
+                    "type":    "date",
+                    "meaning": "Date"
+                }
+            ]
+        }
             
 ####################################################################
 # Same for all instances:
