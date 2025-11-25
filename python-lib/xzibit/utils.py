@@ -28,11 +28,28 @@ def get_dss_external_url():
     else:
         return "DSS URL is not configured in Administration settings."
 
-# --- Execution ---
-current_url = get_dss_external_url()
-print(f"Current DSS URL: {current_url}")
+def get_dss_url_from_env():
+    # Attempt to retrieve host and port from environment variables
+    ext_host = os.environ.get('DKU_BACKEND_EXT_HOST')
+    base_port = os.environ.get('DKU_BASE_PORT')
     
+    if ext_host and base_port:
+        # Note: You may need to infer the scheme (http vs https) 
+        # based on your knowledge of the instance setup.
+        return f"http://{ext_host}:{base_port}/"  
+    return None
 
+def get_dss_url_from_global_vars():
+    client = dataiku.api_client()
+    
+    # Retrieve global variables (accessible to all users)
+    global_vars = client.get_variables()
+    
+    # Check for common naming conventions like 'dss_url', 'public_url', or 'instance_url'
+    return global_vars.get('dss_url') or global_vars.get('public_url')
+
+
+    
 def safe_extract_dataset_metadata(dataset_handle, pk):
     """x"""
     assert isinstance(dataset_handle, dataikuapi.dss.dataset.DSSDataset), f"safe_extract_dataset_metadata - Assertion failed: Expecting DSSDataset, got {type(dataset_handle)}"
