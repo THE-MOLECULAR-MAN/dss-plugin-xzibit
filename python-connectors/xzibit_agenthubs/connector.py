@@ -30,8 +30,6 @@ class ConnectorProjects(Connector):
                             partition_id=None, records_limit = -1):       
         
 
-        # print("[generate_rows] END")
-                
                 
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
