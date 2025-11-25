@@ -34,6 +34,7 @@ class ConnectorProjects(Connector):
         
          # iterate through each object
         for project_key in self.__objects_list:
+            print("[generate_rows] Outer loop start")
             try:
                 project = client.get_project(project_key)
 
