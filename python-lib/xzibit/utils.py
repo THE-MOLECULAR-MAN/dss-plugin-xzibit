@@ -50,8 +50,8 @@ def get_dss_url_from_global_vars():
 
 
 def get_dss_base_url():
-    options = [get_dss_external_url(), get_dss_url_from_env(), get_dss_url_from_global_vars()]
-    result = next((x for x in options if x is not None), "Default")
+    return = get_dss_external_url() or get_dss_url_from_env() or get_dss_url_from_global_vars()
+
     
 def safe_extract_dataset_metadata(dataset_handle, pk):
     """x"""
