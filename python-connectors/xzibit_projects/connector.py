@@ -81,7 +81,7 @@ class ConnectorProjects(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "resultingUserProfile", 
+                    "name":    "shortDesc", 
                     "type":    "string",
                     "meaning": "Text"
                 },
