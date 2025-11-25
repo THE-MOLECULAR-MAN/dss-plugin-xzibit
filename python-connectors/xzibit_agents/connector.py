@@ -21,8 +21,8 @@ class ConnectorProjects(Connector):
         self.__client = api_client()
         #self.__unique_id_key_name = 'projectKey'
         #self.__keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
-            'shortDesc', 'description',
-            'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
+#             'shortDesc', 'description',
+#             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         self.__objects_list = self.__client.list_project_keys()
 
 
