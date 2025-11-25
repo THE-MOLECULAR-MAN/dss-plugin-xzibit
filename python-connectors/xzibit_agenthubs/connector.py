@@ -59,6 +59,7 @@ class ConnectorProjects(Connector):
                 for webapp in webapps:
                     if is_agent_hub(webapp):
                         # print(f"Found Agent Hub: {webapp['name']} in {project_key}")
+                        pp(webapp)
 
                         # Collect relevant metadata
                         next_row = {
