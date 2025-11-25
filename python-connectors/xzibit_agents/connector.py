@@ -85,6 +85,7 @@ class ConnectorProjects(Connector):
                             "Created By": creation_user, 
                             "Active Version": active_version_id,
                             "LLM Model ID": llm_model_id,
+                            "Agent Type": agent_item.get('type', 'Unknown'),
                             "version": agent_item.get('activeVersion', 'Unknown'),
                             "tags": agent_item.get('tags', 'Unknown'),
                         }
