@@ -46,7 +46,7 @@ class ConnectorMeanings(Connector):
                 },
                 {
                     "name":    "description", 
-                    "type":    "date",
+                    "type":    "string",
                     "meaning": "FreeText"
                 },
                 {
