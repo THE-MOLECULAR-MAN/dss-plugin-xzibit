@@ -88,8 +88,8 @@ class ConnectorProjects(Connector):
                 },
                 {
                     "name":    "tutorialProject", 
-                    "type":    "string",
-                    "meaning": "Text"
+                    "type":    "boolean",
+                    "meaning": "Boolean"
                 }
             ]
         }
