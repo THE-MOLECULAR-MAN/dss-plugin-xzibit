@@ -131,9 +131,9 @@ class ConnectorProjects(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "email", 
-                    "type":    "string",
-                    "meaning": "Email"
+                    "name":    "backendRunning", 
+                    "type":    "boolean",
+                    "meaning": "Boolean"
                 },
                 {
                     "name":    "enabled", 
