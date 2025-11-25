@@ -99,7 +99,7 @@ class ConnectorPlugins(Connector):
                 {
                     "name":    "total_usages", 
                     "type":    "integer",
-                    "meaning": "Integer"
+                    "meaning": "LongMeaning"
                 }
             ]
         }
