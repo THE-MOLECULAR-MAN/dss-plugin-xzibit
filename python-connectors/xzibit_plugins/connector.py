@@ -87,11 +87,6 @@ class ConnectorPlugins(Connector):
                     "meaning": "FreeText"
                 },
                 {
-                    "name":    "isDev", 
-                    "type":    "boolean",
-                    "meaning": "Boolean"
-                },
-                {
                     "name":    "project_usages", 
                     "type":    "array",
                     "meaning": "JSONArrayMeaning"
