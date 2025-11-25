@@ -1,3 +1,4 @@
+
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
@@ -8,15 +9,47 @@ from xzibit.utils import *
 ####################################################################
 # Unique imports for this Class
 ####################################################################
+import re
 from datetime import datetime
 
 def convert_webapp_name_to_url_name(web_app_name):
     """x"""
+    # Connect_Name-Test1234567890-=_+!@#$%^&*(),.<>/?'"[{]}\|
+    # becomes
+    # connectname-test1234567890-
+
+
+
+def make_url_friendly(text):
+    """
+    Converts a string to a Dataiku URL-friendly format:
+    1. Converts to lower case
+    2. Removes all characters except alphanumeric (letters/numbers) and spaces
+    3. Replaces spaces (and runs of spaces) with a single hyphen
+    """
+    if not isinstance(text, str):
+        return str(text)
     
+    # 1. Convert to lower case
+    text = text.lower()
+    
+    # 2. Keep only alphanumeric characters and spaces
+    # regex explanation: [^a-z0-9\s] matches anything that is NOT a lowercase letter, number, or whitespace
+    text = re.sub(r'[^a-z0-9\s]', '', text)
+    
+    # 3. Replace one or more whitespace characters with a single hyphen
+    text = re.sub(r'\s+', '-', text)
+    
+    # (Optional) Strip leading/trailing hyphens if spaces were at the ends
+    text = text.strip('-')
+    
+    return text
 
 def get_webapp_url(project_key, webapp_id): 
     base_url = get_dss_base_url()
-    # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/FINAIADVISORSTARTER/webapps/4ia32VE_loan-advisor-agent-connect-version-migrated/edit
+    # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/webapps/gY7nbkW_connectname-test1234567890-/edit
+    # Connect_Name-Test1234567890-=_+!@#$%^&*(),.<>/?'"[{]}\|
+    
     return f"{base_url}/projects/{project_key}/webapps/{webapp_id}_{web_app_name}/edit"
 
 
