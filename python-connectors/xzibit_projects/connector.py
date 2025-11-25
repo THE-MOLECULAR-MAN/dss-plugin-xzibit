@@ -83,7 +83,7 @@ class ConnectorProjects(Connector):
                 },
                 {
                     "name":    "tags", 
-                    "type":    "array",
+                    "type":    "string",
                     "meaning": "JSONArrayMeaning"
                 },
                 {
