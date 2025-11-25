@@ -72,7 +72,7 @@ class ConnectorProjects(Connector):
                 # List all webapps in the project
                 for webapp in project.list_webapps():
                     try:
-                        # pp(webapp)
+                        pp(webapp)
 
                         # Collect relevant metadata
                         next_row = {
