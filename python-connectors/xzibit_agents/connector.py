@@ -85,6 +85,7 @@ class ConnectorProjects(Connector):
                             "Created By": creation_user, 
                             "Active Version": active_version_id,
                             "LLM Model ID": llm_model_id
+                            "version": agent_item.get('activeVersion', 'Unknown'),
                         }
                         yield next_row
 
