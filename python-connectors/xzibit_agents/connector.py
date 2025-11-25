@@ -124,9 +124,9 @@ class ConnectorProjects(Connector):
                             "LLM Connection Name": llm_connection_name,
                             "LLM Model Name": llm_model,
                             "Agent Type": agent_item.get('type', 'Unknown'),
-                            "version": agent_version,
+                            "Agent Version": agent_version,
                             "tags": agent_item.get('tags', 'Unknown'),
-                            "Agent is active version": is_active_version,
+                            # "Agent is active version": is_active_version,
                             "Agent URL": get_agent_url(project_key, agent_item.id, agent_version)
                         }
                         yield next_row
