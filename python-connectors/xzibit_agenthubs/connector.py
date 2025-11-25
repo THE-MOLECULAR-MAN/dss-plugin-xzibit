@@ -12,7 +12,8 @@ from datetime import datetime
 
 def get_agenthub_url(project_key, agent_id, agent_version): 
     base_url = get_dss_base_url()
-    return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent/S-{project_key}-{agent_id}-{agent_version}"  
+    # return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent/S-{project_key}-{agent_id}-{agent_version}"  
+    return f"{base_url}/projects/{project_key}/webapps/{webapp.get('id')}/view"
 
 def is_agent_hub(webapp):
     webapp_type = webapp.get('type', '').lower()
