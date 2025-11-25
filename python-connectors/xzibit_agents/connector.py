@@ -157,62 +157,7 @@ class ConnectorProjects(Connector):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText
         return None
-#         return {
-#             "columns": [
-#                 {
-#                     "name":    "projectKey", 
-#                     "type":    "string",
-#                     "meaning": "Text"
-#                 },
-#                 {
-#                     "name":    "ownerLogin", 
-#                     "type":    "string",
-#                     "meaning": "Text"
-#                 },
-#                 {
-#                     "name":    "projectStatus", 
-#                     "type":    "string",
-#                     "meaning": "Text"
-#                 },
-#                 {
-#                     "name":    "contributors", 
-#                     "type":    "array",
-#                     "meaning": "JSONArrayMeaning"
-#                 },
-#                 {
-#                     "name":    "name", 
-#                     "type":    "string",
-#                     "meaning": "Text"
-#                 },
-#                 {
-#                     "name":    "shortDesc", 
-#                     "type":    "string",
-#                     "meaning": "FreeText"
-#                 },
-#                 {
-#                     "name":    "description", 
-#                     "type":    "string",
-#                     "meaning": "FreeText"
-#                 },
-#                 {
-#                     "name":    "tags", 
-#                     "type":    "array",
-#                     "meaning": "JSONArrayMeaning"
-#                 },
-#                 {
-#                     "name":    "lastModifiedOn", 
-#                     "type":    "date",
-#                     "meaning": "DatetimeNoTz"
-#                 },
-#                 {
-#                     "name":    "tutorialProject", 
-#                     "type":    "boolean",
-#                     "meaning": "Boolean"
-#                 }
-#             ]
-#         }
 
-            
 ####################################################################
 # Same for all instances:
 ####################################################################
