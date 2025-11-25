@@ -24,7 +24,6 @@ class ConnectorProjects(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.__client = api_client()
-        self.__objects_list = self.__client.list_project_keys()
 
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
