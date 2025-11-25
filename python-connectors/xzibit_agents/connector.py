@@ -28,10 +28,7 @@ class ConnectorProjects(Connector):
 
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
-                            partition_id=None, records_limit = -1):
-        
-        # key_mapping = set()
-        # num_rows = 0
+                            partition_id=None, records_limit = -1):       
         
          # iterate through each object
         for pk, proj_datasets in self.__objects_list.items():
