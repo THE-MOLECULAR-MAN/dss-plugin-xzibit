@@ -14,7 +14,7 @@ def get_agenthub_url(project_key, webapp_id):
     base_url = get_dss_base_url()
     # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/webapps/2NndNjZ_agent-hub/edit
     # return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent/S-{project_key}-{agent_id}-{agent_version}"  
-    return f"{base_url}/projects/{project_key}/webapps/{webapp_id}/view"
+    return f"{base_url}/projects/{project_key}/webapps/{webapp_id}_agent-hub/edit"
 
 def is_agent_hub(webapp):
     webapp_type = webapp.get('type', '').lower()
