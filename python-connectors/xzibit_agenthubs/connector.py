@@ -14,6 +14,21 @@ def get_agenthub_url(project_key, agent_id, agent_version):
     base_url = get_dss_base_url()
     return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent/S-{project_key}-{agent_id}-{agent_version}"  
 
+def is_agent_hub(webapp):
+    webapp_type = webapp.get('type', '').lower()
+    # Agent Hub is a plugin webapp. Its type usually follows the pattern 'plugin_id.webapp_id'
+    # We check for the presence of specific keywords to identify it.
+    if webapp_type == 'webapp_agent-hub_agent-hub':
+        return True
+    
+    # Also check the name as a fallback if the user named it explicitly "Agent Hub" 
+    # and the type is generic (less likely, but robust).
+    if 'agent hub' in webapp.get('name', '').lower():
+        return True
+        
+    return False
+
+
 class ConnectorProjects(Connector):
 
     ####################################################################
