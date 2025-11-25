@@ -74,7 +74,7 @@ class ConnectorProjects(Connector):
                             "tags": webapp.get("tags",[]),
                             "type": webapp.get("type"),
                             "created_by_user": webapp.get("createdBy", {}).get("login"),
-                            "url": get_agenthub_url(project_key, webapp.get("id",""None""))
+                            "url": get_agenthub_url(project_key, webapp.get("id",""))
                         }
                         yield next_row
 
