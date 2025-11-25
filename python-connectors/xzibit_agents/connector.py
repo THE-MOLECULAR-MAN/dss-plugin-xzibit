@@ -31,7 +31,7 @@ class ConnectorProjects(Connector):
                             partition_id=None, records_limit = -1):       
         
          # iterate through each object
-        for pk, proj_datasets in self.__objects_list.items(): # projects
+        for project_key in self.__client.list_project_keys():
             try:
                 project_handle = self.__client.get_project(pk)
                 agents = project.list_agents()
