@@ -74,6 +74,7 @@ class ConnectorProjects(Connector):
 
                         # Append to our dataset list
                         # FIX: Use raw_settings (from the full object) instead of agent_item.get_raw()
+                        print("[generate_rows] raw_settings:")
                         pp(raw_settings)
                         creation_user = raw_settings.get("creationTag", {}).get("user", "Unknown")
                         
