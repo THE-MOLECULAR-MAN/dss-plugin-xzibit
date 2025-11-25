@@ -79,7 +79,7 @@ class ConnectorProjects(Connector):
                         creation_user = raw_settings.get("creationTag", {}).get("user", "Unknown")
                         
                         next_row = {
-                            "Project Key": project_key,
+                            "projectKey": project_key,
                             "Agent Name": agent_item.name,
                             "Agent ID": agent_item.id,
                             "Created By": creation_user, 
