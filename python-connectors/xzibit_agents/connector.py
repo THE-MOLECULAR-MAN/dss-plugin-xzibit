@@ -16,6 +16,24 @@ def get_agent_url(project_key, agent_id, agent_version):
     base_url = get_dss_base_url()
     return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent/S-{project_key}-{agent_id}-{agent_version}"  
 
+def parse_llm_id(llm_string: str):
+    """
+    Splits a string by ':' into exactly 3 variables.
+    Returns None for missing fields.
+    """
+    if not llm_string:
+        return None, None, None
+
+    # Split the string
+    parts = llm_string.split(':')
+    
+    # Pad the list with None to ensure it has at least 3 elements, 
+    # then slice to take exactly the first 3.
+    # This handles cases with 1, 2, or 3+ segments gracefully.
+    padded = (parts + [None] * 3)[:3]
+    
+    return padded[0], padded[1], padded[2]
+
 
 class ConnectorProjects(Connector):
 
