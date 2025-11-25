@@ -97,7 +97,7 @@ class ConnectorProjects(Connector):
                             "version": agent_item.get('activeVersion', 'Unknown'),
                             "tags": agent_item.get('tags', 'Unknown'),
                             "Agent is active version": is_active_version,
-                            "Agent URL": get_agent_url(project_key, agent_id, agent_version)
+                            "Agent URL": get_agent_url(project_key, agent_item.id, agent_version)
                         }
                         yield next_row
 
