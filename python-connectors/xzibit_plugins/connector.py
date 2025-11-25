@@ -95,7 +95,14 @@ class ConnectorPlugins(Connector):
                     "name":    "isDev", 
                     "type":    "boolean",
                     "meaning": "Boolean"
+                },
+                {
+                    "name":    "total_usages", 
+                    "type":    "integer",
+                    "meaning": "Integer"
                 }
+                
+                
             ]
         }
             
