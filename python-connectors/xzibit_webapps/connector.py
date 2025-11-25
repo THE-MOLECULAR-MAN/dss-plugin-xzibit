@@ -87,7 +87,7 @@ class ConnectorProjects(Connector):
                             "lastModifiedBy": webapp.get("lastModifiedBy", {}).get('login',None),
                             "lastModifiedOn": datetime.fromtimestamp(webapp.get("lastModifiedOn", None) // 1000),
                             "tags": webapp.get("tags",[]),
-                            "is_code_webapp": webapp.get("type") in ['SHINY', 'STANDARD', 'BOKEH', 'DASH']
+                            "is_code_webapp": webapp.get("type") in ['SHINY', 'STANDARD', 'BOKEH', 'DASH'],
                         }
                         self.__count += 1
                         yield next_row
