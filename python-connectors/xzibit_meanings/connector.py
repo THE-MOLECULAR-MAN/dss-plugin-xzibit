@@ -51,8 +51,8 @@ class ConnectorMeanings(Connector):
                 },
                 {
                     "name":    "detectable", 
-                    "type":    "string",
-                    "meaning": "Text"
+                    "type":    "boolean",
+                    "meaning": "Boolean"
                 },
                 {
                     "name":    "type", 
