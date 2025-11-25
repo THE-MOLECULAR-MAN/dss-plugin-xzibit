@@ -64,10 +64,10 @@ class ConnectorProjects(Connector):
                         # Collect relevant metadata
                         next_row = {
                             "projectKey": project_key,
-                            "webapp_name": webapp.get("name"),
-                            "webapp_id": webapp.get("id"),
-                            "backendRunning": webapp.get("backendRunning"),
-                            "created_on": webapp.get("createdOn"),
+                            "webapp_name": webapp.get("name",None),
+                            "webapp_id": webapp.get("id",None),
+                            "backendRunning": webapp.get("backendRunning",None),
+                            "created_on": webapp.get("createdOn",None),
                             "lastModifiedBy": webapp.get("lastModifiedBy", {}).get('login',None)
                             # "type": webapp.get("type"),
                             "created_by_user": webapp.get("createdBy", {}).get("login"),
