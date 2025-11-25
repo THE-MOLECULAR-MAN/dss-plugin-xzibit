@@ -151,9 +151,9 @@ class ConnectorProjects(Connector):
                     "meaning": "DatetimeNoTz"
                 },
                 {
-                    "name":    "last_session_activity", 
-                    "type":    "date",
-                    "meaning": "Date"
+                    "name":    "tags", 
+                    "type":    "array",
+                    "meaning": "JSONArrayMeaning"
                 }
             ]
         }
