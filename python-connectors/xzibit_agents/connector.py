@@ -55,6 +55,7 @@ class ConnectorProjects(Connector):
                         active_version_id = settings.active_version
 
                         llm_model_id = "N/A"
+                        is_active_version = False
 
                         if active_version_id:
                             # Retrieve settings for the active version
@@ -88,6 +89,7 @@ class ConnectorProjects(Connector):
                             "Agent Type": agent_item.get('type', 'Unknown'),
                             "version": agent_item.get('activeVersion', 'Unknown'),
                             "tags": agent_item.get('tags', 'Unknown'),
+                            "Agent is active version": is_active_version,
                         }
                         yield next_row
 
