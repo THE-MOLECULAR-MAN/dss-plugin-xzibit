@@ -32,11 +32,8 @@ class ConnectorProjects(Connector):
         for project_key in self.__client.list_project_keys():
             try:
                 project = self.__client.get_project(project_key)
-
                 # List all webapps in the project
-                webapps = project.list_webapps()
-
-                for webapp in webapps:
+                for webapp in project.list_webapps():
 
                     pp(webapp)
 
