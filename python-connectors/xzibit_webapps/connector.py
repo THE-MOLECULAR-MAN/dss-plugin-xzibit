@@ -44,7 +44,7 @@ def make_url_friendly(text):
     
     return text
 
-def get_webapp_url(project_key, webapp_id): 
+def get_webapp_url(project_key, webapp_id, web_app_name): 
     base_url = get_dss_base_url()
     # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/webapps/gY7nbkW_connectname-test1234567890-/edit
     # Connect_Name-Test1234567890-=_+!@#$%^&*(),.<>/?'"[{]}\|
