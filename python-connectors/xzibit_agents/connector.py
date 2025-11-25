@@ -12,6 +12,7 @@ from datetime import datetime
 
 def get_agent_url(project_key, agent_id, agent_version): 
     # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/savedmodels/0XpBITsO/agent/S-Data_Dictionary_and_DSS_Instance_datasets_test_project-0XpBITsO-v1
+    # https://honker-design-2.amer.dataiku-sandbox.io       /projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/savedmodels/0XpBITsO/agent/S-Data_Dictionary_and_DSS_Instance_datasets_test_project-0XpBITsO-v1
     base_url = get_dss_base_url()
     return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent/S-{project_key}-{agent_id}-{agent_version}"  
 #     return None
@@ -22,7 +23,7 @@ class ConnectorProjects(Connector):
     # Code that has to be customized for this specific class
     ####################################################################
     def __init__(self, config, plugin_config):
-        print("[DEBUG agents] Constructor START")
+       #  print("[DEBUG agents] Constructor START")
         Connector.__init__(self, config, plugin_config)
         
         self.__client = api_client()
@@ -31,16 +32,16 @@ class ConnectorProjects(Connector):
 #             'shortDesc', 'description',
 #             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         self.__objects_list = self.__client.list_project_keys()
-        print("[DEBUG agents] Constructor END")
+        # print("[DEBUG agents] Constructor END")
 
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):       
-        print("[generate_rows] START")
+        # print("[generate_rows] START")
         
          # iterate through each object
         for project_key in self.__objects_list:
-            print(f"[generate_rows] Outer loop start on project key: {project_key}")
+            # print(f"[generate_rows] Outer loop start on project key: {project_key}")
             try:
                 project = self.__client.get_project(project_key)
 
@@ -50,7 +51,7 @@ class ConnectorProjects(Connector):
 
                 for agent_item in agents:
                     try:
-                        print(f"[generate_rows] Inner loop start on agent_item {agent_item}")                        
+                        # print(f"[generate_rows] Inner loop start on agent_item {agent_item}")                        
                         # Get the full agent object and its settings
                         # We need the full object to access .get_settings()
                         agent = project.get_agent(agent_item.id)
@@ -82,7 +83,7 @@ class ConnectorProjects(Connector):
                         # Append to our dataset list
                         # FIX: Use raw_settings (from the full object) instead of agent_item.get_raw()
                         print("[generate_rows] raw_settings:")
-                        pp(raw_settings)
+                        # pp(raw_settings)
                         creation_user = raw_settings.get("creationTag", {}).get("user", "Unknown")
                         
                         # creationTag.lastModifiedBy.login
