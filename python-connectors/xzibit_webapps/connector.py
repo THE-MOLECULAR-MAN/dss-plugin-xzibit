@@ -148,7 +148,7 @@ class ConnectorProjects(Connector):
                 {
                     "name":    "lastModifiedOn", 
                     "type":    "date",
-                    "meaning": "Date"
+                    "meaning": "DatetimeNoTz"
                 },
                 {
                     "name":    "last_session_activity", 
