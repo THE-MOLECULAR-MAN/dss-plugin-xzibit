@@ -136,9 +136,9 @@ class ConnectorProjects(Connector):
                     "meaning": "Boolean"
                 },
                 {
-                    "name":    "enabled", 
-                    "type":    "boolean",
-                    "meaning": "Boolean"
+                    "name":    "url", 
+                    "type":    "string",
+                    "meaning": "Text"
                 },
                 {
                     "name":    "resultingUserProfile", 
