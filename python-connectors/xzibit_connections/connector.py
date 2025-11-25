@@ -90,12 +90,12 @@ class ConnectorConnections(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "credentialsMode", 
+                    "name":    "type", 
                     "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name":    "credentialsMode", 
+                    "name":    "usableBy", 
                     "type":    "string",
                     "meaning": "Text"
                 },
