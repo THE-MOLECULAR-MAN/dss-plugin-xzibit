@@ -12,6 +12,7 @@ from datetime import datetime
 
 def get_agent_url(): 
     # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/savedmodels/0XpBITsO/agent/S-Data_Dictionary_and_DSS_Instance_datasets_test_project-0XpBITsO-v1
+    # f"{base_url}/projects/${project_key}/savedmodels/${agent_id}/agent/S-${project_key}-${agent_id}-${agent_version}"
     return None
 
 class ConnectorProjects(Connector):
