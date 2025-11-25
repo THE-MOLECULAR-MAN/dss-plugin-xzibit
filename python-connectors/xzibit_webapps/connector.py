@@ -145,6 +145,13 @@ class ConnectorProjects(Connector):
                     "type":    "date",
                     "meaning": "DatetimeNoTz"
                 },
+
+                {
+                    "name":    "lastModifiedBy", 
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+
                 {
                     "name":    "lastModifiedOn", 
                     "type":    "date",
