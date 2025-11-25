@@ -48,7 +48,8 @@ def get_webapp_url(project_key, webapp_id):
     base_url = get_dss_base_url()
     # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/webapps/gY7nbkW_connectname-test1234567890-/edit
     # Connect_Name-Test1234567890-=_+!@#$%^&*(),.<>/?'"[{]}\|
-    return f"{base_url}/projects/{project_key}/webapps/{webapp_id}_{make_url_friendly(web_app_name)}/edit"
+    safe_name = make_url_friendly(web_app_name)
+    return f"{base_url}/projects/{project_key}/webapps/{webapp_id}_{safe_name}/edit"
 
 
 class ConnectorProjects(Connector):
