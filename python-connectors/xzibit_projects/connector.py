@@ -63,7 +63,7 @@ class ConnectorProjects(Connector):
                 },
                 {
                     "name":    "contributors", 
-                    "type":    "array",
+                    "type":    "string",
                     "meaning": "JSONArrayMeaning"
                 },
                 {
