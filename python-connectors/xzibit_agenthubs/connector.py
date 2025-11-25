@@ -68,6 +68,7 @@ class ConnectorProjects(Connector):
                             "webapp_id": webapp.get("id"),
                             "backendRunning": webapp.get("backendRunning"),
                             "created_on": webapp.get("createdOn"),
+                            "lastModifiedBy": webapp.get("lastModifiedBy", {}).get('login',{})
                             # "type": webapp.get("type"),
                             "created_by_user": webapp.get("createdBy", {}).get("login"),
                             # "creation_date": webapp.get("creationDate"),
