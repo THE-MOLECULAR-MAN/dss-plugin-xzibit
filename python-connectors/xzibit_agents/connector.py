@@ -102,6 +102,9 @@ class ConnectorProjects(Connector):
                                 if not llm_model_id and "generation" in ver_raw:
                                     llm_model_id = ver_raw["generation"].get("llmId")
                             
+                            print("[generate_rows] version_settings:")
+                            pp(version_settings)
+
                             creation_user = version_settings.get("creationTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
 
 
