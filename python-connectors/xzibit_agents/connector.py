@@ -86,6 +86,7 @@ class ConnectorProjects(Connector):
                         
                         # creationTag.lastModifiedBy.login
                         # creationTag.lastModifiedBy.lastModifiedOn
+                        agent_version = agent_item.get('activeVersion', 'Unknown')
                         next_row = {
                             "projectKey": project_key,
                             "Agent Name": agent_item.name,
