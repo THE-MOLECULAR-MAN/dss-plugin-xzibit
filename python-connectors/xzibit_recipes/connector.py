@@ -79,17 +79,17 @@ class ConnectorRecipes(Connector):
                 {
                     "name": "tags", 
                     "type": "array",
-                    "meaning": "array"
+                    "meaning": "REPLACE"
                 },
                 {
                     "name": "input_datasets", 
                     "type": "array",
-                    "meaning": "array"
+                    "meaning": "REPLACE"
                 },
                 {
                     "name": "output_datasets", 
                     "type": "array",
-                    "meaning": "array"
+                    "meaning": "REPLACE"
                 }
             ]
         }
