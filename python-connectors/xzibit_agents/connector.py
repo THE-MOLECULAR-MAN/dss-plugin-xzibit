@@ -23,7 +23,7 @@ class ConnectorProjects(Connector):
         self.__keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
             'shortDesc', 'description',
             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
-        self.__objects_list = self.client.list_projects()
+        self.__objects_list = self.__client.list_project_keys()
 
 
         
