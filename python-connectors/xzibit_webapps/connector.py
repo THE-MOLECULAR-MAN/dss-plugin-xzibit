@@ -154,6 +154,11 @@ class ConnectorProjects(Connector):
                     "name":    "tags", 
                     "type":    "array",
                     "meaning": "JSONArrayMeaning"
+                },
+                {
+                    "name":    "is_code_webapp", 
+                    "type":    "boolean",
+                    "meaning": "Boolean"
                 }
             ]
         }
