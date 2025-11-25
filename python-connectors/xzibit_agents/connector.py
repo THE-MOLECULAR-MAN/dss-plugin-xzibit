@@ -44,7 +44,7 @@ class ConnectorProjects(Connector):
 
                 for agent_item in agents:
                     try:
-                        print("[generate_rows] Inner loop start")                        
+                        print(f"[generate_rows] Inner loop start on agent_item {agent_item}")                        
                         # Get the full agent object and its settings
                         # We need the full object to access .get_settings()
                         agent = project.get_agent(agent_item.id)
