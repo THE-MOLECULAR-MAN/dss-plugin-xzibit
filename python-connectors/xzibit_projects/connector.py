@@ -74,12 +74,12 @@ class ConnectorProjects(Connector):
                 {
                     "name":    "shortDesc", 
                     "type":    "string",
-                    "meaning": "Text"
+                    "meaning": "FreeText"
                 },
                 {
                     "name":    "description", 
                     "type":    "string",
-                    "meaning": "Text"
+                    "meaning": "FreeText"
                 },
                 {
                     "name":    "tags", 
