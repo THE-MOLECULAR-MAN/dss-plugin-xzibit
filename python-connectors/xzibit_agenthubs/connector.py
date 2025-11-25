@@ -73,7 +73,6 @@ class ConnectorProjects(Connector):
                             "tags": webapp.get("tags",[]),
                             "type": webapp.get("type"),
                             "created_by_user": webapp.get("createdBy", {}).get("login"),
-                            # "creation_date": webapp.get("creationDate"),
                             "url": f"/projects/{project_key}/webapps/{webapp.get('id')}/view"
                         }
                         yield next_row
