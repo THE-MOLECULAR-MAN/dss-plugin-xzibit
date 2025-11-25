@@ -49,6 +49,8 @@ def get_dss_url_from_global_vars():
     return global_vars.get('dss_url') or global_vars.get('public_url')
 
 
+def get_dss_base_url():
+    
     
 def safe_extract_dataset_metadata(dataset_handle, pk):
     """x"""
