@@ -36,7 +36,7 @@ class ConnectorProjects(Connector):
         for project_key in self.__objects_list:
             print(f"[generate_rows] Outer loop start on project key: {project_key}")
             try:
-                project = client.get_project(project_key)
+                project = self.__client.get_project(project_key)
 
                 # List all agents in the current project
                 # Note: This returns a list of DSSAgentListItem objects
