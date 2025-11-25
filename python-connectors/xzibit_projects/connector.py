@@ -86,9 +86,9 @@ class ConnectorProjects(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "creationDate", 
-                    "type":    "date",
-                    "meaning": "DatetimeNoTz"
+                    "name":    "tags", 
+                    "type":    "array",
+                    "meaning": "JSONArrayMeaning"
                 },
                 {
                     "name":    "last_successful_login", 
