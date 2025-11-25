@@ -30,6 +30,7 @@ class ConnectorConnections(Connector):
         
         # iterate through each object
         for item_info in self.objects_list:
+            pp(item_info)
             next_row = flatten_dict(item_info, include_keys=self.keys)
             
             # return a single row
