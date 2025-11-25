@@ -32,23 +32,13 @@ class ConnectorProjects(Connector):
         
          # iterate through each object
         for pk, proj_datasets in self.__objects_list.items(): # projects
-            project_handle = self.__client.get_project(pk)
+            try:
+                project_handle = self.__client.get_project(pk)
+                agents = project.list_agents()
 
-            for r in proj_datasets:
-                try:
-#                    num_rows += 1
-                    dataset_handle = project_handle.get_dataset(r.id)
-                    next_row = safe_extract_dataset_metadata(dataset_handle, pk)
-                    yield next_row
-
-                except Exception as e:
-                    print(f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} ")
-                    # r is of type "dataikuapi.dss.dataset.DSSDataset"
-                    # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
-                    yield {'projectKey': pk,
-                               'name':       r.id
-                              }
-
+                
+                
+                
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText
