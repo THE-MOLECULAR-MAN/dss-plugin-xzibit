@@ -38,7 +38,6 @@ class ConnectorProjects(Connector):
     def __init__(self, config, plugin_config):
        #  print("[DEBUG agents] Constructor START")
         Connector.__init__(self, config, plugin_config)
-        
         self.__client = api_client()
 
         
