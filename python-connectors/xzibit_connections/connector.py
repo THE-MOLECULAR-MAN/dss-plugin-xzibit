@@ -86,7 +86,7 @@ class ConnectorConnections(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "type", 
+                    "name":    "usableBy", 
                     "type":    "string",
                     "meaning": "Text"
                 }
