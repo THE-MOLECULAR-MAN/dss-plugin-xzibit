@@ -83,7 +83,7 @@ class ConnectorProjects(Connector):
                             "type": webapp.get("type"),
                             "created_by_user": webapp.get("createdBy", {}).get("login"),
                             "backendRunning": webapp.get("backendRunning",None),
-                            "url": get_webapp_url(project_key, webapp.get("id","")),
+                            "url": get_webapp_url(project_key, webapp.get("id",""),webapp.get("name","")),
                             "created_on": datetime.fromtimestamp(webapp.get("createdOn", None) // 1000),
                             "lastModifiedBy": webapp.get("lastModifiedBy", {}).get('login',None),
                             "lastModifiedOn": datetime.fromtimestamp(webapp.get("lastModifiedOn", None) // 1000),
