@@ -19,7 +19,6 @@ def convert_webapp_name_to_url_name(web_app_name):
     # connectname-test1234567890-
 
 
-
 def make_url_friendly(text):
     """
     Converts a string to a Dataiku URL-friendly format:
