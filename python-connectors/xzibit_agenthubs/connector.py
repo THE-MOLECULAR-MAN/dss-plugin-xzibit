@@ -66,7 +66,7 @@ class ConnectorProjects(Connector):
                             "webapp_name": webapp.get("name"),
                             "webapp_id": webapp.get("id"),
                             # "type": webapp.get("type"),
-                            "created_by": webapp.get("createdBy", {}).get("login"),
+                            "created_by_user": webapp.get("createdBy", {}).get("login"),
                             # "creation_date": webapp.get("creationDate"),
                             "url": f"/projects/{project_key}/webapps/{webapp.get('id')}/view"
                         }
