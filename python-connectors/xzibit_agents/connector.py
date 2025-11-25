@@ -33,10 +33,63 @@ class ConnectorProjects(Connector):
          # iterate through each object
         for project_key in self.__objects_list:
             try:
-                project_handle = self.__client.get_project(pk)
+                project = client.get_project(project_key)
+
+                # List all agents in the current project
+                # Note: This returns a list of DSSAgentListItem objects
                 agents = project.list_agents()
 
-                
+                for agent_item in agents:
+                    try:
+                        # Get the full agent object and its settings
+                        # We need the full object to access .get_settings()
+                        agent = project.get_agent(agent_item.id)
+                        settings = agent.get_settings()
+                        raw_settings = settings.get_raw()
+
+                        # We typically want the LLM used by the *Active* version of the agent
+                        active_version_id = settings.active_version
+
+                        llm_model_id = "N/A"
+
+                        if active_version_id:
+                            # Retrieve settings for the active version
+                            version_settings = settings.get_version_settings(active_version_id)
+
+                            # 1. Try standard Visual Agent property
+                            try:
+                                llm_model_id = version_settings.llm_id
+                            except AttributeError:
+                                # 2. Fallback: Check raw settings (common for Code Agents)
+                                ver_raw = version_settings.get_raw()
+                                llm_model_id = ver_raw.get("llmId", None)
+
+                                # Sometimes stored under 'generation' block for complex setups
+                                if not llm_model_id and "generation" in ver_raw:
+                                    llm_model_id = ver_raw["generation"].get("llmId")
+
+                        # Append to our dataset list
+                        # FIX: Use raw_settings (from the full object) instead of agent_item.get_raw()
+                        creation_user = raw_settings.get("creationTag", {}).get("user", "Unknown")
+
+                        agent_data.append({
+                            "Project Key": project_key,
+                            "Agent Name": agent_item.name,
+                            "Agent ID": agent_item.id,
+                            "Created By": creation_user, 
+                            "Active Version": active_version_id,
+                            "LLM Model ID": llm_model_id
+                        })
+
+                    except Exception as e_agent:
+                        # Print minimal error to avoid cluttering logs
+                        print(f"  [Skipping Agent] {agent_item.name} in {project_key}: {e_agent}")
+
+            except Exception as e_proj:
+                # Pass on projects where we lack permissions or feature is disabled
+                pass
+
+
                 
                 
     def get_read_schema(self):
