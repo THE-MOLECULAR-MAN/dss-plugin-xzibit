@@ -67,6 +67,7 @@ class ConnectorProjects(Connector):
                         if active_version_id:
                             # Retrieve settings for the active version
                             version_settings = settings.get_version_settings(active_version_id)
+                            print("[generate_rows] Version Settings")
                             pp(version_settings)
 
                             # 1. Try standard Visual Agent property
