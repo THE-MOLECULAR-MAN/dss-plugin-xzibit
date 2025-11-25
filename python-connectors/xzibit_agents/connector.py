@@ -103,7 +103,7 @@ class ConnectorProjects(Connector):
                                     llm_model_id = ver_raw["generation"].get("llmId")
                             
                             print("[generate_rows] version_settings:")
-                            pp(version_settings)
+                            pp(version_settings.get_raw())
 
                             creation_user = version_settings.get("creationTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
 
