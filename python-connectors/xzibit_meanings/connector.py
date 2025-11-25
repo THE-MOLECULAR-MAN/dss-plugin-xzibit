@@ -40,29 +40,9 @@ class ConnectorMeanings(Connector):
         return {
             "columns": [
                 {
-                    "name":    "id", 
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
                     "name":    "label", 
                     "type":    "string",
                     "meaning": "Text"
-                },
-                {
-                    "name":    "version", 
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "author", 
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "tags", 
-                    "type":    "array",
-                    "meaning": "JSONArrayMeaning"
                 },
                 {
                     "name":    "description", 
@@ -70,9 +50,9 @@ class ConnectorMeanings(Connector):
                     "meaning": "FreeText"
                 },
                 {
-                    "name":    "project_usages", 
-                    "type":    "array",
-                    "meaning": "JSONArrayMeaning"
+                    "name":    "detectable", 
+                    "type":    "string",
+                    "meaning": "Text"
                 },
                 {
                     "name":    "isDev", 
