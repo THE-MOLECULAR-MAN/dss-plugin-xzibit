@@ -71,15 +71,16 @@ class ConnectorProjects(Connector):
                         # Append to our dataset list
                         # FIX: Use raw_settings (from the full object) instead of agent_item.get_raw()
                         creation_user = raw_settings.get("creationTag", {}).get("user", "Unknown")
-
-                        agent_data.append({
+                        
+                        next_row = {
                             "Project Key": project_key,
                             "Agent Name": agent_item.name,
                             "Agent ID": agent_item.id,
                             "Created By": creation_user, 
                             "Active Version": active_version_id,
                             "LLM Model ID": llm_model_id
-                        })
+                        }
+                        yield next_row
 
                     except Exception as e_agent:
                         # Print minimal error to avoid cluttering logs
