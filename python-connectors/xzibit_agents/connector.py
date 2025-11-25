@@ -81,6 +81,7 @@ class ConnectorProjects(Connector):
 
                         llm_model_id = "N/A"
                         is_active_version = active_version_id == agent_item.get('activeVersion', 'Unknown')
+                        creation_user = 'Unknown'
 
                         if active_version_id:
                             # Retrieve settings for the active version
