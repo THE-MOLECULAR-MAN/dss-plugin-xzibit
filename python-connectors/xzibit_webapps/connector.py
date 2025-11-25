@@ -32,8 +32,6 @@ class ConnectorProjects(Connector):
         # 1. Retrieve list of all projects (User is Admin per assumptions)
         project_keys = self.__client.list_project_keys()
 
-        agent_hubs = []
-
         for project_key in project_keys:
             try:
                 project = self.__client.get_project(project_key)
