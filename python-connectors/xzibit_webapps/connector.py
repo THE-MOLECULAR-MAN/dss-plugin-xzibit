@@ -146,7 +146,7 @@ class ConnectorProjects(Connector):
                     "meaning": "DatetimeNoTz"
                 },
                 {
-                    "name":    "last_successful_login", 
+                    "name":    "lastModifiedOn", 
                     "type":    "date",
                     "meaning": "Date"
                 },
