@@ -55,9 +55,9 @@ class ConnectorMeanings(Connector):
                     "meaning": "Text"
                 },
                 {
-                    "name":    "isDev", 
-                    "type":    "boolean",
-                    "meaning": "Boolean"
+                    "name":    "id", 
+                    "type":    "string",
+                    "meaning": "Text"
                 },
                 {
                     "name":    "total_usages", 
