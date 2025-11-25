@@ -21,7 +21,7 @@ class ConnectorConnections(Connector):
         self.client = api_client()
         self.unique_id_key_name = 'name'
         self.keys   = [self.unique_id_key_name, 'type', 'usableBy', 'allowWrite',
-                'credentialsMode', 'params.credentialsMode', 'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedBy.lastModifiedOn', 'params.authtype']
+                'credentialsMode', 'params.credentialsMode', 'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedBy.lastModifiedOn', 'params.authType']
         self.objects_list = self.client.list_connections(as_type='listitems')
 
             
