@@ -43,7 +43,37 @@ class ConnectorProjects(Connector):
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):       
-        
+        # 1. Retrieve list of all projects (User is Admin per assumptions)
+        project_keys = client.list_project_keys()
+        # print(f"Scanning {len(project_keys)} projects for Agent Hub instances...")
+
+        agent_hubs = []
+
+        for project_key in project_keys:
+            try:
+                project = client.get_project(project_key)
+
+                # List all webapps in the project
+                webapps = project.list_webapps()
+
+                for webapp in webapps:
+                    if is_agent_hub(webapp):
+                        # print(f"Found Agent Hub: {webapp['name']} in {project_key}")
+
+                        # Collect relevant metadata
+                        agent_hubs.append({
+                            "project_key": project_key,
+                            "webapp_name": webapp.get("name"),
+                            "webapp_id": webapp.get("id"),
+                            # "type": webapp.get("type"),
+                            "created_by": webapp.get("createdBy", {}).get("login"),
+                            # "creation_date": webapp.get("creationDate"),
+                            "url": f"/projects/{project_key}/webapps/{webapp.get('id')}/view"
+                        })
+
+            except Exception as e:
+                print(f"Skipping project {project_key} due to error: {e}")
+
         
 
                 
