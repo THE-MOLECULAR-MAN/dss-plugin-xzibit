@@ -27,7 +27,7 @@ class ConnectorPlugins(Connector):
         # iterate through each object
         for item_info in self.__client.list_plugins():
             try:
-                next_row = flatten_dict(item_info, include_keys=self.keys)
+                next_row = flatten_dict(item_info, include_keys=self.__keys)
                 next_row = remove_prefix_from_keys(next_row, 'meta.')
                 plugin_handle = self.client.get_plugin(next_row['id'])
                 list_of_usages = plugin_handle.list_usages().get_raw()['usages']
