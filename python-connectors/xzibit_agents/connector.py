@@ -48,7 +48,6 @@ class ConnectorProjects(Connector):
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):       
-        # print("[generate_rows] START")
         
          # iterate through each object
         for project_key in self.__objects_list:
@@ -102,14 +101,8 @@ class ConnectorProjects(Connector):
                             last_modified_on = datetime.fromtimestamp(version_settings.get_raw().get("versionTag", {}).get("lastModifiedOn", None) // 1000) 
                             last_modified_user = version_settings.get_raw().get("versionTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
 
-
-                        # Append to our dataset list
-                        # FIX: Use raw_settings (from the full object) instead of agent_item.get_raw()
-                        #print("[generate_rows] raw_settings:")
                         #pp(raw_settings)
                         
-                        # creationTag.lastModifiedBy.login
-                        # creationTag.lastModifiedBy.lastModifiedOn
                         agent_version = agent_item.get('activeVersion', 'Unknown')
                         
                         # llm_vendor, llm_connection_name, llm_model = split(llm_model_id, ":")
