@@ -83,7 +83,7 @@ class ConnectorProjects(Connector):
                 {"name": "shortDesc", "type": "string", "meaning": "FreeText"},
                 {"name": "description", "type": "string", "meaning": "FreeText"},
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
-                {"name": "lastModifiedOn", "type": "date", "meaning": "DatetimeNoTz"},
+                {"name": "lastModifiedOn", "type": "datetimenotz", "meaning": "DatetimeNoTz"},},
                 {"name": "tutorialProject", "type": "boolean", "meaning": "Boolean"},
             ]
         }
