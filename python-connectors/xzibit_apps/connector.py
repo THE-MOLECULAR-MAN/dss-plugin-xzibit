@@ -6,8 +6,8 @@ from dataiku.connector import Connector
 from xzibit.utils import *
 
 
-
 class ConnectorApps(Connector):
+    """TBD"""
 
     ####################################################################
     # Code that has to be customized for this specific class
@@ -15,34 +15,51 @@ class ConnectorApps(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__keys   = ['appId', 'appVersion', 'label', 
-                 'origin', 'shortDesc', 
-                'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
-                'onlyLimitedVisibility']
+        self.__keys = [
+            "appId",
+            "appVersion",
+            "label",
+            "origin",
+            "shortDesc",
+            "tags",
+            "isAppImg",
+            "instanceCount",
+            "useAsRecipe",
+            "onlyLimitedVisibility",
+        ]
 
-
-    def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
-                            partition_id=None, records_limit = -1):
+    def generate_rows(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        records_limit=-1,
+    ):
+        """TBD"""
         # iterate through each object
         for item_info in self.__client.list_apps():
             next_row = flatten_dict(item_info, include_keys=self.__keys)
             yield next_row
 
-
     def get_records_count(self, partitioning=None, partition_id=None):
+        """TBD"""
         return len(self.__client.list_apps())
-    
+
     def get_read_schema(self):
+        """TBD"""
         return None
 
-####################################################################
-# Intentionally not implemented, not needed for this type
-####################################################################
+    ####################################################################
+    # Intentionally not implemented, not needed for this type
+    ####################################################################
     def get_partitioning(self):
+        """TBD"""
         raise NotImplementedError
 
     def list_partitions(self, partitioning):
+        """TBD"""
         return []
 
     def partition_exists(self, partitioning, partition_id):
+        """TBD"""
         raise NotImplementedError

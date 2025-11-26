@@ -1,5 +1,7 @@
 import os
 import re
+import glob
+import shutil
 from datetime import datetime
 
 import dataiku
@@ -8,112 +10,154 @@ from dataikuapi.utils import DataikuException
 
 # pretty print dictionaries for debugging - don't remove at this time.
 from pprint import pprint as pp
-from json   import dumps  as jd
+from json import dumps as jd
 
 
 def get_dss_external_url():
+    """TBD"""
     # 1. Initialize the client (connects to local instance)
     client = dataiku.api_client()
-    
+
     # 2. Retrieve General Settings (Requires Admin permissions)
     # This corresponds to the "Administration > Settings > General" page
     settings = client.get_general_settings()
-    
+
     # 3. Extract the 'studioExternalUrl' from the raw settings dictionary
     # This key holds the value of the "DSS URL" field
-    dss_url = settings.get_raw().get('studioExternalUrl')
-    
+    dss_url = settings.get_raw().get("studioExternalUrl")
+
     if dss_url:
         return dss_url
-    else:
-        return None
 
-def get_dss_url_from_env():
-    # Attempt to retrieve host and port from environment variables
-    ext_host = os.environ.get('DKU_BACKEND_EXT_HOST')
-    base_port = os.environ.get('DKU_BASE_PORT')
-    
-    if ext_host and base_port:
-        # Note: You may need to infer the scheme (http vs https) 
-        # based on your knowledge of the instance setup.
-        return f"http://{ext_host}:{base_port}/"  
     return None
 
+
+def get_dss_url_from_env():
+    """TBD"""
+    # Attempt to retrieve host and port from environment variables
+    ext_host = os.environ.get("DKU_BACKEND_EXT_HOST")
+    base_port = os.environ.get("DKU_BASE_PORT")
+
+    if ext_host and base_port:
+        # Note: You may need to infer the scheme (http vs https)
+        # based on your knowledge of the instance setup.
+        return f"http://{ext_host}:{base_port}/"
+    return None
+
+
 def get_dss_url_from_global_vars():
+    """TBD"""
     client = dataiku.api_client()
-    
+
     # Retrieve global variables (accessible to all users)
     global_vars = client.get_variables()
-    
+
     # Check for common naming conventions like 'dss_url', 'public_url', or 'instance_url'
-    return global_vars.get('dss_url') or global_vars.get('public_url')
+    return global_vars.get("dss_url") or global_vars.get("public_url")
 
 
 def get_dss_base_url():
-    return get_dss_url_from_env() or get_dss_external_url() or get_dss_url_from_global_vars()
+    """TBD"""
+    return (
+        get_dss_url_from_env()
+        or get_dss_external_url()
+        or get_dss_url_from_global_vars()
+    )
 
-    
+
 def safe_extract_dataset_metadata(dataset_handle, pk):
-    """x"""
-    assert isinstance(dataset_handle, dataikuapi.dss.dataset.DSSDataset), f"safe_extract_dataset_metadata - Assertion failed: Expecting DSSDataset, got {type(dataset_handle)}"
-    
-    keys = ['name', 'type', 'formatType', 'params.connection',
-           'managed', 'params.mode', 'params.table', 'params.schema',
-           'params.path', 
-           'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn',
-           'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn',
-           'shortDesc', 'description', 'params.metastoreDatabaseName',
-           'params.folderSmartId', 'tags', 'featureGroup'
-          ]
+    """TBD"""
+    assert isinstance(
+        dataset_handle, dataikuapi.dss.dataset.DSSDataset
+    ), f"safe_extract_dataset_metadata - Assertion failed: Expecting DSSDataset, got {type(dataset_handle)}"
+
+    keys = [
+        "name",
+        "type",
+        "formatType",
+        "params.connection",
+        "managed",
+        "params.mode",
+        "params.table",
+        "params.schema",
+        "params.path",
+        "creationTag.lastModifiedBy.login",
+        "creationTag.lastModifiedOn",
+        "versionTag.lastModifiedBy.login",
+        "versionTag.lastModifiedOn",
+        "shortDesc",
+        "description",
+        "params.metastoreDatabaseName",
+        "params.folderSmartId",
+        "tags",
+        "featureGroup",
+    ]
     try:
         dataset_metadata = {}
-        dataset_metadata['projectKey']     = pk
-        dataset_metadata['id']     = dataset_handle.id
-        dataset_metadata['name']   = dataset_handle.name
-        dataset_metadata['exists'] = dataset_handle.exists()
-        
-        if not dataset_metadata['exists']:
+        dataset_metadata["projectKey"] = pk
+        dataset_metadata["id"] = dataset_handle.id
+        dataset_metadata["name"] = dataset_handle.name
+        dataset_metadata["exists"] = dataset_handle.exists()
+
+        if not dataset_metadata["exists"]:
             # print('safe_extract_dataset_metadata - dataset does NOT exist.')
             return dataset_metadata
-            
+
         try:
-            raw_data = dataset_handle.get_info().get_raw() # returns dict, can throw com.dataiku.dip.server.controllers.NotFoundException
-            raw_data = raw_data.get('dataset', {}) # fix for get_info
-        except Exception as e:
-            print(f"safe_extract_dataset_metadata - EXCEPTION at dataset_handle.get_info().get_raw()")
-            dataset_metadata['exists'] = "EXCEPTION 1"
+            raw_data = (
+                dataset_handle.get_info().get_raw()
+            )  # returns dict, can throw com.dataiku.dip.server.controllers.NotFoundException
+            raw_data = raw_data.get("dataset", {})  # fix for get_info
+        except Exception:
+            print(
+                f"safe_extract_dataset_metadata - EXCEPTION at dataset_handle.get_info().get_raw()"
+            )
+            dataset_metadata["exists"] = "EXCEPTION 1"
             return dataset_metadata
 
         # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
 
         try:
             # pp(raw_data)
-            dataset_metadata_new = extract_nested_keys(raw_data, keys) # NOT causing exception
-            dataset_metadata.update(dataset_metadata_new) # def not causing exception
+            dataset_metadata_new = extract_nested_keys(
+                raw_data, keys
+            )  # NOT causing exception
+            dataset_metadata.update(dataset_metadata_new)  # def not causing exception
             # pp(dataset_metadata) # def not causing exception
 
-        except Exception as e:
+        except Exception:
             print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
-            dataset_metadata['exists'] = "EXCEPTION 2"
+            dataset_metadata["exists"] = "EXCEPTION 2"
             return dataset_metadata
-       
-        dataset_metadata['num_metrics_checks'] = len(raw_data.get('metricsChecks', {}).get('checks', []))
-        dataset_metadata['num_columns']        = len(raw_data.get('schema', {}).get('columns', []))
-        dataset_metadata['column_names']       = [col["name"] for col in raw_data.get("schema", {}).get("columns", []) if "name" in col]
-        dataset_metadata['creationTag.lastModifiedOn'] = int_to_datetime(dataset_metadata.get('creationTag.lastModifiedOn', None))
-        dataset_metadata['versionTag.lastModifiedOn']  = int_to_datetime(dataset_metadata.get('versionTag.lastModifiedOn',  None))
+
+        dataset_metadata["num_metrics_checks"] = len(
+            raw_data.get("metricsChecks", {}).get("checks", [])
+        )
+        dataset_metadata["num_columns"] = len(
+            raw_data.get("schema", {}).get("columns", [])
+        )
+        dataset_metadata["column_names"] = [
+            col["name"]
+            for col in raw_data.get("schema", {}).get("columns", [])
+            if "name" in col
+        ]
+        dataset_metadata["creationTag.lastModifiedOn"] = int_to_datetime(
+            dataset_metadata.get("creationTag.lastModifiedOn", None)
+        )
+        dataset_metadata["versionTag.lastModifiedOn"] = int_to_datetime(
+            dataset_metadata.get("versionTag.lastModifiedOn", None)
+        )
 
     except DataikuException as e:
         print(f"safe_extract_dataset_metadata - Dataiku exception {e}")
-        dataset_metadata['exists'] = "EXCEPTION 3"
+        dataset_metadata["exists"] = "EXCEPTION 3"
         return dataset_metadata
     except Exception as e:
         print(f"safe_extract_dataset_metadata - Generic exception {e}")
-        dataset_metadata['exists'] = "EXCEPTION 4"
+        dataset_metadata["exists"] = "EXCEPTION 4"
         return dataset_metadata
     finally:
         return dataset_metadata
-
 
 
 def print_sorted_strings(s: set[str]) -> None:
@@ -123,7 +167,8 @@ def print_sorted_strings(s: set[str]) -> None:
     for item in sorted(s, key=str.lower):
         print(item)
 
-def list_keys_recursive(d: dict, parent_key: str = '') -> list[str]:
+
+def list_keys_recursive(d: dict, parent_key: str = "") -> list[str]:
     """
     Recursively list all keys in a nested dictionary using dot notation,
     ignoring list indices (e.g., schema.columns[0].name -> schema.columns.name).
@@ -140,8 +185,7 @@ def list_keys_recursive(d: dict, parent_key: str = '') -> list[str]:
         t = str(type(d))
         print(f"ERROR: list_keys_recursive - not a dict: {d} - {t}")
         return None
-    
-    
+
     for k, v in d.items():
         full_key = f"{parent_key}.{k}" if parent_key else k
         keys.append(full_key)
@@ -154,6 +198,7 @@ def list_keys_recursive(d: dict, parent_key: str = '') -> list[str]:
                     # Recurse without adding an index
                     keys.extend(list_keys_recursive(item, full_key))
     return keys
+
 
 def extract_nested_keys(d: dict, keys: list[str]) -> dict[str, object]:
     """
@@ -170,7 +215,7 @@ def extract_nested_keys(d: dict, keys: list[str]) -> dict[str, object]:
 
     def get_nested_value(data, key_path):
         """Safely get a nested value from a dict using dot-separated keys."""
-        for key in key_path.split('.'):
+        for key in key_path.split("."):
             if isinstance(data, dict) and key in data:
                 data = data[key]
             else:
@@ -193,7 +238,7 @@ def int_to_datetime(timestamp: int) -> datetime:
 
     if timestamp > 1e12:
         timestamp /= 1000  # convert to seconds
-    
+
     return datetime.utcfromtimestamp(timestamp)
 
 
@@ -210,14 +255,14 @@ def parse_user_datetime(dt_str: str) -> datetime:
     except ValueError:
         return None
 
-    
+
 def get_jq_value(data: dict, jq_path: str):
     """
     Traverse a nested dict using a jq-style path like 'a.b.c'.
     Returns the value if found, else None.
     """
     try:
-        keys = jq_path.split('.')
+        keys = jq_path.split(".")
         for key in keys:
             if isinstance(data, dict) and key in data:
                 data = data[key]
@@ -226,6 +271,7 @@ def get_jq_value(data: dict, jq_path: str):
         return data
     except Exception:
         return None
+
 
 def list_to_error_dict(strings: list[str], value="error") -> dict[str, str]:
     """
@@ -240,7 +286,9 @@ def list_to_error_dict(strings: list[str], value="error") -> dict[str, str]:
     """
     return {s: value for s in strings}
 
+
 def get_path_size_megabytes(path):
+    """TBD"""
     # Convert bytes → megabytes (1 MB = 1024 * 1024 bytes)
     size_mb = get_path_size(path) / (1024 * 1024)
     return round(size_mb, 1)
@@ -292,6 +340,7 @@ def get_values_for_key(ld, k):
     """
     return {d[k] for d in ld if isinstance(d, dict) and k in d}
 
+
 def get_values_from_list_of_dicts(list_of_dicts):
     """
     Extract a list of unique values from a list of dictionaries.
@@ -312,18 +361,19 @@ def get_values_from_list_of_dicts(list_of_dicts):
                     values.append(v)
     return values
 
-def flatten_dict(d, parent_key='', sep='.', include_keys=None):
+
+def flatten_dict(d, parent_key="", sep=".", include_keys=None):
     """
     Recursively flattens a nested dictionary and optionally filters which keys to include.
 
     Ex: flatten_dict(data, include_keys=['label', 'url', 'version'])
-    
+
     Args:
         d (dict): The input dictionary to flatten.
         parent_key (str): Used internally for recursion; do not set manually.
         sep (str): Separator for concatenated keys. Default is '.'.
-        include_keys (list[str] | None): 
-            Optional list of keys (or substrings) to include in the final output. 
+        include_keys (list[str] | None):
+            Optional list of keys (or substrings) to include in the final output.
             If None, all keys are included.
 
     Returns:
@@ -356,9 +406,9 @@ def remove_prefix_from_keys(d, prefix, recursive=True):
     new_dict = {}
     for k, v in d.items():
         # Remove the prefix if the key starts with it
-        new_key = k[len(prefix):] if k.startswith(prefix) else k
+        new_key = k[len(prefix) :] if k.startswith(prefix) else k
         # Strip a leading separator if present (e.g., '.' or '_')
-        if new_key.startswith('.') or new_key.startswith('_'):
+        if new_key.startswith(".") or new_key.startswith("_"):
             new_key = new_key[1:]
         # Recurse into nested dicts if enabled
         if recursive and isinstance(v, dict):
@@ -370,17 +420,14 @@ def remove_prefix_from_keys(d, prefix, recursive=True):
 
 def clear_pip_tmp():
     """
-    This function deletes all the temporary files created by 
-    Pip during the installation process. They are not always cleared 
-    and when dealing with dozens of Code Environments, 
+    This function deletes all the temporary files created by
+    Pip during the installation process. They are not always cleared
+    and when dealing with dozens of Code Environments,
     it can fill up the hard disk very quickly.
     It assumpes they're located in /tmp/pip-*
     """
-    import glob
-    import os
-    import shutil
-    
-    for d in glob.glob('/tmp/pip-*'):
+
+    for d in glob.glob("/tmp/pip-*"):
         # print(f'Deleting {d}...')
         if os.path.isdir(d):
             shutil.rmtree(d, ignore_errors=True)

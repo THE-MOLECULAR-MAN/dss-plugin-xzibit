@@ -1,9 +1,8 @@
-
 import json
 import sys
+import traceback
 
 # from json import dumps
-import traceback
 
 # import pandas as pd
 import dataiku
@@ -21,24 +20,21 @@ class MyRunnable(Runnable):
         :param config: the dict of the configuration of the object
         :param plugin_config: contains the plugin settings
         """
-        self.__project_key   = project_key
-        self.__config        = config
+        self.__project_key = project_key
+        self.__config = config
         self.__plugin_config = plugin_config
-        self.__client        = dataiku.api_client()
-        
+        self.__client = dataiku.api_client()
+
     def get_progress_target(self):
         """
-        If the runnable will return some progress info, have this function return a tuple of 
+        If the runnable will return some progress info, have this function return a tuple of
         (target, unit) where unit is one of: SIZE, FILES, RECORDS, NONE
         """
         return None
 
-
     def _sync_with_github(self):
         """x"""
-        
-        
-        projects = self.__client.list_projects()
+        # projects = self.__client.list_projects()
         successful = set()
         not_connected = set()
         errored = set()
@@ -52,15 +48,24 @@ class MyRunnable(Runnable):
                 r = project_git.get_remote()
                 status = project_git.get_status()
 
-                has_github_repo = len(status.get('remotes',[])) > 0
-                projects_analysis.append({"key":iter_project_key, "has_github_repo": has_github_repo, "status": str(status), "remote": r})
+                has_github_repo = len(status.get("remotes", [])) > 0
+                projects_analysis.append(
+                    {
+                        "key": iter_project_key,
+                        "has_github_repo": has_github_repo,
+                        "status": str(status),
+                        "remote": r,
+                    }
+                )
 
                 if has_github_repo:
                     res_push = project_git.push()
                     res_pull = project_git.pull()
 
-                    if (not res_push.get('success',False)) or (not res_pull.get('success',False)):
-        #             if not res_push.get('success',False):
+                    if (not res_push.get("success", False)) or (
+                        not res_pull.get("success", False)
+                    ):
+                        #             if not res_push.get('success',False):
                         print(f"[ERROR] pushing or pulling {iter_project_key}")
                         errored.add(iter_project_key)
                         continue
@@ -73,11 +78,7 @@ class MyRunnable(Runnable):
                 errored.add(iter_project_key)
                 continue
 
-
-
-
     def run(self, progress_callback):
-        """
-        """
+        """TBD"""
         self._sync_with_github()
         return None

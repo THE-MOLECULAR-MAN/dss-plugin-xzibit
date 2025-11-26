@@ -5,6 +5,7 @@ from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
 
+
 class ConnectorRecipes(Connector):
 
     ####################################################################
@@ -15,14 +16,19 @@ class ConnectorRecipes(Connector):
         self.__client = api_client()
         self.__objects_list = {}
         self.__count = 0
-        
+
         for pk in self.__client.list_project_keys():
             project_handle = self.__client.get_project(pk)
-            self.__objects_list[pk] = project_handle.list_recipes(as_type='objects')
+            self.__objects_list[pk] = project_handle.list_recipes(as_type="objects")
             self.__count += len(self.__objects_list[pk])
 
-    def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
-                            partition_id=None, records_limit = -1):
+    def generate_rows(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        records_limit=-1,
+    ):
         # iterate through each object
         for pk, proj_recipes in self.objects_list.items():
             project_handle = self.__client.get_project(pk)
@@ -31,69 +37,46 @@ class ConnectorRecipes(Connector):
                 recipe_handle = project_handle.get_recipe(r.id)
                 recipe_settings_handle = recipe_handle.get_settings()
                 raw_data = recipe_settings_handle.get_recipe_raw_definition()
-                
+
                 next_row = {
-                            'projectKey': pk,
-                            'id':   r.id,
-                            'type': raw_data['type'],
-                            'name': recipe_handle.name,
-                            'tags': raw_data['tags'],
-                            'input_datasets':  recipe_settings_handle.get_flat_input_refs(),
-                            'output_datasets': recipe_settings_handle.get_flat_output_refs(),
+                    "projectKey": pk,
+                    "id": r.id,
+                    "type": raw_data["type"],
+                    "name": recipe_handle.name,
+                    "tags": raw_data["tags"],
+                    "input_datasets": recipe_settings_handle.get_flat_input_refs(),
+                    "output_datasets": recipe_settings_handle.get_flat_output_refs(),
                 }
                 yield next_row
 
-                
     def get_read_schema(self):
         return {
             "columns": [
+                {"name": "projectKey", "type": "string", "meaning": "Text"},
+                {"name": "id", "type": "string", "meaning": "Text"},
+                {"name": "type", "type": "string", "meaning": "Text"},
+                {"name": "name", "type": "string", "meaning": "Text"},
+                {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {
-                    "name":   "projectKey", 
-                    "type":   "string",
-                    "meaning": "Text"
+                    "name": "input_datasets",
+                    "type": "string",
+                    "meaning": "JSONArrayMeaning",
                 },
                 {
-                    "name": "id", 
+                    "name": "output_datasets",
                     "type": "string",
-                    "meaning": "Text"
+                    "meaning": "JSONArrayMeaning",
                 },
-                {
-                    "name": "type", 
-                    "type": "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name": "name", 
-                    "type": "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name": "tags", 
-                    "type": "string",
-                    "meaning": "JSONArrayMeaning"
-                },
-                {
-                    "name": "input_datasets", 
-                    "type": "string",
-                    "meaning": "JSONArrayMeaning"
-                },
-                {
-                    "name": "output_datasets", 
-                    "type": "string",
-                    "meaning": "JSONArrayMeaning"
-                }
             ]
         }
-        # return None
-
 
     def get_records_count(self, partitioning=None, partition_id=None):
         # return len(self.objects_list)
         return self.__count
 
-####################################################################
-# Intentionally not implemented, not needed for this type
-####################################################################
+    ####################################################################
+    # Intentionally not implemented, not needed for this type
+    ####################################################################
     def get_partitioning(self):
         raise NotImplementedError
 
