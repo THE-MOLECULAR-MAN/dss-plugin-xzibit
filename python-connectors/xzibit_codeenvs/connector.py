@@ -41,7 +41,6 @@ class ConnectorCodeEnvs(Connector):
         for item_info in self.__client.list_code_envs():
             next_row = flatten_dict(item_info, include_keys=self.__keys)
 
-            # custom things for this specific class:
             env_lang = next_row["envLang"]
             env_name = next_row["envName"]
             try:
