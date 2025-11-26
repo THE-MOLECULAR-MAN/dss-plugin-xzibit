@@ -27,7 +27,7 @@ class ConnectorCodeEnvs(Connector):
                             partition_id=None, records_limit = -1):
         # iterate through each object
         for item_info in self.objects_list:
-            next_row = flatten_dict(item_info, include_keys=self.keys)
+            next_row = flatten_dict(item_info, include_keys=self.__keys)
             
             # custom things for this specific class:
             env_lang = next_row['envLang']
