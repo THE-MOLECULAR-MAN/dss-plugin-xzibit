@@ -11,7 +11,7 @@ def get_codeenv_url(envName, envLang='python'):
     base_url = get_dss_base_url()
     if envName is None or envLang is None or base_url is None:
         return None
-    return f"{base_url}/admin/code-envs/design/{lower(envName)}/{envLang}"
+    return f"{base_url}/admin/code-envs/design/{lower(envLang)}/{envName}"
 
 
 
