@@ -92,5 +92,4 @@ class ConnectorConnections(Connector):
              {'meaning': 'Text', 'name': 'params.role', 'type': 'string'},
              {'meaning': 'Text',
               'name': 'params.defaultSchema',
-              'type': 'string'}],
- 'userModified': True}
+              'type': 'string'}]}
