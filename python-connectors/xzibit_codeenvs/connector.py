@@ -6,12 +6,12 @@ from dataiku.connector import Connector
 from xzibit.utils import *
 
 
-def get_cluster_url(cluster_id):
+def get_codeenv_url(envName, envLang):
     # https://beta-design.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/brave-mcp/    
     base_url = get_dss_base_url()
-    if cluster_id is None or base_url is None:
+    if envName is None or envLang is None or base_url is None:
         return None
-    return f"{base_url}/admin/clusters/{cluster_id}"
+    return f"{base_url}/admin/code-envs/design/{lower(envName)}/{envLang}"
 
 
 
