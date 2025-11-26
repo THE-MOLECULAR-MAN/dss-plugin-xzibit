@@ -20,7 +20,6 @@ class ConnectorPlugins(Connector):
         
         self.__client = api_client()
         self.__keys   = ['id', 'meta.label', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev']
-        self.objects_list = 
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
