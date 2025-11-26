@@ -58,9 +58,9 @@ class ConnectorCodeEnvs(Connector):
                 )
                 next_row["path"] = settings.get("path", None)
 
-                next_row["disk_size_megabytes"] = get_path_size_megabytes(
-                    next_row["path"]
-                )
+#                 next_row["disk_size_megabytes"] = get_path_size_megabytes(
+#                     next_row["path"]
+#                 )
 
                 list_of_usages = code_env_handle.list_usages()
 
@@ -94,9 +94,9 @@ class ConnectorCodeEnvs(Connector):
              {'meaning': 'URL', 'name': 'codeenv_url', 'type': 'string'},
              {'meaning': 'Text', 'name': 'corePackagesSet', 'type': 'string'},
              {'meaning': 'Text', 'name': 'path', 'type': 'string'},
-             {'meaning': 'DoubleMeaning',
-              'name': 'disk_size_megabytes',
-              'type': 'double'},
+#              {'meaning': 'DoubleMeaning',
+#               'name': 'disk_size_megabytes',
+#               'type': 'double'},
              {'meaning': 'JSONArrayMeaning',
               'name': 'usages',
               'type': 'string'}]}

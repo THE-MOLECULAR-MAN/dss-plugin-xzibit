@@ -48,21 +48,27 @@ class ConnectorUsers(Connector):
     ):
         # iterate through each object
         for item_info in self.__client.list_users():
-            next_row = flatten_dict(item_info, include_keys=self.__keys)
-            # item_id = next_row[self.__unique_id_key_name]
-            item_handle = self.__client.get_user(item_info[self.__unique_id_key_name])
-            # activity_handle = item_handle.get_activity()
-            # TODO: fix this date mess below
-            next_row["last_successful_login"] = parse_user_datetime(
-                str(item_handle.get_activity().last_successful_login)
-            )
-            next_row["last_session_activity"] = parse_user_datetime(
-                str(item_handle.get_activity().last_session_activity)
-            )
-            next_row["creationDate"] = int_to_datetime(next_row["creationDate"])
-            next_row["url_user"] = self.get_user_url(next_row.get("login", None))
-            # pp(item_info)
-            yield next_row
+            try:
+                next_row = flatten_dict(item_info, include_keys=self.__keys)
+                # item_id = next_row[self.__unique_id_key_name]
+                item_handle = self.__client.get_user(item_info[self.__unique_id_key_name])
+                # activity_handle = item_handle.get_activity()
+                # TODO: fix this date mess below
+                next_row["last_successful_login"] = parse_user_datetime(
+                    str(item_handle.get_activity().last_successful_login)
+                )
+                next_row["last_session_activity"] = parse_user_datetime(
+                    str(item_handle.get_activity().last_session_activity)
+                )
+                next_row["url_user"] = self.get_user_url(next_row.get("login", None))
+
+                # bug on next line
+                next_row["creationDate"] = int_to_datetime(next_row["creationDate"])
+                # pp(item_info)
+            except Exception:
+                print("Exception: generate_rows - User")
+            finally
+                yield next_row
 
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
