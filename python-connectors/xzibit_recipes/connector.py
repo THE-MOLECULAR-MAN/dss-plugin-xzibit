@@ -5,11 +5,6 @@ from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
 
-####################################################################
-# Unique imports for this Class
-####################################################################
-# none.
-
 class ConnectorRecipes(Connector):
 
     ####################################################################
@@ -17,22 +12,20 @@ class ConnectorRecipes(Connector):
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
-        
-        self.client = api_client()
-        self.objects_list = {}
+        self.__client = api_client()
+        self.__objects_list = {}
         self.__count = 0
         
-        for pk in self.client.list_project_keys():
-            project_handle = self.client.get_project(pk)
-            self.objects_list[pk] = project_handle.list_recipes(as_type='objects')
-            self.__count += len(self.objects_list[pk])
+        for pk in self.__client.list_project_keys():
+            project_handle = self.__client.get_project(pk)
+            self.__objects_list[pk] = project_handle.list_recipes(as_type='objects')
+            self.__count += len(self.__objects_list[pk])
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
-        
         # iterate through each object
         for pk, proj_recipes in self.objects_list.items():
-            project_handle = self.client.get_project(pk)
+            project_handle = self.__client.get_project(pk)
 
             for r in proj_recipes:
                 recipe_handle = project_handle.get_recipe(r.id)
@@ -45,11 +38,9 @@ class ConnectorRecipes(Connector):
                             'type': raw_data['type'],
                             'name': recipe_handle.name,
                             'tags': raw_data['tags'],
-                            'input_datasets': recipe_settings_handle.get_flat_input_refs(),
+                            'input_datasets':  recipe_settings_handle.get_flat_input_refs(),
                             'output_datasets': recipe_settings_handle.get_flat_output_refs(),
                 }
-               
-                # return a single row
                 yield next_row
 
                 
@@ -78,27 +69,24 @@ class ConnectorRecipes(Connector):
                 },
                 {
                     "name": "tags", 
-                    "type": "array",
-                    "meaning": "array"
+                    "type": "string",
+                    "meaning": "JSONArrayMeaning"
                 },
                 {
                     "name": "input_datasets", 
-                    "type": "array",
-                    "meaning": "array"
+                    "type": "string",
+                    "meaning": "JSONArrayMeaning"
                 },
                 {
                     "name": "output_datasets", 
-                    "type": "array",
-                    "meaning": "array"
+                    "type": "string",
+                    "meaning": "JSONArrayMeaning"
                 }
             ]
         }
         # return None
 
-            
-####################################################################
-# Same for all instances:
-####################################################################
+
     def get_records_count(self, partitioning=None, partition_id=None):
         # return len(self.objects_list)
         return self.__count

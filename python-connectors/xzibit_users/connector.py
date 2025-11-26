@@ -5,10 +5,6 @@ from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
 
-####################################################################
-# Unique imports for this Class
-####################################################################
-# none.
 
 class ConnectorUsers(Connector):
 
@@ -17,31 +13,27 @@ class ConnectorUsers(Connector):
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
-        
-        self.client = api_client()
-        self.unique_id_key_name = 'login'
-        self.keys   = [self.unique_id_key_name, 'displayName',
+        self.__client = api_client()
+        self.__unique_id_key_name = 'login'
+        self.__keys   = [self.__unique_id_key_name, 'displayName',
                       'userProfile', 'groups', 'sourceType', 'email',
                       'creationDate', 'enabled', 'resultingUserProfile',
                       'userProfile']
-        self.objects_list = self.client.list_users()
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
-        
         # iterate through each object
-        for item_info in self.objects_list:
-            next_row = flatten_dict(item_info, include_keys=self.keys)
-            item_id = next_row[self.unique_id_key_name]
-            item_handle = self.client.get_user(item_info[self.unique_id_key_name])
+        for item_info in self.__client.list_users():
+            next_row = flatten_dict(item_info, include_keys=self.__keys)
+            item_id = next_row[self.__unique_id_key_name]
+            item_handle = self.client.get_user(item_info[self.__unique_id_key_name])
             activity_handle = item_handle.get_activity()
-
+            # TODO: fix this date mess below
             next_row['last_successful_login'] = parse_user_datetime(str(item_handle.get_activity().last_successful_login))
             next_row['last_session_activity'] = parse_user_datetime(str(item_handle.get_activity().last_session_activity))
             next_row['creationDate'] = int_to_datetime(next_row['creationDate'])
             # pp(item_info)
-            # return a single row
             yield next_row
 
     def get_read_schema(self):
@@ -106,12 +98,10 @@ class ConnectorUsers(Connector):
                 }
             ]
         }
-            
-####################################################################
-# Same for all instances:
-####################################################################
+
+
     def get_records_count(self, partitioning=None, partition_id=None):
-        return len(self.objects_list)
+        return len(self.__client.list_users())
 
 ####################################################################
 # Intentionally not implemented, not needed for this type
@@ -124,6 +114,3 @@ class ConnectorUsers(Connector):
 
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
-
-    #def get_read_schema(self):
-    #    return None

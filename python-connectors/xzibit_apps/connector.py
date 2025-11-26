@@ -6,10 +6,6 @@ from dataiku.connector import Connector
 from xzibit.utils import *
 
 
-####################################################################
-# Unique imports for this Class
-####################################################################
-# none.
 
 class ConnectorApps(Connector):
 
@@ -18,32 +14,26 @@ class ConnectorApps(Connector):
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
-        
-        self.client = api_client()
-        self.unique_id_key_name = 'appId'
-        self.keys   = [self.unique_id_key_name, 'appVersion', 'label', 
-                       'origin', 'shortDesc', 
+        self.__client = api_client()
+        self.__keys   = ['appId', 'appVersion', 'label', 
+                 'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
                 'onlyLimitedVisibility']
-        self.objects_list = self.client.list_apps()
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
-        
         # iterate through each object
-        for item_info in self.objects_list:
-            next_row = flatten_dict(item_info, include_keys=self.keys)
-            
-            # return a single row
+        for item_info in self.__client.list_apps():
+            next_row = flatten_dict(item_info, include_keys=self.__keys)
             yield next_row
 
-            
-####################################################################
-# Same for all instances:
-####################################################################
+
     def get_records_count(self, partitioning=None, partition_id=None):
-        return len(self.objects_list)
+        return len(self.__client.list_apps())
+    
+    def get_read_schema(self):
+        return None
 
 ####################################################################
 # Intentionally not implemented, not needed for this type
@@ -56,6 +46,3 @@ class ConnectorApps(Connector):
 
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
-
-    def get_read_schema(self):
-        return None

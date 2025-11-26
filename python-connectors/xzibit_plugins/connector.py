@@ -17,26 +17,19 @@ class ConnectorPlugins(Connector):
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
-        
-        self.client = api_client()
-        self.unique_id_key_name = 'id'
-        self.keys   = [self.unique_id_key_name, 'meta.label', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev']
-        self.objects_list = self.client.list_plugins()
+        self.__client = api_client()
+        self.__keys   = ['id', 'meta.label', 'version', 'meta.author', 
+                         'meta.tags', 'meta.description', 'isDev']
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
-        
         # iterate through each object
-        for item_info in self.objects_list:
+        for item_info in self.__client.list_plugins():
             try:
-                next_row = flatten_dict(item_info, include_keys=self.keys)
-
-                # custom things for this specific class:
+                next_row = flatten_dict(item_info, include_keys=self.__keys)
                 next_row = remove_prefix_from_keys(next_row, 'meta.')
-
-                plugin_handle = self.client.get_plugin(next_row['id'])
-
+                plugin_handle = self.__client.get_plugin(next_row['id'])
                 list_of_usages = plugin_handle.list_usages().get_raw()['usages']
 
                 if len(list_of_usages) == 0:
@@ -48,9 +41,10 @@ class ConnectorPlugins(Connector):
             except Exception as e:
                 print(f"Exception {e} with plugin_info:")
                 pprint(plugin_info)
-                next_row = list_to_error_dict(keys)
+                next_row = list_to_error_dict(self.__keys)
             finally:
                 yield next_row
+
 
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
@@ -79,17 +73,17 @@ class ConnectorPlugins(Connector):
                 },
                 {
                     "name":    "tags", 
-                    "type":    "array",
+                    "type":    "string",
                     "meaning": "JSONArrayMeaning"
                 },
                 {
                     "name":    "description", 
-                    "type":    "date",
+                    "type":    "string",
                     "meaning": "FreeText"
                 },
                 {
                     "name":    "project_usages", 
-                    "type":    "array",
+                    "type":    "string",
                     "meaning": "JSONArrayMeaning"
                 },
                 {
@@ -104,13 +98,10 @@ class ConnectorPlugins(Connector):
                 }
             ]
         }
-            
 
-####################################################################
-# Same for all instances:
-####################################################################
+
     def get_records_count(self, partitioning=None, partition_id=None):
-        return len(self.objects_list)
+        return len(self.__client.list_plugins())
 
 ####################################################################
 # Intentionally not implemented, not needed for this type

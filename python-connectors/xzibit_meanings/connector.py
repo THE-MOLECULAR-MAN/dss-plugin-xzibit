@@ -18,21 +18,17 @@ class ConnectorMeanings(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         
-        self.client = api_client()
-        self.unique_id_key_name = 'label'
-        self.keys   = [self.unique_id_key_name, 'description', 'detectable', 'type', 'id', 'normalizationMode']
-        self.objects_list = self.client.list_meanings()
+        self.__client = api_client()
+        self.__keys   = ['label', 'description', 'detectable', 'type', 'id', 'normalizationMode']
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
-        
         # iterate through each object
-        for item_info in self.objects_list:
-            next_row = flatten_dict(item_info, include_keys=self.keys)
-
-            # return a single row
+        for item_info in self.__client.list_meanings():
+            next_row = flatten_dict(item_info, include_keys=self.__keys)
             yield next_row
+
 
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
@@ -71,13 +67,10 @@ class ConnectorMeanings(Connector):
                 }
             ]
         }
-            
-            
-####################################################################
-# Same for all instances:
-####################################################################
+
     def get_records_count(self, partitioning=None, partition_id=None):
-        return len(self.objects_list)
+        return len(self.__client.list_meanings())
+
 
 ####################################################################
 # Intentionally not implemented, not needed for this type

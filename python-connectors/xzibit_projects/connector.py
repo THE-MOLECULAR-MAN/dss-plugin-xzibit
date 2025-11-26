@@ -17,29 +17,24 @@ class ConnectorProjects(Connector):
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
-        
-        self.client = api_client()
-        self.unique_id_key_name = 'projectKey'
-        self.keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
+        self.__client = api_client()
+        self.__keys   = ['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 
             'shortDesc', 'description',
             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
-        self.objects_list = self.client.list_projects()
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
-        
         # iterate through each object
-        for item_info in self.objects_list:
-            pp(item_info)
-            next_row = flatten_dict(item_info, include_keys=self.keys)
+        for item_info in self.__client.list_projects():
+            # pp(item_info)
+            next_row = flatten_dict(item_info, include_keys=self.__keys)
             
             # custom things for this specific class:
             next_row = remove_prefix_from_keys(next_row, 'versionTag.')
             next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
-            
-            # return a single row
             yield next_row
+
 
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
@@ -63,7 +58,7 @@ class ConnectorProjects(Connector):
                 },
                 {
                     "name":    "contributors", 
-                    "type":    "array",
+                    "type":    "string",
                     "meaning": "JSONArrayMeaning"
                 },
                 {
@@ -83,7 +78,7 @@ class ConnectorProjects(Connector):
                 },
                 {
                     "name":    "tags", 
-                    "type":    "array",
+                    "type":    "string",
                     "meaning": "JSONArrayMeaning"
                 },
                 {
@@ -98,12 +93,9 @@ class ConnectorProjects(Connector):
                 }
             ]
         }
-            
-####################################################################
-# Same for all instances:
-####################################################################
+
     def get_records_count(self, partitioning=None, partition_id=None):
-        return len(self.objects_list)
+        return len(self.__client.list_projects())
 
 ####################################################################
 # Intentionally not implemented, not needed for this type

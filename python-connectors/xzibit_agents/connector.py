@@ -41,21 +41,13 @@ class ConnectorProjects(Connector):
     # Code that has to be customized for this specific class
     ####################################################################
     def __init__(self, config, plugin_config):
-       #  print("[DEBUG agents] Constructor START")
-        Connector.__init__(self, config, plugin_config)
-        
+        Connector.__init__(self, config, plugin_config)        
         self.__client = api_client()
-        #self.__unique_id_key_name = 'projectKey'
-        #self.__keys   = [self.unique_id_key_name, 'ownerLogin', 'projectStatus', 'contributors', 'name', 
-#             'shortDesc', 'description',
-#             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
         self.__objects_list = self.__client.list_project_keys()
-        # print("[DEBUG agents] Constructor END")
 
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):       
-        # print("[generate_rows] START")
         
          # iterate through each object
         for project_key in self.__objects_list:
@@ -109,17 +101,10 @@ class ConnectorProjects(Connector):
                             last_modified_on = datetime.fromtimestamp(version_settings.get_raw().get("versionTag", {}).get("lastModifiedOn", None) // 1000) 
                             last_modified_user = version_settings.get_raw().get("versionTag", {}).get("lastModifiedBy", {}).get("login","Unknown")
 
-
-                        # Append to our dataset list
-                        # FIX: Use raw_settings (from the full object) instead of agent_item.get_raw()
-                        #print("[generate_rows] raw_settings:")
                         #pp(raw_settings)
                         
-                        # creationTag.lastModifiedBy.login
-                        # creationTag.lastModifiedBy.lastModifiedOn
                         agent_version = agent_item.get('activeVersion', 'Unknown')
                         
-                        # llm_vendor, llm_connection_name, llm_model = split(llm_model_id, ":")
                         llm_vendor, llm_connection_name, llm_model = parse_llm_id(llm_model_id)
                         next_row = {
                             "projectKey": project_key,
@@ -157,67 +142,11 @@ class ConnectorProjects(Connector):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText
         return None
-#         return {
-#             "columns": [
-#                 {
-#                     "name":    "projectKey", 
-#                     "type":    "string",
-#                     "meaning": "Text"
-#                 },
-#                 {
-#                     "name":    "ownerLogin", 
-#                     "type":    "string",
-#                     "meaning": "Text"
-#                 },
-#                 {
-#                     "name":    "projectStatus", 
-#                     "type":    "string",
-#                     "meaning": "Text"
-#                 },
-#                 {
-#                     "name":    "contributors", 
-#                     "type":    "array",
-#                     "meaning": "JSONArrayMeaning"
-#                 },
-#                 {
-#                     "name":    "name", 
-#                     "type":    "string",
-#                     "meaning": "Text"
-#                 },
-#                 {
-#                     "name":    "shortDesc", 
-#                     "type":    "string",
-#                     "meaning": "FreeText"
-#                 },
-#                 {
-#                     "name":    "description", 
-#                     "type":    "string",
-#                     "meaning": "FreeText"
-#                 },
-#                 {
-#                     "name":    "tags", 
-#                     "type":    "array",
-#                     "meaning": "JSONArrayMeaning"
-#                 },
-#                 {
-#                     "name":    "lastModifiedOn", 
-#                     "type":    "date",
-#                     "meaning": "DatetimeNoTz"
-#                 },
-#                 {
-#                     "name":    "tutorialProject", 
-#                     "type":    "boolean",
-#                     "meaning": "Boolean"
-#                 }
-#             ]
-#         }
 
-            
 ####################################################################
 # Same for all instances:
 ####################################################################
     def get_records_count(self, partitioning=None, partition_id=None):
-        # return len(self.objects_list)
         return None
 
 ####################################################################
