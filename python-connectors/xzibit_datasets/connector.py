@@ -5,7 +5,7 @@ from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
 
-def get_codeenv_url(env_name, env_lang='python'):
+def get_dataset_url():
     # https://beta-design.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/brave-mcp/
     # https://honker-design-2.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/CausalModels
     # https://honker-design-2.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/CausalModels/
