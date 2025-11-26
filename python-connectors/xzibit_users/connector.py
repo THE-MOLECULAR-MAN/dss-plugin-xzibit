@@ -29,7 +29,7 @@ class ConnectorUsers(Connector):
         
         # iterate through each object
         for item_info in self.__client.list_users():
-            next_row = flatten_dict(item_info, include_keys=self.keys)
+            next_row = flatten_dict(item_info, include_keys=self.__keys)
             item_id = next_row[self.unique_id_key_name]
             item_handle = self.client.get_user(item_info[self.unique_id_key_name])
             activity_handle = item_handle.get_activity()
