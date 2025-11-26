@@ -29,7 +29,7 @@ class ConnectorClusters(Connector):
             # return a single row
             yield next_row
 
-            
+
 ####################################################################
 # Same for all instances:
 ####################################################################
