@@ -31,7 +31,7 @@ class ConnectorApps(Connector):
                             partition_id=None, records_limit = -1):
         # iterate through each object
         for item_info in self.__client.list_apps():
-            next_row = flatten_dict(item_info, include_keys=self.keys)
+            next_row = flatten_dict(item_info, include_keys=self.__keys)
             yield next_row
 
             
