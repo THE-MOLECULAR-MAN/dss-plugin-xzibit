@@ -6,10 +6,6 @@ from dataiku.connector import Connector
 from xzibit.utils import *
 
 
-####################################################################
-# Unique imports for this Class
-####################################################################
-# none.
 
 class ConnectorApps(Connector):
 
