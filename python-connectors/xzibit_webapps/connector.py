@@ -61,7 +61,7 @@ class ConnectorProjects(Connector):
        #  print("[DEBUG agents] Constructor START")
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__count = 0
+        self.__count  = 0
 
         
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
