@@ -24,7 +24,7 @@ class ConnectorApps(Connector):
                  'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
                 'onlyLimitedVisibility']
-        self.__objects_list = 
+
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
@@ -39,7 +39,7 @@ class ConnectorApps(Connector):
 # Same for all instances:
 ####################################################################
     def get_records_count(self, partitioning=None, partition_id=None):
-        return len(self.__objects_list)
+        return len(self.__client.list_apps())
 
 ####################################################################
 # Intentionally not implemented, not needed for this type
