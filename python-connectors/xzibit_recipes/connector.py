@@ -29,7 +29,6 @@ class ConnectorRecipes(Connector):
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
-        
         # iterate through each object
         for pk, proj_recipes in self.objects_list.items():
             project_handle = self.client.get_project(pk)
