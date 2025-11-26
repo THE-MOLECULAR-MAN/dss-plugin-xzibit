@@ -29,6 +29,7 @@ class ConnectorMeanings(Connector):
             next_row = flatten_dict(item_info, include_keys=self.keys)
             yield next_row
 
+
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
