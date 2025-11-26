@@ -59,6 +59,7 @@ class ConnectorPlugins(Connector):
                     )
 
                 next_row["total_usages"] = len(list_of_usages)
+                next_row["plugin_url"] = get_plugin_url(next_row["id"])
             except Exception as e:
                 print(f"Exception {e} with plugin_info:")
                 pprint(plugin_info)
