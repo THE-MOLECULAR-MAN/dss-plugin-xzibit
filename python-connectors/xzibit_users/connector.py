@@ -5,7 +5,6 @@ from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
 
-
 class ConnectorUsers(Connector):
 
     ####################################################################
@@ -27,6 +26,18 @@ class ConnectorUsers(Connector):
             "resultingUserProfile",
             "userProfile",
         ]
+        self.__baseurl = get_dss_base_url()
+
+        
+    def get_user_url(self, user_id):
+        # https://beta-design.se-platform.dataiku-sandbox.io/admin/security/users/edit/tim.honker/
+        try:
+            if self.__baseurl is None or user_id is None:
+                return None
+            return f"{self.__baseurl}/admin/security/users/edit/{user_id}/"
+        except Exception: # yeah, I know this is bad practice
+            return None
+
 
     def generate_rows(
         self,
@@ -49,6 +60,7 @@ class ConnectorUsers(Connector):
                 str(item_handle.get_activity().last_session_activity)
             )
             next_row["creationDate"] = int_to_datetime(next_row["creationDate"])
+            next_row["url_user"] = self.get_user_url(next_row.get("login", None))
             # pp(item_info)
             yield next_row
 
@@ -65,9 +77,10 @@ class ConnectorUsers(Connector):
                 {"name": "email", "type": "string", "meaning": "Email"},
                 {"name": "enabled", "type": "boolean", "meaning": "Boolean"},
                 {"name": "resultingUserProfile", "type": "string", "meaning": "Text"},
-                {"name": "creationDate", "type": "date", "meaning": "DatetimeNoTz"},
+                {"name": "creationDate", "type": "datetimenotz", "meaning": "DatetimeNoTz"},
                 {"name": "last_successful_login", "type": "date", "meaning": "Date"},
                 {"name": "last_session_activity", "type": "date", "meaning": "Date"},
+                {"name": "url_user", "type": "string", "meaning": "URL"},
             ]
         }
 

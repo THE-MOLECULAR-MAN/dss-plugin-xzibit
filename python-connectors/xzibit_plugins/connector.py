@@ -6,6 +6,18 @@ from dataiku.connector import Connector
 from xzibit.utils import *
 
 
+def get_plugin_url(plugin_id):
+    # https://honker-design-2.se-platform.dataiku-sandbox.io/plugins/agent-connect/summary/
+    try:
+        base_url = get_dss_base_url()
+        if base_url is None or plugin_id is None:
+            return None
+        # trailing slash is MANDATORY
+        return f"{base_url}/plugins/{plugin_id}/summary/"
+    except Exception: # yeah, I know this is bad practice
+        return None
+
+
 class ConnectorPlugins(Connector):
 
     ####################################################################
@@ -47,6 +59,7 @@ class ConnectorPlugins(Connector):
                     )
 
                 next_row["total_usages"] = len(list_of_usages)
+                next_row["plugin_url"] = get_plugin_url(next_row["id"])
             except Exception as e:
                 print(f"Exception {e} with plugin_info:")
                 pprint(plugin_info)
@@ -72,6 +85,7 @@ class ConnectorPlugins(Connector):
                 },
                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
                 {"name": "total_usages", "type": "bigint", "meaning": "LongMeaning"},
+                {"name": "plugin_url", "type": "string", "meaning": "URL"},
             ]
         }
 

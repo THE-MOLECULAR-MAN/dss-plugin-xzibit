@@ -107,7 +107,7 @@ class ConnectorProjects(Connector):
                                 if not llm_model_id and "generation" in ver_raw:
                                     llm_model_id = ver_raw["generation"].get("llmId")
 
-                            print("[generate_rows] version_settings:")
+                            # print("[generate_rows] version_settings:")
                             # pp(version_settings.get_raw())
 
                             creation_user = (
@@ -171,11 +171,32 @@ class ConnectorProjects(Connector):
 
         # print("[generate_rows] END")
 
+
     def get_read_schema(self):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText
-        return None
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
+        return {'columns': [{'meaning': 'Text', 'name': 'Created by user', 'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'Last modified by user',
+              'type': 'string'},
+             {'meaning': 'JSONArrayMeaning', 'name': 'tags', 'type': 'string'},
+             {'meaning': 'DatetimeNoTz',
+              'name': 'Last Modified timestamp',
+              'type': 'datetimenotz'},
+             {'meaning': 'Text', 'name': 'projectKey', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'Agent Name', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'Agent ID', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'Active Version', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'LLM Vendor', 'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'LLM Connection Name',
+              'type': 'string'},
+             {'meaning': 'Text', 'name': 'LLM Model Name', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'Agent Type', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'Agent Version', 'type': 'string'},
+             {'meaning': 'URL', 'name': 'Agent URL', 'type': 'string'}],
+        }
 
     ####################################################################
     # Same for all instances:

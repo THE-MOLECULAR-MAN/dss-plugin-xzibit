@@ -5,6 +5,20 @@ from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
 
+# Meanings don't have an obvious, dedicated URL
+
+def get_dataset_url(project_key, dataset_id):
+    # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/datasets/Sales_Marketing_queries/explore/
+    try:
+        base_url = get_dss_base_url()
+        if base_url is None or project_key is None or dataset_id is None:
+            return None
+        # trailing slash is MANDATORY
+        return f"{base_url}/projects/{project_key}/datasets/{dataset_id}/explore/"
+    except Exception: # yeah, I know this is bad practice
+        return None
+
+
 
 class ConnectorMeanings(Connector):
     """TBD"""
