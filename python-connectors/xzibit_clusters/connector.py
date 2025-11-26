@@ -84,7 +84,7 @@ class ConnectorClusters(Connector):
              {'meaning': 'Text', 'name': 'state', 'type': 'string'},
              {'meaning': 'LongMeaning',
               'name': 'usedInScenarios',
-              'type': 'int64'},
+              'type': 'int'},
              {'meaning': 'LongMeaning',
               'name': 'usedInProjects',
               'type': 'int64'},
