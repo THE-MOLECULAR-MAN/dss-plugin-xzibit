@@ -59,6 +59,7 @@ class ConnectorUsers(Connector):
             next_row["last_session_activity"] = parse_user_datetime(
                 str(item_handle.get_activity().last_session_activity)
             )
+            # bug on next line
             next_row["creationDate"] = int_to_datetime(next_row["creationDate"])
             next_row["url_user"] = self.get_user_url(next_row.get("login", None))
             # pp(item_info)
