@@ -4,6 +4,7 @@
 
 This Dataiku DSS plugin provides read-only datasets to various Dataiku objects:
 * Apps
+* Agents
 * Clusters
 * Code Environments
 * Connections
@@ -13,13 +14,14 @@ This Dataiku DSS plugin provides read-only datasets to various Dataiku objects:
 * Projects
 * Recipes
 * Users
+* Web Apps
 
 Intended use cases:
-* Reclaiming unused/underutilized user licenses
-* Assisting with planning upgrades/migratins by locating soon to be deprecated items (recipes, connections, plugins, clusters, etc)
+* reclaiming unused/underutilized user licenses
+* assisting with planning upgrades/migratins by locating soon to be deprecated items (recipes, connections, plugins, clusters, etc)
 * monitoring usage
 * locating empty projects
-* Locating hardcoded database names, schemas in datasets that should be migrated to use variables
+* locating hardcoded database names, schemas in datasets that should be migrated to use variables
 * quickly generating exportable lists of information for auditors
 * making information about a Dataiku instance available for querying via natural language in a Dataiku agent
 * maintanence - locating unused code environments that take up large amounts of disk space
