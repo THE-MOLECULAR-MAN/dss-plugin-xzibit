@@ -196,7 +196,7 @@ class ConnectorProjects(Connector):
              {'meaning': 'Text', 'name': 'Agent Type', 'type': 'string'},
              {'meaning': 'Text', 'name': 'Agent Version', 'type': 'string'},
              {'meaning': 'URL', 'name': 'Agent URL', 'type': 'string'}],
- 'userModified': True}
+}
 
     ####################################################################
     # Same for all instances:
