@@ -22,7 +22,6 @@ class ConnectorRecipes(Connector):
             project_handle = self.__client.get_project(pk)
             self.__objects_list[pk] = project_handle.list_recipes(as_type="objects")
             self.__count += len(self.__objects_list[pk])
-
         
 
     def get_recipe_url(self, project_key, recipe_id):
