@@ -4,7 +4,6 @@
 from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
-# https://beta-design.se-platform.dataiku-sandbox.io/admin/security/users/edit/tim.honker/
 
 class ConnectorUsers(Connector):
 
@@ -31,11 +30,11 @@ class ConnectorUsers(Connector):
 
         
     def get_user_url(self, user_id):
-        # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/recipes/compute_Product_sales_by_acc_joined/
+        # https://beta-design.se-platform.dataiku-sandbox.io/admin/security/users/edit/tim.honker/
         try:
-            if self.__baseurl is None or project_key is None or recipe_id is None:
+            if self.__baseurl is None or user_id is None:
                 return None
-            return f"{self.__baseurl}/projects/{project_key}/recipes/{recipe_id}/"
+            return f"{self.__baseurl}/admin/security/users/edit/{user_id}/"
         except Exception: # yeah, I know this is bad practice
             return None
 
