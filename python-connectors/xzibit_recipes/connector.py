@@ -56,10 +56,11 @@ class ConnectorRecipes(Connector):
                     "type": raw_data["type"],
                     "name": recipe_handle.name,
                     "tags": raw_data["tags"],
-                    "input_datasets": recipe_settings_handle.get_flat_input_refs(),
-                    "output_datasets": recipe_settings_handle.get_flat_output_refs(),
                     "url_recipe": self.get_recipe_url(pk, r.id),
                 }
+                
+                "input_datasets": recipe_settings_handle.get_flat_input_refs(),
+                    "output_datasets": recipe_settings_handle.get_flat_output_refs(),
                 yield next_row
 
     def get_read_schema(self):
