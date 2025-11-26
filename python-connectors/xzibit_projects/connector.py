@@ -21,14 +21,14 @@ class ConnectorProjects(Connector):
         self.__keys   = ['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 
             'shortDesc', 'description',
             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
-        self.objects_list = self.__client.list_projects()
+        self.objects_list = 
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
         # iterate through each object
-        for item_info in self.objects_list:
+        for item_info in self.__client.list_projects():
             pp(item_info)
             next_row = flatten_dict(item_info, include_keys=self.keys)
             
