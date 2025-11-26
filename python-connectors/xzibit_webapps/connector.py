@@ -128,7 +128,7 @@ class ConnectorProjects(Connector):
                 {"name": "created_on", "type": "date", "meaning": "DatetimeNoTz"},
                 {"name": "lastModifiedBy", "type": "string", "meaning": "Text"},
                 {"name": "lastModifiedOn", "type": "date", "meaning": "DatetimeNoTz"},
-                {"name": "tags", "type": "array", "meaning": "JSONArrayMeaning"},
+                {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "is_code_webapp", "type": "boolean", "meaning": "Boolean"},
             ]
         }
