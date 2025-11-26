@@ -28,7 +28,7 @@ class ConnectorProjects(Connector):
         # iterate through each object
         for item_info in self.__client.list_projects():
             # pp(item_info)
-            next_row = flatten_dict(item_info, include_keys=self.keys)
+            next_row = flatten_dict(item_info, include_keys=self.__keys)
             
             # custom things for this specific class:
             next_row = remove_prefix_from_keys(next_row, 'versionTag.')
