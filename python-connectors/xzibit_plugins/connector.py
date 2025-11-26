@@ -5,7 +5,18 @@ from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
 
-# https://honker-design-2.se-platform.dataiku-sandbox.io/plugins/agent-connect/summary/
+
+def get_plugin_url(plugin_id):
+    # https://honker-design-2.se-platform.dataiku-sandbox.io/plugins/agent-connect/summary/
+    try:
+        base_url = get_dss_base_url()
+        if base_url is None or project_key is None or dataset_id is None:
+            return None
+        # trailing slash is MANDATORY
+        return f"{base_url}/plugins/{plugin_id}/summary/"
+    except Exception: # yeah, I know this is bad practice
+        return None
+
 
 class ConnectorPlugins(Connector):
 
