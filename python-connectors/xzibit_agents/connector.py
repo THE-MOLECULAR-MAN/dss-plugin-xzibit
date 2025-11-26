@@ -195,8 +195,8 @@ class ConnectorProjects(Connector):
                 },
                 {
                     "name":    "Last Modified timestamp",
-                    "type":    "string",
-                    "meaning": "Text"
+                    "type":    "datetimenotz",
+                    "meaning": "DatetimeNoTz"
                 }
             ]
         }
