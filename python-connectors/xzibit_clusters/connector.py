@@ -111,12 +111,12 @@ class ConnectorClusters(Connector):
                 {
                     "name":    "usedInScenarios",
                     "type":    "int64",
-                    "meaning": "Integer"
+                    "meaning": "LongMeaning"
                 },
                 {
                     "name":    "usedInProjects",
                     "type":    "int64",
-                    "meaning": "Integer"
+                    "meaning": "LongMeaning"
                 },
                 {
                     "name":    "cluster_url",
