@@ -17,12 +17,13 @@ class ConnectorRecipes(Connector):
         self.__client = api_client()
         self.__objects_list = {}
         self.__count = 0
-
+        self.__baseurl = get_dss_base_url()
+        
         for pk in self.__client.list_project_keys():
             project_handle = self.__client.get_project(pk)
             self.__objects_list[pk] = project_handle.list_recipes(as_type="objects")
             self.__count += len(self.__objects_list[pk])
-        self.__baseurl = get_dss_base_url()
+
         
 
     def get_project_url(self, project_key):
