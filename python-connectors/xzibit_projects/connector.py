@@ -11,6 +11,18 @@ from xzibit.utils import *
 from datetime import datetime
 
 
+def get_project_url(project_key):
+    # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/datasets/Sales_Marketing_queries/explore/
+    try:
+        base_url = get_dss_base_url()
+        if base_url is None or project_key is None or dataset_id is None:
+            return None
+        # trailing slash is MANDATORY
+        return f"{base_url}/projects/{project_key}/datasets/{dataset_id}/explore/"
+    except Exception: # yeah, I know this is bad practice
+        return None
+
+
 class ConnectorProjects(Connector):
 
     ####################################################################
