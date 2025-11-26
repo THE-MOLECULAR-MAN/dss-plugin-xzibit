@@ -24,13 +24,13 @@ class ConnectorApps(Connector):
                  'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
                 'onlyLimitedVisibility']
-        self.__objects_list = self.__client.list_apps()
+        self.__objects_list = 
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         # iterate through each object
-        for item_info in self.__objects_list:
+        for item_info in self.__client.list_apps():
             next_row = flatten_dict(item_info, include_keys=self.keys)
             yield next_row
 
