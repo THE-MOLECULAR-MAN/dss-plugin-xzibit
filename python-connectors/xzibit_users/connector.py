@@ -18,9 +18,9 @@ class ConnectorUsers(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         
-        self.client = api_client()
-        self.unique_id_key_name = 'login'
-        self.keys   = [self.unique_id_key_name, 'displayName',
+        self.__client = api_client()
+        self.unique_id_key_name = 
+        self.keys   = ['login', 'displayName',
                       'userProfile', 'groups', 'sourceType', 'email',
                       'creationDate', 'enabled', 'resultingUserProfile',
                       'userProfile']
