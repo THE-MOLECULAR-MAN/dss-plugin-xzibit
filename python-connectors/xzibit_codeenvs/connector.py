@@ -18,9 +18,9 @@ class ConnectorCodeEnvs(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         
-        self.client = api_client()
-        self.keys   = ['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner' ]
-        self.objects_list = self.client.list_code_envs()
+        self.__client = api_client()
+        self.__keys   = ['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner' ]
+        self.__objects_list = self.client.list_code_envs()
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
