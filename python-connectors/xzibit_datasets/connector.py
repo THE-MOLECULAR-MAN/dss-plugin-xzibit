@@ -5,10 +5,8 @@ from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
 
-def get_dataset_url():
-    # https://beta-design.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/brave-mcp/
-    # https://honker-design-2.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/CausalModels
-    # https://honker-design-2.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/CausalModels/
+def get_dataset_url(project_key, dataset_id):
+    # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/datasets/Sales_Marketing_queries/explore/
     try:
         base_url = get_dss_base_url()
         if base_url is None or env_lang is None or base_url is None:
