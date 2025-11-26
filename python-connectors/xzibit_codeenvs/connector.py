@@ -6,7 +6,6 @@ from dataiku.connector import Connector
 from xzibit.utils import *
 
 class ConnectorCodeEnvs(Connector):
-
     ####################################################################
     # Code that has to be customized for this specific class
     ####################################################################
