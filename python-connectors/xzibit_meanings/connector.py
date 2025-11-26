@@ -20,7 +20,7 @@ class ConnectorMeanings(Connector):
         
         self.__client = api_client()
         self.keys   = ['label', 'description', 'detectable', 'type', 'id', 'normalizationMode']
-        self.objects_list = self.client.list_meanings()
+        self.objects_list = self.__client.list_meanings()
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
