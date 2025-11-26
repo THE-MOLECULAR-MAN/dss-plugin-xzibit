@@ -9,7 +9,7 @@ from xzibit.utils import *
 def get_codeenv_url(env_name, env_lang='python'):
     # https://beta-design.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/brave-mcp/    
     base_url = get_dss_base_url()
-    if  is None or env_lang is None or base_url is None:
+    if base_url is None or env_lang is None or base_url is None:
         return None
     return f"{base_url}/admin/code-envs/design/{lower(env_lang)}/{env_name}"
 
