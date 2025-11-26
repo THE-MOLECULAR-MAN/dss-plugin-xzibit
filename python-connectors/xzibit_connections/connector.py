@@ -30,7 +30,7 @@ class ConnectorConnections(Connector):
                             partition_id=None, records_limit = -1):
         
         # iterate through each object
-        for item_info in self.__objects_list:
+        for item_info in sself.__client.list_connections(as_type='listitems'):
             #pp(item_info)
             next_row = flatten_dict(item_info, include_keys=self.__keys)
             
