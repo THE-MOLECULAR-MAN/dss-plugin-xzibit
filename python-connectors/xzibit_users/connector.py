@@ -80,6 +80,7 @@ class ConnectorUsers(Connector):
                 {"name": "creationDate", "type": "date", "meaning": "DatetimeNoTz"},
                 {"name": "last_successful_login", "type": "date", "meaning": "Date"},
                 {"name": "last_session_activity", "type": "date", "meaning": "Date"},
+                {"name": "url_user", "type": "string", "meaning": "URL"},
             ]
         }
 
