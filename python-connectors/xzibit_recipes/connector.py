@@ -58,6 +58,7 @@ class ConnectorRecipes(Connector):
                     "tags": raw_data["tags"],
                     "input_datasets": recipe_settings_handle.get_flat_input_refs(),
                     "output_datasets": recipe_settings_handle.get_flat_output_refs(),
+                    "url_recipe": self.get_recipe_url(pk, r.id),
                 }
                 yield next_row
 
