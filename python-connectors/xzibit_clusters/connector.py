@@ -23,7 +23,7 @@ class ConnectorClusters(Connector):
                             partition_id=None, records_limit = -1):        
         # iterate through each object
         for item_info in self.__client.list_clusters():
-            next_row = flatten_dict(item_info, include_keys=self.keys)            
+            next_row = flatten_dict(item_info, include_keys=self.__keys)            
             # return a single row
             yield next_row
 
