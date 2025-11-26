@@ -89,4 +89,3 @@ class ConnectorClusters(Connector):
               'name': 'usedInProjects',
               'type': 'int64'},
              {'meaning': 'URL', 'name': 'cluster_url', 'type': 'string'}]}
-        }
