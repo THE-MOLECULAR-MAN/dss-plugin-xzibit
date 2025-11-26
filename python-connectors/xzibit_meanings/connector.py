@@ -20,14 +20,14 @@ class ConnectorMeanings(Connector):
         
         self.__client = api_client()
         self.__keys   = ['label', 'description', 'detectable', 'type', 'id', 'normalizationMode']
-        self.__objects_list = self.__client.list_meanings()
+        self.__objects_list = 
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
         # iterate through each object
-        for item_info in self.objects_list:
+        for item_info in self.__client.list_meanings():
             next_row = flatten_dict(item_info, include_keys=self.keys)
 
             # return a single row
