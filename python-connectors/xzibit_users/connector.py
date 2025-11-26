@@ -29,6 +29,16 @@ class ConnectorUsers(Connector):
         ]
         self.__baseurl = get_dss_base_url()
 
+        
+    def get_user_url(self, user_id):
+        # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/recipes/compute_Product_sales_by_acc_joined/
+        try:
+            if self.__baseurl is None or project_key is None or recipe_id is None:
+                return None
+            return f"{self.__baseurl}/projects/{project_key}/recipes/{recipe_id}/"
+        except Exception: # yeah, I know this is bad practice
+            return None
+
 
     def generate_rows(
         self,
