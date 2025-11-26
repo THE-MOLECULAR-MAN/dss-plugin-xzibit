@@ -19,8 +19,7 @@ class ConnectorApps(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__unique_id_key_name = 'appId'
-        self.__keys   = [self.__unique_id_key_name, 'appVersion', 'label', 
+        self.__keys   = ['appId', 'appVersion', 'label', 
                  'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
                 'onlyLimitedVisibility']
