@@ -56,7 +56,7 @@ class ConnectorRecipes(Connector):
                 {"name": "id", "type": "string", "meaning": "Text"},
                 {"name": "type", "type": "string", "meaning": "Text"},
                 {"name": "name", "type": "string", "meaning": "Text"},
-                {"name": "tags", "type": "string", "meaning": "Text"},
+                {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {
                     "name": "input_datasets",
                     "type": "string",
