@@ -13,7 +13,6 @@ class ConnectorConnections(Connector):
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
-        
         self.__client = api_client()
         self.__unique_id_key_name = 'name'
         self.__keys   = [self.unique_id_key_name, 'type', 'usableBy', 'allowWrite',
