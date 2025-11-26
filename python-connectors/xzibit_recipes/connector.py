@@ -31,7 +31,7 @@ class ConnectorRecipes(Connector):
             if self.__baseurl is None or project_key is None or recipe_id is None:
                 return None
             # trailing slash is MANDATORY
-            return f"{self.__baseurl}/projects/{project_key}/recipes/compute_Product_sales_by_acc_joined/"
+            return f"{self.__baseurl}/projects/{project_key}/recipes/{recipe_id}/"
         except Exception: # yeah, I know this is bad practice
             return None
 
