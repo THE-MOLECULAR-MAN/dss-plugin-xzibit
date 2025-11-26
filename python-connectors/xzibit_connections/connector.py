@@ -27,8 +27,6 @@ class ConnectorConnections(Connector):
         for item_info in self.__client.list_connections(as_type='listitems'):
             #pp(item_info)
             next_row = flatten_dict(item_info, include_keys=self.__keys)
-            
-            # return a single row
             yield next_row
 
             
