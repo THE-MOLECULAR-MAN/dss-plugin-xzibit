@@ -82,6 +82,31 @@ class ConnectorClusters(Connector):
                     "name":    "owner",
                     "type":    "string",
                     "meaning": "Text"
-                }
+                },
+                {
+                    "name":    "id",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "name",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "type",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "architecture",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "state",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
             ]
         }
