@@ -14,6 +14,7 @@ def get_codeenv_url(env_name, env_lang='python'):
         base_url = get_dss_base_url()
         if base_url is None or env_lang is None or base_url is None:
             return None
+        # trailing slash is MANDATORY
         return f"{base_url}/admin/code-envs/design/{env_lang.lower()}/{env_name}/"
     except Exception: # yeah, I know this is bad practice
         return None
