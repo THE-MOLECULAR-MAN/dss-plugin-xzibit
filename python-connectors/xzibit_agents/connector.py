@@ -105,7 +105,6 @@ class ConnectorProjects(Connector):
                         
                         agent_version = agent_item.get('activeVersion', 'Unknown')
                         
-                        # llm_vendor, llm_connection_name, llm_model = split(llm_model_id, ":")
                         llm_vendor, llm_connection_name, llm_model = parse_llm_id(llm_model_id)
                         next_row = {
                             "projectKey": project_key,
