@@ -73,9 +73,6 @@ class ConnectorConnections(Connector):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        # return None
-
-
         return {
             "columns": [
                 {
