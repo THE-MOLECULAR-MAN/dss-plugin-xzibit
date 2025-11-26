@@ -30,7 +30,6 @@ class ConnectorApps(Connector):
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
-        
         # iterate through each object
         for item_info in self.__objects_list:
             next_row = flatten_dict(item_info, include_keys=self.keys)
