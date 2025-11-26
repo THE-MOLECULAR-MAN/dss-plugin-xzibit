@@ -44,7 +44,6 @@ class ConnectorCodeEnvs(Connector):
             # custom things for this specific class:
             env_lang = next_row["envLang"]
             env_name = next_row["envName"]
-            
             try:
                 next_row['codeenv_url'] = get_codeenv_url(env_name, env_lang)
                 code_env_handle = self.__client.get_code_env(env_lang, env_name)
