@@ -30,7 +30,7 @@ class ConnectorRecipes(Connector):
         records_limit=-1,
     ):
         # iterate through each object
-        for pk, proj_recipes in self.objects_list.items():
+        for pk, proj_recipes in self.__objects_list.items():
             project_handle = self.__client.get_project(pk)
 
             for r in proj_recipes:
