@@ -15,8 +15,7 @@ class ConnectorClusters(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.client = api_client()
-        self.unique_id_key_name = 'id'
-        self.keys   = [self.unique_id_key_name, 'architecture',
+        self.keys   = ['id', 'architecture',
                       'name', 'owner', 'state', 'type',
                       'usedInProjects', 'usedInScenarios']
         self.objects_list = self.client.list_clusters()
