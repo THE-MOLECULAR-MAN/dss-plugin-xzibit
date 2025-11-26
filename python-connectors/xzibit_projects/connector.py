@@ -85,6 +85,7 @@ class ConnectorProjects(Connector):
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "lastModifiedOn", "type": "datetimenotz", "meaning": "DatetimeNoTz"},
                 {"name": "tutorialProject", "type": "boolean", "meaning": "Boolean"},
+                {"name": "url_project", "type": "string", "meaning": "URL"},
             ]
         }
 
