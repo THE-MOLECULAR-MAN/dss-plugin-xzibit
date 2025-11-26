@@ -102,52 +102,33 @@ class ConnectorDatasets(Connector):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return {
-            "columns": [
-                {
-                    "name":    "owner",
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "id",
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "name",
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "type",
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "architecture",
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "state",
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "usedInScenarios",
-                    "type":    "int64",
-                    "meaning": "LongMeaning"
-                },
-                {
-                    "name":    "usedInProjects",
-                    "type":    "int64",
-                    "meaning": "LongMeaning"
-                },
-                {
-                    "name":    "cluster_url",
-                    "type":    "string",
-                    "meaning": "URL"
-                },
-            ]
-        }
+        return {'columns': [{'name': 'projectKey', 'type': 'string'},
+             {'name': 'id', 'type': 'string'},
+             {'name': 'name', 'type': 'string'},
+             {'name': 'exists', 'type': 'string'},
+             {'name': 'type', 'type': 'string'},
+             {'name': 'formatType', 'type': 'string'},
+             {'name': 'params.connection', 'type': 'string'},
+             {'name': 'managed', 'type': 'string'},
+             {'name': 'params.mode', 'type': 'string'},
+             {'name': 'params.table', 'type': 'string'},
+             {'name': 'params.schema', 'type': 'string'},
+             {'name': 'params.path', 'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'creationTag.lastModifiedBy.login',
+              'type': 'string'},
+             {'meaning': 'DatetimeNoTz',
+              'name': 'creationTag.lastModifiedOn',
+              'type': 'datetimenotz'},
+             {'name': 'versionTag.lastModifiedBy.login', 'type': 'string'},
+             {'name': 'versionTag.lastModifiedOn', 'type': 'datetimenotz'},
+             {'name': 'shortDesc', 'type': 'string'},
+             {'name': 'description', 'type': 'string'},
+             {'name': 'params.metastoreDatabaseName', 'type': 'string'},
+             {'name': 'params.folderSmartId', 'type': 'string'},
+             {'name': 'tags', 'type': 'string'},
+             {'name': 'featureGroup', 'type': 'boolean'},
+             {'name': 'num_metrics_checks', 'type': 'int'},
+             {'name': 'num_columns', 'type': 'int'},
+             {'name': 'column_names', 'type': 'string'},
+             {'meaning': 'URL', 'name': 'dataset_url', 'type': 'string'}]}
