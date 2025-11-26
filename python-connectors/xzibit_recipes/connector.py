@@ -60,7 +60,7 @@ class ConnectorRecipes(Connector):
                 }
                 
                 next_row["input_datasets"] = recipe_settings_handle.get_flat_input_refs()
-                    "output_datasets": recipe_settings_handle.get_flat_output_refs(),
+                next_row["output_datasets"] = recipe_settings_handle.get_flat_output_refs(),
                 yield next_row
 
     def get_read_schema(self):
