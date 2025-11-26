@@ -58,9 +58,12 @@ class ConnectorRecipes(Connector):
                     "tags": raw_data["tags"],
                     "url_recipe": self.get_recipe_url(pk, r.id),
                 }
-                
-                next_row["input_datasets"] = recipe_settings_handle.get_flat_input_refs()
-                next_row["output_datasets"] = recipe_settings_handle.get_flat_output_refs()
+                try:
+                    
+                    next_row["input_datasets"] = recipe_settings_handle.get_flat_input_refs()
+                    next_row["output_datasets"] = recipe_settings_handle.get_flat_output_refs()
+                except Exception:
+                    print("Exception in Recipe input/output datasets.")
                 yield next_row
 
     def get_read_schema(self):
