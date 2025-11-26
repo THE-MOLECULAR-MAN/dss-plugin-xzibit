@@ -77,7 +77,7 @@ class ConnectorUsers(Connector):
                 {"name": "email", "type": "string", "meaning": "Email"},
                 {"name": "enabled", "type": "boolean", "meaning": "Boolean"},
                 {"name": "resultingUserProfile", "type": "string", "meaning": "Text"},
-                {"name": "creationDate", "type": "date", "meaning": "DatetimeNoTz"},
+                {"name": "creationDate", "type": "datetimenotz", "meaning": "DatetimeNoTz"},
                 {"name": "last_successful_login", "type": "date", "meaning": "Date"},
                 {"name": "last_session_activity", "type": "date", "meaning": "Date"},
                 {"name": "url_user", "type": "string", "meaning": "URL"},
