@@ -43,6 +43,7 @@ class ConnectorClusters(Connector):
         for item_info in self.__client.list_clusters():
             next_row = flatten_dict(item_info, include_keys=self.__keys)
             # return a single row
+            next_row['cluster_url'] = get_cluster_url(next_row['id'])
             yield next_row
 
     ####################################################################
