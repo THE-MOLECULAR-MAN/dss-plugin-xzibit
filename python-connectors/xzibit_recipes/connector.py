@@ -19,13 +19,13 @@ class ConnectorRecipes(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.__client = api_client()
-        self.objects_list = {}
+        self.__objects_list = {}
         self.__count = 0
         
-        for pk in self.client.list_project_keys():
-            project_handle = self.client.get_project(pk)
-            self.objects_list[pk] = project_handle.list_recipes(as_type='objects')
-            self.__count += len(self.objects_list[pk])
+        for pk in self.__client.list_project_keys():
+            project_handle = self.__client.get_project(pk)
+            self.__objects_list[pk] = project_handle.list_recipes(as_type='objects')
+            self.__count += len(self.__objects_list[pk])
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
