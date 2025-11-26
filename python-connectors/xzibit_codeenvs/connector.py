@@ -6,6 +6,8 @@ from dataiku.connector import Connector
 from xzibit.utils import *
 
 
+# https://beta-design.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/brave-mcp/
+
 class ConnectorCodeEnvs(Connector):
     ####################################################################
     # Code that has to be customized for this specific class
