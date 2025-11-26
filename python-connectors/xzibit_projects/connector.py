@@ -65,7 +65,7 @@ class ConnectorProjects(Connector):
             next_row["lastModifiedOn"] = datetime.fromtimestamp(
                 next_row["lastModifiedOn"] // 1000
             )
-            next_row['url_project'] = get_project_url(next_row['projectKey'])
+            next_row['url_project'] = self.get_project_url(next_row['projectKey'])
             yield next_row
 
     def get_read_schema(self):
