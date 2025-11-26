@@ -14,8 +14,7 @@ class ConnectorConnections(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__unique_id_key_name = 'name'
-        self.__keys   = [self.unique_id_key_name, 'type', 'usableBy', 'allowWrite',
+        self.__keys   = ['name', 'type', 'usableBy', 'allowWrite',
                 'credentialsMode', 'params.credentialsMode', 'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedBy.lastModifiedOn', 'params.authType',
                 'params.db', 'params.defaultSchema', 'params.role', 'params.warehouse', 'params.scope']
         # self.__objects_list = self.__client.list_connections(as_type='listitems')
