@@ -194,35 +194,10 @@ class ConnectorProjects(Connector):
                     "meaning": "JSONArrayMeaning"
                 },
                 {
-                    "name":    "type",
+                    "name":    "Last Modified timestamp",
                     "type":    "string",
                     "meaning": "Text"
-                },
-                {
-                    "name":    "architecture",
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "state",
-                    "type":    "string",
-                    "meaning": "Text"
-                },
-                {
-                    "name":    "usedInScenarios",
-                    "type":    "int64",
-                    "meaning": "LongMeaning"
-                },
-                {
-                    "name":    "usedInProjects",
-                    "type":    "int64",
-                    "meaning": "LongMeaning"
-                },
-                {
-                    "name":    "cluster_url",
-                    "type":    "string",
-                    "meaning": "URL"
-                },
+                }
             ]
         }
 
