@@ -21,7 +21,7 @@ class ConnectorProjects(Connector):
         self.__keys   = ['projectKey', 'ownerLogin', 'projectStatus', 'contributors', 'name', 
             'shortDesc', 'description',
             'tags', 'versionTag.lastModifiedOn', 'tutorialProject']
-        self.objects_list = self.client.list_projects()
+        self.objects_list = self.__client.list_projects()
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
