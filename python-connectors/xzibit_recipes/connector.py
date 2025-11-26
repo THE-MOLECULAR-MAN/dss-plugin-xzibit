@@ -18,7 +18,7 @@ class ConnectorRecipes(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         
-        self.client = api_client()
+        self.__client = api_client()
         self.objects_list = {}
         self.__count = 0
         
