@@ -67,7 +67,7 @@ class ConnectorUsers(Connector):
                 # pp(item_info)
             except Exception:
                 print("Exception: generate_rows - User")
-            finally
+            finally:
                 yield next_row
 
     def get_read_schema(self):
