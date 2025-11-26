@@ -171,11 +171,60 @@ class ConnectorProjects(Connector):
 
         # print("[generate_rows] END")
 
+
     def get_read_schema(self):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText
-        return None
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
+        return {
+            "columns": [
+                {
+                    "name":    "owner",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "id",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "name",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "type",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "architecture",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "state",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "usedInScenarios",
+                    "type":    "int64",
+                    "meaning": "LongMeaning"
+                },
+                {
+                    "name":    "usedInProjects",
+                    "type":    "int64",
+                    "meaning": "LongMeaning"
+                },
+                {
+                    "name":    "cluster_url",
+                    "type":    "string",
+                    "meaning": "URL"
+                },
+            ]
+        }
 
     ####################################################################
     # Same for all instances:
