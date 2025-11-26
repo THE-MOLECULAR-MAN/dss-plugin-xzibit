@@ -23,14 +23,14 @@ class ConnectorUsers(Connector):
                       'userProfile', 'groups', 'sourceType', 'email',
                       'creationDate', 'enabled', 'resultingUserProfile',
                       'userProfile']
-        self.objects_list = self.client.list_users()
+        self.objects_list = 
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
         # iterate through each object
-        for item_info in self.objects_list:
+        for item_info in self.__client.list_users():
             next_row = flatten_dict(item_info, include_keys=self.keys)
             item_id = next_row[self.unique_id_key_name]
             item_handle = self.client.get_user(item_info[self.unique_id_key_name])
