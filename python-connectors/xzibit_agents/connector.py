@@ -197,7 +197,58 @@ class ConnectorProjects(Connector):
                     "name":    "Last Modified timestamp",
                     "type":    "datetimenotz",
                     "meaning": "DatetimeNoTz"
-                }
+                },
+                {
+                    "name":    "projectKey",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "Agent Name",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "Agent ID",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "Active Version",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "LLM Vendor",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "LLM Connection Name",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "LLM Model Name",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "Agent Type",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "Agent Version",
+                    "type":    "string",
+                    "meaning": "Text"
+                },
+                {
+                    "name":    "Agent URL",
+                    "type":    "string",
+                    "meaning": "URL"
+                },
+
             ]
         }
 
