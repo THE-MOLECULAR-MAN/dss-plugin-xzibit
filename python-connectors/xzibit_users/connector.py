@@ -4,7 +4,7 @@
 from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
-
+# https://beta-design.se-platform.dataiku-sandbox.io/admin/security/users/edit/tim.honker/
 
 class ConnectorUsers(Connector):
 
