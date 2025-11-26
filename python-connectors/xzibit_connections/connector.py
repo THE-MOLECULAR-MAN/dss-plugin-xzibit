@@ -73,13 +73,24 @@ class ConnectorConnections(Connector):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return None
-#         return {
-#             "columns": [
-#                 {
-#                     "name":    "creationTag.lastModifiedBy.login",
-#                     "type":    "string",
-#                     "meaning": "Text"
-#                 }
-#             ]
-#         }
+        return {'columns': [{'meaning': 'Text', 'name': 'params.db', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'name', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'type', 'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'creationTag.lastModifiedBy.login',
+              'type': 'string'},
+             {'meaning': 'Boolean', 'name': 'allowWrite', 'type': 'boolean'},
+             {'meaning': 'Text', 'name': 'credentialsMode', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'usableBy', 'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'params.credentialsMode',
+              'type': 'string'},
+             {'meaning': 'Text', 'name': 'params.authType', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'params.scopes', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'params.scope', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'params.warehouse', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'params.role', 'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'params.defaultSchema',
+              'type': 'string'}],
+ 'userModified': True}
