@@ -35,7 +35,9 @@ class ConnectorApps(Connector):
 
     def get_records_count(self, partitioning=None, partition_id=None):
         return len(self.__client.list_apps())
-
+    
+    def get_read_schema(self):
+        return None
 
 ####################################################################
 # Intentionally not implemented, not needed for this type
@@ -49,5 +51,3 @@ class ConnectorApps(Connector):
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
 
-    def get_read_schema(self):
-        return None
