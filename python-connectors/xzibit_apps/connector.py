@@ -32,6 +32,7 @@ class ConnectorApps(Connector):
             next_row = flatten_dict(item_info, include_keys=self.__keys)
             yield next_row
 
+
     def get_records_count(self, partitioning=None, partition_id=None):
         return len(self.__client.list_apps())
 
