@@ -25,7 +25,6 @@ class ConnectorApps(Connector):
                 'onlyLimitedVisibility']
 
 
-
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         # iterate through each object
