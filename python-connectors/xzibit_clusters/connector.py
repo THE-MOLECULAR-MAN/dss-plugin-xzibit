@@ -87,6 +87,6 @@ class ConnectorClusters(Connector):
               'type': 'int'},
              {'meaning': 'LongMeaning',
               'name': 'usedInProjects',
-              'type': 'int64'},
+              'type': 'int'},
              {'meaning': 'URL', 'name': 'cluster_url', 'type': 'string'}]
         }
