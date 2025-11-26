@@ -125,9 +125,9 @@ class ConnectorProjects(Connector):
                 {"name": "created_by_user", "type": "string", "meaning": "Text"},
                 {"name": "backendRunning", "type": "boolean", "meaning": "Boolean"},
                 {"name": "url", "type": "string", "meaning": "URL"},
-                {"name": "created_on", "type": "date", "meaning": "DatetimeNoTz"},
+                {"name": "created_on", "type": "date", "meaning": "DatetimeTz"},
                 {"name": "lastModifiedBy", "type": "string", "meaning": "Text"},
-                {"name": "lastModifiedOn", "type": "date", "meaning": "DatetimeNoTz"},
+                {"name": "lastModifiedOn", "type": "date", "meaning": "DatetimeTz"},
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "is_code_webapp", "type": "boolean", "meaning": "Boolean"},
             ]
