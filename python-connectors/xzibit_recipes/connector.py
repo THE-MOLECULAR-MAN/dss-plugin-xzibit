@@ -5,7 +5,6 @@ from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import *
 
-# https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/recipes/compute_Product_sales_by_acc_joined/
 
 class ConnectorRecipes(Connector):
 
@@ -26,8 +25,8 @@ class ConnectorRecipes(Connector):
 
         
 
-    def get_project_url(self, project_key):
-        # https://beta-design.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/flow/
+    def get_recipe_url(self, project_key, recipe_id):
+        # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/recipes/compute_Product_sales_by_acc_joined/
         try:
             if self.__baseurl is None or project_key is None:
                 return None
