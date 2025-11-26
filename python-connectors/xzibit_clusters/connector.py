@@ -8,7 +8,7 @@ from xzibit.utils import flatten_dict
 def get_cluster_url(cluster_id):
     # https://beta-design.se-platform.dataiku-sandbox.io/admin/clusters/k8s-gpu-small
     base_url = get_dss_base_url()
-    return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent/S-{project_key}-{agent_id}-{agent_version}"
+    return f"{base_url}/admin/clusters/{cluster_id}"
 
 
 class ConnectorClusters(Connector):
