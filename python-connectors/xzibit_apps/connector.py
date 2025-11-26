@@ -36,7 +36,7 @@ class ConnectorApps(Connector):
     def get_records_count(self, partitioning=None, partition_id=None):
         return len(self.__client.list_apps())
 
-            
+
 ####################################################################
 # Same for all instances:
 ####################################################################
