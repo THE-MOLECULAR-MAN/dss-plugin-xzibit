@@ -8,6 +8,9 @@ from xzibit.utils import flatten_dict
 def get_cluster_url(cluster_id):
     # https://beta-design.se-platform.dataiku-sandbox.io/admin/clusters/k8s-gpu-small
     base_url = get_dss_base_url()
+    if cluster_id is None or base_url is None:
+        return None
+
     return f"{base_url}/admin/clusters/{cluster_id}"
 
 
