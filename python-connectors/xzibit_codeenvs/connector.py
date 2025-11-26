@@ -12,7 +12,6 @@ class ConnectorCodeEnvs(Connector):
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
-        
         self.__client = api_client()
         self.__keys   = ['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner' ]
 
