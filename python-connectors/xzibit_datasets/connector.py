@@ -12,7 +12,7 @@ def get_dataset_url(project_key, dataset_id):
         if base_url is None or project_key is None or dataset_id is None:
             return None
         # trailing slash is MANDATORY
-        return f"{base_url}/admin/code-envs/design/{env_lang.lower()}/{env_name}/"
+        return f"{base_url}/projects/{project_key}/datasets/{dataset_id}/explore/"
     except Exception: # yeah, I know this is bad practice
         return None
 
