@@ -20,13 +20,13 @@ class ConnectorCodeEnvs(Connector):
         
         self.__client = api_client()
         self.__keys   = ['envName', 'envLang', 'deploymentMode', 'pythonInterpreter', 'owner' ]
-        self.__objects_list = self.client.list_code_envs()
+        self.__objects_list = self.__client.list_code_envs()
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         # iterate through each object
-        for item_info in self.objects_list:
+        for item_info in self.__client.list_code_envs():
             next_row = flatten_dict(item_info, include_keys=self.__keys)
             
             # custom things for this specific class:
