@@ -31,7 +31,7 @@ class ConnectorRecipes(Connector):
                             partition_id=None, records_limit = -1):
         # iterate through each object
         for pk, proj_recipes in self.objects_list.items():
-            project_handle = self.client.get_project(pk)
+            project_handle = self.__client.get_project(pk)
 
             for r in proj_recipes:
                 recipe_handle = project_handle.get_recipe(r.id)
@@ -44,11 +44,9 @@ class ConnectorRecipes(Connector):
                             'type': raw_data['type'],
                             'name': recipe_handle.name,
                             'tags': raw_data['tags'],
-                            'input_datasets': recipe_settings_handle.get_flat_input_refs(),
+                            'input_datasets':  recipe_settings_handle.get_flat_input_refs(),
                             'output_datasets': recipe_settings_handle.get_flat_output_refs(),
                 }
-               
-                # return a single row
                 yield next_row
 
                 
