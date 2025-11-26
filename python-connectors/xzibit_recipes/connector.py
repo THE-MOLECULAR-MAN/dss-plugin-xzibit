@@ -28,7 +28,7 @@ class ConnectorRecipes(Connector):
     def get_recipe_url(self, project_key, recipe_id):
         # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/recipes/compute_Product_sales_by_acc_joined/
         try:
-            if self.__baseurl is None or project_key is None:
+            if self.__baseurl is None or project_key is None or recipe_id is None:
                 return None
             # trailing slash is MANDATORY
             return f"{self.__baseurl}/projects/{project_key}/flow/"
