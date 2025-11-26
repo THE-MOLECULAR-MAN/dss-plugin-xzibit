@@ -28,12 +28,8 @@ class ConnectorPlugins(Connector):
         for item_info in self.__client.list_plugins():
             try:
                 next_row = flatten_dict(item_info, include_keys=self.keys)
-
-                # custom things for this specific class:
                 next_row = remove_prefix_from_keys(next_row, 'meta.')
-
                 plugin_handle = self.client.get_plugin(next_row['id'])
-
                 list_of_usages = plugin_handle.list_usages().get_raw()['usages']
 
                 if len(list_of_usages) == 0:
