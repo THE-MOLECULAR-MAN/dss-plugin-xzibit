@@ -19,7 +19,7 @@ class ConnectorPlugins(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.__client = api_client()
-        self.keys   = ['id', 'meta.label', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev']
+        self.__keys   = ['id', 'meta.label', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev']
         self.objects_list = self.client.list_plugins()
 
             
