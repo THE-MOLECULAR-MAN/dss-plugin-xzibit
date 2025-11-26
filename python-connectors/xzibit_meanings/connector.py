@@ -27,8 +27,6 @@ class ConnectorMeanings(Connector):
         # iterate through each object
         for item_info in self.__client.list_meanings():
             next_row = flatten_dict(item_info, include_keys=self.keys)
-
-            # return a single row
             yield next_row
 
     def get_read_schema(self):
