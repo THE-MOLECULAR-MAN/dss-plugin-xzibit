@@ -17,6 +17,6 @@
     "writable": false,
     /* Can this connector append data instead of overwriting it ? */
     "supportAppend": false,
-    "strictSchema": true,
+    //"strictSchema": true,
     "params": []
 }
