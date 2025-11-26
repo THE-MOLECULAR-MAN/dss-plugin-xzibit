@@ -66,6 +66,7 @@ class ConnectorCodeEnvs(Connector):
                     next_row["usages"] = list(
                         get_values_for_key(list_of_usages, "projectKey")
                     )
+                next_row['codeenv_url'] = get_codeenv_url(next_row['envName'], next_row['envLang'] )
 
             except Exception as e:
                 print(f"Exception {e} with code_env_info:")
