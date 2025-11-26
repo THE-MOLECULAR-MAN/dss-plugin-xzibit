@@ -22,7 +22,7 @@ class ConnectorApps(Connector):
         self.__client = api_client()
         self.__unique_id_key_name = 'appId'
         self.__keys   = [self.__unique_id_key_name, 'appVersion', 'label', 
-                       'origin', 'shortDesc', 
+                 'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
                 'onlyLimitedVisibility']
         self.__objects_list = self.__client.list_apps()
