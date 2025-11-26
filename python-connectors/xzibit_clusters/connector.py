@@ -108,5 +108,10 @@ class ConnectorClusters(Connector):
                     "type":    "string",
                     "meaning": "Text"
                 },
+                {
+                    "name":    "usedInScenarios",
+                    "type":    "int64",
+                    "meaning": "Integer"
+                },
             ]
         }
