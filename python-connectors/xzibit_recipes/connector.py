@@ -64,7 +64,8 @@ class ConnectorRecipes(Connector):
                     next_row["output_datasets"] = recipe_settings_handle.get_flat_output_refs()
                 except Exception:
                     print("Exception in Recipe input/output datasets.")
-                yield next_row
+                finally:
+                    yield next_row
 
     def get_read_schema(self):
         return {
