@@ -35,7 +35,7 @@ class ConnectorProjects(Connector):
         self.__baseurl = get_dss_base_url()
         
 
-    def get_project_url(project_key):
+    def get_project_url(self, project_key):
         # https://beta-design.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/flow/
         try:
             # I should move this function to be a class method and store the base_url as a member for speed
