@@ -118,6 +118,11 @@ class ConnectorClusters(Connector):
                     "type":    "int64",
                     "meaning": "Integer"
                 },
+                {
+                    "name":    "cluster_url",
+                    "type":    "string",
+                    "meaning": "URL"
+                },
 
             ]
         }
