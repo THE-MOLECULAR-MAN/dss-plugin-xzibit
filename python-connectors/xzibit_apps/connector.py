@@ -33,8 +33,6 @@ class ConnectorApps(Connector):
         # iterate through each object
         for item_info in self.__objects_list:
             next_row = flatten_dict(item_info, include_keys=self.keys)
-            
-            # return a single row
             yield next_row
 
             
