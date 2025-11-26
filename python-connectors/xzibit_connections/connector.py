@@ -18,21 +18,21 @@ class ConnectorConnections(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         
-        self.client = api_client()
-        self.unique_id_key_name = 'name'
-        self.keys   = [self.unique_id_key_name, 'type', 'usableBy', 'allowWrite',
+        self.__client = api_client()
+        self.__unique_id_key_name = 'name'
+        self.__keys   = [self.unique_id_key_name, 'type', 'usableBy', 'allowWrite',
                 'credentialsMode', 'params.credentialsMode', 'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedBy.lastModifiedOn', 'params.authType',
                 'params.db', 'params.defaultSchema', 'params.role', 'params.warehouse', 'params.scope']
-        self.objects_list = self.client.list_connections(as_type='listitems')
+        self.__objects_list = self.client.list_connections(as_type='listitems')
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
         
         # iterate through each object
-        for item_info in self.objects_list:
-            pp(item_info)
-            next_row = flatten_dict(item_info, include_keys=self.keys)
+        for item_info in self.__objects_list:
+            #pp(item_info)
+            next_row = flatten_dict(item_info, include_keys=self.__keys)
             
             # return a single row
             yield next_row
