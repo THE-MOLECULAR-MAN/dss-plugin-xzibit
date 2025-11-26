@@ -10,7 +10,7 @@ def get_plugin_url(plugin_id):
     # https://honker-design-2.se-platform.dataiku-sandbox.io/plugins/agent-connect/summary/
     try:
         base_url = get_dss_base_url()
-        if base_url is None or project_key is None or dataset_id is None:
+        if base_url is None or plugin_id is None:
             return None
         # trailing slash is MANDATORY
         return f"{base_url}/plugins/{plugin_id}/summary/"
