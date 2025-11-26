@@ -123,6 +123,5 @@ class ConnectorClusters(Connector):
                     "type":    "string",
                     "meaning": "URL"
                 },
-
             ]
         }
