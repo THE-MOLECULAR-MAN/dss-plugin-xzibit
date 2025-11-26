@@ -102,10 +102,7 @@ class ConnectorUsers(Connector):
                 }
             ]
         }
-            
-####################################################################
-# Same for all instances:
-####################################################################
+
     def get_records_count(self, partitioning=None, partition_id=None):
         return len(self.__client.list_users())
 
