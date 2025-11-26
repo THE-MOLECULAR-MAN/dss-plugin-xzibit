@@ -22,7 +22,20 @@ class ConnectorRecipes(Connector):
             project_handle = self.__client.get_project(pk)
             self.__objects_list[pk] = project_handle.list_recipes(as_type="objects")
             self.__count += len(self.__objects_list[pk])
+        self.__baseurl = get_dss_base_url()
+        
 
+    def get_project_url(self, project_key):
+        # https://beta-design.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/flow/
+        try:
+            if self.__baseurl is None or project_key is None:
+                return None
+            # trailing slash is MANDATORY
+            return f"{self.__baseurl}/projects/{project_key}/flow/"
+        except Exception: # yeah, I know this is bad practice
+            return None
+
+            
     def generate_rows(
         self,
         dataset_schema=None,
