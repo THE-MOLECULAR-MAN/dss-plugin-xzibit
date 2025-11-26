@@ -28,14 +28,12 @@ class ConnectorProjects(Connector):
         
         # iterate through each object
         for item_info in self.__client.list_projects():
-            pp(item_info)
+            # pp(item_info)
             next_row = flatten_dict(item_info, include_keys=self.keys)
             
             # custom things for this specific class:
             next_row = remove_prefix_from_keys(next_row, 'versionTag.')
             next_row['lastModifiedOn'] = datetime.fromtimestamp(next_row['lastModifiedOn'] // 1000)
-            
-            # return a single row
             yield next_row
 
     def get_read_schema(self):
