@@ -99,8 +99,7 @@ class ConnectorCodeEnvs(Connector):
               'type': 'double'},
              {'meaning': 'JSONArrayMeaning',
               'name': 'usages',
-              'type': 'string'}],
- 'userModified': True}
+              'type': 'string'}]}
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
