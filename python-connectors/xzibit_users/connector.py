@@ -66,7 +66,7 @@ class ConnectorUsers(Connector):
                 next_row["creationDate"] = int_to_datetime(next_row["creationDate"])
                 # pp(item_info)
             except Exception:
-                    print("whatever")
+                print("whatever")
             finally
                 yield next_row
 
