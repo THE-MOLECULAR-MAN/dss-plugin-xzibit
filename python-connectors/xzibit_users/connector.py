@@ -27,6 +27,8 @@ class ConnectorUsers(Connector):
             "resultingUserProfile",
             "userProfile",
         ]
+        self.__baseurl = get_dss_base_url()
+
 
     def generate_rows(
         self,
