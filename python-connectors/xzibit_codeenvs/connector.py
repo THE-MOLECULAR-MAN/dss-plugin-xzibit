@@ -14,8 +14,6 @@ def get_codeenv_url(env_name, env_lang='python'):
     return f"{base_url}/admin/code-envs/design/{lower(env_lang)}/{env_name}"
 
 
-
-
 class ConnectorCodeEnvs(Connector):
     ####################################################################
     # Code that has to be customized for this specific class
