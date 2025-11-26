@@ -11,18 +11,6 @@ from xzibit.utils import *
 from datetime import datetime
 
 
-def get_project_url(project_key):
-    # https://beta-design.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/flow/
-    try:
-        # I should move this function to be a class method and store the base_url as a member for speed
-        base_url = get_dss_base_url()
-        if base_url is None or project_key is None:
-            return None
-        # trailing slash is MANDATORY
-        return f"{base_url}/projects/{project_key}/flow/"
-    except Exception: # yeah, I know this is bad practice
-        return None
-
 
 class ConnectorProjects(Connector):
 
@@ -44,6 +32,21 @@ class ConnectorProjects(Connector):
             "versionTag.lastModifiedOn",
             "tutorialProject",
         ]
+        self.__baseurl = get_dss_base_url()
+        
+
+    def get_project_url(project_key):
+        # https://beta-design.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/flow/
+        try:
+            # I should move this function to be a class method and store the base_url as a member for speed
+            base_url = get_dss_base_url()
+            if base_url is None or project_key is None:
+                return None
+            # trailing slash is MANDATORY
+            return f"{base_url}/projects/{project_key}/flow/"
+        except Exception: # yeah, I know this is bad practice
+            return None
+
 
     def generate_rows(
         self,
