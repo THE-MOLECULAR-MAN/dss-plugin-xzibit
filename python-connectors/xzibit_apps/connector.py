@@ -19,13 +19,13 @@ class ConnectorApps(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         
-        self.client = api_client()
-        self.unique_id_key_name = 'appId'
-        self.keys   = [self.unique_id_key_name, 'appVersion', 'label', 
+        self.__client = api_client()
+        self.__unique_id_key_name = 'appId'
+        self.__keys   = [self.__unique_id_key_name, 'appVersion', 'label', 
                        'origin', 'shortDesc', 
                 'tags', 'isAppImg', 'instanceCount', 'useAsRecipe', 
                 'onlyLimitedVisibility']
-        self.objects_list = self.client.list_apps()
+        self.__objects_list = self.__client.list_apps()
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
