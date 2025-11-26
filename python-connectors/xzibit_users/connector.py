@@ -60,7 +60,7 @@ class ConnectorUsers(Connector):
                 {"name": "login", "type": "string", "meaning": "Text"},
                 {"name": "displayName", "type": "string", "meaning": "Text"},
                 {"name": "userProfile", "type": "string", "meaning": "Text"},
-                {"name": "groups", "type": "string", "meaning": "Text"}, # error?
+                {"name": "groups", "type": "string", "meaning": "JSONArrayMeaning"}, # error?
                 {"name": "sourceType", "type": "string", "meaning": "Text"},
                 {"name": "email", "type": "string", "meaning": "Email"},
                 {"name": "enabled", "type": "boolean", "meaning": "Boolean"},
