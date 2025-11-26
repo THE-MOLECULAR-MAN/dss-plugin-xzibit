@@ -59,7 +59,6 @@ class ConnectorRecipes(Connector):
                     "url_recipe": self.get_recipe_url(pk, r.id),
                 }
                 try:
-                    
                     next_row["input_datasets"] = recipe_settings_handle.get_flat_input_refs()
                     next_row["output_datasets"] = recipe_settings_handle.get_flat_output_refs()
                 except Exception:
