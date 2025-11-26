@@ -33,7 +33,7 @@ class ConnectorCodeEnvs(Connector):
             env_lang = next_row['envLang']
             env_name = next_row['envName']
             try:
-                code_env_handle = self.client.get_code_env(env_lang, env_name)
+                code_env_handle = self.__client.get_code_env(env_lang, env_name)
                 settings = code_env_handle.get_settings().get_raw()
                 next_row['corePackagesSet'] = settings.get('desc',[]).get('corePackagesSet',[])
                 next_row['path']            = settings.get('path', None)
@@ -58,6 +58,9 @@ class ConnectorCodeEnvs(Connector):
     def get_records_count(self, partitioning=None, partition_id=None):
         return len(self.__client.list_code_envs())
 
+    def get_read_schema(self):
+        return None
+
 ####################################################################
 # Intentionally not implemented, not needed for this type
 ####################################################################
@@ -70,5 +73,3 @@ class ConnectorCodeEnvs(Connector):
     def partition_exists(self, partitioning, partition_id):
         raise NotImplementedError
 
-    def get_read_schema(self):
-        return None
