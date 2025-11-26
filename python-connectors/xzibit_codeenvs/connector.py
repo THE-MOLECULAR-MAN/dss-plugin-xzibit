@@ -44,6 +44,7 @@ class ConnectorCodeEnvs(Connector):
             # custom things for this specific class:
             env_lang = next_row["envLang"]
             env_name = next_row["envName"]
+            next_row['codeenv_url'] = get_codeenv_url(next_row['envName'], next_row['envLang'])
             try:
                 code_env_handle = self.__client.get_code_env(env_lang, env_name)
                 settings = code_env_handle.get_settings().get_raw()
@@ -64,7 +65,7 @@ class ConnectorCodeEnvs(Connector):
                     next_row["usages"] = list(
                         get_values_for_key(list_of_usages, "projectKey")
                     )
-                next_row['codeenv_url'] = get_codeenv_url(next_row['envName'], next_row['envLang'])
+                
 
             except Exception as e:
                 print(f"Exception {e} with code_env_info:")
