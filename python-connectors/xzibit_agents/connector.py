@@ -179,19 +179,19 @@ class ConnectorProjects(Connector):
         return {
             "columns": [
                 {
-                    "name":    "owner",
+                    "name":    "Created by user",
                     "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name":    "id",
+                    "name":    "Last modified by user",
                     "type":    "string",
                     "meaning": "Text"
                 },
                 {
-                    "name":    "name",
-                    "type":    "string",
-                    "meaning": "Text"
+                    "name":    "tags",
+                    "type":    "array",
+                    "meaning": "JSONArrayMeaning"
                 },
                 {
                     "name":    "type",
