@@ -19,8 +19,8 @@ class ConnectorMeanings(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.__client = api_client()
-        self.keys   = ['label', 'description', 'detectable', 'type', 'id', 'normalizationMode']
-        self.objects_list = self.__client.list_meanings()
+        self.__keys   = ['label', 'description', 'detectable', 'type', 'id', 'normalizationMode']
+        self.__objects_list = self.__client.list_meanings()
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
