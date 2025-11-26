@@ -67,8 +67,8 @@ class ConnectorUsers(Connector):
                 # pp(item_info)
             except Exception:
                     print("whatever")
-                finally
-            yield next_row
+            finally
+                yield next_row
 
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
