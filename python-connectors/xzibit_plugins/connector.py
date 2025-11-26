@@ -18,7 +18,8 @@ class ConnectorPlugins(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__keys   = ['id', 'meta.label', 'version', 'meta.author', 'meta.tags', 'meta.description', 'isDev']
+        self.__keys   = ['id', 'meta.label', 'version', 'meta.author', 
+                         'meta.tags', 'meta.description', 'isDev']
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
