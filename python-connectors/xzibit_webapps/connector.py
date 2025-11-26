@@ -115,7 +115,7 @@ class ConnectorProjects(Connector):
 
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, URL
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, URL, 
         return {
             "columns": [
                 {"name": "projectKey", "type": "string", "meaning": "Text"},
@@ -127,7 +127,7 @@ class ConnectorProjects(Connector):
                 {"name": "url", "type": "string", "meaning": "URL"},
                 {"name": "created_on", "type": "date", "meaning": "DatetimeTz"},
                 {"name": "lastModifiedBy", "type": "string", "meaning": "Text"},
-                {"name": "lastModifiedOn", "type": "date", "meaning": "DatetimeTz"},
+                {"name": "lastModifiedOn", "type": "datetimenotz", "meaning": "DatetimeTz"},
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "is_code_webapp", "type": "boolean", "meaning": "Boolean"},
             ]
