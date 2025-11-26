@@ -113,5 +113,11 @@ class ConnectorClusters(Connector):
                     "type":    "int64",
                     "meaning": "Integer"
                 },
+                {
+                    "name":    "usedInProjects",
+                    "type":    "int64",
+                    "meaning": "Integer"
+                },
+
             ]
         }
