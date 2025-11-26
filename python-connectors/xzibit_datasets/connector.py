@@ -64,6 +64,7 @@ class ConnectorDatasets(Connector):
                     #                    num_rows += 1
                     dataset_handle = project_handle.get_dataset(r.id)
                     next_row = safe_extract_dataset_metadata(dataset_handle, pk)
+                    next_row['dataset_url'] = get_dataset_url(pk, r.id)
                     yield next_row
 
                 except Exception as e:
