@@ -19,11 +19,10 @@ class ConnectorUsers(Connector):
         Connector.__init__(self, config, plugin_config)
         
         self.__client = api_client()
-        self.keys   = ['login', 'displayName',
+        self.__keys   = ['login', 'displayName',
                       'userProfile', 'groups', 'sourceType', 'email',
                       'creationDate', 'enabled', 'resultingUserProfile',
                       'userProfile']
-        self.objects_list = 
 
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
