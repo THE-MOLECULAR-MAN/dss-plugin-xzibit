@@ -23,7 +23,7 @@ class ConnectorConnections(Connector):
         self.__keys   = [self.unique_id_key_name, 'type', 'usableBy', 'allowWrite',
                 'credentialsMode', 'params.credentialsMode', 'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedBy.lastModifiedOn', 'params.authType',
                 'params.db', 'params.defaultSchema', 'params.role', 'params.warehouse', 'params.scope']
-        self.__objects_list = self.client.list_connections(as_type='listitems')
+        self.__objects_list = self.__client.list_connections(as_type='listitems')
 
             
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
