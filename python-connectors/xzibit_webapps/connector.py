@@ -3,20 +3,13 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import *
+from xzibit.utils import get_dss_base_url
 
 ####################################################################
 # Unique imports for this Class
 ####################################################################
 import re
 from datetime import datetime
-
-
-def convert_webapp_name_to_url_name(web_app_name):
-    """x"""
-    # Connect_Name-Test1234567890-=_+!@#$%^&*(),.<>/?'"[{]}\|
-    # becomes
-    # connectname-test1234567890-
 
 
 def make_url_friendly(text):
@@ -115,7 +108,7 @@ class ConnectorProjects(Connector):
 
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, URL, 
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, URL,
         return {
             "columns": [
                 {"name": "projectKey", "type": "string", "meaning": "Text"},
@@ -126,8 +119,16 @@ class ConnectorProjects(Connector):
                 {"name": "backendRunning", "type": "boolean", "meaning": "Boolean"},
                 {"name": "url", "type": "string", "meaning": "URL"},
                 {"name": "lastModifiedBy", "type": "string", "meaning": "Text"},
-                {"name": "created_on", "type": "datetimenotz", "meaning": "DatetimeNoTz"},
-                {"name": "lastModifiedOn", "type": "datetimenotz", "meaning": "DatetimeNoTz"},
+                {
+                    "name": "created_on",
+                    "type": "datetimenotz",
+                    "meaning": "DatetimeNoTz",
+                },
+                {
+                    "name": "lastModifiedOn",
+                    "type": "datetimenotz",
+                    "meaning": "DatetimeNoTz",
+                },
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "is_code_webapp", "type": "boolean", "meaning": "Boolean"},
             ]

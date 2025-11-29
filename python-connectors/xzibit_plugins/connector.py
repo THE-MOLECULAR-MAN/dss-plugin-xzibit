@@ -3,7 +3,14 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import *
+from xzibit.utils import (
+    get_dss_base_url,
+    flatten_dict,
+    get_values_for_key,
+    remove_prefix_from_keys,
+    list_to_error_dict,
+    pprint,
+)
 
 
 def get_plugin_url(plugin_id):
@@ -14,7 +21,7 @@ def get_plugin_url(plugin_id):
             return None
         # trailing slash is MANDATORY
         return f"{base_url}/plugins/{plugin_id}/summary/"
-    except Exception: # yeah, I know this is bad practice
+    except Exception:  # yeah, I know this is bad practice
         return None
 
 
@@ -62,7 +69,7 @@ class ConnectorPlugins(Connector):
                 next_row["plugin_url"] = get_plugin_url(next_row["id"])
             except Exception as e:
                 print(f"Exception {e} with plugin_info:")
-                pprint(plugin_info)
+                pprint(item_info)
                 next_row = list_to_error_dict(self.__keys)
             finally:
                 yield next_row

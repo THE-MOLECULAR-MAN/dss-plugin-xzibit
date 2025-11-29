@@ -3,7 +3,12 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import *
+from xzibit.utils import (
+    safe_extract_dataset_metadata,
+    get_dss_base_url,
+    get_dataset_url,
+)
+
 
 def get_dataset_url(project_key, dataset_id):
     # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/datasets/Sales_Marketing_queries/explore/
@@ -13,7 +18,7 @@ def get_dataset_url(project_key, dataset_id):
             return None
         # trailing slash is MANDATORY
         return f"{base_url}/projects/{project_key}/datasets/{dataset_id}/explore/"
-    except Exception: # yeah, I know this is bad practice
+    except Exception:  # yeah, I know this is bad practice
         return None
 
 
@@ -64,7 +69,7 @@ class ConnectorDatasets(Connector):
                     #                    num_rows += 1
                     dataset_handle = project_handle.get_dataset(r.id)
                     next_row = safe_extract_dataset_metadata(dataset_handle, pk)
-                    next_row['dataset_url'] = get_dataset_url(pk, r.id)
+                    next_row["dataset_url"] = get_dataset_url(pk, r.id)
                     yield next_row
 
                 except Exception as e:
@@ -97,50 +102,61 @@ class ConnectorDatasets(Connector):
         """TBD"""
         raise NotImplementedError
 
-    
     def get_read_schema(self):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return {'columns': [{'meaning': 'Text', 'name': 'projectKey', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'id', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'name', 'type': 'string'},
-             {'meaning': 'Boolean', 'name': 'exists', 'type': 'boolean'},
-             {'meaning': 'Text', 'name': 'type', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'formatType', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'params.connection', 'type': 'string'},
-             {'meaning': 'Boolean', 'name': 'managed', 'type': 'boolean'},
-             {'meaning': 'Text', 'name': 'params.mode', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'params.table', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'params.schema', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'params.path', 'type': 'string'},
-             {'meaning': 'Text',
-              'name': 'creationTag.lastModifiedBy.login',
-              'type': 'string'},
-             {'meaning': 'DatetimeNoTz',
-              'name': 'creationTag.lastModifiedOn',
-              'type': 'datetimenotz'},
-             {'meaning': 'Text',
-              'name': 'versionTag.lastModifiedBy.login',
-              'type': 'string'},
-             {'meaning': 'DatetimeNoTz',
-              'name': 'versionTag.lastModifiedOn',
-              'type': 'datetimenotz'},
-             {'meaning': 'FreeText', 'name': 'shortDesc', 'type': 'string'},
-             {'meaning': 'FreeText', 'name': 'description', 'type': 'string'},
-             {'meaning': 'Text',
-              'name': 'params.metastoreDatabaseName',
-              'type': 'string'},
-             {'meaning': 'Text',
-              'name': 'params.folderSmartId',
-              'type': 'string'},
-             {'meaning': 'JSONArrayMeaning', 'name': 'tags', 'type': 'string'},
-             {'meaning': 'Boolean', 'name': 'featureGroup', 'type': 'boolean'},
-             {'meaning': 'LongMeaning',
-              'name': 'num_metrics_checks',
-              'type': 'int'},
-             {'meaning': 'LongMeaning', 'name': 'num_columns', 'type': 'int'},
-             {'meaning': 'JSONArrayMeaning',
-              'name': 'column_names',
-              'type': 'string'},
-             {'meaning': 'URL', 'name': 'dataset_url', 'type': 'string'}]}
+        return {
+            "columns": [
+                {"meaning": "Text", "name": "projectKey", "type": "string"},
+                {"meaning": "Text", "name": "id", "type": "string"},
+                {"meaning": "Text", "name": "name", "type": "string"},
+                {"meaning": "Boolean", "name": "exists", "type": "boolean"},
+                {"meaning": "Text", "name": "type", "type": "string"},
+                {"meaning": "Text", "name": "formatType", "type": "string"},
+                {"meaning": "Text", "name": "params.connection", "type": "string"},
+                {"meaning": "Boolean", "name": "managed", "type": "boolean"},
+                {"meaning": "Text", "name": "params.mode", "type": "string"},
+                {"meaning": "Text", "name": "params.table", "type": "string"},
+                {"meaning": "Text", "name": "params.schema", "type": "string"},
+                {"meaning": "Text", "name": "params.path", "type": "string"},
+                {
+                    "meaning": "Text",
+                    "name": "creationTag.lastModifiedBy.login",
+                    "type": "string",
+                },
+                {
+                    "meaning": "DatetimeNoTz",
+                    "name": "creationTag.lastModifiedOn",
+                    "type": "datetimenotz",
+                },
+                {
+                    "meaning": "Text",
+                    "name": "versionTag.lastModifiedBy.login",
+                    "type": "string",
+                },
+                {
+                    "meaning": "DatetimeNoTz",
+                    "name": "versionTag.lastModifiedOn",
+                    "type": "datetimenotz",
+                },
+                {"meaning": "FreeText", "name": "shortDesc", "type": "string"},
+                {"meaning": "FreeText", "name": "description", "type": "string"},
+                {
+                    "meaning": "Text",
+                    "name": "params.metastoreDatabaseName",
+                    "type": "string",
+                },
+                {"meaning": "Text", "name": "params.folderSmartId", "type": "string"},
+                {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
+                {"meaning": "Boolean", "name": "featureGroup", "type": "boolean"},
+                {"meaning": "LongMeaning", "name": "num_metrics_checks", "type": "int"},
+                {"meaning": "LongMeaning", "name": "num_columns", "type": "int"},
+                {
+                    "meaning": "JSONArrayMeaning",
+                    "name": "column_names",
+                    "type": "string",
+                },
+                {"meaning": "URL", "name": "dataset_url", "type": "string"},
+            ]
+        }

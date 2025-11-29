@@ -3,7 +3,13 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import *
+from xzibit.utils import (
+    flatten_dict,
+    get_dss_base_url,
+    parse_user_datetime,
+    int_to_datetime,
+)
+
 
 class ConnectorUsers(Connector):
 
@@ -28,16 +34,14 @@ class ConnectorUsers(Connector):
         ]
         self.__baseurl = get_dss_base_url()
 
-        
     def get_user_url(self, user_id):
         # https://beta-design.se-platform.dataiku-sandbox.io/admin/security/users/edit/tim.honker/
         try:
             if self.__baseurl is None or user_id is None:
                 return None
             return f"{self.__baseurl}/admin/security/users/edit/{user_id}/"
-        except Exception: # yeah, I know this is bad practice
+        except Exception:  # yeah, I know this is bad practice
             return None
-
 
     def generate_rows(
         self,
@@ -51,7 +55,9 @@ class ConnectorUsers(Connector):
             try:
                 next_row = flatten_dict(item_info, include_keys=self.__keys)
                 # item_id = next_row[self.__unique_id_key_name]
-                item_handle = self.__client.get_user(item_info[self.__unique_id_key_name])
+                item_handle = self.__client.get_user(
+                    item_info[self.__unique_id_key_name]
+                )
                 # activity_handle = item_handle.get_activity()
                 # TODO: fix this date mess below
                 next_row["last_successful_login"] = parse_user_datetime(
@@ -78,12 +84,20 @@ class ConnectorUsers(Connector):
                 {"name": "login", "type": "string", "meaning": "Text"},
                 {"name": "displayName", "type": "string", "meaning": "Text"},
                 {"name": "userProfile", "type": "string", "meaning": "Text"},
-                {"name": "groups", "type": "string", "meaning": "JSONArrayMeaning"}, # error?
+                {
+                    "name": "groups",
+                    "type": "string",
+                    "meaning": "JSONArrayMeaning",
+                },
                 {"name": "sourceType", "type": "string", "meaning": "Text"},
                 {"name": "email", "type": "string", "meaning": "Email"},
                 {"name": "enabled", "type": "boolean", "meaning": "Boolean"},
                 {"name": "resultingUserProfile", "type": "string", "meaning": "Text"},
-                {"name": "creationDate", "type": "datetimenotz", "meaning": "DatetimeNoTz"},
+                {
+                    "name": "creationDate",
+                    "type": "datetimenotz",
+                    "meaning": "DatetimeNoTz",
+                },
                 {"name": "last_successful_login", "type": "date", "meaning": "Date"},
                 {"name": "last_session_activity", "type": "date", "meaning": "Date"},
                 {"name": "url_user", "type": "string", "meaning": "URL"},

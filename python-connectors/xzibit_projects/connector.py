@@ -3,13 +3,12 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import *
+from xzibit.utils import remove_prefix_from_keys, flatten_dict, get_dss_base_url
 
 ####################################################################
 # Unique imports for this Class
 ####################################################################
 from datetime import datetime
-
 
 
 class ConnectorProjects(Connector):
@@ -33,7 +32,6 @@ class ConnectorProjects(Connector):
             "tutorialProject",
         ]
         self.__baseurl = get_dss_base_url()
-        
 
     def get_project_url(self, project_key):
         # https://beta-design.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/flow/
@@ -42,9 +40,8 @@ class ConnectorProjects(Connector):
                 return None
             # trailing slash is MANDATORY
             return f"{self.__baseurl}/projects/{project_key}/flow/"
-        except Exception: # yeah, I know this is bad practice
+        except Exception:  # yeah, I know this is bad practice
             return None
-
 
     def generate_rows(
         self,
@@ -63,7 +60,7 @@ class ConnectorProjects(Connector):
             next_row["lastModifiedOn"] = datetime.fromtimestamp(
                 next_row["lastModifiedOn"] // 1000
             )
-            next_row['url_project'] = self.get_project_url(next_row['projectKey'])
+            next_row["url_project"] = self.get_project_url(next_row["projectKey"])
             yield next_row
 
     def get_read_schema(self):
@@ -83,23 +80,31 @@ class ConnectorProjects(Connector):
                 {"name": "shortDesc", "type": "string", "meaning": "FreeText"},
                 {"name": "description", "type": "string", "meaning": "FreeText"},
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
-                {"name": "lastModifiedOn", "type": "datetimenotz", "meaning": "DatetimeNoTz"},
+                {
+                    "name": "lastModifiedOn",
+                    "type": "datetimenotz",
+                    "meaning": "DatetimeNoTz",
+                },
                 {"name": "tutorialProject", "type": "boolean", "meaning": "Boolean"},
                 {"name": "url_project", "type": "string", "meaning": "URL"},
             ]
         }
 
     def get_records_count(self, partitioning=None, partition_id=None):
+        """TBD"""
         return len(self.__client.list_projects())
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
     def get_partitioning(self):
+        """TBD"""
         raise NotImplementedError
 
     def list_partitions(self, partitioning):
+        """TBD"""
         return []
 
     def partition_exists(self, partitioning, partition_id):
+        """TBD"""
         raise NotImplementedError
