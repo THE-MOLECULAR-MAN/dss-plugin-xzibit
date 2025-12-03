@@ -144,7 +144,7 @@ class ConnectorProjects(Connector):
                 
     def get_records_count(self, partitioning=None, partition_id=None):
         """TBD"""
-        print(f"xzibit_agenttools get_records_count I NEVER RUN!")
+        print(f"xzibit_agenttools get_records_count I NEVER RUN, even when canCountRecords is set to true in connector.json!")
         return None
 
     ####################################################################
