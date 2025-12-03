@@ -96,9 +96,9 @@ class ConnectorProjects(Connector):
                             .get("login", None)
                         )
                         next_row["Last modified by user"] = last_modified_user
-                        next_row["agent_tool_params"] = raw_settings.get('params',None)          
-                        next_row["customFields"]   = raw_settings.get('customFields',None)   
-                        next_row["dkuProperties"]  = raw_settings.get('dkuProperties',None)   
+                        next_row["agent_tool_params"] = raw_settings.get('params',None)
+                        next_row["customFields"]   = raw_settings.get('customFields',None)
+                        next_row["dkuProperties"]  = raw_settings.get('dkuProperties',None)
                         next_row["checklists"]     = raw_settings.get('checklists',{}).get('checklists',None)
                         next_row["quickTestQuery"] = raw_settings.get('quickTestQuery',None)
 
