@@ -19,26 +19,6 @@ def get_agenttool_url(project_key, agenttool_id):
     # https://dev-design.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/agent-tools/JfbcCw6
     return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent-tools/{agenttool_id}"
 
-
-def parse_llm_id(llm_string: str):
-    """
-    Splits a string by ':' into exactly 3 variables.
-    Returns None for missing fields.
-    """
-    if not llm_string:
-        return None, None, None
-
-    # Split the string
-    parts = llm_string.split(":")
-
-    # Pad the list with None to ensure it has at least 3 elements,
-    # then slice to take exactly the first 3.
-    # This handles cases with 1, 2, or 3+ segments gracefully.
-    padded = (parts + [None] * 3)[:3]
-
-    return padded[0], padded[1], padded[2]
-
-
 class ConnectorProjects(Connector):
     """TBD"""
 
