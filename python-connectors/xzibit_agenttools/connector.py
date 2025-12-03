@@ -58,85 +58,24 @@ class ConnectorProjects(Connector):
                         settings = agent.get_settings()
                         # raw_settings = settings.get_raw()
 
-                        # We typically want the LLM used by the *Active* version of the agent
-                        active_version_id = settings.active_version
-
-                        llm_model_id = "N/A"
-                        # is_active_version = active_version_id == agent_item.get(
-                        #     "activeVersion", "Unknown"
-                        # )
-                        creation_user = "Unknown"
-
-                        if active_version_id:
-                            # Retrieve settings for the active version
-                            version_settings = settings.get_version_settings(
-                                active_version_id
-                            )
-                            # print("[generate_rows] Version Settings")
-                            # pp(version_settings.get_raw())
-
-                            # 1. Try standard Visual Agent property
-                            try:
-                                llm_model_id = version_settings.llm_id
-                            except AttributeError:
-                                # 2. Fallback: Check raw settings (common for Code Agents)
-                                ver_raw = version_settings.get_raw()
-
-                                llm_model_id = ver_raw.get("llmId", None)
-
-                                # Sometimes stored under 'generation' block for complex setups
-                                if not llm_model_id and "generation" in ver_raw:
-                                    llm_model_id = ver_raw["generation"].get(
-                                        "llmId", None
-                                    )
-
-                            # print("[generate_rows] version_settings:")
-                            # pp(version_settings.get_raw())
-
-                            creation_user = (
-                                version_settings.get_raw()
-                                .get("creationTag", {})
-                                .get("lastModifiedBy", {})
-                                .get("login", None)
-                            )
-                            last_modified_on = datetime.fromtimestamp(
-                                version_settings.get_raw()
-                                .get("versionTag", {})
-                                .get("lastModifiedOn", None)
-                                // 1000
-                            )
-                            last_modified_user = (
-                                version_settings.get_raw()
-                                .get("versionTag", {})
-                                .get("lastModifiedBy", {})
-                                .get("login", None)
-                            )
-
-                        # pp(raw_settings)
-
-                        agent_version = agent_item.get("activeVersion", None)
-
-                        llm_vendor, llm_connection_name, llm_model = parse_llm_id(
-                            llm_model_id
-                        )
                         next_row = {
                             "projectKey": project_key,
-                            "Agent Name": agent_item.name,
-                            "Agent ID": agent_item.id,
-                            "Created by user": creation_user,
-                            "Last modified by user": last_modified_user,
-                            "Active Version": active_version_id,
-                            # "LLM Model ID": llm_model_id,
-                            "LLM Vendor": llm_vendor,
-                            "LLM Connection Name": llm_connection_name,
-                            "LLM Model Name": llm_model,
-                            "Agent Type": agent_item.get("type", None),
-                            "Agent Version": agent_version,
-                            "tags": agent_item.get("tags", None),
-                            "Last Modified timestamp": last_modified_on,
+#                             "Agent Name": agent_item.name,
+#                             "Agent ID": agent_item.id,
+#                             "Created by user": creation_user,
+#                             "Last modified by user": last_modified_user,
+#                             "Active Version": active_version_id,
+#                             # "LLM Model ID": llm_model_id,
+#                             "LLM Vendor": llm_vendor,
+#                             "LLM Connection Name": llm_connection_name,
+#                             "LLM Model Name": llm_model,
+#                             "Agent Type": agent_item.get("type", None),
+#                             "Agent Version": agent_version,
+#                             "tags": agent_item.get("tags", None),
+#                             "Last Modified timestamp": last_modified_on,
                             # "Agent is active version": is_active_version,
-                            "Agent URL": get_agent_url(
-                                project_key, agent_item.id, agent_version
+#                             "Agent URL": get_agent_url(
+#                                 project_key, agent_item.id, agent_version
                             ),
                         }
                         yield next_row
