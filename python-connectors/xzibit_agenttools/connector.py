@@ -82,7 +82,6 @@ class ConnectorProjects(Connector):
 #                             "Active Version": active_version_id,
 #                             "Agent Version": agent_version,
 #                             "Last Modified timestamp": last_modified_on,
-
                         }
                         yield next_row
 
