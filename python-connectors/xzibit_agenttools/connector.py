@@ -71,6 +71,16 @@ class ConnectorProjects(Connector):
                         # raw_settings = settings.get_raw()
                         
                         
+                       
+                        next_row["agent_tool_name"] = raw_settings.get('name',None)
+                        next_row["agent_tool_type"] = raw_settings.get('type',None)
+                        next_row["agent_tool_description_for_LLM"] = raw_settings.get('additionalDescriptionForLLM',None)
+                        next_row["tags"] = raw_settings.get("tags", [])
+                        next_row["url"] =  get_agenttool_url(
+                                project_key, agent_tool_id
+                            )
+                        
+
                         creation_user = (
                                 raw_settings.get_raw()
                                 .get("creationTag", {})
@@ -90,14 +100,6 @@ class ConnectorProjects(Connector):
                             .get("login", None)
                         )
 
-                       
-                        next_row["agent_tool_name"] = raw_settings.get('name',None)
-                        next_row["agent_tool_type"] = raw_settings.get('type',None)
-                        next_row["agent_tool_description_for_LLM"] = raw_settings.get('additionalDescriptionForLLM',None)
-                        next_row["tags"] = raw_settings.get("tags", [])
-                        next_row["url"] =  get_agenttool_url(
-                                project_key, agent_tool_id
-                            )
                         next_row["Created by user"] = creation_user
                         next_row["Last modified by user"] = last_modified_user
                         next_row["Last Modified timestamp"] = last_modified_on
