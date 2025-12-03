@@ -147,6 +147,7 @@ class ConnectorProjects(Connector):
     
     def get_records_count(self, partitioning=None, partition_id=None):
         """TBD"""
+        print(f"xzibit_agenttools get_records_count ====================================")
         return None
 
     ####################################################################
