@@ -48,15 +48,13 @@ class ConnectorProjects(Connector):
                 project = self.__client.get_project(project_key)
 
                 # List all agents in the current project
-                # Note: This returns a list of DSSAgentListItem objects
-                agents = project.list_agents()
 
-                for agent_item in agents:
+                for agent_item in project.list_agent_tools():
                     try:
                         # print(f"[generate_rows] Inner loop start on agent_item {agent_item}")
                         # Get the full agent object and its settings
                         # We need the full object to access .get_settings()
-                        agent = project.get_agent(agent_item.id)
+                        agent = project.get_agent_tool(agent_item.id)
                         settings = agent.get_settings()
                         # raw_settings = settings.get_raw()
 
