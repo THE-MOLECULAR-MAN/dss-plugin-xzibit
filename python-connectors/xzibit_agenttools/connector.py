@@ -73,18 +73,18 @@ class ConnectorProjects(Connector):
                                 .get("lastModifiedBy", {})
                                 .get("login", None)
                             )
-                            last_modified_on = datetime.fromtimestamp(
-                                raw_settings.get_raw()
-                                .get("versionTag", {})
-                                .get("lastModifiedOn", None)
-                                // 1000
-                            )
-                            last_modified_user = (
-                                raw_settings.get_raw()
-                                .get("versionTag", {})
-                                .get("lastModifiedBy", {})
-                                .get("login", None)
-                            )
+                        last_modified_on = datetime.fromtimestamp(
+                            raw_settings.get_raw()
+                            .get("versionTag", {})
+                            .get("lastModifiedOn", None)
+                            // 1000
+                        )
+                        last_modified_user = (
+                            raw_settings.get_raw()
+                            .get("versionTag", {})
+                            .get("lastModifiedBy", {})
+                            .get("login", None)
+                        )
 
                         next_row = {
                             "projectKey": project_key,
@@ -96,7 +96,7 @@ class ConnectorProjects(Connector):
                             "url": get_agenttool_url(
                                 project_key, agent_tool_id
                             ),
-#                             "Created by user": creation_user,
+                            "Created by user": creation_user,
 #                             "Last modified by user": last_modified_user,
 #                             "Active Version": active_version_id,
 #                             "Agent Version": agent_version,
