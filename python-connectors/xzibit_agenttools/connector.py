@@ -67,6 +67,9 @@ class ConnectorProjects(Connector):
 
                         next_row = {
                             "projectKey": project_key,
+                            "Agent Tool ID": raw_settings.get('id',None),
+                            "Agent Tool Name":  raw_settings.get('name',None),
+                            "additionalDescriptionForLLM": 
 #                             "Agent Name": agent_item.name,
 #                             "Agent ID": agent_item.id,
 #                             "Created by user": creation_user,
