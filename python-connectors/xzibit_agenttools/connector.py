@@ -146,13 +146,13 @@ class ConnectorProjects(Connector):
              {'meaning': 'JSONArrayMeaning',
               'name': 'dkuProperties',
               'type': 'string'},
-             {'meaning': 'JSONObjectMeaning',
+             {'meaning': 'JSONArrayMeaning',
               'name': 'checklists',
               'type': 'string'},
              {'meaning': 'JSONObjectMeaning',
               'name': 'quickTestQuery',
               'type': 'string'}]}
-
+    
     def get_records_count(self, partitioning=None, partition_id=None):
         """TBD"""
         return self.__count
