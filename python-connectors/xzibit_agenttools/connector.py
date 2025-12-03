@@ -10,7 +10,7 @@ from dataiku import api_client
 from dataiku.connector import Connector
 
 # from xzibit.utils import *
-from zxibit.utils import get_dss_base_url
+from zxibit.utils import get_dss_base_url, pp
 
 
 def get_agenttool_url(project_key, agenttool_id):
@@ -56,6 +56,7 @@ class ConnectorProjects(Connector):
                         # We need the full object to access .get_settings()
                         agent = project.get_agent_tool(agent_item.id)
                         settings = agent.get_settings()
+                        pp(settings)
                         # raw_settings = settings.get_raw()
 
                         next_row = {
