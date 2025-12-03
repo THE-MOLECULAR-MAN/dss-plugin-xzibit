@@ -29,7 +29,7 @@ class ConnectorProjects(Connector):
     # Code that has to be customized for this specific class
     ####################################################################
     def __init__(self, config, plugin_config):
-        print(f"xzibit_agenttools CONSTRUCTOR START ====================================")
+        print(f"xzibit_agenttools CONSTRUCTOR START")
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__objects_list = self.__client.list_project_keys()
