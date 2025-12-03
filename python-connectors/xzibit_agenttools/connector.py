@@ -119,7 +119,7 @@ class ConnectorProjects(Connector):
                 # Pass on projects where we lack permissions or feature is disabled
                 print(f"[generate_rows] Exception {project_key}: {e_proj}")
 
-        # print("[generate_rows] END")
+        print(f"xzibit_agenttools CONSTRUCTOR END")
 
     def get_read_schema(self):
         """Returns the read schema for Agent Tools"""
