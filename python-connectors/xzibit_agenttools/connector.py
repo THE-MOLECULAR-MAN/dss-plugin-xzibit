@@ -66,6 +66,25 @@ class ConnectorProjects(Connector):
                         # raw_settings = settings.get_raw()
                         
                         agent_tool_id = raw_settings.get('id',None)
+                        
+                        creation_user = (
+                                raw_settings.get_raw()
+                                .get("creationTag", {})
+                                .get("lastModifiedBy", {})
+                                .get("login", None)
+                            )
+                            last_modified_on = datetime.fromtimestamp(
+                                raw_settings.get_raw()
+                                .get("versionTag", {})
+                                .get("lastModifiedOn", None)
+                                // 1000
+                            )
+                            last_modified_user = (
+                                raw_settings.get_raw()
+                                .get("versionTag", {})
+                                .get("lastModifiedBy", {})
+                                .get("login", None)
+                            )
 
                         next_row = {
                             "projectKey": project_key,
