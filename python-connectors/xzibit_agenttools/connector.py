@@ -97,9 +97,9 @@ class ConnectorProjects(Connector):
                                 project_key, agent_tool_id
                             )
                         }
-                        next_row["Created by user"] = creation_user,
-                        next_row["Last modified by user"] = last_modified_user,
-                        next_row["Last Modified timestamp"] = last_modified_on,
+                        next_row["Created by user"] = creation_user
+                        next_row["Last modified by user"] = last_modified_user
+                        next_row["Last Modified timestamp"] = last_modified_on
 #                             "Active Version": active_version_id,
 #                             "Agent Version": agent_version,
                         }
