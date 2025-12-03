@@ -19,6 +19,7 @@ def replace_empty_arrays_sets_with_none(x):
         #if x is None or x in ["[]", "{}", "null"] or len(x) == 0:
             return None
     except Exception:
+        print(f"[replace_empty_arrays_sets_with_none] EXCEPTION: {str(type(x))} {str(x)}")
         return x
     return x
 
