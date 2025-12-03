@@ -77,8 +77,7 @@ class ConnectorProjects(Connector):
 #                             "Agent Version": agent_version,
                             "tags": raw_settings.get("tags", None),
 #                             "Last Modified timestamp": last_modified_on,
-                            # "Agent is active version": is_active_version,
-#                             "Agent URL": get_agent_url(
+#                             "url_agent_tool": get_agent_url(
 #                                 project_key, agent_item.id, agent_version
 #                             ),
                         }
