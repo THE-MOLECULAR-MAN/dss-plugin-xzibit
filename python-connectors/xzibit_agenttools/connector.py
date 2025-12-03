@@ -57,10 +57,10 @@ class ConnectorProjects(Connector):
                         # print(f"[generate_rows] Inner loop start on agent_item {agent_item}")
                         # Get the full agent object and its settings
                         # We need the full object to access .get_settings()
-                        agent_tool_id = agent_item.id
+                        agent_tool_id = 
                         next_row["agent_tool_id"]   = agent_tool_id
 
-                        agent = project.get_agent_tool(agent_tool_id)
+                        agent = project.get_agent_tool(agent_item.id)
                         settings = agent.get_settings() #  <dataikuapi.dss.agent_tool.DSSAgentToolSettings object at 0x7f90301a83d0>
                         # https://developer.dataiku.com/latest/api-reference/python/agents.html#dataikuapi.dss.agent_tool.DSSAgentToolSettings
                         raw_settings = settings.get_raw()
