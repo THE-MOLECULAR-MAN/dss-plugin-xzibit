@@ -73,7 +73,7 @@ class ConnectorProjects(Connector):
                         next_row["agent_tool_description_for_LLM"] = raw_settings.get('additionalDescriptionForLLM',None)
                         next_row["tags"] = raw_settings.get("tags", [])
 #                         next_row["url"] =  get_agenttool_url(
-#                                 project_key, agent_tool_id
+#                                 project_key, next_row["agent_tool_id"]
 #                             )
 
                         creation_user = (
