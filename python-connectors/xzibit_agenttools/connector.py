@@ -97,7 +97,7 @@ class ConnectorProjects(Connector):
                             .get("login", None)
                         )
                         next_row["Last modified by user"] = last_modified_user
-                        next_row["params"] = raw_settings.get('params',None)          
+                        next_row["agent_tool_params"] = raw_settings.get('params',None)          
 
 #                             "Active Version": active_version_id,
 #                             "Agent Version": agent_version,
