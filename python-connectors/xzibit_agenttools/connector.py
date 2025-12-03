@@ -17,7 +17,7 @@ def get_agenttool_url(project_key, agenttool_id):
     """TBD"""
     base_url = get_dss_base_url()
     # https://dev-design.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/agent-tools/JfbcCw6
-    return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent-tools/{agenttool_id}"
+    return f"{base_url}/projects/{project_key}/agent-tools/{agenttool_id}"
 
 
 class ConnectorProjects(Connector):
