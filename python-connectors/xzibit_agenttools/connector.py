@@ -31,7 +31,11 @@ class ConnectorProjects(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        # self.__objects_list = self.__client.list_project_keys()
+        self.__objects_list = self.__client.list_project_keys()
+        self.__count = 0
+        for project_key in self.__objects_list:
+             for agent_item in project.list_agent_tools():
+                    self.__count += 1
 
     # pylint: disable=W0613
     def generate_rows(
