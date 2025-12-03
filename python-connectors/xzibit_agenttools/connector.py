@@ -104,10 +104,6 @@ class ConnectorProjects(Connector):
                         next_row["dkuProperties"]  = raw_settings.get('dkuProperties',None)   
                         next_row["checklists"]     = raw_settings.get('checklists',{}).get('checklists',None)
                         next_row["quickTestQuery"] = raw_settings.get('quickTestQuery',None)   
-#                             "Active Version": active_version_id,
-#                             "Agent Version": agent_version,
-
-                        # yield next_row
 
                     # except (AttributeError, KeyError, TypeError, ValueError) as e:
                     except Exception as e:
