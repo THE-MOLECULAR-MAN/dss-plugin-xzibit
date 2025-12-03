@@ -106,7 +106,6 @@ class ConnectorProjects(Connector):
                         # yield next_row
 
                     except (AttributeError, KeyError, TypeError, ValueError) as e:
-                        # Print minimal error to avoid cluttering logs for expected data issues
                         print(
                             f"[agenttools.generaterows] [EXCEPTION] in {project_key}: {e}"
                         )
