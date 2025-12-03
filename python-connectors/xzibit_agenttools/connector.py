@@ -48,6 +48,7 @@ class ConnectorProjects(Connector):
         records_limit=-1,
     ):
         """TBD"""
+        print(f"xzibit_agenttools generate_rows START ====================================")
 
         # iterate through each object
         for project_key in self.__objects_list:
