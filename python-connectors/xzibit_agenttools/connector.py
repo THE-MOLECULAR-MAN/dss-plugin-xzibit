@@ -62,7 +62,7 @@ class ConnectorProjects(Connector):
                         
 
                         print(f"[agent_tools.generate_rows] settings:")
-                        pp(raw_settings))
+                        pp(raw_settings)
                         # raw_settings = settings.get_raw()
 
                         next_row = {
