@@ -75,7 +75,6 @@ class ConnectorProjects(Connector):
 #                         next_row["url"] =  get_agenttool_url(
 #                                 project_key, agent_tool_id
 #                             )
-                        
 
                         creation_user = (
                                 raw_settings.get("creationTag", {})
