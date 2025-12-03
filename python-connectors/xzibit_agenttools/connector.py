@@ -33,10 +33,10 @@ class ConnectorProjects(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__objects_list = self.__client.list_project_keys()
-        self.__count = 0
-        for project_key in self.__objects_list:
-            project = self.__client.get_project(project_key)
-            self.__count += len(project.list_agent_tools())
+#         self.__count = 0
+#         for project_key in self.__objects_list:
+#             project = self.__client.get_project(project_key)
+#             self.__count += len(project.list_agent_tools())
         print(f"xzibit_agenttools CONSTRUCTOR END")
             
     # pylint: disable=W0613
