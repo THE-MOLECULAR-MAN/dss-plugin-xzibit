@@ -77,8 +77,8 @@ class ConnectorProjects(Connector):
 #                             "Last modified by user": last_modified_user,
 #                             "Active Version": active_version_id,
 #                             "Agent Version": agent_version,
-                            "tags": raw_settings.get("tags", []),
 #                             "Last Modified timestamp": last_modified_on,
+                            "tags": raw_settings.get("tags", []),
                             "url_dss_object": get_agenttool_url(
                                 project_key, agent_tool_id
                             ),
