@@ -64,10 +64,12 @@ class ConnectorProjects(Connector):
                         print(f"[agent_tools.generate_rows] settings:")
                         pp(raw_settings)
                         # raw_settings = settings.get_raw()
+                        
+                        agent_tool_id = raw_settings.get('id',None)
 
                         next_row = {
                             "projectKey": project_key,
-                            "agent_tool_id": raw_settings.get('id',None),
+                            "agent_tool_id": ,
                             "agent_tool_name":  raw_settings.get('name',None),
                             "agent_tool_type":  raw_settings.get('type',None),
                             "agent_tool_description_for_LLM":  raw_settings.get('additionalDescriptionForLLM',None),
@@ -77,7 +79,7 @@ class ConnectorProjects(Connector):
 #                             "Agent Version": agent_version,
                             "tags": raw_settings.get("tags", None),
 #                             "Last Modified timestamp": last_modified_on,
-#                             "url_agent_tool": get_agent_url(
+#                             "url_agent_tool": get_agenttool_url(
 #                                 project_key, agent_item.id, agent_version
 #                             ),
                         }
