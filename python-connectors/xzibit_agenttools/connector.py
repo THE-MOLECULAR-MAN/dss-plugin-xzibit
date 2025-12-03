@@ -92,14 +92,11 @@ class ConnectorProjects(Connector):
                         next_row["agent_tool_id"]   = agent_tool_id
                         next_row["agent_tool_name"] = raw_settings.get('name',None)
                         next_row["agent_tool_type"] = raw_settings.get('type',None)
-                        next_row["agent_tool_id"] = agent_tool_id
-                        next_row["agent_tool_id"] = agent_tool_id
-                        
-                        "":  ,
-                            "agent_tool_type":  
-                        }
-                            "agent_tool_description_for_LLM":  raw_settings.get('additionalDescriptionForLLM',None),
-                            "tags": raw_settings.get("tags", []),
+                        next_row["agent_tool_description_for_LLM"] = raw_settings.get('additionalDescriptionForLLM',None)
+                        next_row["tags"] = raw_settings.get("tags", [])
+                        next_row["tags"] = raw_settings.get("tags", [])                        
+                            "":  ,
+                            "": ,
                             "url": get_agenttool_url(
                                 project_key, agent_tool_id
                             )
