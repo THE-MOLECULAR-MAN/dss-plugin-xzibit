@@ -110,6 +110,8 @@ class ConnectorProjects(Connector):
                         print(
                             f"[generate_rows] [Skipping Agent] {agent_item.name} in {project_key}: {e_agent}"
                         )
+                    finally:
+                        yield next_row
 
             except Exception as e_proj:
                 # Pass on projects where we lack permissions or feature is disabled
