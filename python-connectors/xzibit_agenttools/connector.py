@@ -114,36 +114,35 @@ class ConnectorProjects(Connector):
 
 
     def get_read_schema(self):
-        """Returns the read schema for Agent Tools"""
+        """Returns the read schema for TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return None
-#         return {'columns': [{'meaning': 'Text', 'name': 'projectKey', 'type': 'string'},
-#              {'meaning': 'Text', 'name': 'agent_tool_id', 'type': 'string'},
-#              {'meaning': 'Text', 'name': 'agent_tool_name', 'type': 'string'},
-#              {'meaning': 'Text', 'name': 'agent_tool_type', 'type': 'string'},
-#              {'meaning': 'FreeText',
-#               'name': 'agent_tool_description_for_LLM',
-#               'type': 'string'},
-#              {'meaning': 'JSONArrayMeaning', 'name': 'tags', 'type': 'string'},
-#              {'meaning': 'URL', 'name': 'url', 'type': 'string'},
-#              {'meaning': 'Text', 'name': 'Created by user', 'type': 'string'},
-#              {'meaning': 'DatetimeNoTz',
-#               'name': 'Last Modified timestamp',
-#               'type': 'string'},
-#              {'meaning': 'Text',
-#               'name': 'Last modified by user',
-#               'type': 'string'},
-#              {'meaning': 'JSONObjectMeaning',
-#               'name': 'agent_tool_params',
-#               'type': 'string'},
-#              {'meaning': 'JSONArrayMeaning',
-#               'name': 'dkuProperties',
-#               'type': 'string'},
-#              {'meaning': 'JSONObjectMeaning',
-#               'name': 'quickTestQuery',
-#               'type': 'string'}]}
-    
+        return {'columns': [{'meaning': 'Text', 'name': 'projectKey', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'agent_tool_id', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'agent_tool_name', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'agent_tool_type', 'type': 'string'},
+             {'meaning': 'FreeText',
+              'name': 'agent_tool_description_for_LLM',
+              'type': 'string'},
+             {'meaning': 'JSONArrayMeaning', 'name': 'tags', 'type': 'string'},
+             {'meaning': 'URL', 'name': 'url', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'Created by user', 'type': 'string'},
+             {'meaning': 'DatetimeNoTz',
+              'name': 'Last Modified timestamp',
+              'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'Last modified by user',
+              'type': 'string'},
+             {'meaning': 'JSONObjectMeaning',
+              'name': 'agent_tool_params',
+              'type': 'string'},
+             {'meaning': 'Text', 'name': 'agent_tool_LLMid', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'dkuProperties', 'type': 'string'},
+             {'meaning': 'JSONObjectMeaning',
+              'name': 'quickTestQuery',
+              'type': 'string'}]}
+
+                
     def get_records_count(self, partitioning=None, partition_id=None):
         """TBD"""
         print(f"xzibit_agenttools get_records_count I NEVER RUN!")
