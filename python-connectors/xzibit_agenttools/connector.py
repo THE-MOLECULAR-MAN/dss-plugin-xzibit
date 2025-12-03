@@ -67,7 +67,7 @@ class ConnectorProjects(Connector):
 
                         #print(f"[agent_tools.generate_rows] settings:")
                         #pp(raw_settings)
-                        next_row["agent_tool_id"]   = raw_settings.get('id',None)                       
+                        next_row["agent_tool_id"]   = raw_settings.get('id',None)
                         next_row["agent_tool_name"] = raw_settings.get('name',None)
                         next_row["agent_tool_type"] = raw_settings.get('type',None)
                         next_row["agent_tool_description_for_LLM"] = raw_settings.get('additionalDescriptionForLLM',None)
@@ -82,7 +82,6 @@ class ConnectorProjects(Connector):
                                 .get("login", None)
                             )
                         next_row["Created by user"] = creation_user
-
                         
                         last_modified_on = datetime.fromtimestamp(
                             raw_settings.get("versionTag", {}).get("lastModifiedOn", None) // 1000
