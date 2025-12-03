@@ -68,9 +68,6 @@ class ConnectorProjects(Connector):
 
                         print(f"[agent_tools.generate_rows] settings:")
                         pp(raw_settings)
-                        # raw_settings = settings.get_raw()
-                        
-                        
                        
                         next_row["agent_tool_name"] = raw_settings.get('name',None)
                         next_row["agent_tool_type"] = raw_settings.get('type',None)
