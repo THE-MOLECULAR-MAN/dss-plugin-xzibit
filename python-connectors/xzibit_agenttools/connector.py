@@ -87,16 +87,12 @@ class ConnectorProjects(Connector):
 
                         
                         last_modified_on = datetime.fromtimestamp(
-                            raw_settings.get_raw()
-                            .get("versionTag", {})
-                            .get("lastModifiedOn", None)
-                            // 1000
+                            raw_settings.get("versionTag", {}).get("lastModifiedOn", None) // 1000
                         )
                         next_row["Last Modified timestamp"] = last_modified_on
 
                         last_modified_user = (
-                            raw_settings.get_raw()
-                            .get("versionTag", {})
+                            raw_settings.get("versionTag", {})
                             .get("lastModifiedBy", {})
                             .get("login", None)
                         )
