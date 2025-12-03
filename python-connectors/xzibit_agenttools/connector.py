@@ -61,10 +61,8 @@ class ConnectorProjects(Connector):
                             "projectKey": project_key,
                         }
 
-
                         agent = project.get_agent_tool(agent_item.id)
                         settings = agent.get_settings() #  <dataikuapi.dss.agent_tool.DSSAgentToolSettings object>
-
 
                         # https://developer.dataiku.com/latest/api-reference/python/agents.html#dataikuapi.dss.agent_tool.DSSAgentToolSettings
                         raw_settings = settings.get_raw()
