@@ -61,11 +61,8 @@ class ConnectorProjects(Connector):
                         next_row["agent_tool_id"]   = agent_tool_id
 
                         agent = project.get_agent_tool(agent_tool_id)
-
-
                         settings = agent.get_settings() #  <dataikuapi.dss.agent_tool.DSSAgentToolSettings object at 0x7f90301a83d0>
                         # https://developer.dataiku.com/latest/api-reference/python/agents.html#dataikuapi.dss.agent_tool.DSSAgentToolSettings
-                        # get_raw
                         raw_settings = settings.get_raw()
                         
 
