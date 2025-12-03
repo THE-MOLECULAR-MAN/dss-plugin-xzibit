@@ -57,12 +57,11 @@ def get_dss_url_from_global_vars():
 
 
 def get_dss_base_url():
-    """TBD"""
-    return (
-        get_dss_url_from_env()
+    """returns the base URL for the local node, without a trailing slash"""
+    res = get_dss_url_from_env()
         or get_dss_external_url()
         or get_dss_url_from_global_vars()
-    )
+    return res.rstrip('/')
 
 
 def safe_extract_dataset_metadata(dataset_handle, pk):
