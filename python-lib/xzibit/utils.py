@@ -20,7 +20,7 @@ def replace_empty_arrays_sets_with_none(x):
             (isinstance(x, list) and len(x) == 0) or 
             (isinstance(x, str) and x == "{}") or 
             (isinstance(x, set) and len(x) == 0) or 
-            (isinstance(x, dict) and (not x):
+            (isinstance(x, dict) and (not x)):
         #if x is None or x in ["[]", "{}", "null"] or len(x) == 0:
             return None
     except Exception as e:
