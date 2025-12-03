@@ -15,8 +15,7 @@ from json import dumps as jd
 def replace_empty_arrays_sets_with_none(x):
     """x"""
     try:
-        if  (x is None) or 
-            (isinstance(x, str) and x == "[]") or 
+        if  (x is None) or (isinstance(x, str) and x == "[]") or 
             (isinstance(x, list) and len(x) == 0) or 
             (isinstance(x, str) and x == "{}") or 
             (isinstance(x, set) and len(x) == 0) or 
