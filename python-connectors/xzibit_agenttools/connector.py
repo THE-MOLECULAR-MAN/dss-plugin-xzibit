@@ -126,28 +126,38 @@ class ConnectorProjects(Connector):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-#         return {
-#             "columns": [
-#                 {"meaning": "Text", "name": "Created by user", "type": "string"},
-#                 {"meaning": "Text", "name": "Last modified by user", "type": "string"},
-#                 {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
-#                 {
-#                     "meaning": "DatetimeNoTz",
-#                     "name": "Last Modified timestamp",
-#                     "type": "datetimenotz",
-#                 },
-#                 {"meaning": "Text", "name": "projectKey", "type": "string"},
-#                 {"meaning": "Text", "name": "Agent Name", "type": "string"},
-#                 {"meaning": "Text", "name": "Agent ID", "type": "string"},
-#                 {"meaning": "Text", "name": "Active Version", "type": "string"},
-#                 {"meaning": "Text", "name": "LLM Vendor", "type": "string"},
-#                 {"meaning": "Text", "name": "LLM Connection Name", "type": "string"},
-#                 {"meaning": "Text", "name": "LLM Model Name", "type": "string"},
-#                 {"meaning": "Text", "name": "Agent Type", "type": "string"},
-#                 {"meaning": "Text", "name": "Agent Version", "type": "string"},
-#                 {"meaning": "URL", "name": "Agent URL", "type": "string"},
-#             ],
-#         }
+        return {'columns': [{'meaning': 'Text', 'name': 'projectKey', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'agent_tool_id', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'agent_tool_name', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'agent_tool_type', 'type': 'string'},
+             {'meaning': 'FreeText',
+              'name': 'agent_tool_description_for_LLM',
+              'type': 'string'},
+             {'meaning': 'JSONArrayMeaning', 'name': 'tags', 'type': 'string'},
+             {'meaning': 'URL', 'name': 'url', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'Created by user', 'type': 'string'},
+             {'meaning': 'DatetimeNoTz',
+              'name': 'Last Modified timestamp',
+              'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'Last modified by user',
+              'type': 'string'},
+             {'meaning': 'JSONObjectMeaning',
+              'name': 'agent_tool_params',
+              'type': 'string'},
+             {'meaning': 'JSONObjectMeaning',
+              'name': 'customFields',
+              'type': 'string'},
+             {'meaning': 'JSONArrayMeaning',
+              'name': 'dkuProperties',
+              'type': 'string'},
+             {'meaning': 'JSONObjectMeaning',
+              'name': 'checklists',
+              'type': 'string'},
+             {'meaning': 'JSONObjectMeaning',
+              'name': 'quickTestQuery',
+              'type': 'string'}],
+ 'userModified': True}
         return None
 
     ####################################################################
