@@ -55,7 +55,8 @@ class ConnectorProjects(Connector):
                         # Get the full agent object and its settings
                         # We need the full object to access .get_settings()
                         agent = project.get_agent_tool(agent_item.id)
-                        settings = agent.get_settings()
+                        settings = agent.get_settings() #  <dataikuapi.dss.agent_tool.DSSAgentToolSettings object at 0x7f90301a83d0>
+
                         print(f"[agent_tools.generate_rows] settings:")
                         pp(settings)
                         # raw_settings = settings.get_raw()
