@@ -102,7 +102,7 @@ class ConnectorProjects(Connector):
                         next_row["Last Modified timestamp"] = last_modified_on
 #                             "Active Version": active_version_id,
 #                             "Agent Version": agent_version,
-                        }
+
                         yield next_row
 
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
