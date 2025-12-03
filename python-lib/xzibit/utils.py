@@ -19,7 +19,7 @@ def replace_empty_arrays_sets_with_none(x):
         if x in ["[]", "{}", "null"] or len(x) == 0 or x is None:
             return None
     except Exception:
-        return None
+        return x
     return x
 
 
