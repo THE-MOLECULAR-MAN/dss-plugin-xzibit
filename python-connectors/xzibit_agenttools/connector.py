@@ -73,15 +73,16 @@ class ConnectorProjects(Connector):
                             "agent_tool_name":  raw_settings.get('name',None),
                             "agent_tool_type":  raw_settings.get('type',None),
                             "agent_tool_description_for_LLM":  raw_settings.get('additionalDescriptionForLLM',None),
+                            "tags": raw_settings.get("tags", []),
+                            "url": get_agenttool_url(
+                                project_key, agent_tool_id
+                            ),
 #                             "Created by user": creation_user,
 #                             "Last modified by user": last_modified_user,
 #                             "Active Version": active_version_id,
 #                             "Agent Version": agent_version,
 #                             "Last Modified timestamp": last_modified_on,
-                            "tags": raw_settings.get("tags", []),
-                            "url": get_agenttool_url(
-                                project_key, agent_tool_id
-                            ),
+
                         }
                         yield next_row
 
