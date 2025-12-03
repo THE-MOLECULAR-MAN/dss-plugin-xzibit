@@ -70,7 +70,7 @@ class ConnectorProjects(Connector):
                             "Agent Tool ID": raw_settings.get('id',None),
                             "Agent Tool Name":  raw_settings.get('name',None),
                             "Agent Tool Type":  raw_settings.get('type',None),
-                            "additionalDescriptionForLLM": 
+                            "additionalDescriptionForLLM":  raw_settings.get('additionalDescriptionForLLM',None),
 #                             "Agent Name": agent_item.name,
 #                             "Agent ID": agent_item.id,
 #                             "Created by user": creation_user,
