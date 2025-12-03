@@ -67,8 +67,8 @@ class ConnectorProjects(Connector):
                         # https://developer.dataiku.com/latest/api-reference/python/agents.html#dataikuapi.dss.agent_tool.DSSAgentToolSettings
                         raw_settings = settings.get_raw()
 
-                        print(f"[agent_tools.generate_rows] settings:")
-                        pp(raw_settings)
+                        #print(f"[agent_tools.generate_rows] settings:")
+                        #pp(raw_settings)
                         next_row["agent_tool_id"]   = raw_settings.get('id',None)                       
                         next_row["agent_tool_name"] = raw_settings.get('name',None)
                         next_row["agent_tool_type"] = raw_settings.get('type',None)
