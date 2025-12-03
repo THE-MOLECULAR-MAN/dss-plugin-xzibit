@@ -103,7 +103,7 @@ class ConnectorProjects(Connector):
 #                             "Active Version": active_version_id,
 #                             "Agent Version": agent_version,
 
-                        yield next_row
+                        # yield next_row
 
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         # Print minimal error to avoid cluttering logs for expected data issues
