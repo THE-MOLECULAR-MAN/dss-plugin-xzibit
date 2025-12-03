@@ -34,9 +34,9 @@ class ConnectorProjects(Connector):
         self.__objects_list = self.__client.list_project_keys()
         self.__count = 0
         for project_key in self.__objects_list:
-            for agent_item in project.list_agent_tools():
-                self.__count += 1
-
+            project = self.__client.get_project(project_key)
+            self.__count += len(project.list_agent_tools())
+            
     # pylint: disable=W0613
     def generate_rows(
         self,
