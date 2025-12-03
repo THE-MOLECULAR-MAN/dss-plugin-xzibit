@@ -92,6 +92,8 @@ class ConnectorProjects(Connector):
                             .get("lastModifiedOn", None)
                             // 1000
                         )
+                        next_row["Last Modified timestamp"] = last_modified_on
+
                         last_modified_user = (
                             raw_settings.get_raw()
                             .get("versionTag", {})
@@ -100,7 +102,6 @@ class ConnectorProjects(Connector):
                         )
 
                         next_row["Last modified by user"] = last_modified_user
-                        next_row["Last Modified timestamp"] = last_modified_on
 #                             "Active Version": active_version_id,
 #                             "Agent Version": agent_version,
 
