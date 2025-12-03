@@ -21,6 +21,6 @@
     //"strictSchema": true,
 
     "params": [],
-    "partitioningMode": "NOT_PARTITIONABLE",
-    "canCountRecords": true
+    "partitioningMode": "NOT_PARTITIONABLE"
+    //"canCountRecords": true
 }
