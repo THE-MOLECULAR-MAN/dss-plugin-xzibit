@@ -23,5 +23,4 @@
     "params": [],
     "partitioningMode": "NOT_PARTITIONABLE",
     "canCountRecords": true
-
 }
