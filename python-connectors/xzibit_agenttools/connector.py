@@ -58,6 +58,8 @@ class ConnectorProjects(Connector):
                         # Get the full agent object and its settings
                         # We need the full object to access .get_settings()
                         agent_tool_id = agent_item.id
+                        next_row["agent_tool_id"]   = agent_tool_id
+
                         agent = project.get_agent_tool(agent_tool_id)
 
 
@@ -92,7 +94,6 @@ class ConnectorProjects(Connector):
                         )
 
                        
-                        next_row["agent_tool_id"]   = agent_tool_id
                         next_row["agent_tool_name"] = raw_settings.get('name',None)
                         next_row["agent_tool_type"] = raw_settings.get('type',None)
                         next_row["agent_tool_description_for_LLM"] = raw_settings.get('additionalDescriptionForLLM',None)
