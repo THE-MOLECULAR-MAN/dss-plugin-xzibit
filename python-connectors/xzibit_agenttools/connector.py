@@ -37,7 +37,7 @@ class ConnectorProjects(Connector):
         for project_key in self.__objects_list:
             project = self.__client.get_project(project_key)
             self.__count += len(project.list_agent_tools())
-        print(f"xzibit_agenttools CONSTRUCTOR END ====================================")
+        print(f"xzibit_agenttools CONSTRUCTOR END")
             
     # pylint: disable=W0613
     def generate_rows(
@@ -48,7 +48,7 @@ class ConnectorProjects(Connector):
         records_limit=-1,
     ):
         """TBD"""
-        print(f"xzibit_agenttools generate_rows START ====================================")
+        print(f"xzibit_agenttools generate_rows START")
 
         # iterate through each object
         for project_key in self.__objects_list:
