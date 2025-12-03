@@ -56,6 +56,7 @@ class ConnectorProjects(Connector):
                         # We need the full object to access .get_settings()
                         agent = project.get_agent_tool(agent_item.id)
                         settings = agent.get_settings()
+                        print(f"[agent_tools.generate_rows] settings:")
                         pp(settings)
                         # raw_settings = settings.get_raw()
 
