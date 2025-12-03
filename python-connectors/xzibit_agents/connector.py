@@ -10,7 +10,7 @@ from dataiku import api_client
 from dataiku.connector import Connector
 
 # from xzibit.utils import *
-from zxibit.utils import get_dss_base_url
+from xzibit.utils import get_dss_base_url
 
 
 def get_agent_url(project_key, agent_id, agent_version):
