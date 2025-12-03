@@ -141,7 +141,6 @@ class ConnectorProjects(Connector):
              {'meaning': 'JSONObjectMeaning',
               'name': 'quickTestQuery',
               'type': 'string'}]}
-
                 
     def get_records_count(self, partitioning=None, partition_id=None):
         """TBD"""
