@@ -164,7 +164,7 @@ class ConnectorProjects(Connector):
     ####################################################################
     def get_records_count(self, partitioning=None, partition_id=None):
         """TBD"""
-        return None
+        return  self.__count
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
