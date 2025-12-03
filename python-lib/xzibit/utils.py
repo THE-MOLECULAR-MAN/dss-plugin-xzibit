@@ -18,8 +18,8 @@ def replace_empty_arrays_sets_with_none(x):
         if (isinstance(x, str) and x == "[]") or (isinstance(x, list) and len(x) == 0) or (isinstance(x, str) and x == "{}") or (isinstance(x, set) and len(x) == 0):
         #if x is None or x in ["[]", "{}", "null"] or len(x) == 0:
             return None
-    except Exception:
-        print(f"[replace_empty_arrays_sets_with_none] EXCEPTION: {str(type(x))} {str(x)}")
+    except Exception as e:
+        print(f"[replace_empty_arrays_sets_with_none] EXCEPTION: {str(type(x))} {str(x)} {e}")
         return x
     return x
 
