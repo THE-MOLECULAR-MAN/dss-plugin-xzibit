@@ -58,9 +58,9 @@ def get_dss_url_from_global_vars():
 
 def get_dss_base_url():
     """returns the base URL for the local node, without a trailing slash"""
-    res = get_dss_url_from_env()
+    res = (get_dss_url_from_env()
         or get_dss_external_url()
-        or get_dss_url_from_global_vars()
+        or get_dss_url_from_global_vars() )
     return res.rstrip('/')
 
 
