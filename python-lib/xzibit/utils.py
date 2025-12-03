@@ -16,7 +16,7 @@ def replace_empty_arrays_sets_with_none(x):
     """x"""
     try:
     # if (isinstance(x, str) and x == "[]") or (isinstance(x, list) and len(x) == 0) or (isinstance(x, str) and x == "{}") or (isinstance(x, set) and len(x) == 0):
-        if x is None or x in ["[]", "{}", "null"] or len(x) == 0:
+        if x is None or x in ["[]", "{}", "null", ""] or len(x) == 0:
             return None
     except Exception:
         return x
