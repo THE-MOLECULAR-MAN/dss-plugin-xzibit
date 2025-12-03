@@ -97,10 +97,10 @@ class ConnectorProjects(Connector):
                                 project_key, agent_tool_id
                             ),
                             "Created by user": creation_user,
-#                             "Last modified by user": last_modified_user,
+                            "Last modified by user": last_modified_user,
+                            "Last Modified timestamp": last_modified_on,
 #                             "Active Version": active_version_id,
 #                             "Agent Version": agent_version,
-#                             "Last Modified timestamp": last_modified_on,
                         }
                         yield next_row
 
