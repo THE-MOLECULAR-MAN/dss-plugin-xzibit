@@ -156,9 +156,7 @@ class ConnectorProjects(Connector):
               'type': 'string'},
              {'meaning': 'JSONObjectMeaning',
               'name': 'quickTestQuery',
-              'type': 'string'}],
-             'userModified': True}
-#         return None
+              'type': 'string'}]}
 
     ####################################################################
     # Same for all instances:
