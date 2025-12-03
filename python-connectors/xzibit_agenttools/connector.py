@@ -97,7 +97,7 @@ class ConnectorProjects(Connector):
                         )
                         next_row["Last modified by user"] = last_modified_user
                         next_row["agent_tool_params"] = replace_empty_arrays_sets_with_none(raw_settings.get('params',None))
-                        next_row["agent_tool_LLMid"]  = raw_settings.get('params',{}).get("llmId", "BLAH")
+                        next_row["agent_tool_LLMid"]  = raw_settings.get('params',{}).get("llmId", "NOT_FOUND")
                         
                         # next_row["customFields"]   = raw_settings.get('customFields',None)
                         next_row["dkuProperties"]    = replace_empty_arrays_sets_with_none(raw_settings.get('dkuProperties',None))
