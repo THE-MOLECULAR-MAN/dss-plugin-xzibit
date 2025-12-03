@@ -159,9 +159,6 @@ class ConnectorProjects(Connector):
               'name': 'quickTestQuery',
               'type': 'string'}]}
 
-    ####################################################################
-    # Same for all instances:
-    ####################################################################
     def get_records_count(self, partitioning=None, partition_id=None):
         """TBD"""
         return self.__count
