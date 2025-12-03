@@ -13,7 +13,7 @@ from dataiku.connector import Connector
 from zxibit.utils import get_dss_base_url
 
 
-def get_agent_url(project_key, agent_id, agent_version):
+def get_agenttool_url(project_key, agenttool_id):
     """TBD"""
     base_url = get_dss_base_url()
     return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent/S-{project_key}-{agent_id}-{agent_version}"
