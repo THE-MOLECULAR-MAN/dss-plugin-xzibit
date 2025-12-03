@@ -105,10 +105,10 @@ class ConnectorProjects(Connector):
 
                         # yield next_row
 
-                    except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
+                    except (AttributeError, KeyError, TypeError, ValueError) as e:
                         # Print minimal error to avoid cluttering logs for expected data issues
                         print(
-                            f"[generate_rows] [Skipping Agent] {agent_item.name} in {project_key}: {e_agent}"
+                            f"[agenttools.generaterows] [EXCEPTION] in {project_key}: {e}"
                         )
                     finally:
                         yield next_row
