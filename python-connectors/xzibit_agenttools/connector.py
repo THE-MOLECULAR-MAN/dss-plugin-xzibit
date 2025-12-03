@@ -51,6 +51,9 @@ class ConnectorProjects(Connector):
 
                 for agent_item in project.list_agent_tools():
                     try:
+                         next_row = {
+                            "projectKey": project_key,
+                        }
                         # print(f"[generate_rows] Inner loop start on agent_item {agent_item}")
                         # Get the full agent object and its settings
                         # We need the full object to access .get_settings()
@@ -86,9 +89,7 @@ class ConnectorProjects(Connector):
                             .get("login", None)
                         )
 
-                        next_row = {
-                            "projectKey": project_key,
-                        }
+                       
                         next_row["agent_tool_id"]   = agent_tool_id
                         next_row["agent_tool_name"] = raw_settings.get('name',None)
                         next_row["agent_tool_type"] = raw_settings.get('type',None)
