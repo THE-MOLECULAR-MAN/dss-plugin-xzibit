@@ -88,9 +88,11 @@ class ConnectorProjects(Connector):
 
                         next_row = {
                             "projectKey": project_key,
+                        }
                             "agent_tool_id": agent_tool_id,
                             "agent_tool_name":  raw_settings.get('name',None),
-                            "agent_tool_type":  raw_settings.get('type',None),
+                            "agent_tool_type":  raw_settings.get('type',None)
+                        }
                             "agent_tool_description_for_LLM":  raw_settings.get('additionalDescriptionForLLM',None),
                             "tags": raw_settings.get("tags", []),
                             "url": get_agenttool_url(
