@@ -83,6 +83,9 @@ class ConnectorProjects(Connector):
                                 .get("lastModifiedBy", {})
                                 .get("login", None)
                             )
+                        next_row["Created by user"] = creation_user
+
+                        
                         last_modified_on = datetime.fromtimestamp(
                             raw_settings.get_raw()
                             .get("versionTag", {})
@@ -96,7 +99,6 @@ class ConnectorProjects(Connector):
                             .get("login", None)
                         )
 
-                        next_row["Created by user"] = creation_user
                         next_row["Last modified by user"] = last_modified_user
                         next_row["Last Modified timestamp"] = last_modified_on
 #                             "Active Version": active_version_id,
