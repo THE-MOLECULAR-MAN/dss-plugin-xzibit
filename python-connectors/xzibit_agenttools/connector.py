@@ -79,7 +79,7 @@ class ConnectorProjects(Connector):
 #                             "Agent Version": agent_version,
                             "tags": raw_settings.get("tags", None),
 #                             "Last Modified timestamp": last_modified_on,
-                            "url_agent_tool": get_agenttool_url(
+                            "url": get_agenttool_url(
                                 project_key, agent_tool_id
                             ),
                         }
