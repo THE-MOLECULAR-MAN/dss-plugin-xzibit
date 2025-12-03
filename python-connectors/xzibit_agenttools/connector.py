@@ -51,7 +51,7 @@ class ConnectorProjects(Connector):
 
                 for agent_item in project.list_agent_tools():
                     try:
-                         next_row = {
+                        next_row = {
                             "projectKey": project_key,
                         }
                         # print(f"[generate_rows] Inner loop start on agent_item {agent_item}")
