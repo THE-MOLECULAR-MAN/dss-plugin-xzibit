@@ -117,7 +117,6 @@ class ConnectorProjects(Connector):
         """Returns the read schema for Agent Tools"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        print(f"xzibit_agenttools get_read_schema")
         return None
 #         return {'columns': [{'meaning': 'Text', 'name': 'projectKey', 'type': 'string'},
 #              {'meaning': 'Text', 'name': 'agent_tool_id', 'type': 'string'},
