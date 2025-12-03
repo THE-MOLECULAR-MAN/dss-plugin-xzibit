@@ -101,7 +101,7 @@ class ConnectorProjects(Connector):
                         next_row["customFields"]   = raw_settings.get('customFields',None)   
                         next_row["dkuProperties"]  = raw_settings.get('dkuProperties',None)   
                         next_row["checklists"]     = raw_settings.get('checklists',{}).get('checklists',None)
-                        next_row["quickTestQuery"] = raw_settings.get('quickTestQuery',None)   
+                        next_row["quickTestQuery"] = raw_settings.get('quickTestQuery',None)
 
                     # except (AttributeError, KeyError, TypeError, ValueError) as e:
                     except Exception as e:
