@@ -12,7 +12,7 @@ from dataikuapi.utils import DataikuException
 from pprint import pprint as pp
 from json import dumps as jd
 
-def replace_empty_arrays_sets_with_none(s):
+def replace_empty_arrays_sets_with_none(x):
     """x"""
     if (isinstance(x, str) and x == "[]") or (isinstance(x, list) and len(x) == 0):
         x = None
