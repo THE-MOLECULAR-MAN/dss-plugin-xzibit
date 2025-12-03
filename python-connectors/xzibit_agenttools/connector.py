@@ -78,7 +78,7 @@ class ConnectorProjects(Connector):
                         
 
                         creation_user = (
-                                raw_settings.get_raw()
+                                raw_settings
                                 .get("creationTag", {})
                                 .get("lastModifiedBy", {})
                                 .get("login", None)
