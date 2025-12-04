@@ -28,6 +28,6 @@
 
     For the full list and for more details, see the documentation: https://doc.dataiku.com/dss/latest/plugins/reference/params.html
     */
-    "params": [
-    ]
+    "params": [],
+    "partitioningMode": "NOT_PARTITIONABLE"
 }
