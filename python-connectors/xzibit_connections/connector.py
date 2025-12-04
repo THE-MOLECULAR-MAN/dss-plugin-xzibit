@@ -48,25 +48,6 @@ class ConnectorConnections(Connector):
             yield next_row
 
 
-    ####################################################################
-    # Intentionally not implemented, not needed for this type
-    ####################################################################
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs"""
-        return None
-
-    def get_partitioning(self):
-        """TBD"""
-        raise NotImplementedError
-
-    def list_partitions(self, partitioning):
-        """TBD"""
-        return []
-
-    def partition_exists(self, partitioning, partition_id):
-        """TBD"""
-        raise NotImplementedError
-
     def get_read_schema(self):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
@@ -93,3 +74,22 @@ class ConnectorConnections(Connector):
                 {"meaning": "Text", "name": "params.defaultSchema", "type": "string"},
             ]
         }
+
+    ####################################################################
+    # Intentionally not implemented, not needed for this type
+    ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs"""
+        return None
+
+    def get_partitioning(self):
+        """TBD"""
+        raise NotImplementedError
+
+    def list_partitions(self, partitioning):
+        """TBD"""
+        return []
+
+    def partition_exists(self, partitioning, partition_id):
+        """TBD"""
+        raise NotImplementedError
