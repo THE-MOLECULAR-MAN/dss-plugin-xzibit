@@ -93,7 +93,7 @@ class ConnectorProjects(Connector):
                             .get("lastModifiedBy", {})
                             .get("login", None)
                         )
-                        next_row["Last modified by user"] = last_modified_user
+                        next_row["last_modified_user"] = last_modified_user
                         next_row["agent_tool_params"] = replace_empty_arrays_sets_with_none(raw_settings.get('params',None))
                         next_row["agent_tool_LLMid"]  = raw_settings.get('params',{}).get("llmId", "")
                         
@@ -134,7 +134,7 @@ class ConnectorProjects(Connector):
               'name': 'last_modified_timestamp',
               'type': 'string'},
              {'meaning': 'Text',
-              'name': 'Last modified by user',
+              'name': 'last_modified_user',
               'type': 'string'},
              {'meaning': 'JSONObjectMeaning',
               'name': 'agent_tool_params',
