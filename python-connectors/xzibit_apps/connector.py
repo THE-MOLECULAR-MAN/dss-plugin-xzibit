@@ -41,7 +41,6 @@ class ConnectorApps(Connector):
             next_row = flatten_dict(item_info, include_keys=self.__keys)
             yield next_row
 
-
     def get_read_schema(self):
         """TBD"""
         return None

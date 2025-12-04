@@ -47,7 +47,6 @@ class ConnectorConnections(Connector):
             next_row = flatten_dict(item_info, include_keys=self.__keys)
             yield next_row
 
-
     def get_read_schema(self):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema

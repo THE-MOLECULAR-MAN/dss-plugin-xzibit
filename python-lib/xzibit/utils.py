@@ -12,14 +12,24 @@ from dataikuapi.utils import DataikuException
 from pprint import pprint as pp
 from json import dumps as jd
 
+
 def replace_empty_arrays_sets_with_none(x):
     """x"""
     try:
-        if (x is None) or (isinstance(x, str) and x == "[]") or (isinstance(x, list) and len(x) == 0) or (isinstance(x, str) and x == "{}") or (isinstance(x, set) and len(x) == 0) or (isinstance(x, dict) and (not x)):
-        #if x is None or x in ["[]", "{}", "null"] or len(x) == 0:
+        if (
+            (x is None)
+            or (isinstance(x, str) and x == "[]")
+            or (isinstance(x, list) and len(x) == 0)
+            or (isinstance(x, str) and x == "{}")
+            or (isinstance(x, set) and len(x) == 0)
+            or (isinstance(x, dict) and (not x))
+        ):
+            # if x is None or x in ["[]", "{}", "null"] or len(x) == 0:
             return None
     except Exception as e:
-        print(f"[replace_empty_arrays_sets_with_none] EXCEPTION: {str(type(x))} {str(x)} {e}")
+        print(
+            f"[replace_empty_arrays_sets_with_none] EXCEPTION: {str(type(x))} {str(x)} {e}"
+        )
         return x
     print(f"[replace_empty_arrays_sets_with_none]: {str(type(x))} {str(x)}")
     return x
@@ -70,10 +80,12 @@ def get_dss_url_from_global_vars():
 
 def get_dss_base_url():
     """returns the base URL for the local node, without a trailing slash"""
-    res = (get_dss_url_from_env()
+    res = (
+        get_dss_url_from_env()
         or get_dss_external_url()
-        or get_dss_url_from_global_vars() )
-    return res.rstrip('/')
+        or get_dss_url_from_global_vars()
+    )
+    return res.rstrip("/")
 
 
 def safe_extract_dataset_metadata(dataset_handle, pk):

@@ -9,6 +9,7 @@ from xzibit.utils import (
     get_dataset_url,
 )
 
+
 def get_dataset_url(project_key, dataset_id):
     # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/datasets/Sales_Marketing_queries/explore/
     try:
@@ -138,7 +139,6 @@ class ConnectorDatasets(Connector):
             ]
         }
 
-
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
@@ -157,4 +157,3 @@ class ConnectorDatasets(Connector):
     def partition_exists(self, partitioning, partition_id):
         """TBD"""
         raise NotImplementedError
-
