@@ -41,9 +41,6 @@ class ConnectorApps(Connector):
             next_row = flatten_dict(item_info, include_keys=self.__keys)
             yield next_row
 
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs anyway"""
-        return None
 
     def get_read_schema(self):
         """TBD"""
@@ -52,6 +49,10 @@ class ConnectorApps(Connector):
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs anyway"""
+        return None
+
     def get_partitioning(self):
         """TBD"""
         raise NotImplementedError
