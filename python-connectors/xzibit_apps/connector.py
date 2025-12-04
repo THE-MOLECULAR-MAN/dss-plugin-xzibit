@@ -42,7 +42,7 @@ class ConnectorApps(Connector):
             yield next_row
 
     def get_records_count(self, partitioning=None, partition_id=None):
-        """TBD"""
+        """This never runs anyway"""
         return None
 
     def get_read_schema(self):
