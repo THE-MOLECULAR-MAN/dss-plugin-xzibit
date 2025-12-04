@@ -153,7 +153,7 @@ class ConnectorProjects(Connector):
                             "agent_type": agent_item.get("type", None),
                             "agent_version": agent_version,
                             "tags": agent_item.get("tags", None),
-                            "Last Modified timestamp": last_modified_on,
+                            "last_modified_timestamp": last_modified_on,
                             # "Agent is active version": is_active_version,
                             "url": get_agent_url(
                                 project_key, agent_item.id, agent_version
@@ -184,7 +184,7 @@ class ConnectorProjects(Connector):
                 {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
                 {
                     "meaning": "DatetimeNoTz",
-                    "name": "Last Modified timestamp",
+                    "name": "last_modified_timestamp",
                     "type": "datetimenotz",
                 },
                 {"meaning": "Text", "name": "projectKey", "type": "string"},
