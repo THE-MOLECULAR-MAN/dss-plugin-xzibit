@@ -144,7 +144,7 @@ class ConnectorProjects(Connector):
                             "agent_name": agent_item.name,
                             "agent_id": agent_item.id,
                             "creator_user": creation_user,
-                            "Last modified by user": last_modified_user,
+                            "last_modified_user": last_modified_user,
                             "Active Version": active_version_id,
                             # "LLM Model ID": llm_model_id,
                             "LLM Vendor": llm_vendor,
@@ -180,7 +180,7 @@ class ConnectorProjects(Connector):
         return {
             "columns": [
                 {"meaning": "Text", "name": "creator_user", "type": "string"},
-                {"meaning": "Text", "name": "Last modified by user", "type": "string"},
+                {"meaning": "Text", "name": "last_modified_user", "type": "string"},
                 {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
                 {
                     "meaning": "DatetimeNoTz",
