@@ -17,9 +17,10 @@ def get_agenttool_url(project_key, agenttool_id):
     """TBD"""
     base_url = get_dss_base_url()
 
-    # at least one is None
+    # at least one is None, return None
     if any(v is None for v in (agenttool_id, agenttool_id, project_key)):
         return None
+    
     # https://dev-design.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/agent-tools/JfbcCw6
     return f"{base_url}/projects/{project_key}/agent-tools/{agenttool_id}"
 
