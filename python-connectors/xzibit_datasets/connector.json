@@ -18,5 +18,7 @@
     /* Can this connector append data instead of overwriting it ? */
     "supportAppend": false,
 
-    "params": []
+    "params": [],
+    "partitioningMode": "NOT_PARTITIONABLE"
+
 }
