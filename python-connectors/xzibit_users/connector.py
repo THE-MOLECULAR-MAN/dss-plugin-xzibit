@@ -104,12 +104,13 @@ class ConnectorUsers(Connector):
             ]
         }
 
-    def get_records_count(self, partitioning=None, partition_id=None):
-        return len(self.__client.list_users())
-
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs"""
+        return None
+
     def get_partitioning(self):
         raise NotImplementedError
 

@@ -49,6 +49,24 @@ class ConnectorClusters(Connector):
             next_row["cluster_url"] = get_cluster_url(next_row["id"])
             yield next_row
 
+    def get_read_schema(self):
+        """TBD"""
+        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
+        return {
+            "columns": [
+                {"meaning": "Text", "name": "owner", "type": "string"},
+                {"meaning": "Text", "name": "id", "type": "string"},
+                {"meaning": "Text", "name": "name", "type": "string"},
+                {"meaning": "Text", "name": "type", "type": "string"},
+                {"meaning": "Text", "name": "architecture", "type": "string"},
+                {"meaning": "Text", "name": "state", "type": "string"},
+                {"meaning": "LongMeaning", "name": "usedInScenarios", "type": "int"},
+                {"meaning": "LongMeaning", "name": "usedInProjects", "type": "int"},
+                {"meaning": "URL", "name": "cluster_url", "type": "string"},
+            ]
+        }
+
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
@@ -67,21 +85,3 @@ class ConnectorClusters(Connector):
     def partition_exists(self, partitioning, partition_id):
         """TBD"""
         raise NotImplementedError
-
-    def get_read_schema(self):
-        """TBD"""
-        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return {
-            "columns": [
-                {"meaning": "Text", "name": "owner", "type": "string"},
-                {"meaning": "Text", "name": "id", "type": "string"},
-                {"meaning": "Text", "name": "name", "type": "string"},
-                {"meaning": "Text", "name": "type", "type": "string"},
-                {"meaning": "Text", "name": "architecture", "type": "string"},
-                {"meaning": "Text", "name": "state", "type": "string"},
-                {"meaning": "LongMeaning", "name": "usedInScenarios", "type": "int"},
-                {"meaning": "LongMeaning", "name": "usedInProjects", "type": "int"},
-                {"meaning": "URL", "name": "cluster_url", "type": "string"},
-            ]
-        }

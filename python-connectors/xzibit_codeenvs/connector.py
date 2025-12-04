@@ -79,10 +79,6 @@ class ConnectorCodeEnvs(Connector):
                 # return a single row
                 yield next_row
 
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """TBD"""
-        return len(self.__client.list_code_envs())
-
     def get_read_schema(self):
         """TBD"""
         return {
@@ -116,3 +112,7 @@ class ConnectorCodeEnvs(Connector):
     def partition_exists(self, partitioning, partition_id):
         """TBD"""
         raise NotImplementedError
+
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs"""
+        return None

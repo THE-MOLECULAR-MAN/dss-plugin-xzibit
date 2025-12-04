@@ -90,13 +90,13 @@ class ConnectorProjects(Connector):
             ]
         }
 
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """TBD"""
-        return len(self.__client.list_projects())
-
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs"""
+        return None
+
     def get_partitioning(self):
         """TBD"""
         raise NotImplementedError

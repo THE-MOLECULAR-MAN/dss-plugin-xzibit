@@ -93,14 +93,13 @@ class ConnectorRecipes(Connector):
             ]
         }
 
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """TBD"""
-        # return len(self.objects_list)
-        return self.__count
-
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs"""
+        return None
+
     def get_partitioning(self):
         """TBD"""
         raise NotImplementedError
