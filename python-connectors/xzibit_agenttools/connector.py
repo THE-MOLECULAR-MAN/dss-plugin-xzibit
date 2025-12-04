@@ -117,7 +117,7 @@ class ConnectorProjects(Connector):
         """Returns the read schema for TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return {'userModified': True,
+        return {
             'columns': [{'meaning': 'Text', 'name': 'projectKey', 'type': 'string',
              {'meaning': 'Text', 'name': 'agent_tool_id', 'type': 'string'},
              {'meaning': 'Text', 'name': 'agent_tool_name', 'type': 'string'},
