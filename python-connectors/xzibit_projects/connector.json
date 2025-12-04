@@ -20,5 +20,7 @@
 
     //"strictSchema": true,
 
-    "params": []
+    "params": [],
+    "partitioningMode": "NOT_PARTITIONABLE"
+
 }
