@@ -72,7 +72,7 @@ class ConnectorMeanings(Connector):
     # Intentionally not implemented, not needed for this type
     ####################################################################
     def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs"""
+        """This never runs for anything that I can find."""
         return None
 
     def get_partitioning(self):

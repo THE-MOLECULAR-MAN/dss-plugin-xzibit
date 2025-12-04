@@ -138,14 +138,17 @@ class ConnectorProjects(Connector):
     # Intentionally not implemented, not needed for this type
     ####################################################################
     def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs"""
+        """This never runs for anything that I can find."""
         return None
 
     def get_partitioning(self):
+        """TBD"""
         raise NotImplementedError
 
     def list_partitions(self, partitioning):
+        """TBD"""
         return []
 
     def partition_exists(self, partitioning, partition_id):
+        """TBD"""
         raise NotImplementedError

@@ -101,6 +101,10 @@ class ConnectorCodeEnvs(Connector):
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs for anything that I can find."""
+        return None
+
     def get_partitioning(self):
         """TBD"""
         raise NotImplementedError
@@ -112,7 +116,3 @@ class ConnectorCodeEnvs(Connector):
     def partition_exists(self, partitioning, partition_id):
         """TBD"""
         raise NotImplementedError
-
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs"""
-        return None
