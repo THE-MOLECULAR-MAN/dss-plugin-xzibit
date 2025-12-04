@@ -31,7 +31,6 @@ class ConnectorProjects(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__objects_list = self.__client.list_project_keys()
             
     # pylint: disable=W0613
     def generate_rows(
@@ -44,7 +43,7 @@ class ConnectorProjects(Connector):
         """TBD"""
 
         # iterate through each object
-        for project_key in self.__objects_list:
+        for project_key in self.__client.list_project_keys():
             # print(f"[generate_rows] Outer loop start on project key: {project_key}")
             try:
                 project = self.__client.get_project(project_key)
