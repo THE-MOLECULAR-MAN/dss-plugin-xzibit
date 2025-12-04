@@ -50,17 +50,12 @@ class ConnectorClusters(Connector):
             yield next_row
 
     ####################################################################
-    # Same for all instances:
-    ####################################################################
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """
-        Length of the list of items
-        """
-        return len(self.__client.list_clusters())
-
-    ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs"""
+        return None
+
     def get_partitioning(self):
         """TBD"""
         raise NotImplementedError
