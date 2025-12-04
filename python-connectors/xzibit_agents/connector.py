@@ -179,6 +179,14 @@ class ConnectorProjects(Connector):
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
+                {"meaning": "Text", "name": "agent_name", "type": "string"},
+                {"meaning": "Text", "name": "agent_id", "type": "string"},
+                {"meaning": "Text", "name": "projectKey", "type": "string"},
+                {"meaning": "Text", "name": "llm_vendor", "type": "string"},
+                {"meaning": "Text", "name": "llm_connection_name", "type": "string"},
+                {"meaning": "Text", "name": "llm_model", "type": "string"},
+                {"meaning": "Text", "name": "agent_type", "type": "string"},
+                {"meaning": "Text", "name": "agent_version", "type": "string"},
                 {"meaning": "Text", "name": "creator_user", "type": "string"},
                 {"meaning": "Text", "name": "last_modified_user", "type": "string"},
                 {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
@@ -187,15 +195,7 @@ class ConnectorProjects(Connector):
                     "name": "last_modified_timestamp",
                     "type": "datetimenotz",
                 },
-                {"meaning": "Text", "name": "projectKey", "type": "string"},
-                {"meaning": "Text", "name": "agent_name", "type": "string"},
-                {"meaning": "Text", "name": "agent_id", "type": "string"},
                 {"meaning": "Text", "name": "active_agent_version", "type": "string"},
-                {"meaning": "Text", "name": "llm_vendor", "type": "string"},
-                {"meaning": "Text", "name": "llm_connection_name", "type": "string"},
-                {"meaning": "Text", "name": "llm_model", "type": "string"},
-                {"meaning": "Text", "name": "agent_type", "type": "string"},
-                {"meaning": "Text", "name": "agent_version", "type": "string"},
                 {"meaning": "URL", "name": "dss_object_url", "type": "string"},
             ],
         }
