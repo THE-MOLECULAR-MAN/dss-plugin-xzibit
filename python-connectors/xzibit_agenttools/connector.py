@@ -86,7 +86,7 @@ class ConnectorProjects(Connector):
                         last_modified_on = datetime.fromtimestamp(
                             raw_settings.get("versionTag", {}).get("lastModifiedOn", None) // 1000
                         )
-                        next_row["Last Modified timestamp"] = last_modified_on
+                        next_row["last_modified_timestamp"] = last_modified_on
 
                         last_modified_user = (
                             raw_settings.get("versionTag", {})
@@ -131,7 +131,7 @@ class ConnectorProjects(Connector):
              {'meaning': 'URL', 'name': 'url', 'type': 'string'},
              {'meaning': 'Text', 'name': 'creator_user', 'type': 'string'},
              {'meaning': 'DatetimeNoTz',
-              'name': 'Last Modified timestamp',
+              'name': 'last_modified_timestamp',
               'type': 'string'},
              {'meaning': 'Text',
               'name': 'Last modified by user',
