@@ -81,7 +81,7 @@ class ConnectorProjects(Connector):
                                 .get("lastModifiedBy", {})
                                 .get("login", None)
                             )
-                        next_row["Created by user"] = creation_user
+                        next_row["creator_user"] = creation_user
                         
                         last_modified_on = datetime.fromtimestamp(
                             raw_settings.get("versionTag", {}).get("lastModifiedOn", None) // 1000
@@ -129,7 +129,7 @@ class ConnectorProjects(Connector):
               'type': 'string'},
              {'meaning': 'JSONArrayMeaning', 'name': 'tags', 'type': 'string'},
              {'meaning': 'URL', 'name': 'url', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'Created by user', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'creator_user', 'type': 'string'},
              {'meaning': 'DatetimeNoTz',
               'name': 'Last Modified timestamp',
               'type': 'string'},
