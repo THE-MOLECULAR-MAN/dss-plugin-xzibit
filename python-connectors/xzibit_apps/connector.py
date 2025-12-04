@@ -43,7 +43,7 @@ class ConnectorApps(Connector):
 
     def get_records_count(self, partitioning=None, partition_id=None):
         """TBD"""
-        return len(self.__client.list_apps())
+        return None
 
     def get_read_schema(self):
         """TBD"""
