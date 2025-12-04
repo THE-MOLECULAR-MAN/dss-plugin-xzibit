@@ -143,7 +143,7 @@ class ConnectorProjects(Connector):
                             "projectKey": project_key,
                             "agent_name": agent_item.name,
                             "agent_id": agent_item.id,
-                            "Created by user": creation_user,
+                            "creator_username": creation_user,
                             "Last modified by user": last_modified_user,
                             "Active Version": active_version_id,
                             # "LLM Model ID": llm_model_id,
@@ -179,7 +179,7 @@ class ConnectorProjects(Connector):
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
-                {"meaning": "Text", "name": "Created by user", "type": "string"},
+                {"meaning": "Text", "name": "creator_username", "type": "string"},
                 {"meaning": "Text", "name": "Last modified by user", "type": "string"},
                 {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
                 {
