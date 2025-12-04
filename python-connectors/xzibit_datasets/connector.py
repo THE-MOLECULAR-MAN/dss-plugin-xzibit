@@ -30,7 +30,7 @@ class ConnectorDatasets(Connector):
         Connector.__init__(self, config, plugin_config)
 
         self.__client = api_client()
-        self.__objects_list = {}
+        # self.__objects_list = {}
         #         self.__keys = ['projectKey', 'name', 'type', 'formatType', 'params.connection',
         #                        'managed', 'params.mode', 'params.table', 'params.schema', 'params.database',
         #                        'params.path',
@@ -39,14 +39,14 @@ class ConnectorDatasets(Connector):
         #                        'shortDesc', 'description', 'params.metastoreDatabaseName',
         #                        'params.folderSmartId', 'tags', 'featureGroup',
         #                       ]
-        self.__count = 0
+        # self.__count = 0
 
-        for pk in self.__client.list_project_keys():
-            project_handle = self.__client.get_project(pk)
-            self.__objects_list[pk] = project_handle.list_datasets(
-                as_type="objects", include_shared=True
-            )
-            self.__count += len(self.__objects_list[pk])
+        # for pk in self.__client.list_project_keys():
+        #     project_handle = self.__client.get_project(pk)
+        #     self.__objects_list[pk] = project_handle.list_datasets(
+        #         as_type="objects", include_shared=True
+        #     )
+        #     self.__count += len(self.__objects_list[pk])
 
     def generate_rows(
         self,
@@ -61,10 +61,12 @@ class ConnectorDatasets(Connector):
         # num_rows = 0
 
         # iterate through each object
-        for pk, proj_datasets in self.__objects_list.items():
+        for pk in self.__client.list_project_keys():
             project_handle = self.__client.get_project(pk)
 
-            for r in proj_datasets:
+            for r in project_handle.list_datasets(
+                as_type="objects", include_shared=True
+            ):
                 try:
                     #                    num_rows += 1
                     dataset_handle = project_handle.get_dataset(r.id)
