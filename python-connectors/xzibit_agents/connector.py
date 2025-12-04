@@ -141,8 +141,8 @@ class ConnectorProjects(Connector):
                         )
                         next_row = {
                             "projectKey": project_key,
-                            "Agent Name": agent_item.name,
-                            "Agent ID": agent_item.id,
+                            "agent_name": agent_item.name,
+                            "agent_id": agent_item.id,
                             "Created by user": creation_user,
                             "Last modified by user": last_modified_user,
                             "Active Version": active_version_id,
@@ -188,8 +188,8 @@ class ConnectorProjects(Connector):
                     "type": "datetimenotz",
                 },
                 {"meaning": "Text", "name": "projectKey", "type": "string"},
-                {"meaning": "Text", "name": "Agent Name", "type": "string"},
-                {"meaning": "Text", "name": "Agent ID", "type": "string"},
+                {"meaning": "Text", "name": "agent_name", "type": "string"},
+                {"meaning": "Text", "name": "agent_id", "type": "string"},
                 {"meaning": "Text", "name": "Active Version", "type": "string"},
                 {"meaning": "Text", "name": "LLM Vendor", "type": "string"},
                 {"meaning": "Text", "name": "LLM Connection Name", "type": "string"},
