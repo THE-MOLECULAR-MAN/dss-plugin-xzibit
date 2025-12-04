@@ -118,7 +118,7 @@ class ConnectorProjects(Connector):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {'userModified': True,
-            'columns': [{'meaning': 'Text', 'name': 'projectKey', 'type': 'string', 'content': 'xxxxx', 'description': "A Project Key is a unique string that identifies a project within a Dataiku DSS instance.", "isColumnEdited": True},
+            'columns': [{'meaning': 'Text', 'name': 'projectKey', 'type': 'string',
              {'meaning': 'Text', 'name': 'agent_tool_id', 'type': 'string'},
              {'meaning': 'Text', 'name': 'agent_tool_name', 'type': 'string'},
              {'meaning': 'Text', 'name': 'agent_tool_type', 'type': 'string'},
