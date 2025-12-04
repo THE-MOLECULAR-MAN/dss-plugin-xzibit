@@ -155,7 +155,7 @@ class ConnectorProjects(Connector):
                             "tags": agent_item.get("tags", None),
                             "Last Modified timestamp": last_modified_on,
                             # "Agent is active version": is_active_version,
-                            "Agent URL": get_agent_url(
+                            "url": get_agent_url(
                                 project_key, agent_item.id, agent_version
                             ),
                         }
@@ -196,7 +196,7 @@ class ConnectorProjects(Connector):
                 {"meaning": "Text", "name": "llm_model", "type": "string"},
                 {"meaning": "Text", "name": "agent_type", "type": "string"},
                 {"meaning": "Text", "name": "agent_version", "type": "string"},
-                {"meaning": "URL", "name": "Agent URL", "type": "string"},
+                {"meaning": "URL", "name": "url", "type": "string"},
             ],
         }
 
