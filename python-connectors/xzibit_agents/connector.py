@@ -60,7 +60,7 @@ class ConnectorProjects(Connector):
         """TBD"""
 
         # iterate through each object
-        for project_key in self.__objects_list:
+        for project_key in self.__client.list_project_keys():
             # print(f"[generate_rows] Outer loop start on project key: {project_key}")
             try:
                 project = self.__client.get_project(project_key)
