@@ -70,11 +70,20 @@ class ConnectorRecipes(Connector):
                     next_row["input_datasets"] = (
                         recipe_settings_handle.get_flat_input_refs()
                     )
-                    next_row["output_datasets"] = (
-                        recipe_settings_handle.get_flat_output_refs()
-                    )
+                    try:
+                        next_row["output_datasets"] = (
+                            recipe_settings_handle.get_flat_output_refs()
+                        )
+                    except Exception:
+                        # this occurs often on Dev-Design.
+                        print(
+                            f"[EXCEPTION] Exception in Recipe output dataset, project_key: {pk}, recipe_id: {r.id}"
+                        )
                 except Exception:
-                    print("Exception in Recipe input/output datasets.")
+                    # this occurs often on Dev-Design.
+                    print(
+                        f"[EXCEPTION] Exception in Recipe input dataset, project_key: {pk}, recipe_id: {r.id}"
+                    )
                 finally:
                     yield next_row
 
