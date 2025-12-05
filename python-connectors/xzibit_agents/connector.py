@@ -79,6 +79,11 @@ class ConnectorProjects(Connector):
 
                 for agent_item in agents:
                     try:
+                        next_row = {
+                            "projectKey": project_key,
+                            "agent_name": agent_item.name,
+                            "agent_id": agent_item.id,
+                        }
                         # print(f"[generate_rows] Inner loop start on agent_item {agent_item}")
                         # Get the full agent object and its settings
                         # We need the full object to access .get_settings()
@@ -87,12 +92,16 @@ class ConnectorProjects(Connector):
                         # raw_settings = settings.get_raw()
 
                         # We typically want the LLM used by the *Active* version of the agent
+                        next_row["active_agent_version"] = settings.active_version
                         active_version_id = settings.active_version
 
-                        llm_model_id = "N/A"
+                        next_row["llm_model_id"] = "Unknown"
+                        llm_model_id = "Unknown"
                         # is_active_version = active_version_id == agent_item.get(
                         #     "activeVersion", "Unknown"
                         # )
+                        next_row["creation_user"] = "Unknown"
+
                         creation_user = "Unknown"
 
                         if active_version_id:
@@ -121,25 +130,29 @@ class ConnectorProjects(Connector):
                             # print("[generate_rows] version_settings:")
                             # pp(version_settings.get_raw())
 
+                            next_row["llm_model_id"] = llm_model_id
+
                             creation_user = (
                                 version_settings.get_raw()
                                 .get("creationTag", {})
                                 .get("lastModifiedBy", {})
                                 .get("login", None)
                             )
+                            next_row["creation_user"] = creation_user
                             last_modified_on = datetime.fromtimestamp(
                                 version_settings.get_raw()
                                 .get("versionTag", {})
                                 .get("lastModifiedOn", 0)
                                 // 1000
                             )
+                            next_row["last_modified_on"] = last_modified_on
                             last_modified_user = (
                                 version_settings.get_raw()
                                 .get("versionTag", {})
                                 .get("lastModifiedBy", {})
                                 .get("login", None)
                             )
-
+                            next_row["last_modified_user"] = last_modified_user
                         # pp(raw_settings)
 
                         agent_version = agent_item.get("activeVersion", None)
@@ -169,13 +182,13 @@ class ConnectorProjects(Connector):
                                 agent_item.id, project_key, agent_version
                             ),
                         }
-                        yield next_row
-
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         # Print minimal error to avoid cluttering logs for expected data issues
                         print(
-                            f"[generate_rows] [Skipping Agent] {agent_item.name} in {project_key}: {e_agent}"
+                            f"[generate_rows] [agents] [CAUGHT EXCEPTION] {agent_item.name} in {project_key}: {e_agent}"
                         )
+                    finally:
+                        yield next_row
 
             except Exception as e_proj:
                 # Pass on projects where we lack permissions or feature is disabled
