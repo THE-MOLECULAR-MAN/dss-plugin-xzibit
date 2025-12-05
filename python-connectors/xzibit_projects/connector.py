@@ -55,7 +55,7 @@ class ConnectorProjects(Connector):
             # custom things for this specific class:
             next_row = remove_prefix_from_keys(next_row, "versionTag.")
             next_row["lastModifiedOn"] = datetime.fromtimestamp(
-                next_row["lastModifiedOn"] // 1000
+                next_row.get("lastModifiedOn", 0) // 1000
             )
             next_row["url"] = self.get_url(next_row["projectKey"])
             yield next_row

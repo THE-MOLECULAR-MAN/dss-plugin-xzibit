@@ -87,9 +87,7 @@ class ConnectorProjects(Connector):
                         next_row["creator_user"] = creation_user
 
                         last_modified_on = datetime.fromtimestamp(
-                            raw_settings.get("versionTag", {}).get(
-                                "lastModifiedOn", None
-                            )
+                            raw_settings.get("versionTag", {}).get("lastModifiedOn", 0)
                             // 1000
                         )
                         next_row["last_modified_timestamp"] = last_modified_on

@@ -130,7 +130,7 @@ class ConnectorProjects(Connector):
                             last_modified_on = datetime.fromtimestamp(
                                 version_settings.get_raw()
                                 .get("versionTag", {})
-                                .get("lastModifiedOn", None)
+                                .get("lastModifiedOn", 0)
                                 // 1000
                             )
                             last_modified_user = (
