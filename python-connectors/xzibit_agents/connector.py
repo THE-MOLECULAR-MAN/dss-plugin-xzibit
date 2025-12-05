@@ -79,6 +79,7 @@ class ConnectorProjects(Connector):
 
                 for agent_item in agents:
                     try:
+                        print(f"[generate_rows] [agent] start")
                         next_row = {
                             "projectKey": project_key,
                             "agent_name": agent_item.name,
@@ -88,12 +89,15 @@ class ConnectorProjects(Connector):
                         # Get the full agent object and its settings
                         # We need the full object to access .get_settings()
                         agent = project.get_agent(agent_item.id)
+                        print(f"[generate_rows] [agent] 1")
                         settings = agent.get_settings()
+                        print(f"[generate_rows] [agent] 2")
                         # raw_settings = settings.get_raw()
 
                         # We typically want the LLM used by the *Active* version of the agent
                         next_row["active_agent_version"] = settings.active_version
                         active_version_id = settings.active_version
+                        print(f"[generate_rows] [agent] 3")
 
                         next_row["llm_model_id"] = "Unknown"
                         llm_model_id = "Unknown"
@@ -103,35 +107,44 @@ class ConnectorProjects(Connector):
                         next_row["creation_user"] = "Unknown"
 
                         creation_user = "Unknown"
+                        print(f"[generate_rows] [agent] 4")
 
                         if active_version_id:
+                            print(f"[generate_rows] [agent] 5")
                             # Retrieve settings for the active version
                             version_settings = settings.get_version_settings(
                                 active_version_id
                             )
+                            print(f"[generate_rows] [agent] 6")
                             # print("[generate_rows] Version Settings")
                             # pp(version_settings.get_raw())
 
                             # 1. Try standard Visual Agent property
                             try:
+                                print(f"[generate_rows] [agent] 7")
                                 llm_model_id = version_settings.llm_id
+                                print(f"[generate_rows] [agent] 8")
                             except AttributeError:
+                                print(f"[generate_rows] [agent] 8a")
                                 # 2. Fallback: Check raw settings (common for Code Agents)
                                 ver_raw = version_settings.get_raw()
-
+                                print(f"[generate_rows] [agent] 8b")
                                 llm_model_id = ver_raw.get("llmId", None)
 
+                                print(f"[generate_rows] [agent] 8c")
                                 # Sometimes stored under 'generation' block for complex setups
                                 if not llm_model_id and "generation" in ver_raw:
                                     llm_model_id = ver_raw["generation"].get(
                                         "llmId", None
                                     )
+                                print(f"[generate_rows] [agent] 8d")
 
                             # print("[generate_rows] version_settings:")
                             # pp(version_settings.get_raw())
 
                             next_row["llm_model_id"] = llm_model_id
 
+                            print(f"[generate_rows] [agent] 9")
                             creation_user = (
                                 version_settings.get_raw()
                                 .get("creationTag", {})
@@ -139,6 +152,8 @@ class ConnectorProjects(Connector):
                                 .get("login", None)
                             )
                             next_row["creation_user"] = creation_user
+
+                            print(f"[generate_rows] [agent] 10")
                             last_modified_on = datetime.fromtimestamp(
                                 version_settings.get_raw()
                                 .get("versionTag", {})
@@ -146,6 +161,8 @@ class ConnectorProjects(Connector):
                                 // 1000
                             )
                             next_row["last_modified_on"] = last_modified_on
+
+                            print(f"[generate_rows] [agent] 11")
                             last_modified_user = (
                                 version_settings.get_raw()
                                 .get("versionTag", {})
@@ -156,10 +173,11 @@ class ConnectorProjects(Connector):
                         # pp(raw_settings)
 
                         agent_version = agent_item.get("activeVersion", None)
-
+                        print(f"[generate_rows] [agent] 12")
                         llm_vendor, llm_connection_name, llm_model = parse_llm_id(
                             llm_model_id
                         )
+                        print(f"[generate_rows] [agent] 13")
                         next_row = {
                             "projectKey": project_key,
                             "agent_name": agent_item.name,
@@ -182,10 +200,13 @@ class ConnectorProjects(Connector):
                                 agent_item.id, project_key, agent_version
                             ),
                         }
+                        print(
+                            f"[generate_rows] [agent] end of inner loop without exception"
+                        )
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         # Print minimal error to avoid cluttering logs for expected data issues
                         print(
-                            f"[generate_rows] [agents] [CAUGHT EXCEPTION] {agent_item.name} in {project_key}: {e_agent}"
+                            f"[generate_rows] [agents] [CAUGHT EXCEPTION] {e_agent} - Project Key: {project_key}, Agent Name: {agent_item.name}"
                         )
                     finally:
                         yield next_row
