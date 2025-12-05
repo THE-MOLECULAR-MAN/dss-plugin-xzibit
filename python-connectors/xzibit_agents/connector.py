@@ -206,7 +206,7 @@ class ConnectorProjects(Connector):
                     "type": "datetimenotz",
                 },
                 {"meaning": "Text", "name": "active_agent_version", "type": "string"},
-                {"meaning": "URL", "name": "dss_object_url", "type": "string"},
+                {"meaning": "URL", "name": "url", "type": "string"},
             ],
         }
 
