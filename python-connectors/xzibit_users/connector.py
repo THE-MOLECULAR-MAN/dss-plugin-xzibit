@@ -74,10 +74,13 @@ class ConnectorUsers(Connector):
                 )
                 next_row["url"] = self.get_url(next_row.get("login", None))
 
-                # bug on next line
-                next_row["creationDate"] = int_to_datetime(next_row["creationDate"])
+                # TODO: bug inside int_to_datetime
+                next_row["creationDate"] = int_to_datetime(
+                    next_row.get("creationDate", 0)
+                )
                 # pp(item_info)
             except Exception:
+                # TODO: figure out why this is getting hit so much
                 print("Exception: generate_rows - User")
             finally:
                 yield next_row
