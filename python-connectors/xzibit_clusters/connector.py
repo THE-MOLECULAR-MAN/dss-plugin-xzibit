@@ -40,6 +40,7 @@ class ConnectorClusters(Connector):
         records_limit=-1,
     ):
         """TBD"""
+        # TODO: add support for records_generated limit
         keys = [
             "id",
             "architecture",
