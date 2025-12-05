@@ -44,12 +44,12 @@ class ConnectorMeanings(Connector):
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
+                {"name": "id", "type": "string", "meaning": "Text"},
                 {"name": "label", "type": "string", "meaning": "Text"},
-                {"name": "description", "type": "string", "meaning": "FreeText"},
                 {"name": "detectable", "type": "boolean", "meaning": "Boolean"},
                 {"name": "type", "type": "string", "meaning": "Text"},
-                {"name": "id", "type": "string", "meaning": "Text"},
                 {"name": "normalizationMode", "type": "string", "meaning": "Text"},
+                {"name": "description", "type": "string", "meaning": "FreeText"},
             ]
         }
 

@@ -66,16 +66,11 @@ class ConnectorProjects(Connector):
         return {
             "columns": [
                 {"name": "projectKey", "type": "string", "meaning": "Text"},
-                {"name": "ownerLogin", "type": "string", "meaning": "Text"},
-                {"name": "projectStatus", "type": "string", "meaning": "Text"},
-                {
-                    "name": "contributors",
-                    "type": "string",
-                    "meaning": "JSONArrayMeaning",
-                },
                 {"name": "name", "type": "string", "meaning": "Text"},
                 {"name": "shortDesc", "type": "string", "meaning": "FreeText"},
                 {"name": "description", "type": "string", "meaning": "FreeText"},
+                {"name": "ownerLogin", "type": "string", "meaning": "Text"},
+                {"name": "projectStatus", "type": "string", "meaning": "Text"},
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {
                     "name": "lastModifiedOn",
@@ -83,6 +78,11 @@ class ConnectorProjects(Connector):
                     "meaning": "DatetimeNoTz",
                 },
                 {"name": "tutorialProject", "type": "boolean", "meaning": "Boolean"},
+                {
+                    "name": "contributors",
+                    "type": "string",
+                    "meaning": "JSONArrayMeaning",
+                },
                 {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }

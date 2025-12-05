@@ -77,11 +77,13 @@ class ConnectorDatasets(Connector):
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
-                {"meaning": "Text", "name": "projectKey", "type": "string"},
                 {"meaning": "Text", "name": "id", "type": "string"},
                 {"meaning": "Text", "name": "name", "type": "string"},
-                {"meaning": "Boolean", "name": "exists", "type": "boolean"},
+                {"meaning": "Text", "name": "projectKey", "type": "string"},
                 {"meaning": "Text", "name": "type", "type": "string"},
+                {"meaning": "FreeText", "name": "shortDesc", "type": "string"},
+                {"meaning": "FreeText", "name": "description", "type": "string"},
+                {"meaning": "Boolean", "name": "exists", "type": "boolean"},
                 {"meaning": "Text", "name": "formatType", "type": "string"},
                 {"meaning": "Text", "name": "params.connection", "type": "string"},
                 {"meaning": "Boolean", "name": "managed", "type": "boolean"},
@@ -109,8 +111,6 @@ class ConnectorDatasets(Connector):
                     "name": "versionTag.lastModifiedOn",
                     "type": "datetimenotz",
                 },
-                {"meaning": "FreeText", "name": "shortDesc", "type": "string"},
-                {"meaning": "FreeText", "name": "description", "type": "string"},
                 {
                     "meaning": "Text",
                     "name": "params.metastoreDatabaseName",

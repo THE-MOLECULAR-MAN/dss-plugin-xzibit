@@ -96,11 +96,10 @@ class ConnectorRecipes(Connector):
         """TBD"""
         return {
             "columns": [
-                {"name": "projectKey", "type": "string", "meaning": "Text"},
                 {"name": "id", "type": "string", "meaning": "Text"},
-                {"name": "type", "type": "string", "meaning": "Text"},
                 {"name": "name", "type": "string", "meaning": "Text"},
-                {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
+                {"name": "projectKey", "type": "string", "meaning": "Text"},
+                {"name": "type", "type": "string", "meaning": "Text"},
                 {
                     "name": "input_datasets",
                     "type": "string",
@@ -111,6 +110,7 @@ class ConnectorRecipes(Connector):
                     "type": "string",
                     "meaning": "JSONArrayMeaning",
                 },
+                {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }

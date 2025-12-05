@@ -101,7 +101,11 @@ class ConnectorUsers(Connector):
                     "meaning": "JSONArrayMeaning",
                 },
                 {"name": "sourceType", "type": "string", "meaning": "Text"},
-                {"name": "email", "type": "string", "meaning": "Email"},
+                {  # intentionally not setting the meanting=Email b/c email format is not enforced for DSS users, and there are exceptions to this on Dev-Design
+                    "name": "email",
+                    "type": "string",
+                    "meaning": "Text",
+                },
                 {"name": "enabled", "type": "boolean", "meaning": "Boolean"},
                 {"name": "resultingUserProfile", "type": "string", "meaning": "Text"},
                 {

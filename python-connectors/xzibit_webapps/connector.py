@@ -122,13 +122,12 @@ class ConnectorProjects(Connector):
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, URL,
         return {
             "columns": [
-                {"name": "projectKey", "type": "string", "meaning": "Text"},
-                {"name": "webapp_name", "type": "string", "meaning": "Text"},
                 {"name": "webapp_id", "type": "string", "meaning": "Text"},
+                {"name": "webapp_name", "type": "string", "meaning": "Text"},
+                {"name": "projectKey", "type": "string", "meaning": "Text"},
                 {"name": "type", "type": "string", "meaning": "Text"},
-                {"name": "created_by_user", "type": "string", "meaning": "Text"},
                 {"name": "backendRunning", "type": "boolean", "meaning": "Boolean"},
-                {"name": "url", "type": "string", "meaning": "URL"},
+                {"name": "created_by_user", "type": "string", "meaning": "Text"},
                 {"name": "lastModifiedBy", "type": "string", "meaning": "Text"},
                 {
                     "name": "created_on",
@@ -142,6 +141,7 @@ class ConnectorProjects(Connector):
                 },
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "is_code_webapp", "type": "boolean", "meaning": "Boolean"},
+                {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
 
