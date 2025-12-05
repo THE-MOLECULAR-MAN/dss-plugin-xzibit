@@ -49,11 +49,31 @@ class ConnectorApps(Connector):
         # iterate through each object
         for item_info in self.__client.list_apps():
             next_row = flatten_dict(item_info, include_keys=keys)
+            next_row["url"] = self.get_url(next_row["appId"])
             yield next_row
 
     def get_read_schema(self):
         """TBD"""
-        return None
+        return {
+            "columns": [
+                {
+                    "meaning": "Boolean",
+                    "name": "onlyLimitedVisibility",
+                    "type": "boolean",
+                },
+                {"meaning": "Text", "name": "appId", "type": "string"},
+                {"meaning": "Text", "name": "appVersion", "type": "string"},
+                {"meaning": "Text", "name": "label", "type": "string"},
+                {"meaning": "FreeText", "name": "shortDesc", "type": "string"},
+                {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
+                {"meaning": "Boolean", "name": "isAppImg", "type": "boolean"},
+                {"meaning": "Text", "name": "origin", "type": "string"},
+                {"meaning": "Text", "name": "originProjectKey", "type": "string"},
+                {"meaning": "LongMeaning", "name": "instanceCount", "type": "int"},
+                {"meaning": "Boolean", "name": "useAsRecipe", "type": "boolean"},
+                {"meaning": "URL", "name": "url", "type": "string"},
+            ]
+        }
 
     ####################################################################
     # Intentionally not implemented, not needed for this type

@@ -63,7 +63,6 @@ class ConnectorClusters(Connector):
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
-                {"meaning": "Text", "name": "owner", "type": "string"},
                 {"meaning": "Text", "name": "id", "type": "string"},
                 {"meaning": "Text", "name": "name", "type": "string"},
                 {"meaning": "Text", "name": "type", "type": "string"},
@@ -71,7 +70,8 @@ class ConnectorClusters(Connector):
                 {"meaning": "Text", "name": "state", "type": "string"},
                 {"meaning": "LongMeaning", "name": "usedInScenarios", "type": "int"},
                 {"meaning": "LongMeaning", "name": "usedInProjects", "type": "int"},
-                {"meaning": "URL", "name": "cluster_url", "type": "string"},
+                {"meaning": "Text", "name": "owner", "type": "string"},
+                {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
 
