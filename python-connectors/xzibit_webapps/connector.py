@@ -44,10 +44,20 @@ class ConnectorProjects(Connector):
     # Code that has to be customized for this specific class
     ####################################################################
     def __init__(self, config, plugin_config):
-        #  print("[DEBUG agents] Constructor START")
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
+
+    def get_url(self, project_key, webapp_id, web_app_name):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(
+            v is None for v in (self.__baseurl, webapp_id, project_key, web_app_name)
+        ):
+            return None
+        safe_name = make_url_friendly(web_app_name)
+        return f"{self.__baseurl}/projects/{project_key}/webapps/{webapp_id}_{safe_name}/edit"
 
     def get_webapp_url(self, project_key, webapp_id, web_app_name):
         # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/webapps/gY7nbkW_connectname-test1234567890-/edit
@@ -78,7 +88,7 @@ class ConnectorProjects(Connector):
                             "type": webapp.get("type"),
                             "created_by_user": webapp.get("createdBy", {}).get("login"),
                             "backendRunning": webapp.get("backendRunning", None),
-                            "url": get_webapp_url(
+                            "url": self.get_url(
                                 project_key,
                                 webapp.get("id", ""),
                                 webapp.get("name", ""),
