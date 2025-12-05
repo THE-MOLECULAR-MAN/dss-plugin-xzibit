@@ -72,12 +72,17 @@ class ConnectorProjects(Connector):
         partition_id=None,
         records_limit=-1,
     ):
+        records_generated = 0
         for project_key in self.__client.list_project_keys():
             try:
                 project = self.__client.get_project(project_key)
                 # List all webapps in the project
+                if records_generated >= records_limit:
+                    break
                 for webapp in project.list_webapps():
                     try:
+                        if records_generated >= records_limit:
+                            break
                         # pp(webapp)
 
                         # Collect relevant metadata
@@ -106,6 +111,7 @@ class ConnectorProjects(Connector):
                             "is_code_webapp": webapp.get("type")
                             in ["SHINY", "STANDARD", "BOKEH", "DASH"],
                         }
+                        records_generated += 1
                         yield next_row
                     except Exception as e:
                         print(
