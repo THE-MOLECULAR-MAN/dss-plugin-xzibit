@@ -13,12 +13,6 @@ from dataiku.connector import Connector
 from xzibit.utils import get_dss_base_url
 
 
-def get_agent_url(project_key, agent_id, agent_version):
-    """TBD"""
-    base_url = get_dss_base_url()
-    return f"{base_url}/projects/{project_key}/savedmodels/{agent_id}/agent/S-{project_key}-{agent_id}-{agent_version}"
-
-
 def parse_llm_id(llm_string: str):
     """
     Splits a string by ':' into exactly 3 variables.
@@ -179,8 +173,6 @@ class ConnectorProjects(Connector):
                             "tags": agent_item.get("tags", None),
                             "last_modified_timestamp": last_modified_on,
                             # "Agent is active version": is_active_version,
-                            # "dss_object_url": get_agent_url(
-                            #    project_key, agent_item.id, agent_version
                             "url": self.get_url(
                                 agent_item.id, project_key, agent_version
                             ),

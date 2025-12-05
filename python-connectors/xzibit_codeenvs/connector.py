@@ -24,18 +24,6 @@ class ConnectorCodeEnvs(Connector):
         # trailing slash is MANDATORY for Code Envs
         return f"{self.__baseurl}/admin/code-envs/design/{env_lang.lower()}/{env_name}/"
 
-    def get_codeenv_url(self, env_name, env_lang="python"):
-        # https://beta-design.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/brave-mcp/
-        # https://honker-design-2.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/CausalModels
-        # https://honker-design-2.se-platform.dataiku-sandbox.io/admin/code-envs/design/python/CausalModels/
-        try:
-            if self.__baseurl is None or env_lang is None or env_name is None:
-                return None
-            # trailing slash is MANDATORY
-            return f"{self.__baseurl}/admin/code-envs/design/{env_lang.lower()}/{env_name}/"
-        except Exception:  # yeah, I know this is bad practice
-            return None
-
     def generate_rows(
         self,
         dataset_schema=None,
@@ -104,14 +92,13 @@ class ConnectorCodeEnvs(Connector):
                 {"meaning": "Text", "name": "deploymentMode", "type": "string"},
                 {"meaning": "Text", "name": "owner", "type": "string"},
                 {"meaning": "Text", "name": "pythonInterpreter", "type": "string"},
-                # {"meaning": "URL", "name": "codeenv_url", "type": "string"},
-                {"meaning": "URL", "name": "url", "type": "string"},
                 {"meaning": "Text", "name": "corePackagesSet", "type": "string"},
                 {"meaning": "Text", "name": "path", "type": "string"},
                 #              {'meaning': 'DoubleMeaning',
                 #               'name': 'disk_size_megabytes',
                 #               'type': 'double'},
                 {"meaning": "JSONArrayMeaning", "name": "usages", "type": "string"},
+                {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
 

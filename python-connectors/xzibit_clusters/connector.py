@@ -26,12 +26,6 @@ class ConnectorClusters(Connector):
         # Clusters MUST NOT HAVE trailing slash
         return f"{self.__baseurl}/admin/clusters/{id}"
 
-    def get_cluster_url(self, cluster_id):
-        # https://beta-design.se-platform.dataiku-sandbox.io/admin/clusters/k8s-gpu-small
-        if cluster_id is None or self.__baseurl is None:
-            return None
-        return f"{self.__baseurl}/admin/clusters/{cluster_id}"
-
     def generate_rows(
         self,
         dataset_schema=None,

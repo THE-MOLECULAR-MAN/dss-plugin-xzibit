@@ -59,12 +59,6 @@ class ConnectorProjects(Connector):
         safe_name = make_url_friendly(web_app_name)
         return f"{self.__baseurl}/projects/{project_key}/webapps/{webapp_id}_{safe_name}/edit"
 
-    def get_webapp_url(self, project_key, webapp_id, web_app_name):
-        # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/webapps/gY7nbkW_connectname-test1234567890-/edit
-        # Connect_Name-Test1234567890-=_+!@#$%^&*(),.<>/?'"[{]}\|
-        safe_name = make_url_friendly(web_app_name)
-        return f"{self.__baseurl}/projects/{project_key}/webapps/{webapp_id}_{safe_name}/edit"
-
     def generate_rows(
         self,
         dataset_schema=None,

@@ -9,18 +9,6 @@ from xzibit.utils import (
 )
 
 
-def get_dataset_url(project_key, dataset_id):
-    # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/datasets/Sales_Marketing_queries/explore/
-    try:
-        base_url = get_dss_base_url()
-        if base_url is None or project_key is None or dataset_id is None:
-            return None
-        # trailing slash is MANDATORY
-        return f"{base_url}/projects/{project_key}/datasets/{dataset_id}/explore/"
-    except Exception:  # yeah, I know this is bad practice
-        return None
-
-
 class ConnectorDatasets(Connector):
     ####################################################################
     # Code that has to be customized for this specific class
@@ -65,7 +53,6 @@ class ConnectorDatasets(Connector):
                     #                    num_rows += 1
                     dataset_handle = project_handle.get_dataset(r.id)
                     next_row = safe_extract_dataset_metadata(dataset_handle, pk)
-                    # next_row["dataset_url"] = get_dataset_url(pk, r.id)
                     next_row["url"] = self.get_url(r.id, pk)
                     records_generated += 1
                     yield next_row

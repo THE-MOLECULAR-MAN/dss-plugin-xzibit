@@ -30,16 +30,6 @@ class ConnectorRecipes(Connector):
             return None
         return f"{self.__baseurl}/projects/{project_key}/recipes/{id}/"
 
-    def get_recipe_url(self, project_key, recipe_id):
-        """TBD"""
-        # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/recipes/compute_Product_sales_by_acc_joined/
-        try:
-            if self.__baseurl is None or project_key is None or recipe_id is None:
-                return None
-            return f"{self.__baseurl}/projects/{project_key}/recipes/{recipe_id}/"
-        except Exception:  # yeah, I know this is bad practice
-            return None
-
     def generate_rows(
         self,
         dataset_schema=None,
@@ -70,7 +60,6 @@ class ConnectorRecipes(Connector):
                     "type": raw_data["type"],
                     "name": recipe_handle.name,
                     "tags": raw_data["tags"],
-                    # "url_recipe": self.get_recipe_url(pk, r.id),
                     "url": self.get_url(r.id, pk),
                 }
                 try:
