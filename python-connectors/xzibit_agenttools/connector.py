@@ -152,7 +152,6 @@ class ConnectorProjects(Connector):
                     "type": "string",
                 },
                 {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
-                {"meaning": "URL", "name": "url", "type": "string"},
                 {"meaning": "Text", "name": "creator_user", "type": "string"},
                 {
                     "meaning": "DatetimeNoTz",
@@ -172,6 +171,7 @@ class ConnectorProjects(Connector):
                     "name": "quickTestQuery",
                     "type": "string",
                 },
+                {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
 
