@@ -69,7 +69,7 @@ class ConnectorProjects(Connector):
 
         # iterate through each object
         for project_key in self.__client.list_project_keys():
-            # print(f"[generate_rows] Outer loop start on project key: {project_key}")
+
             try:
                 project = self.__client.get_project(project_key)
 
@@ -84,7 +84,6 @@ class ConnectorProjects(Connector):
                             "agent_name": agent_item.name,
                             "agent_id": agent_item.id,
                         }
-                        # print(f"[generate_rows] Inner loop start on agent_item {agent_item}")
                         # Get the full agent object and its settings
                         # We need the full object to access .get_settings()
                         agent = project.get_agent(agent_item.id)
@@ -109,8 +108,6 @@ class ConnectorProjects(Connector):
                             version_settings = settings.get_version_settings(
                                 active_version_id
                             )
-                            # print("[generate_rows] Version Settings")
-                            # pp(version_settings.get_raw())
 
                             # 1. Try standard Visual Agent property
                             try:
@@ -128,8 +125,6 @@ class ConnectorProjects(Connector):
                                         "llmId", None
                                     )
 
-                            # print("[generate_rows] version_settings:")
-                            # pp(version_settings.get_raw())
                             next_row["llm_model_id"] = llm_model_id
 
                             creation_user = (
@@ -185,18 +180,17 @@ class ConnectorProjects(Connector):
                             ),
                         }
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
-                        # Print minimal error to avoid cluttering logs for expected data issues
                         print(
-                            f"[generate_rows] [agents] [CAUGHT EXCEPTION] {e_agent} - Project Key: {project_key}, Agent Name: {agent_item.name}"
+                            f"[agents-generate_rows] [EXPECTED EXCEPTION] {e_agent} - Project Key: {project_key}, Agent Name: {agent_item.name}"
                         )
                     finally:
                         yield next_row
 
             except Exception as e_proj:
                 # Pass on projects where we lack permissions or feature is disabled
-                print(f"[generate_rows] Exception {project_key}: {e_proj}")
-
-        # print("[generate_rows] END")
+                print(
+                    f"[agents-generate_rows] [UNEXPECTED EXCEPTION] {e_proj} - Project Key: {project_key}"
+                )
 
     def get_read_schema(self):
         """TBD"""

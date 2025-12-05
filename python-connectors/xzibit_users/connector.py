@@ -79,9 +79,11 @@ class ConnectorUsers(Connector):
                     next_row.get("creationDate", 0)
                 )
                 # pp(item_info)
-            except Exception:
+            except Exception as e:
                 # TODO: figure out why this is getting hit so much
-                print("Exception: generate_rows - User")
+                print(
+                    f"[users-generate_rows] [UNEXPECTED EXCEPTION] {e} with user {next_row.get('login', None)}"
+                )
             finally:
                 yield next_row
 

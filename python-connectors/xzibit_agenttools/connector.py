@@ -44,12 +44,10 @@ class ConnectorProjects(Connector):
 
         # iterate through each object
         for project_key in self.__client.list_project_keys():
-            # print(f"[generate_rows] Outer loop start on project key: {project_key}")
             try:
                 project = self.__client.get_project(project_key)
 
                 # List all agents in the current project
-
                 for agent_item in project.list_agent_tools():
                     try:
                         next_row = {
@@ -64,8 +62,6 @@ class ConnectorProjects(Connector):
                         # https://developer.dataiku.com/latest/api-reference/python/agents.html#dataikuapi.dss.agent_tool.DSSAgentToolSettings
                         raw_settings = settings.get_raw()
 
-                        # print(f"[agent_tools.generate_rows] settings:")
-                        # pp(raw_settings)
                         next_row["agent_tool_id"] = raw_settings.get("id", None)
                         next_row["agent_tool_name"] = raw_settings.get("name", None)
                         next_row["agent_tool_type"] = raw_settings.get("type", None)
@@ -121,14 +117,16 @@ class ConnectorProjects(Connector):
                     # except (AttributeError, KeyError, TypeError, ValueError) as e:
                     except Exception as e:
                         print(
-                            f"[agenttools.generaterows] [EXCEPTION] in {project_key}: {e}"
+                            f"[agenttools-generate_rows] [agenttools EXCEPTION] {project_key}: {e}"
                         )
                     finally:
                         yield next_row
 
             except Exception as e_proj:
                 # Pass on projects where we lack permissions or feature is disabled
-                print(f"[generate_rows] Exception {project_key}: {e_proj}")
+                print(
+                    f"[agenttools-generate_rows] [PROJECT EXCEPTION] {project_key}: {e_proj}"
+                )
 
     def get_read_schema(self):
         """Returns the read schema for TBD"""

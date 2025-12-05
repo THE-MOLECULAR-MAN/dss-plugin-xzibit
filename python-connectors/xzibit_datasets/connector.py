@@ -54,6 +54,7 @@ class ConnectorDatasets(Connector):
             for r in project_handle.list_datasets(
                 as_type="objects", include_shared=True
             ):
+                # TODO: need to switch to yield in finally
                 try:
                     #                    num_rows += 1
                     dataset_handle = project_handle.get_dataset(r.id)
@@ -64,7 +65,7 @@ class ConnectorDatasets(Connector):
 
                 except Exception as e:
                     print(
-                        f"GENERIC EXCEPTION in xzibit_datasets/connector.py - generate_rows with dataset {r.id} in project {pk}: {e} "
+                        f"[datasets-generate_rows] [UNEXPECTED EXCEPTION] with dataset {r.id} in project {pk}: {e}"
                     )
                     # r is of type "dataikuapi.dss.dataset.DSSDataset"
                     # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:

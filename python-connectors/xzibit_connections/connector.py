@@ -52,7 +52,6 @@ class ConnectorConnections(Connector):
         """TBD"""
         # iterate through each object
         for item_info in self.__client.list_connections(as_type="listitems"):
-            # pp(item_info)
             next_row = flatten_dict(item_info, include_keys=keys)
             next_row["url"] = self.get_url(next_row["name"])
             yield next_row

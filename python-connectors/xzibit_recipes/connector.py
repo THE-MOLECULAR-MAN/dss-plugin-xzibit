@@ -67,6 +67,11 @@ class ConnectorRecipes(Connector):
                     "url": self.get_url(r.id, pk),
                 }
                 try:
+                    # GUI produces this error message when visiting this recipe's inputs/utputs
+                    # An invalid argument has been encountered : Failed to iterate, caused by: IllegalArgumentException: No parameters dataset selected for repeating dataset/recipe
+                    # Seems to happen with the Export To Folder recipe, which exports files to folder.
+                    # if the user has not set the "Parameters dataset" option for this recipe, or maybe if that dataset has been deleted, then it will throw an exception.
+
                     next_row["input_datasets"] = (
                         recipe_settings_handle.get_flat_input_refs()
                     )
@@ -74,15 +79,15 @@ class ConnectorRecipes(Connector):
                         next_row["output_datasets"] = (
                             recipe_settings_handle.get_flat_output_refs()
                         )
-                    except Exception:
+                    except Exception as e:
                         # this occurs often on Dev-Design.
                         print(
-                            f"[EXCEPTION] Exception in Recipe output dataset, project_key: {pk}, recipe_id: {r.id}"
+                            f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe output dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
                         )
-                except Exception:
+                except Exception as e:
                     # this occurs often on Dev-Design.
                     print(
-                        f"[EXCEPTION] Exception in Recipe input dataset, project_key: {pk}, recipe_id: {r.id}"
+                        f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe input dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
                     )
                 finally:
                     yield next_row

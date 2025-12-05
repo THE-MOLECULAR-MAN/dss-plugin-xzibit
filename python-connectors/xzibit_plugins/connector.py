@@ -79,8 +79,10 @@ class ConnectorPlugins(Connector):
                 # next_row["plugin_url"] = get_plugin_url(next_row["id"])
                 next_row["url"] = self.get_url(next_row["id"])
             except Exception as e:
-                print(f"Exception {e} with plugin_info:")
-                pprint(item_info)
+                print(
+                    f"[plugins-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
+                )
+                # pp(item_info)
                 next_row = list_to_error_dict(keys)
             finally:
                 yield next_row

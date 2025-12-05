@@ -82,8 +82,9 @@ class ConnectorCodeEnvs(Connector):
                     )
 
             except Exception as e:
-                print(f"Exception {e} with code_env_info:")
-                # pp(item_info)
+                print(
+                    f"[codeenvs-generate_rows] [UNEXPECTED EXCEPTION] {e} on {env_name}"
+                )
 
             finally:
                 # return a single row

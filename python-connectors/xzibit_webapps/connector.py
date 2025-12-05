@@ -108,10 +108,14 @@ class ConnectorProjects(Connector):
                         }
                         yield next_row
                     except Exception as e:
-                        print(f"Skipping webapp due to error: {e}")
+                        print(
+                            f"[webapps-generate_rows] [UNEXPECTED WEBAPP EXCEPTION] {e} with webapp {next_row.get('webapp_name', None)}"
+                        )
 
             except Exception as e:
-                print(f"Skipping project {project_key} due to error: {e}")
+                print(
+                    f"[webapps-generate_rows] [UNEXPECTED PROJECT EXCEPTION] {e} with project {project_key}"
+                )
 
     def get_read_schema(self):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
