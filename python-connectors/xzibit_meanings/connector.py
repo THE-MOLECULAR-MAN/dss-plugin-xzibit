@@ -5,8 +5,9 @@ from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import flatten_dict
 
-
 # MEANINGS do not have URLs, so no need to get base URL
+
+
 class ConnectorMeanings(Connector):
     """TBD"""
 
@@ -16,6 +17,10 @@ class ConnectorMeanings(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
+
+    def get_url(self):
+        """Meanings do not have URLs."""
+        return None
 
     def generate_rows(
         self,
@@ -37,6 +42,7 @@ class ConnectorMeanings(Connector):
         # iterate through each object
         for item_info in self.__client.list_meanings():
             next_row = flatten_dict(item_info, include_keys=keys)
+            # intentinally no URL for meanings
             yield next_row
 
     def get_read_schema(self):
@@ -51,6 +57,7 @@ class ConnectorMeanings(Connector):
                 {"name": "type", "type": "string", "meaning": "Text"},
                 {"name": "normalizationMode", "type": "string", "meaning": "Text"},
                 {"name": "description", "type": "string", "meaning": "FreeText"},
+                # intentinally no URL for meanings
             ]
         }
 
