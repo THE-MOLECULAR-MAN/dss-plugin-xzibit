@@ -6,7 +6,6 @@ from dataiku.connector import Connector
 from xzibit.utils import (
     safe_extract_dataset_metadata,
     get_dss_base_url,
-    get_dataset_url,
 )
 
 

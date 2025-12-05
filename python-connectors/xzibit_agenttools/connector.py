@@ -157,14 +157,14 @@ class ConnectorProjects(Connector):
                 },
                 {"meaning": "Text", "name": "last_modified_user", "type": "string"},
                 {
-                    "meaning": "JSONObjectMeaning",
+                    "meaning": "Text",
                     "name": "agent_tool_params",
                     "type": "string",
                 },
                 {"meaning": "Text", "name": "agent_tool_LLMid", "type": "string"},
                 {"meaning": "Text", "name": "dkuProperties", "type": "string"},
                 {
-                    "meaning": "JSONObjectMeaning",
+                    "meaning": "Text",
                     "name": "quickTestQuery",
                     "type": "string",
                 },
