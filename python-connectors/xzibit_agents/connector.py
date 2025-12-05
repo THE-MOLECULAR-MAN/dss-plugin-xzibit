@@ -161,7 +161,7 @@ class ConnectorProjects(Connector):
                         llm_vendor, llm_connection_name, llm_model = parse_llm_id(
                             llm_model_id
                         )
-                        print(f"[generate_rows] [agent] 13")
+
                         next_row = {
                             "projectKey": project_key,
                             "agent_name": agent_item.name,
