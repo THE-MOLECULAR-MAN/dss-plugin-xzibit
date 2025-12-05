@@ -79,7 +79,6 @@ class ConnectorProjects(Connector):
 
                 for agent_item in agents:
                     try:
-                        print(f"[generate_rows] [agent] start")
                         next_row = {
                             "projectKey": project_key,
                             "agent_name": agent_item.name,
@@ -89,15 +88,12 @@ class ConnectorProjects(Connector):
                         # Get the full agent object and its settings
                         # We need the full object to access .get_settings()
                         agent = project.get_agent(agent_item.id)
-                        print(f"[generate_rows] [agent] 1")
                         settings = agent.get_settings()
-                        print(f"[generate_rows] [agent] 2")
                         # raw_settings = settings.get_raw()
 
                         # We typically want the LLM used by the *Active* version of the agent
                         next_row["active_agent_version"] = settings.active_version
                         active_version_id = settings.active_version
-                        print(f"[generate_rows] [agent] 3")
 
                         next_row["llm_model_id"] = "Unknown"
                         llm_model_id = "Unknown"
@@ -107,31 +103,30 @@ class ConnectorProjects(Connector):
                         next_row["creation_user"] = "Unknown"
 
                         creation_user = "Unknown"
-                        print(f"[generate_rows] [agent] 4")
 
                         if active_version_id:
-                            print(f"[generate_rows] [agent] 5")
                             # Retrieve settings for the active version
                             version_settings = settings.get_version_settings(
                                 active_version_id
                             )
-                            print(f"[generate_rows] [agent] 6")
                             # print("[generate_rows] Version Settings")
                             # pp(version_settings.get_raw())
 
                             # 1. Try standard Visual Agent property
                             try:
-                                print(f"[generate_rows] [agent] 7")
-                                llm_model_id = version_settings.llm_id
+                                print(
+                                    f"[generate_rows] [agent] 7 - exception may happen"
+                                )
+                                llm_model_id = version_settings.get("llm_id", None)
                                 print(f"[generate_rows] [agent] 8")
                             except AttributeError:
-                                print(f"[generate_rows] [agent] 8a")
+                                print(f"[generate_rows] [agent] EXCEPTION 8a")
                                 # 2. Fallback: Check raw settings (common for Code Agents)
                                 ver_raw = version_settings.get_raw()
-                                print(f"[generate_rows] [agent] 8b")
+                                print(f"[generate_rows] [agent] EXCEPTION 8b")
                                 llm_model_id = ver_raw.get("llmId", None)
 
-                                print(f"[generate_rows] [agent] 8c")
+                                print(f"[generate_rows] [agent] EXCEPTION 8c")
                                 # Sometimes stored under 'generation' block for complex setups
                                 if not llm_model_id and "generation" in ver_raw:
                                     llm_model_id = ver_raw["generation"].get(
