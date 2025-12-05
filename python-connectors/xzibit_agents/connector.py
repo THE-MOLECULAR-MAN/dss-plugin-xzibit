@@ -114,31 +114,22 @@ class ConnectorProjects(Connector):
 
                             # 1. Try standard Visual Agent property
                             try:
-                                print(
-                                    f"[generate_rows] [agent] 7 - exception may happen"
-                                )
+                                # the following line occasionally throws Exception
                                 llm_model_id = version_settings.get("llm_id", None)
-                                print(f"[generate_rows] [agent] 8")
+
                             except AttributeError:
-                                print(f"[generate_rows] [agent] EXCEPTION 8a")
                                 # 2. Fallback: Check raw settings (common for Code Agents)
                                 ver_raw = version_settings.get_raw()
-                                print(f"[generate_rows] [agent] EXCEPTION 8b")
                                 llm_model_id = ver_raw.get("llmId", None)
 
-                                print(f"[generate_rows] [agent] EXCEPTION 8c")
                                 # Sometimes stored under 'generation' block for complex setups
                                 if not llm_model_id and "generation" in ver_raw:
-                                    print(f"[generate_rows] [agent] EXCEPTION 8ca")
                                     llm_model_id = ver_raw["generation"].get(
                                         "llmId", None
                                     )
-                                    print(f"[generate_rows] [agent] EXCEPTION 8cd")
-                                print(f"[generate_rows] [agent] EXCEPTION 8d")
 
                             # print("[generate_rows] version_settings:")
                             # pp(version_settings.get_raw())
-                            print(f"[generate_rows] [agent] 9")
                             next_row["llm_model_id"] = llm_model_id
 
                             creation_user = (
@@ -149,7 +140,6 @@ class ConnectorProjects(Connector):
                             )
                             next_row["creation_user"] = creation_user
 
-                            print(f"[generate_rows] [agent] 10")
                             last_modified_on = datetime.fromtimestamp(
                                 version_settings.get_raw()
                                 .get("versionTag", {})
@@ -158,7 +148,6 @@ class ConnectorProjects(Connector):
                             )
                             next_row["last_modified_on"] = last_modified_on
 
-                            print(f"[generate_rows] [agent] 11")
                             last_modified_user = (
                                 version_settings.get_raw()
                                 .get("versionTag", {})
@@ -169,7 +158,6 @@ class ConnectorProjects(Connector):
                         # pp(raw_settings)
 
                         agent_version = agent_item.get("activeVersion", None)
-                        print(f"[generate_rows] [agent] 12")
                         llm_vendor, llm_connection_name, llm_model = parse_llm_id(
                             llm_model_id
                         )
@@ -196,9 +184,6 @@ class ConnectorProjects(Connector):
                                 agent_item.id, project_key, agent_version
                             ),
                         }
-                        print(
-                            f"[generate_rows] [agent] end of inner loop without exception"
-                        )
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         # Print minimal error to avoid cluttering logs for expected data issues
                         print(
