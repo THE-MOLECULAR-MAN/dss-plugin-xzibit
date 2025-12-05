@@ -129,17 +129,18 @@ class ConnectorProjects(Connector):
                                 print(f"[generate_rows] [agent] EXCEPTION 8c")
                                 # Sometimes stored under 'generation' block for complex setups
                                 if not llm_model_id and "generation" in ver_raw:
+                                    print(f"[generate_rows] [agent] EXCEPTION 8ca")
                                     llm_model_id = ver_raw["generation"].get(
                                         "llmId", None
                                     )
-                                print(f"[generate_rows] [agent] 8d")
+                                    print(f"[generate_rows] [agent] EXCEPTION 8cd")
+                                print(f"[generate_rows] [agent] EXCEPTION 8d")
 
                             # print("[generate_rows] version_settings:")
                             # pp(version_settings.get_raw())
-
+                            print(f"[generate_rows] [agent] 9")
                             next_row["llm_model_id"] = llm_model_id
 
-                            print(f"[generate_rows] [agent] 9")
                             creation_user = (
                                 version_settings.get_raw()
                                 .get("creationTag", {})
