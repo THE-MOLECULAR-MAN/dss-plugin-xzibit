@@ -50,10 +50,15 @@ class ConnectorConnections(Connector):
             "params.scope",
         ]
         """TBD"""
+        records_generated = 0
         # iterate through each object
         for item_info in self.__client.list_connections(as_type="listitems"):
+            if records_limit > 0 and records_generated >= records_limit:
+                break
+
             next_row = flatten_dict(item_info, include_keys=keys)
             next_row["url"] = self.get_url(next_row["name"])
+            records_generated += 1
             yield next_row
 
     def get_read_schema(self):

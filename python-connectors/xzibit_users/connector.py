@@ -45,6 +45,7 @@ class ConnectorUsers(Connector):
         partition_id=None,
         records_limit=-1,
     ):
+        records_generated = 0
         unique_id_key_name = "login"
         keys = [
             unique_id_key_name,
@@ -61,6 +62,9 @@ class ConnectorUsers(Connector):
         # iterate through each object
         for item_info in self.__client.list_users():
             try:
+                if records_limit > 0 and records_generated >= records_limit:
+                    break
+
                 next_row = flatten_dict(item_info, include_keys=keys)
                 # item_id = next_row[self.__unique_id_key_name]
                 item_handle = self.__client.get_user(item_info[unique_id_key_name])
@@ -85,6 +89,7 @@ class ConnectorUsers(Connector):
                     f"[users-generate_rows] [UNEXPECTED EXCEPTION] {e} with user {next_row.get('login', None)}"
                 )
             finally:
+                records_generated += 1
                 yield next_row
 
     def get_read_schema(self):

@@ -50,6 +50,7 @@ class ConnectorPlugins(Connector):
         partition_id=None,
         records_limit=-1,
     ):
+        records_generated = 0
         keys = [
             "id",
             "meta.label",
@@ -63,6 +64,9 @@ class ConnectorPlugins(Connector):
         # iterate through each object
         for item_info in self.__client.list_plugins():
             try:
+                if records_limit > 0 and records_generated >= records_limit:
+                    break
+
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
                 plugin_handle = self.__client.get_plugin(next_row["id"])
@@ -85,6 +89,7 @@ class ConnectorPlugins(Connector):
                 # pp(item_info)
                 next_row = list_to_error_dict(keys)
             finally:
+                records_generated += 1
                 yield next_row
 
     def get_read_schema(self):

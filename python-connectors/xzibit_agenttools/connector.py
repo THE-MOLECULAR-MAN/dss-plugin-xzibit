@@ -41,15 +41,22 @@ class ConnectorProjects(Connector):
         records_limit=-1,
     ):
         """TBD"""
+        records_generated = 0
 
         # iterate through each object
         for project_key in self.__client.list_project_keys():
+            if records_limit > 0 and records_generated >= records_limit:
+                break
+
             try:
                 project = self.__client.get_project(project_key)
 
                 # List all agents in the current project
                 for agent_item in project.list_agent_tools():
                     try:
+                        if records_limit > 0 and records_generated >= records_limit:
+                            break
+
                         next_row = {
                             "projectKey": project_key,
                         }
@@ -120,6 +127,7 @@ class ConnectorProjects(Connector):
                             f"[agenttools-generate_rows] [agenttools EXCEPTION] {project_key}: {e}"
                         )
                     finally:
+                        records_generated += 1
                         yield next_row
 
             except Exception as e_proj:

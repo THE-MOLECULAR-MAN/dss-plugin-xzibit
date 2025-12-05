@@ -77,11 +77,11 @@ class ConnectorProjects(Connector):
             try:
                 project = self.__client.get_project(project_key)
                 # List all webapps in the project
-                if records_generated >= records_limit:
+                if records_limit > 0 and records_generated >= records_limit:
                     break
                 for webapp in project.list_webapps():
                     try:
-                        if records_generated >= records_limit:
+                        if records_limit > 0 and records_generated >= records_limit:
                             break
                         # pp(webapp)
 

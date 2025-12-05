@@ -48,11 +48,18 @@ class ConnectorRecipes(Connector):
         records_limit=-1,
     ):
         """TBD"""
+        records_generated = 0
         # iterate through each object
         for pk, proj_recipes in self.__objects_list.items():
+            if records_limit > 0 and records_generated >= records_limit:
+                break
+
             project_handle = self.__client.get_project(pk)
 
             for r in proj_recipes:
+                if records_limit > 0 and records_generated >= records_limit:
+                    break
+
                 recipe_handle = project_handle.get_recipe(r.id)
                 recipe_settings_handle = recipe_handle.get_settings()
                 raw_data = recipe_settings_handle.get_recipe_raw_definition()
@@ -90,6 +97,7 @@ class ConnectorRecipes(Connector):
                         f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe input dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
                     )
                 finally:
+                    records_generated += 1
                     yield next_row
 
     def get_read_schema(self):

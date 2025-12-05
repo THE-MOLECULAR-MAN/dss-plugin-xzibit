@@ -46,14 +46,20 @@ class ConnectorDatasets(Connector):
         records_limit=-1,
     ):
         """TBD"""
+        records_generated = 0
 
         # iterate through each object
         for pk in self.__client.list_project_keys():
+            if records_limit > 0 and records_generated >= records_limit:
+                break
+
             project_handle = self.__client.get_project(pk)
 
             for r in project_handle.list_datasets(
                 as_type="objects", include_shared=True
             ):
+                if records_limit > 0 and records_generated >= records_limit:
+                    break
                 # TODO: need to switch to yield in finally
                 try:
                     #                    num_rows += 1
@@ -61,6 +67,7 @@ class ConnectorDatasets(Connector):
                     next_row = safe_extract_dataset_metadata(dataset_handle, pk)
                     # next_row["dataset_url"] = get_dataset_url(pk, r.id)
                     next_row["url"] = self.get_url(r.id, pk)
+                    records_generated += 1
                     yield next_row
 
                 except Exception as e:
@@ -69,6 +76,7 @@ class ConnectorDatasets(Connector):
                     )
                     # r is of type "dataikuapi.dss.dataset.DSSDataset"
                     # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
+                    records_generated += 1
                     yield {"projectKey": pk, "name": r.id}
 
     def get_read_schema(self):

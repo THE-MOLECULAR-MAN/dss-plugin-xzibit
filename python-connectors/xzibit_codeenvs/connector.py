@@ -44,6 +44,7 @@ class ConnectorCodeEnvs(Connector):
         records_limit=-1,
     ):
         """TBD"""
+        records_generated = 0
         keys = [
             "envName",
             "envLang",
@@ -54,6 +55,9 @@ class ConnectorCodeEnvs(Connector):
 
         # iterate through each object
         for item_info in self.__client.list_code_envs():
+            if records_limit > 0 and records_generated >= records_limit:
+                break
+
             next_row = flatten_dict(item_info, include_keys=keys)
 
             env_lang = next_row["envLang"]
@@ -88,6 +92,7 @@ class ConnectorCodeEnvs(Connector):
 
             finally:
                 # return a single row
+                records_generated += 1
                 yield next_row
 
     def get_read_schema(self):
