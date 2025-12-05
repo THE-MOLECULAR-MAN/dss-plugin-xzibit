@@ -31,7 +31,7 @@ def replace_empty_arrays_sets_with_none(x):
             f"[replace_empty_arrays_sets_with_none] EXCEPTION: {str(type(x))} {str(x)} {e}"
         )
         return x
-    print(f"[replace_empty_arrays_sets_with_none]: {str(type(x))} {str(x)}")
+    # print(f"[replace_empty_arrays_sets_with_none]: {str(type(x))} {str(x)}")
     return x
 
 
