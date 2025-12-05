@@ -3,7 +3,7 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import flatten_dict
+from xzibit.utils import flatten_dict, get_dss_base_url
 
 
 class ConnectorApps(Connector):
@@ -15,7 +15,26 @@ class ConnectorApps(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__keys = [
+        self.__baseurl = get_dss_base_url()
+
+    def get_url(self, id):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, id)):
+            return None
+        # CANNOT have trailing slash on Apps
+        return f"{self.__baseurl}/apps/{id}"
+
+    def generate_rows(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        records_limit=-1,
+    ):
+        """TBD"""
+        keys = [
             "appId",
             "appVersion",
             "label",
@@ -27,18 +46,9 @@ class ConnectorApps(Connector):
             "useAsRecipe",
             "onlyLimitedVisibility",
         ]
-
-    def generate_rows(
-        self,
-        dataset_schema=None,
-        dataset_partitioning=None,
-        partition_id=None,
-        records_limit=-1,
-    ):
-        """TBD"""
         # iterate through each object
         for item_info in self.__client.list_apps():
-            next_row = flatten_dict(item_info, include_keys=self.__keys)
+            next_row = flatten_dict(item_info, include_keys=keys)
             yield next_row
 
     def get_read_schema(self):

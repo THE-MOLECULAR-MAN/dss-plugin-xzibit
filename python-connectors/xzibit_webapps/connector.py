@@ -38,14 +38,6 @@ def make_url_friendly(text):
     return text
 
 
-def get_webapp_url(project_key, webapp_id, web_app_name):
-    base_url = get_dss_base_url()
-    # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/webapps/gY7nbkW_connectname-test1234567890-/edit
-    # Connect_Name-Test1234567890-=_+!@#$%^&*(),.<>/?'"[{]}\|
-    safe_name = make_url_friendly(web_app_name)
-    return f"{base_url}/projects/{project_key}/webapps/{webapp_id}_{safe_name}/edit"
-
-
 class ConnectorProjects(Connector):
 
     ####################################################################
@@ -55,7 +47,13 @@ class ConnectorProjects(Connector):
         #  print("[DEBUG agents] Constructor START")
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__count = 0
+        self.__baseurl = get_dss_base_url()
+
+    def get_webapp_url(self, project_key, webapp_id, web_app_name):
+        # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/webapps/gY7nbkW_connectname-test1234567890-/edit
+        # Connect_Name-Test1234567890-=_+!@#$%^&*(),.<>/?'"[{]}\|
+        safe_name = make_url_friendly(web_app_name)
+        return f"{self.__baseurl}/projects/{project_key}/webapps/{webapp_id}_{safe_name}/edit"
 
     def generate_rows(
         self,
@@ -98,7 +96,6 @@ class ConnectorProjects(Connector):
                             "is_code_webapp": webapp.get("type")
                             in ["SHINY", "STANDARD", "BOKEH", "DASH"],
                         }
-                        self.__count += 1
                         yield next_row
                     except Exception as e:
                         print(f"Skipping webapp due to error: {e}")

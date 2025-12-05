@@ -13,18 +13,6 @@ from dataiku.connector import Connector
 from xzibit.utils import get_dss_base_url, replace_empty_arrays_sets_with_none, pp
 
 
-def get_agenttool_url(project_key, agenttool_id):
-    """TBD"""
-    base_url = get_dss_base_url()
-
-    # at least one is None, return None
-    if any(v is None for v in (agenttool_id, agenttool_id, project_key)):
-        return None
-
-    # https://dev-design.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/agent-tools/JfbcCw6
-    return f"{base_url}/projects/{project_key}/agent-tools/{agenttool_id}"
-
-
 class ConnectorProjects(Connector):
     """TBD"""
 
@@ -34,6 +22,15 @@ class ConnectorProjects(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
+        self.__baseurl = get_dss_base_url()
+
+    def get_url(self, project_key, agenttool_id):
+        """Create a URL to the agent tool in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, agenttool_id, project_key)):
+            return None
+        return f"{self.__baseurl}/projects/{project_key}/agent-tools/{agenttool_id}/"
 
     # pylint: disable=W0613
     def generate_rows(
@@ -78,7 +75,7 @@ class ConnectorProjects(Connector):
                         next_row["tags"] = replace_empty_arrays_sets_with_none(
                             raw_settings.get("tags", [])
                         )
-                        next_row["url"] = get_agenttool_url(
+                        next_row["url"] = self.get_url(
                             project_key, next_row["agent_tool_id"]
                         )
 

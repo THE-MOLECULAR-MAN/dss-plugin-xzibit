@@ -15,11 +15,27 @@ class ConnectorProjects(Connector):
 
     ####################################################################
     # Code that has to be customized for this specific class
-    ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__keys = [
+        self.__baseurl = get_dss_base_url()
+
+    def get_url(self, project_key):
+        """Create a URL to the object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, project_key)):
+            return None
+        return f"{self.__baseurl}/projects/{project_key}/flow/"
+
+    def generate_rows(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        records_limit=-1,
+    ):
+        keys = [
             "projectKey",
             "ownerLogin",
             "projectStatus",
@@ -31,36 +47,17 @@ class ConnectorProjects(Connector):
             "versionTag.lastModifiedOn",
             "tutorialProject",
         ]
-        self.__baseurl = get_dss_base_url()
-
-    def get_project_url(self, project_key):
-        # https://beta-design.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/flow/
-        try:
-            if self.__baseurl is None or project_key is None:
-                return None
-            # trailing slash is MANDATORY
-            return f"{self.__baseurl}/projects/{project_key}/flow/"
-        except Exception:  # yeah, I know this is bad practice
-            return None
-
-    def generate_rows(
-        self,
-        dataset_schema=None,
-        dataset_partitioning=None,
-        partition_id=None,
-        records_limit=-1,
-    ):
         # iterate through each object
         for item_info in self.__client.list_projects():
             # pp(item_info)
-            next_row = flatten_dict(item_info, include_keys=self.__keys)
+            next_row = flatten_dict(item_info, include_keys=keys)
 
             # custom things for this specific class:
             next_row = remove_prefix_from_keys(next_row, "versionTag.")
             next_row["lastModifiedOn"] = datetime.fromtimestamp(
                 next_row["lastModifiedOn"] // 1000
             )
-            next_row["url_project"] = self.get_project_url(next_row["projectKey"])
+            next_row["url"] = self.get_url(next_row["projectKey"])
             yield next_row
 
     def get_read_schema(self):
@@ -86,7 +83,7 @@ class ConnectorProjects(Connector):
                     "meaning": "DatetimeNoTz",
                 },
                 {"name": "tutorialProject", "type": "boolean", "meaning": "Boolean"},
-                {"name": "url_project", "type": "string", "meaning": "URL"},
+                {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
 

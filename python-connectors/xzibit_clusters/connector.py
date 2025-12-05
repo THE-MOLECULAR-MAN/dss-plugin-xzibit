@@ -6,14 +6,6 @@ from dataiku.connector import Connector
 from xzibit.utils import flatten_dict, get_dss_base_url
 
 
-def get_cluster_url(cluster_id):
-    # https://beta-design.se-platform.dataiku-sandbox.io/admin/clusters/k8s-gpu-small
-    base_url = get_dss_base_url()
-    if cluster_id is None or base_url is None:
-        return None
-    return f"{base_url}/admin/clusters/{cluster_id}"
-
-
 class ConnectorClusters(Connector):
     """TBD"""
 
@@ -23,16 +15,22 @@ class ConnectorClusters(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__keys = [
-            "id",
-            "architecture",
-            "name",
-            "owner",
-            "state",
-            "type",
-            "usedInProjects",
-            "usedInScenarios",
-        ]
+        self.__baseurl = get_dss_base_url()
+
+    def get_url(self, id):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, id)):
+            return None
+        # Clusters MUST NOT HAVE trailing slash
+        return f"{self.__baseurl}/admin/clusters/{id}"
+
+    def get_cluster_url(self, cluster_id):
+        # https://beta-design.se-platform.dataiku-sandbox.io/admin/clusters/k8s-gpu-small
+        if cluster_id is None or self.__baseurl is None:
+            return None
+        return f"{self.__baseurl}/admin/clusters/{cluster_id}"
 
     def generate_rows(
         self,
@@ -42,11 +40,21 @@ class ConnectorClusters(Connector):
         records_limit=-1,
     ):
         """TBD"""
+        keys = [
+            "id",
+            "architecture",
+            "name",
+            "owner",
+            "state",
+            "type",
+            "usedInProjects",
+            "usedInScenarios",
+        ]
         # iterate through each object
         for item_info in self.__client.list_clusters():
-            next_row = flatten_dict(item_info, include_keys=self.__keys)
-            # return a single row
-            next_row["cluster_url"] = get_cluster_url(next_row["id"])
+            next_row = flatten_dict(item_info, include_keys=keys)
+            # next_row["cluster_url"] = self.get_cluster_url(next_row["id"])
+            next_row["url"] = self.get_url(next_row["id"])
             yield next_row
 
     def get_read_schema(self):

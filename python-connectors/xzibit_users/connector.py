@@ -19,19 +19,6 @@ class ConnectorUsers(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__unique_id_key_name = "login"
-        self.__keys = [
-            self.__unique_id_key_name,
-            "displayName",
-            "userProfile",
-            "groups",
-            "sourceType",
-            "email",
-            "creationDate",
-            "enabled",
-            "resultingUserProfile",
-            "userProfile",
-        ]
         self.__baseurl = get_dss_base_url()
 
     def get_user_url(self, user_id):
@@ -43,6 +30,14 @@ class ConnectorUsers(Connector):
         except Exception:  # yeah, I know this is bad practice
             return None
 
+    def get_url(self, id):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, id)):
+            return None
+        return f"{self.__baseurl}/admin/security/users/edit/{id}/"
+
     def generate_rows(
         self,
         dataset_schema=None,
@@ -50,14 +45,25 @@ class ConnectorUsers(Connector):
         partition_id=None,
         records_limit=-1,
     ):
+        unique_id_key_name = "login"
+        keys = [
+            unique_id_key_name,
+            "displayName",
+            "userProfile",
+            "groups",
+            "sourceType",
+            "email",
+            "creationDate",
+            "enabled",
+            "resultingUserProfile",
+            "userProfile",
+        ]
         # iterate through each object
         for item_info in self.__client.list_users():
             try:
-                next_row = flatten_dict(item_info, include_keys=self.__keys)
+                next_row = flatten_dict(item_info, include_keys=keys)
                 # item_id = next_row[self.__unique_id_key_name]
-                item_handle = self.__client.get_user(
-                    item_info[self.__unique_id_key_name]
-                )
+                item_handle = self.__client.get_user(item_info[unique_id_key_name])
                 # activity_handle = item_handle.get_activity()
                 # TODO: fix this date mess below
                 next_row["last_successful_login"] = parse_user_datetime(
@@ -66,7 +72,7 @@ class ConnectorUsers(Connector):
                 next_row["last_session_activity"] = parse_user_datetime(
                     str(item_handle.get_activity().last_session_activity)
                 )
-                next_row["url_user"] = self.get_user_url(next_row.get("login", None))
+                next_row["url"] = self.get_url(next_row.get("login", None))
 
                 # bug on next line
                 next_row["creationDate"] = int_to_datetime(next_row["creationDate"])
@@ -100,7 +106,7 @@ class ConnectorUsers(Connector):
                 },
                 {"name": "last_successful_login", "type": "date", "meaning": "Date"},
                 {"name": "last_session_activity", "type": "date", "meaning": "Date"},
-                {"name": "url_user", "type": "string", "meaning": "URL"},
+                {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
 

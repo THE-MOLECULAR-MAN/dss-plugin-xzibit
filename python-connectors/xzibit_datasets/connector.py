@@ -28,25 +28,16 @@ class ConnectorDatasets(Connector):
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
-
         self.__client = api_client()
-        # self.__objects_list = {}
-        #         self.__keys = ['projectKey', 'name', 'type', 'formatType', 'params.connection',
-        #                        'managed', 'params.mode', 'params.table', 'params.schema', 'params.database',
-        #                        'params.path',
-        #                        'creationTag.lastModifiedBy.login', 'creationTag.lastModifiedOn',
-        #                        'versionTag.lastModifiedBy.login',  'versionTag.lastModifiedOn',
-        #                        'shortDesc', 'description', 'params.metastoreDatabaseName',
-        #                        'params.folderSmartId', 'tags', 'featureGroup',
-        #                       ]
-        # self.__count = 0
+        self.__baseurl = get_dss_base_url()
 
-        # for pk in self.__client.list_project_keys():
-        #     project_handle = self.__client.get_project(pk)
-        #     self.__objects_list[pk] = project_handle.list_datasets(
-        #         as_type="objects", include_shared=True
-        #     )
-        #     self.__count += len(self.__objects_list[pk])
+    def get_url(self, id, project_key):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, id, project_key)):
+            return None
+        return f"{self.__baseurl}/projects/{project_key}/datasets/{id}/explore/"
 
     def generate_rows(
         self,
@@ -56,9 +47,6 @@ class ConnectorDatasets(Connector):
         records_limit=-1,
     ):
         """TBD"""
-
-        # key_mapping = set()
-        # num_rows = 0
 
         # iterate through each object
         for pk in self.__client.list_project_keys():
@@ -71,7 +59,8 @@ class ConnectorDatasets(Connector):
                     #                    num_rows += 1
                     dataset_handle = project_handle.get_dataset(r.id)
                     next_row = safe_extract_dataset_metadata(dataset_handle, pk)
-                    next_row["dataset_url"] = get_dataset_url(pk, r.id)
+                    # next_row["dataset_url"] = get_dataset_url(pk, r.id)
+                    next_row["url"] = self.get_url(r.id, pk)
                     yield next_row
 
                 except Exception as e:
@@ -137,7 +126,7 @@ class ConnectorDatasets(Connector):
                     "name": "column_names",
                     "type": "string",
                 },
-                {"meaning": "URL", "name": "dataset_url", "type": "string"},
+                {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
 

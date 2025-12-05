@@ -3,24 +3,10 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import get_dss_base_url, flatten_dict
-
-# Meanings don't have an obvious, dedicated URL
+from xzibit.utils import flatten_dict
 
 
-def get_dataset_url(project_key, dataset_id):
-    """TBD"""
-    # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/datasets/Sales_Marketing_queries/explore/
-    try:
-        base_url = get_dss_base_url()
-        if base_url is None or project_key is None or dataset_id is None:
-            return None
-        # trailing slash is MANDATORY
-        return f"{base_url}/projects/{project_key}/datasets/{dataset_id}/explore/"
-    except Exception:  # yeah, I know this is bad practice
-        return None
-
-
+# MEANINGS do not have URLs, so no need to get base URL
 class ConnectorMeanings(Connector):
     """TBD"""
 
@@ -29,16 +15,7 @@ class ConnectorMeanings(Connector):
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
-
         self.__client = api_client()
-        self.__keys = [
-            "label",
-            "description",
-            "detectable",
-            "type",
-            "id",
-            "normalizationMode",
-        ]
 
     def generate_rows(
         self,
@@ -48,9 +25,17 @@ class ConnectorMeanings(Connector):
         records_limit=-1,
     ):
         """TBD"""
+        keys = [
+            "label",
+            "description",
+            "detectable",
+            "type",
+            "id",
+            "normalizationMode",
+        ]
         # iterate through each object
         for item_info in self.__client.list_meanings():
-            next_row = flatten_dict(item_info, include_keys=self.__keys)
+            next_row = flatten_dict(item_info, include_keys=keys)
             yield next_row
 
     def get_read_schema(self):

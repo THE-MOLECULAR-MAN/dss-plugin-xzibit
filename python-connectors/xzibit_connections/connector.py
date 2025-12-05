@@ -3,7 +3,7 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import flatten_dict
+from xzibit.utils import flatten_dict, get_dss_base_url
 
 
 class ConnectorConnections(Connector):
@@ -15,8 +15,26 @@ class ConnectorConnections(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__keys = [
-            "name",
+        self.__baseurl = get_dss_base_url()
+
+    def get_url(self, id):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, id)):
+            return None
+        # Trailing slash for Connections is Mandatory.
+        return f"{self.__baseurl}/admin/connections/{id}/"
+
+    def generate_rows(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        records_limit=-1,
+    ):
+        keys = [
+            "name",  # for Connections, name is the ID, it is immutable after creation
             "type",
             "usableBy",
             "allowWrite",
@@ -31,20 +49,12 @@ class ConnectorConnections(Connector):
             "params.warehouse",
             "params.scope",
         ]
-        # self.__objects_list = self.__client.list_connections(as_type='listitems')
-
-    def generate_rows(
-        self,
-        dataset_schema=None,
-        dataset_partitioning=None,
-        partition_id=None,
-        records_limit=-1,
-    ):
         """TBD"""
         # iterate through each object
         for item_info in self.__client.list_connections(as_type="listitems"):
             # pp(item_info)
-            next_row = flatten_dict(item_info, include_keys=self.__keys)
+            next_row = flatten_dict(item_info, include_keys=keys)
+            next_row["url"] = self.get_url(next_row["name"])
             yield next_row
 
     def get_read_schema(self):

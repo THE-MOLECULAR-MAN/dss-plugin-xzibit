@@ -47,6 +47,15 @@ class ConnectorProjects(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
+        self.__baseurl = get_dss_base_url()
+
+    def get_url(self, id, project_key, agent_version):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, id, project_key, agent_version)):
+            return None
+        return f"{self.__baseurl}/projects/{project_key}/savedmodels/{id}/agent/S-{project_key}-{id}-{agent_version}"
 
     # pylint: disable=W0613
     def generate_rows(
@@ -154,8 +163,10 @@ class ConnectorProjects(Connector):
                             "tags": agent_item.get("tags", None),
                             "last_modified_timestamp": last_modified_on,
                             # "Agent is active version": is_active_version,
-                            "dss_object_url": get_agent_url(
-                                project_key, agent_item.id, agent_version
+                            # "dss_object_url": get_agent_url(
+                            #    project_key, agent_item.id, agent_version
+                            "url": self.get_url(
+                                agent_item.id, project_key, agent_version
                             ),
                         }
                         yield next_row

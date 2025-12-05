@@ -16,13 +16,19 @@ class ConnectorRecipes(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__objects_list = {}
-        self.__count = 0
         self.__baseurl = get_dss_base_url()
 
         for pk in self.__client.list_project_keys():
             project_handle = self.__client.get_project(pk)
             self.__objects_list[pk] = project_handle.list_recipes(as_type="objects")
-            self.__count += len(self.__objects_list[pk])
+
+    def get_url(self, id, project_key):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, id, project_key)):
+            return None
+        return f"{self.__baseurl}/projects/{project_key}/recipes/{id}/"
 
     def get_recipe_url(self, project_key, recipe_id):
         """TBD"""
@@ -57,7 +63,8 @@ class ConnectorRecipes(Connector):
                     "type": raw_data["type"],
                     "name": recipe_handle.name,
                     "tags": raw_data["tags"],
-                    "url_recipe": self.get_recipe_url(pk, r.id),
+                    # "url_recipe": self.get_recipe_url(pk, r.id),
+                    "url": self.get_url(r.id, pk),
                 }
                 try:
                     next_row["input_datasets"] = (
@@ -90,6 +97,7 @@ class ConnectorRecipes(Connector):
                     "type": "string",
                     "meaning": "JSONArrayMeaning",
                 },
+                {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
 

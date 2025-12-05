@@ -33,7 +33,24 @@ class ConnectorPlugins(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__keys = [
+        self.__baseurl = get_dss_base_url()
+
+    def get_url(self, id):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, id)):
+            return None
+        return f"{self.__baseurl}/plugins/{id}/summary/"
+
+    def generate_rows(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        records_limit=-1,
+    ):
+        keys = [
             "id",
             "meta.label",
             "version",
@@ -43,17 +60,10 @@ class ConnectorPlugins(Connector):
             "isDev",
         ]
 
-    def generate_rows(
-        self,
-        dataset_schema=None,
-        dataset_partitioning=None,
-        partition_id=None,
-        records_limit=-1,
-    ):
         # iterate through each object
         for item_info in self.__client.list_plugins():
             try:
-                next_row = flatten_dict(item_info, include_keys=self.__keys)
+                next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
                 plugin_handle = self.__client.get_plugin(next_row["id"])
                 list_of_usages = plugin_handle.list_usages().get_raw()["usages"]
@@ -66,11 +76,12 @@ class ConnectorPlugins(Connector):
                     )
 
                 next_row["total_usages"] = len(list_of_usages)
-                next_row["plugin_url"] = get_plugin_url(next_row["id"])
+                # next_row["plugin_url"] = get_plugin_url(next_row["id"])
+                next_row["url"] = self.get_url(next_row["id"])
             except Exception as e:
                 print(f"Exception {e} with plugin_info:")
                 pprint(item_info)
-                next_row = list_to_error_dict(self.__keys)
+                next_row = list_to_error_dict(keys)
             finally:
                 yield next_row
 
@@ -92,7 +103,7 @@ class ConnectorPlugins(Connector):
                 },
                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
                 {"name": "total_usages", "type": "bigint", "meaning": "LongMeaning"},
-                {"name": "plugin_url", "type": "string", "meaning": "URL"},
+                {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
 
