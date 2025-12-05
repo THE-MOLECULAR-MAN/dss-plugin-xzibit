@@ -85,6 +85,7 @@ class ConnectorConnections(Connector):
                     "type": "string",
                 },
                 {"meaning": "Boolean", "name": "allowWrite", "type": "boolean"},
+                {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
 
