@@ -52,7 +52,7 @@ class ConnectorCodeEnvs(Connector):
                 settings_raw = settings.get_raw()
                 pp(settings_raw)
                 next_row["deploymentMode"] = settings_raw.get('deploymentMode', None)
-                next_row["pythonInterpreter"] = settings_raw.get('pythonInterpreter', None)
+                next_row["pythonInterpreter"] = settings_raw.get("desc", {}).get('pythonInterpreter', None)
                 next_row["owner"] = settings_raw.get('owner', None)                                
                 next_row["corePackagesSet"] = settings_raw.get("desc", []).get(
                     "corePackagesSet", None
