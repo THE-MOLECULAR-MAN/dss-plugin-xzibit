@@ -75,8 +75,8 @@ class ConnectorPlugins(Connector):
 #                     next_row["project_usages"] = list(
 #                         get_values_for_key(list_of_usages, "projectKey")
 #                     )
-
 #                 next_row["total_usages"] = len(list_of_usages)
+
                 next_row["url"] = self.get_url(next_row["id"])
             except Exception as e:
                 print(
