@@ -89,10 +89,18 @@ class ConnectorProjects(Connector):
                         )
                         next_row["creator_user"] = creation_user
 
-                        last_modified_on = datetime.fromtimestamp(
-                            raw_settings.get("versionTag", {}).get("lastModifiedOn", 0)
-                            // 1000
-                        )
+                        # TODO: warning, this can return a "v1" instead of timestamp
+                        # if agent tool type is empty, then it returns a version number instead of date
+                        # so need to clear that out
+                        if not next_row["agent_tool_type"]:
+                            last_modified_on = datetime.fromtimestamp(0)
+                        else:
+                            last_modified_on = datetime.fromtimestamp(
+                                raw_settings.get("versionTag", {}).get(
+                                    "lastModifiedOn", 0
+                                )
+                                // 1000
+                            )
                         next_row["last_modified_timestamp"] = last_modified_on
 
                         last_modified_user = (
