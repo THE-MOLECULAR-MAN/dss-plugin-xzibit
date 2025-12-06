@@ -56,6 +56,7 @@ class ConnectorCodeEnvs(Connector):
                 next_row["corePackagesSet"] = settings_raw.get("desc", []).get(
                     "corePackagesSet", []
                 )
+                next_row["path"] = settings.get("path", None)
                 
             except Exception as e:
                 print(f"codeenvs - generate_rows EXCEPTION")
