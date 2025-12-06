@@ -64,8 +64,9 @@ class ConnectorPlugins(Connector):
                 next_row = remove_prefix_from_keys(next_row, "meta.")
                 
                 # this is so slow!!!!
-                # This adds 2+ hours instead of 1 second.
+
                 #plugin_handle = self.__client.get_plugin(next_row["id"])
+                # .list_usages adds 2+ hours instead of 1 second.
                 #list_of_usages = plugin_handle.list_usages().get_raw()["usages"]
 
 #                 if len(list_of_usages) == 0:
