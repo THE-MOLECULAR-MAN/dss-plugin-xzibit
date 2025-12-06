@@ -48,6 +48,10 @@ class ConnectorCodeEnvs(Connector):
                 }
                 next_row["url"] = self.get_url(code_env_name, code_env_lang)
                 
+                next_row["corePackagesSet"] = settings.get("desc", []).get(
+#                     "corePackagesSet", []
+#                 )
+                
             except Exception as e:
                 print(f"codeenvs - generate_rows EXCEPTION")
             finally:
