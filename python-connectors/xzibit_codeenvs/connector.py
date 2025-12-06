@@ -149,12 +149,12 @@ class ConnectorCodeEnvs(Connector):
         return None
         return {
             "columns": [
-                {"meaning": "Text", "name": "envName", "type": "string"},
-                {"meaning": "Text", "name": "envLang", "type": "string"},
-                {"meaning": "Text", "name": "deploymentMode", "type": "string"},
+                {"meaning": "Text", "name": "code_env_name", "type": "string"},
+                {"meaning": "Text", "name": "code_env_lang", "type": "string"},
+                {"meaning": "Text", "name": "deployment_mode", "type": "string"},
                 {"meaning": "Text", "name": "owner", "type": "string"},
-                {"meaning": "Text", "name": "pythonInterpreter", "type": "string"},
-                {"meaning": "Text", "name": "corePackagesSet", "type": "string"},
+                {"meaning": "Text", "name": "python_interpreter", "type": "string"},
+                {"meaning": "Text", "name": "core_packages_set", "type": "string"},
                 {"meaning": "Text", "name": "path", "type": "string"},
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]
