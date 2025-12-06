@@ -59,18 +59,18 @@ class ConnectorCodeEnvs(Connector):
                 )
                 next_row["path"] = settings_raw.get("path", None)
                 
-                print("starting code env list usages")
-                usages = code_env_handle.list_usages()
-                print("finished code env list usages")                
-                num_usages = len(usages)
-                if len(usages) == 0:
-                    pk_usages = None
-                else:
-                    pk_usages = list(
-                        get_values_for_key(usages, "projectKey")
-                     )                    
-                next_row["project_keys_where_plugin_used"] = pk_usages
-                next_row["num_projects_that_use_this_plugin"] = pk_usages
+#                 print("starting code env list usages")
+#                 usages = code_env_handle.list_usages()
+#                 print("finished code env list usages")                
+#                 num_usages = len(usages)
+#                 if len(usages) == 0:
+#                     pk_usages = None
+#                 else:
+#                     pk_usages = list(
+#                         get_values_for_key(usages, "projectKey")
+#                      )                    
+#                 next_row["project_keys_where_plugin_used"] = pk_usages
+#                 next_row["num_projects_that_use_this_plugin"] = pk_usages
                 
             except Exception as e:
                 print(f"codeenvs - generate_rows EXCEPTION")
