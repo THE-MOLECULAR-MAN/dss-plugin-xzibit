@@ -50,13 +50,14 @@ class ConnectorCodeEnvs(Connector):
                 next_row["url"] = self.get_url(code_env_name, code_env_lang)
                 
                 settings_raw = settings.get_raw()
-                next_row["deploymentMode"] = settings.
-                pythonInterpreter
-                owner
+                next_row["deploymentMode"] = settings_raw.get('deploymentMode', None)
+                next_row["pythonInterpreter"] = settings_raw.get('pythonInterpreter', None)
+                next_row["owner"] = settings_raw.get('owner', None)                
                 
-#                 next_row["corePackagesSet"] = settings.get("desc", []).get(
-#                     "corePackagesSet", []
-#                 )
+                
+                next_row["corePackagesSet"] = settings_raw.get("desc", []).get(
+                    "corePackagesSet", []
+                )
                 
             except Exception as e:
                 print(f"codeenvs - generate_rows EXCEPTION")
