@@ -39,6 +39,7 @@ class ConnectorCodeEnvs(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     break
                 settings = code_env_handle.get_settings()
+
                 code_env_name = settings.env_name
                 code_env_lang = settings.env_lang
 
@@ -47,6 +48,11 @@ class ConnectorCodeEnvs(Connector):
                     "code_env_lang": code_env_lang,
                 }
                 next_row["url"] = self.get_url(code_env_name, code_env_lang)
+                
+                settings_raw = settings.get_raw()
+                next_row["deploymentMode"] = settings.
+                pythonInterpreter
+                owner
                 
 #                 next_row["corePackagesSet"] = settings.get("desc", []).get(
 #                     "corePackagesSet", []
