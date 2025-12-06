@@ -44,7 +44,8 @@ class ConnectorCodeEnvs(Connector):
                 "envLang": settings.env_lang,
                 "env_name": settings.env_name
             }
-            next_row[]
+            records_generated += 1
+            yield next_row
 
     
     def generate_rows(
