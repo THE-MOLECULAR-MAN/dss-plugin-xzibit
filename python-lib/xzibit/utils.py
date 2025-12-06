@@ -89,7 +89,7 @@ def get_dss_base_url():
 
 
 def safe_extract_dataset_metadata(dataset_handle, pk):
-    """SLOW! Adds 1.36 seconds per row on average"""
+    """SLOW! Adds 1.36 seconds per dataset (row) on average"""
     assert isinstance(
         dataset_handle, dataikuapi.dss.dataset.DSSDataset
     ), f"safe_extract_dataset_metadata - Assertion failed: Expecting DSSDataset, got {type(dataset_handle)}"
