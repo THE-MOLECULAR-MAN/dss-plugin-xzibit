@@ -72,11 +72,11 @@ class ConnectorProjects(Connector):
                 project = self.__client.get_project(project_key)
                 # List all webapps in the project
                 if records_limit > 0 and records_generated >= records_limit:
-                    break
+                    return
                 for webapp in project.list_webapps():
                     try:
                         if records_limit > 0 and records_generated >= records_limit:
-                            break
+                            return
                         # pp(webapp)
 
                         # Collect relevant metadata
