@@ -62,7 +62,11 @@ class ConnectorCodeEnvs(Connector):
                 print("starting code env list usages")
                 usages = code_env_handle.list_usages()
                 print("finished code env list usages")                
-                if len()
+                if len(usages) == 0:
+                    pk_usages = None
+                    num_usages = 0
+                else:
+                    
                     
                 
             except Exception as e:
