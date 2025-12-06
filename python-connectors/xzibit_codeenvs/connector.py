@@ -56,7 +56,7 @@ class ConnectorCodeEnvs(Connector):
             "pythonInterpreter",
             "owner",
         ]
-        
+
         # iterate through each object
         for item_info in self.__client.list_code_envs():
             if records_limit > 0 and records_generated >= records_limit:
