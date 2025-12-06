@@ -61,17 +61,19 @@ class ConnectorPlugins(Connector):
 
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
-                plugin_handle = self.__client.get_plugin(next_row["id"])
-                list_of_usages = plugin_handle.list_usages().get_raw()["usages"]
+                
+                # this is so slow!!!!
+                #plugin_handle = self.__client.get_plugin(next_row["id"])
+                #list_of_usages = plugin_handle.list_usages().get_raw()["usages"]
 
-                if len(list_of_usages) == 0:
-                    next_row["project_usages"] = []
-                else:
-                    next_row["project_usages"] = list(
-                        get_values_for_key(list_of_usages, "projectKey")
-                    )
+#                 if len(list_of_usages) == 0:
+#                     next_row["project_usages"] = []
+#                 else:
+#                     next_row["project_usages"] = list(
+#                         get_values_for_key(list_of_usages, "projectKey")
+#                     )
 
-                next_row["total_usages"] = len(list_of_usages)
+#                 next_row["total_usages"] = len(list_of_usages)
                 next_row["url"] = self.get_url(next_row["id"])
             except Exception as e:
                 print(
