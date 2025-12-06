@@ -71,7 +71,6 @@ class ConnectorCodeEnvs(Connector):
                      )                    
                 next_row["project_keys_where_plugin_used"] = pk_usages
                 next_row["num_projects_that_use_this_plugin"] = pk_usages
-
                 
             except Exception as e:
                 print(f"codeenvs - generate_rows EXCEPTION")
