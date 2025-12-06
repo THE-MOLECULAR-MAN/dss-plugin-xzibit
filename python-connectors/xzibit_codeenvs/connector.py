@@ -40,8 +40,8 @@ class ConnectorCodeEnvs(Connector):
             settings = code_env_handle.get_settings()
 
             next_row = {
-                "envLang": settings.env_lang,
-                "env_name": settings.env_name
+                "code_env_name": settings.env_name
+                "code_env_lang": settings.env_lang,
             }
             records_generated += 1
             yield next_row
