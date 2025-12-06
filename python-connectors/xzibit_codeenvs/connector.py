@@ -39,12 +39,14 @@ class ConnectorCodeEnvs(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     break
                 settings = code_env_handle.get_settings()
+                code_env_name = settings.env_name
+                code_env_lang = settings.env_lang
 
                 next_row = {
-                    "code_env_name": settings.env_name,
-                    "code_env_lang": settings.env_lang,
+                    "code_env_name": code_env_name,
+                    "code_env_lang": code_env_lang,
                 }
-                next_row["url"] = self.get_url(env_name, env_lang)
+                next_row["url"] = self.get_url(code_env_name, code_env_lang)
                 
             except Exception as e:
                 print(f"codeenvs - generate_rows EXCEPTION")
