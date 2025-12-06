@@ -54,7 +54,7 @@ class ConnectorCodeEnvs(Connector):
                 next_row["pythonInterpreter"] = settings_raw.get('pythonInterpreter', None)
                 next_row["owner"] = settings_raw.get('owner', None)                                
                 next_row["corePackagesSet"] = settings_raw.get("desc", []).get(
-                    "corePackagesSet", []
+                    "corePackagesSet", None
                 )
                 next_row["path"] = settings_raw.get("path", None)
                 
