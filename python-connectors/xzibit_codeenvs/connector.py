@@ -38,6 +38,8 @@ class ConnectorCodeEnvs(Connector):
             if records_limit > 0 and records_generated >= records_limit:
                 break
             settings = code_env_handle.get_settings()
+            env_lang = settings.env_lang
+            env_name = settings.env_name
 
     
     def generate_rows(
