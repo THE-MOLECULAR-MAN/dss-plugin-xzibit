@@ -37,7 +37,7 @@ class ConnectorCodeEnvs(Connector):
         for code_env_handle in self.__client.list_code_envs(as_objects=True):
             try:
                 if records_limit > 0 and records_generated >= records_limit:
-                    break
+                    return
                 settings = code_env_handle.get_settings()
 
                 code_env_name = settings.env_name
