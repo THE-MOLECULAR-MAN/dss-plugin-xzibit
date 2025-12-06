@@ -51,6 +51,10 @@ class ConnectorCodeEnvs(Connector):
             "pythonInterpreter",
             "owner",
         ]
+        
+        for code_env_handle in self.__client.list_code_envs(as_objects=True):
+
+        
 
         # iterate through each object
         for item_info in self.__client.list_code_envs():
