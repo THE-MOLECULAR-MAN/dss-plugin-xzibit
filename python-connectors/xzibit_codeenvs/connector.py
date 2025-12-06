@@ -67,7 +67,7 @@ class ConnectorCodeEnvs(Connector):
                     pk_usages = None
                 else:
                     pk_usages = list(
-                        get_values_for_key(list_of_usages, "projectKey")
+                        get_values_for_key(usages, "projectKey")
                      )
                     
                 next_row["project_keys_where_plugin_used"] = pk_usages
