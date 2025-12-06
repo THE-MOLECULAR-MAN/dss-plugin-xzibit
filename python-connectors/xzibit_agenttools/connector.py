@@ -46,7 +46,7 @@ class ConnectorProjects(Connector):
         # iterate through each object
         for project_key in self.__client.list_project_keys():
             if records_limit > 0 and records_generated >= records_limit:
-                break
+                return
 
             try:
                 project = self.__client.get_project(project_key)
