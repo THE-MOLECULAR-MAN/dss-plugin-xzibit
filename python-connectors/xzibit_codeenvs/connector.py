@@ -59,8 +59,10 @@ class ConnectorCodeEnvs(Connector):
                 )
                 next_row["path"] = settings_raw.get("path", None)
                 
+                print("starting code env list usages")
                 usages = code_env_handle.list_usages()
-                
+                print("finished code env list usages")                
+                if len()
                     
                 
             except Exception as e:
