@@ -24,7 +24,7 @@ class ConnectorCodeEnvs(Connector):
         # trailing slash is MANDATORY for Code Envs
         return f"{self.__baseurl}/admin/code-envs/design/{env_lang.lower()}/{env_name}/"
 
-    def generate_rows(
+    def generate_rows_faster(
         self,
         dataset_schema=None,
         dataset_partitioning=None,
