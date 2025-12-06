@@ -64,7 +64,7 @@ class ConnectorCodeEnvs(Connector):
                 # the dataset's built time from 2 min 30 sec to 5 hours!!!
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-                # print("starting code env list usages")
+#                 print("starting code env list usages")
 #                 usages = code_env_handle.list_usages()
 #                 print("finished code env list usages")                
 #                 num_usages = len(usages)
