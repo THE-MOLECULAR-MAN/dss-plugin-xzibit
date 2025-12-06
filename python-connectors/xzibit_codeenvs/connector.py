@@ -58,6 +58,7 @@ class ConnectorCodeEnvs(Connector):
                     "corePackagesSet", None
                 )
                 next_row["path"] = settings_raw.get("path", None)
+  
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 # adding list_usages for code environments on DevDesign (600 code env at an
                 # average of 30 sec per code env to list all its usages), increases
