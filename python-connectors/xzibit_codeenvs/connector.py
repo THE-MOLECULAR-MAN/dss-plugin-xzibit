@@ -33,6 +33,17 @@ class ConnectorCodeEnvs(Connector):
     ):
         """TBD"""
         records_generated = 0
+
+    
+    def generate_rows(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        records_limit=-1,
+    ):
+        """TBD"""
+        records_generated = 0
         keys = [
             "envName",
             "envLang",
