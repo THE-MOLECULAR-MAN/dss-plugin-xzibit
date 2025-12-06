@@ -50,12 +50,9 @@ class ConnectorDatasets(Connector):
                     break
                 # TODO: need to switch to yield in finally
                 try:
-                    #                    num_rows += 1
                     dataset_handle = project_handle.get_dataset(r.id)
                     next_row = safe_extract_dataset_metadata(dataset_handle, pk)
                     next_row["url"] = self.get_url(r.id, pk)
-                    records_generated += 1
-                    yield next_row
 
                 except Exception as e:
                     print(
@@ -63,8 +60,10 @@ class ConnectorDatasets(Connector):
                     )
                     # r is of type "dataikuapi.dss.dataset.DSSDataset"
                     # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
+                    next_row = {"projectKey": pk, "name": r.id}
+                finally:
                     records_generated += 1
-                    yield {"projectKey": pk, "name": r.id}
+                    yield next_row
 
     def get_read_schema(self):
         """TBD"""
