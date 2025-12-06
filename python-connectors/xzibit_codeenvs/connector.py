@@ -44,6 +44,7 @@ class ConnectorCodeEnvs(Connector):
                     "code_env_name": settings.env_name,
                     "code_env_lang": settings.env_lang,
                 }
+                next_row["url"] = self.get_url(env_name, env_lang)
                 
             except Exception as e:
                 print(f"codeenvs - generate_rows EXCEPTION")
