@@ -60,8 +60,8 @@ class ConnectorCodeEnvs(Connector):
                 next_row["path"] = settings_raw.get("path", None)
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 # adding list_usages for code environments on DevDesign (600 code env at an
-                # average of 30 sec per code env to list all its usages), 
-                # adds 5 hours!
+                # average of 30 sec per code env to list all its usages), increases
+                # the dataset's built time from 2 min 30 sec to 5 hours!!!
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                 # print("starting code env list usages")
