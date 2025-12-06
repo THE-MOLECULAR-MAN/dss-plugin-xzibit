@@ -35,16 +35,20 @@ class ConnectorCodeEnvs(Connector):
         records_generated = 0
         
         for code_env_handle in self.__client.list_code_envs(as_objects=True):
-            if records_limit > 0 and records_generated >= records_limit:
-                break
-            settings = code_env_handle.get_settings()
+            try:
+                if records_limit > 0 and records_generated >= records_limit:
+                    break
+                settings = code_env_handle.get_settings()
 
-            next_row = {
-                "code_env_name": settings.env_name,
-                "code_env_lang": settings.env_lang,
-            }
-            records_generated += 1
-            yield next_row
+                next_row = {
+                    "code_env_name": settings.env_name,
+                    "code_env_lang": settings.env_lang,
+                }
+            except Exception as e:
+                print(f"codeenvs - generate_rows EXCEPTION")
+            finally:
+                records_generated += 1
+                yield next_row
 
     
 #     def generate_rows(
