@@ -48,7 +48,6 @@ class ConnectorDatasets(Connector):
             ):
                 if records_limit > 0 and records_generated >= records_limit:
                     break
-                # TODO: need to switch to yield in finally
                 try:
                     dataset_handle = project_handle.get_dataset(r.id)
                     next_row = safe_extract_dataset_metadata(dataset_handle, pk)
