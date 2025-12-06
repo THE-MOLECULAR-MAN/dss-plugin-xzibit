@@ -55,7 +55,7 @@ class ConnectorProjects(Connector):
                 for agent_item in project.list_agent_tools():
                     try:
                         if records_limit > 0 and records_generated >= records_limit:
-                            break
+                            return
 
                         next_row = {
                             "projectKey": project_key,
