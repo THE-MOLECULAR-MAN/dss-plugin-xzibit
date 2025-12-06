@@ -63,7 +63,7 @@ class ConnectorUsers(Connector):
         for item_info in self.__client.list_users():
             try:
                 if records_limit > 0 and records_generated >= records_limit:
-                    break
+                    return
 
                 next_row = flatten_dict(item_info, include_keys=keys)
                 # item_id = next_row[self.__unique_id_key_name]
