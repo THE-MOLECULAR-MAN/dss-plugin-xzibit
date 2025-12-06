@@ -147,22 +147,18 @@ class ConnectorCodeEnvs(Connector):
     def get_read_schema(self):
         """TBD"""
         return None
-#         return {
-#             "columns": [
-#                 {"meaning": "Text", "name": "envName", "type": "string"},
-#                 {"meaning": "Text", "name": "envLang", "type": "string"},
-#                 {"meaning": "Text", "name": "deploymentMode", "type": "string"},
-#                 {"meaning": "Text", "name": "owner", "type": "string"},
-#                 {"meaning": "Text", "name": "pythonInterpreter", "type": "string"},
-#                 {"meaning": "Text", "name": "corePackagesSet", "type": "string"},
-#                 {"meaning": "Text", "name": "path", "type": "string"},
-#                 #              {'meaning': 'DoubleMeaning',
-#                 #               'name': 'disk_size_megabytes',
-#                 #               'type': 'double'},
-#                 {"meaning": "JSONArrayMeaning", "name": "usages", "type": "string"},
-#                 {"meaning": "URL", "name": "url", "type": "string"},
-#             ]
-#         }
+        return {
+            "columns": [
+                {"meaning": "Text", "name": "envName", "type": "string"},
+                {"meaning": "Text", "name": "envLang", "type": "string"},
+                {"meaning": "Text", "name": "deploymentMode", "type": "string"},
+                {"meaning": "Text", "name": "owner", "type": "string"},
+                {"meaning": "Text", "name": "pythonInterpreter", "type": "string"},
+                {"meaning": "Text", "name": "corePackagesSet", "type": "string"},
+                {"meaning": "Text", "name": "path", "type": "string"},
+                {"meaning": "URL", "name": "url", "type": "string"},
+            ]
+        }
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
