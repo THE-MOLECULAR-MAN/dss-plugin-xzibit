@@ -59,7 +59,8 @@ class ConnectorCodeEnvs(Connector):
                 )
                 next_row["path"] = settings_raw.get("path", None)
                 
-                usages = code_env_handle.list_usages():
+                usages = code_env_handle.list_usages()
+                
                     
                 
             except Exception as e:
