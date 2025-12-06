@@ -58,8 +58,10 @@ class ConnectorCodeEnvs(Connector):
                     "corePackagesSet", None
                 )
                 next_row["path"] = settings_raw.get("path", None)
-                
-#                 print("starting code env list usages")
+                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                # adding list_usages for code environments on DevDesign (600 code env at an average of 30 sec per code env to list all its usages), adds 5 hours
+                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                # print("starting code env list usages")
 #                 usages = code_env_handle.list_usages()
 #                 print("finished code env list usages")                
 #                 num_usages = len(usages)
