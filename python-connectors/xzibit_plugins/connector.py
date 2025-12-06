@@ -50,6 +50,8 @@ class ConnectorPlugins(Connector):
         ]
 
         # iterate through each object
+        # list plugins does not take any parameters like object vs list:
+        # https://developer.dataiku.com/latest/api-reference/python/client.html#dataikuapi.DSSClient.list_plugins
         for item_info in self.__client.list_plugins():
             try:
                 if records_limit > 0 and records_generated >= records_limit:
