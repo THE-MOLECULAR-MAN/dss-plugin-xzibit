@@ -42,13 +42,13 @@ class ConnectorRecipes(Connector):
         # iterate through each object
         for pk, proj_recipes in self.__objects_list.items():
             if records_limit > 0 and records_generated >= records_limit:
-                break
+                return
 
             project_handle = self.__client.get_project(pk)
 
             for r in proj_recipes:
                 if records_limit > 0 and records_generated >= records_limit:
-                    break
+                    return
 
                 recipe_handle = project_handle.get_recipe(r.id)
                 recipe_settings_handle = recipe_handle.get_settings()
