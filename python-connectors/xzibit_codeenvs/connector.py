@@ -146,7 +146,6 @@ class ConnectorCodeEnvs(Connector):
 
     def get_read_schema(self):
         """TBD"""
-        return None
         return {
             "columns": [
                 {"meaning": "Text", "name": "code_env_name", "type": "string"},
