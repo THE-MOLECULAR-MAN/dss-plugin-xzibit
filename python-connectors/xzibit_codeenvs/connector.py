@@ -67,6 +67,7 @@ class ConnectorCodeEnvs(Connector):
                     num_usages = 0
                 else:
                     
+                next_row["project_keys_where_plugin_used"] = 
                     
                 
             except Exception as e:
