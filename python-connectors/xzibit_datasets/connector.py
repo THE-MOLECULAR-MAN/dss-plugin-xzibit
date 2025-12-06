@@ -38,16 +38,13 @@ class ConnectorDatasets(Connector):
 
         # iterate through each object
         for pk in self.__client.list_project_keys():
-            if records_limit > 0 and records_generated >= records_limit:
-                break
-
             project_handle = self.__client.get_project(pk)
 
             for r in project_handle.list_datasets(
                 as_type="objects", include_shared=True
             ):
                 if records_limit > 0 and records_generated >= records_limit:
-                    break
+                    return
                 try:
                     dataset_handle = project_handle.get_dataset(r.id)
                     next_row = safe_extract_dataset_metadata(dataset_handle, pk)
