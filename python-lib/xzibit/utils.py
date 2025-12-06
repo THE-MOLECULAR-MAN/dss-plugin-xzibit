@@ -89,7 +89,7 @@ def get_dss_base_url():
 
 
 def safe_extract_dataset_metadata(dataset_handle, pk):
-    """TBD"""
+    """SLOW!"""
     assert isinstance(
         dataset_handle, dataikuapi.dss.dataset.DSSDataset
     ), f"safe_extract_dataset_metadata - Assertion failed: Expecting DSSDataset, got {type(dataset_handle)}"
