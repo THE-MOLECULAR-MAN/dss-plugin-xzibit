@@ -65,7 +65,7 @@ class ConnectorCodeEnvs(Connector):
                 # average of 30 sec per code env to list all its usages across 2,362 projects), increases
                 # the dataset's built time from 2 min 30 sec to 5 hours!!!
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+#                if self.__include_usages: 
 #                 print("starting code env list usages")
 #                 usages = code_env_handle.list_usages()
 #                 print("finished code env list usages")                
