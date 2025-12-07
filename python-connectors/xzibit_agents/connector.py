@@ -90,24 +90,10 @@ class ConnectorProjects(Connector):
                         agent = project.get_agent(agent_item.id)
                         settings = agent.get_settings()
                         raw_settings = settings.get_raw()
-                        #LLMs = recursive_key_search(raw_settings, 'llmId')
-                        #print(f"LLMs found: {LLMs}")
                         
-                        # debug_content.append(raw_settings)
-                        
-                        
-                        #print("FULL_AGENT_SETTINGS_START")
-                        #pp(raw_settings)
-                        #print("FULL_AGENT_SETTINGS_END")
                         # We typically want the LLM used by the *Active* version of the agent
                         next_row["active_agent_version"] = settings.active_version
                         active_version_id = settings.active_version
-
-#                         next_row["llm_model_id"] = "Unknown"
-#                         llm_model_id = "Unknown"
-                        # is_active_version = active_version_id == agent_item.get(
-                        #     "activeVersion", "Unknown"
-                        # )
                         next_row["creation_user"] = "Unknown"
 
                         creation_user = "Unknown"
