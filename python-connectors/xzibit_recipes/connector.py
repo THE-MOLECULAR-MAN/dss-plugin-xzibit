@@ -93,30 +93,30 @@ class ConnectorRecipes(Connector):
                     records_generated += 1
                     yield next_row
 
+
     def get_read_schema(self):
-        """TBD"""
-        return {
-            "columns": [
-                {"name": "id", "type": "string", "meaning": "Text"},
-                {"name": "name", "type": "string", "meaning": "Text"},
-                {"name": "projectKey", "type": "string", "meaning": "Text"},
-                {"name": "type", "type": "string", "meaning": "Text"},
-                {
-                    "name": "input_datasets",
-                    "type": "string",
-                    "meaning": "JSONArrayMeaning",
-                },
-                {
-                    "name": "output_datasets",
-                    "type": "string",
-                    "meaning": "JSONArrayMeaning",
-                },
-                {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
-                {"name": "engine_parameters", "type": "string", "meaning": "Text"},
-                {"name": "last_modified_user", "type": "string", "meaning": "Text"},
-                {"name": "url", "type": "string", "meaning": "URL"},
-            ]
-        }
+        """Returns the read schema for TBD"""
+        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
+        return {'columns': [{'meaning': 'Text', 'name': 'id', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'name', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'projectKey', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'type', 'type': 'string'},
+             {'meaning': 'JSONArrayMeaning',
+              'name': 'input_datasets',
+              'type': 'string'},
+             {'meaning': 'JSONArrayMeaning',
+              'name': 'output_datasets',
+              'type': 'string'},
+             {'meaning': 'JSONArrayMeaning', 'name': 'tags', 'type': 'string'},
+             {'meaning': 'JSONObjectMeaning',
+              'name': 'engine_parameters',
+              'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'last_modified_user',
+              'type': 'string'},
+             {'meaning': 'URL', 'name': 'url', 'type': 'string'}]}
+
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
