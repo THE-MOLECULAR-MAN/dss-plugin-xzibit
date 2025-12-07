@@ -110,7 +110,7 @@ class ConnectorProjects(Connector):
                                 .get("lastModifiedBy", {})
                                 .get("login", None)
                             )
-                            next_row["creation_user"] = creation_user
+                            next_row["created_by_user"] = creation_user
 
                             last_modified_on = datetime.fromtimestamp(
                                 version_settings.get_raw()
@@ -134,7 +134,7 @@ class ConnectorProjects(Connector):
                             "projectKey": project_key,
                             "agent_name": agent_item.name,
                             "agent_id": agent_item.id,
-                            "creator_user": creation_user,
+                            "created_by_user": creation_user,
                             "last_modified_user": last_modified_user,
                             "active_agent_version": active_version_id,
                             "agent_type": agent_item.get("type", None),
@@ -172,7 +172,7 @@ class ConnectorProjects(Connector):
                 {"meaning": "Text", "name": "agent_type", "type": "string"},
                 {"meaning": "Text", "name": "agent_version", "type": "string"},
                 {"meaning": "JSONArrayMeaning", "name": "LLMs_used", "type": "string"},
-                {"meaning": "Text", "name": "creator_user", "type": "string"},
+                {"meaning": "Text", "name": "created_by_user", "type": "string"},
                 {"meaning": "Text", "name": "last_modified_user", "type": "string"},
                 {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
                 {
