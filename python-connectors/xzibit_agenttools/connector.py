@@ -158,7 +158,6 @@ class ConnectorProjects(Connector):
                     "name": "agent_tool_description_for_LLM",
                     "type": "string",
                 },
-                {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
                 {"meaning": "Text", "name": "creator_user", "type": "string"},
                 {
                     "meaning": "DatetimeNoTz",
@@ -178,6 +177,7 @@ class ConnectorProjects(Connector):
                     "name": "quickTestQuery",
                     "type": "string",
                 },
+                {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
