@@ -79,7 +79,7 @@ class ConnectorUsers(Connector):
                 next_row["url"] = self.get_url(next_row.get("login", None))
 
                 # TODO: bug inside int_to_datetime
-                next_row["creationDate"] = int_to_datetime(
+                next_row["created_timestamp"] = int_to_datetime(
                     next_row.get("creationDate", 0)
                 )
                 # pp(item_info)
@@ -114,7 +114,7 @@ class ConnectorUsers(Connector):
                 {"name": "enabled", "type": "boolean", "meaning": "Boolean"},
                 {"name": "resultingUserProfile", "type": "string", "meaning": "Text"},
                 {
-                    "name": "creationDate",
+                    "name": "created_timestamp",
                     "type": "datetimenotz",
                     "meaning": "DatetimeNoTz",
                 },
