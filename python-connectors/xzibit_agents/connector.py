@@ -186,10 +186,10 @@ class ConnectorProjects(Connector):
                                 agent_item.id, project_key, agent_version
                             ),
                         }
-                        print(f"[agents-generate_rows] about to run recursive_key_search")
+                        #print(f"[agents-generate_rows] about to run recursive_key_search")
                         # next_row['LLMs_used'] = "uninitialized"
                         next_row['LLMs_used'] = recursive_search_all(version_settings.get_raw(), 'llmId')
-                        print(f"[agents-generate_rows] finished without exception")
+                        # print(f"[agents-generate_rows] finished without exception")
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         print(
                             f"[agents-generate_rows] [EXPECTED EXCEPTION] {e_agent} - Project Key: {project_key}, Agent Name: {agent_item.name}"
