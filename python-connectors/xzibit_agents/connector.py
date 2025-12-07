@@ -185,7 +185,7 @@ class ConnectorProjects(Connector):
                                 agent_item.id, project_key, agent_version
                             ),
                         }
-                        print(f"[agents-generate_rows] ")
+                        print(f"[agents-generate_rows] about to run recursive_key_search")
                         LLMs = recursive_key_search(raw_settings, 'llmId')
                         next_row['LLMs_used'] = LLMs
         
