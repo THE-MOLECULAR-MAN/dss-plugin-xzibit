@@ -200,6 +200,7 @@ class ConnectorProjects(Connector):
                 {"meaning": "Text", "name": "agent_name", "type": "string"},
                 {"meaning": "Text", "name": "agent_id", "type": "string"},
                 {"meaning": "Text", "name": "projectKey", "type": "string"},
+                {"meaning": "Text", "name": "LLM Model ID", "type": "string"},
                 {"meaning": "Text", "name": "llm_vendor", "type": "string"},
                 {"meaning": "Text", "name": "llm_connection_name", "type": "string"},
                 {"meaning": "Text", "name": "llm_model", "type": "string"},
