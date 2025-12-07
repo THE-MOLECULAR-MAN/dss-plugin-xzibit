@@ -188,7 +188,7 @@ class ConnectorProjects(Connector):
                         }
                         print(f"[agents-generate_rows] about to run recursive_key_search")
                         next_row['LLMs_used'] = "uninitialized"
-                        next_row['LLMs_used'] = recursive_search_all(version_settings.get_raw())
+                        next_row['LLMs_used'] = recursive_search_all(version_settings.get_raw(), 'llmId')
                         print(f"[agents-generate_rows] finished without exception")
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         print(
