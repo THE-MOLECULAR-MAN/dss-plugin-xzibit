@@ -2,6 +2,7 @@
 # Unique imports for this Class
 ####################################################################
 from datetime import datetime
+import json
 
 ####################################################################
 # Same imports for all dataset Classes
@@ -195,7 +196,7 @@ class ConnectorProjects(Connector):
                     f"[agents-generate_rows] [UNEXPECTED EXCEPTION] {e_proj} - Project Key: {project_key}"
                 )
         # end
-        pp(debug_content)
+        json.dumps(debug_content, indent=4)
 
     def get_read_schema(self):
         """TBD"""
