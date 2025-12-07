@@ -57,8 +57,8 @@ class ConnectorRecipes(Connector):
 
                 next_row = {
                     "projectKey": pk,
-                    "id": r.id,
-                    "type": raw_data["type"],
+                    "recipe_id": r.id,
+                    "recipe_type": raw_data["type"],
                     "name": recipe_handle.name,
                     "tags": raw_data["tags"],
                     "url": self.get_url(r.id, pk),
@@ -98,10 +98,10 @@ class ConnectorRecipes(Connector):
         """Returns the read schema for TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return {'columns': [{'meaning': 'Text', 'name': 'id', 'type': 'string'},
+        return {'columns': [{'meaning': 'Text', 'name': 'recipe_id', 'type': 'string'},
              {'meaning': 'Text', 'name': 'name', 'type': 'string'},
              {'meaning': 'Text', 'name': 'projectKey', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'type', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'recipe_type', 'type': 'string'},
              {'meaning': 'JSONArrayMeaning',
               'name': 'input_datasets',
               'type': 'string'},
