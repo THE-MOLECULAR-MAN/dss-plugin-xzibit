@@ -154,9 +154,9 @@ class ConnectorProjects(Connector):
                         # pp(raw_settings)
 
                         agent_version = agent_item.get("activeVersion", None)
-                        llm_vendor, llm_connection_name, llm_model = parse_llm_id(
-                            llm_model_id
-                        )
+#                         llm_vendor, llm_connection_name, llm_model = parse_llm_id(
+#                             llm_model_id
+#                         )
 
                         next_row = {
                             "projectKey": project_key,
@@ -165,10 +165,10 @@ class ConnectorProjects(Connector):
                             "creator_user": creation_user,
                             "last_modified_user": last_modified_user,
                             "active_agent_version": active_version_id,
-                            "LLM Model ID": llm_model_id,
-                            "llm_vendor": llm_vendor,
-                            "llm_connection_name": llm_connection_name,
-                            "llm_model": llm_model,
+                            #"LLM Model ID": llm_model_id,
+                            #"llm_vendor": llm_vendor,
+                            #"llm_connection_name": llm_connection_name,
+                            #"llm_model": llm_model,
                             "agent_type": agent_item.get("type", None),
                             "agent_version": agent_version,
                             "tags": agent_item.get("tags", None),
