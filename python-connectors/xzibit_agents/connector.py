@@ -128,7 +128,6 @@ class ConnectorProjects(Connector):
                             )
                             next_row["last_modified_user"] = last_modified_user
 
-
                         agent_version = agent_item.get("activeVersion", None)
 
                         next_row = {
