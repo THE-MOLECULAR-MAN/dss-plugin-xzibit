@@ -22,6 +22,7 @@ class ConnectorPlugins(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
+        # self.__list_usages = False # for possible future config option
 
     def get_url(self, id):
         """Create a URL to the DSS object in question in this specific DSS instance.
@@ -63,6 +64,7 @@ class ConnectorPlugins(Connector):
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
                 
+                # self.__list_usages
                 # this is so slow!!!!
 
                 #plugin_handle = self.__client.get_plugin(next_row["id"])
