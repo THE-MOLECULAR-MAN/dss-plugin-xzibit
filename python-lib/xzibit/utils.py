@@ -12,6 +12,47 @@ from dataikuapi.utils import DataikuException
 from pprint import pprint as pp
 from json import dumps as jd
 
+def recursive_key_search(d, s):
+    """
+    Recursively searches a dictionary for keys named 's' and returns a list 
+    of the values associated with those keys.
+
+    Args:
+        d (dict): The dictionary to search.
+        s (str): The key name to search for.
+
+    Returns:
+        list: A list of values associated with key 's', or None if no keys are found.
+    """
+    
+    # Initialize the results list
+    results = []
+
+    # Iterate over the key-value pairs in the current dictionary level
+    for key, value in d.items():
+        # 1. Check the current key
+        if key == s:
+            # If the key matches the target string 's', add its value to the results
+            results.append(value)
+        
+        # 2. Check for nested dictionaries (the recursive step)
+        if isinstance(value, dict):
+            # Recursively call the function on the nested dictionary
+            # The result of the recursive call is either a list or None
+            nested_results = recursive_key_search(value, s)
+            
+            # If the recursive call returned a list (i.e., found results),
+            # extend the main results list with them.
+            if nested_results is not None:
+                results.extend(nested_results)
+    
+    # Final check: If the results list is empty, return None as requested
+    if not results:
+        return None
+    else:
+        # Otherwise, return the collected list of values
+        return results
+
 
 def replace_empty_arrays_sets_with_none(x):
     """x"""
