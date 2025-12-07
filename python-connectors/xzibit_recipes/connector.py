@@ -53,6 +53,7 @@ class ConnectorRecipes(Connector):
                 recipe_handle = project_handle.get_recipe(r.id)
                 recipe_settings_handle = recipe_handle.get_settings()
                 raw_data = recipe_settings_handle.get_recipe_raw_definition()
+                pp(raw_data)
 
                 next_row = {
                     "projectKey": pk,
