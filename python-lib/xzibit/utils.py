@@ -24,7 +24,7 @@ def recursive_key_search(d, s):
     Returns:
         list: A list of values associated with key 's', or None if no keys are found.
     """
-    
+    try:
     # Initialize the results list
     results = []
 
@@ -52,6 +52,10 @@ def recursive_key_search(d, s):
     else:
         # Otherwise, return the collected list of values
         return results
+
+    except Exception as e:
+        print(f"recursive_key_search - EXCEPTION {e}")
+        return ['EXCEPTION']
 
 
 def replace_empty_arrays_sets_with_none(x):
