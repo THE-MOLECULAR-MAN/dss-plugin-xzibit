@@ -94,7 +94,7 @@ class ConnectorProjects(Connector):
                         
                         # debug_content.append(raw_settings)
                         
-                        LLMs = recursive_key_search(raw_settings, 'llmId')
+                        
                         #print("FULL_AGENT_SETTINGS_START")
                         #pp(raw_settings)
                         #print("FULL_AGENT_SETTINGS_END")
@@ -185,7 +185,7 @@ class ConnectorProjects(Connector):
                                 agent_item.id, project_key, agent_version
                             ),
                         }
-    
+                        LLMs = recursive_key_search(raw_settings, 'llmId')
                         next_row['LLMs_used'] = LLMs
         
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
