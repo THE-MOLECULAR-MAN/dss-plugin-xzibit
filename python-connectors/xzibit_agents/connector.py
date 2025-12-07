@@ -92,7 +92,7 @@ class ConnectorProjects(Connector):
                         settings = agent.get_settings()
                         raw_settings = settings.get_raw()
                         
-                        debug_content.append(raw_settings)
+                        # debug_content.append(raw_settings)
                         
                         LLMs = recursive_key_search(raw_settings, 'llmId')
                         #print("FULL_AGENT_SETTINGS_START")
