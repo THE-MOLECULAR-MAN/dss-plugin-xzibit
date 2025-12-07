@@ -12,51 +12,56 @@ from dataikuapi.utils import DataikuException
 from pprint import pprint as pp
 from json import dumps as jd
 
-def recursive_key_search(d, s):
+def recursive_search_all(data, s):
     """
-    Recursively searches a dictionary for keys named 's' and returns a list 
-    of the values associated with those keys.
+    Recursively searches a dictionary, list, or other object for keys or 
+    values that match the string 's'.
 
     Args:
-        d (dict): The dictionary to search.
-        s (str): The key name to search for.
+        data (dict | list | object): The structure to search.
+        s (str): The key or value string to search for.
 
     Returns:
-        list: A list of values associated with key 's', or None if no keys are found.
+        list: A list of all results found, or None if no matches are found.
     """
-    try:
-        # Initialize the results list
-        results = []
+    results = []
 
-        # Iterate over the key-value pairs in the current dictionary level
-        for key, value in d.items():
-            # 1. Check the current key
+    # --- 1. Handle Dictionaries ---
+    if isinstance(data, dict):
+        for key, value in data.items():
+            # Check the Key
             if key == s:
-                # If the key matches the target string 's', add its value to the results
                 results.append(value)
 
-            # 2. Check for nested dictionaries (the recursive step)
-            if isinstance(value, dict):
-                # Recursively call the function on the nested dictionary
-                # The result of the recursive call is either a list or None
-                nested_results = recursive_key_search(value, s)
+            # Check the Value
+            if value == s:
+                results.append(value)
+                
+            # Recurse on the Value (Handles nested dicts, lists, etc.)
+            nested_results = recursive_search_all(value, s)
+            if nested_results is not None:
+                results.extend(nested_results)
 
-                # If the recursive call returned a list (i.e., found results),
-                # extend the main results list with them.
-                if nested_results is not None:
-                    results.extend(nested_results)
+    # --- 2. Handle Lists and Tuples ---
+    elif isinstance(data, (list, tuple)):
+        for item in data:
+            # Check the Value
+            if item == s:
+                results.append(item)
+                
+            # Recurse on the Item
+            nested_results = recursive_search_all(item, s)
+            if nested_results is not None:
+                results.extend(nested_results)
 
-        # Final check: If the results list is empty, return None as requested
-        if not results:
-            return None
-        else:
-            # Otherwise, return the collected list of values
-            return results
-
-    except Exception as e:
-        print(f"recursive_key_search - EXCEPTION {e}")
-        return ['EXCEPTION']
-
+    # --- 3. Handle Primitive/Scalar Types (Final return check) ---
+    # No more recursion is possible here. The value check above covers this.
+    
+    # Final check: If the results list is empty, return None as requested
+    if not results:
+        return None
+    else:
+        return results
 
 def replace_empty_arrays_sets_with_none(x):
     """x"""
