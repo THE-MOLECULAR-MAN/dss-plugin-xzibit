@@ -197,7 +197,7 @@ class ConnectorProjects(Connector):
                 )
         # end
         print("DEBUG_CONTENT_START")
-        json.dumps(debug_content, indent=4)
+        print(json.dumps(debug_content, indent=4))
         print("DEBUG_CONTENT_END")
         
     def get_read_schema(self):
