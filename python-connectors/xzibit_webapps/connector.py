@@ -101,7 +101,7 @@ class ConnectorProjects(Connector):
                             "last_modified_timestamp": datetime.fromtimestamp(
                                 webapp.get("lastModifiedOn", 0) // 1000
                             ),
-                            "tags": webapp.get("tags", []),
+                            "tags": webapp.get("tags", None),
                             "is_code_webapp": webapp.get("type")
                             in ["SHINY", "STANDARD", "BOKEH", "DASH"],
                         }
