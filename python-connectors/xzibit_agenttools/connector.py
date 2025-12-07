@@ -82,7 +82,7 @@ class ConnectorProjects(Connector):
                             project_key, next_row["agent_tool_id"]
                         )
 
-                        next_row["creator_user"] = (
+                        next_row["created_by_user"] = (
                             raw_settings.get("creationTag", {})
                             .get("lastModifiedBy", {})
                             .get("login", None)
