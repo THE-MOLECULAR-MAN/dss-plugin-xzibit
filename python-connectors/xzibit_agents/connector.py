@@ -88,7 +88,8 @@ class ConnectorProjects(Connector):
                         # We need the full object to access .get_settings()
                         agent = project.get_agent(agent_item.id)
                         settings = agent.get_settings()
-                        # raw_settings = settings.get_raw()
+                        raw_settings = settings.get_raw()
+                        pp(raw_settings)
 
                         # We typically want the LLM used by the *Active* version of the agent
                         next_row["active_agent_version"] = settings.active_version
