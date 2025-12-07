@@ -11,7 +11,7 @@ from dataiku import api_client
 from dataiku.connector import Connector
 
 # from xzibit.utils import *
-from xzibit.utils import get_dss_base_url, pp
+from xzibit.utils import get_dss_base_url, recursive_key_search, pp
 
 
 def parse_llm_id(llm_string: str):
