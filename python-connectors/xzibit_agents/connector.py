@@ -146,7 +146,7 @@ class ConnectorProjects(Connector):
                             ),
                         }
                         # next_row['LLMs_used'] = recursive_search_all(version_settings.get_raw(), 'llmId') # works but only returns one
-                        next_row['LLMs_used'] = recursive_search_all(raw_settings, 'llmId') # works but only returns one
+                        next_row['LLMs_used'] = recursive_search_all(raw_settings, 'llmId') # may return multiple
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         print(
                             f"[agents-generate_rows] [EXPECTED EXCEPTION] {e_agent} - Project Key: {project_key}, Agent Name: {agent_item.name}"
