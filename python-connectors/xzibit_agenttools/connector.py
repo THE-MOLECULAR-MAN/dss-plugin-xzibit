@@ -82,12 +82,11 @@ class ConnectorProjects(Connector):
                             project_key, next_row["agent_tool_id"]
                         )
 
-                        creation_user = (
+                        next_row["creator_user"] = (
                             raw_settings.get("creationTag", {})
                             .get("lastModifiedBy", {})
                             .get("login", None)
                         )
-                        next_row["creator_user"] = creation_user
 
                         # TODO: warning, this can return a "v1" instead of timestamp
                         # if agent tool type is empty, then it returns a version number instead of date
