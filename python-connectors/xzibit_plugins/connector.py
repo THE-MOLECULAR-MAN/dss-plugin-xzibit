@@ -66,11 +66,9 @@ class ConnectorPlugins(Connector):
                 
                 # if self.__list_usages:
                 # this is so slow!!!!
-
                 #plugin_handle = self.__client.get_plugin(next_row["id"])
                 # .list_usages() adds 2+ hours instead of 1 second for entire run
                 #list_of_usages = plugin_handle.list_usages().get_raw()["usages"]
-
 #                 if len(list_of_usages) == 0:
 #                     next_row["project_usages"] = []
 #                 else:
