@@ -58,7 +58,7 @@ class ConnectorProjects(Connector):
 
             # custom things for this specific class:
             next_row = remove_prefix_from_keys(next_row, "versionTag.")
-            next_row["lastModifiedOn"] = datetime.fromtimestamp(
+            next_row["last_modified_timestamp"] = datetime.fromtimestamp(
                 next_row.get("lastModifiedOn", 0) // 1000
             )
             next_row["url"] = self.get_url(next_row["projectKey"])
@@ -78,7 +78,7 @@ class ConnectorProjects(Connector):
                 {"name": "projectStatus", "type": "string", "meaning": "Text"},
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {
-                    "name": "lastModifiedOn",
+                    "name": "last_modified_timestamp",
                     "type": "datetimenotz",
                     "meaning": "DatetimeNoTz",
                 },
