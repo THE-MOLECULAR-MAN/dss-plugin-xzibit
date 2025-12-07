@@ -84,21 +84,21 @@ class ConnectorProjects(Connector):
                             "projectKey": project_key,
                             "webapp_name": webapp.get("name", None),
                             "webapp_id": webapp.get("id", None),
-                            "type": webapp.get("type"),
+                            "webapp_type": webapp.get("type"),
                             "created_by_user": webapp.get("createdBy", {}).get("login"),
-                            "backendRunning": webapp.get("backendRunning", None),
+                            "backend_running": webapp.get("backendRunning", None),
                             "url": self.get_url(
                                 project_key,
                                 webapp.get("id", ""),
                                 webapp.get("name", ""),
                             ),
-                            "created_on": datetime.fromtimestamp(
+                            "created_timestamp": datetime.fromtimestamp(
                                 webapp.get("createdOn", 0) // 1000
                             ),
                             "lastModifiedBy": webapp.get("lastModifiedBy", {}).get(
                                 "login", None
                             ),
-                            "lastModifiedOn": datetime.fromtimestamp(
+                            "last_modified_timestamp": datetime.fromtimestamp(
                                 webapp.get("lastModifiedOn", 0) // 1000
                             ),
                             "tags": webapp.get("tags", []),
@@ -125,17 +125,17 @@ class ConnectorProjects(Connector):
                 {"name": "webapp_id", "type": "string", "meaning": "Text"},
                 {"name": "webapp_name", "type": "string", "meaning": "Text"},
                 {"name": "projectKey", "type": "string", "meaning": "Text"},
-                {"name": "type", "type": "string", "meaning": "Text"},
-                {"name": "backendRunning", "type": "boolean", "meaning": "Boolean"},
+                {"name": "webapp_type", "type": "string", "meaning": "Text"},
+                {"name": "backend_running", "type": "boolean", "meaning": "Boolean"},
                 {"name": "created_by_user", "type": "string", "meaning": "Text"},
                 {"name": "lastModifiedBy", "type": "string", "meaning": "Text"},
                 {
-                    "name": "created_on",
+                    "name": "created_timestamp",
                     "type": "datetimenotz",
                     "meaning": "DatetimeNoTz",
                 },
                 {
-                    "name": "lastModifiedOn",
+                    "name": "last_modified_timestamp",
                     "type": "datetimenotz",
                     "meaning": "DatetimeNoTz",
                 },
