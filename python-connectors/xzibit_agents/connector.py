@@ -138,7 +138,6 @@ class ConnectorProjects(Connector):
                             "creator_user": creation_user,
                             "last_modified_user": last_modified_user,
                             "active_agent_version": active_version_id,
-
                             "agent_type": agent_item.get("type", None),
                             "agent_version": agent_version,
                             "tags": agent_item.get("tags", None),
