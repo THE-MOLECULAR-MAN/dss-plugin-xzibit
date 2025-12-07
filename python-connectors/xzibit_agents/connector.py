@@ -202,9 +202,9 @@ class ConnectorProjects(Connector):
                     f"[agents-generate_rows] [UNEXPECTED EXCEPTION] {e_proj} - Project Key: {project_key}"
                 )
         # end
-        print("DEBUG_CONTENT_START")
-        print(json.dumps(debug_content, indent=4))
-        print("DEBUG_CONTENT_END")
+#         print("DEBUG_CONTENT_START")
+#         print(json.dumps(debug_content, indent=4))
+#         print("DEBUG_CONTENT_END")
         
     def get_read_schema(self):
         """TBD"""
