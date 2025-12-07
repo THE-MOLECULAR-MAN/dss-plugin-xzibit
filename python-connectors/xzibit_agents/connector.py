@@ -186,7 +186,7 @@ class ConnectorProjects(Connector):
                             ),
                         }
     
-                        next_row['LLMs'] = LLMs
+                        next_row['LLMs_used'] = LLMs
         
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         print(
@@ -221,6 +221,7 @@ class ConnectorProjects(Connector):
 #                 {"meaning": "Text", "name": "llm_model", "type": "string"},
                 {"meaning": "Text", "name": "agent_type", "type": "string"},
                 {"meaning": "Text", "name": "agent_version", "type": "string"},
+                {"meaning": "JSONArrayMeaning", "name": "LLMs_used", "type": "string"},
                 {"meaning": "Text", "name": "creator_user", "type": "string"},
                 {"meaning": "Text", "name": "last_modified_user", "type": "string"},
                 {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
