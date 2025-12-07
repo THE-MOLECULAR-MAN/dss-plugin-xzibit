@@ -158,7 +158,7 @@ class ConnectorProjects(Connector):
                     "name": "agent_tool_description_for_LLM",
                     "type": "string",
                 },
-                {"meaning": "Text", "name": "creator_user", "type": "string"},
+                {"meaning": "Text", "name": "created_by_user", "type": "string"},
                 {
                     "meaning": "DatetimeNoTz",
                     "name": "last_modified_timestamp",
