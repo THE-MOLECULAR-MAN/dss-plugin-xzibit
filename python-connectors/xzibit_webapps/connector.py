@@ -85,7 +85,7 @@ class ConnectorProjects(Connector):
                             "webapp_name": webapp.get("name", None),
                             "webapp_id": webapp.get("id", None),
                             "webapp_type": webapp.get("type", None),
-                            "created_by_user": webapp.get("createdBy", {}).get("login"),
+                            "created_by_user": webapp.get("createdBy", {}).get("login", None),
                             "backend_running": webapp.get("backendRunning", None),
                             "url": self.get_url(
                                 project_key,
