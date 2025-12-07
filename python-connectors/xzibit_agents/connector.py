@@ -181,30 +181,26 @@ class ConnectorProjects(Connector):
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return None
-#     {
-#             "columns": [
-#                 {"meaning": "Text", "name": "agent_name", "type": "string"},
-#                 {"meaning": "Text", "name": "agent_id", "type": "string"},
-#                 {"meaning": "Text", "name": "projectKey", "type": "string"},
-# #                 {"meaning": "Text", "name": "LLM Model ID", "type": "string"},
-# #                 {"meaning": "Text", "name": "llm_vendor", "type": "string"},
-# #                 {"meaning": "Text", "name": "llm_connection_name", "type": "string"},
-# #                 {"meaning": "Text", "name": "llm_model", "type": "string"},
-#                 {"meaning": "Text", "name": "agent_type", "type": "string"},
-#                 {"meaning": "Text", "name": "agent_version", "type": "string"},
-#                 {"meaning": "JSONArrayMeaning", "name": "LLMs_used", "type": "string"},
-#                 {"meaning": "Text", "name": "creator_user", "type": "string"},
-#                 {"meaning": "Text", "name": "last_modified_user", "type": "string"},
-#                 {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
-#                 {
-#                     "meaning": "DatetimeNoTz",
-#                     "name": "last_modified_timestamp",
-#                     "type": "datetimenotz",
-#                 },
-#                 {"meaning": "Text", "name": "active_agent_version", "type": "string"},
-#                 {"meaning": "URL", "name": "url", "type": "string"},
-#             ],
-#         }
+    {
+            "columns": [
+                {"meaning": "Text", "name": "agent_name", "type": "string"},
+                {"meaning": "Text", "name": "agent_id", "type": "string"},
+                {"meaning": "Text", "name": "projectKey", "type": "string"},
+                {"meaning": "Text", "name": "agent_type", "type": "string"},
+                {"meaning": "Text", "name": "agent_version", "type": "string"},
+                {"meaning": "JSONArrayMeaning", "name": "LLMs_used", "type": "string"},
+                {"meaning": "Text", "name": "creator_user", "type": "string"},
+                {"meaning": "Text", "name": "last_modified_user", "type": "string"},
+                {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
+                {
+                    "meaning": "DatetimeNoTz",
+                    "name": "last_modified_timestamp",
+                    "type": "datetimenotz",
+                },
+                {"meaning": "Text", "name": "active_agent_version", "type": "string"},
+                {"meaning": "URL", "name": "url", "type": "string"},
+            ],
+        }
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
