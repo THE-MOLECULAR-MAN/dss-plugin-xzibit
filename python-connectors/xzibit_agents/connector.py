@@ -90,6 +90,7 @@ class ConnectorProjects(Connector):
                         agent = project.get_agent(agent_item.id)
                         settings = agent.get_settings()
                         raw_settings = settings.get_raw()
+                        debug_content.add(raw_settings)
                         print("FULL_AGENT_SETTINGS_START")
                         pp(raw_settings)
                         print("FULL_AGENT_SETTINGS_END")
