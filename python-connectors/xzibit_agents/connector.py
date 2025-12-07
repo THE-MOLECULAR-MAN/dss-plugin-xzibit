@@ -180,8 +180,7 @@ class ConnectorProjects(Connector):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return None
-    {
+        return {
             "columns": [
                 {"meaning": "Text", "name": "agent_name", "type": "string"},
                 {"meaning": "Text", "name": "agent_id", "type": "string"},
