@@ -25,33 +25,33 @@ def recursive_key_search(d, s):
         list: A list of values associated with key 's', or None if no keys are found.
     """
     try:
-    # Initialize the results list
-    results = []
+        # Initialize the results list
+        results = []
 
-    # Iterate over the key-value pairs in the current dictionary level
-    for key, value in d.items():
-        # 1. Check the current key
-        if key == s:
-            # If the key matches the target string 's', add its value to the results
-            results.append(value)
-        
-        # 2. Check for nested dictionaries (the recursive step)
-        if isinstance(value, dict):
-            # Recursively call the function on the nested dictionary
-            # The result of the recursive call is either a list or None
-            nested_results = recursive_key_search(value, s)
-            
-            # If the recursive call returned a list (i.e., found results),
-            # extend the main results list with them.
-            if nested_results is not None:
-                results.extend(nested_results)
-    
-    # Final check: If the results list is empty, return None as requested
-    if not results:
-        return None
-    else:
-        # Otherwise, return the collected list of values
-        return results
+        # Iterate over the key-value pairs in the current dictionary level
+        for key, value in d.items():
+            # 1. Check the current key
+            if key == s:
+                # If the key matches the target string 's', add its value to the results
+                results.append(value)
+
+            # 2. Check for nested dictionaries (the recursive step)
+            if isinstance(value, dict):
+                # Recursively call the function on the nested dictionary
+                # The result of the recursive call is either a list or None
+                nested_results = recursive_key_search(value, s)
+
+                # If the recursive call returned a list (i.e., found results),
+                # extend the main results list with them.
+                if nested_results is not None:
+                    results.extend(nested_results)
+
+        # Final check: If the results list is empty, return None as requested
+        if not results:
+            return None
+        else:
+            # Otherwise, return the collected list of values
+            return results
 
     except Exception as e:
         print(f"recursive_key_search - EXCEPTION {e}")
