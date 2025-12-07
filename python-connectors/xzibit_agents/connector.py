@@ -61,6 +61,7 @@ class ConnectorProjects(Connector):
     ):
         """TBD"""
         records_generated = 0
+        debug_content = []
 
         # iterate through each object
         for project_key in self.__client.list_project_keys():
