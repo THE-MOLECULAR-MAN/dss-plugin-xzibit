@@ -95,8 +95,8 @@ class ConnectorProjects(Connector):
                         next_row["active_agent_version"] = settings.active_version
                         active_version_id = settings.active_version
 
-                        next_row["llm_model_id"] = "Unknown"
-                        llm_model_id = "Unknown"
+#                         next_row["llm_model_id"] = "Unknown"
+#                         llm_model_id = "Unknown"
                         # is_active_version = active_version_id == agent_item.get(
                         #     "activeVersion", "Unknown"
                         # )
@@ -111,22 +111,22 @@ class ConnectorProjects(Connector):
                             )
 
                             # 1. Try standard Visual Agent property
-                            try:
-                                # the following line occasionally throws Exception
-                                llm_model_id = version_settings.get("llm_id", None)
+#                             try:
+#                                 # the following line occasionally throws Exception
+#                                 llm_model_id = version_settings.get("llm_id", None)
 
-                            except AttributeError:
-                                # 2. Fallback: Check raw settings (common for Code Agents)
-                                ver_raw = version_settings.get_raw()
-                                llm_model_id = ver_raw.get("llmId", None)
+#                             except AttributeError:
+#                                 # 2. Fallback: Check raw settings (common for Code Agents)
+#                                 ver_raw = version_settings.get_raw()
+#                                 llm_model_id = ver_raw.get("llmId", None)
 
-                                # Sometimes stored under 'generation' block for complex setups
-                                if not llm_model_id and "generation" in ver_raw:
-                                    llm_model_id = ver_raw["generation"].get(
-                                        "llmId", None
-                                    )
+#                                 # Sometimes stored under 'generation' block for complex setups
+#                                 if not llm_model_id and "generation" in ver_raw:
+#                                     llm_model_id = ver_raw["generation"].get(
+#                                         "llmId", None
+#                                     )
 
-                            next_row["llm_model_id"] = llm_model_id
+#                             next_row["llm_model_id"] = llm_model_id
 
                             creation_user = (
                                 version_settings.get_raw()
