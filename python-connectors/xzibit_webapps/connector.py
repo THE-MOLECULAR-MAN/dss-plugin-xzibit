@@ -95,7 +95,7 @@ class ConnectorProjects(Connector):
                             "created_timestamp": datetime.fromtimestamp(
                                 webapp.get("createdOn", 0) // 1000
                             ),
-                            "lastModifiedBy": webapp.get("lastModifiedBy", {}).get(
+                            "last_modified_user": webapp.get("lastModifiedBy", {}).get(
                                 "login", None
                             ),
                             "last_modified_timestamp": datetime.fromtimestamp(
@@ -128,7 +128,7 @@ class ConnectorProjects(Connector):
                 {"name": "webapp_type", "type": "string", "meaning": "Text"},
                 {"name": "backend_running", "type": "boolean", "meaning": "Boolean"},
                 {"name": "created_by_user", "type": "string", "meaning": "Text"},
-                {"name": "lastModifiedBy", "type": "string", "meaning": "Text"},
+                {"name": "last_modified_user", "type": "string", "meaning": "Text"},
                 {
                     "name": "created_timestamp",
                     "type": "datetimenotz",
