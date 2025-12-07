@@ -112,6 +112,8 @@ class ConnectorRecipes(Connector):
                     "meaning": "JSONArrayMeaning",
                 },
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
+                {"name": "engine_parameters", "type": "string", "meaning": "Text"},
+                {"name": "last_modified_user", "type": "string", "meaning": "Text"},
                 {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
