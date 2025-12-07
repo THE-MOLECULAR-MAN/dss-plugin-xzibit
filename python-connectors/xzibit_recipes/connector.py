@@ -1,3 +1,5 @@
+"""TBD"""
+
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
@@ -68,9 +70,15 @@ class ConnectorRecipes(Connector):
                     # An invalid argument has been encountered : Failed to iterate, caused by: IllegalArgumentException: No parameters dataset selected for repeating dataset/recipe
                     # Seems to happen with the Export To Folder recipe, which exports files to folder.
                     # if the user has not set the "Parameters dataset" option for this recipe, or maybe if that dataset has been deleted, then it will throw an exception.
-                    
-                    next_row["engine_parameters"]  = raw_data.get("params",{}).get("engineParams",None)
-                    next_row["last_modified_user"] = raw_data.get("versionTag",{}).get("lastModifiedBy",{}).get("login",None)
+
+                    next_row["engine_parameters"] = raw_data.get("params", {}).get(
+                        "engineParams", None
+                    )
+                    next_row["last_modified_user"] = (
+                        raw_data.get("versionTag", {})
+                        .get("lastModifiedBy", {})
+                        .get("login", None)
+                    )
 
                     next_row["input_datasets"] = (
                         recipe_settings_handle.get_flat_input_refs()
@@ -93,30 +101,36 @@ class ConnectorRecipes(Connector):
                     records_generated += 1
                     yield next_row
 
-
     def get_read_schema(self):
         """Returns the read schema for TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return {'columns': [{'meaning': 'Text', 'name': 'recipe_id', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'recipe_name', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'projectKey', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'recipe_type', 'type': 'string'},
-             {'meaning': 'JSONArrayMeaning',
-              'name': 'input_datasets',
-              'type': 'string'},
-             {'meaning': 'JSONArrayMeaning',
-              'name': 'output_datasets',
-              'type': 'string'},
-             {'meaning': 'JSONArrayMeaning', 'name': 'tags', 'type': 'string'},
-             {'meaning': 'JSONObjectMeaning',
-              'name': 'engine_parameters',
-              'type': 'string'},
-             {'meaning': 'Text',
-              'name': 'last_modified_user',
-              'type': 'string'},
-             {'meaning': 'URL', 'name': 'url', 'type': 'string'}]}
-
+        return {
+            "columns": [
+                {"meaning": "Text", "name": "recipe_id", "type": "string"},
+                {"meaning": "Text", "name": "recipe_name", "type": "string"},
+                {"meaning": "Text", "name": "projectKey", "type": "string"},
+                {"meaning": "Text", "name": "recipe_type", "type": "string"},
+                {
+                    "meaning": "JSONArrayMeaning",
+                    "name": "input_datasets",
+                    "type": "string",
+                },
+                {
+                    "meaning": "JSONArrayMeaning",
+                    "name": "output_datasets",
+                    "type": "string",
+                },
+                {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
+                {
+                    "meaning": "JSONObjectMeaning",
+                    "name": "engine_parameters",
+                    "type": "string",
+                },
+                {"meaning": "Text", "name": "last_modified_user", "type": "string"},
+                {"meaning": "URL", "name": "url", "type": "string"},
+            ]
+        }
 
     ####################################################################
     # Intentionally not implemented, not needed for this type

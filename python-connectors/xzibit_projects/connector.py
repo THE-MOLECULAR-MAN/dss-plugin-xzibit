@@ -1,3 +1,5 @@
+"""TBD"""
+
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
@@ -12,6 +14,7 @@ from datetime import datetime
 
 
 class ConnectorProjects(Connector):
+    """TBD"""
 
     ####################################################################
     # Code that has to be customized for this specific class
@@ -35,6 +38,7 @@ class ConnectorProjects(Connector):
         partition_id=None,
         records_limit=-1,
     ):
+        """TBD"""
         records_generated = 0
         keys = [
             "projectKey",
@@ -66,6 +70,7 @@ class ConnectorProjects(Connector):
             yield next_row
 
     def get_read_schema(self):
+        """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText
         return {

@@ -12,9 +12,10 @@ from dataikuapi.utils import DataikuException
 from pprint import pprint as pp
 from json import dumps as jd
 
+
 def recursive_search_all(data, s):
     """
-    Recursively searches a dictionary, list, or other object for keys or 
+    Recursively searches a dictionary, list, or other object for keys or
     values that match the string 's'.
 
     Args:
@@ -36,7 +37,7 @@ def recursive_search_all(data, s):
             # Check the Value
             if value == s:
                 results.append(value)
-                
+
             # Recurse on the Value (Handles nested dicts, lists, etc.)
             nested_results = recursive_search_all(value, s)
             if nested_results is not None:
@@ -48,7 +49,7 @@ def recursive_search_all(data, s):
             # Check the Value
             if item == s:
                 results.append(item)
-                
+
             # Recurse on the Item
             nested_results = recursive_search_all(item, s)
             if nested_results is not None:
@@ -56,15 +57,16 @@ def recursive_search_all(data, s):
 
     # --- 3. Handle Primitive/Scalar Types (Final return check) ---
     # No more recursion is possible here. The value check above covers this.
-    
+
     # Final check: If the results list is empty, return None as requested
     if not results:
         return None
     else:
         return results
 
+
 def replace_empty_arrays_sets_with_none(x):
-    """x"""
+    """TBD"""
     try:
         if (
             (x is None)

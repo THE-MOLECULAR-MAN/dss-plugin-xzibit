@@ -1,3 +1,5 @@
+"""TBD"""
+
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
@@ -33,6 +35,7 @@ class ConnectorConnections(Connector):
         partition_id=None,
         records_limit=-1,
     ):
+        """TBD"""
         keys = [
             "name",  # for Connections, name is the ID, it is immutable after creation
             "type",
@@ -49,7 +52,6 @@ class ConnectorConnections(Connector):
             "params.warehouse",
             "params.scope",
         ]
-        """TBD"""
         records_generated = 0
         # iterate through each object
         for item_info in self.__client.list_connections(as_type="listitems"):

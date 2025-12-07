@@ -1,3 +1,5 @@
+"""TBD"""
+
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
@@ -26,7 +28,8 @@ def make_url_friendly(text):
     text = text.lower()
 
     # 2. Keep only alphanumeric characters and spaces
-    # regex explanation: [^a-z0-9\s] matches anything that is NOT a lowercase letter, number, or whitespace
+    # regex explanation: [^a-z0-9\s] matches anything that is NOT a
+    # lowercase letter, number, or whitespace
     text = re.sub(r"[^a-z0-9\s]", "", text)
 
     # 3. Replace one or more whitespace characters with a single hyphen
@@ -39,6 +42,7 @@ def make_url_friendly(text):
 
 
 class ConnectorProjects(Connector):
+    """TBD"""
 
     ####################################################################
     # Code that has to be customized for this specific class
@@ -66,6 +70,7 @@ class ConnectorProjects(Connector):
         partition_id=None,
         records_limit=-1,
     ):
+        """TBD"""
         records_generated = 0
         for project_key in self.__client.list_project_keys():
             try:
@@ -85,7 +90,9 @@ class ConnectorProjects(Connector):
                             "webapp_name": webapp.get("name", None),
                             "webapp_id": webapp.get("id", None),
                             "webapp_type": webapp.get("type", None),
-                            "created_by_user": webapp.get("createdBy", {}).get("login", None),
+                            "created_by_user": webapp.get("createdBy", {}).get(
+                                "login", None
+                            ),
                             "backend_running": webapp.get("backendRunning", None),
                             "url": self.get_url(
                                 project_key,
@@ -118,6 +125,7 @@ class ConnectorProjects(Connector):
                 )
 
     def get_read_schema(self):
+        """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, URL,
         return {

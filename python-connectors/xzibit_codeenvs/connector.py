@@ -1,3 +1,5 @@
+"""TBD"""
+
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
@@ -7,6 +9,8 @@ from xzibit.utils import get_dss_base_url, flatten_dict, get_values_for_key, pp
 
 
 class ConnectorCodeEnvs(Connector):
+    """TBD"""
+
     ####################################################################
     # Code that has to be customized for this specific class
     ####################################################################
@@ -34,7 +38,7 @@ class ConnectorCodeEnvs(Connector):
     ):
         """TBD"""
         records_generated = 0
-        
+
         for code_env_handle in self.__client.list_code_envs(as_objects=True):
             try:
                 if records_limit > 0 and records_generated >= records_limit:
@@ -49,38 +53,40 @@ class ConnectorCodeEnvs(Connector):
                     "code_env_lang": code_env_lang,
                 }
                 next_row["url"] = self.get_url(code_env_name, code_env_lang)
-                
+
                 settings_raw = settings.get_raw()
                 # pp(settings_raw)
-                next_row["deployment_mode"] = settings_raw.get('deploymentMode', None)
-                next_row["python_interpreter"] = settings_raw.get("desc", {}).get('pythonInterpreter', None)
-                next_row["owner"] = settings_raw.get('owner', None)                                
+                next_row["deployment_mode"] = settings_raw.get("deploymentMode", None)
+                next_row["python_interpreter"] = settings_raw.get("desc", {}).get(
+                    "pythonInterpreter", None
+                )
+                next_row["owner"] = settings_raw.get("owner", None)
                 next_row["core_packages_set"] = settings_raw.get("desc", {}).get(
                     "corePackagesSet", None
                 )
                 next_row["path"] = settings_raw.get("path", None)
-  
+
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 # adding list_usages for code environments on DevDesign (600 code env at an
                 # average of 30 sec per code env to list all its usages across 2,362 projects), increases
                 # the dataset's built time from 2 min 30 sec to 5 hours!!!
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#                if self.__include_usages: 
-#                 print("starting code env list usages")
-#                 usages = code_env_handle.list_usages()
-#                 print("finished code env list usages")                
-#                 num_usages = len(usages)
-#                 if len(usages) == 0:
-#                     pk_usages = None
-#                 else:
-#                     pk_usages = list(
-#                         get_values_for_key(usages, "projectKey")
-#                      )                    
-#                 next_row["project_keys_where_plugin_used"] = pk_usages
-#                 next_row["num_projects_that_use_this_plugin"] = pk_usages
-                
+            #                if self.__include_usages:
+            #                 print("starting code env list usages")
+            #                 usages = code_env_handle.list_usages()
+            #                 print("finished code env list usages")
+            #                 num_usages = len(usages)
+            #                 if len(usages) == 0:
+            #                     pk_usages = None
+            #                 else:
+            #                     pk_usages = list(
+            #                         get_values_for_key(usages, "projectKey")
+            #                      )
+            #                 next_row["project_keys_where_plugin_used"] = pk_usages
+            #                 next_row["num_projects_that_use_this_plugin"] = pk_usages
+
             except Exception as e:
-                print(f"codeenvs - generate_rows EXCEPTION")
+                print(f"codeenvs - generate_rows EXCEPTION: {e}")
             finally:
                 records_generated += 1
                 yield next_row

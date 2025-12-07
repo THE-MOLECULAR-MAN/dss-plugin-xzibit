@@ -1,3 +1,5 @@
+"""TBD"""
+
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
@@ -12,6 +14,7 @@ from xzibit.utils import (
 
 
 class ConnectorUsers(Connector):
+    """TBD"""
 
     ####################################################################
     # Code that has to be customized for this specific class
@@ -20,15 +23,6 @@ class ConnectorUsers(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
-
-    def get_user_url(self, user_id):
-        # https://beta-design.se-platform.dataiku-sandbox.io/admin/security/users/edit/tim.honker/
-        try:
-            if self.__baseurl is None or user_id is None:
-                return None
-            return f"{self.__baseurl}/admin/security/users/edit/{user_id}/"
-        except Exception:  # yeah, I know this is bad practice
-            return None
 
     def get_url(self, id):
         """Create a URL to the DSS object in question in this specific DSS instance.
@@ -45,6 +39,7 @@ class ConnectorUsers(Connector):
         partition_id=None,
         records_limit=-1,
     ):
+        """TBD"""
         records_generated = 0
         unique_id_key_name = "login"
         keys = [
@@ -93,6 +88,7 @@ class ConnectorUsers(Connector):
                 yield next_row
 
     def get_read_schema(self):
+        """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date
         return {

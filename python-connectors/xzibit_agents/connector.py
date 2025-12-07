@@ -1,8 +1,9 @@
+"""TBD"""
+
 ####################################################################
 # Unique imports for this Class
 ####################################################################
 from datetime import datetime
-import json
 
 ####################################################################
 # Same imports for all dataset Classes
@@ -10,7 +11,7 @@ import json
 from dataiku import api_client
 from dataiku.connector import Connector
 
-from xzibit.utils import *
+from xzibit.utils import recursive_search_all, get_dss_base_url, pp
 
 
 def parse_llm_id(llm_string: str):
@@ -61,7 +62,6 @@ class ConnectorProjects(Connector):
     ):
         """TBD"""
         records_generated = 0
-        debug_content = []
 
         # iterate through each object
         for project_key in self.__client.list_project_keys():
@@ -89,8 +89,7 @@ class ConnectorProjects(Connector):
                         # We need the full object to access .get_settings()
                         agent = project.get_agent(agent_item.id)
                         settings = agent.get_settings()
-                        raw_settings = settings.get_raw()
-                        
+
                         # We typically want the LLM used by the *Active* version of the agent
                         next_row["active_agent_version"] = settings.active_version
                         active_version_id = settings.active_version
@@ -145,7 +144,9 @@ class ConnectorProjects(Connector):
                                 agent_item.id, project_key, agent_version
                             ),
                         }
-                        next_row['LLMs_used'] = recursive_search_all(version_settings.get_raw(), 'llmId')
+                        next_row["LLMs_used"] = recursive_search_all(
+                            version_settings.get_raw(), "llmId"
+                        )
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         print(
                             f"[agents-generate_rows] [EXPECTED EXCEPTION] {e_agent} - Project Key: {project_key}, Agent Name: {agent_item.name}"
@@ -159,7 +160,7 @@ class ConnectorProjects(Connector):
                 print(
                     f"[agents-generate_rows] [UNEXPECTED EXCEPTION] {e_proj} - Project Key: {project_key}"
                 )
-        
+
     def get_read_schema(self):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema

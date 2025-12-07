@@ -1,3 +1,5 @@
+"""TBD"""
+
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
@@ -6,14 +8,15 @@ from dataiku.connector import Connector
 from xzibit.utils import (
     get_dss_base_url,
     flatten_dict,
-    get_values_for_key,
     remove_prefix_from_keys,
     list_to_error_dict,
     pp,
+    get_values_for_key,
 )
 
 
 class ConnectorPlugins(Connector):
+    """TBD"""
 
     ####################################################################
     # Code that has to be customized for this specific class
@@ -39,6 +42,7 @@ class ConnectorPlugins(Connector):
         partition_id=None,
         records_limit=-1,
     ):
+        """TBD"""
         records_generated = 0
         keys = [
             "id",
@@ -63,19 +67,19 @@ class ConnectorPlugins(Connector):
 
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
-                
+
                 # if self.__list_usages:
                 # this is so slow!!!!
-                #plugin_handle = self.__client.get_plugin(next_row["id"])
+                # plugin_handle = self.__client.get_plugin(next_row["id"])
                 # .list_usages() adds 2+ hours instead of 1 second for entire run
-                #list_of_usages = plugin_handle.list_usages().get_raw()["usages"]
-#                 if len(list_of_usages) == 0:
-#                     next_row["project_usages"] = []
-#                 else:
-#                     next_row["project_usages"] = list(
-#                         get_values_for_key(list_of_usages, "projectKey")
-#                     )
-#                 next_row["total_usages"] = len(list_of_usages)
+                # list_of_usages = plugin_handle.list_usages().get_raw()["usages"]
+                #                 if len(list_of_usages) == 0:
+                #                     next_row["project_usages"] = []
+                #                 else:
+                #                     next_row["project_usages"] = list(
+                #                         get_values_for_key(list_of_usages, "projectKey")
+                #                     )
+                #                 next_row["total_usages"] = len(list_of_usages)
 
                 next_row["url"] = self.get_url(next_row["id"])
             except Exception as e:
@@ -89,6 +93,7 @@ class ConnectorPlugins(Connector):
                 yield next_row
 
     def get_read_schema(self):
+        """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
@@ -99,11 +104,11 @@ class ConnectorPlugins(Connector):
                 {"name": "author", "type": "string", "meaning": "Text"},
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "description", "type": "string", "meaning": "FreeText"},
-#                 {
-#                     "name": "project_usages",
-#                     "type": "string",
-#                     "meaning": "JSONArrayMeaning",
-#                 },
+                #                 {
+                #                     "name": "project_usages",
+                #                     "type": "string",
+                #                     "meaning": "JSONArrayMeaning",
+                #                 },
                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
                 # {"name": "total_usages", "type": "bigint", "meaning": "LongMeaning"},
                 {"name": "url", "type": "string", "meaning": "URL"},
