@@ -14,6 +14,7 @@ class ConnectorCodeEnvs(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
+        # self.__include_usages = False # for possible future configuration option
 
     def get_url(self, env_name, env_lang="python"):
         """Create a URL to the DSS object in question in this specific DSS instance.
