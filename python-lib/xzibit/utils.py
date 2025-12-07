@@ -59,7 +59,7 @@ def recursive_search_all(data, s):
     
     # Final check: If the results list is empty, return None as requested
     if not results:
-        return '
+        return ''
     else:
         return results
 
