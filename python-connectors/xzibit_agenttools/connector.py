@@ -76,7 +76,7 @@ class ConnectorProjects(Connector):
                             "additionalDescriptionForLLM", None
                         )
                         next_row["tags"] = replace_empty_arrays_sets_with_none(
-                            raw_settings.get("tags", [])
+                            raw_settings.get("tags", None)
                         )
                         next_row["url"] = self.get_url(
                             project_key, next_row["agent_tool_id"]
