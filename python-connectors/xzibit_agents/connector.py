@@ -145,7 +145,7 @@ class ConnectorProjects(Connector):
                                 agent_item.id, project_key, agent_version
                             ),
                         }
-                        next_row['LLMs_used'] = recursive_search_all(version_settings.get_raw(), 'llmId') # works but only returns one
+                        # next_row['LLMs_used'] = recursive_search_all(version_settings.get_raw(), 'llmId') # works but only returns one
                         next_row['LLMs_used'] = recursive_search_all(raw_settings, 'llmId') # works but only returns one
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         print(
