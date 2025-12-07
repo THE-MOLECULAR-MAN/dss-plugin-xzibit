@@ -91,9 +91,9 @@ class ConnectorProjects(Connector):
                         settings = agent.get_settings()
                         raw_settings = settings.get_raw()
                         debug_content.add(raw_settings)
-                        print("FULL_AGENT_SETTINGS_START")
-                        pp(raw_settings)
-                        print("FULL_AGENT_SETTINGS_END")
+                        #print("FULL_AGENT_SETTINGS_START")
+                        #pp(raw_settings)
+                        #print("FULL_AGENT_SETTINGS_END")
                         # We typically want the LLM used by the *Active* version of the agent
                         next_row["active_agent_version"] = settings.active_version
                         active_version_id = settings.active_version
@@ -194,6 +194,8 @@ class ConnectorProjects(Connector):
                 print(
                     f"[agents-generate_rows] [UNEXPECTED EXCEPTION] {e_proj} - Project Key: {project_key}"
                 )
+        # end
+        pp(debug_content)
 
     def get_read_schema(self):
         """TBD"""
