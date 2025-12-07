@@ -118,24 +118,6 @@ class ConnectorProjects(Connector):
                                 active_version_id
                             )
 
-                            # 1. Try standard Visual Agent property
-#                             try:
-#                                 # the following line occasionally throws Exception
-#                                 llm_model_id = version_settings.get("llm_id", None)
-
-#                             except AttributeError:
-#                                 # 2. Fallback: Check raw settings (common for Code Agents)
-#                                 ver_raw = version_settings.get_raw()
-#                                 llm_model_id = ver_raw.get("llmId", None)
-
-#                                 # Sometimes stored under 'generation' block for complex setups
-#                                 if not llm_model_id and "generation" in ver_raw:
-#                                     llm_model_id = ver_raw["generation"].get(
-#                                         "llmId", None
-#                                     )
-
-#                             next_row["llm_model_id"] = llm_model_id
-
                             creation_user = (
                                 version_settings.get_raw()
                                 .get("creationTag", {})
@@ -159,12 +141,9 @@ class ConnectorProjects(Connector):
                                 .get("login", None)
                             )
                             next_row["last_modified_user"] = last_modified_user
-                        # pp(raw_settings)
+
 
                         agent_version = agent_item.get("activeVersion", None)
-#                         llm_vendor, llm_connection_name, llm_model = parse_llm_id(
-#                             llm_model_id
-#                         )
 
                         next_row = {
                             "projectKey": project_key,
@@ -173,23 +152,16 @@ class ConnectorProjects(Connector):
                             "creator_user": creation_user,
                             "last_modified_user": last_modified_user,
                             "active_agent_version": active_version_id,
-                            #"LLM Model ID": llm_model_id,
-                            #"llm_vendor": llm_vendor,
-                            #"llm_connection_name": llm_connection_name,
-                            #"llm_model": llm_model,
+
                             "agent_type": agent_item.get("type", None),
                             "agent_version": agent_version,
                             "tags": agent_item.get("tags", None),
                             "last_modified_timestamp": last_modified_on,
-                            # "Agent is active version": is_active_version,
                             "url": self.get_url(
                                 agent_item.id, project_key, agent_version
                             ),
                         }
-                        #print(f"[agents-generate_rows] about to run recursive_key_search")
-                        # next_row['LLMs_used'] = "uninitialized"
                         next_row['LLMs_used'] = recursive_search_all(version_settings.get_raw(), 'llmId')
-                        # print(f"[agents-generate_rows] finished without exception")
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         print(
                             f"[agents-generate_rows] [EXPECTED EXCEPTION] {e_agent} - Project Key: {project_key}, Agent Name: {agent_item.name}"
