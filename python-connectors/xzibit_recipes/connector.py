@@ -68,6 +68,9 @@ class ConnectorRecipes(Connector):
                     # An invalid argument has been encountered : Failed to iterate, caused by: IllegalArgumentException: No parameters dataset selected for repeating dataset/recipe
                     # Seems to happen with the Export To Folder recipe, which exports files to folder.
                     # if the user has not set the "Parameters dataset" option for this recipe, or maybe if that dataset has been deleted, then it will throw an exception.
+                    
+                    next_row["engine_parameters"] = raw_data.get("params",{}).get("engineParams",None)
+                    
 
                     next_row["input_datasets"] = (
                         recipe_settings_handle.get_flat_input_refs()
