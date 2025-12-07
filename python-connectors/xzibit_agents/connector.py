@@ -93,6 +93,8 @@ class ConnectorProjects(Connector):
                         raw_settings = settings.get_raw()
                         
                         debug_content.append(raw_settings)
+                        
+                        LLMs = recursive_key_search(raw_settings, 'llmId')
                         #print("FULL_AGENT_SETTINGS_START")
                         #pp(raw_settings)
                         #print("FULL_AGENT_SETTINGS_END")
@@ -183,6 +185,9 @@ class ConnectorProjects(Connector):
                                 agent_item.id, project_key, agent_version
                             ),
                         }
+    
+                        next_row['LLMs'] = LLMs
+        
                     except (AttributeError, KeyError, TypeError, ValueError) as e_agent:
                         print(
                             f"[agents-generate_rows] [EXPECTED EXCEPTION] {e_agent} - Project Key: {project_key}, Agent Name: {agent_item.name}"
