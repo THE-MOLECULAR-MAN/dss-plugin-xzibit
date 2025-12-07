@@ -164,7 +164,7 @@ class ConnectorProjects(Connector):
                             "creator_user": creation_user,
                             "last_modified_user": last_modified_user,
                             "active_agent_version": active_version_id,
-                            # "LLM Model ID": llm_model_id,
+                            "LLM Model ID": llm_model_id,
                             "llm_vendor": llm_vendor,
                             "llm_connection_name": llm_connection_name,
                             "llm_model": llm_model,
