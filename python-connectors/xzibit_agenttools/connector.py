@@ -118,7 +118,7 @@ class ConnectorProjects(Connector):
                         )
                         
                         print(jd(raw_settings))
-                        next_row["agent_tool_LLMid"] = raw_settings.get(
+                        next_row["LLM_id"] = raw_settings.get(
                             "params", {}
                         ).get("config", {}).get("llmId", "")
 
@@ -175,7 +175,7 @@ class ConnectorProjects(Connector):
                     "name": "agent_tool_params",
                     "type": "string",
                 },
-                {"meaning": "Text", "name": "agent_tool_LLMid", "type": "string"},
+                {"meaning": "Text", "name": "LLM_id", "type": "string"},
 #                {"meaning": "Text", "name": "dkuProperties", "type": "string"},
 #                 {
 #                     "meaning": "Text",
