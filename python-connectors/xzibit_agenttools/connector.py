@@ -116,6 +116,8 @@ class ConnectorProjects(Connector):
                                 raw_settings.get("params", None)
                             )
                         )
+                        
+                        print(jd(raw_settings))
                         next_row["agent_tool_LLMid"] = raw_settings.get(
                             "params", {}
                         ).get("llmId", "")
