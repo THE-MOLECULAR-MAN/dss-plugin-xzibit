@@ -121,9 +121,9 @@ class ConnectorProjects(Connector):
                         ).get("llmId", "")
 
                         # next_row["customFields"]   = raw_settings.get('customFields',None)
-                        next_row["dkuProperties"] = replace_empty_arrays_sets_with_none(
-                            raw_settings.get("dkuProperties", None)
-                        )
+#                         next_row["dkuProperties"] = replace_empty_arrays_sets_with_none(
+#                             raw_settings.get("dkuProperties", None)
+#                         )
                         # next_row["checklists"]     = raw_settings.get('checklists',{}).get('checklists',None)
                         next_row["quickTestQuery"] = (
                             replace_empty_arrays_sets_with_none(
@@ -174,7 +174,7 @@ class ConnectorProjects(Connector):
                     "type": "string",
                 },
                 {"meaning": "Text", "name": "agent_tool_LLMid", "type": "string"},
-                {"meaning": "Text", "name": "dkuProperties", "type": "string"},
+#                {"meaning": "Text", "name": "dkuProperties", "type": "string"},
                 {
                     "meaning": "Text",
                     "name": "quickTestQuery",
