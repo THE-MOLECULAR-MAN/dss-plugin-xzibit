@@ -120,7 +120,7 @@ class ConnectorProjects(Connector):
                         print(jd(raw_settings))
                         next_row["agent_tool_LLMid"] = raw_settings.get(
                             "params", {}
-                        ).get("llmId", "")
+                        ).get("config", {""}).get("llmId", "")
 
                         # next_row["customFields"]   = raw_settings.get('customFields',None)
 #                         next_row["dkuProperties"] = replace_empty_arrays_sets_with_none(
