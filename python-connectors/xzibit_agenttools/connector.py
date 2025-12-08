@@ -32,6 +32,7 @@ class ConnectorProjects(Connector):
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, agenttool_id, project_key)):
             return None
+        # Agent Tools do NOT have a trailing slash
         return f"{self.__baseurl}/projects/{project_key}/agent-tools/{agenttool_id}"
 
     # pylint: disable=W0613
