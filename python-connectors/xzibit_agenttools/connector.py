@@ -103,6 +103,8 @@ class ConnectorProjects(Connector):
                                 )
                                 // 1000
                             )
+                        if last_modified_on == 0:
+                            last_modified_on = None
                         next_row["last_modified_timestamp"] = last_modified_on
 
                         last_modified_user = (
