@@ -32,7 +32,7 @@ class ConnectorProjects(Connector):
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, agenttool_id, project_key)):
             return None
-        return f"{self.__baseurl}/projects/{project_key}/agent-tools/{agenttool_id}/"
+        return f"{self.__baseurl}/projects/{project_key}/agent-tools/{agenttool_id}"
 
     # pylint: disable=W0613
     def generate_rows(
