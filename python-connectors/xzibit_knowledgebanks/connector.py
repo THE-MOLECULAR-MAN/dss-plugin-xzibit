@@ -59,10 +59,10 @@ class ConnectorProjects(Connector):
                         next_row["kb_id"] = settings_raw.get('id', None)
                         next_row["kb_name"] = settings_raw.get('name', None)
                         
-                        next_row["embeddingLLMId"] = settings_raw.get('', None)
-                        next_row["retrieverType"] = settings_raw.get('', None)
-                        next_row["vectorStoreType"] = settings_raw.get('', None)
-                        next_row["envSelection"] = settings_raw.get('', None)
+                        next_row["embeddingLLMId"] = settings_raw.get('embeddingLLMId', None)
+                        next_row["retrieverType"] = settings_raw.get('retrieverType', None)
+                        next_row["vectorStoreType"] = settings_raw.get('vectorStoreType', None)
+                        next_row["envSelection"] = settings_raw.get('envSelection', None)
 
                         next_row["url"] = self.get_url(project_key, webapp.get("id", ""))
 #                         next_row["created_timestamp"] = datetime.fromtimestamp(webapp.get("createdOn", 0) // 1000)
