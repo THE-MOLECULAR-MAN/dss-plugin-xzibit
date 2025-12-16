@@ -75,7 +75,7 @@ class ConnectorProjects(Connector):
                         
 
                         # URL is fetched using class method that specifically implements this DSS object type:
-                        next_row["url"] = self.get_url(next_row["id"], project_key, next_row["name"])
+                        # next_row["url"] = self.get_url(next_row["id"], project_key, next_row["name"])
                         
                         # add features that are almost always the same for different DSS object types
                         # next_row["created_timestamp"] = datetime.fromtimestamp(settings_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
