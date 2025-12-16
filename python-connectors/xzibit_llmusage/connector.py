@@ -112,7 +112,7 @@ class ConnectorProjects(Connector):
                         if not next_row['llmId']:
                             continue
                         records_generated += 1
-                        yield next_row
+                        yield self.replace_retired_llm_responses(next_row)
                         
                 # recipes
                 for handle in project.list_recipes(as_type='objects'):
