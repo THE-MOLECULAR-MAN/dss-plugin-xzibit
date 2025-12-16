@@ -62,7 +62,18 @@ class ConnectorProjects(Connector):
                         records_generated += 1
                         yield next_row
                         
-               # for ...
+               for agent_tool_handle in project.list_agent_tools(as_type='objects'):
+                    try: 
+                        next_row = {"projectKey": project_key, "dss_object_type": "agent"}
+                        next_row['dss_object_id'] = agent_handle.id
+                        agent_data = agent_handle.get_settings().get_raw()
+                        next_row['dss_object_name'] = agent_data.get('name',None)
+                        next_row['llmId'] = recursive_search_all(agent_data, "llmId")
+                    except Exception as e:
+                        print(f"[EXCEPTION] generate rows - llm Usage - agents: {e}")
+                    finally:
+                        records_generated += 1
+                        yield next_row
                 
                 
             except Exception as e:
