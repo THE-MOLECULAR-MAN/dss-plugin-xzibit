@@ -66,6 +66,7 @@ class ConnectorProjects(Connector):
                     try: 
                         next_row = {"projectKey": project_key, "dss_object_type": "agent tool"}
                         next_row['dss_object_id'] = agent_tool_handle.id
+                        
                         data = agent_tool_handle.get_settings().get_raw()
                         next_row['dss_object_name'] = data.get('name',None)
                         next_row['llmId'] = data.get(
