@@ -122,7 +122,7 @@ class ConnectorProjects(Connector):
                         next_row['dss_object_name'] = handle.name
                         data = handle.get_settings().get_raw()
                         # pp(data)
-                        next_row['llmId'] = recursive_search_all(data, 'llmId') or recursive_search_all(data, 'embeddingLLMId')
+                        next_row['llmId'] = recursive_search_all(data, 'llmId')
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - RA LLM: {e}")
                     finally:
