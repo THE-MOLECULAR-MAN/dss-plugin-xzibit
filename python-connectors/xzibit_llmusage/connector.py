@@ -101,9 +101,10 @@ class ConnectorProjects(Connector):
                     try: 
                         next_row = {"projectKey": project_key, "dss_object_type": "recipe"}
                         next_row['dss_object_id'] = handle.id
+                        next_row['dss_object_name'] = handle.name
                         data = handle.get_settings().get_raw()
                         pp(data)
-                        next_row['dss_object_name'] = data.get('name', None)
+                         = data.get('name', None)
                         next_row['llmId'] =  recursive_search_all(data, 'llmId')
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agent tool: {e}")
