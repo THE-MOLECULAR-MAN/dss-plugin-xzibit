@@ -51,6 +51,7 @@ class ConnectorProjects(Connector):
                         if records_limit > 0 and records_generated >= records_limit:
                             return
 
+                        # initializing first column in case their is an exception, the yield will still work
                         next_row = {"projectKey": project_key}
 
                         settings_raw = kb.get_settings().get_raw()
