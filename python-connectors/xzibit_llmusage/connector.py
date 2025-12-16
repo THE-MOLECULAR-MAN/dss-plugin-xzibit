@@ -70,7 +70,7 @@ class ConnectorProjects(Connector):
                         next_row['dss_object_name'] = data.get('name',None)
                         next_row['llmId'] = recursive_search_all(data, "llmId")
                     except Exception as e:
-                        print(f"[EXCEPTION] generate rows - llm Usage - agents: {e}")
+                        print(f"[EXCEPTION] generate rows - llm Usage - agent tool: {e}")
                     finally:
                         records_generated += 1
                         yield next_row
