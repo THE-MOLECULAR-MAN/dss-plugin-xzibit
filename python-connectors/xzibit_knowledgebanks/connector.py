@@ -71,7 +71,7 @@ class ConnectorProjects(Connector):
                         next_row["multimodalColumn"] = settings_raw.get("multimodalColumn", None)
                         next_row["rebuildBehavior"] = settings_raw.get("rebuildBehavior", None)
 
-                        # add features that are almost always the same for different object types
+                        # add features that are almost always the same for different DSS object types
                         next_row["created_timestamp"] = datetime.fromtimestamp(settings_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
                         next_row["last_modified_user"] = settings_raw.get("versionTag",{}).get("lastModifiedBy", {}).get("login", None)
                         next_row["last_modified_timestamp"] = datetime.fromtimestamp(settings_raw.get("versionTag",{}).get("lastModifiedOn", 0) // 1000)
