@@ -56,7 +56,8 @@ class ConnectorProjects(Connector):
                         next_row["kb_id"] = webapp.get("id", None)
                         next_row["created_by_user"] = webapp.get("createdBy", {}).get(
                                 "login", None
-                            ),
+                            )
+                        
 
                         
                         
