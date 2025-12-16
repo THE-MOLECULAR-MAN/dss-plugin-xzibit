@@ -60,6 +60,7 @@ class ConnectorProjects(Connector):
                         print(f"[EXCEPTION] generate rows - llm Usage - agents: {e}")
                     finally:
                         if not next_row['llmId']:
+                            # code agents don't have this field filled out.
                             continue
                         records_generated += 1
                         yield next_row
