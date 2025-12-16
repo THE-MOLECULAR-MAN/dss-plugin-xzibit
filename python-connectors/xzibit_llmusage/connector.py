@@ -87,7 +87,7 @@ class ConnectorProjects(Connector):
                 for kb_handle in project.list_agent_tools(as_type='objects'):
                     try: 
                         next_row = {"projectKey": project_key, "dss_object_type": "knowledge bank"}
-                        next_row['dss_object_id'] = agent_tool_handle.id
+                        next_row['dss_object_id'] = kb_handle.id
                         
                         data = agent_tool_handle.get_settings().get_raw()
                         pp(data)
