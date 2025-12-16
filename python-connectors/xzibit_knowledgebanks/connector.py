@@ -46,7 +46,7 @@ class ConnectorProjects(Connector):
                 # List all webapps in the project
                 if records_limit > 0 and records_generated >= records_limit:
                     return
-                for webapp in project.list_webapps():
+                for kb in project.list_knowledge_banks(as_type='objects'):
                     try:
                         if records_limit > 0 and records_generated >= records_limit:
                             return
