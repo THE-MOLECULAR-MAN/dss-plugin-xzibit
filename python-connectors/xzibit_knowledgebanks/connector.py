@@ -65,7 +65,8 @@ class ConnectorProjects(Connector):
                         # fetch settings as dict
                         settings_raw = kb.get_settings().get_raw()
                         
-                        # display debug info during development, ex: adding new columns:
+                        # display debug info during development
+                        # for example, finding key names when adding new columns
                         # pp(settings_raw)
                         
                         # add features that are unique to this object type
