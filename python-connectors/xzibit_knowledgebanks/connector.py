@@ -67,8 +67,7 @@ class ConnectorProjects(Connector):
                         )
                     finally:
                         records_generated += 1
-                        yield next_row
-                        
+                        yield next_row                       
 
             except Exception as e:
                 print(
