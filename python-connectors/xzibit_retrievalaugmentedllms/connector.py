@@ -37,7 +37,6 @@ class ConnectorProjects(Connector):
             for v in version_info:
                 if v.get("versionId",None) == current_version_id:
                     return v
-            
             return None
         except:
             return None
