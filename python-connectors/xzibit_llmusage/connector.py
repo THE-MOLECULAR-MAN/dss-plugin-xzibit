@@ -23,14 +23,7 @@ class ConnectorProjects(Connector):
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
 
-    def get_url(self, project_key, kb_id):
-        """Create a URL to the object in question in this specific DSS instance.
-        Return None if any of the inputs are None."""
-        # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, project_key, kb_id)):
-            return None
-        return f"{self.__baseurl}/projects/{project_key}/knowledge-bank/{kb_id}/settings/"
-
+   
     def generate_rows(
         self,
         dataset_schema=None,
@@ -54,10 +47,6 @@ class ConnectorProjects(Connector):
                 # intentionally not using 'list' since that can be slower for some object types
                 for kb in project.list_knowledge_banks(as_type='objects'):
                     try:
-
-                        # exit early if exceeded the number of records requested
-                        if records_limit > 0 and records_generated >= records_limit:
-                            return
 
                         # initializing first column in case their is an exception, the yield will still work
                         next_row = {"projectKey": project_key}
