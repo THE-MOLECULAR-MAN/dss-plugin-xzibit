@@ -71,6 +71,10 @@ class ConnectorProjects(Connector):
                         
                         # add features that are unique to this object type
                         next_row["id"] = settings_raw.get('id', None)
+                        
+                        versions = settings_raw.get('versions', {})
+                        
+                        
                         # next_row["name"] = settings_raw.get('name', None)
                         
 
