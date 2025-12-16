@@ -66,7 +66,7 @@ class ConnectorProjects(Connector):
 
                         next_row["created_timestamp"] = datetime.fromtimestamp(settings_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
                         next_row["last_modified_user"] = settings_raw.get("lastModifiedBy", {}).get("login", None)
-                        next_row["last_modified_timestamp"] = datetime.fromtimestamp(settings_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
+                        next_row["last_modified_timestamp"] = datetime.fromtimestamp(settings_raw.get("versionTag",{}).get("lastModifiedOn", 0) // 1000)
                         next_row["tags"] = settings_raw.get("tags", None)                        
                         next_row["created_by_user"] = settings_raw.get("createdBy", {}).get("login", None)
                         next_row["url"] = self.get_url(project_key, next_row["kb_id"])
