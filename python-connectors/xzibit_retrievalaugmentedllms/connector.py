@@ -23,13 +23,13 @@ class ConnectorProjects(Connector):
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
 
-    def get_url(self, id, project_key, agent_version):
+    def get_url(self, id, project_key, name):
         """Create a URL to the DSS object in question in this specific DSS instance.
         Return None if any of the inputs are None."""
         # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, id, project_key, agent_version)):
+        if any(v is None for v in (self.__baseurl, id, project_key, name)):
             return None
-        return f"{self.__baseurl}/projects/{project_key}/savedmodels/{id}/retrieval-augmented-llm/S-{project_key}-{id}-{agent_version}"
+        return f"{self.__baseurl}/projects/{project_key}/savedmodels/{id}/retrieval-augmented-llm/S-{project_key}-{id}-{name}"
     
     def generate_rows(
         self,
