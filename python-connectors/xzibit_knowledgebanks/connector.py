@@ -67,13 +67,14 @@ class ConnectorProjects(Connector):
                         next_row["last_modified_timestamp"] = datetime.fromtimestamp(webapp.get("lastModifiedOn", 0) // 1000)
                         next_row["tags"] = webapp.get("tags", None)                        
                         
-                        
-                        records_generated += 1
-                        yield next_row
                     except Exception as e:
                         print(
                             f"[webapps-generate_rows] [UNEXPECTED WEBAPP EXCEPTION] {e} with webapp {next_row.get('webapp_name', None)}"
                         )
+                    finally:
+                        records_generated += 1
+                        yield next_row
+                        
 
             except Exception as e:
                 print(
