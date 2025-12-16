@@ -43,11 +43,14 @@ class ConnectorProjects(Connector):
         for project_key in self.__client.list_project_keys():
             try:
                 project = self.__client.get_project(project_key)
-                # List all webapps in the project
+
+                # exit early if exceeded the number of records requested
                 if records_limit > 0 and records_generated >= records_limit:
                     return
+
                 for kb in project.list_knowledge_banks(as_type='objects'):
                     try:
+                        # exit early if exceeded the number of records requested                        
                         if records_limit > 0 and records_generated >= records_limit:
                             return
 
