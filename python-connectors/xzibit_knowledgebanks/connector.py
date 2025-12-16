@@ -66,7 +66,7 @@ class ConnectorProjects(Connector):
                         settings_raw = kb.get_settings().get_raw()
                         
                         # display debug info during development
-                        # for example, finding key names when adding new columns
+                        # for example, finding key names when adding new columns to dataset
                         # pp(settings_raw)
                         
                         # add features that are unique to this object type
