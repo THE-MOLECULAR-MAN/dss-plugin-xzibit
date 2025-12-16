@@ -71,13 +71,16 @@ class ConnectorProjects(Connector):
                         next_row["multimodalColumn"] = settings_raw.get("multimodalColumn", None)
                         next_row["rebuildBehavior"] = settings_raw.get("rebuildBehavior", None)
 
+                        # URL is fetched using class method that specifically implements this DSS object type:
+                        next_row["url"] = self.get_url(project_key, next_row["kb_id"])
+                        
                         # add features that are almost always the same for different DSS object types
                         next_row["created_timestamp"] = datetime.fromtimestamp(settings_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
                         next_row["last_modified_user"] = settings_raw.get("versionTag",{}).get("lastModifiedBy", {}).get("login", None)
                         next_row["last_modified_timestamp"] = datetime.fromtimestamp(settings_raw.get("versionTag",{}).get("lastModifiedOn", 0) // 1000)
                         next_row["tags"] = settings_raw.get("tags", None)             
                         next_row["created_by_user"] = settings_raw.get("creationTag",{}).get("lastModifiedBy", {}).get("login", None)
-                        next_row["url"] = self.get_url(project_key, next_row["kb_id"])
+                        
                         
                     except Exception as e:
                         print(
