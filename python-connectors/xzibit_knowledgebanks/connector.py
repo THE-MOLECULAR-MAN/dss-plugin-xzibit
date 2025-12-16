@@ -89,10 +89,35 @@ class ConnectorProjects(Connector):
     
 
     def get_read_schema(self):
-        """TBD"""
+        """Returns the read schema for TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText
-        return None
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
+        return {'columns': [{'meaning': 'Text', 'name': 'projectKey', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'kb_id', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'kb_name', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'kb_embeddingLLMId', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'retrieverType', 'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'kb_vectorStoreType',
+              'type': 'string'},
+             {'meaning': 'JSONObjectMeaning',
+              'name': 'envSelection',
+              'type': 'string'},
+             {'meaning': 'DatetimeNoTz',
+              'name': 'created_timestamp',
+              'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'last_modified_user',
+              'type': 'string'},
+             {'meaning': 'DatetimeNoTz',
+              'name': 'last_modified_timestamp',
+              'type': 'string'},
+             {'meaning': 'JSONArrayMeaning', 'name': 'tags', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'created_by_user', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'managedFolderId', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'multimodalColumn', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'rebuildBehavior', 'type': 'string'},
+             {'meaning': 'URL', 'name': 'url', 'type': 'string'}]}
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
