@@ -59,7 +59,7 @@ class ConnectorProjects(Connector):
                     finally:
                         yield next_row
                         
-                    
+               # for ...
                 
                 
             except Exception as e:
