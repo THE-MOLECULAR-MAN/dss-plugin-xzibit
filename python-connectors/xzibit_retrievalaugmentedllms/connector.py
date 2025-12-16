@@ -34,7 +34,7 @@ class ConnectorProjects(Connector):
     def get_current_version_info(self, current_version_id, version_info):
         """TBD"""
         try:
-            res = None
+            res = {None}
             for v in version_info:
                 if v.get("versionId",None) == current_version_id:
                     res = v
@@ -86,6 +86,7 @@ class ConnectorProjects(Connector):
                         next_row["activeVersion"] = settings_raw.get('activeVersion', None)
                         
                         versions = settings_raw.get('versions', {})
+                        settings_raw
                         
                         
                         # next_row["name"] = settings_raw.get('name', None)
