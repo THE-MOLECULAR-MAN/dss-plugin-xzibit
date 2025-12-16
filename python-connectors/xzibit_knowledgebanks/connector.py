@@ -71,7 +71,7 @@ class ConnectorProjects(Connector):
 
             except Exception as e:
                 print(
-                    f"[webapps-generate_rows] [UNEXPECTED PROJECT EXCEPTION] {e} with project {project_key}"
+                    f"[kb-generate_rows] [UNEXPECTED PROJECT EXCEPTION] {e} with project {project_key}"
                 )
     
 
