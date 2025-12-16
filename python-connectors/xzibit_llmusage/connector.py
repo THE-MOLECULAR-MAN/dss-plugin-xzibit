@@ -53,8 +53,9 @@ class ConnectorProjects(Connector):
                     try: 
                         next_row = {"projectKey": project_key, "dss_object_type": "agent"}
                         next_row['dss_object_id'] = agent_handle.id
-                        next_row['dss_object_name'] = agent_handle.name
+                        
                         agent_data = agent_handle.get_settings().get_raw()
+                        next_row['dss_object_name'] = agent_data.get('name',None)
                         # next_row['llmId'] = recursive_search_all(agent_data, "llmId")
                         
                     except Exception as e:
