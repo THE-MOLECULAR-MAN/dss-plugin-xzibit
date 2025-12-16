@@ -40,6 +40,8 @@ class ConnectorProjects(Connector):
     ):
         """TBD"""
         records_generated = 0
+        
+        # iterate through projects
         for project_key in self.__client.list_project_keys():
             try:
                 project = self.__client.get_project(project_key)
@@ -48,6 +50,8 @@ class ConnectorProjects(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     return
 
+                # iterate through Knowledge Banks in this project as objects
+                # intentionally not using 'list' since that can be slower for some object types
                 for kb in project.list_knowledge_banks(as_type='objects'):
                     try:
 
