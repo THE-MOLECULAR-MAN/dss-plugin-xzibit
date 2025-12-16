@@ -101,7 +101,7 @@ class ConnectorProjects(Connector):
                 # recipes
                 for handle in project.list_recipes(as_type='objects'):
                     try: 
-                        next_row = {"projectKey": project_key, "dss_object_type": "knowledge bank"}
+                        next_row = {"projectKey": project_key, "dss_object_type": "recipe"}
                         next_row['dss_object_id'] = handle.id
                         data = handle.get_settings().get_raw()
                         next_row['dss_object_name'] = data.get('name', None)
