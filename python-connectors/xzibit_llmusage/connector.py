@@ -24,7 +24,7 @@ class ConnectorProjects(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
-        self.__REPLACEMENT_MSG = "LLM no longer available. It has been disabled or retired."
+
         
     def replace_retired_llm_responses(input_list):
         """
@@ -40,10 +40,10 @@ class ConnectorProjects(Connector):
         Returns:
             List[str]: A new list with empty strings replaced.
         """
-        # REPLACEMENT_MSG = "LLM no longer available. It has been disabled or retired."
+        REPLACEMENT_MSG = "LLM no longer available. It has been disabled or retired."
 
         # Pythonic list comprehension for efficiency and readability
-        return [self.__REPLACEMENT_MSG if item == '' else item for item in input_list]
+        return [REPLACEMENT_MSG if item == '' else item for item in input_list]
 
    
     def generate_rows(
