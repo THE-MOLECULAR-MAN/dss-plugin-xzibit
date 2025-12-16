@@ -38,7 +38,6 @@ class ConnectorProjects(Connector):
             for v in version_info:
                 if v.get("versionId",None) == current_version_id:
                     res = v
-
         except Exception as e:
             print(f"Exception in retrievalaugmentedllms.get_current_version_info: {e}")
         finally:
