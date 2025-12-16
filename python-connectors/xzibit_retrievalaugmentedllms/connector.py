@@ -125,7 +125,31 @@ class ConnectorProjects(Connector):
         """Returns the read schema for TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return None
+        return {'columns': [{'meaning': 'Text', 'name': 'projectKey', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'rag_llm_id', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'activeVersion', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'llmId', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'kb_id', 'type': 'string'},
+             {'meaning': 'URL', 'name': 'url', 'type': 'string'},
+             {'meaning': 'JSONArrayMeaning',
+              'name': 'retrievalColumns',
+              'type': 'string'},
+             {'meaning': 'Text', 'name': 'retrievalSource', 'type': 'string'},
+             {'meaning': 'DatetimeNoTz',
+              'name': 'created_timestamp',
+              'type': 'string'},
+             {'meaning': 'Text',
+              'name': 'last_modified_user',
+              'type': 'string'},
+             {'meaning': 'DatetimeNoTz',
+              'name': 'last_modified_timestamp',
+              'type': 'string'},
+             {'meaning': 'JSONArrayMeaning', 'name': 'tags', 'type': 'string'},
+             {'meaning': 'Text', 'name': 'created_by_user', 'type': 'string'}]}
+
+
+
+
     
     ####################################################################
     # Intentionally not implemented, not needed for this type
