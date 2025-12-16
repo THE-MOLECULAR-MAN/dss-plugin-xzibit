@@ -57,21 +57,18 @@ class ConnectorProjects(Connector):
                         next_row["created_by_user"] = webapp.get("createdBy", {}).get(
                                 "login", None
                             )
-                        
+                        next_row["url"] = self.get_url(
+                                project_key,
+                                webapp.get("id", "")
+                            ),
 
                         
                         
                         
                         # Collect relevant metadata
                         next_row = {
-                            "projectKey": project_key,
-                            "kb_name": webapp.get("name", None),
-                            "kb_id": webapp.get("id", None),
-                            "created_by_user": 
-                            "url": self.get_url(
-                                project_key,
-                                webapp.get("id", "")
-                            ),
+                            
+                            
                             "created_timestamp": datetime.fromtimestamp(
                                 webapp.get("createdOn", 0) // 1000
                             ),
