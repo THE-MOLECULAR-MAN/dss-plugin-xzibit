@@ -58,6 +58,9 @@ class ConnectorProjects(Connector):
                         pp(settings_raw)
                         next_row["kb_id"] = settings_raw.get('id', None)
                         next_row["kb_name"] = settings_raw.get('name', None)
+                        
+                        "embeddingLLMId"
+                        "retrieverType"
 
                         next_row["url"] = self.get_url(project_key, webapp.get("id", ""))
 #                         next_row["created_timestamp"] = datetime.fromtimestamp(webapp.get("createdOn", 0) // 1000)
