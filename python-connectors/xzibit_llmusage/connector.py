@@ -75,6 +75,8 @@ class ConnectorProjects(Connector):
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agent tool: {e}")
                     finally:
+                        if not next_row['llmId']:
+                            continue
                         records_generated += 1
                         yield next_row
                 
