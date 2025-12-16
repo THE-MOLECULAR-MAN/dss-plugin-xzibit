@@ -95,15 +95,14 @@ class ConnectorProjects(Connector):
                         data = handle.get_settings().get_raw()
                         pp(data)
                         next_row['dss_object_name'] = data.get('name', None)
-                        next_row['llmId'] =  data.get('embeddingLLMId', None)
+                        next_row['llmId'] =  recursive_search_all(data, 'embeddingLLMId')
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agent tool: {e}")
                     finally:
-                        print("!!!!! 40")                        
+
                         if not next_row['llmId']:
                             continue
                         records_generated += 1
-                        print("!!!!! yield")
                         yield next_row
                 
                 
