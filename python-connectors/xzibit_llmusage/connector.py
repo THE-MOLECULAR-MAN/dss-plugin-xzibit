@@ -82,6 +82,25 @@ class ConnectorProjects(Connector):
                             continue
                         records_generated += 1
                         yield next_row
+                        
+                        
+                for kb_handle in project.list_agent_tools(as_type='objects'):
+                    try: 
+                        next_row = {"projectKey": project_key, "dss_object_type": "knowledge bank"}
+                        next_row['dss_object_id'] = agent_tool_handle.id
+                        
+                        data = agent_tool_handle.get_settings().get_raw()
+                        pp(data)
+                        next_row['dss_object_name'] = data.get('name', None)
+                        # next_row['llmId'] =  data.get('params',{}).get('llmId', None)
+                        next_row['llmId'] =  recursive_search_all(data, "llmId")
+                    except Exception as e:
+                        print(f"[EXCEPTION] generate rows - llm Usage - agent tool: {e}")
+                    finally:
+                        if not next_row['llmId']:
+                            continue
+                        records_generated += 1
+                        yield next_row
                 
                 
             except Exception as e:
