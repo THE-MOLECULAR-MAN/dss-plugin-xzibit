@@ -64,10 +64,7 @@ class ConnectorProjects(Connector):
                     print(
                         f"[generate_rows] [UNEXPECTED EXCEPTION project] {e} with object"
                     )
-                finally:
-                    # return something, even if an exception occurred.
-                    records_generated += 1
-                    yield next_row        
+                  
     
 
     def get_read_schema(self):
