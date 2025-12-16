@@ -32,7 +32,7 @@ class ConnectorProjects(Connector):
         return f"{self.__baseurl}/projects/{project_key}/savedmodels/{id}/retrieval-augmented-llm/S-{project_key}-{id}-{name}"
     
     def get_current_version_info(self, current_version_id, version_info):
-        """TBD"""
+        """TODO: Does this handle cases where current_version_id or version_info are None or {}?"""
         try:
             res = {}
             for v in version_info:
