@@ -55,7 +55,7 @@ class ConnectorProjects(Connector):
                         next_row['dss_object_name'] = agent_handle.name
                         
                     except Exception as e:
-                        print(f"[EXCEPTION]")
+                        print(f"[EXCEPTION] generate rows - llm Usage - agents: {e}")
                     
                 
                 
