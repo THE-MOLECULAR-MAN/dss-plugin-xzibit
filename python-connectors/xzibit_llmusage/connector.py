@@ -56,7 +56,8 @@ class ConnectorProjects(Connector):
                         
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agents: {e}")
-                    
+                    finally:
+                        yield next_row
                 
                 
             except Exception as e:
