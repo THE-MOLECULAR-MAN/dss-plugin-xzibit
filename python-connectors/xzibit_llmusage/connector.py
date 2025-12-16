@@ -90,7 +90,7 @@ class ConnectorProjects(Connector):
                         next_row = {"projectKey": project_key, "dss_object_type": "knowledge bank"}
                         print("!!!!! 30")
 
-                        next_row['dss_object_id'] = kb_handle.id
+                        next_row['dss_object_id'] = handle.id
                         
                         data = handle.get_settings().get_raw()
                         pp(data)
