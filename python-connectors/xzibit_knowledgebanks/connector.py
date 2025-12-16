@@ -52,7 +52,7 @@ class ConnectorProjects(Connector):
                             return
                         settings_raw = kb.get_settings.get_raw()
                         
-                        pp()
+                        pp(settings_raw)
                       
                         next_row = {"projectKey": project_key}
                         next_row["kb_id"] = settings_raw.get('id', None)
