@@ -48,26 +48,26 @@ class ConnectorProjects(Connector):
                 # objects that can use LLMs:
                 # agents
                 for agent_handle in project.list_agents(as_type='objects'):
-                    next_row = {"projectKey": project_key}
-                    agent_data = agent_handle.get_settings().get_raw()
+                    try: 
+                        next_row = {"projectKey": project_key}
+                        agent_data = agent_handle.get_settings().get_raw()
 
+
+                        next_row['dss_object_id'] = agent_handle.id
+                        next_row['dss_object_name'] = agent_handle.name
+                    except Exception as e:
+                        print(f"[EXCEPTION]")
                     
-                    next_row['dss_object_id'] = agent_handle.id
-                    next_row['dss_object_name'] = agent_handle.name
-                    
-                    
-                # agent tools
-                # connections
-                # knowledge banks
-                # recipe
-                # RA LLms
                 
-                # yield next_row                       
-
+                
             except Exception as e:
-                print(
-                    f"[generate_rows] [UNEXPECTED PROJECT EXCEPTION] {e} with project {project_key}"
-                )
+                    print(
+                        f"[generate_rows] [UNEXPECTED EXCEPTION project] {e} with object"
+                    )
+                finally:
+                    # return something, even if an exception occurred.
+                    records_generated += 1
+                    yield next_row        
     
 
     def get_read_schema(self):
