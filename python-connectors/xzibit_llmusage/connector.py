@@ -103,7 +103,7 @@ class ConnectorProjects(Connector):
                         next_row['dss_object_id'] = handle.id
                         next_row['dss_object_name'] = handle.name
                         data = handle.get_settings().get_recipe_raw_definition()
-                        # pp(data)
+
                         next_row['llmId'] = recursive_search_all(data, 'llmId') or recursive_search_all(data, 'embeddingLLMId')
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - recipe: {e}")
@@ -122,7 +122,7 @@ class ConnectorProjects(Connector):
                         next_row['dss_object_name'] = None # they don't have a name, or they're stored inside the active version info
                         data = handle.get_settings().get_raw()
                         next_row['dss_object_id'] = data.get("id", None)
-                        # pp(data)
+
                         next_row['llmId'] = recursive_search_all(data, 'llmId')
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - RA LLM: {e}")
