@@ -95,7 +95,7 @@ class ConnectorProjects(Connector):
 
             except Exception as e:
                 print(
-                    f"[kb-generate_rows] [UNEXPECTED PROJECT EXCEPTION] {e} with project {project_key}"
+                    f"[kgenerate_rows] [UNEXPECTED PROJECT EXCEPTION] {e} with project {project_key}"
                 )
     
 
