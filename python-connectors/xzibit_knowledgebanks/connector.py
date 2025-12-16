@@ -39,7 +39,58 @@ class ConnectorProjects(Connector):
         records_limit=-1,
     ):
         """TBD"""
-        yield None
+        records_generated = 0
+        for project_key in self.__client.list_project_keys():
+            try:
+                project = self.__client.get_project(project_key)
+                # List all webapps in the project
+                if records_limit > 0 and records_generated >= records_limit:
+                    return
+                for webapp in project.list_webapps():
+                    try:
+                        if records_limit > 0 and records_generated >= records_limit:
+                            return
+                        # pp(webapp)
+
+                        # Collect relevant metadata
+                        next_row = {
+                            "projectKey": project_key,
+                            "webapp_name": webapp.get("name", None),
+                            "webapp_id": webapp.get("id", None),
+                            "webapp_type": webapp.get("type", None),
+                            "created_by_user": webapp.get("createdBy", {}).get(
+                                "login", None
+                            ),
+                            "backend_running": webapp.get("backendRunning", None),
+                            "url": self.get_url(
+                                project_key,
+                                webapp.get("id", ""),
+                                webapp.get("name", ""),
+                            ),
+                            "created_timestamp": datetime.fromtimestamp(
+                                webapp.get("createdOn", 0) // 1000
+                            ),
+                            "last_modified_user": webapp.get("lastModifiedBy", {}).get(
+                                "login", None
+                            ),
+                            "last_modified_timestamp": datetime.fromtimestamp(
+                                webapp.get("lastModifiedOn", 0) // 1000
+                            ),
+                            "tags": webapp.get("tags", None),
+                            "is_code_webapp": webapp.get("type")
+                            in ["SHINY", "STANDARD", "BOKEH", "DASH"],
+                        }
+                        records_generated += 1
+                        yield next_row
+                    except Exception as e:
+                        print(
+                            f"[webapps-generate_rows] [UNEXPECTED WEBAPP EXCEPTION] {e} with webapp {next_row.get('webapp_name', None)}"
+                        )
+
+            except Exception as e:
+                print(
+                    f"[webapps-generate_rows] [UNEXPECTED PROJECT EXCEPTION] {e} with project {project_key}"
+                )
     
 
     def get_read_schema(self):
