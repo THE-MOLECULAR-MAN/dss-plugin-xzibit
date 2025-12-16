@@ -79,8 +79,7 @@ class ConnectorProjects(Connector):
                         next_row["last_modified_user"] = settings_raw.get("versionTag",{}).get("lastModifiedBy", {}).get("login", None)
                         next_row["last_modified_timestamp"] = datetime.fromtimestamp(settings_raw.get("versionTag",{}).get("lastModifiedOn", 0) // 1000)
                         next_row["tags"] = settings_raw.get("tags", None)             
-                        next_row["created_by_user"] = settings_raw.get("creationTag",{}).get("lastModifiedBy", {}).get("login", None)
-                        
+                        next_row["created_by_user"] = settings_raw.get("creationTag",{}).get("lastModifiedBy", {}).get("login", None)                        
                         
                     except Exception as e:
                         print(
