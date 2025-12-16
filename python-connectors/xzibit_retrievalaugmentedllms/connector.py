@@ -52,7 +52,7 @@ class ConnectorProjects(Connector):
 
                 # iterate through Knowledge Banks in this project as objects
                 # intentionally not using 'list' since that can be slower for some object types
-                for kb in project.list_knowledge_banks(as_type='objects'):
+                for kb in project.list_retrieval_augmented_llms(as_type='objects'):
                     try:
 
                         # exit early if exceeded the number of records requested
