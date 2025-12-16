@@ -87,7 +87,7 @@ class ConnectorProjects(Connector):
                         
                     except Exception as e:
                         print(
-                            f"[generate_rows] [UNEXPECTED EXCEPTION] {e} with object {next_row.get('id', None)}"
+                            f"[generate_rows] [UNEXPECTED EXCEPTION] {e} with object"
                         )
                     finally:
                         records_generated += 1
