@@ -61,6 +61,7 @@ class ConnectorProjects(Connector):
                         
                         "embeddingLLMId"
                         "retrieverType"
+                        "vectorStoreType"
 
                         next_row["url"] = self.get_url(project_key, webapp.get("id", ""))
 #                         next_row["created_timestamp"] = datetime.fromtimestamp(webapp.get("createdOn", 0) // 1000)
