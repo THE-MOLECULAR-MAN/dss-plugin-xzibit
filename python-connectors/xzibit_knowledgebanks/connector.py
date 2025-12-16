@@ -50,12 +50,12 @@ class ConnectorProjects(Connector):
                     try:
                         if records_limit > 0 and records_generated >= records_limit:
                             return
-                        kb_info = 
+                        kb_info = kb.
                         
                         pp()
                       
                         next_row = {"projectKey": project_key}
-                        next_row["kb_name"] = kb.get("name", None)
+                        next_row["kb_name"] = kb.id
                         next_row["kb_id"] = kb.get("id", None)
                         next_row["url"] = self.get_url(project_key, webapp.get("id", ""))
 #                         next_row["created_timestamp"] = datetime.fromtimestamp(webapp.get("createdOn", 0) // 1000)
