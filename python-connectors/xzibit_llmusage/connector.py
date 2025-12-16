@@ -51,7 +51,7 @@ class ConnectorProjects(Connector):
                 # agents
                 for agent_handle in project.list_agents(as_type='objects'):
                     try: 
-                        next_row = {"projectKey": project_key}
+                        next_row = {"projectKey": project_key, "dss_object_type": "agent"}
                         next_row['dss_object_id'] = agent_handle.id
                         next_row['dss_object_name'] = agent_handle.name
                         agent_data = agent_handle.get_settings().get_raw()
