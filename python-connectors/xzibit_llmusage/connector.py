@@ -48,6 +48,7 @@ class ConnectorProjects(Connector):
                 # objects that can use LLMs:
                 # agents
                 for agent_handle in project.list_agents(as_type='objects'):
+                    agent_data = agent_handle.get_settings().get_raw()
                     
                     
                 # agent tools
