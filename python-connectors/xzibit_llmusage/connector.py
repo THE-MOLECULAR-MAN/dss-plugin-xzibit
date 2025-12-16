@@ -49,7 +49,7 @@ class ConnectorProjects(Connector):
                 # agents
                 for agent_handle in project.list_agents(as_type='objects'):
                     agent_data = agent_handle.get_settings().get_raw()
-                    
+                    next_row = {"projectKey": project_key}
                     
                 # agent tools
                 # connections
