@@ -68,6 +68,7 @@ class ConnectorProjects(Connector):
                         next_row['dss_object_id'] = agent_tool_handle.id
                         
                         data = agent_tool_handle.get_settings().get_raw()
+                        pp(data)
                         next_row['dss_object_name'] = data.get('name',None)
                         next_row['llmId'] = data
                     except Exception as e:
