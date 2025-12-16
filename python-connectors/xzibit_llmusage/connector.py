@@ -83,7 +83,6 @@ class ConnectorProjects(Connector):
                         records_generated += 1
                         yield next_row
                         
-                print("!!!!! 10")
                 for handle in project.list_knowledge_banks(as_type='objects'):
                     try: 
                         next_row = {"projectKey": project_key, "dss_object_type": "knowledge bank"}
