@@ -29,7 +29,6 @@ class ConnectorProjects(Connector):
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, project_key, kb_id)):
             return None
-        # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Utility_Outage_Modeling_and_Prediction/knowledge-bank/G1httEzX/settings/
         return f"{self.__baseurl}/projects/{project_key}/knowledge-bank/{kb_id}/settings/"
 
     def generate_rows(
