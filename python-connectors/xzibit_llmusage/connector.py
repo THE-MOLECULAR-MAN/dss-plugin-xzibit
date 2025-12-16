@@ -51,6 +51,7 @@ class ConnectorProjects(Connector):
                     agent_data = agent_handle.get_settings().get_raw()
                     next_row = {"projectKey": project_key}
                     
+                    next_row['object_id'] = agent_data.get('id',None)
                     
                     
                 # agent tools
