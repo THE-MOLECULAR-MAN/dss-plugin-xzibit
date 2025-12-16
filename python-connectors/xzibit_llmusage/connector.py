@@ -71,7 +71,7 @@ class ConnectorProjects(Connector):
                         next_row['dss_object_name'] = data.get('name',None)
                         next_row['llmId'] = data.get(
                             "params", {}
-                        ).get("config", {}).get("llmId", "")
+                        ).get("config", {}).get("llmId", None)
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agent tool: {e}")
                     finally:
