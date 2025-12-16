@@ -104,6 +104,7 @@ class ConnectorProjects(Connector):
                         next_row = {"projectKey": project_key, "dss_object_type": "recipe"}
                         next_row['dss_object_id'] = handle.id
                         data = handle.get_settings().get_raw()
+                        pp(data)
                         next_row['dss_object_name'] = data.get('name', None)
                         next_row['llmId'] =  recursive_search_all(data, 'embeddingLLMId')
                     except Exception as e:
