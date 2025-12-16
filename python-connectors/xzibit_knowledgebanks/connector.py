@@ -55,10 +55,7 @@ class ConnectorProjects(Connector):
                         next_row["kb_name"] = webapp.get("name", None)
                         next_row["kb_id"] = webapp.get("id", None)
                    
-                        next_row["url"] = self.get_url(
-                                project_key,
-                                webapp.get("id", "")
-                            )
+                        next_row["url"] = self.get_url(project_key, webapp.get("id", ""))
 
                         next_row["created_timestamp"] = datetime.fromtimestamp(webapp.get("createdOn", 0) // 1000)
                         next_row["last_modified_user"] = webapp.get("lastModifiedBy", {}).get("login", None)
