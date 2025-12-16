@@ -61,7 +61,7 @@ class ConnectorProjects(Connector):
                         
                         next_row["kb_embeddingLLMId"] = settings_raw.get('embeddingLLMId', None)
                         next_row["retrieverType"] = settings_raw.get('retrieverType', None)
-                        next_row["vectorStoreType"] = settings_raw.get('vectorStoreType', None)
+                        next_row["kb_vectorStoreType"] = settings_raw.get('vectorStoreType', None)
                         next_row["envSelection"] = settings_raw.get('envSelection', None)
 
                         next_row["created_timestamp"] = datetime.fromtimestamp(settings_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
