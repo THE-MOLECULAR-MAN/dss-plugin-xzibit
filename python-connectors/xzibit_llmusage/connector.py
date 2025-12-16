@@ -104,6 +104,7 @@ class ConnectorProjects(Connector):
                         if not next_row['llmId']:
                             continue
                         records_generated += 1
+                        print("!!!!! yield")
                         yield next_row
                 
                 
