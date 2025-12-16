@@ -55,7 +55,7 @@ class ConnectorProjects(Connector):
                 for kb in project.list_knowledge_banks(as_type='objects'):
                     try:
 
-                        # exit early if exceeded the number of records requested         
+                        # exit early if exceeded the number of records requested
                         if records_limit > 0 and records_generated >= records_limit:
                             return
 
