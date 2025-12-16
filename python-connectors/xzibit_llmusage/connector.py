@@ -69,8 +69,8 @@ class ConnectorProjects(Connector):
                         
                         data = agent_tool_handle.get_settings().get_raw()
                         pp(data)
-                        next_row['dss_object_name'] = data.get('name',None)
-                        # next_row['llmId'] =  data.get('params',{}).get('llmId',None)
+                        next_row['dss_object_name'] = data.get('name', None)
+                        # next_row['llmId'] =  data.get('params',{}).get('llmId', None)
                         next_row['llmId'] =  recursive_search_all(data, "llmId")
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agent tool: {e}")
