@@ -1,22 +1,17 @@
+"""TBD"""
+
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import *
+from xzibit.utils import get_dss_base_url
 
 ####################################################################
 # Unique imports for this Class
 ####################################################################
 import re
 from datetime import datetime
-
-
-def convert_webapp_name_to_url_name(web_app_name):
-    """x"""
-    # Connect_Name-Test1234567890-=_+!@#$%^&*(),.<>/?'"[{]}\|
-    # becomes
-    # connectname-test1234567890-
 
 
 def make_url_friendly(text):
@@ -33,7 +28,8 @@ def make_url_friendly(text):
     text = text.lower()
 
     # 2. Keep only alphanumeric characters and spaces
-    # regex explanation: [^a-z0-9\s] matches anything that is NOT a lowercase letter, number, or whitespace
+    # regex explanation: [^a-z0-9\s] matches anything that is NOT a
+    # lowercase letter, number, or whitespace
     text = re.sub(r"[^a-z0-9\s]", "", text)
 
     # 3. Replace one or more whitespace characters with a single hyphen
@@ -45,24 +41,27 @@ def make_url_friendly(text):
     return text
 
 
-def get_webapp_url(project_key, webapp_id, web_app_name):
-    base_url = get_dss_base_url()
-    # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Data_Dictionary_and_DSS_Instance_datasets_test_project/webapps/gY7nbkW_connectname-test1234567890-/edit
-    # Connect_Name-Test1234567890-=_+!@#$%^&*(),.<>/?'"[{]}\|
-    safe_name = make_url_friendly(web_app_name)
-    return f"{base_url}/projects/{project_key}/webapps/{webapp_id}_{safe_name}/edit"
-
-
 class ConnectorProjects(Connector):
+    """TBD"""
 
     ####################################################################
     # Code that has to be customized for this specific class
     ####################################################################
     def __init__(self, config, plugin_config):
-        #  print("[DEBUG agents] Constructor START")
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__count = 0
+        self.__baseurl = get_dss_base_url()
+
+    def get_url(self, project_key, webapp_id, web_app_name):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(
+            v is None for v in (self.__baseurl, webapp_id, project_key, web_app_name)
+        ):
+            return None
+        safe_name = make_url_friendly(web_app_name)
+        return f"{self.__baseurl}/projects/{project_key}/webapps/{webapp_id}_{safe_name}/edit"
 
     def generate_rows(
         self,
@@ -71,12 +70,18 @@ class ConnectorProjects(Connector):
         partition_id=None,
         records_limit=-1,
     ):
+        """TBD"""
+        records_generated = 0
         for project_key in self.__client.list_project_keys():
             try:
                 project = self.__client.get_project(project_key)
                 # List all webapps in the project
+                if records_limit > 0 and records_generated >= records_limit:
+                    return
                 for webapp in project.list_webapps():
                     try:
+                        if records_limit > 0 and records_generated >= records_limit:
+                            return
                         # pp(webapp)
 
                         # Collect relevant metadata
@@ -84,70 +89,85 @@ class ConnectorProjects(Connector):
                             "projectKey": project_key,
                             "webapp_name": webapp.get("name", None),
                             "webapp_id": webapp.get("id", None),
-                            "type": webapp.get("type"),
-                            "created_by_user": webapp.get("createdBy", {}).get("login"),
-                            "backendRunning": webapp.get("backendRunning", None),
-                            "url": get_webapp_url(
+                            "webapp_type": webapp.get("type", None),
+                            "created_by_user": webapp.get("createdBy", {}).get(
+                                "login", None
+                            ),
+                            "backend_running": webapp.get("backendRunning", None),
+                            "url": self.get_url(
                                 project_key,
                                 webapp.get("id", ""),
                                 webapp.get("name", ""),
                             ),
-                            "created_on": datetime.fromtimestamp(
-                                webapp.get("createdOn", None) // 1000
+                            "created_timestamp": datetime.fromtimestamp(
+                                webapp.get("createdOn", 0) // 1000
                             ),
-                            "lastModifiedBy": webapp.get("lastModifiedBy", {}).get(
+                            "last_modified_user": webapp.get("lastModifiedBy", {}).get(
                                 "login", None
                             ),
-                            "lastModifiedOn": datetime.fromtimestamp(
-                                webapp.get("lastModifiedOn", None) // 1000
+                            "last_modified_timestamp": datetime.fromtimestamp(
+                                webapp.get("lastModifiedOn", 0) // 1000
                             ),
-                            "tags": webapp.get("tags", []),
+                            "tags": webapp.get("tags", None),
                             "is_code_webapp": webapp.get("type")
                             in ["SHINY", "STANDARD", "BOKEH", "DASH"],
                         }
-                        self.__count += 1
+                        records_generated += 1
                         yield next_row
                     except Exception as e:
-                        print(f"Skipping webapp due to error: {e}")
+                        print(
+                            f"[webapps-generate_rows] [UNEXPECTED WEBAPP EXCEPTION] {e} with webapp {next_row.get('webapp_name', None)}"
+                        )
 
             except Exception as e:
-                print(f"Skipping project {project_key} due to error: {e}")
+                print(
+                    f"[webapps-generate_rows] [UNEXPECTED PROJECT EXCEPTION] {e} with project {project_key}"
+                )
 
     def get_read_schema(self):
+        """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, URL, 
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, URL,
         return {
             "columns": [
-                {"name": "projectKey", "type": "string", "meaning": "Text"},
-                {"name": "webapp_name", "type": "string", "meaning": "Text"},
                 {"name": "webapp_id", "type": "string", "meaning": "Text"},
-                {"name": "type", "type": "string", "meaning": "Text"},
+                {"name": "webapp_name", "type": "string", "meaning": "Text"},
+                {"name": "projectKey", "type": "string", "meaning": "Text"},
+                {"name": "webapp_type", "type": "string", "meaning": "Text"},
+                {"name": "backend_running", "type": "boolean", "meaning": "Boolean"},
                 {"name": "created_by_user", "type": "string", "meaning": "Text"},
-                {"name": "backendRunning", "type": "boolean", "meaning": "Boolean"},
-                {"name": "url", "type": "string", "meaning": "URL"},
-                {"name": "lastModifiedBy", "type": "string", "meaning": "Text"},
-                {"name": "created_on", "type": "datetimenotz", "meaning": "DatetimeNoTz"},
-                {"name": "lastModifiedOn", "type": "datetimenotz", "meaning": "DatetimeNoTz"},
+                {"name": "last_modified_user", "type": "string", "meaning": "Text"},
+                {
+                    "name": "created_timestamp",
+                    "type": "datetimenotz",
+                    "meaning": "DatetimeNoTz",
+                },
+                {
+                    "name": "last_modified_timestamp",
+                    "type": "datetimenotz",
+                    "meaning": "DatetimeNoTz",
+                },
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "is_code_webapp", "type": "boolean", "meaning": "Boolean"},
+                {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
 
     ####################################################################
-    # Same for all instances:
-    ####################################################################
-    def get_records_count(self, partitioning=None, partition_id=None):
-        # return len(self.objects_list)
-        return self.__count
-
-    ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs for anything that I can find."""
+        return None
+
     def get_partitioning(self):
+        """TBD"""
         raise NotImplementedError
 
     def list_partitions(self, partitioning):
+        """TBD"""
         return []
 
     def partition_exists(self, partitioning, partition_id):
+        """TBD"""
         raise NotImplementedError

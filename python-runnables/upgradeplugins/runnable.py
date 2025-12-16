@@ -38,7 +38,10 @@ class MyRunnable(Runnable):
         """TBD"""
 
         for plugin_info in self.__client.list_plugins():
-            plugin_id = plugin_info["id"]
+            plugin_id = plugin_info.get("id", None)
+
+            if plugin_id is None:
+                continue
 
             # if plugin_id in plugins_to_skip_update:
             #   continue
@@ -46,12 +49,12 @@ class MyRunnable(Runnable):
             plugin_handle = self.__client.get_plugin(plugin_id)
 
             try:
-                print(f"Attempting to update plugin {plugin_id} ... ")
+                # print(f"Attempting to update plugin {plugin_id} ... ")
                 future = plugin_handle.update_from_store()
                 future.wait_for_result()
 
             except Exception as e:
-                print(f"Failed to update {plugin_id}: {str(e)}")
+                print(f"[EXCEPTION] Failed to update {plugin_id}: {e}")
 
     def run(self, progress_callback):
         """

@@ -13,6 +13,80 @@ from pprint import pprint as pp
 from json import dumps as jd
 
 
+def recursive_search_all(data, s):
+    """
+    Recursively searches a dictionary, list, or other object for keys or
+    values that match the string 's'.
+
+    Args:
+        data (dict | list | object): The structure to search.
+        s (str): The key or value string to search for.
+
+    Returns:
+        list: A list of all results found, or None if no matches are found.
+    """
+    results = []
+
+    # --- 1. Handle Dictionaries ---
+    if isinstance(data, dict):
+        for key, value in data.items():
+            # Check the Key
+            if key == s:
+                results.append(value)
+
+            # Check the Value
+            if value == s:
+                results.append(value)
+
+            # Recurse on the Value (Handles nested dicts, lists, etc.)
+            nested_results = recursive_search_all(value, s)
+            if nested_results is not None:
+                results.extend(nested_results)
+
+    # --- 2. Handle Lists and Tuples ---
+    elif isinstance(data, (list, tuple)):
+        for item in data:
+            # Check the Value
+            if item == s:
+                results.append(item)
+
+            # Recurse on the Item
+            nested_results = recursive_search_all(item, s)
+            if nested_results is not None:
+                results.extend(nested_results)
+
+    # --- 3. Handle Primitive/Scalar Types (Final return check) ---
+    # No more recursion is possible here. The value check above covers this.
+
+    # Final check: If the results list is empty, return None as requested
+    if not results:
+        return None
+    else:
+        return results
+
+
+def replace_empty_arrays_sets_with_none(x):
+    """TBD"""
+    try:
+        if (
+            (x is None)
+            or (isinstance(x, str) and x == "[]")
+            or (isinstance(x, list) and len(x) == 0)
+            or (isinstance(x, str) and x == "{}")
+            or (isinstance(x, set) and len(x) == 0)
+            or (isinstance(x, dict) and (not x))
+        ):
+            # if x is None or x in ["[]", "{}", "null"] or len(x) == 0:
+            return None
+    except Exception as e:
+        print(
+            f"[replace_empty_arrays_sets_with_none] EXCEPTION: {str(type(x))} {str(x)} {e}"
+        )
+        return x
+    # print(f"[replace_empty_arrays_sets_with_none]: {str(type(x))} {str(x)}")
+    return x
+
+
 def get_dss_external_url():
     """TBD"""
     # 1. Initialize the client (connects to local instance)
@@ -41,7 +115,7 @@ def get_dss_url_from_env():
     if ext_host and base_port:
         # Note: You may need to infer the scheme (http vs https)
         # based on your knowledge of the instance setup.
-        return f"http://{ext_host}:{base_port}/"
+        return f"http://{ext_host}:{base_port}"
     return None
 
 
@@ -57,16 +131,17 @@ def get_dss_url_from_global_vars():
 
 
 def get_dss_base_url():
-    """TBD"""
-    return (
+    """returns the base URL for the local node, without a trailing slash"""
+    res = (
         get_dss_url_from_env()
         or get_dss_external_url()
         or get_dss_url_from_global_vars()
     )
+    return res.rstrip("/")
 
 
 def safe_extract_dataset_metadata(dataset_handle, pk):
-    """TBD"""
+    """SLOW! Adds 1.36 seconds per dataset (row) on average"""
     assert isinstance(
         dataset_handle, dataikuapi.dss.dataset.DSSDataset
     ), f"safe_extract_dataset_metadata - Assertion failed: Expecting DSSDataset, got {type(dataset_handle)}"
@@ -232,10 +307,11 @@ def int_to_datetime(timestamp: int) -> datetime:
     """
     # Detect if the timestamp is in milliseconds
     if not isinstance(timestamp, int):
-        t = str(type(timestamp))
-        print(f"int_to_datetime - not an integer: {timestamp} - {t}")
-        return None
+        # t = str(type(timestamp))
+        # print(f"int_to_datetime - not an integer: {timestamp} - {t}")
+        timestamp = 0
 
+    # can cause a bug in like 50k years from now? ;-)
     if timestamp > 1e12:
         timestamp /= 1000  # convert to seconds
 

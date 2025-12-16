@@ -1,23 +1,13 @@
+"""TBD"""
+
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import *
+from xzibit.utils import flatten_dict
 
-# Meanings don't have an obvious, dedicated URL
-
-def get_dataset_url(project_key, dataset_id):
-    # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/datasets/Sales_Marketing_queries/explore/
-    try:
-        base_url = get_dss_base_url()
-        if base_url is None or project_key is None or dataset_id is None:
-            return None
-        # trailing slash is MANDATORY
-        return f"{base_url}/projects/{project_key}/datasets/{dataset_id}/explore/"
-    except Exception: # yeah, I know this is bad practice
-        return None
-
+# MEANINGS do not have URLs, so no need to get base URL
 
 
 class ConnectorMeanings(Connector):
@@ -28,16 +18,11 @@ class ConnectorMeanings(Connector):
     ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
-
         self.__client = api_client()
-        self.__keys = [
-            "label",
-            "description",
-            "detectable",
-            "type",
-            "id",
-            "normalizationMode",
-        ]
+
+    def get_url(self):
+        """Meanings do not have URLs."""
+        return None
 
     def generate_rows(
         self,
@@ -47,9 +32,19 @@ class ConnectorMeanings(Connector):
         records_limit=-1,
     ):
         """TBD"""
+        # TODO: add support for records_generated limit
+        keys = [
+            "label",
+            "description",
+            "detectable",
+            "type",
+            "id",
+            "normalizationMode",
+        ]
         # iterate through each object
         for item_info in self.__client.list_meanings():
-            next_row = flatten_dict(item_info, include_keys=self.__keys)
+            next_row = flatten_dict(item_info, include_keys=keys)
+            # intentinally no URL for meanings
             yield next_row
 
     def get_read_schema(self):
@@ -58,22 +53,23 @@ class ConnectorMeanings(Connector):
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
+                {"name": "id", "type": "string", "meaning": "Text"},
                 {"name": "label", "type": "string", "meaning": "Text"},
-                {"name": "description", "type": "string", "meaning": "FreeText"},
                 {"name": "detectable", "type": "boolean", "meaning": "Boolean"},
                 {"name": "type", "type": "string", "meaning": "Text"},
-                {"name": "id", "type": "string", "meaning": "Text"},
                 {"name": "normalizationMode", "type": "string", "meaning": "Text"},
+                {"name": "description", "type": "string", "meaning": "FreeText"},
+                # intentinally no URL for meanings
             ]
         }
-
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """TBD"""
-        return len(self.__client.list_meanings())
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs for anything that I can find."""
+        return None
+
     def get_partitioning(self):
         """TBD"""
         raise NotImplementedError

@@ -1,12 +1,15 @@
+"""TBD"""
+
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import *
+from xzibit.utils import get_dss_base_url, pp
 
 
 class ConnectorRecipes(Connector):
+    """TBD"""
 
     ####################################################################
     # Code that has to be customized for this specific class
@@ -15,25 +18,20 @@ class ConnectorRecipes(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__objects_list = {}
-        self.__count = 0
         self.__baseurl = get_dss_base_url()
-        
+
         for pk in self.__client.list_project_keys():
             project_handle = self.__client.get_project(pk)
             self.__objects_list[pk] = project_handle.list_recipes(as_type="objects")
-            self.__count += len(self.__objects_list[pk])
-        
 
-    def get_recipe_url(self, project_key, recipe_id):
-        # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/PMMOPTIMIZINGOMNICHANNELMARKETINGLLM/recipes/compute_Product_sales_by_acc_joined/
-        try:
-            if self.__baseurl is None or project_key is None or recipe_id is None:
-                return None
-            return f"{self.__baseurl}/projects/{project_key}/recipes/{recipe_id}/"
-        except Exception: # yeah, I know this is bad practice
+    def get_url(self, id, project_key):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, id, project_key)):
             return None
+        return f"{self.__baseurl}/projects/{project_key}/recipes/{id}/"
 
-            
     def generate_rows(
         self,
         dataset_schema=None,
@@ -41,64 +39,114 @@ class ConnectorRecipes(Connector):
         partition_id=None,
         records_limit=-1,
     ):
+        """TBD"""
+        records_generated = 0
         # iterate through each object
         for pk, proj_recipes in self.__objects_list.items():
+            if records_limit > 0 and records_generated >= records_limit:
+                return
+
             project_handle = self.__client.get_project(pk)
 
             for r in proj_recipes:
+                if records_limit > 0 and records_generated >= records_limit:
+                    return
+
                 recipe_handle = project_handle.get_recipe(r.id)
                 recipe_settings_handle = recipe_handle.get_settings()
                 raw_data = recipe_settings_handle.get_recipe_raw_definition()
+                # pp(raw_data)
 
                 next_row = {
                     "projectKey": pk,
-                    "id": r.id,
-                    "type": raw_data["type"],
-                    "name": recipe_handle.name,
+                    "recipe_id": r.id,
+                    "recipe_type": raw_data["type"],
+                    "recipe_name": recipe_handle.name,
                     "tags": raw_data["tags"],
-                    "url_recipe": self.get_recipe_url(pk, r.id),
+                    "url": self.get_url(r.id, pk),
                 }
                 try:
-                    next_row["input_datasets"] = recipe_settings_handle.get_flat_input_refs()
-                    next_row["output_datasets"] = recipe_settings_handle.get_flat_output_refs()
-                except Exception:
-                    print("Exception in Recipe input/output datasets.")
+                    # GUI produces this error message when visiting this recipe's inputs/utputs
+                    # An invalid argument has been encountered : Failed to iterate, caused by: IllegalArgumentException: No parameters dataset selected for repeating dataset/recipe
+                    # Seems to happen with the Export To Folder recipe, which exports files to folder.
+                    # if the user has not set the "Parameters dataset" option for this recipe, or maybe if that dataset has been deleted, then it will throw an exception.
+
+                    next_row["engine_parameters"] = raw_data.get("params", {}).get(
+                        "engineParams", None
+                    )
+                    next_row["last_modified_user"] = (
+                        raw_data.get("versionTag", {})
+                        .get("lastModifiedBy", {})
+                        .get("login", None)
+                    )
+
+                    next_row["input_datasets"] = (
+                        recipe_settings_handle.get_flat_input_refs()
+                    )
+                    try:
+                        next_row["output_datasets"] = (
+                            recipe_settings_handle.get_flat_output_refs()
+                        )
+                    except Exception as e:
+                        # this occurs often on Dev-Design.
+                        print(
+                            f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe output dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
+                        )
+                except Exception as e:
+                    # this occurs often on Dev-Design.
+                    print(
+                        f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe input dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
+                    )
                 finally:
+                    records_generated += 1
                     yield next_row
 
     def get_read_schema(self):
+        """Returns the read schema for TBD"""
+        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
-                {"name": "projectKey", "type": "string", "meaning": "Text"},
-                {"name": "id", "type": "string", "meaning": "Text"},
-                {"name": "type", "type": "string", "meaning": "Text"},
-                {"name": "name", "type": "string", "meaning": "Text"},
-                {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
+                {"meaning": "Text", "name": "recipe_id", "type": "string"},
+                {"meaning": "Text", "name": "recipe_name", "type": "string"},
+                {"meaning": "Text", "name": "projectKey", "type": "string"},
+                {"meaning": "Text", "name": "recipe_type", "type": "string"},
                 {
+                    "meaning": "JSONArrayMeaning",
                     "name": "input_datasets",
                     "type": "string",
-                    "meaning": "JSONArrayMeaning",
                 },
                 {
+                    "meaning": "JSONArrayMeaning",
                     "name": "output_datasets",
                     "type": "string",
-                    "meaning": "JSONArrayMeaning",
                 },
+                {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
+                {
+                    "meaning": "JSONObjectMeaning",
+                    "name": "engine_parameters",
+                    "type": "string",
+                },
+                {"meaning": "Text", "name": "last_modified_user", "type": "string"},
+                {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
-
-    def get_records_count(self, partitioning=None, partition_id=None):
-        # return len(self.objects_list)
-        return self.__count
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs for anything that I can find."""
+        return None
+
     def get_partitioning(self):
+        """TBD"""
         raise NotImplementedError
 
     def list_partitions(self, partitioning):
+        """TBD"""
         return []
 
     def partition_exists(self, partitioning, partition_id):
+        """TBD"""
         raise NotImplementedError
