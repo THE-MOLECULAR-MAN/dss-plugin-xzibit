@@ -90,6 +90,7 @@ class ConnectorProjects(Connector):
                             f"[generate_rows] [UNEXPECTED EXCEPTION] {e} with object"
                         )
                     finally:
+                        # return something, even if an exception occurred.
                         records_generated += 1
                         yield next_row                       
 
