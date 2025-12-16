@@ -50,7 +50,7 @@ class ConnectorProjects(Connector):
                     try:
                         if records_limit > 0 and records_generated >= records_limit:
                             return
-                        kb_info = kb.
+                        kb_settings_raw = kb.get_settings.get_raw()
                         
                         pp()
                       
