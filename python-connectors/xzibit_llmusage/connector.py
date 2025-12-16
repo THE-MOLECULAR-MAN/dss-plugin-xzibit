@@ -62,7 +62,7 @@ class ConnectorProjects(Connector):
                         records_generated += 1
                         yield next_row
                         
-               for agent_tool_handle in project.list_agent_tools(as_type='objects'):
+                for agent_tool_handle in project.list_agent_tools(as_type='objects'):
                     try: 
                         next_row = {"projectKey": project_key, "dss_object_type": "agent tool"}
                         next_row['dss_object_id'] = agent_tool_handle.id
