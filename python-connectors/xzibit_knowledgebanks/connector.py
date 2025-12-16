@@ -50,8 +50,9 @@ class ConnectorProjects(Connector):
                     try:
                         if records_limit > 0 and records_generated >= records_limit:
                             return
+                        kb_info = 
                         
-                        pp(pp)
+                        pp()
                       
                         next_row = {"projectKey": project_key}
                         next_row["kb_name"] = kb.get("name", None)
