@@ -31,6 +31,17 @@ class ConnectorProjects(Connector):
             return None
         return f"{self.__baseurl}/projects/{project_key}/savedmodels/{id}/retrieval-augmented-llm/S-{project_key}-{id}-{name}"
     
+    def get_current_version_info(self, current_version_id, version_info):
+        """TBD"""
+        try:
+            for v in version_info:
+                if v.get("versionId",None) == current_version_id:
+                    return v
+            
+            return None
+        except:
+            return None
+    
     def generate_rows(
         self,
         dataset_schema=None,
