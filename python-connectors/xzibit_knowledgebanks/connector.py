@@ -60,7 +60,7 @@ class ConnectorProjects(Connector):
                         next_row["url"] = self.get_url(
                                 project_key,
                                 webapp.get("id", "")
-                            ),
+                            )
 
                         
                         
