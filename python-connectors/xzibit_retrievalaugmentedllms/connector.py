@@ -87,8 +87,6 @@ class ConnectorProjects(Connector):
                         
                         versions = settings_raw.get('versions', {})
                         current_version_info_raw = self.get_current_version_info(next_row["activeVersion"], versions)
-                        
-                        
 
                         next_row["llmId"] = current_version_info_raw.get("ragllmSettings",{}).get("llmId",None)
                         next_row["kb_id"] = current_version_info_raw.get("ragllmSettings",{}).get("kbRef",None)
