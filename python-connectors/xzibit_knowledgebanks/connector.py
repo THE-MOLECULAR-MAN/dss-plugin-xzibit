@@ -46,29 +46,7 @@ class ConnectorProjects(Connector):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText
-        return {
-            "columns": [
-                {"name": "projectKey", "type": "string", "meaning": "Text"},
-                {"name": "name", "type": "string", "meaning": "Text"},
-                {"name": "shortDesc", "type": "string", "meaning": "FreeText"},
-                {"name": "description", "type": "string", "meaning": "FreeText"},
-                {"name": "ownerLogin", "type": "string", "meaning": "Text"},
-                {"name": "projectStatus", "type": "string", "meaning": "Text"},
-                {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
-                {
-                    "name": "last_modified_timestamp",
-                    "type": "datetimenotz",
-                    "meaning": "DatetimeNoTz",
-                },
-                {"name": "tutorialProject", "type": "boolean", "meaning": "Boolean"},
-                {
-                    "name": "contributors",
-                    "type": "string",
-                    "meaning": "JSONArrayMeaning",
-                },
-                {"name": "url", "type": "string", "meaning": "URL"},
-            ]
-        }
+        return None
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
