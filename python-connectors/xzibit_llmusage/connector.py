@@ -81,7 +81,7 @@ class ConnectorProjects(Connector):
                             # code agents don't have this field filled out. Code agents have to be manually inventoried and updated. boo.
                             continue
                         records_generated += 1
-                        yield next_row
+                        yield self.replace_retired_llm_responses(next_row)
                         
                 for agent_tool_handle in project.list_agent_tools(as_type='objects'):
                     try: 
@@ -97,7 +97,7 @@ class ConnectorProjects(Connector):
                         if not next_row['llmId']:
                             continue
                         records_generated += 1
-                        yield next_row
+                        yield self.replace_retired_llm_responses(next_row)
                         
                 for handle in project.list_knowledge_banks(as_type='objects'):
                     try: 
