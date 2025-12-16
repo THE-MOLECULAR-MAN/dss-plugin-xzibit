@@ -89,12 +89,15 @@ class ConnectorProjects(Connector):
                         current_version_info_raw = self.get_current_version_info(next_row["activeVersion"], versions)
                         
                         
-                        
+
+                        next_row["llmId"] = current_version_info_raw.get("ragllmSettings",{}).get("llmId",None)
+                        next_row["url"] = self.get_url(next_row["id"], project_key, next_row["activeVersion"])
+
                         # next_row["name"] = settings_raw.get('name', None)
                         
 
                         # URL is fetched using class method that specifically implements this DSS object type:
-                        next_row["url"] = self.get_url(next_row["id"], project_key, next_row["activeVersion"])
+
                         
                         # add features that are almost always the same for different DSS object types
                         next_row["created_timestamp"] = datetime.fromtimestamp(current_version_info_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
@@ -102,7 +105,6 @@ class ConnectorProjects(Connector):
                         next_row["last_modified_timestamp"] = datetime.fromtimestamp(current_version_info_raw.get("versionTag",{}).get("lastModifiedOn", 0) // 1000)
                         next_row["tags"] = settings_raw.get("tags", None)
                         next_row["created_by_user"] = current_version_info_raw.get("creationTag",{}).get("lastModifiedBy", {}).get("login", None)                        
-                        next_row["llmId"] = current_version_info_raw.get("ragllmSettings",{}).get("llmId",None)
                         
                     except Exception as e:
                         print(
