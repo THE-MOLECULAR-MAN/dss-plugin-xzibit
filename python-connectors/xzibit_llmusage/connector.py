@@ -111,7 +111,6 @@ class ConnectorProjects(Connector):
                         records_generated += 1
                         yield next_row
 
-                        
                 # RA LLMs
                 for handle in project.list_retrieval_augmented_llms(as_type='objects'):
                     try: 
