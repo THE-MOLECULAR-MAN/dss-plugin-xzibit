@@ -60,7 +60,7 @@ class ConnectorProjects(Connector):
                         print(f"[EXCEPTION] generate rows - llm Usage - agents: {e}")
                     finally:
                         if not next_row['llmId']:
-                            # code agents don't have this field filled out. Code agents have to be manually inventoried and updated.
+                            # code agents don't have this field filled out. Code agents have to be manually inventoried and updated. boo.
                             continue
                         records_generated += 1
                         yield next_row
