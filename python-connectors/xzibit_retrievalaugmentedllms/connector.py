@@ -102,6 +102,7 @@ class ConnectorProjects(Connector):
                         next_row["last_modified_timestamp"] = datetime.fromtimestamp(current_version_info_raw.get("versionTag",{}).get("lastModifiedOn", 0) // 1000)
                         next_row["tags"] = settings_raw.get("tags", None)
                         next_row["created_by_user"] = current_version_info_raw.get("creationTag",{}).get("lastModifiedBy", {}).get("login", None)                        
+                        next_row["llmId"] = current_version_info_raw.get("ragllmSettings",{}).get("llmId",None)
                         
                     except Exception as e:
                         print(
