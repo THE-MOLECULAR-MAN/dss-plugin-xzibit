@@ -87,7 +87,7 @@ class ConnectorProjects(Connector):
                         
                     except Exception as e:
                         print(
-                            f"[webapps-generate_rows] [UNEXPECTED WEBAPP EXCEPTION] {e} with webapp {next_row.get('webapp_name', None)}"
+                            f"[generate_rows] [UNEXPECTED EXCEPTION] {e} with object {next_row.get('id', None)}"
                         )
                     finally:
                         records_generated += 1
