@@ -26,7 +26,24 @@ class ConnectorProjects(Connector):
         self.__baseurl = get_dss_base_url()
         self.__REPLACEMENT_MSG = "LLM no longer available. It has been disabled or retired."
         
-    
+    def self.replace_retired_llm_responses(input_list: List[str]) -> List[str]:
+        """
+        Iterates through a list of strings and replaces exact matches of empty strings ('') 
+        with a specific deprecation message.
+
+        This function is idempotent: running it multiple times on the same input 
+        produces the same result.
+
+        Args:
+            input_list (List[str]): The list of strings to evaluate.
+
+        Returns:
+            List[str]: A new list with empty strings replaced.
+        """
+        # REPLACEMENT_MSG = "LLM no longer available. It has been disabled or retired."
+
+        # Pythonic list comprehension for efficiency and readability
+        return [self.__REPLACEMENT_MSG if item == '' else item for item in input_list]
 
    
     def generate_rows(
