@@ -102,7 +102,7 @@ class ConnectorProjects(Connector):
                         next_row = {"projectKey": project_key, "dss_object_type": "recipe"}
                         next_row['dss_object_id'] = handle.id
                         next_row['dss_object_name'] = handle.name
-                        data = handle.get_settings().get_raw()
+                        data = handle.get_settings().get_recipe_raw_definition()
                         pp(data)
                         next_row['llmId'] = 'hardcoded' # recursive_search_all(data, 'llmId')
                     except Exception as e:
