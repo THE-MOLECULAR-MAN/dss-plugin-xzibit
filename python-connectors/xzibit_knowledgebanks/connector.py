@@ -53,12 +53,16 @@ class ConnectorProjects(Connector):
 
                         # initializing first column in case their is an exception, the yield will still work
                         next_row = {"projectKey": project_key}
-
+                        
+                        # fetch settings as dict
                         settings_raw = kb.get_settings().get_raw()
-                        pp(settings_raw)
+                        
+                        # display debug info during development, adding features:
+                        # pp(settings_raw)
+                        
+                        # add features that are unique to this object type
                         next_row["kb_id"] = settings_raw.get('id', None)
                         next_row["kb_name"] = settings_raw.get('name', None)
-                        
                         next_row["kb_embeddingLLMId"] = settings_raw.get('embeddingLLMId', None)
                         next_row["retrieverType"] = settings_raw.get('retrieverType', None)
                         next_row["kb_vectorStoreType"] = settings_raw.get('vectorStoreType', None)
@@ -67,6 +71,7 @@ class ConnectorProjects(Connector):
                         next_row["multimodalColumn"] = settings_raw.get("multimodalColumn", None)
                         next_row["rebuildBehavior"] = settings_raw.get("rebuildBehavior", None)
 
+                        # add features that are almost always the same for different object types
                         next_row["created_timestamp"] = datetime.fromtimestamp(settings_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
                         next_row["last_modified_user"] = settings_raw.get("versionTag",{}).get("lastModifiedBy", {}).get("login", None)
                         next_row["last_modified_timestamp"] = datetime.fromtimestamp(settings_raw.get("versionTag",{}).get("lastModifiedOn", 0) // 1000)
