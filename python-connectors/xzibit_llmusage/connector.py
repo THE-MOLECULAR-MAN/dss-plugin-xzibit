@@ -93,7 +93,7 @@ class ConnectorProjects(Connector):
                         pp(data)
                         next_row['dss_object_name'] = data.get('name', None)
                         # next_row['llmId'] =  data.get('params',{}).get('llmId', None)
-                        next_row['llmId'] =  'fake' # recursive_search_all(data, "llmId")
+                        next_row['llmId'] =  data.get('embeddingLLMId', None)
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agent tool: {e}")
                     finally:
