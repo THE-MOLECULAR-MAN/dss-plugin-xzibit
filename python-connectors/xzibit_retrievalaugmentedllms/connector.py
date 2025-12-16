@@ -52,7 +52,7 @@ class ConnectorProjects(Connector):
 
                 # iterate through Knowledge Banks in this project as objects
                 # intentionally not using 'list' since that can be slower for some object types
-                for kb in project.list_retrieval_augmented_llms(as_type='objects'):
+                for obj_handle in project.list_retrieval_augmented_llms(as_type='objects'):
                     try:
 
                         # exit early if exceeded the number of records requested
@@ -63,7 +63,7 @@ class ConnectorProjects(Connector):
                         next_row = {"projectKey": project_key}
                         
                         # fetch settings as dict
-                        settings_raw = kb.get_settings().get_raw()
+                        settings_raw = intentionally.get_settings().get_raw()
                         
                         # display debug info during development
                         # for example, finding key names when adding new columns to dataset
