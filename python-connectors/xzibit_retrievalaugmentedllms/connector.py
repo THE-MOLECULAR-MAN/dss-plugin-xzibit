@@ -97,11 +97,11 @@ class ConnectorProjects(Connector):
                         # next_row["url"] = self.get_url(next_row["id"], project_key, next_row["name"])
                         
                         # add features that are almost always the same for different DSS object types
-                        # next_row["created_timestamp"] = datetime.fromtimestamp(current_version_info_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
-                        # next_row["last_modified_user"] = current_version_info_raw.get("versionTag",{}).get("lastModifiedBy", {}).get("login", None)
-                        # next_row["last_modified_timestamp"] = datetime.fromtimestamp(current_version_info_raw.get("versionTag",{}).get("lastModifiedOn", 0) // 1000)
+                        next_row["created_timestamp"] = datetime.fromtimestamp(current_version_info_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
+                        next_row["last_modified_user"] = current_version_info_raw.get("versionTag",{}).get("lastModifiedBy", {}).get("login", None)
+                        next_row["last_modified_timestamp"] = datetime.fromtimestamp(current_version_info_raw.get("versionTag",{}).get("lastModifiedOn", 0) // 1000)
                         next_row["tags"] = settings_raw.get("tags", None)
-                        # next_row["created_by_user"] = current_version_info_raw.get("creationTag",{}).get("lastModifiedBy", {}).get("login", None)                        
+                        next_row["created_by_user"] = current_version_info_raw.get("creationTag",{}).get("lastModifiedBy", {}).get("login", None)                        
                         
                     except Exception as e:
                         print(
