@@ -40,7 +40,7 @@ class ConnectorProjects(Connector):
                     res = v
 
         except Exception as e:
-            print(f"Exception in get_current_version_info: {e}")
+            print(f"Exception in retrievalaugmentedllms.get_current_version_info: {e}")
         finally:
             return res
     
