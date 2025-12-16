@@ -64,10 +64,6 @@ class ConnectorProjects(Connector):
 
                         
                         
-                        
-                        # Collect relevant metadata
-                        next_row = {
-                            
                             
                             "created_timestamp": datetime.fromtimestamp(
                                 webapp.get("createdOn", 0) // 1000
