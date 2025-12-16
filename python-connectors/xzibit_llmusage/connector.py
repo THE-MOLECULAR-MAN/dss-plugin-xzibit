@@ -61,10 +61,10 @@ class ConnectorProjects(Connector):
                 
                 
             except Exception as e:
-                    print(
-                        f"[generate_rows] [UNEXPECTED EXCEPTION project] {e} with object"
-                    )
-                  
+                print(
+                    f"[generate_rows] [UNEXPECTED EXCEPTION project] {e} with object"
+                )
+
     
 
     def get_read_schema(self):
