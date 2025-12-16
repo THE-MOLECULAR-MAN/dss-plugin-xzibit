@@ -51,6 +51,8 @@ class ConnectorProjects(Connector):
                     agent_data = agent_handle.get_settings().get_raw()
                     next_row = {"projectKey": project_key}
                     
+                    
+                    
                 # agent tools
                 # connections
                 # knowledge banks
