@@ -97,8 +97,9 @@ class ConnectorProjects(Connector):
                         next_row["url"] = self.get_url(next_row["kb_id"], project_key, next_row["activeVersion"])
                         next_row["retrievalColumns"] = current_version_info_raw.get("ragllmSettings",{}).get("retrievalColumns",None)
                         next_row["retrievalSource"] = current_version_info_raw.get("ragllmSettings",{}).get("retrievalSource",None)
-
-
+                        next_row["tools"] = current_version_info_raw.get("
+toolsUsingAgentSettings
+tools
                         
                         # add features that are almost always the same for different DSS object types
                         next_row["created_timestamp"] = datetime.fromtimestamp(current_version_info_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
