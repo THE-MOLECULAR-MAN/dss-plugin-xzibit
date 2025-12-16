@@ -5,7 +5,9 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import remove_prefix_from_keys, flatten_dict, get_dss_base_url, pp
+from xzibit.utils import remove_prefix_from_keys, flatten_dict, get_dss_base_url, recursive_search_all, pp
+
+
 
 ####################################################################
 # Unique imports for this Class
@@ -50,9 +52,10 @@ class ConnectorProjects(Connector):
                 for agent_handle in project.list_agents(as_type='objects'):
                     try: 
                         next_row = {"projectKey": project_key}
-                        agent_data = agent_handle.get_settings().get_raw()
                         next_row['dss_object_id'] = agent_handle.id
                         next_row['dss_object_name'] = agent_handle.name
+                        agent_data = agent_handle.get_settings().get_raw()
+                        next_row['llmId'] = recursive_search_all(agent_data)
                         
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agents: {e}")
