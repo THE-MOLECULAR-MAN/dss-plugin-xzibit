@@ -24,26 +24,9 @@ class ConnectorProjects(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
-
+        self.__REPLACEMENT_MSG = "LLM no longer available. It has been disabled or retired."
         
-    def replace_retired_llm_responses(input_list):
-        """
-        Iterates through a list of strings and replaces exact matches of empty strings ('') 
-        with a specific deprecation message.
 
-        This function is idempotent: running it multiple times on the same input 
-        produces the same result.
-
-        Args:
-            input_list (List[str]): The list of strings to evaluate.
-
-        Returns:
-            List[str]: A new list with empty strings replaced.
-        """
-        REPLACEMENT_MSG = "LLM no longer available. It has been disabled or retired."
-
-        # Pythonic list comprehension for efficiency and readability
-        return [REPLACEMENT_MSG if item == '' else item for item in input_list]
 
    
     def generate_rows(
@@ -81,7 +64,7 @@ class ConnectorProjects(Connector):
                             # code agents don't have this field filled out. Code agents have to be manually inventoried and updated. boo.
                             continue
                         records_generated += 1
-                        yield self.replace_retired_llm_responses(next_row)
+                        yield next_row
                         
                 for agent_tool_handle in project.list_agent_tools(as_type='objects'):
                     try: 
@@ -97,7 +80,7 @@ class ConnectorProjects(Connector):
                         if not next_row['llmId']:
                             continue
                         records_generated += 1
-                        yield self.replace_retired_llm_responses(next_row)
+                        yield next_row
                         
                 for handle in project.list_knowledge_banks(as_type='objects'):
                     try: 
@@ -112,7 +95,7 @@ class ConnectorProjects(Connector):
                         if not next_row['llmId']:
                             continue
                         records_generated += 1
-                        yield self.replace_retired_llm_responses(next_row)
+                        yield next_row
                         
                 # recipes
                 for handle in project.list_recipes(as_type='objects'):
@@ -129,7 +112,7 @@ class ConnectorProjects(Connector):
                         if not next_row['llmId']:
                             continue
                         records_generated += 1
-                        yield self.replace_retired_llm_responses(next_row)
+                        yield next_row
 
                         
                 # RA LLMs
@@ -150,7 +133,7 @@ class ConnectorProjects(Connector):
                         if not next_row['llmId']:
                             continue
                         records_generated += 1
-                        yield self.replace_retired_llm_responses(next_row)
+                        yield next_row
                 
             except Exception as e:
                 print(
