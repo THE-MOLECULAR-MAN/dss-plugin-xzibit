@@ -119,7 +119,7 @@ class ConnectorProjects(Connector):
                     try: 
                         next_row = {"projectKey": project_key, "dss_object_type": "retrieval augmented LLM"}
                         next_row['dss_object_id'] = handle.id
-                        next_row['dss_object_name'] = None # they don't have a name
+                        next_row['dss_object_name'] = None # they don't have a name, or they're stored inside the active version info
                         data = handle.get_settings().get_raw()
                         # pp(data)
                         next_row['llmId'] = recursive_search_all(data, 'llmId')
