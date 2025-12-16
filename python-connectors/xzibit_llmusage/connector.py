@@ -112,7 +112,24 @@ class ConnectorProjects(Connector):
                             continue
                         records_generated += 1
                         yield next_row
-                
+
+                        
+                # RA LLMs
+                for handle in project.list_retrieval_augmented_llms(as_type='objects'):
+                    try: 
+                        next_row = {"projectKey": project_key, "dss_object_type": "retrieval augmented LLM"}
+                        next_row['dss_object_id'] = handle.id
+                        next_row['dss_object_name'] = handle.name
+                        data = handle.get_settings().get_raw()
+                        # pp(data)
+                        next_row['llmId'] = recursive_search_all(data, 'llmId') or recursive_search_all(data, 'embeddingLLMId')
+                    except Exception as e:
+                        print(f"[EXCEPTION] generate rows - llm Usage - recipe: {e}")
+                    finally:
+                        if not next_row['llmId']:
+                            continue
+                        records_generated += 1
+                        yield next_row
                 
             except Exception as e:
                 print(
