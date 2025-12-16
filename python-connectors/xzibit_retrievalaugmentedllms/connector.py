@@ -70,15 +70,9 @@ class ConnectorProjects(Connector):
                         pp(settings_raw)
                         
                         # add features that are unique to this object type
-                        next_row["kb_id"] = settings_raw.get('id', None)
-                        next_row["kb_name"] = settings_raw.get('name', None)
-                        next_row["kb_embeddingLLMId"] = settings_raw.get('embeddingLLMId', None)
-                        next_row["retrieverType"] = settings_raw.get('retrieverType', None)
-                        next_row["kb_vectorStoreType"] = settings_raw.get('vectorStoreType', None)
-                        next_row["envSelection"] = settings_raw.get('envSelection', None)
-                        next_row["managedFolderId"] = settings_raw.get("managedFolderId", None)
-                        next_row["multimodalColumn"] = settings_raw.get("multimodalColumn", None)
-                        next_row["rebuildBehavior"] = settings_raw.get("rebuildBehavior", None)
+                        next_row["id"] = settings_raw.get('id', None)
+                        next_row["name"] = settings_raw.get('name', None)
+                        
 
                         # URL is fetched using class method that specifically implements this DSS object type:
                         next_row["url"] = self.get_url(project_key, next_row["kb_id"])
