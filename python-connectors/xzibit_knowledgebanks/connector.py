@@ -62,20 +62,12 @@ class ConnectorProjects(Connector):
                                 webapp.get("id", "")
                             )
 
+                        next_row["created_timestamp"] = datetime.fromtimestamp(webapp.get("createdOn", 0) // 1000)
+                        next_row["last_modified_user"] = webapp.get("lastModifiedBy", {}).get("login", None)
+                        next_row["last_modified_timestamp"] = datetime.fromtimestamp(webapp.get("lastModifiedOn", 0) // 1000)
+                        next_row["tags"] = webapp.get("tags", None)                        
                         
                         
-                            
-                            "created_timestamp": datetime.fromtimestamp(
-                                webapp.get("createdOn", 0) // 1000
-                            ),
-                            "last_modified_user": webapp.get("lastModifiedBy", {}).get(
-                                "login", None
-                            ),
-                            "last_modified_timestamp": datetime.fromtimestamp(
-                                webapp.get("lastModifiedOn", 0) // 1000
-                            ),
-                            "tags": webapp.get("tags", None),
-                        }
                         records_generated += 1
                         yield next_row
                     except Exception as e:
