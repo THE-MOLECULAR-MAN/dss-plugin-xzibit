@@ -51,10 +51,9 @@ class ConnectorProjects(Connector):
                     try: 
                         next_row = {"projectKey": project_key}
                         agent_data = agent_handle.get_settings().get_raw()
-
-
                         next_row['dss_object_id'] = agent_handle.id
                         next_row['dss_object_name'] = agent_handle.name
+                        
                     except Exception as e:
                         print(f"[EXCEPTION]")
                     
