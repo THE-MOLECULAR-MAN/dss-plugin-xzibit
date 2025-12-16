@@ -86,20 +86,14 @@ class ConnectorProjects(Connector):
                 print("!!!!! 10")
                 for handle in project.list_knowledge_banks(as_type='objects'):
                     try: 
-                        print("!!!!! 20")
                         next_row = {"projectKey": project_key, "dss_object_type": "knowledge bank"}
-                        print("!!!!! 30")
-
                         next_row['dss_object_id'] = handle.id
-                        
                         data = handle.get_settings().get_raw()
-                        pp(data)
                         next_row['dss_object_name'] = data.get('name', None)
                         next_row['llmId'] =  recursive_search_all(data, 'embeddingLLMId')
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agent tool: {e}")
                     finally:
-
                         if not next_row['llmId']:
                             continue
                         records_generated += 1
