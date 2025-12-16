@@ -56,7 +56,7 @@ class ConnectorProjects(Connector):
                         
                         agent_data = agent_handle.get_settings().get_raw()
                         next_row['dss_object_name'] = agent_data.get('name',None)
-                        # next_row['llmId'] = recursive_search_all(agent_data, "llmId")
+                        next_row['llmId'] = recursive_search_all(agent_data, "llmId")
                         
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agents: {e}")
