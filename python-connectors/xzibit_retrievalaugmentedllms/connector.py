@@ -95,8 +95,8 @@ class ConnectorProjects(Connector):
 
                         # URL is fetched using class method that specifically implements this DSS object type:
                         next_row["url"] = self.get_url(next_row["kb_id"], project_key, next_row["activeVersion"])
-                        next_row["retrievalColumns"] = current_version_info_raw.get("retrievalColumns",None)
-                        next_row["retrievalSource"] = current_version_info_raw.get("retrievalSource",None)
+                        next_row["retrievalColumns"] = current_version_info_raw.get("ragllmSettings",{}).get("retrievalColumns",None)
+                        next_row["retrievalSource"] = current_version_info_raw.get("ragllmSettings",{}).get("retrievalSource",None)
 
 
                         
