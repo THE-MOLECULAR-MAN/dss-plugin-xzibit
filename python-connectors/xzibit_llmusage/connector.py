@@ -24,6 +24,7 @@ class ConnectorProjects(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
+        self.__REPLACEMENT_MSG = "LLM no longer available. It has been disabled or retired."
         
     
 
@@ -124,6 +125,8 @@ class ConnectorProjects(Connector):
                         next_row['dss_object_id'] = data.get("id", None)
 
                         next_row['llmId'] = recursive_search_all(data, 'llmId')
+                        
+                        
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - RA LLM: {e}")
                     finally:
