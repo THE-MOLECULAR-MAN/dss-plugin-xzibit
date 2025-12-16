@@ -71,7 +71,7 @@ class ConnectorProjects(Connector):
                         
                         # add features that are unique to this object type
                         next_row["id"] = settings_raw.get('id', None)
-                        next_row["name"] = settings_raw.get('name', None)
+                        # next_row["name"] = settings_raw.get('name', None)
                         
 
                         # URL is fetched using class method that specifically implements this DSS object type:
