@@ -105,7 +105,7 @@ class ConnectorProjects(Connector):
                         data = handle.get_settings().get_raw()
                         pp(data)
                          = data.get('name', None)
-                        next_row['llmId'] =  recursive_search_all(data, 'llmId')
+                        next_row['llmId'] = 'hardcoded' # recursive_search_all(data, 'llmId')
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agent tool: {e}")
                     finally:
