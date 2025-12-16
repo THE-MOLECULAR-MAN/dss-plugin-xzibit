@@ -48,12 +48,10 @@ class ConnectorProjects(Connector):
                 # objects that can use LLMs:
                 # agents
                 # agent tools
-                # apps?
                 # connections
                 # knowledge banks
                 # recipe
                 # RA LLms
-                # web apps?
                 
                 # yield next_row                       
 
