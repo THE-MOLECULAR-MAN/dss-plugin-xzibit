@@ -48,8 +48,9 @@ class ConnectorProjects(Connector):
                 # objects that can use LLMs:
                 # agents
                 for agent_handle in project.list_agents(as_type='objects'):
-                    agent_data = agent_handle.get_settings().get_raw()
                     next_row = {"projectKey": project_key}
+                    agent_data = agent_handle.get_settings().get_raw()
+
                     
                     next_row['dss_object_id'] = agent_handle.id
                     next_row['dss_object_name'] = agent_handle.name
