@@ -34,7 +34,7 @@ class ConnectorProjects(Connector):
     def get_current_version_info(self, current_version_id, version_info):
         """TBD"""
         try:
-            res = {None}
+            res = {}
             for v in version_info:
                 if v.get("versionId",None) == current_version_id:
                     res = v
