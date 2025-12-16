@@ -23,13 +23,14 @@ class ConnectorProjects(Connector):
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
 
-    def get_url(self, project_key):
+    def get_url(self, project_key, kb_id):
         """Create a URL to the object in question in this specific DSS instance.
         Return None if any of the inputs are None."""
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, project_key)):
             return None
-        return f"{self.__baseurl}/projects/{project_key}/flow/"
+        # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/Utility_Outage_Modeling_and_Prediction/knowledge-bank/G1httEzX/settings/
+        return f"{self.__baseurl}/projects/{project_key}/knowledge-bank/{kb_id}/settings/"
 
     def generate_rows(
         self,
