@@ -55,17 +55,14 @@ class ConnectorProjects(Connector):
                         # Collect relevant metadata
                         next_row = {
                             "projectKey": project_key,
-                            "webapp_name": webapp.get("name", None),
-                            "webapp_id": webapp.get("id", None),
-                            "webapp_type": webapp.get("type", None),
+                            "kb_name": webapp.get("name", None),
+                            "kb_id": webapp.get("id", None),
                             "created_by_user": webapp.get("createdBy", {}).get(
                                 "login", None
                             ),
-                            "backend_running": webapp.get("backendRunning", None),
                             "url": self.get_url(
                                 project_key,
-                                webapp.get("id", ""),
-                                webapp.get("name", ""),
+                                webapp.get("id", "")
                             ),
                             "created_timestamp": datetime.fromtimestamp(
                                 webapp.get("createdOn", 0) // 1000
@@ -77,8 +74,6 @@ class ConnectorProjects(Connector):
                                 webapp.get("lastModifiedOn", 0) // 1000
                             ),
                             "tags": webapp.get("tags", None),
-                            "is_code_webapp": webapp.get("type")
-                            in ["SHINY", "STANDARD", "BOKEH", "DASH"],
                         }
                         records_generated += 1
                         yield next_row
