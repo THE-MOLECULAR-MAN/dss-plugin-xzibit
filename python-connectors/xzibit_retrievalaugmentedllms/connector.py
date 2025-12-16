@@ -29,7 +29,8 @@ class ConnectorProjects(Connector):
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, id, project_key, agent_version)):
             return None
-        return f"{self.__baseurl}/projects/{project_key}/savedmodels/{id}/agent/S-{project_key}-{id}-{agent_version}"
+        return f"{self.__baseurl}/projects/{project_key}/savedmodels/{id}/retrieval-augmented-llm/S-{project_key}-{id}-{agent_version}"
+    
     def generate_rows(
         self,
         dataset_schema=None,
