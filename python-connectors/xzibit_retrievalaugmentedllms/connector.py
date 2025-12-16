@@ -91,7 +91,7 @@ class ConnectorProjects(Connector):
                         
 
                         next_row["llmId"] = current_version_info_raw.get("ragllmSettings",{}).get("llmId",None)
-                        next_row["kbRef"] = current_version_info_raw.get("ragllmSettings",{}).get("kbRef",None)
+                        next_row["kb_id"] = current_version_info_raw.get("ragllmSettings",{}).get("kbRef",None)
 
                         # URL is fetched using class method that specifically implements this DSS object type:
                         next_row["url"] = self.get_url(next_row["id"], project_key, next_row["activeVersion"])
