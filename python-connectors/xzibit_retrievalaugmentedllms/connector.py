@@ -86,7 +86,8 @@ class ConnectorProjects(Connector):
                         next_row["activeVersion"] = settings_raw.get('activeVersion', None)
                         
                         versions = settings_raw.get('versions', {})
-                        settings_raw
+                        version_raw = self.get_current_version_info(next_row["activeVersion"], versions)
+                        
                         
                         
                         # next_row["name"] = settings_raw.get('name', None)
