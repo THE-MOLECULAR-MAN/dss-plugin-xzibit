@@ -111,7 +111,7 @@ class ConnectorProjects(Connector):
                         records_generated += 1
                         yield next_row
 
-                # RA LLMs
+                # retrieval augmented LLM
                 for handle in project.list_retrieval_augmented_llms(as_type='objects'):
                     try: 
                         next_row = {"projectKey": project_key, "dss_object_type": "retrieval augmented LLM"}
