@@ -83,10 +83,13 @@ class ConnectorProjects(Connector):
                         records_generated += 1
                         yield next_row
                         
-                        
+                print("!!!!! 10")
                 for handle in project.list_knowledge_banks(as_type='objects'):
                     try: 
+                        print("!!!!! 20")
                         next_row = {"projectKey": project_key, "dss_object_type": "knowledge bank"}
+                        print("!!!!! 30")
+
                         next_row['dss_object_id'] = kb_handle.id
                         
                         data = handle.get_settings().get_raw()
@@ -97,6 +100,7 @@ class ConnectorProjects(Connector):
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - agent tool: {e}")
                     finally:
+                        print("!!!!! 40")                        
                         if not next_row['llmId']:
                             continue
                         records_generated += 1
