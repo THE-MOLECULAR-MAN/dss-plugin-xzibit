@@ -34,12 +34,15 @@ class ConnectorProjects(Connector):
     def get_current_version_info(self, current_version_id, version_info):
         """TBD"""
         try:
+            res = None
             for v in version_info:
                 if v.get("versionId",None) == current_version_id:
-                    return v
-            return None
-        except:
-            return None
+                    res = v
+
+        except Exception as e:
+            print(f"Exception in get_current_version_info: {e}")
+        finally:
+            return res
     
     def generate_rows(
         self,
