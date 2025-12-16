@@ -24,9 +24,6 @@ class ConnectorProjects(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
-        self.__REPLACEMENT_MSG = "LLM no longer available. It has been disabled or retired."
-        
-
 
    
     def generate_rows(
