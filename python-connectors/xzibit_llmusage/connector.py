@@ -45,6 +45,16 @@ class ConnectorProjects(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     return
 
+                # objects that can use LLMs:
+                # agents
+                # agent tools
+                # apps?
+                # connections
+                # knowledge banks
+                # recipe
+                # RA LLms
+                # web apps?
+                
                 # yield next_row                       
 
             except Exception as e:
