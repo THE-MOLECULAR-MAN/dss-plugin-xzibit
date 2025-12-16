@@ -22,6 +22,8 @@ class ConnectorProjects(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
+        
+    
 
    
     def generate_rows(
@@ -43,50 +45,7 @@ class ConnectorProjects(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     return
 
-                # iterate through Knowledge Banks in this project as objects
-                # intentionally not using 'list' since that can be slower for some object types
-                for kb in project.list_knowledge_banks(as_type='objects'):
-                    try:
-
-                        # initializing first column in case their is an exception, the yield will still work
-                        next_row = {"projectKey": project_key}
-                        
-                        # fetch settings as dict
-                        settings_raw = kb.get_settings().get_raw()
-                        
-                        # display debug info during development
-                        # for example, finding key names when adding new columns to dataset
-                        # pp(settings_raw)
-                        
-                        # add features that are unique to this object type
-                        next_row["kb_id"] = settings_raw.get('id', None)
-                        next_row["kb_name"] = settings_raw.get('name', None)
-                        next_row["kb_embeddingLLMId"] = settings_raw.get('embeddingLLMId', None)
-                        next_row["retrieverType"] = settings_raw.get('retrieverType', None)
-                        next_row["kb_vectorStoreType"] = settings_raw.get('vectorStoreType', None)
-                        next_row["envSelection"] = settings_raw.get('envSelection', None)
-                        next_row["managedFolderId"] = settings_raw.get("managedFolderId", None)
-                        next_row["multimodalColumn"] = settings_raw.get("multimodalColumn", None)
-                        next_row["rebuildBehavior"] = settings_raw.get("rebuildBehavior", None)
-
-                        # URL is fetched using class method that specifically implements this DSS object type:
-                        next_row["url"] = self.get_url(project_key, next_row["kb_id"])
-                        
-                        # add features that are almost always the same for different DSS object types
-                        next_row["created_timestamp"] = datetime.fromtimestamp(settings_raw.get("creationTag",{}).get("lastModifiedOn", 0) // 1000)
-                        next_row["last_modified_user"] = settings_raw.get("versionTag",{}).get("lastModifiedBy", {}).get("login", None)
-                        next_row["last_modified_timestamp"] = datetime.fromtimestamp(settings_raw.get("versionTag",{}).get("lastModifiedOn", 0) // 1000)
-                        next_row["tags"] = settings_raw.get("tags", None)
-                        next_row["created_by_user"] = settings_raw.get("creationTag",{}).get("lastModifiedBy", {}).get("login", None)                        
-                        
-                    except Exception as e:
-                        print(
-                            f"[generate_rows] [UNEXPECTED EXCEPTION] {e} with object"
-                        )
-                    finally:
-                        # return something, even if an exception occurred.
-                        records_generated += 1
-                        yield next_row                       
+                # yield next_row                       
 
             except Exception as e:
                 print(
