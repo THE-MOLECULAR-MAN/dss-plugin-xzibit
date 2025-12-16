@@ -104,7 +104,7 @@ class ConnectorProjects(Connector):
                         next_row['dss_object_name'] = handle.name
                         data = handle.get_settings().get_recipe_raw_definition()
                         pp(data)
-                        next_row['llmId'] = 'hardcoded' # recursive_search_all(data, 'llmId')
+                        next_row['llmId'] = recursive_search_all(data, 'llmId')
                     except Exception as e:
                         print(f"[EXCEPTION] generate rows - llm Usage - recipe: {e}")
                     finally:
