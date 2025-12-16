@@ -54,15 +54,19 @@ class ConnectorProjects(Connector):
                         next_row = {"projectKey": project_key}
                         next_row["kb_name"] = webapp.get("name", None)
                         next_row["kb_id"] = webapp.get("id", None)
+                        next_row["created_by_user"] = webapp.get("createdBy", {}).get(
+                                "login", None
+                            ),
 
+                        
+                        
+                        
                         # Collect relevant metadata
                         next_row = {
                             "projectKey": project_key,
                             "kb_name": webapp.get("name", None),
                             "kb_id": webapp.get("id", None),
-                            "created_by_user": webapp.get("createdBy", {}).get(
-                                "login", None
-                            ),
+                            "created_by_user": 
                             "url": self.get_url(
                                 project_key,
                                 webapp.get("id", "")
