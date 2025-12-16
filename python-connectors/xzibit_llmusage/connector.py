@@ -124,7 +124,7 @@ class ConnectorProjects(Connector):
                         # pp(data)
                         next_row['llmId'] = recursive_search_all(data, 'llmId') or recursive_search_all(data, 'embeddingLLMId')
                     except Exception as e:
-                        print(f"[EXCEPTION] generate rows - llm Usage - recipe: {e}")
+                        print(f"[EXCEPTION] generate rows - llm Usage - RA LLM: {e}")
                     finally:
                         if not next_row['llmId']:
                             continue
