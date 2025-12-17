@@ -77,7 +77,7 @@ class ConnectorConnections(Connector):
                 else:
                     connection_test_result = 'FAILED'
                     connection_error_msg = connection_test_status.get("connectionError",{}.get("detailedMessage", "Unable to fetch error message")
-                    pp(connection_test_status)
+                    # pp(connection_test_status)
                 
             # except com.dataiku.dip.utils.NotImplementedException:
             except DataikuException as e:
