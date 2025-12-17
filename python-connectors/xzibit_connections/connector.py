@@ -65,6 +65,7 @@ class ConnectorConnections(Connector):
                 t = next_row.get("type","unknown type")
                 if t == "Filesystem":
                     connection_test_result = 'N/A'
+                    continue
                 
                 obj_handle = self.__client.get_connection(next_row["name"])
                 c = obj_handle.test()
