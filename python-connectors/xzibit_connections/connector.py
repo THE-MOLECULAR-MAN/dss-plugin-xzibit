@@ -87,7 +87,6 @@ class ConnectorConnections(Connector):
                     # If it is a different Dataiku error, re-raise it to avoid silencing legitimate failures
                     raise e
             except Exception as e:
-                
                 print(f"[Connections-generate_row] EXCEPTION {e}")
                 # print(f"Connection type had exception: {connection_type}")
                 connection_test_result = f"EXCEPTION {e}: {connection_type}"
