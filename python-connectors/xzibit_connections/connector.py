@@ -87,7 +87,7 @@ class ConnectorConnections(Connector):
                     pp(connection_test_result)
             finally:
                 next_row["connection_test_status"] = connection_test_result
-                next_row["connection_error_msg"] = connection_error_msg
+                next_row["connection_test_error_msg"] = connection_error_msg
                 records_generated += 1
                 yield next_row
 
@@ -101,7 +101,7 @@ class ConnectorConnections(Connector):
                 {"meaning": "Text", "name": "type", "type": "string"},
                 {"meaning": "Text", "name": "credentialsMode", "type": "string"},
                 {"meaning": "Text", "name": "connection_test_status", "type": "string"},
-                {"meaning": "Text", "name": "connection_error_msg", "type": "string"},
+                {"meaning": "Text", "name": "connection_test_error_msg", "type": "string"},
                 {"meaning": "Text", "name": "usableBy", "type": "string"},
                 {"meaning": "Text", "name": "params.credentialsMode", "type": "string"},
                 {"meaning": "Text", "name": "params.authType", "type": "string"},
