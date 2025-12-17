@@ -75,18 +75,15 @@ class ConnectorConnections(Connector):
                     connection_test_result = 'FAILED'
                     connection_error_msg = connection_test_status.get("connectionError",{}).get("detailedMessage", "Unable to fetch error message")
 
-            except DataikuException as e:
+            except Exception as e:
                 # Not all connection types have a .test() method implemented, by design, like filesystem.
                 # This catches them and marks their test result as N/A.
                 if JAVA_NOT_IMPLEMENTED in str(e):
                     connection_test_result = "N/A"
                 else:
-                    # If it is a different Dataiku error, re-raise it to avoid silencing legitimate failures
-                    raise e # error
-            except Exception as e:
-                print(f"[Connections-generate_row] EXCEPTION {e}")
-                connection_test_result = f"EXCEPTION {e}"
-                pp(connection_test_result)
+                    print(f"[Connections-generate_row] EXCEPTION {e}")
+                    connection_test_result = f"EXCEPTION {e}"
+                    pp(connection_test_result)
             finally:
                 next_row["connection_test_status"] = connection_test_result
                 next_row["connection_error_msg"] = connection_error_msg
