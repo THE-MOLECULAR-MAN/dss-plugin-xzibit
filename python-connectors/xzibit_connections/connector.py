@@ -69,7 +69,7 @@ class ConnectorConnections(Connector):
                 
                 obj_handle = self.__client.get_connection(next_row["name"])
                 connection_test_dict = obj_handle.test() # error
-                if connection_test_dict.get("connectionOK",False):
+                if connection_test_dict.get("connectionOK", False):
                     connection_test_result = 'PASSED'
                 else:
                     connection_test_result = 'FAILED'
