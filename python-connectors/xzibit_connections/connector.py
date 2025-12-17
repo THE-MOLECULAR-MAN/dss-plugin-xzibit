@@ -62,6 +62,9 @@ class ConnectorConnections(Connector):
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row["url"] = self.get_url(next_row["name"])
                 
+                t = next_row.get("type","unknown type")
+                if t == "Filesystem":
+                    connection_test_result = 'N/A'
                 
                 obj_handle = self.__client.get_connection(next_row["name"])
                 c = obj_handle.test()
@@ -75,7 +78,7 @@ class ConnectorConnections(Connector):
             except Exception as e:
                 print(f"[Connections-generate_row] EXCEPTION {e}")
 
-                t = next_row.get("type","unknown type")
+                t = 
                 print(f"Connection type had exception: {t}")
                 connection_test_result = f"exception: {t}"
             finally:
