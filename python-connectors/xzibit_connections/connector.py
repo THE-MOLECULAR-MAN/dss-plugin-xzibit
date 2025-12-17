@@ -80,7 +80,7 @@ class ConnectorConnections(Connector):
             except Exception as e:
                 print(f"[Connections-generate_row] EXCEPTION {e}")
                 # print(f"Connection type had exception: {connection_type}")
-                connection_test_result = f"EXCEPTION: {connection_type}"
+                connection_test_result = f"EXCEPTION: {connection_type} {e}"
                 pp(connection_test_result)
             finally:
                 next_row["connection_test_status"] = connection_test_result
