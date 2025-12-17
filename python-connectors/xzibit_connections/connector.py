@@ -68,8 +68,8 @@ class ConnectorConnections(Connector):
                 next_row["url"] = self.get_url(next_row["name"])
                 
                 obj_handle = self.__client.get_connection(next_row["name"])
-                connection_test_status = obj_handle.test() # error
-                if connection_test_status.get("connectionOK",False):
+                connection_test_dict = obj_handle.test() # error
+                if connection_test_dict.get("connectionOK",False):
                     connection_test_result = 'PASSED'
                 else:
                     connection_test_result = 'FAILED'
@@ -84,7 +84,7 @@ class ConnectorConnections(Connector):
                 else:
                     print(f"[Connections-generate_row] UNHANDLED EXCEPTION {e}")
                     connection_test_result = f"FAILED - EXCEPTION"
-                    pp(connection_test_status)
+                    pp(connection_test_dict)
             finally:
                 next_row["connection_test_status"] = connection_test_result
                 next_row["connection_test_error_msg"] = connection_error_msg
