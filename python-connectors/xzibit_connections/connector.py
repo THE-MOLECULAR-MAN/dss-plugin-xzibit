@@ -77,7 +77,7 @@ class ConnectorConnections(Connector):
                 else:
                     connection_test_result = 'FAILED'
                     connection_error_msg = connection_test_status.get("connectionError",{}.get("detailedMessage", "Unable to fetch error message")
-                    # pp(connection_test_status)
+
             except DataikuException as e:
                 # We catch the wrapper exception and check the message payload
                 if JAVA_NOT_IMPLEMENTED in str(e):
