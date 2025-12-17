@@ -6,6 +6,7 @@
 from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import flatten_dict, get_dss_base_url, pp
+from dataikuapi.utils import DataikuException
 
 
 class ConnectorConnections(Connector):
