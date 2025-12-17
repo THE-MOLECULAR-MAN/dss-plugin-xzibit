@@ -5,10 +5,13 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import flatten_dict, get_dss_base_url, pp
+from xzibit.utils import flatten_dict, get_dss_base_url, pp, JAVA_NOT_IMPLEMENTED
 
 # Novel:
 from dataikuapi.utils import DataikuException, NotImplementedException
+
+JAVA_NOT_IMPLEMENTED = "com.dataiku.dip.utils.NotImplementedException"
+
 
 
 class ConnectorConnections(Connector):
