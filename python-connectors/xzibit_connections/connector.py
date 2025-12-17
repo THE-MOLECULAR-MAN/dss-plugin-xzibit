@@ -71,9 +71,9 @@ class ConnectorConnections(Connector):
                 obj_handle = self.__client.get_connection(next_row["name"])
                 connection_test_status = obj_handle.test()
                 if connection_test_status.get("connectionOK",False):
-                    connection_test_result = 'pass'
+                    connection_test_result = 'PASSED'
                 else:
-                    connection_test_result = 'fail'
+                    connection_test_result = 'FAILED'
                     pp(connection_test_status)
                 
                 
