@@ -62,17 +62,19 @@ class ConnectorConnections(Connector):
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row["url"] = self.get_url(next_row["name"])
                 
-                connection_test_result = 'fail'
+                
                 obj_handle = self.__client.get_connection(next_row["name"])
                 c = obj_handle.test()
                 if c.get("connectionOK",False):
                     connection_test_result = 'pass'
                 else:
+                    connection_test_result = 'fail'
                     pp(c)
                 
                 
             except Exception as e:
                 print(f"[Connections-generate_row] EXCEPTION {e}")
+                connection_test_result = 'exception'
             finally:
                 next_row["connection_test_status"] = connection_test_result
                 records_generated += 1
