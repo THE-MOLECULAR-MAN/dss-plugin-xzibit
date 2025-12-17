@@ -83,7 +83,7 @@ class ConnectorConnections(Connector):
                     connection_error_msg = None
                 else:
                     print(f"[Connections-generate_row] UNHANDLED EXCEPTION {e}")
-                    connection_test_result = f"EXCEPTION {e}"
+                    connection_test_result = f"EXCEPTION"
                     pp(connection_test_result)
             finally:
                 next_row["connection_test_status"] = connection_test_result
