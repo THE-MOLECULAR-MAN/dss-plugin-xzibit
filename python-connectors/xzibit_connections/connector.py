@@ -79,11 +79,15 @@ class ConnectorConnections(Connector):
                     pp(connection_test_status)
                 
             # except com.dataiku.dip.utils.NotImplementedException:
-            except NotImplementedException:
-
-                connection_test_result = "N/A"
-                
+            except DataikuException as e:
+                # We catch the wrapper exception and check the message payload
+                if JAVA_NOT_IMPLEMENTED in str(e):
+                    connection_test_result = "N/A"
+                else:
+                    # If it is a different Dataiku error, re-raise it to avoid silencing legitimate failures
+                    raise e
             except Exception as e:
+                
                 print(f"[Connections-generate_row] EXCEPTION {e}")
                 # print(f"Connection type had exception: {connection_type}")
                 connection_test_result = f"EXCEPTION {e}: {connection_type}"
