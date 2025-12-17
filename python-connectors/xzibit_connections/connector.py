@@ -76,7 +76,9 @@ class ConnectorConnections(Connector):
                     connection_test_result = 'FAILED'
                     pp(connection_test_status)
                 
-            except com.dataiku.dip.utils.NotImplementedException:
+            # except com.dataiku.dip.utils.NotImplementedException:
+            except NotImplementedException:
+
                 connection_test_result = "N/A"
                 
             except Exception as e:
