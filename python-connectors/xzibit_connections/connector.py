@@ -76,6 +76,7 @@ class ConnectorConnections(Connector):
                     connection_test_result = 'PASSED'
                 else:
                     connection_test_result = 'FAILED'
+                    connection_error_msg = 
                     pp(connection_test_status)
                 
             # except com.dataiku.dip.utils.NotImplementedException:
