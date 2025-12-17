@@ -67,10 +67,6 @@ class ConnectorConnections(Connector):
 
                 next_row["url"] = self.get_url(next_row["name"])
                 
-#                 if connection_type == "Filesystem":
-#                     connection_test_result = 'N/A'
-#                     continue
-                
                 obj_handle = self.__client.get_connection(next_row["name"])
                 connection_test_status = obj_handle.test()
                 if connection_test_status.get("connectionOK",False):
