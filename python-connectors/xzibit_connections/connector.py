@@ -81,7 +81,7 @@ class ConnectorConnections(Connector):
                 if JAVA_NOT_IMPLEMENTED in str(e):
                     connection_test_result = "N/A"
                 else:
-                    print(f"[Connections-generate_row] EXCEPTION {e}")
+                    print(f"[Connections-generate_row] UNHANDLED EXCEPTION {e}")
                     connection_test_result = f"EXCEPTION {e}"
                     pp(connection_test_result)
             finally:
