@@ -78,8 +78,6 @@ class ConnectorConnections(Connector):
                 
             except Exception as e:
                 print(f"[Connections-generate_row] EXCEPTION {e}")
-
-                t = 
                 print(f"Connection type had exception: {t}")
                 connection_test_result = f"exception: {t}"
             finally:
