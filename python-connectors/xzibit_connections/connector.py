@@ -68,7 +68,7 @@ class ConnectorConnections(Connector):
                 next_row["url"] = self.get_url(next_row["name"])
                 
                 obj_handle = self.__client.get_connection(next_row["name"])
-                connection_test_status = obj_handle.test()
+                connection_test_status = obj_handle.test() # error
                 if connection_test_status.get("connectionOK",False):
                     connection_test_result = 'PASSED'
                 else:
@@ -82,7 +82,7 @@ class ConnectorConnections(Connector):
                     connection_test_result = "N/A"
                 else:
                     # If it is a different Dataiku error, re-raise it to avoid silencing legitimate failures
-                    raise e
+                    raise e # error
             except Exception as e:
                 print(f"[Connections-generate_row] EXCEPTION {e}")
                 connection_test_result = f"EXCEPTION {e}"
