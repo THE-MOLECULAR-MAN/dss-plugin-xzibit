@@ -94,6 +94,9 @@ class ConnectorConnections(Connector):
                 pp(connection_test_result)
             finally:
                 next_row["connection_test_status"] = connection_test_result
+                if connection_error_msg:
+                                                                      
+
                 records_generated += 1
                 yield next_row
 
