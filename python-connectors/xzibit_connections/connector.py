@@ -76,7 +76,8 @@ class ConnectorConnections(Connector):
                     connection_error_msg = connection_test_status.get("connectionError",{}).get("detailedMessage", "Unable to fetch error message")
 
             except DataikuException as e:
-                # We catch the wrapper exception and check the message payload
+                # Not all connection types have a .test() method implemented, by design, like filesystem.
+                # This catches them and marks their test result as N/A.
                 if JAVA_NOT_IMPLEMENTED in str(e):
                     connection_test_result = "N/A"
                 else:
