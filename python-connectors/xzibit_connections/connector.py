@@ -81,6 +81,7 @@ class ConnectorConnections(Connector):
                 print(f"[Connections-generate_row] EXCEPTION {e}")
                 # print(f"Connection type had exception: {connection_type}")
                 connection_test_result = f"exception: {connection_type}"
+                pp(connection_test_result)
             finally:
                 next_row["connection_test_status"] = connection_test_result
                 records_generated += 1
