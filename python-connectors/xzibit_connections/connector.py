@@ -76,7 +76,7 @@ class ConnectorConnections(Connector):
                     connection_test_result = 'PASSED'
                 else:
                     connection_test_result = 'FAILED'
-                    connection_error_msg = connection_test_status.get("connectionError",{}.get("detailedMessage", "Unable to fetch error message")
+                    connection_error_msg = connection_test_status.get("connectionError",{}).get("detailedMessage", "Unable to fetch error message")
 
             except DataikuException as e:
                 # We catch the wrapper exception and check the message payload
