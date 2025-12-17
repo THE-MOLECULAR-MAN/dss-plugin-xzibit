@@ -107,6 +107,7 @@ class ConnectorConnections(Connector):
                 {"meaning": "Text", "name": "type", "type": "string"},
                 {"meaning": "Text", "name": "credentialsMode", "type": "string"},
                 {"meaning": "Text", "name": "connection_test_status", "type": "string"},
+                {"meaning": "Text", "name": "connection_error_msg", "type": "string"},
                 {"meaning": "Text", "name": "usableBy", "type": "string"},
                 {"meaning": "Text", "name": "params.credentialsMode", "type": "string"},
                 {"meaning": "Text", "name": "params.authType", "type": "string"},
