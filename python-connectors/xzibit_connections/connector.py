@@ -83,6 +83,7 @@ class ConnectorConnections(Connector):
                 # We catch the wrapper exception and check the message payload
                 if JAVA_NOT_IMPLEMENTED in str(e):
                     connection_test_result = "N/A"
+                                                                      connection_error_msg
                 else:
                     # If it is a different Dataiku error, re-raise it to avoid silencing legitimate failures
                     raise e
