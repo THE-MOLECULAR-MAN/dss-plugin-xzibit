@@ -63,6 +63,7 @@ class ConnectorConnections(Connector):
 
                 next_row = flatten_dict(item_info, include_keys=keys)
                 connection_type = next_row.get("type","unknown type")
+                connection_error_msg = None
 
                 next_row["url"] = self.get_url(next_row["name"])
                 
