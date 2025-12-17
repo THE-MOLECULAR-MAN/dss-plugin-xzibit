@@ -80,6 +80,7 @@ class ConnectorConnections(Connector):
                 # This catches them and marks their test result as N/A.
                 if JAVA_NOT_IMPLEMENTED in str(e):
                     connection_test_result = "N/A"
+                    connection_error_msg = None
                 else:
                     print(f"[Connections-generate_row] UNHANDLED EXCEPTION {e}")
                     connection_test_result = f"EXCEPTION {e}"
