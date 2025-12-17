@@ -67,6 +67,8 @@ class ConnectorConnections(Connector):
                 c = obj_handle.test()
                 if c.get("connectionOK",False):
                     connection_test_result = 'pass'
+                else:
+                    pp(c)
                 
                 
             except Exception as e:
