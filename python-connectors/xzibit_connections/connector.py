@@ -94,7 +94,6 @@ class ConnectorConnections(Connector):
                 next_row["connection_test_status"] = connection_test_result
                 if connection_error_msg:
                     next_row["connection_error_msg"] = connection_error_msg
-
                 records_generated += 1
                 yield next_row
 
