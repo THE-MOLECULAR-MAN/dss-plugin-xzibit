@@ -12,6 +12,8 @@ from dataikuapi.utils import DataikuException
 from pprint import pprint as pp
 from json import dumps as jd
 
+JAVA_NOT_IMPLEMENTED = "com.dataiku.dip.utils.NotImplementedException"
+
 
 def recursive_search_all(data, s):
     """
