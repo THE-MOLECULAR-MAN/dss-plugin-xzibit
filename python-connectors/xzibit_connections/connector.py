@@ -8,7 +8,7 @@ from dataiku.connector import Connector
 from xzibit.utils import flatten_dict, get_dss_base_url, pp
 
 # Novel:
-from dataikuapi.utils import DataikuException
+from dataikuapi.utils import DataikuException, NotImplementedException
 
 
 class ConnectorConnections(Connector):
