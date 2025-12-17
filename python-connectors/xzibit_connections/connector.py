@@ -74,7 +74,7 @@ class ConnectorConnections(Connector):
                     connection_test_result = 'pass'
                 else:
                     connection_test_result = 'fail'
-                    pp(c)
+                    pp(connection_test_result)
                 
                 
             except Exception as e:
