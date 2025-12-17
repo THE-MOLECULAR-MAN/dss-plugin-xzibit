@@ -60,10 +60,11 @@ class ConnectorConnections(Connector):
                     break
 
                 next_row = flatten_dict(item_info, include_keys=keys)
+                connection_type = next_row.get("type","unknown type")
+
                 next_row["url"] = self.get_url(next_row["name"])
                 
-                t = next_row.get("type","unknown type")
-                if t == "Filesystem":
+                if connection_type == "Filesystem":
                     connection_test_result = 'N/A'
                     continue
                 
