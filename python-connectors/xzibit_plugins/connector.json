@@ -15,5 +15,5 @@
       "description": "Some documentation for parameter1",
       "mandatory": true,
       "default": false
-    }],
+    }]
 }
