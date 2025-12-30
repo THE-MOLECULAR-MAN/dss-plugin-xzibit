@@ -5,7 +5,7 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import get_dss_base_url, flatten_dict, get_values_for_key, pp
+from xzibit.utils import get_dss_base_url, flatten_dict, get_values_for_key, get_path_size_megabytes, pp
 
 
 class ConnectorCodeEnvs(Connector):
@@ -68,7 +68,7 @@ class ConnectorCodeEnvs(Connector):
                 next_row["path"] = settings_raw.get("path", None)
                 
                 if self.__compute_codeenv_disk_space_usage:
-
+                    x = get_path_size_megabytes()
                 else:
                     next_row["size_in_MB"] = None
 
