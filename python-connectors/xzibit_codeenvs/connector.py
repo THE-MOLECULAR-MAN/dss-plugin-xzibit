@@ -68,20 +68,10 @@ class ConnectorCodeEnvs(Connector):
                 next_row["path"] = settings_raw.get("path", None)
                 
                 if self.__compute_codeenv_disk_space_usage:
-                    # this is so slow!!!!
-                    plugin_handle = self.__client.get_plugin(next_row["id"])
-                    # .list_usages() adds 2+ hours instead of 1 second for entire run
-                    list_of_usages = plugin_handle.list_usages().get_raw()["usages"]
-                    if len(list_of_usages) == 0:
-                        next_row["plugin_used_in_projectkeys"] = []
-                    else:
-                        next_row["plugin_used_in_projectkeys"] = list(
-                            get_values_for_key(list_of_usages, "projectKey")
-                        )
-                    next_row["total_usages"] = len(list_of_usages)
+
                 else:
-                    next_row["plugin_used_in_projectkeys"] = ['Plugin usage checking not enabled in dataset settings.']
-                    next_row["total_usages"]  = None
+                    next_row["size_in_MB"] = None
+
 
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 # adding list_usages for code environments on DevDesign (600 code env at an
