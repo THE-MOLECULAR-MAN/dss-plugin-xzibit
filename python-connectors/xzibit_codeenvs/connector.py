@@ -101,6 +101,9 @@ class ConnectorCodeEnvs(Connector):
 
     def get_read_schema(self):
         """TBD"""
+        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
+
         return {
             "columns": [
                 {"meaning": "Text", "name": "code_env_name", "type": "string"},
@@ -110,7 +113,7 @@ class ConnectorCodeEnvs(Connector):
                 {"meaning": "Text", "name": "python_interpreter", "type": "string"},
                 {"meaning": "Text", "name": "core_packages_set", "type": "string"},
                 {"meaning": "Text", "name": "path", "type": "string"},
-                {"name": "size_in_MB", "type": "bigint", "meaning": "LongMeaning"},
+                {"name": "size_in_MB", "type": "double", "meaning": "LongMeaning"},
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
