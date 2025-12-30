@@ -67,7 +67,7 @@ class ConnectorCodeEnvs(Connector):
                 )
                 next_row["path"] = settings_raw.get("path", None)
                 
-                if self.__compute_codeenv_disk_space_usage and if next_row["path"]:
+                if self.__compute_codeenv_disk_space_usage and next_row["path"]:
                     if next_row["path"]:
                         
                     x = get_path_size_megabytes()
