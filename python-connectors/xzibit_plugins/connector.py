@@ -69,15 +69,15 @@ class ConnectorPlugins(Connector):
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
 
-                # if self.__list_usages:
+                # if self.__compute_plugin_usages:
                 # this is so slow!!!!
                 # plugin_handle = self.__client.get_plugin(next_row["id"])
                 # .list_usages() adds 2+ hours instead of 1 second for entire run
                 # list_of_usages = plugin_handle.list_usages().get_raw()["usages"]
                 #                 if len(list_of_usages) == 0:
-                #                     next_row["project_usages"] = []
+                #                     next_row["plugin_used_in_projectkeys"] = []
                 #                 else:
-                #                     next_row["project_usages"] = list(
+                #                     next_row["plugin_used_in_projectkeys"] = list(
                 #                         get_values_for_key(list_of_usages, "projectKey")
                 #                     )
                 #                 next_row["total_usages"] = len(list_of_usages)
