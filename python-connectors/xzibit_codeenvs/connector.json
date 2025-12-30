@@ -16,5 +16,13 @@
       "description": "Enable the size of the code environment as stored on disk. Checking this box populates the column named 'size_in_MB'. WARNING: This adds an additional 30+ seconds per code env, so checking a DSS Node with X code environments adds nearly 2.5 hours to run.",
       "mandatory": true,
       "defaultValue": false
+    },
+    {
+      "name": "compute_codeenv_usages",
+      "label": "Calculate all usage locations of each code environment",
+      "type": "BOOLEAN",
+      "description": "Enable the size of the code environment as stored on disk. Checking this box populates the column named 'size_in_MB'. WARNING: This adds a LOT of time, usually 5+ hours.",
+      "mandatory": true,
+      "defaultValue": false
     }]
 }
