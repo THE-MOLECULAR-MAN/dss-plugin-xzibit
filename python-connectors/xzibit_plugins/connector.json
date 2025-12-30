@@ -7,6 +7,13 @@
     "readable": true,
     "writable": false,
     "supportAppend": false,
-    "params": [],
-    "partitioningMode": "NOT_PARTITIONABLE"
+    "partitioningMode": "NOT_PARTITIONABLE",
+    "params": [{
+      "name": "compute_disk_util",
+      "label": "Compute disk space utilization",
+      "type": "BOOLEAN",
+      "description": "Some documentation for parameter1",
+      "mandatory": true,
+      "default": false
+    },],
 }
