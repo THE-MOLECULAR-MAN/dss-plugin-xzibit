@@ -113,11 +113,11 @@ class ConnectorPlugins(Connector):
                 {"name": "author", "type": "string", "meaning": "Text"},
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "description", "type": "string", "meaning": "FreeText"},
-                #                 {
-                #                     "name": "project_usages",
-                #                     "type": "string",
-                #                     "meaning": "JSONArrayMeaning",
-                #                 },
+                                {
+                                    "name": "plugin_used_in_projectkeys",
+                                    "type": "string",
+                                    "meaning": "JSONArrayMeaning",
+                                },
                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
                 # {"name": "total_usages", "type": "bigint", "meaning": "LongMeaning"},
                 {"name": "url", "type": "string", "meaning": "URL"},
