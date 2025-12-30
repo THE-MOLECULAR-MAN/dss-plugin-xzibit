@@ -27,7 +27,6 @@ class ConnectorPlugins(Connector):
         self.__baseurl = get_dss_base_url()
         self.__compute_disk_util = self.config.get('compute_disk_util', False)
         self.__compute_plugin_usages = self.config.get('compute_plugin_usages', False)
-        # self.__list_usages = False # for possible future config option
 
     def get_url(self, id):
         """Create a URL to the DSS object in question in this specific DSS instance.
