@@ -18,6 +18,8 @@ class ConnectorCodeEnvs(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
+        
+        # calculating disk space usage on my personal FM instance took 8 seconds for 
         self.__compute_codeenv_disk_space_usage = self.config.get("compute_codeenv_disk_space_usage", False)
         # self.__include_usages = False # for possible future configuration option
 
@@ -113,7 +115,7 @@ class ConnectorCodeEnvs(Connector):
                 {"meaning": "Text", "name": "python_interpreter", "type": "string"},
                 {"meaning": "Text", "name": "core_packages_set", "type": "string"},
                 {"meaning": "Text", "name": "path", "type": "string"},
-                {"name": "size_in_MB", "type": "double", "meaning": "LongMeaning"},
+                {"name": "size_in_MB", "type": "double", "meaning": "DoubleMeaning"},
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
