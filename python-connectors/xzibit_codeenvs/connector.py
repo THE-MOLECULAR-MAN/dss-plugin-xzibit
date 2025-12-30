@@ -27,7 +27,7 @@ class ConnectorCodeEnvs(Connector):
         #    * ... average time to calculate each code env size: 0.16667 sec on second run. Unsure of first run
         
         self.__compute_codeenv_disk_space_usage = self.config.get("compute_codeenv_disk_space_usage", False)
-        
+        self.__compute_codeenv_usages =  self.config.get("compute_codeenv_usages", False)
         # self.__include_usages = False # for possible future configuration option
 
     def get_url(self, env_name, env_lang="python"):
