@@ -10,10 +10,10 @@
     "partitioningMode": "NOT_PARTITIONABLE",
     "params": [
               {
-      "name": "compute_plugin_usages",
+      "name": "compute_codeenv_disk_space_usage",
       "label": "Include list of project keys that use each plugin",
       "type": "BOOLEAN",
-      "description": "Enable computing which projects are used by each plugin. Checking this box populates the column named 'plugin_used_in_projectkeys'. WARNING: This adds an additional 30+ seconds per plugin, so checking a DSS Node with 280 installed plugins and 2,700 projects adds nearly 2.5 hours to run.",
+      "description": "Enable the size of the code environment as stored on disk. Checking this box populates the column named 'size_in_MB'. WARNING: This adds an additional 30+ seconds per code env, so checking a DSS Node with 280 installed plugins and 2,700 projects adds nearly 2.5 hours to run.",
       "mandatory": true,
       "defaultValue": false
     }]
