@@ -18,6 +18,7 @@ class ConnectorCodeEnvs(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
+        self.__compute_codeenv_disk_space_usage = self.config.get("compute_codeenv_disk_space_usage", False)
         # self.__include_usages = False # for possible future configuration option
 
     def get_url(self, env_name, env_lang="python"):
