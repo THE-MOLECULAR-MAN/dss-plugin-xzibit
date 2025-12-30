@@ -115,7 +115,7 @@ class ConnectorCodeEnvs(Connector):
                 {"meaning": "Text", "name": "python_interpreter", "type": "string"},
                 {"meaning": "Text", "name": "core_packages_set", "type": "string"},
                 {"meaning": "Text", "name": "path", "type": "string"},
-                {"name": "size_in_MB", "type": "double", "meaning": "DoubleMeaning"},
+                {"meaning": "DoubleMeaning", "name": "size_in_MB", "type": "double"},
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
