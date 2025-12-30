@@ -69,7 +69,7 @@ class ConnectorCodeEnvs(Connector):
                 
                 if self.__compute_codeenv_disk_space_usage:
                     # get_path_size_megabytes returns 0 if path does not exist
-                    next_row["size_in_MB"] = get_path_size_megabytes()
+                    next_row["size_in_MB"] = get_path_size_megabytes(next_row["path"])
                 else:
                     next_row["size_in_MB"] = None
 
