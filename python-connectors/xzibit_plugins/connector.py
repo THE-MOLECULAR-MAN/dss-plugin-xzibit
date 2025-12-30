@@ -120,6 +120,7 @@ class ConnectorPlugins(Connector):
                 },
                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
                 {"name": "total_usages", "type": "bigint", "meaning": "LongMeaning"},
+                {"name": "plugin_disk_space_size_MB", "type": "bigint", "meaning": "LongMeaning"},
                 {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
