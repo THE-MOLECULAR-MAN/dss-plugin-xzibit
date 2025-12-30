@@ -24,7 +24,7 @@ class ConnectorCodeEnvs(Connector):
         #    * 94.0 GB of total code environment disk space
         #    * for 48 unique code environments
         #    * ... average code env size was 2005.3 GB
-        #    * ... average time to calculate each code env size: 0.16667 sec
+        #    * ... average time to calculate each code env size: 0.16667 sec on second run
         
         self.__compute_codeenv_disk_space_usage = self.config.get("compute_codeenv_disk_space_usage", False)
         
