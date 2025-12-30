@@ -25,7 +25,7 @@ class ConnectorPlugins(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
-        self.__compute_disk_util = config.get('compute_disk_util', False)
+        self.__compute_disk_util = self.config.get('compute_disk_util', False)
         # self.__list_usages = False # for possible future config option
 
     def get_url(self, id):
