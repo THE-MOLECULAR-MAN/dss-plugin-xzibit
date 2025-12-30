@@ -86,7 +86,7 @@ class ConnectorPlugins(Connector):
                     next_row["total_usages"]  = None
                     
                 if self.__compute_disk_util:
-                    next_row["plugin_disk_space_size_MB"] = 0
+                    next_row["plugin_disk_space_size_MB"] = 123
                 else:
                     next_row["plugin_disk_space_size_MB"] = None
 
