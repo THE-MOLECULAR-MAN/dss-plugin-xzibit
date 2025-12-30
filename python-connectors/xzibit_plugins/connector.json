@@ -12,7 +12,7 @@
       "name": "compute_disk_util",
       "label": "Compute disk space utilization",
       "type": "BOOLEAN",
-      "description": "Some documentation for parameter1",
+      "description": "Enable checking disk space used by each plugin. WARNING: This adds at least 30 seconds per plugin.",
       "mandatory": true,
       "defaultValue": false
     }]
