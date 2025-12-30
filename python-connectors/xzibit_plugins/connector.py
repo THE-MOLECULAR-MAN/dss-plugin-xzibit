@@ -86,9 +86,9 @@ class ConnectorPlugins(Connector):
                     next_row["total_usages"]  = None
                     
                 if self.__compute_disk_util:
-                    next_row[""] = 0
+                    next_row["plugin_disk_space_size_MB"] = 0
                 else:
-                    next_row["plugin_used_in_projectkeys"] = ['Plugin usage checking not enabled in dataset settings.']
+                    next_row["plugin_disk_space_size_MB"] = None
 
                 
 
