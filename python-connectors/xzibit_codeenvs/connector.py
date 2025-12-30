@@ -23,8 +23,9 @@ class ConnectorCodeEnvs(Connector):
         #    * took 8 seconds
         #    * 96 GB of total code environment disk space
         #    * for 48 unique code environments
+        
         self.__compute_codeenv_disk_space_usage = self.config.get("compute_codeenv_disk_space_usage", False)
-        # self.__include_usages = False # for possible future configuration option
+        
 
     def get_url(self, env_name, env_lang="python"):
         """Create a URL to the DSS object in question in this specific DSS instance.
