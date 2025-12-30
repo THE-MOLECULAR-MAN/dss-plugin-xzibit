@@ -19,7 +19,10 @@ class ConnectorCodeEnvs(Connector):
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
         
-        # calculating disk space usage on my personal FM instance took 8 seconds for 
+        # calculating disk space usage on my personal FM instance
+        #    * took 8 seconds
+        #    * 96 GB of total code environment disk space
+        #    * for 48 unique code environments
         self.__compute_codeenv_disk_space_usage = self.config.get("compute_codeenv_disk_space_usage", False)
         # self.__include_usages = False # for possible future configuration option
 
