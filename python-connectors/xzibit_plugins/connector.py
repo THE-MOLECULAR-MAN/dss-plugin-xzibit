@@ -74,13 +74,13 @@ class ConnectorPlugins(Connector):
                     plugin_handle = self.__client.get_plugin(next_row["id"])
                     .list_usages() adds 2+ hours instead of 1 second for entire run
                     list_of_usages = plugin_handle.list_usages().get_raw()["usages"]
-                                    if len(list_of_usages) == 0:
-                                        next_row["plugin_used_in_projectkeys"] = []
-                                    else:
-                                        next_row["plugin_used_in_projectkeys"] = list(
-                                            get_values_for_key(list_of_usages, "projectKey")
-                                        )
-                                    next_row["total_usages"] = len(list_of_usages)
+                    if len(list_of_usages) == 0:
+                        next_row["plugin_used_in_projectkeys"] = []
+                    else:
+                        next_row["plugin_used_in_projectkeys"] = list(
+                            get_values_for_key(list_of_usages, "projectKey")
+                        )
+                    next_row["total_usages"] = len(list_of_usages)
                 else:
                     next_row["plugin_used_in_projectkeys"] = ['Plugin usage checking not enabled in dataset settings.']
                     next_row["total_usages"]  = None
