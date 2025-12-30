@@ -11,7 +11,7 @@
     "params": [
               {
       "name": "compute_codeenv_disk_space_usage",
-      "label": "Include list of project keys that use each plugin",
+      "label": "Calculate disk space used by each code environment",
       "type": "BOOLEAN",
       "description": "Enable the size of the code environment as stored on disk. Checking this box populates the column named 'size_in_MB'. WARNING: This adds an additional 30+ seconds per code env, so checking a DSS Node with X code environments adds nearly 2.5 hours to run.",
       "mandatory": true,
