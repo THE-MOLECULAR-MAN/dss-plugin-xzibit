@@ -119,7 +119,7 @@ class ConnectorPlugins(Connector):
                     "meaning": "JSONArrayMeaning",
                 },
                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
-                # {"name": "total_usages", "type": "bigint", "meaning": "LongMeaning"},
+                {"name": "total_usages", "type": "bigint", "meaning": "LongMeaning"},
                 {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
