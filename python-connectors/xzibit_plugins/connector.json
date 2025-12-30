@@ -14,6 +14,6 @@
       "type": "BOOLEAN",
       "description": "Some documentation for parameter1",
       "mandatory": true,
-      "default": false
+      "defaultValue": false
     }]
 }
