@@ -21,7 +21,7 @@ class ConnectorCodeEnvs(Connector):
         
         # Calculating disk space usage on my personal FM instance:
         #    * took 8 seconds
-        #    * 94 GB of total code environment disk space
+        #    * 94 .0GB of total code environment disk space
         #    * for 48 unique code environments
         
         self.__compute_codeenv_disk_space_usage = self.config.get("compute_codeenv_disk_space_usage", False)
