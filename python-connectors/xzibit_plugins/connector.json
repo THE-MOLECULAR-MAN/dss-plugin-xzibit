@@ -12,7 +12,7 @@
       "name": "compute_disk_util",
       "label": "Compute disk space utilization",
       "type": "BOOLEAN",
-      "description": "Enable checking disk space used by each plugin. Checking this box populates the column named 'plugin_disk_space_size_MB'. WARNING: This adds at least 30 seconds per plugin, so checking a DSS Node with 280 installed plugins takes almost 2.5 hours to run.",
+      "description": "Enable checking disk space used by each plugin. Checking this box populates the column named 'plugin_disk_space_size_MB'. WARNING: This adds at least 30 seconds per plugin, so checking a DSS Node with 280 installed plugins takes about 2.5 hours to run.",
       "mandatory": true,
       "defaultValue": false
     }]
