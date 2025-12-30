@@ -84,6 +84,13 @@ class ConnectorPlugins(Connector):
                 else:
                     next_row["plugin_used_in_projectkeys"] = ['Plugin usage checking not enabled in dataset settings.']
                     next_row["total_usages"]  = None
+                    
+                if self.__compute_disk_util:
+                    next_row[""] = 0
+                else:
+                    next_row["plugin_used_in_projectkeys"] = ['Plugin usage checking not enabled in dataset settings.']
+
+                
 
                 next_row["url"] = self.get_url(next_row["id"])
             except Exception as e:
