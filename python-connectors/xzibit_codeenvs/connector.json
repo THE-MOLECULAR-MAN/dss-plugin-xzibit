@@ -21,7 +21,7 @@
       "name": "compute_codeenv_usages",
       "label": "Calculate all usage locations of each code environment",
       "type": "BOOLEAN",
-      "description": " WARNING: This adds a LOT of time, usually 5+ hours.",
+      "description": "Populates the '' column with a list of all __ where the code environment is used. WARNING: This adds a LOT of time, usually 5+ hours.",
       "mandatory": true,
       "defaultValue": false
     }]
