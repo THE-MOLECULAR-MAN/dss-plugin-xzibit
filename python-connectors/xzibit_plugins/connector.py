@@ -90,8 +90,6 @@ class ConnectorPlugins(Connector):
                 else:
                     next_row["plugin_disk_space_size_MB"] = None
 
-                
-
                 next_row["url"] = self.get_url(next_row["id"])
             except Exception as e:
                 print(
