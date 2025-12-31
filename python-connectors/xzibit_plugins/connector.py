@@ -84,14 +84,16 @@ class ConnectorPlugins(Connector):
                 next_row["url"] = self.get_url(next_row["id"])
                 next_row["is_built_in_plugin"] = next_row["id"] in DSS_BUILT_IN_PLUGIN_IDS
 
-                print("HERE_COMES_DEBUG_OUTPUT")
-                settings_raw = plugin_handle.get_settings().get_raw()
-                pp(item_info)
 
 
                 if self.__compute_plugin_usages:
                     # this is so slow!!!!
                     plugin_handle = self.__client.get_plugin(next_row["id"])
+                    
+                    print("HERE_COMES_DEBUG_OUTPUT")
+                    settings_raw = plugin_handle.get_settings().get_raw()
+                    pp(item_info)
+
                         
                     # .list_usages() adds 2+ hours instead of 1 second for entire run
                     list_of_usages = plugin_handle.list_usages().get_raw().get("usages",[])
