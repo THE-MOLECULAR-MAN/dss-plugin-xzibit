@@ -70,6 +70,7 @@ class ConnectorPlugins(Connector):
             'colorbrewer-palettes',
             'k8s-metrics-utils',
             'local-r-dev-setup',
+            'project-standards'
             
         ]
         for item_info in self.__client.list_plugins():
