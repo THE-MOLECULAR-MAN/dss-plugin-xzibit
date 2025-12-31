@@ -91,7 +91,7 @@ class ConnectorPlugins(Connector):
                 pp(item_info)
                 pp(settings_raw)
                 
-                next_row["codeEnvName"] = settings_raw.get("codeEnvName", None)
+                next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
                 
                 if self.__compute_plugin_usages:
                     # this is so slow!!!!
@@ -129,6 +129,7 @@ class ConnectorPlugins(Connector):
             "columns": [
                 {"name": "id", "type": "string", "meaning": "Text"},
                 {"name": "label", "type": "string", "meaning": "Text"},
+                {"name": "code_env_name", "type": "string", "meaning": "Text"},
                 {"name": "version", "type": "string", "meaning": "Text"},
                 {"name": "author", "type": "string", "meaning": "Text"},
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
