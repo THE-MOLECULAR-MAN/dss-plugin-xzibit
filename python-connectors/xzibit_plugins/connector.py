@@ -85,10 +85,10 @@ class ConnectorPlugins(Connector):
                 
                 print(f"[plugins-generate_rows] Start plugin ID: {next_row['id']}")
                 # pp(item_info)
-                if next_row["id"] == "default-samples":
-                    settings_raw = plugin_handle.get_settings().get_raw()
-                    print("HERE_COMES_DEBUG_OUTPUT")
-                    pp(item_info)
+#                 if next_row["id"] == "default-samples":
+#                     settings_raw = plugin_handle.get_settings().get_raw()
+#                     print("HERE_COMES_DEBUG_OUTPUT")
+#                     pp(item_info)
 
                 if self.__compute_plugin_usages:
                     # this is so slow!!!!
