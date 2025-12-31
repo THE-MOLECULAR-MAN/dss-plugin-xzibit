@@ -138,6 +138,7 @@ class ConnectorPlugins(Connector):
                 },
                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
                 {"name": "total_usages", "type": "bigint", "meaning": "LongMeaning"},
+                "is_built_in_plugin"
                 {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
