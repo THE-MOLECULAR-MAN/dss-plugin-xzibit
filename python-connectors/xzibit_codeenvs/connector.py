@@ -130,6 +130,7 @@ class ConnectorCodeEnvs(Connector):
                 {"name": "projectKeys_where_plugin_used", "meaning": "JSONArrayMeaning", "type": "string"},
                 {"name": "total_instances_of_plugin", "meaning": "LongMeaning", "type": "bigint"},
                 {"meaning": "URL", "name": "url", "type": "string"}
+            ]
         }
 
     ####################################################################
