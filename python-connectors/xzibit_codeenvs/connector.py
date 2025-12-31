@@ -28,7 +28,7 @@ class ConnectorCodeEnvs(Connector):
         
         self.__compute_codeenv_disk_space_usage = self.config.get("compute_codeenv_disk_space_usage", False)
         self.__compute_codeenv_usages =  self.config.get("compute_codeenv_usages", False)
-        # self.__include_usages = False # for possible future configuration option
+
 
     def get_url(self, env_name, env_lang="python"):
         """Create a URL to the DSS object in question in this specific DSS instance.
@@ -83,24 +83,29 @@ class ConnectorCodeEnvs(Connector):
                     next_row["size_in_MB"] = None
 
 
+                if self.__compute_codeenv_usages:
+                    print("starting code env list usages")
+                    usages = code_env_handle.list_usages()
+                    print("finished code env list usages")
+                    num_usages = len(usages)
+                    if len(usages) == 0:
+                        pk_usages = None
+                    else:
+                        pk_usages = list(
+                            get_values_for_key(usages, "projectKey")
+                         )
+                    next_row["project_keys_where_plugin_used"] = pk_usages
+                    next_row["num_projects_that_use_this_plugin"] = pk_usages
+
+                else:
+                    next_row["project_keys_where_plugin_used"] = None
+                    
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 # adding list_usages for code environments on DevDesign (600 code env at an
                 # average of 30 sec per code env to list all its usages across 2,362 projects), increases
                 # the dataset's built time from 2 min 30 sec to 5 hours!!!
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             #                if self.__include_usages:
-            #                 print("starting code env list usages")
-            #                 usages = code_env_handle.list_usages()
-            #                 print("finished code env list usages")
-            #                 num_usages = len(usages)
-            #                 if len(usages) == 0:
-            #                     pk_usages = None
-            #                 else:
-            #                     pk_usages = list(
-            #                         get_values_for_key(usages, "projectKey")
-            #                      )
-            #                 next_row["project_keys_where_plugin_used"] = pk_usages
-            #                 next_row["num_projects_that_use_this_plugin"] = pk_usages
 
             except Exception as e:
                 print(f"codeenvs - generate_rows EXCEPTION: {e}")
