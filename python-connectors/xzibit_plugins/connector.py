@@ -84,11 +84,10 @@ class ConnectorPlugins(Connector):
                 next_row["url"] = self.get_url(next_row["id"])
                 next_row["is_built_in_plugin"] = next_row["id"] in DSS_BUILT_IN_PLUGIN_IDS
 
-                # pp(item_info)
-#                 if next_row["id"] == "default-samples":
-#                     settings_raw = plugin_handle.get_settings().get_raw()
-#                     print("HERE_COMES_DEBUG_OUTPUT")
-#                     pp(item_info)
+                print("HERE_COMES_DEBUG_OUTPUT")
+                settings_raw = plugin_handle.get_settings().get_raw()
+                pp(item_info)
+
 
                 if self.__compute_plugin_usages:
                     # this is so slow!!!!
