@@ -91,7 +91,7 @@ class ConnectorPlugins(Connector):
                 pp(item_info)
                 pp(settings_raw)
                 
-                next_row["codeEnvName"] = 
+                next_row["codeEnvName"] = settings_raw.get("codeEnvName", None)
                 
                 if self.__compute_plugin_usages:
                     # this is so slow!!!!
