@@ -82,6 +82,11 @@ class ConnectorCodeEnvs(Connector):
                 else:
                     next_row["size_in_MB"] = None
 
+                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                # adding list_usages for code environments on DevDesign (600 code env at an
+                # average of 30 sec per code env to list all its usages across 2,362 projects), increases
+                # the dataset's built time from 2 min 30 sec to 5 hours!!!
+                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                 if self.__compute_codeenv_usages:
                     print(f"starting code env list usages for {next_row['code_env_name']}")
@@ -98,13 +103,8 @@ class ConnectorCodeEnvs(Connector):
                     next_row["plugin_total_instances"] = num_usages
 
                 else:
-                    next_row["project_keys_where_plugin_used"] = None
-                    
-                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                # adding list_usages for code environments on DevDesign (600 code env at an
-                # average of 30 sec per code env to list all its usages across 2,362 projects), increases
-                # the dataset's built time from 2 min 30 sec to 5 hours!!!
-                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    next_row["projectKeys_where_plugin_used"] = None
+                    next_row["plugin_total_instances"] = None
             #                if self.__include_usages:
 
             except Exception as e:
