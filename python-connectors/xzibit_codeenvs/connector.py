@@ -129,7 +129,6 @@ class ConnectorCodeEnvs(Connector):
                 {"meaning": "DoubleMeaning", "name": "size_in_MB", "type": "double"},
                 {"name": "projectKeys_where_plugin_used", "meaning": "", "type": ""},
                 {"name": "total_instances_of_plugin", "meaning": "LongMeaning", "type": "bigint"},
-                
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
