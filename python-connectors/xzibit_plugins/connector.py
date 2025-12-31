@@ -67,7 +67,8 @@ class ConnectorPlugins(Connector):
             'default-samples',
             'builtin-macros',
             'code-studio-blocks',
-            'colorbrewer-palettes'
+            'colorbrewer-palettes',
+            'k8s-metrics-utils',
             
         ]
         for item_info in self.__client.list_plugins():
