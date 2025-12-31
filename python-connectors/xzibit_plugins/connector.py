@@ -79,7 +79,8 @@ class ConnectorPlugins(Connector):
                     plugin_handle = self.__client.get_plugin(next_row["id"])
                     
                     settings_raw = plugin_handle.get_settings().get_raw()
-                    jd(settings_raw)
+                    
+                    print(jd(settings_raw))
                     # .list_usages() adds 2+ hours instead of 1 second for entire run
                     list_of_usages = plugin_handle.list_usages().get_raw().get("usages",[])
                     if len(list_of_usages) == 0:
