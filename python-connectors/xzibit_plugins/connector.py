@@ -83,7 +83,6 @@ class ConnectorPlugins(Connector):
                 print(f"[plugins-generate_rows] Start plugin ID: {next_row['id']}")
                 next_row["url"] = self.get_url(next_row["id"])
                 next_row["is_built_in_plugin"] = next_row["id"] in DSS_BUILT_IN_PLUGIN_IDS
-                
 
                 # pp(item_info)
 #                 if next_row["id"] == "default-samples":
