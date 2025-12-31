@@ -86,7 +86,8 @@ class ConnectorPlugins(Connector):
                     if next_row["id"] == "default-samples":
                         settings_raw = plugin_handle.get_settings().get_raw()
                         print("HERE_COMES_DEBUG_OUTPUT")
-                        pp(settings_raw)
+                        pp(item_info)
+                        
                         
                     # .list_usages() adds 2+ hours instead of 1 second for entire run
                     list_of_usages = plugin_handle.list_usages().get_raw().get("usages",[])
