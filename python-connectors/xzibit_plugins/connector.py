@@ -84,8 +84,6 @@ class ConnectorPlugins(Connector):
                 next_row["url"] = self.get_url(next_row["id"])
                 next_row["is_built_in_plugin"] = next_row["id"] in DSS_BUILT_IN_PLUGIN_IDS
 
-
-
                 if self.__compute_plugin_usages:
                     # this is so slow!!!!
                     plugin_handle = self.__client.get_plugin(next_row["id"])                   
