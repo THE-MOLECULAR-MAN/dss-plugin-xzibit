@@ -95,7 +95,7 @@ class ConnectorCodeEnvs(Connector):
                             get_values_for_key(usages, "projectKey")
                          )
                     next_row["project_keys_where_plugin_used"] = pk_usages
-                    next_row["num_projects_that_use_this_plugin"] = pk_usages
+                    next_row["plugin_total_instances"] = num_usages
 
                 else:
                     next_row["project_keys_where_plugin_used"] = None
