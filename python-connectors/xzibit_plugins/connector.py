@@ -71,7 +71,7 @@ class ConnectorPlugins(Connector):
                 next_row = remove_prefix_from_keys(next_row, "meta.")
                 next_row["url"] = self.get_url(next_row["id"])
                 
-                print(f"[plugins-generate_rows] plugin ID: {next_row['id']} TOP")
+                print(f"[plugins-generate_rows] Start plugin ID: {next_row['id']}")
                 # pp(item_info)
 
                 if self.__compute_plugin_usages:
