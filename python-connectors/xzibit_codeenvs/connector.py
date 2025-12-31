@@ -127,8 +127,9 @@ class ConnectorCodeEnvs(Connector):
                 {"meaning": "Text", "name": "core_packages_set", "type": "string"},
                 {"meaning": "Text", "name": "path", "type": "string"},
                 {"meaning": "DoubleMeaning", "name": "size_in_MB", "type": "double"},
-                projectKeys_where_plugin_used
-                plugin_total_instances
+                {"name": "projectKeys_where_plugin_used", "meaning": "", "type": ""},
+                {"name": "total_instances_of_plugin", "meaning": "", "type": ""},
+                
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
