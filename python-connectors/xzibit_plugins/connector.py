@@ -68,6 +68,7 @@ class ConnectorPlugins(Connector):
 
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
+                next_row["url"] = self.get_url(next_row["id"])
                 # pp(item_info)
 
                 if self.__compute_plugin_usages:
@@ -89,7 +90,7 @@ class ConnectorPlugins(Connector):
                     next_row["plugin_used_in_projectkeys"] = ['Plugin usage checking not enabled in dataset settings.']
                     next_row["total_usages"]  = None
                    
-                next_row["url"] = self.get_url(next_row["id"])
+                
             except Exception as e:
                 print(
                     f"[plugins-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
