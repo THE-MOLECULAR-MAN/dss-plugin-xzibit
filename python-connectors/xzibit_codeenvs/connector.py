@@ -99,12 +99,12 @@ class ConnectorCodeEnvs(Connector):
                         pk_usages = list(
                             get_values_for_key(usages, "projectKey")
                          )
-                    next_row["projectKeys_where_plugin_used"] = pk_usages
-                    next_row["total_instances_of_plugin"] = num_usages
+                    next_row["projectKeys_where_code_env_used"] = pk_usages
+                    next_row["total_instances_of_code_env"] = num_usages
 
                 else:
-                    next_row["projectKeys_where_plugin_used"] = None
-                    next_row["total_instances_of_plugin"] = None
+                    next_row["projectKeys_where_code_env_used"] = None
+                    next_row["total_instances_of_code_env"] = None
 
             except Exception as e:
                 print(f"codeenvs - generate_rows EXCEPTION: {e}")
@@ -127,8 +127,8 @@ class ConnectorCodeEnvs(Connector):
                 {"meaning": "Text", "name": "core_packages_set", "type": "string"},
                 {"meaning": "Text", "name": "path", "type": "string"},
                 {"meaning": "DoubleMeaning", "name": "size_in_MB", "type": "double"},
-                {"name": "projectKeys_where_plugin_used", "meaning": "JSONArrayMeaning", "type": "string"},
-                {"name": "total_instances_of_plugin", "meaning": "LongMeaning", "type": "bigint"},
+                {"name": "projectKeys_where_code_env_used", "meaning": "JSONArrayMeaning", "type": "string"},
+                {"name": "total_instances_of_code_env", "meaning": "LongMeaning", "type": "bigint"},
                 {"meaning": "URL", "name": "url", "type": "string"}
             ]
         }
