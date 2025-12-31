@@ -127,10 +127,9 @@ class ConnectorCodeEnvs(Connector):
                 {"meaning": "Text", "name": "core_packages_set", "type": "string"},
                 {"meaning": "Text", "name": "path", "type": "string"},
                 {"meaning": "DoubleMeaning", "name": "size_in_MB", "type": "double"},
-                {"name": "projectKeys_where_plugin_used", "meaning": "", "type": ""},
+                {"name": "projectKeys_where_plugin_used", "meaning": "JSONArrayMeaning", "type": "string"},
                 {"name": "total_instances_of_plugin", "meaning": "LongMeaning", "type": "bigint"},
-                {"meaning": "URL", "name": "url", "type": "string"},
-            ]
+                {"meaning": "URL", "name": "url", "type": "string"}
         }
 
     ####################################################################
