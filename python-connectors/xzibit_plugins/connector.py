@@ -65,6 +65,7 @@ class ConnectorPlugins(Connector):
         
         DSS_BUILT_IN_PLUGIN_IDS = [
             'default-samples',
+            'builtin-macros',
             
         ]
         for item_info in self.__client.list_plugins():
