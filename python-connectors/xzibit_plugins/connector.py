@@ -88,8 +88,7 @@ class ConnectorPlugins(Connector):
 
                 if self.__compute_plugin_usages:
                     # this is so slow!!!!
-                    plugin_handle = self.__client.get_plugin(next_row["id"])
-                    
+                    plugin_handle = self.__client.get_plugin(next_row["id"])                   
 
                     settings_raw = plugin_handle.get_settings().get_raw()
                     print("HERE_COMES_DEBUG_OUTPUT")
