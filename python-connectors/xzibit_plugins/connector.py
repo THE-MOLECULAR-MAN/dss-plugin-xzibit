@@ -68,6 +68,7 @@ class ConnectorPlugins(Connector):
 
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
+                pp(item_info)
 
                 if self.__compute_plugin_usages:
                     # this is so slow!!!!
