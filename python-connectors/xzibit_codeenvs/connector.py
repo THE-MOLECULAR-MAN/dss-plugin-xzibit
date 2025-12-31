@@ -105,7 +105,6 @@ class ConnectorCodeEnvs(Connector):
                 else:
                     next_row["projectKeys_where_plugin_used"] = None
                     next_row["plugin_total_instances"] = None
-            #                if self.__include_usages:
 
             except Exception as e:
                 print(f"codeenvs - generate_rows EXCEPTION: {e}")
