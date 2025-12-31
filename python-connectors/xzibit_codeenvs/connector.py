@@ -100,11 +100,11 @@ class ConnectorCodeEnvs(Connector):
                             get_values_for_key(usages, "projectKey")
                          )
                     next_row["projectKeys_where_plugin_used"] = pk_usages
-                    next_row["plugin_total_instances"] = num_usages
+                    next_row["total_instances_of_plugin"] = num_usages
 
                 else:
                     next_row["projectKeys_where_plugin_used"] = None
-                    next_row["plugin_total_instances"] = None
+                    next_row["total_instances_of_plugin"] = None
 
             except Exception as e:
                 print(f"codeenvs - generate_rows EXCEPTION: {e}")
@@ -127,6 +127,8 @@ class ConnectorCodeEnvs(Connector):
                 {"meaning": "Text", "name": "core_packages_set", "type": "string"},
                 {"meaning": "Text", "name": "path", "type": "string"},
                 {"meaning": "DoubleMeaning", "name": "size_in_MB", "type": "double"},
+                projectKeys_where_plugin_used
+                plugin_total_instances
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
