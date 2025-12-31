@@ -78,7 +78,7 @@ class ConnectorPlugins(Connector):
                     # this is so slow!!!!
                     plugin_handle = self.__client.get_plugin(next_row["id"])
                     
-                    if next_row["id"] == "default-samples"
+                    if next_row["id"] == "default-samples":
                         settings_raw = plugin_handle.get_settings().get_raw()
                         pp(settings_raw)
                         
