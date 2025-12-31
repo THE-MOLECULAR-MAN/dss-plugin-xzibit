@@ -80,6 +80,7 @@ class ConnectorPlugins(Connector):
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
                 next_row["url"] = self.get_url(next_row["id"])
+                next_row["is_built_in_plugin"] = next_row["id"] in DSS_BUILT_IN_PLUGIN_IDS
                 
                 print(f"[plugins-generate_rows] Start plugin ID: {next_row['id']}")
                 # pp(item_info)
