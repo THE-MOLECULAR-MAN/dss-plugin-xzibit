@@ -72,6 +72,8 @@ class ConnectorPlugins(Connector):
             'local-r-dev-setup',
             'project-standards',
         ]
+        #  'eks-clusters' ?
+
         for item_info in self.__client.list_plugins():
             try:
                 if records_limit > 0 and records_generated >= records_limit:
