@@ -93,6 +93,7 @@ class ConnectorPlugins(Connector):
                     print("HERE_COMES_DEBUG_OUTPUT")
                     settings_raw = plugin_handle.get_settings().get_raw()
                     pp(item_info)
+                    pp(settings_raw)
 
                         
                     # .list_usages() adds 2+ hours instead of 1 second for entire run
