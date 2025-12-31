@@ -117,6 +117,7 @@ class ConnectorPlugins(Connector):
                 )
                 # pp(item_info)
                 next_row = list_to_error_dict(keys)
+                next_row['plugin_used_in_projectkeys'] = ['EXCEPTION']
             finally:
                 records_generated += 1
                 yield next_row
