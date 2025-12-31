@@ -70,6 +70,8 @@ class ConnectorPlugins(Connector):
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
                 next_row["url"] = self.get_url(next_row["id"])
+                
+                print(f"plugins - generate_rows - plugin ID: {next_row['id']}")
                 # pp(item_info)
 
                 if self.__compute_plugin_usages:
