@@ -69,6 +69,7 @@ class ConnectorPlugins(Connector):
             'code-studio-blocks',
             'colorbrewer-palettes',
             'k8s-metrics-utils',
+            'local-r-dev-setup',
             
         ]
         for item_info in self.__client.list_plugins():
