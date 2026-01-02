@@ -72,7 +72,7 @@ class ConnectorConnections(Connector):
                 
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
                 connection_handle = self.__client.get_connection(next_row["name"])
-                
+                connection_info = connection_handle.get_info().get_params()
 
                 next_row["url"] = self.get_url(next_row["name"])
 
