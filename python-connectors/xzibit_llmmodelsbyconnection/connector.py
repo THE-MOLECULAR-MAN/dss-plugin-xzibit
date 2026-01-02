@@ -61,11 +61,11 @@ class ConnectorProjects(Connector):
                     for k,v in connection_params.items():
                         if k.startswith('allow'):
                             stripped_key = k[5:]
-                            res.append({
+                            yield {
                                 'connection_name': CONNECTION_NAME,
                                 'connection_type': connection_type,
                                 'llm_name': stripped_key,
-                                'llm_enabled': v})
+                                'llm_enabled': v}
         
             except Exception as e:
                 print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION {e}")
