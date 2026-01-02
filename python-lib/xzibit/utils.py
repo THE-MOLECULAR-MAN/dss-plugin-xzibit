@@ -14,6 +14,7 @@ from json import dumps as jd
 
 JAVA_NOT_IMPLEMENTED = "com.dataiku.dip.utils.NotImplementedException"
 
+
 def extract_keys(d, v=True, key_prefix='allow'):
     """
     Finds keys in dictionary 'd' that start with 'key_prefix' and have value 'v'.
