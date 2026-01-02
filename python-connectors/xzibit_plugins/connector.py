@@ -26,8 +26,8 @@ class ConnectorPlugins(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
-        self.__compute_disk_util = self.config.get('compute_disk_util', False)
-        self.__compute_plugin_usages = self.config.get('compute_plugin_usages', False)
+        self.__compute_disk_util = self.config.get("compute_disk_util", False)
+        self.__compute_plugin_usages = self.config.get("compute_plugin_usages", False)
 
     def get_url(self, id):
         """Create a URL to the DSS object in question in this specific DSS instance.
@@ -62,15 +62,15 @@ class ConnectorPlugins(Connector):
         # even in the source code, no parameters:
         # https://github.com/dataiku/dataiku-api-client-python/blob/master/dataikuapi/dssclient.py#L273
         # There's not an easy way to speed up the next, very slow line
-        
+
         DSS_BUILT_IN_PLUGIN_IDS = [
-            'default-samples',
-            'builtin-macros',
-            'code-studio-blocks',
-            'colorbrewer-palettes',
-            'k8s-metrics-utils',
-            'local-r-dev-setup',
-            'project-standards',
+            "default-samples",
+            "builtin-macros",
+            "code-studio-blocks",
+            "colorbrewer-palettes",
+            "k8s-metrics-utils",
+            "local-r-dev-setup",
+            "project-standards",
         ]
 
         for item_info in self.__client.list_plugins():
@@ -82,22 +82,26 @@ class ConnectorPlugins(Connector):
                 next_row = remove_prefix_from_keys(next_row, "meta.")
                 print(f"[plugins-generate_rows] Start plugin ID: {next_row['id']}")
                 next_row["url"] = self.get_url(next_row["id"])
-                next_row["is_built_in_plugin"] = next_row["id"] in DSS_BUILT_IN_PLUGIN_IDS
+                next_row["is_built_in_plugin"] = (
+                    next_row["id"] in DSS_BUILT_IN_PLUGIN_IDS
+                )
 
-                plugin_handle = self.__client.get_plugin(next_row["id"])                   
+                plugin_handle = self.__client.get_plugin(next_row["id"])
 
                 settings_raw = plugin_handle.get_settings().get_raw()
-                #print("HERE_COMES_DEBUG_OUTPUT")
-                #pp(item_info)
-                #pp(settings_raw)
-                
+                # print("HERE_COMES_DEBUG_OUTPUT")
+                # pp(item_info)
+                # pp(settings_raw)
+
                 next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
-                
+
                 if self.__compute_plugin_usages:
                     # this is so slow!!!!
-                        
+
                     # .list_usages() adds 2+ hours instead of 1 second for entire run
-                    list_of_usages = plugin_handle.list_usages().get_raw().get("usages",[])
+                    list_of_usages = (
+                        plugin_handle.list_usages().get_raw().get("usages", [])
+                    )
                     if len(list_of_usages) == 0:
                         next_row["plugin_used_in_projectkeys"] = []
                     else:
@@ -106,17 +110,21 @@ class ConnectorPlugins(Connector):
                         )
                     next_row["total_usages"] = len(list_of_usages)
                 else:
-                    next_row["plugin_used_in_projectkeys"] = ['Plugin usage checking not enabled in dataset settings.']
-                    next_row["total_usages"]  = None
-                   
-                print(f"[plugins-generate_rows] plugin ID: {next_row['id']} FINISHED SUCCESSFULLY")
+                    next_row["plugin_used_in_projectkeys"] = [
+                        "Plugin usage checking not enabled in dataset settings."
+                    ]
+                    next_row["total_usages"] = None
+
+                print(
+                    f"[plugins-generate_rows] plugin ID: {next_row['id']} FINISHED SUCCESSFULLY"
+                )
             except Exception as e:
                 print(
                     f"[plugins-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
                 )
                 # pp(item_info)
                 next_row = list_to_error_dict(keys)
-                next_row['plugin_used_in_projectkeys'] = ['EXCEPTION']
+                next_row["plugin_used_in_projectkeys"] = ["EXCEPTION"]
             finally:
                 records_generated += 1
                 yield next_row

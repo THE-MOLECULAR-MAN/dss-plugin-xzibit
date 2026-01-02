@@ -6,8 +6,13 @@
 from dataiku import api_client
 from dataiku.connector import Connector
 
-from xzibit.utils import flatten_dict, get_dss_base_url, JAVA_NOT_IMPLEMENTED, DataikuException, pp
-
+from xzibit.utils import (
+    flatten_dict,
+    get_dss_base_url,
+    JAVA_NOT_IMPLEMENTED,
+    DataikuException,
+    pp,
+)
 
 
 class ConnectorConnections(Connector):
@@ -62,18 +67,20 @@ class ConnectorConnections(Connector):
                     break
 
                 next_row = flatten_dict(item_info, include_keys=keys)
-                connection_type = next_row.get("type","unknown type")
+                connection_type = next_row.get("type", "unknown type")
                 connection_error_msg = None
 
                 next_row["url"] = self.get_url(next_row["name"])
-                
+
                 obj_handle = self.__client.get_connection(next_row["name"])
-                connection_test_dict = obj_handle.test() # error
+                connection_test_dict = obj_handle.test()  # error
                 if connection_test_dict.get("connectionOK", False):
-                    connection_test_result = 'PASSED'
+                    connection_test_result = "PASSED"
                 else:
-                    connection_test_result = 'FAILED'
-                    connection_error_msg = connection_test_dict.get("connectionError",{}).get("detailedMessage", "Unable to fetch error message")
+                    connection_test_result = "FAILED"
+                    connection_error_msg = connection_test_dict.get(
+                        "connectionError", {}
+                    ).get("detailedMessage", "Unable to fetch error message")
 
             except Exception as e:
                 # Not all connection types have a .test() method implemented, by design, like filesystem.
@@ -102,7 +109,11 @@ class ConnectorConnections(Connector):
                 {"meaning": "Text", "name": "type", "type": "string"},
                 {"meaning": "Text", "name": "credentialsMode", "type": "string"},
                 {"meaning": "Text", "name": "connection_test_status", "type": "string"},
-                {"meaning": "Text", "name": "connection_test_error_msg", "type": "string"},
+                {
+                    "meaning": "Text",
+                    "name": "connection_test_error_msg",
+                    "type": "string",
+                },
                 {"meaning": "Text", "name": "usableBy", "type": "string"},
                 {"meaning": "Text", "name": "params.credentialsMode", "type": "string"},
                 {"meaning": "Text", "name": "params.authType", "type": "string"},

@@ -5,7 +5,13 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import get_dss_base_url, flatten_dict, get_values_for_key, get_path_size_megabytes, pp
+from xzibit.utils import (
+    get_dss_base_url,
+    flatten_dict,
+    get_values_for_key,
+    get_path_size_megabytes,
+    pp,
+)
 
 
 class ConnectorCodeEnvs(Connector):
@@ -18,17 +24,18 @@ class ConnectorCodeEnvs(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
-        
+
         # Calculating disk space usage on my personal FM instance:
         #    * took 8 seconds
         #    * 94.0 GB of total code environment disk space
         #    * for 48 unique code environments
         #    * ... average code env size was 2005.3 GB
         #    * ... average time to calculate each code env size: 0.16667 sec on second run. Unsure of first run
-        
-        self.__compute_codeenv_disk_space_usage = self.config.get("compute_codeenv_disk_space_usage", False)
-        self.__compute_codeenv_usages =  self.config.get("compute_codeenv_usages", False)
 
+        self.__compute_codeenv_disk_space_usage = self.config.get(
+            "compute_codeenv_disk_space_usage", False
+        )
+        self.__compute_codeenv_usages = self.config.get("compute_codeenv_usages", False)
 
     def get_url(self, env_name, env_lang="python"):
         """Create a URL to the DSS object in question in this specific DSS instance.
@@ -75,7 +82,7 @@ class ConnectorCodeEnvs(Connector):
                     "corePackagesSet", None
                 )
                 next_row["path"] = settings_raw.get("path", None)
-                
+
                 if self.__compute_codeenv_disk_space_usage:
                     # get_path_size_megabytes returns 0 if path does not exist
                     next_row["size_in_MB"] = get_path_size_megabytes(next_row["path"])
@@ -89,16 +96,14 @@ class ConnectorCodeEnvs(Connector):
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                 if self.__compute_codeenv_usages:
-                    #print(f"starting code env list usages for {next_row['code_env_name']}")
+                    # print(f"starting code env list usages for {next_row['code_env_name']}")
                     usages = code_env_handle.list_usages()
-                    #print(f"finished code env list usages")
+                    # print(f"finished code env list usages")
                     num_usages = len(usages)
                     if len(usages) == 0:
                         pk_usages = None
                     else:
-                        pk_usages = list(
-                            get_values_for_key(usages, "projectKey")
-                         )
+                        pk_usages = list(get_values_for_key(usages, "projectKey"))
                     next_row["projectKeys_where_code_env_used"] = pk_usages
                     next_row["total_instances_of_code_env"] = num_usages
 
@@ -127,9 +132,17 @@ class ConnectorCodeEnvs(Connector):
                 {"meaning": "Text", "name": "core_packages_set", "type": "string"},
                 {"meaning": "Text", "name": "path", "type": "string"},
                 {"meaning": "DoubleMeaning", "name": "size_in_MB", "type": "double"},
-                {"name": "projectKeys_where_code_env_used", "meaning": "JSONArrayMeaning", "type": "string"},
-                {"name": "total_instances_of_code_env", "meaning": "LongMeaning", "type": "bigint"},
-                {"meaning": "URL", "name": "url", "type": "string"}
+                {
+                    "name": "projectKeys_where_code_env_used",
+                    "meaning": "JSONArrayMeaning",
+                    "type": "string",
+                },
+                {
+                    "name": "total_instances_of_code_env",
+                    "meaning": "LongMeaning",
+                    "type": "bigint",
+                },
+                {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
 
