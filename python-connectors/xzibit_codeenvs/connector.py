@@ -112,7 +112,9 @@ class ConnectorCodeEnvs(Connector):
                     next_row["total_instances_of_code_env"] = None
 
             except Exception as e:
+                # this is occuring on DevDesign
                 print(f"codeenvs - generate_rows EXCEPTION: {e}")
+                
             finally:
                 records_generated += 1
                 yield next_row
