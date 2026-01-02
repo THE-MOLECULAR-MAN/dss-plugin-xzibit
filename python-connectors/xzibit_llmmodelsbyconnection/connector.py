@@ -42,7 +42,7 @@ class ConnectorProjects(Connector):
         records_generated = 0
 
         # iterate through each object
-        for item_info in self.__client.list_connections(as_type="listitems"):
+        for item_info in self.__client.list_connections(as_type="objects"):
             try:
                 if records_limit > 0 and records_generated >= records_limit:
                     break
