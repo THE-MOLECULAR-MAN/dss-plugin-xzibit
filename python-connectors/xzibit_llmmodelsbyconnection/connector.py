@@ -47,7 +47,7 @@ class ConnectorProjects(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     break
 
-                next_row = flatten_dict(item_info, include_keys=keys)
+                
                 connection_type = next_row.get("type", "unknown type")
                 connection_error_msg = None
                 
