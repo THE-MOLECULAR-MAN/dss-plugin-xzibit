@@ -74,7 +74,8 @@ class ConnectorConnections(Connector):
                 connection_handle = self.__client.get_connection(next_row["name"])
                 connection_info = connection_handle.get_info().get_params()
                 connection_settings = connection_handle.get_settings().get_raw()
-                connection_
+                pp(connection_info)
+                pp(connection_settings)
 
                 next_row["url"] = self.get_url(next_row["name"])
 
