@@ -74,6 +74,7 @@ class ConnectorProjects(Connector):
         
             except Exception as e:
                 print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION {e}")
+                continue
 
 
 def get_read_schema(self):
