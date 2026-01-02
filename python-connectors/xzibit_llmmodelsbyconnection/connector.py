@@ -58,11 +58,10 @@ class ConnectorProjects(Connector):
 
                     for k,v in connection_params.items():
                         if k.startswith('allow'):
-                            stripped_key = k[5:]
                             next_row = {
                                 'connection_name': connection_name,
                                 'connection_type': connection_type}
-                            
+                            stripped_key = k[5:]
                             next_row['llm_name'] = stripped_key
                             next_row['llm_enabled'] = v  
         
