@@ -61,9 +61,10 @@ class ConnectorProjects(Connector):
                             stripped_key = k[5:]
                             next_row = {
                                 'connection_name': connection_name,
-                                'connection_type': connection_type,
-                                'llm_name': stripped_key,
-                                'llm_enabled': v}
+                                'connection_type': connection_type}
+                            
+                            next_row['llm_name'] = stripped_key
+                            next_row['llm_enabled'] = v  
         
             except Exception as e:
                 print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION {e}")
