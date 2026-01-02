@@ -70,7 +70,9 @@ class ConnectorConnections(Connector):
                 connection_type = next_row.get("type", "unknown type")
                 connection_error_msg = None
                 
+                # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
                 connection_handle = self.__client.get_connection(next_row["name"])
+                
 
                 next_row["url"] = self.get_url(next_row["name"])
 
