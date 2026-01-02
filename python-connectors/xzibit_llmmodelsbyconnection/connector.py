@@ -60,7 +60,7 @@ class ConnectorProjects(Connector):
                         if k.startswith('allow'):
                             stripped_key = k[5:]
                             yield {
-                                'connection_name': CONNECTION_NAME,
+                                'connection_name': connection_name,
                                 'connection_type': connection_type,
                                 'llm_name': stripped_key,
                                 'llm_enabled': v}
