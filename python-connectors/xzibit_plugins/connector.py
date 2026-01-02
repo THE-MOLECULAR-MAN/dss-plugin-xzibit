@@ -79,6 +79,8 @@ class ConnectorPlugins(Connector):
             try:
                 if records_limit > 0 and records_generated >= records_limit:
                     return
+                
+                plugin_id = item_info.get("id","NO_PLUGIN_ID")
 
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
