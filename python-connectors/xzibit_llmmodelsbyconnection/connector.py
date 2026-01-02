@@ -38,7 +38,9 @@ class ConnectorProjects(Connector):
         records_limit=-1,
     ):
         """TBD"""
+        
        records_generated = 0
+    
         # iterate through each object
         for item_info in self.__client.list_connections(as_type="listitems"):
             try:
