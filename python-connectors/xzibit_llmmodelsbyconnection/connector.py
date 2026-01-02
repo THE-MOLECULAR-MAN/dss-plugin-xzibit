@@ -57,7 +57,7 @@ class ConnectorProjects(Connector):
                     connection_params = connection_settings.get("params",{})
 
                     for k,v in connection_params.items():
-                        if k.startswith('allow'):
+                        if k.startswith('allow') and k != 'allowFinetuning':
                             try:
                                 next_row = {
                                     'connection_name': connection_name,
