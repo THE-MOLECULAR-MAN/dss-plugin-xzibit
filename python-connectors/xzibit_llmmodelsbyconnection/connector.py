@@ -68,6 +68,9 @@ class ConnectorProjects(Connector):
                                 next_row['llm_enabled'] = v  
                         except Exception as e:
                             print(f"[llmmodelsbyconnection-generate_row] INNER LOOP UNHANDLED EXCEPTION {e}")
+                        finally:
+                            records_generated += 1
+                            yield next_row
         
             except Exception as e:
                 print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION {e}")
