@@ -51,26 +51,26 @@ class ConnectorProjects(Connector):
                 connection_type = connection_settings.get("type", None)
                 
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
-                if True: # connection_type in ["OpenAI", "AzureOpenAI", "VertexAILLM"]:
-                    pp(connection_settings)
-                    connection_name = connection_settings.get("name", None)
-                    connection_params = connection_settings.get("params",{})
 
-                    for k,v in connection_params.items():
-                        if k.startswith('allow') and k != 'allowFinetuning':
-                            try:
-                                next_row = {
-                                    'connection_name': connection_name,
-                                    'connection_type': connection_type}
+                #pp(connection_settings)
+                connection_name = connection_settings.get("name", None)
+                connection_params = connection_settings.get("params",{})
 
-                                stripped_key = k[5:]
-                                next_row['llm_name'] = stripped_key
-                                next_row['llm_enabled'] = v  
-                            except Exception as e:
-                                print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION at model level {e}")
-                            finally:
-                                records_generated += 1
-                                yield next_row
+                for k,v in connection_params.items():
+                    if k.startswith('allow') and k != 'allowFinetuning':
+                        try:
+                            next_row = {
+                                'connection_name': connection_name,
+                                'connection_type': connection_type}
+
+                            stripped_key = k[5:]
+                            next_row['llm_name'] = stripped_key
+                            next_row['llm_enabled'] = v  
+                        except Exception as e:
+                            print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION at model level {e}")
+                        finally:
+                            records_generated += 1
+                            yield next_row
         
             except Exception as e:
                 print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION at connection level: {e}")
