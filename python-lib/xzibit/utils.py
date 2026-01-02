@@ -19,6 +19,8 @@ def extract_keys(d, v=True, key_prefix='allow'):
     """
     Finds keys in dictionary 'd' that start with 'key_prefix' and have value 'v'.
     Returns a list of these keys with the prefix removed.
+
+    Used in extracting an LLM connection's list of allowed LLM models
     """
     result = []
     
