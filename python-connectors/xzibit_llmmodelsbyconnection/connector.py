@@ -51,8 +51,6 @@ class ConnectorProjects(Connector):
                 connection_settings = connection_handle.get_settings().get_raw()
                 connection_type = connection_settings.get("type", None)
 
-                connection_type = next_row.get("type", "unknown type")
-                connection_error_msg = None
                 
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
                 if connection_type in ["OpenAI", "AzureOpenAI", "VertexAILLM"]:
