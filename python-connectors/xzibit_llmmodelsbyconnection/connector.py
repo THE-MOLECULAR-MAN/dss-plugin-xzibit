@@ -65,8 +65,6 @@ class ConnectorProjects(Connector):
 
             
             finally:
-                next_row["connection_test_status"] = connection_test_result
-                next_row["connection_test_error_msg"] = connection_error_msg
                 records_generated += 1
                 yield next_row
     def get_read_schema(self):
