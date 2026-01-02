@@ -74,6 +74,7 @@ class ConnectorConnections(Connector):
                 connection_handle = self.__client.get_connection(next_row["name"])
                 connection_info = connection_handle.get_info().get_params()
                 connection_settings = connection_handle.get_settings().get_raw()
+                # outputs for these are VERY long
                 pp(connection_info)
                 pp(connection_settings)
 
