@@ -96,6 +96,9 @@ class ConnectorCodeEnvs(Connector):
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                 if self.__compute_codeenv_usages:
+                    next_row["projectKeys_where_code_env_used"] = 'EXCEPTION'
+                    next_row["total_instances_of_code_env"] = 'EXCEPTION'
+
                     print(f"starting code env list usages for {code_env_name}")
                     usages = code_env_handle.list_usages()
                     print(f"Finished code env list usages for {code_env_name}")
