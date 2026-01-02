@@ -14,6 +14,21 @@ from json import dumps as jd
 
 JAVA_NOT_IMPLEMENTED = "com.dataiku.dip.utils.NotImplementedException"
 
+def extract_keys(d, v=True, key_prefix='allow'):
+    """
+    Finds keys in dictionary 'd' that start with 'key_prefix' and have value 'v'.
+    Returns a list of these keys with the prefix removed.
+    """
+    result = []
+    
+    for key, value in d.items():
+        # Check if key starts with the prefix AND value matches v
+        if key.startswith(key_prefix) and value == v:
+            # Remove the prefix using string slicing
+            stripped_key = key[len(key_prefix):]
+            result.append(stripped_key)
+            
+    return result
 
 def recursive_search_all(data, s):
     """
