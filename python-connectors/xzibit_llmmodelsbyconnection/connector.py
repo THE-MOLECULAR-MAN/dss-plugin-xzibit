@@ -62,7 +62,7 @@ class ConnectorProjects(Connector):
                     print(f"Connection_SETTINGS for {connection_type}")
                     pp(connection_settings)
 
-
+            except
             
             finally:
                 records_generated += 1
