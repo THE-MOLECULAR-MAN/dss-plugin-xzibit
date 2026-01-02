@@ -98,7 +98,7 @@ class ConnectorCodeEnvs(Connector):
                 if self.__compute_codeenv_usages:
                     # print(f"starting code env list usages for {next_row['code_env_name']}")
                     usages = code_env_handle.list_usages()
-                    # print(f"finished code env list usages")
+                    print(f"finished code env list usages")
                     num_usages = len(usages)
                     if len(usages) == 0:
                         pk_usages = None
