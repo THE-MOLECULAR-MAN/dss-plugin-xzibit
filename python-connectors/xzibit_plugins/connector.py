@@ -86,12 +86,12 @@ class ConnectorPlugins(Connector):
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
 
-                next_row["url"] = self.get_url(next_row["id"])
+                next_row["url"] = self.get_url(plugin_id)
                 next_row["is_built_in_plugin"] = (
-                    next_row["id"] in DSS_BUILT_IN_PLUGIN_IDS
+                    plugin_id in DSS_BUILT_IN_PLUGIN_IDS
                 )
 
-                plugin_handle = self.__client.get_plugin(next_row["id"])
+                plugin_handle = self.__client.get_plugin(plugin_id)
 
                 settings_raw = plugin_handle.get_settings().get_raw()
                 # print("HERE_COMES_DEBUG_OUTPUT")
