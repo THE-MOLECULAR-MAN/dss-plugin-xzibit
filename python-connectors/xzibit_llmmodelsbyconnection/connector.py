@@ -42,6 +42,7 @@ class ConnectorProjects(Connector):
         records_generated = 0
 
         # iterate through each object
+        # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
         for connection_handle in self.__client.list_connections(as_type="objects"):
             try:
                 if records_limit > 0 and records_generated >= records_limit:
@@ -50,7 +51,6 @@ class ConnectorProjects(Connector):
                 connection_settings = connection_handle.get_settings().get_raw()
                 connection_type = connection_settings.get("type", None)
                 
-                # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
                 #pp(connection_settings)
                 connection_name = connection_settings.get("name", None)
                 connection_params = connection_settings.get("params",{})
