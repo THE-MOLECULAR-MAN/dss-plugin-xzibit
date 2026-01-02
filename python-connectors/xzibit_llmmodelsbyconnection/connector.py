@@ -49,7 +49,7 @@ class ConnectorProjects(Connector):
 
                 connection_settings = connection_handle.get_settings().get_raw()
                 connection_name = connection_settings.get("name", None)
-                connection_type = connection_settings.get("type", None)
+                connection_type = connection_settings.type
                 connection_params = connection_settings.get("params",{})
                 
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
