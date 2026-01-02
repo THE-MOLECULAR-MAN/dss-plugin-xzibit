@@ -73,7 +73,7 @@ class ConnectorProjects(Connector):
                             yield next_row
         
             except Exception as e:
-                print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION {e}")
+                print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION at connection level: {e}")
                 continue
 
 
