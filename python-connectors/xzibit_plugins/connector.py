@@ -99,7 +99,7 @@ class ConnectorPlugins(Connector):
                     # this is so slow!!!!
 
                     # .list_usages() adds 2+ hours instead of 1 second for entire run
-                    # on DevDesign, average time per plugin was 26 sec with 281 plugins & 2747 projects
+                    # on DevDesign, average time per plugin was 26 sec with 281 plugins & 2,747 projects
                     list_of_usages = (
                         plugin_handle.list_usages().get_raw().get("usages", [])
                     )
