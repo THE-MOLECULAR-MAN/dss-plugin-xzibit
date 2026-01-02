@@ -80,7 +80,7 @@ class ConnectorPlugins(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     return
                 
-                plugin_id = item_info.get("id","NO_PLUGIN_ID")
+                plugin_id = item_info.get("id", "NO_PLUGIN_ID")
                 print(f"[plugins-generate_rows] Start plugin ID: {plugin_id}")
                 
                 next_row = flatten_dict(item_info, include_keys=keys)
