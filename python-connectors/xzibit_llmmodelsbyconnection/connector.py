@@ -65,11 +65,8 @@ class ConnectorProjects(Connector):
                                 'connection_name': CONNECTION_NAME,
                                 'connection_type': connection_type,
                                 'llm_name': stripped_key,
-                                'llm_enabled': v
-        })
+                                'llm_enabled': v})
         
-res
-
             except Exception as e:
                 print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION {e}")
 
