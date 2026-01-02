@@ -73,6 +73,8 @@ class ConnectorPlugins(Connector):
             "project-standards",
         ]
 
+        # list_plugins does not offer any parameters
+        # list_plugins returns a list of dict. Each dict contains at least a ‘id’ field
         for item_info in self.__client.list_plugins():
             try:
                 if records_limit > 0 and records_generated >= records_limit:
