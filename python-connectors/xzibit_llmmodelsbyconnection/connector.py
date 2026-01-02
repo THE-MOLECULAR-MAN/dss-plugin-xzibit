@@ -56,8 +56,6 @@ class ConnectorProjects(Connector):
                     connection_name = connection_settings.get("name", None)
                     connection_params = connection_settings.get("params",{})
 
-                    res = []
-
                     for k,v in connection_params.items():
                         if k.startswith('allow'):
                             stripped_key = k[5:]
