@@ -48,20 +48,26 @@ class ConnectorProjects(Connector):
                     break
 
                 connection_settings = connection_handle.get_settings().get_raw()
-                connection_name = connection_settings.get("name", None)
-                connection_type = connection_settings.type
-                connection_params = connection_settings.get("params",{})
+                connection_type = connection_settings.get("type", None)
                 
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
                 if connection_type in ["OpenAI", "AzureOpenAI", "VertexAILLM"]:
-                    connection_handle = self.__client.get_connection(next_row["name"])
-                    connection_info = connection_handle.get_info().get_params()
-                    connection_settings = connection_handle.get_settings().get_raw()
-                    # outputs for these are VERY long
-                    print(f"Connection_INFO for {connection_type}")
-                    pp(connection_info)
-                    print(f"Connection_SETTINGS for {connection_type}")
-                    pp(connection_settings)
+                    connection_name = connection_settings.get("name", None)
+                    connection_params = connection_settings.get("params",{})
+
+                    res = []
+
+                    for k,v in connection_params.items():
+                        if k.startswith('allow'):
+                            stripped_key = k[5:]
+                            res.append({
+                                'connection_name': CONNECTION_NAME,
+                                'connection_type': connection_type,
+                                'llm_name': stripped_key,
+                                'llm_enabled': v
+        })
+        
+res
 
             except Exception as e:
                 print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION {e}")
