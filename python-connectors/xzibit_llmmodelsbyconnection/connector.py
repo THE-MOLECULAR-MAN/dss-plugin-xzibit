@@ -63,7 +63,7 @@ class ConnectorProjects(Connector):
                     pp(connection_settings)
 
             except Exception as e:
-                print(f"[Connections-generate_row] UNHANDLED EXCEPTION {e}")
+                print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION {e}")
 
             finally:
                 records_generated += 1
