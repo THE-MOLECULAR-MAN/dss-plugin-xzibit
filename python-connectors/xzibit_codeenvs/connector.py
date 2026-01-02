@@ -113,7 +113,7 @@ class ConnectorCodeEnvs(Connector):
 
             except Exception as e:
                 # this is occuring on DevDesign
-                print(f"codeenvs - generate_rows EXCEPTION: {e} on {code_env_name}")
+                print(f"codeenvs - generate_rows EXCEPTION: CodeEnv: {code_env_name} - {e}")
                 
             finally:
                 records_generated += 1
