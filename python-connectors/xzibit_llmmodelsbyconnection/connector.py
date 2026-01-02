@@ -81,7 +81,7 @@ class ConnectorProjects(Connector):
         """Returns the read schema for TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return {None
+        return None
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
