@@ -57,14 +57,15 @@ class ConnectorProjects(Connector):
                     connection_params = connection_settings.get("params",{})
 
                     for k,v in connection_params.items():
-                        if k.startswith('allow'):
-                            next_row = {
-                                'connection_name': connection_name,
-                                'connection_type': connection_type}
+                        try:
+                            if k.startswith('allow'):
+                                next_row = {
+                                    'connection_name': connection_name,
+                                    'connection_type': connection_type}
 
-                            stripped_key = k[5:]
-                            next_row['llm_name'] = stripped_key
-                            next_row['llm_enabled'] = v  
+                                stripped_key = k[5:]
+                                next_row['llm_name'] = stripped_key
+                                next_row['llm_enabled'] = v  
         
             except Exception as e:
                 print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION {e}")
