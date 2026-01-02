@@ -47,7 +47,6 @@ class ConnectorProjects(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     break
 
-
                 connection_settings = connection_handle.get_settings().get_raw()
                 connection_name = connection_settings.get("name", None)
                 connection_type = connection_settings.get("type", None)
