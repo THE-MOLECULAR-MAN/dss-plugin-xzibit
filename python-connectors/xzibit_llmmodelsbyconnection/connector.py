@@ -62,17 +62,6 @@ class ConnectorProjects(Connector):
                     print(f"Connection_SETTINGS for {connection_type}")
                     pp(connection_settings)
 
-                next_row["url"] = self.get_url(next_row["name"])
-
-                obj_handle = self.__client.get_connection(next_row["name"])
-                connection_test_dict = obj_handle.test()  # error
-                if connection_test_dict.get("connectionOK", False):
-                    connection_test_result = "PASSED"
-                else:
-                    connection_test_result = "FAILED"
-                    connection_error_msg = connection_test_dict.get(
-                        "connectionError", {}
-                    ).get("detailedMessage", "Unable to fetch error message")
 
             except Exception as e:
                 # Not all connection types have a .test() method implemented, by design, like filesystem.
