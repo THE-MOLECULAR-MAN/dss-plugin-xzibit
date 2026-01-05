@@ -103,8 +103,7 @@ class ConnectorCodeEnvs(Connector):
                     print(f"starting code env list usages for {code_env_name}")
                     # next line throws exception on DevDesign:
                     #  jakarta.servlet.ServletException: Handler dispatch failed: java.lang.Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool, caused by: Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool
-                    # https://developer.dataiku.com/latest/api-reference/python/plugins.html#dataikuapi.dss.plugin.DSSPlugin.list_usages
-                    # potential troubleshooting path to narrow down scope would be to iterate on projects and call .list_usages() with a projectKey
+                    # list_usages() does not take any parameters
                     usages = code_env_handle.list_usages()
                     print(f"Finished code env list usages for {code_env_name}")
                     num_usages = len(usages)
