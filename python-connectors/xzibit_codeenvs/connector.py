@@ -103,7 +103,6 @@ class ConnectorCodeEnvs(Connector):
                     print(f"starting code env list usages for {code_env_name}")
                     # next line throws exception on DevDesign:
                     #  jakarta.servlet.ServletException: Handler dispatch failed: java.lang.Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool, caused by: Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool
-
                     usages = code_env_handle.list_usages()
                     print(f"Finished code env list usages for {code_env_name}")
                     num_usages = len(usages)
