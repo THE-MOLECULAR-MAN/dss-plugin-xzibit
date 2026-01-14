@@ -13,7 +13,7 @@
       "name": "get_column_lineage",
       "label": "Include column lineage",
       "type": "BOOLEAN",
-      "description": "Enable computing which projects are used by each plugin. Checking this box populates the column named 'plugin_used_in_projectkeys'. WARNING: This adds an additional 30+ seconds per plugin, so checking a DSS Node with 280 installed plugins and 2,700 projects adds nearly 2.5 hours to run.",
+      "description": "Enable computing the entire history of each column. WARNING: This adds an XX.",
       "mandatory": true,
       "defaultValue": false
     }]
