@@ -140,7 +140,7 @@ def get_dss_base_url():
     return res.rstrip("/")
 
 
-def safe_extract_dataset_metadata(dataset_handle, pk):
+def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False):
     """SLOW! Adds 1.36 seconds per dataset (row) on average"""
     assert isinstance(
         dataset_handle, dataikuapi.dss.dataset.DSSDataset
@@ -223,7 +223,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk):
             dataset_metadata.get("versionTag.lastModifiedOn", None)
         )
         
-        if self.__get_column_lineage:
+        if get_column_lineage:
             dataset_metadata["data_lineage"] = []
             for colname in dataset_metadata["column_names"]:
                 dataset_metadata["data_lineage"].append(dataset_handle.get_column_lineage())
