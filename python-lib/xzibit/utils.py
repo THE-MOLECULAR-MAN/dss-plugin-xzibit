@@ -246,7 +246,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False):
         if get_column_lineage:
             # runtime for tim's personal dev env (X datasets) was :
             #    3 min 33 sec sec with data lineage turned ON
-            #    6 sec with data lineage turned OFF
+            #    5 sec with data lineage turned OFF
             dataset_metadata["data_lineage"] = []
             lineage = []
             
