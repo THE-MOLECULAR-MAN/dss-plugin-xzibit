@@ -222,6 +222,11 @@ def safe_extract_dataset_metadata(dataset_handle, pk):
         dataset_metadata["versionTag.lastModifiedOn"] = int_to_datetime(
             dataset_metadata.get("versionTag.lastModifiedOn", None)
         )
+        
+        if self.__get_column_lineage:
+            dataset_metadata["data_lineage"] = dataset_handle.get_column_lineage()
+        else:
+            dataset_metadata["data_lineage"] = ""
 
     except DataikuException as e:
         print(f"safe_extract_dataset_metadata - Dataiku exception {e}")
