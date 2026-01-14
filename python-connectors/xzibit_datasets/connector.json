@@ -13,7 +13,7 @@
       "name": "get_column_lineage",
       "label": "Include column lineage",
       "type": "BOOLEAN",
-      "description": "Enable computing the entire history of each column for every dataset. WARNING: This makes is about 42 times slower.",
+      "description": "Enable computing the entire history of each column for every dataset. WARNING: This causes a 40x slowdown in runtime.",
       "mandatory": true,
       "defaultValue": false
     },
@@ -21,7 +21,7 @@
       "name": "get_data_quality_rules",
       "label": "Get data quality rules",
       "type": "BOOLEAN",
-      "description": "Enable computing the number of data quality rules.",
+      "description": "Enable computing the number of data quality rules. This adds a slight slowdown in runtime.",
       "mandatory": true,
       "defaultValue": false
     }
