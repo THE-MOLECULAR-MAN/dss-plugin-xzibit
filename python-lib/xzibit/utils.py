@@ -248,7 +248,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False):
             lineage = []
             
             for column_name in dataset_metadata["column_names"]:
-                iter_col_lineage = dataset_handle.get_column_lineage()
+                iter_col_lineage = dataset_handle.get_column_lineage(column_name)
                 new_lineage = {"column_name": column_name, "column_lineage": iter_col_lineage}
                 lineage.append(x)
             dataset_metadata["data_lineage"] = lineage
