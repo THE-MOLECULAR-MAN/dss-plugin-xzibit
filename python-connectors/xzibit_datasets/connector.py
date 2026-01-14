@@ -21,7 +21,8 @@ class ConnectorDatasets(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
-        self.__get_column_lineage = False
+        self.__get_column_lineage = self.config.get("get_column_lineage", False)
+
         "get_column_lineage"
 
     def get_url(self, id, project_key):
