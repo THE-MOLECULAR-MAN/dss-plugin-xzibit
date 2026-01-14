@@ -123,6 +123,8 @@ class ConnectorDatasets(Connector):
                     "type": "string",
                 },
                 {"meaning": "URL", "name": "url", "type": "string"},
+                {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
+
             ]
         }
 
