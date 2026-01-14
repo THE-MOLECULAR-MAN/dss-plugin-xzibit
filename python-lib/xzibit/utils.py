@@ -261,6 +261,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, 
             
         if get_data_quality_rules:
             dataset_metadata["num_data_quality_rules"] = None
+            
 
     except DataikuException as e:
         print(f"safe_extract_dataset_metadata - Dataiku exception {e}")
