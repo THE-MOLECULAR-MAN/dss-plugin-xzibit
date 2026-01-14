@@ -21,7 +21,7 @@
       "name": "get_data_quality_rules",
       "label": "Get data quality rules",
       "type": "BOOLEAN",
-      "description": "Enable computing the entire history of each column. WARNING: This adds an XX.",
+      "description": "Enable computing the number of data quality rules.",
       "mandatory": true,
       "defaultValue": false
     }
