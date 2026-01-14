@@ -261,6 +261,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, 
             
         if get_data_quality_rules:
             print(f"getting data quality rules...")
+            dataset_metadata["num_data_quality_rules"] = -1
             dataset_metadata["num_data_quality_rules"] = len(dataset_handle.get_data_quality_rules())
             print(f"successfully finished getting data quality rules")
         else:
