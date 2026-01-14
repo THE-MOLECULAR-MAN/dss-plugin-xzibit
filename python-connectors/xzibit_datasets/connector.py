@@ -23,7 +23,6 @@ class ConnectorDatasets(Connector):
         self.__baseurl = get_dss_base_url()
         self.__get_column_lineage = self.config.get("get_column_lineage", False)
 
-
     def get_url(self, id, project_key):
         """Create a URL to the DSS object in question in this specific DSS instance.
         Return None if any of the inputs are None."""
