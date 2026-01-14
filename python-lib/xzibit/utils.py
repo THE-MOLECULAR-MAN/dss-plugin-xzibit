@@ -224,9 +224,11 @@ def safe_extract_dataset_metadata(dataset_handle, pk):
         )
         
         if self.__get_column_lineage:
-            dataset_metadata["data_lineage"] = dataset_handle.get_column_lineage()
+            dataset_metadata["data_lineage"] = []
+            for colname in dataset_metadata["column_names"]:
+            dataset_handle.get_column_lineage()
         else:
-            dataset_metadata["data_lineage"] = ""
+                dataset_metadata.append(dataset_metadata["data_lineage"] = "")
 
     except DataikuException as e:
         print(f"safe_extract_dataset_metadata - Dataiku exception {e}")
