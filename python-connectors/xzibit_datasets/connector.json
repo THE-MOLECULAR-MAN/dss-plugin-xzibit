@@ -24,6 +24,6 @@
       "description": "Enable computing the entire history of each column. WARNING: This adds an XX.",
       "mandatory": true,
       "defaultValue": false
-    },
+    }
     ]
 }
