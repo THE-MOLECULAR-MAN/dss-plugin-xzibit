@@ -1,6 +1,6 @@
 {
     "meta" : {
-        "label": "Dataiku Knowledge Banks dataset",
+        "label": "Dataiku LLM Models by Connection dataset",
         "description": "a dataset describing all Knowledge Banks on this DSS instance",        
         "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
     },

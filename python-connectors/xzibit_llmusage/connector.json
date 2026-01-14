@@ -1,7 +1,7 @@
 {
     "meta" : {
-        "label": "Dataiku Knowledge Banks dataset",
-        "description": "a dataset describing all Knowledge Banks on this DSS instance",        
+        "label": "Dataiku LLM Usages dataset",
+        "description": "a dataset describing all objects that use an LLM on this DSS instance",        
         "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
     },
     "readable": true,

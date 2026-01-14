@@ -119,22 +119,24 @@ class ConnectorProjects(Connector):
                                 raw_settings.get("params", None)
                             )
                         )
-                        
+
                         print(jd(raw_settings))
-                        next_row["LLM_id"] = raw_settings.get(
-                            "params", {}
-                        ).get("config", {}).get("llmId", "")
+                        next_row["LLM_id"] = (
+                            raw_settings.get("params", {})
+                            .get("config", {})
+                            .get("llmId", "")
+                        )
 
                         # next_row["customFields"]   = raw_settings.get('customFields',None)
-#                         next_row["dkuProperties"] = replace_empty_arrays_sets_with_none(
-#                             raw_settings.get("dkuProperties", None)
-#                         )
-                        # next_row["checklists"]     = raw_settings.get('checklists',{}).get('checklists',None)
-#                         next_row["quickTestQuery"] = (
-#                             replace_empty_arrays_sets_with_none(
-#                                 raw_settings.get("quickTestQuery", None)
-#                             )
-#                         )
+                    #                         next_row["dkuProperties"] = replace_empty_arrays_sets_with_none(
+                    #                             raw_settings.get("dkuProperties", None)
+                    #                         )
+                    # next_row["checklists"]     = raw_settings.get('checklists',{}).get('checklists',None)
+                    #                         next_row["quickTestQuery"] = (
+                    #                             replace_empty_arrays_sets_with_none(
+                    #                                 raw_settings.get("quickTestQuery", None)
+                    #                             )
+                    #                         )
 
                     # except (AttributeError, KeyError, TypeError, ValueError) as e:
                     except Exception as e:
@@ -179,12 +181,12 @@ class ConnectorProjects(Connector):
                     "type": "string",
                 },
                 {"meaning": "Text", "name": "LLM_id", "type": "string"},
-#                {"meaning": "Text", "name": "dkuProperties", "type": "string"},
-#                 {
-#                     "meaning": "Text",
-#                     "name": "quickTestQuery",
-#                     "type": "string",
-#                 },
+                #                {"meaning": "Text", "name": "dkuProperties", "type": "string"},
+                #                 {
+                #                     "meaning": "Text",
+                #                     "name": "quickTestQuery",
+                #                     "type": "string",
+                #                 },
                 {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]

@@ -8,5 +8,14 @@
     "writable": false,
     "supportAppend": false,
     "params": [],
-    "partitioningMode": "NOT_PARTITIONABLE"
+    "partitioningMode": "NOT_PARTITIONABLE",
+    "params": [
+              {
+      "name": "test_connection",
+      "label": "Test each connection",
+      "type": "BOOLEAN",
+      "description": "Tests each connection to see if any errors occur. Populates the columns connection_test_status and connection_test_error_msg.",
+      "mandatory": true,
+      "defaultValue": false
+    }]
 }

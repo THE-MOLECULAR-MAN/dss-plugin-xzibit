@@ -5,7 +5,13 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import get_dss_base_url, flatten_dict, get_values_for_key, pp
+from xzibit.utils import (
+    get_dss_base_url,
+    flatten_dict,
+    get_values_for_key,
+    get_path_size_megabytes,
+    pp,
+)
 
 
 class ConnectorCodeEnvs(Connector):
@@ -18,7 +24,18 @@ class ConnectorCodeEnvs(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
-        # self.__include_usages = False # for possible future configuration option
+
+        # Calculating disk space usage on my personal FM instance:
+        #    * took 8 seconds
+        #    * 94.0 GB of total code environment disk space
+        #    * for 48 unique code environments
+        #    * ... average code env size was 2005.3 GB
+        #    * ... average time to calculate each code env size: 0.16667 sec on second run. Unsure of first run
+
+        self.__compute_codeenv_disk_space_usage = self.config.get(
+            "compute_codeenv_disk_space_usage", False
+        )
+        self.__compute_codeenv_usages = self.config.get("compute_codeenv_usages", False)
 
     def get_url(self, env_name, env_lang="python"):
         """Create a URL to the DSS object in question in this specific DSS instance.
@@ -66,33 +83,54 @@ class ConnectorCodeEnvs(Connector):
                 )
                 next_row["path"] = settings_raw.get("path", None)
 
+                if self.__compute_codeenv_disk_space_usage:
+                    # get_path_size_megabytes returns 0 if path does not exist
+                    next_row["size_in_MB"] = get_path_size_megabytes(next_row["path"])
+                else:
+                    next_row["size_in_MB"] = None
+
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 # adding list_usages for code environments on DevDesign (600 code env at an
                 # average of 30 sec per code env to list all its usages across 2,362 projects), increases
                 # the dataset's built time from 2 min 30 sec to 5 hours!!!
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            #                if self.__include_usages:
-            #                 print("starting code env list usages")
-            #                 usages = code_env_handle.list_usages()
-            #                 print("finished code env list usages")
-            #                 num_usages = len(usages)
-            #                 if len(usages) == 0:
-            #                     pk_usages = None
-            #                 else:
-            #                     pk_usages = list(
-            #                         get_values_for_key(usages, "projectKey")
-            #                      )
-            #                 next_row["project_keys_where_plugin_used"] = pk_usages
-            #                 next_row["num_projects_that_use_this_plugin"] = pk_usages
+
+                if self.__compute_codeenv_usages:
+                    
+                    next_row["projectKeys_where_code_env_used"] = []
+                    next_row["total_instances_of_code_env"] = -1
+
+                    print(f"starting code env list usages for {code_env_name}")
+                    # next line throws exception on DevDesign:
+                    #  jakarta.servlet.ServletException: Handler dispatch failed: java.lang.Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool, caused by: Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool
+                    # list_usages() does not take any parameters
+                    usages = code_env_handle.list_usages()
+                    print(f"Finished code env list usages for {code_env_name}")
+                    num_usages = len(usages)
+                    if len(usages) == 0:
+                        pk_usages = None
+                    else:
+                        pk_usages = list(get_values_for_key(usages, "projectKey"))
+                    next_row["projectKeys_where_code_env_used"] = pk_usages
+                    next_row["total_instances_of_code_env"] = num_usages
+
+                else:
+                    next_row["projectKeys_where_code_env_used"] = None
+                    next_row["total_instances_of_code_env"] = None
 
             except Exception as e:
-                print(f"codeenvs - generate_rows EXCEPTION: {e}")
+                # this is occuring on DevDesign
+                print(f"codeenvs - generate_rows EXCEPTION: CodeEnv: {code_env_name} Error message: {e}")
+                
             finally:
                 records_generated += 1
                 yield next_row
 
     def get_read_schema(self):
         """TBD"""
+        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning, DoubleMeaning
+
         return {
             "columns": [
                 {"meaning": "Text", "name": "code_env_name", "type": "string"},
@@ -102,6 +140,17 @@ class ConnectorCodeEnvs(Connector):
                 {"meaning": "Text", "name": "python_interpreter", "type": "string"},
                 {"meaning": "Text", "name": "core_packages_set", "type": "string"},
                 {"meaning": "Text", "name": "path", "type": "string"},
+                {"meaning": "DoubleMeaning", "name": "size_in_MB", "type": "double"},
+                {
+                    "name": "projectKeys_where_code_env_used",
+                    "meaning": "JSONArrayMeaning",
+                    "type": "string",
+                },
+                {
+                    "name": "total_instances_of_code_env",
+                    "meaning": "LongMeaning",
+                    "type": "bigint",
+                },
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
