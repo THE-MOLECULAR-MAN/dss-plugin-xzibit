@@ -21,6 +21,8 @@ class ConnectorDatasets(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
+        self.__get_column_lineage = self.config.get("get_column_lineage", False)
+        self.__get_data_quality_rules = self.config.get("get_data_quality_rules", False)
 
     def get_url(self, id, project_key):
         """Create a URL to the DSS object in question in this specific DSS instance.
@@ -51,7 +53,8 @@ class ConnectorDatasets(Connector):
                     return
                 try:
                     dataset_handle = project_handle.get_dataset(r.id)
-                    next_row = safe_extract_dataset_metadata(dataset_handle, pk)
+                    next_row = safe_extract_dataset_metadata(dataset_handle, pk, self.__get_column_lineage, self.__get_data_quality_rules)
+
                     next_row["url"] = self.get_url(r.id, pk)
 
                 except Exception as e:
@@ -121,6 +124,8 @@ class ConnectorDatasets(Connector):
                     "type": "string",
                 },
                 {"meaning": "URL", "name": "url", "type": "string"},
+                {"meaning": "JSONArrayMeaning", "name": "data_lineage", "type": "string"},
+                {"meaning": "LongMeaning", "name": "num_data_quality_rules", "type": "int"},
             ]
         }
 
