@@ -244,8 +244,9 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False):
         )
         
         if get_column_lineage:
-            # runtime for tim's personal dev env (X datasets) was _ sec with data lineage turned ON
-            # runtime for tim's personal dev env (X datasets) was _ sec with data lineage turned OFF
+            # runtime for tim's personal dev env (X datasets) was :
+            #    _ sec with data lineage turned ON
+            #    _ sec with data lineage turned ON
             dataset_metadata["data_lineage"] = []
             lineage = []
             
