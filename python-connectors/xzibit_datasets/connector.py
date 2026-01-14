@@ -22,6 +22,7 @@ class ConnectorDatasets(Connector):
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
         self.__get_column_lineage = self.config.get("get_column_lineage", False)
+        self.__get_data_quality_rules = self.config.get("get_data_quality_rules", False)
 
     def get_url(self, id, project_key):
         """Create a URL to the DSS object in question in this specific DSS instance.
