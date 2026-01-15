@@ -363,7 +363,7 @@ def int_to_datetime(timestamp: int):
     return datetime.utcfromtimestamp(timestamp)
 
 
-def parse_user_datetime(dt_str: str) -> datetime:
+def parse_user_datetime(dt_str: str):
     """
     Convert a string like '2025-11-11 15:08:36.439000+00:00'
     into a timezone-aware datetime.datetime object.
