@@ -26,6 +26,8 @@ class ConnectorConnections(Connector):
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
         # self.__test_connection = 
+        self.__test_connection = self.config.get("test_connection", False)
+
 
     def get_url(self, id):
         """Create a URL to the DSS object in question in this specific DSS instance.
