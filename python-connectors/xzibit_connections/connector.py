@@ -74,10 +74,10 @@ class ConnectorConnections(Connector):
                 # connection_test_result = 'NOT TESTED'
                 
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
-                if connection_type in ["OpenAI", "AzureOpenAI", "VertexAILLM"]:
-                    connection_handle = self.__client.get_connection(next_row["name"])
-                    connection_info = connection_handle.get_info().get_params()
-                    connection_settings = connection_handle.get_settings().get_raw()
+#                 if connection_type in ["OpenAI", "AzureOpenAI", "VertexAILLM"]:
+#                     connection_handle = self.__client.get_connection(next_row["name"])
+#                     connection_info = connection_handle.get_info().get_params()
+#                     connection_settings = connection_handle.get_settings().get_raw()
                     # outputs for these are VERY long
 #                     print(f"Connection_INFO for {connection_type}")
 #                     pp(connection_info)
