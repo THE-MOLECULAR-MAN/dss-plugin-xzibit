@@ -96,7 +96,7 @@ class ConnectorConnections(Connector):
                             "connectionError", {}
                         ).get("detailedMessage", "Unable to fetch error message")
                 else:
-                    
+                    connection_test_result = 'NOT TESTED'
 
             except Exception as e:
                 # Not all connection types have a .test() method implemented, by design, like filesystem.
