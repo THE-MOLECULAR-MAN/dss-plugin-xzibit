@@ -157,7 +157,7 @@ def get_dss_base_url():
         or get_dss_external_url()
         or get_dss_url_from_global_vars()
     )
-    if res:
+    if len(res) > 0:
         return res.rstrip("/")
     else:
         return None
