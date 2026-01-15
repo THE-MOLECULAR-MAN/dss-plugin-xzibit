@@ -139,13 +139,13 @@ class ConnectorProjects(Connector):
                 {"name": "last_modified_user", "type": "string", "meaning": "Text"},
                 {
                     "name": "created_timestamp",
-                    "type": "datetimenotz",
-                    "meaning": "DatetimeNoTz",
+                    "type": "string",
+                    "meaning": "Text",
                 },
                 {
                     "name": "last_modified_timestamp",
-                    "type": "datetimenotz",
-                    "meaning": "DatetimeNoTz",
+                    "type": "string",
+                    "meaning": "Text",
                 },
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "is_code_webapp", "type": "boolean", "meaning": "Boolean"},
