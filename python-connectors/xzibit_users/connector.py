@@ -111,8 +111,8 @@ class ConnectorUsers(Connector):
                 {"name": "resultingUserProfile", "type": "string", "meaning": "Text"},
                 {
                     "name": "created_timestamp",
-                    "type": "datetimenotz",
-                    "meaning": "DatetimeNoTz",
+                    "type": "string",
+                    "meaning": "Text",
                 },
                 {"name": "last_successful_login", "type": "date", "meaning": "Date"},
                 {"name": "last_session_activity", "type": "date", "meaning": "Date"},
