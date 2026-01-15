@@ -157,7 +157,10 @@ def get_dss_base_url():
         or get_dss_external_url()
         or get_dss_url_from_global_vars()
     )
-    return res.rstrip("/")
+    if res:
+        return res.rstrip("/")
+    else:
+        return None
 
 
 def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, get_data_quality_rules=False):
