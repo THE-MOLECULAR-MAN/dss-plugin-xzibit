@@ -88,7 +88,7 @@ class ConnectorConnections(Connector):
 
                 obj_handle = self.__client.get_connection(next_row["name"])
                 if self.__test_connection:
-                    connection_test_dict = obj_handle.test()  # error
+                    connection_test_dict = obj_handle.test()  # error sometimes
                     if connection_test_dict.get("connectionOK", False):
                         connection_test_result = "PASSED"
                     else:
