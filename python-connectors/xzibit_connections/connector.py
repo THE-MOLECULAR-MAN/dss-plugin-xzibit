@@ -70,8 +70,8 @@ class ConnectorConnections(Connector):
 
                 next_row = flatten_dict(item_info, include_keys=keys)
                 connection_type = next_row.get("type", "unknown type")
-                connection_error_msg = None
-                connection_test_result = 'NOT TESTED'
+                # connection_error_msg = None
+                # connection_test_result = 'NOT TESTED'
                 
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
                 if connection_type in ["OpenAI", "AzureOpenAI", "VertexAILLM"]:
