@@ -71,7 +71,7 @@ class ConnectorDatasets(Connector):
     def get_read_schema(self):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, Date, FreeText, LongMeaning
         return {
             "columns": [
                 {"meaning": "Text", "name": "id", "type": "string"},
@@ -94,9 +94,9 @@ class ConnectorDatasets(Connector):
                     "type": "string",
                 },
                 {
-                    "meaning": "DatetimeNoTz",
+                    "meaning": "Text",
                     "name": "creationTag.lastModifiedOn",
-                    "type": "datetimenotz",
+                    "type": "string",
                 },
                 {
                     "meaning": "Text",
@@ -104,9 +104,9 @@ class ConnectorDatasets(Connector):
                     "type": "string",
                 },
                 {
-                    "meaning": "DatetimeNoTz",
+                    "meaning": "Text",
                     "name": "versionTag.lastModifiedOn",
-                    "type": "datetimenotz",
+                    "type": "string",
                 },
                 {
                     "meaning": "Text",
