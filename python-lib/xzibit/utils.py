@@ -280,12 +280,12 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, 
         return dataset_metadata
 
 
-def print_sorted_strings(s: set[str]) -> None:
-    """
-    Print all strings in a set, sorted alphabetically (case-insensitive), one per line.
-    """
-    for item in sorted(s, key=str.lower):
-        print(item)
+# def print_sorted_strings(s: set[str]) -> None:
+#     """
+#     Print all strings in a set, sorted alphabetically (case-insensitive), one per line.
+#     """
+#     for item in sorted(s, key=str.lower):
+#         print(item)
 
 
 def list_keys_recursive(d: dict, parent_key: str = "") -> list[str]:
