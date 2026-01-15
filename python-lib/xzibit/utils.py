@@ -394,7 +394,7 @@ def get_jq_value(data: dict, jq_path: str):
         return None
 
 
-def list_to_error_dict(strings: list[str], value="error") -> dict[str, str]:
+def list_to_error_dict(strings: list[str], value="error"):
     """
     Convert a list of strings into a dictionary where each string is a key
     and each value is the default string 'error'.
