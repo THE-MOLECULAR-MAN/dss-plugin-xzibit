@@ -280,7 +280,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, 
         return dataset_metadata
 
 
-def print_sorted_strings(s: set[str]):
+def print_sorted_strings(s):
     """
     Print all strings in a set, sorted alphabetically (case-insensitive), one per line.
     """
@@ -288,7 +288,7 @@ def print_sorted_strings(s: set[str]):
         print(item)
 
 
-def list_keys_recursive(d: dict, parent_key: str = ""):
+def list_keys_recursive(d, parent_key=""):
     """
     Recursively list all keys in a nested dictionary using dot notation,
     ignoring list indices (e.g., schema.columns[0].name -> schema.columns.name).
@@ -320,7 +320,7 @@ def list_keys_recursive(d: dict, parent_key: str = ""):
     return keys
 
 
-def extract_nested_keys(d: dict, keys: list[str]):
+def extract_nested_keys(d, keys):
     """
     Extract nested keys (dot-separated) from a dictionary.
     If a key path does not exist, its value is None in the returned dictionary.
@@ -345,7 +345,7 @@ def extract_nested_keys(d: dict, keys: list[str]):
     return {key: get_nested_value(d, key) for key in keys}
 
 
-def int_to_datetime(timestamp: int):
+def int_to_datetime(timestamp):
     """
     Convert an integer timestamp (in seconds or milliseconds)
     into a datetime.datetime object (UTC).
@@ -363,7 +363,7 @@ def int_to_datetime(timestamp: int):
     return datetime.utcfromtimestamp(timestamp)
 
 
-def parse_user_datetime(dt_str: str):
+def parse_user_datetime(dt_str):
     """
     Convert a string like '2025-11-11 15:08:36.439000+00:00'
     into a timezone-aware datetime.datetime object.
@@ -377,7 +377,7 @@ def parse_user_datetime(dt_str: str):
         return None
 
 
-def get_jq_value(data: dict, jq_path: str):
+def get_jq_value(data, jq_path):
     """
     Traverse a nested dict using a jq-style path like 'a.b.c'.
     Returns the value if found, else None.
@@ -394,7 +394,7 @@ def get_jq_value(data: dict, jq_path: str):
         return None
 
 
-def list_to_error_dict(strings: list[str], value="error"):
+def list_to_error_dict(strings, value="error"):
     """
     Convert a list of strings into a dictionary where each string is a key
     and each value is the default string 'error'.
