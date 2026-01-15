@@ -46,8 +46,9 @@ class ConnectorDatasets(Connector):
         for pk in self.__client.list_project_keys():
             project_handle = self.__client.get_project(pk)
 
+            # include_shared=True # introduced after 12.3.2
             for r in project_handle.list_datasets(
-                as_type="objects", include_shared=True
+                as_type="objects"
             ):
                 if records_limit > 0 and records_generated >= records_limit:
                     return
