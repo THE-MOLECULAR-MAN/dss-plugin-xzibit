@@ -98,20 +98,20 @@ class ConnectorConnections(Connector):
 #                         ).get("detailedMessage", "Unable to fetch error message")
 
 
-            except Exception as e:
-                # Not all connection types have a .test() method implemented, by design, like filesystem.
-                # This catches them and marks their test result as N/A.
-                if JAVA_NOT_IMPLEMENTED in str(e):
-                    connection_test_result = "NOT_TESTABLE"
-                    connection_error_msg = None
-                else:
-                    print(f"[Connections-generate_row] UNHANDLED EXCEPTION {e}")
-                    connection_test_result = "FAILED - EXCEPTION"
-                    connection_error_msg = "FAILED - EXCEPTION"
-                    # pp(connection_test_dict)
+#             except Exception as e:
+#                 # Not all connection types have a .test() method implemented, by design, like filesystem.
+#                 # This catches them and marks their test result as N/A.
+#                 if JAVA_NOT_IMPLEMENTED in str(e):
+#                     connection_test_result = "NOT_TESTABLE"
+#                     connection_error_msg = None
+#                 else:
+#                     print(f"[Connections-generate_row] UNHANDLED EXCEPTION {e}")
+#                     connection_test_result = "FAILED - EXCEPTION"
+#                     connection_error_msg = "FAILED - EXCEPTION"
+#                     # pp(connection_test_dict)
             finally:
-                next_row["connection_test_status"] = connection_test_result
-                next_row["connection_test_error_msg"] = connection_error_msg
+                #next_row["connection_test_status"] = connection_test_result
+                #next_row["connection_test_error_msg"] = connection_error_msg
                 records_generated += 1
                 yield next_row
 
