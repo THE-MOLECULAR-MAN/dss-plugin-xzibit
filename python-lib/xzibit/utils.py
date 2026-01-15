@@ -280,15 +280,15 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, 
         return dataset_metadata
 
 
-# def print_sorted_strings(s: set[str]) -> None:
-#     """
-#     Print all strings in a set, sorted alphabetically (case-insensitive), one per line.
-#     """
-#     for item in sorted(s, key=str.lower):
-#         print(item)
+def print_sorted_strings(s: set[str]):
+    """
+    Print all strings in a set, sorted alphabetically (case-insensitive), one per line.
+    """
+    for item in sorted(s, key=str.lower):
+        print(item)
 
 
-def list_keys_recursive(d: dict, parent_key: str = "") -> list[str]:
+def list_keys_recursive(d: dict, parent_key: str = ""):
     """
     Recursively list all keys in a nested dictionary using dot notation,
     ignoring list indices (e.g., schema.columns[0].name -> schema.columns.name).
@@ -320,7 +320,7 @@ def list_keys_recursive(d: dict, parent_key: str = "") -> list[str]:
     return keys
 
 
-def extract_nested_keys(d: dict, keys: list[str]) -> dict[str, object]:
+def extract_nested_keys(d: dict, keys: list[str]):
     """
     Extract nested keys (dot-separated) from a dictionary.
     If a key path does not exist, its value is None in the returned dictionary.
