@@ -345,7 +345,7 @@ def extract_nested_keys(d: dict, keys: list[str]):
     return {key: get_nested_value(d, key) for key in keys}
 
 
-def int_to_datetime(timestamp: int) -> datetime:
+def int_to_datetime(timestamp: int):
     """
     Convert an integer timestamp (in seconds or milliseconds)
     into a datetime.datetime object (UTC).
