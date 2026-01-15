@@ -119,6 +119,7 @@ def get_dss_external_url():
     # 3. Extract the 'studioExternalUrl' from the raw settings dictionary
     # This key holds the value of the "DSS URL" field
     dss_url = settings.get_raw().get("studioExternalUrl")
+    print(dss_url)
 
     if dss_url:
         return dss_url
@@ -135,7 +136,9 @@ def get_dss_url_from_env():
     if ext_host and base_port:
         # Note: You may need to infer the scheme (http vs https)
         # based on your knowledge of the instance setup.
-        return f"http://{ext_host}:{base_port}"
+        s = f"http://{ext_host}:{base_port}"
+        print(s)
+        return s
     return None
 
 
