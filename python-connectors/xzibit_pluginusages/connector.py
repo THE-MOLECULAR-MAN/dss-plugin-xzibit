@@ -74,7 +74,9 @@ class ConnectorPlugins(Connector):
                 list_of_usages = plugin_handle.list_usages()
                 
                 for usage in list_of_usages:
-                    next_row = {}
+                    next_row = {
+                        "plugin_id": plugin_id
+                    }
                 
             except Exception as e:
                 print(
