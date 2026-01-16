@@ -51,7 +51,7 @@ class ConnectorPlugins(Connector):
 
                 list_of_usages = plugin_handle.list_usages()
                 
-                for usage in list_of_usages:
+                for usage in list_of_usages.usages:
                     next_row = {
                         "plugin_id": plugin_id,
                         "maybe_used": list_of_usages.maybe_used()
