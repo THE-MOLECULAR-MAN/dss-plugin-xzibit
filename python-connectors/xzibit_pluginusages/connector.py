@@ -71,7 +71,6 @@ class ConnectorPlugins(Connector):
 
                 settings_raw = plugin_handle.get_settings().get_raw()
 
-
                 list_of_usages = (
                     plugin_handle.list_usages().get_raw().get("usages", [])
                 )
