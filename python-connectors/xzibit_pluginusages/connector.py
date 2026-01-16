@@ -51,6 +51,9 @@ class ConnectorPlugins(Connector):
                 
                 for usage in list_of_usages.usages:
                     try:
+                        if records_limit > 0 and records_generated >= records_limit:
+                            return
+
                         next_row = {
                             "plugin_id":    plugin_id,
                             "element_kind": usages.element_kind,
