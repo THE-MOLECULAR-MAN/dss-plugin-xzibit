@@ -233,9 +233,9 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False):
             dataset_metadata["exists"] = "EXCEPTION 2"
             return dataset_metadata
 
-        dataset_metadata["num_metrics_checks"] = len(
-            raw_data.get("metricsChecks", {}).get("checks", [])
-        )
+#         dataset_metadata["num_metrics_checks"] = len(
+#             raw_data.get("metricsChecks", {}).get("checks", [])
+#         )
         dataset_metadata["num_columns"] = len(
             raw_data.get("schema", {}).get("columns", [])
         )
