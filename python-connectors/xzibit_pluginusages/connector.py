@@ -53,7 +53,8 @@ class ConnectorPlugins(Connector):
                 
                 for usage in list_of_usages:
                     next_row = {
-                        "plugin_id": plugin_id
+                        "plugin_id": plugin_id,
+                        "maybe_used": plugin_handle.maybe_used()
                     }
                     yield next_row
                 
