@@ -168,7 +168,7 @@ def get_dss_base_url():
         return None
 
 
-def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, get_data_quality_rules=False):
+def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False): # , get_data_quality_rules=False):
     """SLOW! Adds 1.36 seconds per dataset (row) on average"""
     assert isinstance(
         dataset_handle, dataikuapi.dss.dataset.DSSDataset
