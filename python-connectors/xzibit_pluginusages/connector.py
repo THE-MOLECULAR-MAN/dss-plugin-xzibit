@@ -60,12 +60,13 @@ class ConnectorPlugins(Connector):
                             "project_key":  usages.project_key,                       
     #                        "maybe_used": list_of_usages.maybe_used()
                         }
-                        yield next_row
+                        
                     except Exception as e:
                         print(
                             f"[plugin_usages-generate_rows] ! [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
                         )
-                
+                    finally:
+                        yield next_row
             except Exception as e:
                 print(
                     f"[plugin_usages-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
