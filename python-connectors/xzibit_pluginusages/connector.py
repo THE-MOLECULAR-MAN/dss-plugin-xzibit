@@ -1,128 +1,202 @@
-# This file is the actual code for the custom Python dataset xzibit_pluginusages
+"""TBD"""
 
-# import the base class for the custom dataset
-from six.moves import xrange
+####################################################################
+# Same imports for all dataset Classes
+####################################################################
+from dataiku import api_client
 from dataiku.connector import Connector
+from xzibit.utils import (
+    get_dss_base_url,
+    flatten_dict,
+    remove_prefix_from_keys,
+    list_to_error_dict,
+    pp,
+    jd,
+    get_values_for_key,
+)
 
-"""
-A custom Python dataset is a subclass of Connector.
 
-The parameters it expects and some flags to control its handling by DSS are
-specified in the connector.json file.
+def extract_allow_keys(d: dict) -> dict:
+    """
+    Filters a dictionary for keys starting with 'allow' and returns a new
+    dictionary with the 'allow' prefix stripped from the keys.
 
-Note: the name of the class itself is not relevant.
-"""
-class MyConnector(Connector):
+    Args:
+        d (dict): The input dictionary.
 
+    Returns:
+        dict: A new dictionary with transformed keys.
+    """
+    if not isinstance(d, dict):
+        raise ValueError("Input must be a dictionary.")
+
+    # Iterate through items, check prefix, and slice the key string
+    # len('allow') is 5, so [5:] removes the prefix
+    return {
+        key[5:]: value 
+        for key, value in d.items() 
+        if key.startswith('allow')
+    }
+
+class ConnectorPlugins(Connector):
+    """TBD"""
+
+    ####################################################################
+    # Code that has to be customized for this specific class
+    ####################################################################
     def __init__(self, config, plugin_config):
-        """
-        The configuration parameters set up by the user in the settings tab of the
-        dataset are passed as a json object 'config' to the constructor.
-        The static configuration parameters set up by the developer in the optional
-        file settings.json at the root of the plugin directory are passed as a json
-        object 'plugin_config' to the constructor
-        """
-        Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
+        Connector.__init__(self, config, plugin_config)
+        self.__client = api_client()
+        self.__baseurl = get_dss_base_url()
+        self.__compute_disk_util = self.config.get("compute_disk_util", False)
+        self.__compute_plugin_usages = self.config.get("compute_plugin_usages", False)
 
-        # perform some more initialization
-        self.theparam1 = self.config.get("parameter1", "defaultValue")
+    def get_url(self, id):
+        """Create a URL to the DSS object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, id)):
+            return None
+        return f"{self.__baseurl}/plugins/{id}/summary/"
+
+    def generate_rows(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        records_limit=-1,
+    ):
+        """TBD"""
+        records_generated = 0
+        keys = [
+            "id",
+            "meta.label",
+            "version",
+            "meta.author",
+            "meta.tags",
+            "meta.description",
+            "isDev",
+        ]
+
+        # iterate through each object
+        # list plugins does not take any parameters like object vs list:
+        # https://developer.dataiku.com/latest/api-reference/python/client.html#dataikuapi.DSSClient.list_plugins
+        # even in the source code, no parameters:
+        # https://github.com/dataiku/dataiku-api-client-python/blob/master/dataikuapi/dssclient.py#L273
+        # There's not an easy way to speed up the next, very slow line
+
+        DSS_BUILT_IN_PLUGIN_IDS = [
+            "default-samples",
+            "builtin-macros",
+            "code-studio-blocks",
+            "colorbrewer-palettes",
+            "k8s-metrics-utils",
+            "local-r-dev-setup",
+            "project-standards",
+        ]
+
+        # list_plugins does not offer any parameters
+        # list_plugins returns a list of dict. Each dict contains at least a ‘id’ field
+        for item_info in self.__client.list_plugins():
+            try:
+                if records_limit > 0 and records_generated >= records_limit:
+                    return
+                
+                plugin_id = item_info.get("id", "NO_PLUGIN_ID")
+                print(f"[plugins-generate_rows] Start plugin ID: {plugin_id}")
+                
+                next_row = flatten_dict(item_info, include_keys=keys)
+                next_row = remove_prefix_from_keys(next_row, "meta.")
+
+                next_row["url"] = self.get_url(plugin_id)
+                next_row["is_built_in_plugin"] = (
+                    plugin_id in DSS_BUILT_IN_PLUGIN_IDS
+                )
+
+                plugin_handle = self.__client.get_plugin(plugin_id)
+
+                settings_raw = plugin_handle.get_settings().get_raw()
+                # print("HERE_COMES_DEBUG_OUTPUT")
+                # pp(item_info)
+                # pp(settings_raw)
+
+                next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
+
+                if self.__compute_plugin_usages:
+                    # this is so slow!!!!
+
+                    # .list_usages() adds 2+ hours instead of 1 second for entire run
+                    # on DevDesign, average time per plugin was 26 sec with 281 plugins & 2,747 projects
+                    list_of_usages = (
+                        plugin_handle.list_usages().get_raw().get("usages", [])
+                    )
+                    if len(list_of_usages) == 0:
+                        next_row["plugin_used_in_projectkeys"] = []
+                    else:
+                        next_row["plugin_used_in_projectkeys"] = list(
+                            get_values_for_key(list_of_usages, "projectKey")
+                        )
+                    next_row["total_usages"] = len(list_of_usages)
+                else:
+                    next_row["plugin_used_in_projectkeys"] = [
+                        "Plugin usage checking not enabled in dataset settings."
+                    ]
+                    next_row["total_usages"] = None
+
+                print(
+                    f"[plugins-generate_rows] plugin ID: {next_row['id']} FINISHED SUCCESSFULLY"
+                )
+            except Exception as e:
+                print(
+                    f"[plugins-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
+                )
+                # pp(item_info)
+                next_row = list_to_error_dict(keys)
+                next_row["plugin_used_in_projectkeys"] = ["EXCEPTION"]
+            finally:
+                records_generated += 1
+                yield next_row
 
     def get_read_schema(self):
-        """
-        Returns the schema that this connector generates when returning rows.
+        """TBD"""
+        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
+        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
+        return {
+            "columns": [
+                {"name": "id", "type": "string", "meaning": "Text"},
+                {"name": "label", "type": "string", "meaning": "Text"},
+                {"name": "code_env_name", "type": "string", "meaning": "Text"},
+                {"name": "version", "type": "string", "meaning": "Text"},
+                {"name": "author", "type": "string", "meaning": "Text"},
+                {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
+                {"name": "description", "type": "string", "meaning": "FreeText"},
+                {
+                    "name": "plugin_used_in_projectkeys",
+                    "type": "string",
+                    "meaning": "JSONArrayMeaning",
+                },
+                {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
+                {"name": "total_usages", "type": "bigint", "meaning": "LongMeaning"},
+                {"name": "is_built_in_plugin", "type": "boolean", "meaning": "Boolean"},
+                {"name": "url", "type": "string", "meaning": "URL"},
+            ]
+        }
 
-        The returned schema may be None if the schema is not known in advance.
-        In that case, the dataset schema will be infered from the first rows.
-
-        If you do provide a schema here, all columns defined in the schema
-        will always be present in the output (with None value),
-        even if you don't provide a value in generate_rows
-
-        The schema must be a dict, with a single key: "columns", containing an array of
-        {'name':name, 'type' : type}.
-
-        Example:
-            return {"columns" : [ {"name": "col1", "type" : "string"}, {"name" :"col2", "type" : "float"}]}
-
-        Supported types are: string, int, bigint, float, double, date, boolean
-        """
-
-        # In this example, we don't specify a schema here, so DSS will infer the schema
-        # from the columns actually returned by the generate_rows method
+    ####################################################################
+    # Intentionally not implemented, not needed for this type
+    ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs for anything that I can find."""
         return None
 
-    def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
-                            partition_id=None, records_limit = -1):
-        """
-        The main reading method.
-
-        Returns a generator over the rows of the dataset (or partition)
-        Each yielded row must be a dictionary, indexed by column name.
-
-        The dataset schema and partitioning are given for information purpose.
-        """
-        for i in xrange(1,10):
-            yield { "first_col" : str(i), "my_string" : "Yes" }
-
-
-    def get_writer(self, dataset_schema=None, dataset_partitioning=None,
-                         partition_id=None, write_mode="OVERWRITE"):
-        """
-        Returns a writer object to write in the dataset (or in a partition).
-
-        The dataset_schema given here will match the the rows given to the writer below.
-
-        write_mode can either be OVERWRITE or APPEND.
-        It will not be APPEND unless the plugin explicitly supports append mode. See flag supportAppend in connector.json.
-        If applicable, the write_mode should be handled in the plugin code.
-
-        Note: the writer is responsible for clearing the partition, if relevant.
-        """
-        raise NotImplementedError
-
-
     def get_partitioning(self):
-        """
-        Return the partitioning schema that the connector defines.
-        """
+        """TBD"""
         raise NotImplementedError
-
 
     def list_partitions(self, partitioning):
-        """Return the list of partitions for the partitioning scheme
-        passed as parameter"""
+        """TBD"""
         return []
 
-
     def partition_exists(self, partitioning, partition_id):
-        """Return whether the partition passed as parameter exists
-
-        Implementation is only required if the corresponding flag is set to True
-        in the connector definition
-        """
+        """TBD"""
         raise NotImplementedError
-
-
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """
-        Returns the count of records for the dataset (or a partition).
-
-        Implementation is only required if the corresponding flag is set to True
-        in the connector definition
-        """
-        raise NotImplementedError
-
-
-class CustomDatasetWriter(object):
-    def __init__(self):
-        pass
-
-    def write_row(self, row):
-        """
-        Row is a tuple with N + 1 elements matching the schema passed to get_writer.
-        The last element is a dict of columns not found in the schema
-        """
-        raise NotImplementedError
-
-    def close(self):
-        pass
