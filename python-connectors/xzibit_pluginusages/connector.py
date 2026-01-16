@@ -77,6 +77,7 @@ class ConnectorPlugins(Connector):
                     next_row = {
                         "plugin_id": plugin_id
                     }
+                    yield next_row
                 
             except Exception as e:
                 print(
