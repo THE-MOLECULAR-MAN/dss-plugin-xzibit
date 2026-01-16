@@ -49,14 +49,6 @@ class ConnectorPlugins(Connector):
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
 
-    def get_url(self, id):
-        """Create a URL to the DSS object in question in this specific DSS instance.
-        Return None if any of the inputs are None."""
-        # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, id)):
-            return None
-        return f"{self.__baseurl}/plugins/{id}/summary/"
-
     def generate_rows(
         self,
         dataset_schema=None,
@@ -66,33 +58,7 @@ class ConnectorPlugins(Connector):
     ):
         """TBD"""
         records_generated = 0
-        keys = [
-            "id",
-            "meta.label",
-            "version",
-            "meta.author",
-            "meta.tags",
-            "meta.description",
-            "isDev",
-        ]
-
-        # iterate through each object
-        # list plugins does not take any parameters like object vs list:
-        # https://developer.dataiku.com/latest/api-reference/python/client.html#dataikuapi.DSSClient.list_plugins
-        # even in the source code, no parameters:
-        # https://github.com/dataiku/dataiku-api-client-python/blob/master/dataikuapi/dssclient.py#L273
-        # There's not an easy way to speed up the next, very slow line
-
-        DSS_BUILT_IN_PLUGIN_IDS = [
-            "default-samples",
-            "builtin-macros",
-            "code-studio-blocks",
-            "colorbrewer-palettes",
-            "k8s-metrics-utils",
-            "local-r-dev-setup",
-            "project-standards",
-        ]
-
+        
         # list_plugins does not offer any parameters
         # list_plugins returns a list of dict. Each dict contains at least a ‘id’ field
         for item_info in self.__client.list_plugins():
