@@ -65,7 +65,6 @@ class ConnectorPlugins(Connector):
                         print(
                             f"[plugin_usages-generate_rows] ! [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
                         )
-
                 
             except Exception as e:
                 print(
