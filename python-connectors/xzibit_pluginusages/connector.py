@@ -55,11 +55,11 @@ class ConnectorPlugins(Connector):
                             return
 
                         next_row = {"plugin_id":   plugin_id}
-                        next_row["element_kind"] =  usages.element_kind
-                        next_row["element_type"] =  usages.element_type
-                        next_row["object_id"] =   usages.object_id
-                        next_row["object_type"] =  usages.object_type
-                        next_row["project_key"] =  usages.project_key
+                        next_row["element_kind"] =  usage.element_kind
+                        next_row["element_type"] =  usage.element_type
+                        next_row["object_id"] =   usage.object_id
+                        next_row["object_type"] =  usage.object_type
+                        next_row["project_key"] =  usage.project_key
 
                     except Exception as e:
                         print(
