@@ -54,12 +54,12 @@ class ConnectorPlugins(Connector):
                         if records_limit > 0 and records_generated >= records_limit:
                             return
 
-                        next_row["plugin_id"] =  plugin_id,
-                        next_row["element_kind"] =  usages.element_kind,
-                        next_row["element_type"] =  usages.element_type,
-                        next_row["object_id"] =   usages.object_id,
-                        next_row["object_type"] =  usages.object_type,
-                        next_row["project_key"] =  usages.project_key,
+                        next_row["plugin_id"] =  plugin_id
+                        next_row["element_kind"] =  usages.element_kind
+                        next_row["element_type"] =  usages.element_type
+                        next_row["object_id"] =   usages.object_id
+                        next_row["object_type"] =  usages.object_type
+                        next_row["project_key"] =  usages.project_key
 
                     except Exception as e:
                         print(
