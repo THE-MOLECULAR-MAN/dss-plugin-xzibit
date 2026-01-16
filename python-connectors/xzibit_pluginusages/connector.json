@@ -8,13 +8,5 @@
     "writable": false,
     "supportAppend": false,
     "partitioningMode": "NOT_PARTITIONABLE",
-    "params": [
-              {
-      "name": "compute_plugin_usages",
-      "label": "Include list of project keys that use each plugin",
-      "type": "BOOLEAN",
-      "description": "Enable computing which projects are used by each plugin. Checking this box populates the column named 'plugin_used_in_projectkeys'. WARNING: This adds an additional 30+ seconds per plugin, so checking a DSS Node with 280 installed plugins and 2,700 projects adds nearly 2.5 hours to run.",
-      "mandatory": true,
-      "defaultValue": false
-    }]
+    "params": []
 }
