@@ -17,6 +17,7 @@
       "mandatory": true,
       "defaultValue": false
     }
+        //,
     //{
     //  "name": "get_data_quality_rules",
     //  "label": "Get data quality rules",
