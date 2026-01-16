@@ -74,13 +74,9 @@ class ConnectorPlugins(Connector):
                 list_of_usages = (
                     plugin_handle.list_usages().get_raw().get("usages", [])
                 )
-                if len(list_of_usages) == 0:
-                    next_row["plugin_used_in_projectkeys"] = []
-                else:
-                    next_row["plugin_used_in_projectkeys"] = list(
-                        get_values_for_key(list_of_usages, "projectKey")
-                    )
-
+                
+                
+                
             except Exception as e:
                 print(
                     f"[plugins-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
