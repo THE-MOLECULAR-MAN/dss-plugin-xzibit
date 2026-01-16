@@ -58,7 +58,6 @@ class ConnectorPlugins(Connector):
                             "object_id":    usages.object_id,
                             "object_type":  usages.object_type,
                             "project_key":  usages.project_key,                       
-    #                        "maybe_used": list_of_usages.maybe_used()
                         }
                     except Exception as e:
                         print(
