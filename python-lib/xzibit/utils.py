@@ -251,21 +251,21 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False):
             dataset_metadata.get("versionTag.lastModifiedOn", None)
         )
         
-        if get_column_lineage:
-            # runtime for tim's personal dev env (X datasets) was :
-            #    213 to 214 sec with data lineage turned ON
-            #    5 sec with data lineage turned OFF
-            #    42x slower
-            dataset_metadata["data_lineage"] = []
-            lineage = []
+#         if get_column_lineage:
+#             # runtime for tim's personal dev env (X datasets) was :
+#             #    213 to 214 sec with data lineage turned ON
+#             #    5 sec with data lineage turned OFF
+#             #    42x slower
+#             dataset_metadata["data_lineage"] = []
+#             lineage = []
             
-            for column_name in dataset_metadata["column_names"]:
-                iter_col_lineage = dataset_handle.get_column_lineage(column_name)
-                new_lineage = {"column_name": column_name, "column_lineage": iter_col_lineage}
-                lineage.append(new_lineage)
-            dataset_metadata["data_lineage"] = lineage
-        else:
-            dataset_metadata["data_lineage"] = None
+#             for column_name in dataset_metadata["column_names"]:
+#                 iter_col_lineage = dataset_handle.get_column_lineage(column_name)
+#                 new_lineage = {"column_name": column_name, "column_lineage": iter_col_lineage}
+#                 lineage.append(new_lineage)
+#             dataset_metadata["data_lineage"] = lineage
+#         else:
+#             dataset_metadata["data_lineage"] = None
             
 #         if get_data_quality_rules:
 #             # doubles the runtime from 5 to 9 sec.
