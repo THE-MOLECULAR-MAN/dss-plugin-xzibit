@@ -63,10 +63,15 @@ class ConnectorPlugins(Connector):
     #                        "maybe_used": list_of_usages.maybe_used()
                         }
                         yield next_row
+                    except Exception as e:
+                        print(
+                            f"[plugin_usages-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
+                        )
+
                 
             except Exception as e:
                 print(
-                    f"[plugins-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
+                    f"[plugin_usages-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
                 )
             finally:
                 records_generated += 1
