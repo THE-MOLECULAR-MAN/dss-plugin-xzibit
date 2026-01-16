@@ -75,7 +75,8 @@ class ConnectorPlugins(Connector):
                     plugin_handle.list_usages().get_raw().get("usages", [])
                 )
                 
-                
+                for usage in list_of_usages:
+                    
                 
             except Exception as e:
                 print(
