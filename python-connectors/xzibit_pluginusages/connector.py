@@ -63,14 +63,14 @@ class ConnectorPlugins(Connector):
 
                     except Exception as e:
                         print(
-                            f"[plugin_usages-generate_rows] ! [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
+                            f"[plugin_usages-generate_rows] ! [UNEXPECTED EXCEPTION] {e} with plugin"
                         )
                     finally:
                         records_generated += 1
                         yield next_row
             except Exception as e:
                 print(
-                    f"[plugin_usages-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
+                    f"[plugin_usages-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin"
                 )
 
     def get_read_schema(self):
