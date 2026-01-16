@@ -16,28 +16,6 @@ from xzibit.utils import (
 )
 
 
-def extract_allow_keys(d: dict) -> dict:
-    """
-    Filters a dictionary for keys starting with 'allow' and returns a new
-    dictionary with the 'allow' prefix stripped from the keys.
-
-    Args:
-        d (dict): The input dictionary.
-
-    Returns:
-        dict: A new dictionary with transformed keys.
-    """
-    if not isinstance(d, dict):
-        raise ValueError("Input must be a dictionary.")
-
-    # Iterate through items, check prefix, and slice the key string
-    # len('allow') is 5, so [5:] removes the prefix
-    return {
-        key[5:]: value 
-        for key, value in d.items() 
-        if key.startswith('allow')
-    }
-
 class ConnectorPlugins(Connector):
     """TBD"""
 
