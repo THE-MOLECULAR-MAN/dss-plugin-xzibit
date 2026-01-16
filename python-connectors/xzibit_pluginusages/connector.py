@@ -53,7 +53,7 @@ class ConnectorPlugins(Connector):
                 
                 for usage in list_of_usages.usages:
                     next_row = {
-                        "plugin_id": plugin_id,
+                        "plugin_id":    plugin_id,
                         "element_kind": usages.element_kind,
                         "element_type": usages.element_type,
                         "object_id":    usages.object_id,
