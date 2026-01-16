@@ -56,9 +56,9 @@ class ConnectorPlugins(Connector):
                         "plugin_id": plugin_id,
                         "element_kind": usages.element_kind,
                         "element_type": usages.element_type,
-                        "object_id": usages.object_id,
-                        "object_type": usages.object_type,
-                        "project_key": usages.project_key,                       
+                        "object_id":    usages.object_id,
+                        "object_type":  usages.object_type,
+                        "project_key":  usages.project_key,                       
 #                        "maybe_used": list_of_usages.maybe_used()
                     }
                     yield next_row
