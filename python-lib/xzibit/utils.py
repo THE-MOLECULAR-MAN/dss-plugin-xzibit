@@ -353,8 +353,6 @@ def int_to_datetime(timestamp: int) -> datetime:
     """
     # Detect if the timestamp is in milliseconds
     if not isinstance(timestamp, int):
-        # t = str(type(timestamp))
-        # print(f"int_to_datetime - not an integer: {timestamp} - {t}")
         timestamp = 0
 
     # can cause a bug in like 50k years from now? ;-)
