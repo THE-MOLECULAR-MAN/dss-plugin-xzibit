@@ -1,11 +1,11 @@
 {
-    "meta" : {
+    "meta": {
         "label": "Dataiku Clusters dataset",
         "description": "a dataset describing the Clusters on this DSS instance",
-        "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
+        "icon": "icon-cogs"
     },
     "readable": true,
-    "writable": false,    
+    "writable": false,
     "supportAppend": false,
     "params": [],
     "partitioningMode": "NOT_PARTITIONABLE"
