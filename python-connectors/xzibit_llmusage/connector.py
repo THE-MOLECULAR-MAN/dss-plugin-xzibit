@@ -8,7 +8,6 @@ from dataiku.connector import Connector
 from xzibit.utils import (
     get_dss_base_url,
     recursive_search_all,
-    pp,
 )
 
 
