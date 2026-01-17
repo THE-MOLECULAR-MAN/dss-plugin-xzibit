@@ -11,7 +11,6 @@ from datetime import datetime
 from dataiku import api_client
 from dataiku.connector import Connector
 
-# from xzibit.utils import *
 from xzibit.utils import get_dss_base_url, replace_empty_arrays_sets_with_none, pp, jd
 
 
