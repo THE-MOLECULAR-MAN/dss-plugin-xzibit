@@ -268,7 +268,6 @@ def safe_extract_dataset_metadata(
             dataset_metadata["num_data_quality_rules"] = len(
                 dataset_handle.get_data_quality_rules().list_rules()
             )
-            # print(f"successfully finished getting data quality rules")
         else:
             dataset_metadata["num_data_quality_rules"] = None
 
