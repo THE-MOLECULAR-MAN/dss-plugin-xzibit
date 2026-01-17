@@ -219,8 +219,6 @@ def safe_extract_dataset_metadata(
             dataset_metadata["exists"] = "EXCEPTION 1"
             return dataset_metadata
 
-        # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
-
         try:
             # pp(raw_data)
             dataset_metadata_new = extract_nested_keys(
