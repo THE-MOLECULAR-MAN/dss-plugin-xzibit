@@ -135,7 +135,7 @@ def get_dss_url_from_env():
     if ext_host and base_port:
         # Note: You may need to infer the scheme (http vs https)
         # based on your knowledge of the instance setup.
-        s = f"http://{ext_host}:{base_port}"
+        s = f"https://{ext_host}:{base_port}"
         print(s)
         return s
     return None
