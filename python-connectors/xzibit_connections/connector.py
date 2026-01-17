@@ -27,7 +27,6 @@ class ConnectorConnections(Connector):
         self.__baseurl = get_dss_base_url()
         # self.__test_connection = self.config.get("test_connection", False)
 
-
     def get_url(self, id):
         """Create a URL to the DSS object in question in this specific DSS instance.
         Return None if any of the inputs are None."""
@@ -72,46 +71,45 @@ class ConnectorConnections(Connector):
                 connection_type = next_row.get("type", "unknown type")
                 # connection_error_msg = None
                 # connection_test_result = 'NOT TESTED'
-                
+
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
-#                 if connection_type in ["OpenAI", "AzureOpenAI", "VertexAILLM"]:
-#                     connection_handle = self.__client.get_connection(next_row["name"])
-#                     connection_info = connection_handle.get_info().get_params()
-#                     connection_settings = connection_handle.get_settings().get_raw()
-                    # outputs for these are VERY long
-#                     print(f"Connection_INFO for {connection_type}")
-#                     pp(connection_info)
-#                     print(f"Connection_SETTINGS for {connection_type}")
-#                     pp(connection_settings)
+                #                 if connection_type in ["OpenAI", "AzureOpenAI", "VertexAILLM"]:
+                #                     connection_handle = self.__client.get_connection(next_row["name"])
+                #                     connection_info = connection_handle.get_info().get_params()
+                #                     connection_settings = connection_handle.get_settings().get_raw()
+                # outputs for these are VERY long
+                #                     print(f"Connection_INFO for {connection_type}")
+                #                     pp(connection_info)
+                #                     print(f"Connection_SETTINGS for {connection_type}")
+                #                     pp(connection_settings)
 
                 next_row["url"] = self.get_url(next_row["name"])
 
                 # obj_handle = self.__client.get_connection(next_row["name"])
-#                 if self.__test_connection:
-#                     connection_test_dict = obj_handle.test()  # error sometimes
-#                     if connection_test_dict.get("connectionOK", False):
-#                         connection_test_result = "PASSED"
-#                     else:
-#                         connection_test_result = "FAILED"
-#                         connection_error_msg = connection_test_dict.get(
-#                             "connectionError", {}
-#                         ).get("detailedMessage", "Unable to fetch error message")
+            #                 if self.__test_connection:
+            #                     connection_test_dict = obj_handle.test()  # error sometimes
+            #                     if connection_test_dict.get("connectionOK", False):
+            #                         connection_test_result = "PASSED"
+            #                     else:
+            #                         connection_test_result = "FAILED"
+            #                         connection_error_msg = connection_test_dict.get(
+            #                             "connectionError", {}
+            #                         ).get("detailedMessage", "Unable to fetch error message")
 
-
-#             except Exception as e:
-#                 # Not all connection types have a .test() method implemented, by design, like filesystem.
-#                 # This catches them and marks their test result as N/A.
-#                 if JAVA_NOT_IMPLEMENTED in str(e):
-#                     connection_test_result = "NOT_TESTABLE"
-#                     connection_error_msg = None
-#                 else:
-#                     print(f"[Connections-generate_row] UNHANDLED EXCEPTION {e}")
-#                     connection_test_result = "FAILED - EXCEPTION"
-#                     connection_error_msg = "FAILED - EXCEPTION"
-#                     # pp(connection_test_dict)
+            #             except Exception as e:
+            #                 # Not all connection types have a .test() method implemented, by design, like filesystem.
+            #                 # This catches them and marks their test result as N/A.
+            #                 if JAVA_NOT_IMPLEMENTED in str(e):
+            #                     connection_test_result = "NOT_TESTABLE"
+            #                     connection_error_msg = None
+            #                 else:
+            #                     print(f"[Connections-generate_row] UNHANDLED EXCEPTION {e}")
+            #                     connection_test_result = "FAILED - EXCEPTION"
+            #                     connection_error_msg = "FAILED - EXCEPTION"
+            #                     # pp(connection_test_dict)
             finally:
-                #next_row["connection_test_status"] = connection_test_result
-                #next_row["connection_test_error_msg"] = connection_error_msg
+                # next_row["connection_test_status"] = connection_test_result
+                # next_row["connection_test_error_msg"] = connection_error_msg
                 records_generated += 1
                 yield next_row
 
@@ -124,12 +122,12 @@ class ConnectorConnections(Connector):
                 {"meaning": "Text", "name": "name", "type": "string"},
                 {"meaning": "Text", "name": "type", "type": "string"},
                 {"meaning": "Text", "name": "credentialsMode", "type": "string"},
-#                 {"meaning": "Text", "name": "connection_test_status", "type": "string"},
-#                 {
-#                     "meaning": "Text",
-#                     "name": "connection_test_error_msg",
-#                     "type": "string",
-#                 },
+                #                 {"meaning": "Text", "name": "connection_test_status", "type": "string"},
+                #                 {
+                #                     "meaning": "Text",
+                #                     "name": "connection_test_error_msg",
+                #                     "type": "string",
+                #                 },
                 {"meaning": "Text", "name": "usableBy", "type": "string"},
                 {"meaning": "Text", "name": "params.credentialsMode", "type": "string"},
                 {"meaning": "Text", "name": "params.authType", "type": "string"},
