@@ -552,7 +552,6 @@ def clear_pip_tmp():
     """
 
     for d in glob.glob("/tmp/pip-*"):
-        # print(f'Deleting {d}...')
         if os.path.isdir(d):
             shutil.rmtree(d, ignore_errors=True)
         else:
