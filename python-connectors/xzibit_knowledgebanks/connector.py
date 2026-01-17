@@ -67,10 +67,6 @@ class ConnectorProjects(Connector):
                         # fetch settings as dict
                         settings_raw = kb.get_settings().get_raw()
 
-                        # display debug info during development
-                        # for example, finding key names when adding new columns to dataset
-
-
                         # add features that are unique to this object type
                         next_row["kb_id"] = settings_raw.get("id", None)
                         next_row["kb_name"] = settings_raw.get("name", None)
