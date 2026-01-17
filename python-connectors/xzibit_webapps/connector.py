@@ -82,7 +82,6 @@ class ConnectorProjects(Connector):
                     try:
                         if records_limit > 0 and records_generated >= records_limit:
                             return
-                        # pp(webapp)
 
                         # Collect relevant metadata
                         next_row = {
