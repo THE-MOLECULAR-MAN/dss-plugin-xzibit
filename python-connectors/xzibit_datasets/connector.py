@@ -117,8 +117,6 @@ class ConnectorDatasets(Connector):
                     "type": "string",
                 },
                 {"meaning": "URL", "name": "url", "type": "string"},
-                # {"meaning": "JSONArrayMeaning", "name": "data_lineage", "type": "string"},
-                # {"meaning": "LongMeaning", "name": "num_data_quality_rules", "type": "int"},
             ]
         }
 
