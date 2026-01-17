@@ -220,7 +220,7 @@ def safe_extract_dataset_metadata(
             return dataset_metadata
 
         try:
-            # pp(raw_data)
+
             dataset_metadata_new = extract_nested_keys(
                 raw_data, keys
             )  # NOT causing exception
