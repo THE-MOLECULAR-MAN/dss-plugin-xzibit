@@ -3,7 +3,6 @@
         "label": "Dataiku Apps dataset",
         "description": "a dataset describing the Apps on this DSS instance",
         // icon: DSS v12 requires FontAwesome 3.2.1 icons, complete list here at https://fontawesome.com/v3.2.1/icons/
-
         "icon": "icon-cogs"
     },
     "readable": true,
