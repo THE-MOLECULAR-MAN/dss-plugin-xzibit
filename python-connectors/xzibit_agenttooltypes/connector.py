@@ -86,7 +86,8 @@ class MyConnector(Connector):
         The dataset_schema given here will match the the rows given to the writer below.
 
         write_mode can either be OVERWRITE or APPEND.
-        It will not be APPEND unless the plugin explicitly supports append mode. See flag supportAppend in connector.json.
+        It will not be APPEND unless the plugin explicitly supports append mode.
+        See flag supportAppend in connector.json.
         If applicable, the write_mode should be handled in the plugin code.
 
         Note: the writer is responsible for clearing the partition, if relevant.
