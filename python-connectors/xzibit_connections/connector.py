@@ -98,7 +98,6 @@ class ConnectorConnections(Connector):
                     print(f"[Connections-generate_row] UNHANDLED EXCEPTION {e}")
                     connection_test_result = "FAILED - EXCEPTION"
                     connection_error_msg = connection_test_dict
-                    # pp(connection_test_dict)
             finally:
                 next_row["connection_test_status"] = connection_test_result
                 next_row["connection_test_error_msg"] = connection_error_msg
