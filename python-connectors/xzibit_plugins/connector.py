@@ -103,7 +103,7 @@ class ConnectorPlugins(Connector):
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
                 next_row["url"] = self.get_url(plugin_id)
-                next_row["is_built_in_plugin"] = plugin_id in DSS_BUILT_IN_PLUGIN_IDS
+                next_row["is_built_in_plugin"] = plugin_id in builtin_plugins
                 plugin_handle = self.__client.get_plugin(plugin_id)
                 settings_raw = plugin_handle.get_settings().get_raw()
                 next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
