@@ -67,7 +67,8 @@ class ConnectorDatasets(Connector):
                         f"[datasets-generate_rows] [UNEXPECTED EXCEPTION] with dataset {r.id} in project {pk}: {e}"
                     )
                     # r is of type "dataikuapi.dss.dataset.DSSDataset"
-                    # Test failed: com.dataiku.dip.server.controllers.NotFoundException: dataset does not exist:
+                    # Test failed: com.dataiku.dip.server.controllers.NotFoundException:
+                    # dataset does not exist:
                     next_row = {"projectKey": pk, "name": r.id}
                 finally:
                     records_generated += 1
