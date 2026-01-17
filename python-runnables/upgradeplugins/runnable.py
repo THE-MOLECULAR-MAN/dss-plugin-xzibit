@@ -49,7 +49,6 @@ class MyRunnable(Runnable):
             plugin_handle = self.__client.get_plugin(plugin_id)
 
             try:
-                # print(f"Attempting to update plugin {plugin_id} ... ")
                 future = plugin_handle.update_from_store()
                 future.wait_for_result()
 
