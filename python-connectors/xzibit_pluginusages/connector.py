@@ -77,7 +77,6 @@ class ConnectorPlugins(Connector):
         """TBD"""
         return None
 
-
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
