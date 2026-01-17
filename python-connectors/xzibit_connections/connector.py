@@ -66,11 +66,11 @@ class ConnectorConnections(Connector):
                     break
 
                 next_row = flatten_dict(item_info, include_keys=keys)
-                
+
                 connection_error_msg = None
 
-                
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
+                # connection_type = next_row.get("type", "unknown type")
                 # if connection_type in ["OpenAI", "AzureOpenAI", "VertexAILLM"]:
                 #     connection_handle = self.__client.get_connection(next_row["name"])
                 #     connection_info = connection_handle.get_info().get_params()
