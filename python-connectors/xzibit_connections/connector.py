@@ -88,7 +88,8 @@ class ConnectorConnections(Connector):
                     ).get("detailedMessage", "Unable to fetch error message")
 
             except Exception as e:
-                # Not all connection types have a .test() method implemented, by design, like filesystem.
+                # Not all connection types have a .test() method implemented,
+                # by design, like filesystem.
                 # This catches them and marks their test result as N/A.
                 if JAVA_NOT_IMPLEMENTED in str(e):
                     connection_test_result = "NOT_TESTABLE"
