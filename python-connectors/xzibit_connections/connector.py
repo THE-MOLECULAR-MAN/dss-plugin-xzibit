@@ -77,7 +77,7 @@ class ConnectorConnections(Connector):
                     connection_settings = connection_handle.get_settings().get_raw()
                     # outputs for these are VERY long
                     print(f"Connection_INFO for {connection_type}")
-                    pp(connection_info)
+
                     print(f"Connection_SETTINGS for {connection_type}")
                     pp(connection_settings)
 
