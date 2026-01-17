@@ -1,8 +1,8 @@
 {
-    "meta" : {
+    "meta": {
         "label": "Dataiku Users dataset",
         "description": "a dataset describing the Users on this DSS instance",
-        "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
+        "icon": "icon-cogs"
     },
     "readable": true,
     "writable": false,
