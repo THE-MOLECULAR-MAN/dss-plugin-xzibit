@@ -1,8 +1,8 @@
 {
-    "meta" : {
+    "meta": {
         "label": "Dataiku Recipes dataset",
         "description": "a dataset describing the Recipes on this DSS instance",
-        "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
+        "icon": "icon-cogs"
     },
     "readable": true,
     "writable": false,
