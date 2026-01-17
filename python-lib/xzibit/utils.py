@@ -373,7 +373,7 @@ def parse_user_datetime(dt_str: str) -> datetime:
         dt_str = dt_str.replace(" ", "T")
         return datetime.fromisoformat(dt_str)
     except ValueError:
-        return None
+        return None  # 0 ?
 
 
 def get_jq_value(data: dict, jq_path: str):
