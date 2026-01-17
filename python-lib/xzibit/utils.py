@@ -145,8 +145,6 @@ def get_dss_url_from_global_vars():
 
     # Retrieve global variables (accessible to all users)
     global_vars = client.get_variables()
-    print(global_vars.get("dss_url"))
-    print(global_vars.get("public_url"))
 
     # Check for common naming conventions like 'dss_url', 'public_url', or 'instance_url'
     return global_vars.get("dss_url") or global_vars.get("public_url")
