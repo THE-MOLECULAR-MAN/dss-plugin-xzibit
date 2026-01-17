@@ -46,7 +46,7 @@ class ConnectorPlugins(Connector):
                 
                 plugin_id = item_info.get("id", "NO_PLUGIN_ID")
                 plugin_handle = self.__client.get_plugin(plugin_id)
-                settings_raw = plugin_handle.get_settings().get_raw()
+                # settings_raw = plugin_handle.get_settings().get_raw()
                 list_of_usages = plugin_handle.list_usages()
                 
                 for usage in list_of_usages.usages:
