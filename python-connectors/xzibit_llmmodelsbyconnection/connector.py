@@ -51,7 +51,6 @@ class ConnectorProjects(Connector):
                 connection_settings = connection_handle.get_settings().get_raw()
                 connection_type = connection_settings.get("type", None)
 
-                # pp(connection_settings)
                 connection_name = connection_settings.get("name", None)
                 connection_params = connection_settings.get("params", {})
 
