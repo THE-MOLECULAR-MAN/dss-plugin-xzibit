@@ -35,7 +35,6 @@ def make_url_friendly(text):
     # 3. Replace one or more whitespace characters with a single hyphen
     text = re.sub(r"\s+", "-", text)
 
-
     return text
 
 
