@@ -93,7 +93,8 @@ class ConnectorProjects(Connector):
                             "rebuildBehavior", None
                         )
 
-                        # URL is fetched using class method that specifically implements this DSS object type:
+                        # URL is fetched using class method that specifically implements 
+                        # this DSS object type:
                         next_row["url"] = self.get_url(project_key, next_row["kb_id"])
 
                         # add features that are almost always the same for different DSS object types
