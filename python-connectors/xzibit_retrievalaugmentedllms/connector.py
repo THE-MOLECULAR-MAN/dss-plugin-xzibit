@@ -97,7 +97,8 @@ class ConnectorProjects(Connector):
                             "ragllmSettings", {}
                         ).get("kbRef", None)
 
-                        # URL is fetched using class method that specifically implements this DSS object type:
+                        # URL is fetched using class method that specifically implements
+                        # this DSS object type:
                         next_row["url"] = self.get_url(
                             next_row["kb_id"], project_key, next_row["activeVersion"]
                         )
