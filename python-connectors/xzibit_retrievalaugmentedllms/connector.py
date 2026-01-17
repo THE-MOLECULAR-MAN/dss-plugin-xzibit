@@ -79,10 +79,6 @@ class ConnectorProjects(Connector):
                         # fetch settings as dict
                         settings_raw = obj_handle.get_settings().get_raw()
 
-                        # display debug info during development
-                        # for example, finding key names when adding new columns to dataset
-
-
                         # add features that are unique to this object type
                         next_row["rag_llm_id"] = settings_raw.get("id", None)
                         next_row["activeVersion"] = settings_raw.get(
