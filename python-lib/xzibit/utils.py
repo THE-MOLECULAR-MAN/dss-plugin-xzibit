@@ -15,7 +15,7 @@ from json import dumps as jd
 JAVA_NOT_IMPLEMENTED = "com.dataiku.dip.utils.NotImplementedException"
 
 
-def extract_keys(d, v=True, key_prefix='allow'):
+def extract_keys(d, v=True, key_prefix="allow"):
     """
     Finds keys in dictionary 'd' that start with 'key_prefix' and have value 'v'.
     Returns a list of these keys with the prefix removed.
@@ -23,15 +23,16 @@ def extract_keys(d, v=True, key_prefix='allow'):
     Used in extracting an LLM connection's list of allowed LLM models
     """
     result = []
-    
+
     for key, value in d.items():
         # Check if key starts with the prefix AND value matches v
         if key.startswith(key_prefix) and value == v:
             # Remove the prefix using string slicing
-            stripped_key = key[len(key_prefix):]
+            stripped_key = key[len(key_prefix) :]
             result.append(stripped_key)
-            
+
     return result
+
 
 def recursive_search_all(data, s):
     """
@@ -168,7 +169,9 @@ def get_dss_base_url():
         return None
 
 
-def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False): # , get_data_quality_rules=False):
+def safe_extract_dataset_metadata(
+    dataset_handle, pk, get_column_lineage=False
+):  # , get_data_quality_rules=False):
     """SLOW! Adds 1.36 seconds per dataset (row) on average"""
     assert isinstance(
         dataset_handle, dataikuapi.dss.dataset.DSSDataset
@@ -250,31 +253,31 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False):
         dataset_metadata["versionTag.lastModifiedOn"] = int_to_datetime(
             dataset_metadata.get("versionTag.lastModifiedOn", None)
         )
-        
-#         if get_column_lineage:
-#             # runtime for tim's personal dev env (X datasets) was :
-#             #    213 to 214 sec with data lineage turned ON
-#             #    5 sec with data lineage turned OFF
-#             #    42x slower
-#             dataset_metadata["data_lineage"] = []
-#             lineage = []
-            
-#             for column_name in dataset_metadata["column_names"]:
-#                 iter_col_lineage = dataset_handle.get_column_lineage(column_name)
-#                 new_lineage = {"column_name": column_name, "column_lineage": iter_col_lineage}
-#                 lineage.append(new_lineage)
-#             dataset_metadata["data_lineage"] = lineage
-#         else:
-#             dataset_metadata["data_lineage"] = None
-            
-#         if get_data_quality_rules:
-#             # doubles the runtime from 5 to 9 sec.
-#             #print(f"getting data quality rules...")
-#             #dataset_metadata["num_data_quality_rules"] = -1
-#             dataset_metadata["num_data_quality_rules"] = len(dataset_handle.get_data_quality_rules().list_rules())
-#             #print(f"successfully finished getting data quality rules")
-#         else:
-#             dataset_metadata["num_data_quality_rules"] = None
+
+    #         if get_column_lineage:
+    #             # runtime for tim's personal dev env (X datasets) was :
+    #             #    213 to 214 sec with data lineage turned ON
+    #             #    5 sec with data lineage turned OFF
+    #             #    42x slower
+    #             dataset_metadata["data_lineage"] = []
+    #             lineage = []
+
+    #             for column_name in dataset_metadata["column_names"]:
+    #                 iter_col_lineage = dataset_handle.get_column_lineage(column_name)
+    #                 new_lineage = {"column_name": column_name, "column_lineage": iter_col_lineage}
+    #                 lineage.append(new_lineage)
+    #             dataset_metadata["data_lineage"] = lineage
+    #         else:
+    #             dataset_metadata["data_lineage"] = None
+
+    #         if get_data_quality_rules:
+    #             # doubles the runtime from 5 to 9 sec.
+    #             #print(f"getting data quality rules...")
+    #             #dataset_metadata["num_data_quality_rules"] = -1
+    #             dataset_metadata["num_data_quality_rules"] = len(dataset_handle.get_data_quality_rules().list_rules())
+    #             #print(f"successfully finished getting data quality rules")
+    #         else:
+    #             dataset_metadata["num_data_quality_rules"] = None
 
     except DataikuException as e:
         print(f"safe_extract_dataset_metadata - Dataiku exception {e}")
