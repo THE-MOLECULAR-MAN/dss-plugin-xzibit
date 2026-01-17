@@ -125,8 +125,6 @@ class ConnectorProjects(Connector):
 
     def get_read_schema(self):
         """TBD"""
-        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, URL,
         return {
             "columns": [
                 {"name": "webapp_id", "type": "string", "meaning": "Text"},
