@@ -2,7 +2,7 @@
     "meta" : {
         "label": "Dataiku Connections dataset",
         "description": "a dataset describing the Connections on this DSS instance",  
-        "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
+        "icon": "icon-cogs"
     },
     "readable": true,
     "writable": false,
