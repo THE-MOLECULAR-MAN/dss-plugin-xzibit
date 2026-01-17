@@ -121,9 +121,6 @@ class ConnectorPlugins(Connector):
 
                 next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
 
-                print(
-                    f"[plugins-generate_rows] plugin ID: {next_row['id']} FINISHED SUCCESSFULLY"
-                )
             except Exception as e:
                 print(
                     f"[plugins-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
