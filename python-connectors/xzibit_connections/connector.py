@@ -66,7 +66,6 @@ class ConnectorConnections(Connector):
                     break
 
                 next_row = flatten_dict(item_info, include_keys=keys)
-
                 connection_error_msg = None
 
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
