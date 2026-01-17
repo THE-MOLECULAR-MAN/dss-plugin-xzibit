@@ -1,0 +1,12 @@
+{
+    "meta" : {
+        "label": "Dataiku Plugin Usages dataset",
+        "description": "a dataset describing instances of where plugins are used",
+        "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
+    },
+    "readable": true,
+    "writable": false,
+    "supportAppend": false,
+    "partitioningMode": "NOT_PARTITIONABLE",
+    "params": []
+}
