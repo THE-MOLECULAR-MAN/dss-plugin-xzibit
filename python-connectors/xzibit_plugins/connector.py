@@ -82,7 +82,7 @@ class ConnectorPlugins(Connector):
         # https://github.com/dataiku/dataiku-api-client-python/blob/master/dataikuapi/dssclient.py#L273
         # There's not an easy way to speed up the next, very slow line
 
-        DSS_BUILT_IN_PLUGIN_IDS: list[str] = [
+        builtin_plugins: list[str] = [
             "default-samples",
             "builtin-macros",
             "code-studio-blocks",
