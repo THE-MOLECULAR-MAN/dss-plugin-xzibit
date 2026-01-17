@@ -61,7 +61,6 @@ class ConnectorUsers(Connector):
                     return
 
                 next_row = flatten_dict(item_info, include_keys=keys)
-
                 item_handle = self.__client.get_user(item_info[unique_id_key_name])
                 # TODO: fix this date mess below
                 next_row["last_successful_login"] = parse_user_datetime(
