@@ -71,28 +71,6 @@ class ConnectorConnections(Connector):
 
                 next_row["url"] = self.get_url(next_row["name"])
 
-                # obj_handle = self.__client.get_connection(next_row["name"])
-            #                 if self.__test_connection:
-            #                     connection_test_dict = obj_handle.test()  # error sometimes
-            #                     if connection_test_dict.get("connectionOK", False):
-            #                         connection_test_result = "PASSED"
-            #                     else:
-            #                         connection_test_result = "FAILED"
-            #                         connection_error_msg = connection_test_dict.get(
-            #                             "connectionError", {}
-            #                         ).get("detailedMessage", "Unable to fetch error message")
-
-            #             except Exception as e:
-            #                 # Not all connection types have a .test() method implemented, by design, like filesystem.
-            #                 # This catches them and marks their test result as N/A.
-            #                 if JAVA_NOT_IMPLEMENTED in str(e):
-            #                     connection_test_result = "NOT_TESTABLE"
-            #                     connection_error_msg = None
-            #                 else:
-            #                     print(f"[Connections-generate_row] UNHANDLED EXCEPTION {e}")
-            #                     connection_test_result = "FAILED - EXCEPTION"
-            #                     connection_error_msg = "FAILED - EXCEPTION"
-            #                     # pp(connection_test_dict)
             finally:
                 # next_row["connection_test_status"] = connection_test_result
                 # next_row["connection_test_error_msg"] = connection_error_msg
