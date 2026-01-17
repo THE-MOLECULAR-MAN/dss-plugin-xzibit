@@ -104,7 +104,7 @@ class ConnectorCodeEnvs(Connector):
                     # next line throws exception on DevDesign:
                     #  jakarta.servlet.ServletException: Handler dispatch failed:
                     # java.lang.Error: Unknown tool type:
-                    # Custom_agent_tool_jira-tools_jira-create-issue-tool, caused by: 
+                    # Custom_agent_tool_jira-tools_jira-create-issue-tool, caused by:
                     # Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool
                     # list_usages() does not take any parameters
                     usages = code_env_handle.list_usages()
