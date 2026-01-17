@@ -278,7 +278,7 @@ def safe_extract_dataset_metadata(
     except Exception as e:
         print(f"safe_extract_dataset_metadata - Generic exception {e}")
         dataset_metadata["exists"] = "ERROR"
-        return dataset_metadata
+
     finally:
         return dataset_metadata
 
