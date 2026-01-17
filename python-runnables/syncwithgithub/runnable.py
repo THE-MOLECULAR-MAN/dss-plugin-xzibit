@@ -70,7 +70,6 @@ class MyRunnable(Runnable):
                         continue
                     successful.add(iter_project_key)
                 else:
-                    # print(f"{iter_project_key} is not connected to GitHub")
                     not_connected.add(iter_project_key)
             except Exception as e:
                 print(f"[EXCEPTION] {iter_project_key}: {e}")
