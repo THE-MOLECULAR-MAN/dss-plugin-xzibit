@@ -108,30 +108,6 @@ class ConnectorPlugins(Connector):
                 settings_raw = plugin_handle.get_settings().get_raw()
                 next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
 
-                if self.__compute_plugin_usages:
-                    # this is so slow!!!!
-
-                    # .list_usages() adds 2+ hours instead of 1 second for entire run
-                    # on DevDesign, average time per plugin was 26 sec with 281 plugins & 2,747 projects
-                    list_of_usages = (
-                        plugin_handle.list_usages().get_raw().get("usages", [])
-                    )
-                    if len(list_of_usages) == 0:
-                        next_row["plugin_used_in_projectkeys"] = []
-                    else:
-                        next_row["plugin_used_in_projectkeys"] = list(
-                            get_values_for_key(list_of_usages, "projectKey")
-                        )
-                    next_row["total_usages"] = len(list_of_usages)
-                else:
-                    next_row["plugin_used_in_projectkeys"] = [
-                        "Plugin usage checking not enabled in dataset settings."
-                    ]
-                    next_row["total_usages"] = None
-
-                print(
-                    f"[plugins-generate_rows] plugin ID: {next_row['id']} FINISHED SUCCESSFULLY"
-                )
             except Exception as e:
                 print(
                     f"[plugins-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
