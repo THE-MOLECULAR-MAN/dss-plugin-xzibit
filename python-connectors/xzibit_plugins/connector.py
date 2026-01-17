@@ -114,7 +114,6 @@ class ConnectorPlugins(Connector):
                 print(
                     f"[plugins-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
                 )
-                # pp(item_info)
                 next_row = list_to_error_dict(keys)
                 next_row["plugin_used_in_projectkeys"] = ["EXCEPTION"]
             finally:
