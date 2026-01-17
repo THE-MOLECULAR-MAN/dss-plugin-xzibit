@@ -361,7 +361,7 @@ def int_to_datetime(timestamp: int) -> datetime:
 
     # can cause a bug in like 50k years from now? ;-)
     if timestamp > 1e12:
-        timestamp /= 1000  # convert to seconds
+        timestamp /= 1000.0  # convert to seconds
 
     return datetime.utcfromtimestamp(timestamp)
 
