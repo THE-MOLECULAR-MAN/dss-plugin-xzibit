@@ -54,7 +54,6 @@ class ConnectorProjects(Connector):
         ]
         # iterate through each object
         for item_info in self.__client.list_projects():
-            # pp(item_info)
             if records_limit > 0 and records_generated >= records_limit:
                 return
 
