@@ -66,7 +66,7 @@ class MyRunnable(Runnable):
                 if not self.__force_rebuild_env:
                     # print(f'Failed to build {envName} without force rebuild, trying again with force rebuild...')
                     res = code_env.update_packages(force_rebuild_env=True)
-                    # print(f"Success: {envName} when Force rebuild")
+
                     # pass
             except Exception:
                 print(f"FAILED: {envName}, even with force rebuild")
