@@ -9,7 +9,6 @@ from xzibit.utils import (
     get_dss_base_url,
     get_values_for_key,
     get_path_size_megabytes,
-    pp,
 )
 
 
