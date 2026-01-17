@@ -52,7 +52,7 @@ class ConnectorDatasets(Connector):
                     return
                 try:
                     dataset_handle = project_handle.get_dataset(r.id)
-                    next_row = safe_extract_dataset_metadata(dataset_handle, pk) #, self.__get_column_lineage) #, self.__get_data_quality_rules)
+                    next_row = safe_extract_dataset_metadata(dataset_handle, pk)
 
                     next_row["url"] = self.get_url(r.id, pk)
 
