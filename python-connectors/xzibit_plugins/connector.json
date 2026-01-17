@@ -8,6 +8,5 @@
     "writable": false,
     "supportAppend": false,
     "partitioningMode": "NOT_PARTITIONABLE",
-    "params": [
-    ]
+    "params": []
 }
