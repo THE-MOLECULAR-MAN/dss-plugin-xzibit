@@ -69,6 +69,7 @@ class ConnectorConnections(Connector):
                 
                 connection_error_msg = None
 
+                
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
                 # if connection_type in ["OpenAI", "AzureOpenAI", "VertexAILLM"]:
                 #     connection_handle = self.__client.get_connection(next_row["name"])
