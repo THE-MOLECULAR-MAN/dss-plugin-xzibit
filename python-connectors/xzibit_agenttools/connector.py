@@ -126,18 +126,6 @@ class ConnectorProjects(Connector):
                             .get("llmId", "")
                         )
 
-                        # next_row["customFields"]   = raw_settings.get('customFields',None)
-                    #                         next_row["dkuProperties"] = replace_empty_arrays_sets_with_none(
-                    #                             raw_settings.get("dkuProperties", None)
-                    #                         )
-                    # next_row["checklists"]     = raw_settings.get('checklists',{}).get('checklists',None)
-                    #                         next_row["quickTestQuery"] = (
-                    #                             replace_empty_arrays_sets_with_none(
-                    #                                 raw_settings.get("quickTestQuery", None)
-                    #                             )
-                    #                         )
-
-                    # except (AttributeError, KeyError, TypeError, ValueError) as e:
                     except Exception as e:
                         print(
                             f"[agenttools-generate_rows] [agenttools EXCEPTION] {project_key}: {e}"
