@@ -113,7 +113,7 @@ class ConnectorProjects(Connector):
                         # next_row["tools"] = current_version_info_raw.get("toolsUsingAgentSettings",{}).get("tools",None)
 
                         # add features that are almost always the same for d
-                        # ifferent DSS object types
+                        # different DSS object types
                         next_row["created_timestamp"] = datetime.fromtimestamp(
                             current_version_info_raw.get("creationTag", {}).get(
                                 "lastModifiedOn", 0
