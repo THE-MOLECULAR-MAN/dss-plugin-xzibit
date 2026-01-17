@@ -1,28 +1,29 @@
 {
-    "meta" : {
+    "meta": {
         "label": "Dataiku Code Environments dataset",
         "description": "a dataset describing the Code Environments on this DSS instance",
-        "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
+        "icon": "icon-cogs"
     },
     "readable": true,
     "writable": false,
     "supportAppend": false,
     "partitioningMode": "NOT_PARTITIONABLE",
     "params": [
-              {
-      "name": "compute_codeenv_disk_space_usage",
-      "label": "Calculate disk space used by each code environment",
-      "type": "BOOLEAN",
-      "description": "Enable the size of the code environment as stored on disk. Checking this box populates the column named 'size_in_MB'. WARNING: This adds an additional 30+ seconds per code env, so checking a DSS Node with X code environments adds nearly 2.5 hours to run.",
-      "mandatory": true,
-      "defaultValue": false
-    },
-    {
-      "name": "compute_codeenv_usages",
-      "label": "Calculate all usage locations of each code environment",
-      "type": "BOOLEAN",
-      "description": "Populates the '' column with a list of all __ where the code environment is used. WARNING: This adds a LOT of time, usually 5+ hours.",
-      "mandatory": true,
-      "defaultValue": false
-    }]
+        {
+            "name": "compute_codeenv_disk_space_usage",
+            "label": "Calculate disk space used by each code environment",
+            "type": "BOOLEAN",
+            "description": "Enable the size of the code environment as stored on disk. Checking this box populates the column named 'size_in_MB'. WARNING: This adds an additional 30+ seconds per code env, so checking a DSS Node with X code environments adds nearly 2.5 hours to run.",
+            "mandatory": true,
+            "defaultValue": false
+        },
+        {
+            "name": "compute_codeenv_usages",
+            "label": "Calculate all usage locations of each code environment",
+            "type": "BOOLEAN",
+            "description": "Populates the '' column with a list of all __ where the code environment is used. WARNING: This adds a LOT of time, usually 5+ hours.",
+            "mandatory": true,
+            "defaultValue": false
+        }
+    ]
 }
