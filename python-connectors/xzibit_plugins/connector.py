@@ -100,7 +100,6 @@ class ConnectorPlugins(Connector):
                     return
 
                 plugin_id = item_info.get("id", "NO_PLUGIN_ID")
-
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
                 next_row["url"] = self.get_url(plugin_id)
