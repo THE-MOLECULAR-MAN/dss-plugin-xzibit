@@ -61,7 +61,6 @@ class ConnectorUsers(Connector):
                     return
 
                 next_row = flatten_dict(item_info, include_keys=keys)
-                # item_id = next_row[self.__unique_id_key_name]
                 item_handle = self.__client.get_user(item_info[unique_id_key_name])
 
                 # TODO: fix this date mess below
