@@ -107,11 +107,8 @@ class ConnectorPlugins(Connector):
 
                 next_row["url"] = self.get_url(plugin_id)
                 next_row["is_built_in_plugin"] = plugin_id in DSS_BUILT_IN_PLUGIN_IDS
-
                 plugin_handle = self.__client.get_plugin(plugin_id)
-
                 settings_raw = plugin_handle.get_settings().get_raw()
-
                 next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
 
                 if self.__compute_plugin_usages:
