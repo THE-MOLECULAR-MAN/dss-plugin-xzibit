@@ -249,31 +249,6 @@ def safe_extract_dataset_metadata(
             dataset_metadata.get("versionTag.lastModifiedOn", None)
         )
 
-    #         if get_column_lineage:
-    #             # runtime for tim's personal dev env (X datasets) was :
-    #             #    213 to 214 sec with data lineage turned ON
-    #             #    5 sec with data lineage turned OFF
-    #             #    42x slower
-    #             dataset_metadata["data_lineage"] = []
-    #             lineage = []
-
-    #             for column_name in dataset_metadata["column_names"]:
-    #                 iter_col_lineage = dataset_handle.get_column_lineage(column_name)
-    #                 new_lineage = {"column_name": column_name, "column_lineage": iter_col_lineage}
-    #                 lineage.append(new_lineage)
-    #             dataset_metadata["data_lineage"] = lineage
-    #         else:
-    #             dataset_metadata["data_lineage"] = None
-
-    #         if get_data_quality_rules:
-    #             # doubles the runtime from 5 to 9 sec.
-    #             #print(f"getting data quality rules...")
-    #             #dataset_metadata["num_data_quality_rules"] = -1
-    #             dataset_metadata["num_data_quality_rules"] = len(dataset_handle.get_data_quality_rules().list_rules())
-    #             #print(f"successfully finished getting data quality rules")
-    #         else:
-    #             dataset_metadata["num_data_quality_rules"] = None
-
     except DataikuException as e:
         print(f"safe_extract_dataset_metadata - Dataiku exception {e}")
         dataset_metadata["exists"] = "EXCEPTION 3"
