@@ -75,7 +75,6 @@ class ConnectorPlugins(Connector):
             "isDev",
         ]
 
-
         builtin_plugins: list[str] = [
             "default-samples",
             "builtin-macros",
@@ -86,6 +85,12 @@ class ConnectorPlugins(Connector):
             "project-standards",
         ]
 
+        # iterate through each object
+        # list plugins does not take any parameters like object vs list:
+        # https://developer.dataiku.com/latest/api-reference/python/client.html#dataikuapi.DSSClient.list_plugins
+        # even in the source code, no parameters:
+        # https://github.com/dataiku/dataiku-api-client-python/blob/master/dataikuapi/dssclient.py#L273
+        # There's not an easy way to speed up the next, very slow line
         # list_plugins does not offer any parameters
         # list_plugins returns a list of dict. Each dict contains at least a ‘id’ field
         for item_info in self.__client.list_plugins():
