@@ -305,8 +305,6 @@ def list_keys_recursive(d: dict, parent_key: str = "") -> list[str]:
     """
     keys = []
     if not isinstance(d, dict):
-        t = str(type(d))
-        print(f"ERROR: list_keys_recursive - not a dict: {d} - {t}")
         return None
 
     for k, v in d.items():
