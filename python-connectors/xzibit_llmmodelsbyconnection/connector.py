@@ -77,8 +77,6 @@ class ConnectorProjects(Connector):
 
     def get_read_schema(self):
         """Returns the read schema for TBD"""
-        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
                 {"meaning": "Text", "name": "connection_name", "type": "string"},
