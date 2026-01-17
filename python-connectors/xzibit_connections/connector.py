@@ -11,7 +11,6 @@ from xzibit.utils import (
     get_dss_base_url,
     JAVA_NOT_IMPLEMENTED,
     DataikuException,
-    pp,
 )
 
 
