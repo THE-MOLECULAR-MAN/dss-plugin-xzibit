@@ -73,66 +73,44 @@ class MyConnector(Connector):
         for i in xrange(1, 10):
             yield {"first_col": str(i), "my_string": "Yes"}
 
-    def get_writer(
-        self,
-        dataset_schema=None,
-        dataset_partitioning=None,
-        partition_id=None,
-        write_mode="OVERWRITE",
-    ):
-        """
-        Returns a writer object to write in the dataset (or in a partition).
+    def get_read_schema(self):
+        """TBD"""
+        return {
+            "columns": [
+                {
+                    "meaning": "Boolean",
+                    "name": "onlyLimitedVisibility",
+                    "type": "boolean",
+                },
+                {"meaning": "Text", "name": "appId", "type": "string"},
+                {"meaning": "Text", "name": "appVersion", "type": "string"},
+                {"meaning": "Text", "name": "label", "type": "string"},
+                {"meaning": "FreeText", "name": "shortDesc", "type": "string"},
+                {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
+                {"meaning": "Boolean", "name": "isAppImg", "type": "boolean"},
+                {"meaning": "Text", "name": "origin", "type": "string"},
+                {"meaning": "Text", "name": "originProjectKey", "type": "string"},
+                {"meaning": "LongMeaning", "name": "instanceCount", "type": "int"},
+                {"meaning": "Boolean", "name": "useAsRecipe", "type": "boolean"},
+                {"meaning": "URL", "name": "url", "type": "string"},
+            ]
+        }
 
-        The dataset_schema given here will match the the rows given to the writer below.
-
-        write_mode can either be OVERWRITE or APPEND.
-        It will not be APPEND unless the plugin explicitly supports append mode.
-        See flag supportAppend in connector.json.
-        If applicable, the write_mode should be handled in the plugin code.
-
-        Note: the writer is responsible for clearing the partition, if relevant.
-        """
-        raise NotImplementedError
+    ####################################################################
+    # Intentionally not implemented, not needed for this type
+    ####################################################################
+    def get_records_count(self, partitioning=None, partition_id=None):
+        """This never runs for anything that I can find."""
+        return None
 
     def get_partitioning(self):
-        """
-        Return the partitioning schema that the connector defines.
-        """
+        """TBD"""
         raise NotImplementedError
 
     def list_partitions(self, partitioning):
-        """Return the list of partitions for the partitioning scheme
-        passed as parameter"""
+        """TBD"""
         return []
 
     def partition_exists(self, partitioning, partition_id):
-        """Return whether the partition passed as parameter exists
-
-        Implementation is only required if the corresponding flag is set to True
-        in the connector definition
-        """
+        """TBD"""
         raise NotImplementedError
-
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """
-        Returns the count of records for the dataset (or a partition).
-
-        Implementation is only required if the corresponding flag is set to True
-        in the connector definition
-        """
-        raise NotImplementedError
-
-
-class CustomDatasetWriter(object):
-    def __init__(self):
-        pass
-
-    def write_row(self, row):
-        """
-        Row is a tuple with N + 1 elements matching the schema passed to get_writer.
-        The last element is a dict of columns not found in the schema
-        """
-        raise NotImplementedError
-
-    def close(self):
-        pass
