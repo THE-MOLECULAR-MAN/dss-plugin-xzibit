@@ -220,7 +220,6 @@ def safe_extract_dataset_metadata(
                 raw_data, keys
             )  # NOT causing exception
             dataset_metadata.update(dataset_metadata_new)  # def not causing exception
-            # pp(dataset_metadata) # def not causing exception
 
         except Exception:
             print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
