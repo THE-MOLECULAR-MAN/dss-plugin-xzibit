@@ -118,7 +118,6 @@ def get_dss_external_url():
     # 3. Extract the 'studioExternalUrl' from the raw settings dictionary
     # This key holds the value of the "DSS URL" field
     dss_url = settings.get_raw().get("studioExternalUrl")
-    print(dss_url)
 
     if dss_url:
         return dss_url
