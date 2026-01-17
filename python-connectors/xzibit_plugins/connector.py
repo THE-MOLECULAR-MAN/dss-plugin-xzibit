@@ -32,11 +32,8 @@ def extract_allow_keys(d: dict) -> dict:
 
     # Iterate through items, check prefix, and slice the key string
     # len('allow') is 5, so [5:] removes the prefix
-    return {
-        key[5:]: value 
-        for key, value in d.items() 
-        if key.startswith('allow')
-    }
+    return {key[5:]: value for key, value in d.items() if key.startswith("allow")}
+
 
 class ConnectorPlugins(Connector):
     """TBD"""
@@ -101,17 +98,15 @@ class ConnectorPlugins(Connector):
             try:
                 if records_limit > 0 and records_generated >= records_limit:
                     return
-                
+
                 plugin_id = item_info.get("id", "NO_PLUGIN_ID")
                 print(f"[plugins-generate_rows] Start plugin ID: {plugin_id}")
-                
+
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
 
                 next_row["url"] = self.get_url(plugin_id)
-                next_row["is_built_in_plugin"] = (
-                    plugin_id in DSS_BUILT_IN_PLUGIN_IDS
-                )
+                next_row["is_built_in_plugin"] = plugin_id in DSS_BUILT_IN_PLUGIN_IDS
 
                 plugin_handle = self.__client.get_plugin(plugin_id)
 

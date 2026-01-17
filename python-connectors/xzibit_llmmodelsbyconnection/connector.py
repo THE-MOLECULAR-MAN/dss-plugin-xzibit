@@ -38,7 +38,7 @@ class ConnectorProjects(Connector):
         records_limit=-1,
     ):
         """TBD"""
-        
+
         records_generated = 0
 
         # iterate through each object
@@ -50,41 +50,49 @@ class ConnectorProjects(Connector):
 
                 connection_settings = connection_handle.get_settings().get_raw()
                 connection_type = connection_settings.get("type", None)
-                
+
                 # pp(connection_settings)
                 connection_name = connection_settings.get("name", None)
-                connection_params = connection_settings.get("params",{})
+                connection_params = connection_settings.get("params", {})
 
-                for k,v in connection_params.items():
-                    if k.startswith('allow') and k != 'allowFinetuning':
+                for k, v in connection_params.items():
+                    if k.startswith("allow") and k != "allowFinetuning":
                         try:
                             next_row = {
-                                'connection_name': connection_name,
-                                'connection_type': connection_type}
+                                "connection_name": connection_name,
+                                "connection_type": connection_type,
+                            }
 
                             stripped_key = k[5:]
-                            next_row['llm_name'] = stripped_key
-                            next_row['llm_enabled'] = v  
+                            next_row["llm_name"] = stripped_key
+                            next_row["llm_enabled"] = v
                         except Exception as e:
-                            print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION at model level {e}")
+                            print(
+                                f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION at model level {e}"
+                            )
                         finally:
                             records_generated += 1
                             yield next_row
-        
-            except Exception as e:
-                print(f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION at connection level: {e}")
-                continue
 
+            except Exception as e:
+                print(
+                    f"[llmmodelsbyconnection-generate_row] UNHANDLED EXCEPTION at connection level: {e}"
+                )
+                continue
 
     def get_read_schema(self):
         """Returns the read schema for TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return {'columns': [{'meaning': 'Text', 'name': 'connection_name', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'connection_type', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'llm_name', 'type': 'string'},
-             {'meaning': 'Boolean', 'name': 'llm_enabled', 'type': 'boolean'}]}
-    
+        return {
+            "columns": [
+                {"meaning": "Text", "name": "connection_name", "type": "string"},
+                {"meaning": "Text", "name": "connection_type", "type": "string"},
+                {"meaning": "Text", "name": "llm_name", "type": "string"},
+                {"meaning": "Boolean", "name": "llm_enabled", "type": "boolean"},
+            ]
+        }
+
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################

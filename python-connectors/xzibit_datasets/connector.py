@@ -53,7 +53,12 @@ class ConnectorDatasets(Connector):
                     return
                 try:
                     dataset_handle = project_handle.get_dataset(r.id)
-                    next_row = safe_extract_dataset_metadata(dataset_handle, pk, self.__get_column_lineage, self.__get_data_quality_rules)
+                    next_row = safe_extract_dataset_metadata(
+                        dataset_handle,
+                        pk,
+                        self.__get_column_lineage,
+                        self.__get_data_quality_rules,
+                    )
 
                     next_row["url"] = self.get_url(r.id, pk)
 
@@ -124,8 +129,16 @@ class ConnectorDatasets(Connector):
                     "type": "string",
                 },
                 {"meaning": "URL", "name": "url", "type": "string"},
-                {"meaning": "JSONArrayMeaning", "name": "data_lineage", "type": "string"},
-                {"meaning": "LongMeaning", "name": "num_data_quality_rules", "type": "int"},
+                {
+                    "meaning": "JSONArrayMeaning",
+                    "name": "data_lineage",
+                    "type": "string",
+                },
+                {
+                    "meaning": "LongMeaning",
+                    "name": "num_data_quality_rules",
+                    "type": "int",
+                },
             ]
         }
 

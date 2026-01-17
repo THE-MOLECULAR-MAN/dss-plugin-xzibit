@@ -96,7 +96,7 @@ class ConnectorCodeEnvs(Connector):
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                 if self.__compute_codeenv_usages:
-                    
+
                     next_row["projectKeys_where_code_env_used"] = []
                     next_row["total_instances_of_code_env"] = -1
 
@@ -120,8 +120,10 @@ class ConnectorCodeEnvs(Connector):
 
             except Exception as e:
                 # this is occuring on DevDesign
-                print(f"codeenvs - generate_rows EXCEPTION: CodeEnv: {code_env_name} Error message: {e}")
-                
+                print(
+                    f"codeenvs - generate_rows EXCEPTION: CodeEnv: {code_env_name} Error message: {e}"
+                )
+
             finally:
                 records_generated += 1
                 yield next_row

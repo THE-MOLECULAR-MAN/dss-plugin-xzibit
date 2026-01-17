@@ -12,6 +12,8 @@ specified in the connector.json file.
 
 Note: the name of the class itself is not relevant.
 """
+
+
 class MyConnector(Connector):
 
     def __init__(self, config, plugin_config):
@@ -22,7 +24,9 @@ class MyConnector(Connector):
         file settings.json at the root of the plugin directory are passed as a json
         object 'plugin_config' to the constructor
         """
-        Connector.__init__(self, config, plugin_config)  # pass the parameters to the base class
+        Connector.__init__(
+            self, config, plugin_config
+        )  # pass the parameters to the base class
 
         # perform some more initialization
         self.theparam1 = self.config.get("parameter1", "defaultValue")
@@ -51,8 +55,13 @@ class MyConnector(Connector):
         # from the columns actually returned by the generate_rows method
         return None
 
-    def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
-                            partition_id=None, records_limit = -1):
+    def generate_rows(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        records_limit=-1,
+    ):
         """
         The main reading method.
 
@@ -61,12 +70,16 @@ class MyConnector(Connector):
 
         The dataset schema and partitioning are given for information purpose.
         """
-        for i in xrange(1,10):
-            yield { "first_col" : str(i), "my_string" : "Yes" }
+        for i in xrange(1, 10):
+            yield {"first_col": str(i), "my_string": "Yes"}
 
-
-    def get_writer(self, dataset_schema=None, dataset_partitioning=None,
-                         partition_id=None, write_mode="OVERWRITE"):
+    def get_writer(
+        self,
+        dataset_schema=None,
+        dataset_partitioning=None,
+        partition_id=None,
+        write_mode="OVERWRITE",
+    ):
         """
         Returns a writer object to write in the dataset (or in a partition).
 
@@ -80,19 +93,16 @@ class MyConnector(Connector):
         """
         raise NotImplementedError
 
-
     def get_partitioning(self):
         """
         Return the partitioning schema that the connector defines.
         """
         raise NotImplementedError
 
-
     def list_partitions(self, partitioning):
         """Return the list of partitions for the partitioning scheme
         passed as parameter"""
         return []
-
 
     def partition_exists(self, partitioning, partition_id):
         """Return whether the partition passed as parameter exists
@@ -101,7 +111,6 @@ class MyConnector(Connector):
         in the connector definition
         """
         raise NotImplementedError
-
 
     def get_records_count(self, partitioning=None, partition_id=None):
         """

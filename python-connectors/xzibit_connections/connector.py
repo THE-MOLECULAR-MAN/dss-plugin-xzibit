@@ -69,7 +69,7 @@ class ConnectorConnections(Connector):
                 next_row = flatten_dict(item_info, include_keys=keys)
                 connection_type = next_row.get("type", "unknown type")
                 connection_error_msg = None
-                
+
                 # https://developer.dataiku.com/latest/api-reference/python/connections.html#dataikuapi.dss.admin.DSSConnection
                 if connection_type in ["OpenAI", "AzureOpenAI", "VertexAILLM"]:
                     connection_handle = self.__client.get_connection(next_row["name"])
