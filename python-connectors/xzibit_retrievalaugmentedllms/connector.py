@@ -81,7 +81,7 @@ class ConnectorProjects(Connector):
 
                         # display debug info during development
                         # for example, finding key names when adding new columns to dataset
-                        # jd(settings_raw)
+
 
                         # add features that are unique to this object type
                         next_row["rag_llm_id"] = settings_raw.get("id", None)
