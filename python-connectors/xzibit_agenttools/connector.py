@@ -120,7 +120,6 @@ class ConnectorProjects(Connector):
                             )
                         )
 
-
                         next_row["LLM_id"] = (
                             raw_settings.get("params", {})
                             .get("config", {})
