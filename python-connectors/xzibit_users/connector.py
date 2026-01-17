@@ -77,7 +77,6 @@ class ConnectorUsers(Connector):
                 next_row["created_timestamp"] = int_to_datetime(
                     next_row.get("creationDate", 0)
                 )
-                # pp(item_info)
             except Exception as e:
                 # TODO: figure out why this is getting hit so much
                 print(
