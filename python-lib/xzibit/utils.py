@@ -417,7 +417,7 @@ def get_path_size(path):
         return os.path.getsize(path)
 
     # Otherwise, walk through all subdirectories and files
-    for dirpath, dirnames, filenames in os.walk(path, onerror=None, followlinks=False):
+    for dirpath, _, filenames in os.walk(path, onerror=None, followlinks=False):
         for f in filenames:
             fp = os.path.join(dirpath, f)
             try:
