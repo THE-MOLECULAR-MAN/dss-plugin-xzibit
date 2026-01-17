@@ -77,8 +77,6 @@ class ConnectorConnections(Connector):
 
     def get_read_schema(self):
         """TBD"""
-        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, Date, FreeText, LongMeaning
         return {
             "columns": [
                 {"meaning": "Text", "name": "name", "type": "string"},
