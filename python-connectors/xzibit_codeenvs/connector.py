@@ -72,7 +72,7 @@ class ConnectorCodeEnvs(Connector):
                 next_row["url"] = self.get_url(code_env_name, code_env_lang)
 
                 settings_raw = settings.get_raw()
-                # pp(settings_raw)
+
                 next_row["deployment_mode"] = settings_raw.get("deploymentMode", None)
                 next_row["python_interpreter"] = settings_raw.get("desc", {}).get(
                     "pythonInterpreter", None
