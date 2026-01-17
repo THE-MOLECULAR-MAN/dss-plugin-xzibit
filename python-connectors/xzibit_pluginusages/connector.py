@@ -79,26 +79,6 @@ class ConnectorPlugins(Connector):
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return None
 
-    #         return {
-    #             "columns": [
-    #                 {"name": "id", "type": "string", "meaning": "Text"},
-    #                 {"name": "label", "type": "string", "meaning": "Text"},
-    #                 {"name": "code_env_name", "type": "string", "meaning": "Text"},
-    #                 {"name": "version", "type": "string", "meaning": "Text"},
-    #                 {"name": "author", "type": "string", "meaning": "Text"},
-    #                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
-    #                 {"name": "description", "type": "string", "meaning": "FreeText"},
-    #                 {
-    #                     "name": "plugin_used_in_projectkeys",
-    #                     "type": "string",
-    #                     "meaning": "JSONArrayMeaning",
-    #                 },
-    #                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
-    #                 {"name": "total_usages", "type": "bigint", "meaning": "LongMeaning"},
-    #                 {"name": "is_built_in_plugin", "type": "boolean", "meaning": "Boolean"},
-    #                 {"name": "url", "type": "string", "meaning": "URL"},
-    #             ]
-    #         }
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
