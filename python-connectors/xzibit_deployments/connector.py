@@ -72,7 +72,7 @@ class ConnectorAPIServices(Connector):
                 
                 
                 next_row["health"] = deployment_handle.get_status().get_health()
-                next_row["governance_status"] = deployment_handle.get_governance_status()
+                next_row["governance_status"] = str(deployment_handle.get_governance_status())
 
                 
 
