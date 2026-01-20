@@ -45,9 +45,11 @@ class ConnectorAPIServices(Connector):
         records_generated = 0
         
         deployer = client.get_projectdeployer()
+        
+        deployments = deployer.list_deployments(as_objects=True)
 
         # iterate through each object
-        for project_key in self.__client.list_project_keys():
+        for deployer_handle in deployments:
             project_handle = self.__client.get_project(project_key)
 
             # iterate through each object in the project
