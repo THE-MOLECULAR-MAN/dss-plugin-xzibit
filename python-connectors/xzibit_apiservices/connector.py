@@ -55,7 +55,10 @@ class ConnectorAPIServices(Connector):
                     return
                 try:
                     next_row = {"project_key": project_key} # safe start in case exception happens.
-                    next_row["url"] = self.get_url(project_key)
+                    
+                    obj_id = object_handle.id
+                    next_row["api_service_id"] = obj_id
+                    next_row["url"] = self.get_url(obj_id, project_key)
 
 
                 except Exception as e:
