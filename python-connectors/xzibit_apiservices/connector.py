@@ -62,7 +62,7 @@ class ConnectorAPIServices(Connector):
                     next_row["url"] = self.get_url(obj_id, project_key)
                     next_row["num_versions"] = len(obj_handle.list_packages())
                     
-                    obj_summary = obj_handle.get_package_summary()
+                    obj_settings = obj_handle.get_settings().get_raw()
                     print(" === DEBUG === ")
                     pp(obj_summary)
 
