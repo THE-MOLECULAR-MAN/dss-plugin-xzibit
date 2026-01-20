@@ -21,6 +21,7 @@ class ConnectorBundles(Connector):
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
 
+    # Bundles do not have a unique page, just a shared page like meanings
     def get_url(self, project_key):
         """Create a URL to the DSS object in question in this specific DSS instance.
         Return None if any of the inputs are None."""
