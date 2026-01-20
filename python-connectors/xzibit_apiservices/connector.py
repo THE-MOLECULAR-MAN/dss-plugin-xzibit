@@ -64,8 +64,8 @@ class ConnectorAPIServices(Connector):
 
                     
                     obj_settings = obj_handle.get_settings().get_raw()
-                    print(" === DEBUG === ")
-                    pp(obj_settings)
+                    #print(" === DEBUG === ")
+                    #pp(obj_settings)
                     
                     next_row["last_modified_timestamp"] = obj_settings.get("versionTag",{}).get("lastModifiedOn","")
                     next_row["last_modified_by_user"]   = obj_settings.get("versionTag",{}).get("lastModifiedBy","")                 
