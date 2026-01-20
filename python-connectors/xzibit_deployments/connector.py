@@ -71,7 +71,7 @@ class ConnectorAPIServices(Connector):
                 next_row["url"] = self.get_url(next_row["bundle_id"], next_row["project_key"])
                 
                 
-                next_row["status"] = deployment_handle.get_status()
+                next_row["status"] = deployment_handle.get_status().get_health()
 
                 
 
