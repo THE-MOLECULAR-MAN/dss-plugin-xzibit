@@ -43,8 +43,12 @@ class ConnectorAPIServices(Connector):
     ):
         """TBD"""
         records_generated = 0
+        try:
+            deployer = self.__client.get_projectdeployer()
+        except:
+            print("No deployers connected")
+            return None
         
-        deployer = self.__client.get_projectdeployer()
 
         # iterate through each object
         for deployment_handle in deployer.list_deployments(as_objects=True):
