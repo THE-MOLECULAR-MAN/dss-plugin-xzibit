@@ -53,16 +53,16 @@ class ConnectorBundles(Connector):
             # .list_exported_bundles() returns a dict, not a list
             x = project_handle.list_exported_bundles().get["bundles",[]]
             pp(x)
-            for key, value in x.items():
+            for obj_dict in x:
                 #print(f"[{self.__object_name}-generate_rows] dict key {key}")
                 if records_limit > 0 and records_generated >= records_limit:
                     return
                 try:
                     next_row = {"projectKey": project_key} # safe start in case exception happens.
                     next_row["url"] = self.get_url(project_key)
-                    next_row["bundleId"] = value.get("bundleId","")
-                    next_row["bundle_creator"] = value.get("requester","")
-                    next_row["created"] = value.get("startTime","")
+                    next_row["bundleId"] = obj_dict.get("bundleId","")
+                    next_row["bundle_creator"] = obj_dict.get("requester","")
+                    next_row["created"] = obj_dict.get("startTime","")
                     #print("=== DEBUG INFO ===")
                     #print(key)
                     #print(value)
