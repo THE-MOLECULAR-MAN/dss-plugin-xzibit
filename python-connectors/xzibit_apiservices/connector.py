@@ -67,7 +67,8 @@ class ConnectorAPIServices(Connector):
                     print(" === DEBUG === ")
                     pp(obj_settings)
                     
-                    next_row["last_modified_timestamp"] = 
+                    next_row["last_modified_timestamp"] = obj_settings.get("versionTag",{}).get("lastModifiedOn","")
+                    next_row["last_modified_by_user"]   = obj_settings.get("versionTag",{}).get("lastModifiedBy","")                    
 
                 except Exception as e:
                     print(
