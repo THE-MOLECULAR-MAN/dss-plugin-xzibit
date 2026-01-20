@@ -65,13 +65,10 @@ class MyRunnable(Runnable):
                     if (not res_push.get("success", False)) or (
                         not res_pull.get("success", False)
                     ):
-                        #             if not res_push.get('success',False):
-                        print(f"[ERROR] pushing or pulling {iter_project_key}")
                         errored.add(iter_project_key)
                         continue
                     successful.add(iter_project_key)
                 else:
-                    # print(f"{iter_project_key} is not connected to GitHub")
                     not_connected.add(iter_project_key)
             except Exception as e:
                 print(f"[EXCEPTION] {iter_project_key}: {e}")

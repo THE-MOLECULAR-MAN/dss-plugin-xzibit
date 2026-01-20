@@ -10,9 +10,6 @@ from xzibit.utils import (
     flatten_dict,
     remove_prefix_from_keys,
     list_to_error_dict,
-    pp,
-    jd,
-    get_values_for_key,
 )
 
 
@@ -32,11 +29,8 @@ def extract_allow_keys(d: dict) -> dict:
 
     # Iterate through items, check prefix, and slice the key string
     # len('allow') is 5, so [5:] removes the prefix
-    return {
-        key[5:]: value 
-        for key, value in d.items() 
-        if key.startswith('allow')
-    }
+    return {key[5:]: value for key, value in d.items() if key.startswith("allow")}
+
 
 class ConnectorPlugins(Connector):
     """TBD"""
@@ -48,8 +42,8 @@ class ConnectorPlugins(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
-        self.__compute_disk_util = self.config.get("compute_disk_util", False)
-        self.__compute_plugin_usages = self.config.get("compute_plugin_usages", False)
+        # self.__compute_disk_util = self.config.get("compute_disk_util", False)
+        # self.__compute_plugin_usages = self.config.get("compute_plugin_usages", False)
 
     def get_url(self, id):
         """Create a URL to the DSS object in question in this specific DSS instance.
@@ -78,14 +72,7 @@ class ConnectorPlugins(Connector):
             "isDev",
         ]
 
-        # iterate through each object
-        # list plugins does not take any parameters like object vs list:
-        # https://developer.dataiku.com/latest/api-reference/python/client.html#dataikuapi.DSSClient.list_plugins
-        # even in the source code, no parameters:
-        # https://github.com/dataiku/dataiku-api-client-python/blob/master/dataikuapi/dssclient.py#L273
-        # There's not an easy way to speed up the next, very slow line
-
-        DSS_BUILT_IN_PLUGIN_IDS = [
+        builtin_plugins: list[str] = [
             "default-samples",
             "builtin-macros",
             "code-studio-blocks",
@@ -95,62 +82,32 @@ class ConnectorPlugins(Connector):
             "project-standards",
         ]
 
+        # iterate through each object
+        # list plugins does not take any parameters like object vs list:
+        # https://developer.dataiku.com/latest/api-reference/python/client.html#dataikuapi.DSSClient.list_plugins
+        # even in the source code, no parameters:
+        # https://github.com/dataiku/dataiku-api-client-python/blob/master/dataikuapi/dssclient.py#L273
+        # There's not an easy way to speed up the next, very slow line
         # list_plugins does not offer any parameters
         # list_plugins returns a list of dict. Each dict contains at least a ‘id’ field
         for item_info in self.__client.list_plugins():
             try:
                 if records_limit > 0 and records_generated >= records_limit:
                     return
-                
+
                 plugin_id = item_info.get("id", "NO_PLUGIN_ID")
-                print(f"[plugins-generate_rows] Start plugin ID: {plugin_id}")
-                
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
-
                 next_row["url"] = self.get_url(plugin_id)
-                next_row["is_built_in_plugin"] = (
-                    plugin_id in DSS_BUILT_IN_PLUGIN_IDS
-                )
-
+                next_row["is_built_in_plugin"] = plugin_id in builtin_plugins
                 plugin_handle = self.__client.get_plugin(plugin_id)
-
                 settings_raw = plugin_handle.get_settings().get_raw()
-                # print("HERE_COMES_DEBUG_OUTPUT")
-                # pp(item_info)
-                # pp(settings_raw)
-
                 next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
 
-                if self.__compute_plugin_usages:
-                    # this is so slow!!!!
-
-                    # .list_usages() adds 2+ hours instead of 1 second for entire run
-                    # on DevDesign, average time per plugin was 26 sec with 281 plugins & 2,747 projects
-                    list_of_usages = (
-                        plugin_handle.list_usages().get_raw().get("usages", [])
-                    )
-                    if len(list_of_usages) == 0:
-                        next_row["plugin_used_in_projectkeys"] = []
-                    else:
-                        next_row["plugin_used_in_projectkeys"] = list(
-                            get_values_for_key(list_of_usages, "projectKey")
-                        )
-                    next_row["total_usages"] = len(list_of_usages)
-                else:
-                    next_row["plugin_used_in_projectkeys"] = [
-                        "Plugin usage checking not enabled in dataset settings."
-                    ]
-                    next_row["total_usages"] = None
-
-                print(
-                    f"[plugins-generate_rows] plugin ID: {next_row['id']} FINISHED SUCCESSFULLY"
-                )
             except Exception as e:
                 print(
                     f"[plugins-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
                 )
-                # pp(item_info)
                 next_row = list_to_error_dict(keys)
                 next_row["plugin_used_in_projectkeys"] = ["EXCEPTION"]
             finally:
@@ -159,8 +116,6 @@ class ConnectorPlugins(Connector):
 
     def get_read_schema(self):
         """TBD"""
-        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
                 {"name": "id", "type": "string", "meaning": "Text"},
@@ -176,7 +131,6 @@ class ConnectorPlugins(Connector):
                     "meaning": "JSONArrayMeaning",
                 },
                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
-                {"name": "total_usages", "type": "bigint", "meaning": "LongMeaning"},
                 {"name": "is_built_in_plugin", "type": "boolean", "meaning": "Boolean"},
                 {"name": "url", "type": "string", "meaning": "URL"},
             ]

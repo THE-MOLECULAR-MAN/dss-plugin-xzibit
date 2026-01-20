@@ -15,7 +15,7 @@ from json import dumps as jd
 JAVA_NOT_IMPLEMENTED = "com.dataiku.dip.utils.NotImplementedException"
 
 
-def extract_keys(d, v=True, key_prefix='allow'):
+def extract_keys(d, v=True, key_prefix="allow"):
     """
     Finds keys in dictionary 'd' that start with 'key_prefix' and have value 'v'.
     Returns a list of these keys with the prefix removed.
@@ -23,15 +23,16 @@ def extract_keys(d, v=True, key_prefix='allow'):
     Used in extracting an LLM connection's list of allowed LLM models
     """
     result = []
-    
+
     for key, value in d.items():
         # Check if key starts with the prefix AND value matches v
         if key.startswith(key_prefix) and value == v:
             # Remove the prefix using string slicing
-            stripped_key = key[len(key_prefix):]
+            stripped_key = key[len(key_prefix) :]
             result.append(stripped_key)
-            
+
     return result
+
 
 def recursive_search_all(data, s):
     """
@@ -103,7 +104,6 @@ def replace_empty_arrays_sets_with_none(x):
             f"[replace_empty_arrays_sets_with_none] EXCEPTION: {str(type(x))} {str(x)} {e}"
         )
         return x
-    # print(f"[replace_empty_arrays_sets_with_none]: {str(type(x))} {str(x)}")
     return x
 
 
@@ -160,7 +160,9 @@ def get_dss_base_url():
     return res.rstrip("/")
 
 
-def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, get_data_quality_rules=False):
+def safe_extract_dataset_metadata(
+    dataset_handle, pk, get_column_lineage=False, get_data_quality_rules=False
+):
     """SLOW! Adds 1.36 seconds per dataset (row) on average"""
     assert isinstance(
         dataset_handle, dataikuapi.dss.dataset.DSSDataset
@@ -195,7 +197,6 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, 
         dataset_metadata["exists"] = dataset_handle.exists()
 
         if not dataset_metadata["exists"]:
-            # print('safe_extract_dataset_metadata - dataset does NOT exist.')
             return dataset_metadata
 
         try:
@@ -210,15 +211,14 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, 
             dataset_metadata["exists"] = "EXCEPTION 1"
             return dataset_metadata
 
-        # key_mapping.update(list_keys_recursive(raw_data)) # debugging, mapping out all the different keys depending on the type of dataset
+        # debugging, mapping out all the different keys depending on the type of dataset
+        # key_mapping.update(list_keys_recursive(raw_data))
 
         try:
-            # pp(raw_data)
             dataset_metadata_new = extract_nested_keys(
                 raw_data, keys
             )  # NOT causing exception
             dataset_metadata.update(dataset_metadata_new)  # def not causing exception
-            # pp(dataset_metadata) # def not causing exception
 
         except Exception:
             print(f"safe_extract_dataset_metadata - EXCEPTION at extract_nested_keys")
@@ -242,7 +242,7 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, 
         dataset_metadata["versionTag.lastModifiedOn"] = int_to_datetime(
             dataset_metadata.get("versionTag.lastModifiedOn", None)
         )
-        
+
         if get_column_lineage:
             # runtime for tim's personal dev env (X datasets) was :
             #    213 to 214 sec with data lineage turned ON
@@ -250,31 +250,34 @@ def safe_extract_dataset_metadata(dataset_handle, pk, get_column_lineage=False, 
             #    42x slower
             dataset_metadata["data_lineage"] = []
             lineage = []
-            
+
             for column_name in dataset_metadata["column_names"]:
                 iter_col_lineage = dataset_handle.get_column_lineage(column_name)
-                new_lineage = {"column_name": column_name, "column_lineage": iter_col_lineage}
+                new_lineage = {
+                    "column_name": column_name,
+                    "column_lineage": iter_col_lineage,
+                }
                 lineage.append(new_lineage)
             dataset_metadata["data_lineage"] = lineage
         else:
             dataset_metadata["data_lineage"] = None
-            
+
         if get_data_quality_rules:
             # doubles the runtime from 5 to 9 sec.
-            #print(f"getting data quality rules...")
-            #dataset_metadata["num_data_quality_rules"] = -1
-            dataset_metadata["num_data_quality_rules"] = len(dataset_handle.get_data_quality_rules().list_rules())
-            #print(f"successfully finished getting data quality rules")
+            # dataset_metadata["num_data_quality_rules"] = -1
+            dataset_metadata["num_data_quality_rules"] = len(
+                dataset_handle.get_data_quality_rules().list_rules()
+            )
         else:
             dataset_metadata["num_data_quality_rules"] = None
 
     except DataikuException as e:
         print(f"safe_extract_dataset_metadata - Dataiku exception {e}")
-        dataset_metadata["exists"] = "EXCEPTION 3"
+        dataset_metadata["exists"] = "ERROR"
         return dataset_metadata
     except Exception as e:
         print(f"safe_extract_dataset_metadata - Generic exception {e}")
-        dataset_metadata["exists"] = "EXCEPTION 4"
+        dataset_metadata["exists"] = "ERROR"
         return dataset_metadata
     finally:
         return dataset_metadata
@@ -302,8 +305,6 @@ def list_keys_recursive(d: dict, parent_key: str = "") -> list[str]:
     """
     keys = []
     if not isinstance(d, dict):
-        t = str(type(d))
-        print(f"ERROR: list_keys_recursive - not a dict: {d} - {t}")
         return None
 
     for k, v in d.items():
@@ -352,8 +353,6 @@ def int_to_datetime(timestamp: int) -> datetime:
     """
     # Detect if the timestamp is in milliseconds
     if not isinstance(timestamp, int):
-        # t = str(type(timestamp))
-        # print(f"int_to_datetime - not an integer: {timestamp} - {t}")
         timestamp = 0
 
     # can cause a bug in like 50k years from now? ;-)
@@ -374,7 +373,7 @@ def parse_user_datetime(dt_str: str) -> datetime:
         dt_str = dt_str.replace(" ", "T")
         return datetime.fromisoformat(dt_str)
     except ValueError:
-        return None
+        return None  # 0 ?
 
 
 def get_jq_value(data: dict, jq_path: str):
@@ -436,7 +435,7 @@ def get_path_size(path):
         return os.path.getsize(path)
 
     # Otherwise, walk through all subdirectories and files
-    for dirpath, dirnames, filenames in os.walk(path, onerror=None, followlinks=False):
+    for dirpath, _, filenames in os.walk(path, onerror=None, followlinks=False):
         for f in filenames:
             fp = os.path.join(dirpath, f)
             try:
@@ -549,7 +548,6 @@ def clear_pip_tmp():
     """
 
     for d in glob.glob("/tmp/pip-*"):
-        # print(f'Deleting {d}...')
         if os.path.isdir(d):
             shutil.rmtree(d, ignore_errors=True)
         else:

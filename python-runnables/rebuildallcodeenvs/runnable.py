@@ -51,9 +51,6 @@ class MyRunnable(Runnable):
             envName = code_env_info["envName"]
             code_env = self.__client.get_code_env(code_env_info["envLang"], envName)
 
-            # print(f"Starting rebuilding {envName} ...")
-            # env_path = os.path.join('/data/dataiku/dss_data/code-envs/python', envName)
-
             # rebuild it
             res = code_env.update_packages(force_rebuild_env=self.__force_rebuild_env)
 
@@ -67,10 +64,7 @@ class MyRunnable(Runnable):
         except Exception:
             try:
                 if not self.__force_rebuild_env:
-                    # print(f'Failed to build {envName} without force rebuild, trying again with force rebuild...')
                     res = code_env.update_packages(force_rebuild_env=True)
-                    # print(f"Success: {envName} when Force rebuild")
-                    # pass
             except Exception:
                 print(f"FAILED: {envName}, even with force rebuild")
                 self.__failed_builds.add(

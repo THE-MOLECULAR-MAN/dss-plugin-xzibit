@@ -50,14 +50,11 @@ class ConnectorClusters(Connector):
         # iterate through each object
         for item_info in self.__client.list_clusters():
             next_row = flatten_dict(item_info, include_keys=keys)
-            # next_row["cluster_url"] = self.get_cluster_url(next_row["id"])
             next_row["url"] = self.get_url(next_row["id"])
             yield next_row
 
     def get_read_schema(self):
         """TBD"""
-        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
                 {"meaning": "Text", "name": "id", "type": "string"},

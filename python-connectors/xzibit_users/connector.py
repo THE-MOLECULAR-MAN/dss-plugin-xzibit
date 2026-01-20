@@ -61,9 +61,8 @@ class ConnectorUsers(Connector):
                     return
 
                 next_row = flatten_dict(item_info, include_keys=keys)
-                # item_id = next_row[self.__unique_id_key_name]
                 item_handle = self.__client.get_user(item_info[unique_id_key_name])
-                # activity_handle = item_handle.get_activity()
+
                 # TODO: fix this date mess below
                 next_row["last_successful_login"] = parse_user_datetime(
                     str(item_handle.get_activity().last_successful_login)
@@ -77,7 +76,6 @@ class ConnectorUsers(Connector):
                 next_row["created_timestamp"] = int_to_datetime(
                     next_row.get("creationDate", 0)
                 )
-                # pp(item_info)
             except Exception as e:
                 # TODO: figure out why this is getting hit so much
                 print(

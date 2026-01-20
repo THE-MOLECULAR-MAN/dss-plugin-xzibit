@@ -55,7 +55,6 @@ class ConnectorRecipes(Connector):
                 recipe_handle = project_handle.get_recipe(r.id)
                 recipe_settings_handle = recipe_handle.get_settings()
                 raw_data = recipe_settings_handle.get_recipe_raw_definition()
-                # pp(raw_data)
 
                 next_row = {
                     "projectKey": pk,
@@ -103,8 +102,6 @@ class ConnectorRecipes(Connector):
 
     def get_read_schema(self):
         """Returns the read schema for TBD"""
-        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
                 {"meaning": "Text", "name": "recipe_id", "type": "string"},

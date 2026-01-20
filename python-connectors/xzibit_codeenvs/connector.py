@@ -7,10 +7,8 @@ from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import (
     get_dss_base_url,
-    flatten_dict,
     get_values_for_key,
     get_path_size_megabytes,
-    pp,
 )
 
 
@@ -30,7 +28,8 @@ class ConnectorCodeEnvs(Connector):
         #    * 94.0 GB of total code environment disk space
         #    * for 48 unique code environments
         #    * ... average code env size was 2005.3 GB
-        #    * ... average time to calculate each code env size: 0.16667 sec on second run. Unsure of first run
+        #    * ... average time to calculate each code env size:
+        #       0.16667 sec on second run. Unsure of first run
 
         self.__compute_codeenv_disk_space_usage = self.config.get(
             "compute_codeenv_disk_space_usage", False
@@ -72,7 +71,7 @@ class ConnectorCodeEnvs(Connector):
                 next_row["url"] = self.get_url(code_env_name, code_env_lang)
 
                 settings_raw = settings.get_raw()
-                # pp(settings_raw)
+
                 next_row["deployment_mode"] = settings_raw.get("deploymentMode", None)
                 next_row["python_interpreter"] = settings_raw.get("desc", {}).get(
                     "pythonInterpreter", None
@@ -91,21 +90,23 @@ class ConnectorCodeEnvs(Connector):
 
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 # adding list_usages for code environments on DevDesign (600 code env at an
-                # average of 30 sec per code env to list all its usages across 2,362 projects), increases
+                # average of 30 sec per code env to list all its usages across
+                # 2,362 projects), increases
                 # the dataset's built time from 2 min 30 sec to 5 hours!!!
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                 if self.__compute_codeenv_usages:
-                    
+
                     next_row["projectKeys_where_code_env_used"] = []
                     next_row["total_instances_of_code_env"] = -1
 
-                    print(f"starting code env list usages for {code_env_name}")
                     # next line throws exception on DevDesign:
-                    #  jakarta.servlet.ServletException: Handler dispatch failed: java.lang.Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool, caused by: Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool
+                    #  jakarta.servlet.ServletException: Handler dispatch failed:
+                    # java.lang.Error: Unknown tool type:
+                    # Custom_agent_tool_jira-tools_jira-create-issue-tool, caused by:
+                    # Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool
                     # list_usages() does not take any parameters
                     usages = code_env_handle.list_usages()
-                    print(f"Finished code env list usages for {code_env_name}")
                     num_usages = len(usages)
                     if len(usages) == 0:
                         pk_usages = None
@@ -120,17 +121,16 @@ class ConnectorCodeEnvs(Connector):
 
             except Exception as e:
                 # this is occuring on DevDesign
-                print(f"codeenvs - generate_rows EXCEPTION: CodeEnv: {code_env_name} Error message: {e}")
-                
+                print(
+                    f"codeenvs - generate_rows EXCEPTION: CodeEnv: {code_env_name} Error message: {e}"
+                )
+
             finally:
                 records_generated += 1
                 yield next_row
 
     def get_read_schema(self):
         """TBD"""
-        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning, DoubleMeaning
-
         return {
             "columns": [
                 {"meaning": "Text", "name": "code_env_name", "type": "string"},

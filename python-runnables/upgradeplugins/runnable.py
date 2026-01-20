@@ -49,7 +49,6 @@ class MyRunnable(Runnable):
             plugin_handle = self.__client.get_plugin(plugin_id)
 
             try:
-                # print(f"Attempting to update plugin {plugin_id} ... ")
                 future = plugin_handle.update_from_store()
                 future.wait_for_result()
 
@@ -61,6 +60,5 @@ class MyRunnable(Runnable):
         Do stuff here. Can return a string or raise an exception.
         The progress_callback is a function expecting 1 value: current progress
         """
-        # raise Exception("unimplemented")
         self._upgrade_plugins()
         return None

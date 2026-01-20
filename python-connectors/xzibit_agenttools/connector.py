@@ -11,8 +11,7 @@ from datetime import datetime
 from dataiku import api_client
 from dataiku.connector import Connector
 
-# from xzibit.utils import *
-from xzibit.utils import get_dss_base_url, replace_empty_arrays_sets_with_none, pp, jd
+from xzibit.utils import get_dss_base_url, replace_empty_arrays_sets_with_none
 
 
 class ConnectorProjects(Connector):
@@ -120,25 +119,12 @@ class ConnectorProjects(Connector):
                             )
                         )
 
-                        print(jd(raw_settings))
                         next_row["LLM_id"] = (
                             raw_settings.get("params", {})
                             .get("config", {})
                             .get("llmId", "")
                         )
 
-                        # next_row["customFields"]   = raw_settings.get('customFields',None)
-                    #                         next_row["dkuProperties"] = replace_empty_arrays_sets_with_none(
-                    #                             raw_settings.get("dkuProperties", None)
-                    #                         )
-                    # next_row["checklists"]     = raw_settings.get('checklists',{}).get('checklists',None)
-                    #                         next_row["quickTestQuery"] = (
-                    #                             replace_empty_arrays_sets_with_none(
-                    #                                 raw_settings.get("quickTestQuery", None)
-                    #                             )
-                    #                         )
-
-                    # except (AttributeError, KeyError, TypeError, ValueError) as e:
                     except Exception as e:
                         print(
                             f"[agenttools-generate_rows] [agenttools EXCEPTION] {project_key}: {e}"

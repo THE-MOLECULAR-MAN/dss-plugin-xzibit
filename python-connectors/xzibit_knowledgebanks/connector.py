@@ -5,7 +5,7 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import remove_prefix_from_keys, flatten_dict, get_dss_base_url, pp
+from xzibit.utils import get_dss_base_url
 
 ####################################################################
 # Unique imports for this Class
@@ -61,15 +61,12 @@ class ConnectorProjects(Connector):
                         if records_limit > 0 and records_generated >= records_limit:
                             return
 
-                        # initializing first column in case their is an exception, the yield will still work
+                        # initializing first column in case their is an exception,
+                        # the yield will still work
                         next_row = {"projectKey": project_key}
 
                         # fetch settings as dict
                         settings_raw = kb.get_settings().get_raw()
-
-                        # display debug info during development
-                        # for example, finding key names when adding new columns to dataset
-                        # pp(settings_raw)
 
                         # add features that are unique to this object type
                         next_row["kb_id"] = settings_raw.get("id", None)
@@ -96,10 +93,12 @@ class ConnectorProjects(Connector):
                             "rebuildBehavior", None
                         )
 
-                        # URL is fetched using class method that specifically implements this DSS object type:
+                        # URL is fetched using class method that specifically implements
+                        # this DSS object type:
                         next_row["url"] = self.get_url(project_key, next_row["kb_id"])
 
-                        # add features that are almost always the same for different DSS object types
+                        # add features that are almost always the same for different
+                        # DSS object types
                         next_row["created_timestamp"] = datetime.fromtimestamp(
                             settings_raw.get("creationTag", {}).get("lastModifiedOn", 0)
                             // 1000
@@ -134,8 +133,6 @@ class ConnectorProjects(Connector):
 
     def get_read_schema(self):
         """Returns the read schema for TBD"""
-        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
         return {
             "columns": [
                 {"meaning": "Text", "name": "projectKey", "type": "string"},
