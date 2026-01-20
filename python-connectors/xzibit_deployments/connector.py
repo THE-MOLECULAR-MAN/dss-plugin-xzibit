@@ -72,7 +72,7 @@ class ConnectorAPIServices(Connector):
                 
                 
                 next_row["status"] = deployment_handle.get_status()
-                status = 
+
                 
 
 
