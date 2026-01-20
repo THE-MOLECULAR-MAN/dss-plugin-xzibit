@@ -53,8 +53,6 @@ class ConnectorAPIServices(Connector):
 
         # iterate through each object
         for deployment_handle in deployer.list_deployments(as_objects=True):
-
-
             if records_limit > 0 and records_generated >= records_limit:
                 return
             try:
