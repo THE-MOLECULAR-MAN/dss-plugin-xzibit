@@ -63,6 +63,7 @@ class ConnectorAPIServices(Connector):
                     next_row["num_versions"] = len(obj_handle.list_packages())
                     
                     obj_summary = obj_handle.get_package_summary()
+                    print(" === DEBUG === ")
                     pp(obj_summary)
 
                 except Exception as e:
