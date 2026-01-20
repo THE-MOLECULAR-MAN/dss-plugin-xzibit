@@ -63,9 +63,9 @@ class ConnectorBundles(Connector):
                     next_row["bundle_name"] = key
                     next_row["bundle_creator"] = value.get("requester","")
                     next_row["created"] = value.get("startTime","")
-                    print("=== DEBUG INFO ===")
+                    #print("=== DEBUG INFO ===")
                     #print(key)
-                    print(value)
+                    #print(value)
                     #pp({key: value})
 
                 except Exception as e:
