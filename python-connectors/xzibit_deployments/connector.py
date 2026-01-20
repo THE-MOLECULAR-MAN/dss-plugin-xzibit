@@ -60,6 +60,8 @@ class ConnectorAPIServices(Connector):
             try:
                 next_row = {"deployment_id": 'EXCEPTION'} # just in case
                 next_row["deployment_id"] = deployment_handle.id
+                
+                obj_settings = deployment_handle.get_settings().get_raw()
 
                 # next_row["url"] = self.get_url(obj_id, project_key)
 
