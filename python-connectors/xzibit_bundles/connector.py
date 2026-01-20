@@ -73,6 +73,8 @@ class ConnectorBundles(Connector):
                     records_generated += 1
                     yield next_row
 
+        print(f"[{self.__object_name}-generate_rows] END")
+
     def get_read_schema(self):
         """TBD"""
         return None
