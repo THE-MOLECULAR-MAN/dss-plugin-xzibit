@@ -43,6 +43,8 @@ class ConnectorAPIServices(Connector):
     ):
         """TBD"""
         records_generated = 0
+        
+        deployer = client.get_projectdeployer()
 
         # iterate through each object
         for project_key in self.__client.list_project_keys():
