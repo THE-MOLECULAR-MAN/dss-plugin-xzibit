@@ -51,7 +51,7 @@ class ConnectorBundles(Connector):
             project_handle = self.__client.get_project(project_key)
 
             # .list_exported_bundles() returns a dict, not a list
-            x = project_handle.list_exported_bundles()
+            x = project_handle.list_exported_bundles().get["bundles",[]]
             pp(x)
             for key, value in x.items():
                 #print(f"[{self.__object_name}-generate_rows] dict key {key}")
@@ -60,7 +60,7 @@ class ConnectorBundles(Connector):
                 try:
                     next_row = {"projectKey": project_key} # safe start in case exception happens.
                     next_row["url"] = self.get_url(project_key)
-                    next_row["bundle_name"] = key
+                    next_row["bundleId"] = value.get("bundleId","")
                     next_row["bundle_creator"] = value.get("requester","")
                     next_row["created"] = value.get("startTime","")
                     #print("=== DEBUG INFO ===")
