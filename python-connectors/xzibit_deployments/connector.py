@@ -68,7 +68,6 @@ class ConnectorAPIServices(Connector):
                 next_row["infrastructure_id"] = obj_settings.get("infraId","")
                 next_row["deployment_type"] = obj_settings.get("type","")
 
-                next_row["url"] = self.get_url(next_row["bundle_id"], next_row["project_key"])
                 
                 
                 next_row["health"] = deployment_handle.get_status().get_health()
@@ -76,6 +75,7 @@ class ConnectorAPIServices(Connector):
 
                 
 
+                next_row["url"] = self.get_url(next_row["bundle_id"], next_row["project_key"])
 
 
             except Exception as e:
