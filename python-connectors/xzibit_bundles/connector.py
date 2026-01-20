@@ -69,6 +69,8 @@ class ConnectorBundles(Connector):
                     next_row["exported_by_user"]   = obj_dict.get("exportManifest",{}).get("exportUserInfo",{}).get("exportedBy","")
                     next_row["exported_timestamp"] = obj_dict.get("exportManifest",{}).get("exportUserInfo",{}).get("exportedOn","")
                     next_row["release_notes"]      = obj_dict.get("exportManifest",{}).get("exportUserInfo",{}).get("releaseNotes","")
+                    next_row["projectStandardsSkipped"]      = obj_dict.get("exportManifest",{}).get("projectStandardsSkipped","")
+                    
 
                     next_row["generated_with_dss_version"] = obj_dict.get("exportManifest",{}).get("generatedWithDSSVersion","")
                     next_row["exported_on_design_node_id"] = obj_dict.get("exportManifest",{}).get("designNodeId","")
