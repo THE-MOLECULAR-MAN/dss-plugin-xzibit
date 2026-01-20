@@ -64,7 +64,7 @@ class ConnectorAPIServices(Connector):
                     
                     obj_settings = obj_handle.get_settings().get_raw()
                     print(" === DEBUG === ")
-                    pp(obj_summary)
+                    pp(obj_settings)
 
                 except Exception as e:
                     print(
