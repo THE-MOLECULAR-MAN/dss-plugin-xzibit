@@ -64,9 +64,9 @@ class ConnectorBundles(Connector):
                     pp(obj_dict)
                     next_row["bundleId"] = obj_dict.get("bundleId","")
                     next_row["state"] = obj_dict.get("state","")
+                    next_row["bundle_creator"] = obj_dict.get("state","")
                     
-                    
-                    next_row["created"] = obj_dict.get("startTime","")
+                    next_row["created"] = obj_dict.get("exportManifest",{})
 
                     #print(key)
                     #print(value)
