@@ -60,7 +60,7 @@ class ConnectorBundles(Connector):
                     next_row = {"projectKey": project_key} # safe start in case exception happens.
                     next_row["url"] = self.get_url(project_key)
                     
-                    #
+                    pp(obj_dict)
                     next_row["bundleId"] = obj_dict.get("bundleId","")
                     next_row["bundle_creator"] = obj_dict.get("requester","")
                     next_row["created"] = obj_dict.get("startTime","")
