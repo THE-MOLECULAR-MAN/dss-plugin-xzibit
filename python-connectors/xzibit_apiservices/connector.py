@@ -60,11 +60,10 @@ class ConnectorAPIServices(Connector):
                     obj_id =  obj_handle.id
                     next_row["api_service_id"] = obj_id
                     next_row["url"] = self.get_url(obj_id, project_key)
-                    next_row["num_versions"] = len(obj_handle.list_packages())
 
+                    next_row["num_versions"] = len(obj_handle.list_packages())
                     
                     obj_settings = obj_handle.get_settings().get_raw()
-                    
                     next_row["last_modified_timestamp"] = obj_settings.get("versionTag",{}).get("lastModifiedOn","")
                     next_row["last_modified_by_user"]   = obj_settings.get("versionTag",{}).get("lastModifiedBy",{}).get("login","")      
                     next_row["num_endpoints"]   = len(obj_settings.get("endpoints",[]))
