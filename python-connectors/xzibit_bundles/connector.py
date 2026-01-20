@@ -72,6 +72,9 @@ class ConnectorBundles(Connector):
                     next_row["exported_on_design_node_id"] = obj_dict.get("exportManifest",{}).get("designNodeId","")
                     next_row["type_badges"] =  obj_dict.get("typeBadges",[])
                     
+                    next_row["published_timestamp"] =  obj_dict.get("publishedBundleState",{}).get("publishedOn","")
+                    next_row["published_by_user"] =  obj_dict.get("publishedBundleState",{}).get("publishedBy","")                    
+                    
                     #print(key)
                     #print(value)
                     #pp({key: value})
