@@ -65,7 +65,7 @@ class ConnectorAPIServices(Connector):
                 next_row["infrastructure_id"] = obj_settings.get("infraId","")
                 next_row["deployment_type"] = obj_settings.get("type","")
                 next_row["last_modified_timestamp"] = obj_settings.get("versionTag",{}).get("lastModifiedOn","")
-                next_row["last_modified_user"] = obj_settings.get("versionTag",{}).get("lastModifiedBy","")
+                next_row["last_modified_user"] = obj_settings.get("versionTag",{}).get("lastModifiedBy",{}).get("login","")
                 
                 next_row["health"] = deployment_handle.get_status().get_health()
                 next_row["highest_governance_severity"] = str(deployment_handle.get_governance_status().get("maxSeverity",""))
