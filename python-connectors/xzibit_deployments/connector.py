@@ -62,6 +62,7 @@ class ConnectorAPIServices(Connector):
                 next_row["deployment_id"] = deployment_handle.id
                 
                 obj_settings = deployment_handle.get_settings().get_raw()
+                pp(obj_settings)
 
                 # next_row["url"] = self.get_url(obj_id, project_key)
 
