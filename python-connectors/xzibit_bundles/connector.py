@@ -20,6 +20,7 @@ class ConnectorBundles(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
+        self.__object_name = "bundle"
 
     # Bundles do not have a unique page, just a shared page like meanings
     def get_url(self, project_key):
@@ -63,12 +64,9 @@ class ConnectorBundles(Connector):
 
                 except Exception as e:
                     print(
-                        f"[datasets-generate_rows] [UNEXPECTED EXCEPTION] with dataset {r.id} in project {pk}: {e}"
+                        f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION] with {self.__object_name} in project {pk}: {e}"
                     )
-                    # r is of type "dataikuapi.dss.dataset.DSSDataset"
-                    # Test failed: com.dataiku.dip.server.controllers.NotFoundException:
-                    # dataset does not exist:
-                    next_row = {"projectKey": pk, "name": r.id}
+                    next_row = {"projectKey": pk}
                 finally:
                     records_generated += 1
                     yield next_row
