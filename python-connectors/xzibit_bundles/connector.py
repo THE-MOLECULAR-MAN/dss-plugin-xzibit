@@ -43,11 +43,9 @@ class ConnectorBundles(Connector):
     ):
         """TBD"""
         records_generated = 0
-        print(f"[{self.__object_name}-generate_rows] START")
 
         # iterate through each object
         for project_key in self.__client.list_project_keys():
-            print(f"[{self.__object_name}-generate_rows] PROJECT KEY: {project_key}")
             project_handle = self.__client.get_project(project_key)
 
             # .list_exported_bundles() returns a dict, not a list
@@ -61,6 +59,8 @@ class ConnectorBundles(Connector):
                 try:
                     next_row = {"projectKey": project_key} # safe start in case exception happens.
                     next_row["url"] = self.get_url(project_key)
+                    
+                    #
                     next_row["bundleId"] = obj_dict.get("bundleId","")
                     next_row["bundle_creator"] = obj_dict.get("requester","")
                     next_row["created"] = obj_dict.get("startTime","")
@@ -78,7 +78,6 @@ class ConnectorBundles(Connector):
                     records_generated += 1
                     yield next_row
 
-        print(f"[{self.__object_name}-generate_rows] END")
 
     def get_read_schema(self):
         """TBD"""
