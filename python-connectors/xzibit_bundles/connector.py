@@ -43,30 +43,22 @@ class ConnectorBundles(Connector):
         records_generated = 0
 
         # iterate through each object
-        for pk in self.__client.list_project_keys():
-            project_handle = self.__client.get_project(pk)
+        for project_key in self.__client.list_project_keys():
+            project_handle = self.__client.get_project(project_key)
 
-            for r in project_handle.list_datasets(
-                as_type="objects", include_shared=True
-            ):
+            for obj_dict in project_handle.list_exported_bundles():
                 if records_limit > 0 and records_generated >= records_limit:
                     return
                 try:
-                    dataset_handle = project_handle.get_dataset(r.id)
-                    next_row = safe_extract_dataset_metadata(
-                        dataset_handle,
-                        pk,
-                        self.__get_column_lineage,
-                        self.__get_data_quality_rules,
-                    )
+                    next_row = {"projectKey": project_key}
 
-                    next_row["url"] = self.get_url(r.id, pk)
+                    next_row["url"] = self.get_url(project_key)
 
                 except Exception as e:
                     print(
                         f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION] with {self.__object_name} in project {pk}: {e}"
                     )
-                    next_row = {"projectKey": pk}
+                    
                 finally:
                     records_generated += 1
                     yield next_row
