@@ -74,7 +74,6 @@ class ConnectorAPIServices(Connector):
                 print(
                     f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION]: {e}"
                 )
-
             finally:
                 records_generated += 1
                 yield next_row
