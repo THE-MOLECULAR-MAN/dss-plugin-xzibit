@@ -64,6 +64,8 @@ class ConnectorBundles(Connector):
                     pp(obj_dict)
                     next_row["bundleId"] = obj_dict.get("bundleId","")
                     next_row["state"] = obj_dict.get("state","")
+                    
+                    
                     next_row["created"] = obj_dict.get("startTime","")
 
                     #print(key)
