@@ -68,7 +68,7 @@ class ConnectorAPIServices(Connector):
                 next_row["infrastructure_id"] = obj_settings.get("infraId","")
                 next_row["deployment_type"] = obj_settings.get("type","")
 
-                # next_row["url"] = self.get_url(obj_id, project_key)
+                next_row["url"] = self.get_url(obj_id, next_row["bundle_id"], project_key)
 
 
 
