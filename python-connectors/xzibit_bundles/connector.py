@@ -66,7 +66,7 @@ class ConnectorBundles(Connector):
                     next_row["state"] = obj_dict.get("state","")
                     next_row["bundle_creator"] = obj_dict.get("state","")
                     
-                    next_row["created"] = obj_dict.get("exportManifest",{})
+                    next_row["bundle_exported_by_user"] = obj_dict.get("exportManifest",{}).get("exportUserInfo",{}).get("exportedBy","")
 
                     #print(key)
                     #print(value)
