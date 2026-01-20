@@ -54,7 +54,6 @@ class ConnectorAPIServices(Connector):
                 return
             try:
                 next_row = {"deployment_id": 'EXCEPTION'} # in case
-
                 next_row["deployment_id"] = deployment_handle.id
 
                 # next_row["url"] = self.get_url(obj_id, project_key)
@@ -63,7 +62,7 @@ class ConnectorAPIServices(Connector):
 
             except Exception as e:
                 print(
-                    f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION] in project {project_key}: {e}"
+                    f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION]: {e}"
                 )
 
             finally:
