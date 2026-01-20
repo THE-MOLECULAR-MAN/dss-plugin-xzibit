@@ -47,6 +47,7 @@ class ConnectorBundles(Connector):
 
         # iterate through each object
         for project_key in self.__client.list_project_keys():
+            print(f"[{self.__object_name}-generate_rows] PROJECT KEY: {project_key}")
             project_handle = self.__client.get_project(project_key)
 
             # .list_exported_bundles() returns a dict, not a list
