@@ -53,7 +53,7 @@ class ConnectorBundles(Connector):
             
             # iterate through each object in the project
             for obj_dict in obj_list:
-                #print(f"[{self.__object_name}-generate_rows] dict key {key}")
+
                 if records_limit > 0 and records_generated >= records_limit:
                     return
                 try:
