@@ -21,7 +21,7 @@ class ConnectorAPIServices(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
-        self.__object_name = "bundle"
+        self.__object_name = "API Service"
 
     # Bundles do not have a unique page, just a shared page like meanings
     def get_url(self, project_key):
