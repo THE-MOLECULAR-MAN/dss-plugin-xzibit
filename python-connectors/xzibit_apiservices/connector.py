@@ -50,6 +50,7 @@ class ConnectorAPIServices(Connector):
 
             # iterate through each object in the project
             for obj_handle in project_handle.list_api_services(astype="objects"):
+                # https://developer.dataiku.com/latest/api-reference/python/api-designer.html#dataikuapi.dss.apiservice.DSSAPIService
 
                 if records_limit > 0 and records_generated >= records_limit:
                     return
