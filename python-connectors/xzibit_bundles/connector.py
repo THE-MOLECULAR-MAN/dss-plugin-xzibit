@@ -49,7 +49,7 @@ class ConnectorBundles(Connector):
             project_handle = self.__client.get_project(project_key)
 
             # .list_exported_bundles() returns a dict, not a list
-            for obj_dict in project_handle.list_exported_bundles(): 
+            for key, value in project_handle.list_exported_bundles().items(): 
                 if records_limit > 0 and records_generated >= records_limit:
                     return
                 try:
