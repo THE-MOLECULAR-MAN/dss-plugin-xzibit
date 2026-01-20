@@ -70,8 +70,6 @@ class ConnectorAPIServices(Connector):
                 next_row["highest_governance_severity"] = str(deployment_handle.get_governance_status().get("maxSeverity",""))
 
                 next_row["url"] = self.get_url(next_row["bundle_id"], next_row["project_key"])
-
-
             except Exception as e:
                 print(
                     f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION]: {e}"
