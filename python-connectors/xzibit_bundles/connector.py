@@ -60,8 +60,8 @@ class ConnectorBundles(Connector):
                     next_row["created"] = value.get("startTime","")
                     #print("=== DEBUG INFO ===")
                     #print(key)
-                    #print(value)
-                    pp({key: value})
+                    print(value)
+                    #pp({key: value})
 
                 except Exception as e:
                     print(
