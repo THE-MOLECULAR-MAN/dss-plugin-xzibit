@@ -61,6 +61,9 @@ class ConnectorAPIServices(Connector):
                     next_row["api_service_id"] = obj_id
                     next_row["url"] = self.get_url(obj_id, project_key)
                     next_row["num_versions"] = len(obj_handle.list_packages())
+                    
+                    obj_summary = obj_handle.get_package_summary()
+                    
 
                 except Exception as e:
                     print(
