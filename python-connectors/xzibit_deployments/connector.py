@@ -62,7 +62,7 @@ class ConnectorAPIServices(Connector):
                 next_row["deployment_id"] = deployment_handle.id
                 
                 obj_settings = deployment_handle.get_settings().get_raw()
-                pp(obj_settings)
+
                 next_row["bundle_id"] = obj_settings.get("bundleId","")
                 next_row["project_key"] = obj_settings.get("deployedProjectKey","")
                 next_row["infrastructure_id"] = obj_settings.get("infraId","")
