@@ -54,6 +54,7 @@ class ConnectorBundles(Connector):
                 try:
                     next_row = {"projectKey": project_key} # safe start in case exception happens.
                     next_row["url"] = self.get_url(project_key)
+                    print("=== DEBUG INFO ===")
                     pp(obj_dict)
 
                 except Exception as e:
