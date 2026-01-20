@@ -3,12 +3,12 @@
     "id": "xzibit",
 
     // It is highly recommended to use Semantic Versioning
-    "version": "DSS v12 0.9.1",
+    "version": "0.9.1",
 
     // Meta data for display purposes:
     "meta": {
         // label: name of the plugin as displayed, should be short
-        "label": "Datasets about Dataiku Instance",
+        "label": "Datasets about DSS v12",
 
         // description: longer string to help end users understand what this plugin does
         "description": "Generate datasets about the local Dataiku instance, including: Code Environments, Projects, Plugins, Connections, Apps, and more. Designed to help with monitoring usage, maintenence, and migrations.",
