@@ -63,13 +63,12 @@ class ConnectorBundles(Connector):
                     print("=== START DICT ===")
                     pp(obj_dict)
                     next_row["bundle_id"] = obj_dict.get("bundleId","")
-                    next_row["bundle_state"] = obj_dict.get("state","")
-                    next_row["bundle_creator"] = obj_dict.get("state","")
+                    next_row["state"] = obj_dict.get("state","")
                     
-                    next_row["bundle_exported_by_user"] = obj_dict.get("exportManifest",{}).get("exportUserInfo",{}).get("exportedBy","")
-                    next_row["bundle_exported_timestamp"] = obj_dict.get("exportManifest",{}).get("exportUserInfo",{}).get("exportedOn","")
+                    next_row["exported_by_user"] = obj_dict.get("exportManifest",{}).get("exportUserInfo",{}).get("exportedBy","")
+                    next_row["exported_timestamp"] = obj_dict.get("exportManifest",{}).get("exportUserInfo",{}).get("exportedOn","")
 
-                    next_row["bundle_exported_with_dss_version"] = obj_dict.get("exportManifest",{}).get("generatedWithDSSVersion","")
+                    next_row["generated_with_dss_version"] = obj_dict.get("exportManifest",{}).get("generatedWithDSSVersion","")
                     #print(key)
                     #print(value)
                     #pp({key: value})
