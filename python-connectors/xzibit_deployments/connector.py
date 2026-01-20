@@ -44,7 +44,7 @@ class ConnectorAPIServices(Connector):
         """TBD"""
         records_generated = 0
         
-        deployer = client.get_projectdeployer()
+        deployer = self.__client.get_projectdeployer()
         
         deployments = deployer.list_deployments(as_objects=True)
 
