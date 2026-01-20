@@ -10,7 +10,7 @@ from xzibit.utils import (
 )
 
 
-class ConnectorDatasets(Connector):
+class ConnectorBundles(Connector):
     """TBD"""
 
     ####################################################################
