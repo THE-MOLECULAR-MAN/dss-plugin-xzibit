@@ -58,7 +58,7 @@ class ConnectorBundles(Connector):
                     print("=== DEBUG INFO ===")
                     print(key)
                     print(value)
-                    #pp(obj_dict)
+                    pp({key: value})
 
                 except Exception as e:
                     print(
