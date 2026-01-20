@@ -62,8 +62,9 @@ class ConnectorBundles(Connector):
 
                     print("=== START DICT ===")
                     pp(obj_dict)
-                    next_row["bundle_id"] = obj_dict.get("bundleId","")
-                    next_row["state"] = obj_dict.get("state","")
+                    next_row["bundle_id"]   = obj_dict.get("bundleId","")
+                    next_row["state"]       = obj_dict.get("state","")
+                    next_row["type_badges"] = obj_dict.get("typeBadges",[])                    
                     
                     next_row["exported_by_user"]   = obj_dict.get("exportManifest",{}).get("exportUserInfo",{}).get("exportedBy","")
                     next_row["exported_timestamp"] = obj_dict.get("exportManifest",{}).get("exportUserInfo",{}).get("exportedOn","")
@@ -72,7 +73,7 @@ class ConnectorBundles(Connector):
                     next_row["generated_with_dss_version"] = obj_dict.get("exportManifest",{}).get("generatedWithDSSVersion","")
                     next_row["exported_on_design_node_id"] = obj_dict.get("exportManifest",{}).get("designNodeId","")
                     
-                    next_row["type_badges"]           =  obj_dict.get("typeBadges",[])
+
                     
                     next_row["published_timestamp"] = obj_dict.get("publishedBundleState",{}).get("publishedOn","")
                     next_row["published_by_user"]   = obj_dict.get("publishedBundleState",{}).get("publishedBy","")                    
