@@ -49,7 +49,6 @@ class ConnectorAPIServices(Connector):
         except:
             print("No deployers connected")
             return None
-        
 
         # iterate through each object
         for deployment_handle in deployer.list_deployments(as_objects=True):
