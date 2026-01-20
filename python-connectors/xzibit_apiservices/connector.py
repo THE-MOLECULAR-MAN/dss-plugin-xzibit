@@ -68,7 +68,7 @@ class ConnectorAPIServices(Connector):
                     #pp(obj_settings)
                     
                     next_row["last_modified_timestamp"] = obj_settings.get("versionTag",{}).get("lastModifiedOn","")
-                    next_row["last_modified_by_user"]   = obj_settings.get("versionTag",{}).get("lastModifiedBy",{}).get("user","")      
+                    next_row["last_modified_by_user"]   = obj_settings.get("versionTag",{}).get("lastModifiedBy",{}).get("login","")      
                     next_row["num_endpoints"]   = len(obj_settings.get("endpoints",[]))
                     next_row["tags"]   =  obj_settings.get("tags",[])
                     next_row["names"]   =  obj_settings.get("names","")
