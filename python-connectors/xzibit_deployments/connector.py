@@ -24,15 +24,15 @@ class ConnectorAPIServices(Connector):
         self.__object_name = "Deployment"
 
     # Bundles do not have a unique page, just a shared page like meanings
-    def get_url(self, id, project_key):
-        """Create a URL to the DSS object in question in this specific DSS instance.
-        Return None if any of the inputs are None."""
-        # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/DKU_TSHIRTS/api-designer/prediciton_model_API_service/endpoints/
-        # does need a trailing slash
-        # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, id, project_key)):
-            return None
-        return f"{self.__baseurl}/projects/{project_key}/api-designer/{id}/endpoints/"
+#     def get_url(self, id, project_key):
+#         """Create a URL to the DSS object in question in this specific DSS instance.
+#         Return None if any of the inputs are None."""
+#         # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/DKU_TSHIRTS/api-designer/prediciton_model_API_service/endpoints/
+#         # does need a trailing slash
+#         # at least one is None, return None
+#         if any(v is None for v in (self.__baseurl, id, project_key)):
+#             return None
+#         return f"{self.__baseurl}/projects/{project_key}/api-designer/{id}/endpoints/"
 
     def generate_rows(
         self,
