@@ -52,7 +52,7 @@ class ConnectorBundles(Connector):
 
             # .list_exported_bundles() returns a dict, not a list
             x = project_handle.list_exported_bundles().get["bundles",[]]
-            pp(x)
+            # pp(x)
             for obj_dict in x:
                 #print(f"[{self.__object_name}-generate_rows] dict key {key}")
                 if records_limit > 0 and records_generated >= records_limit:
