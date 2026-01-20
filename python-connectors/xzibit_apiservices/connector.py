@@ -60,7 +60,6 @@ class ConnectorAPIServices(Connector):
                     next_row["api_service_id"] = obj_id
                     next_row["url"] = self.get_url(obj_id, project_key)
 
-
                 except Exception as e:
                     print(
                         f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION] in project {project_key}: {e}"
