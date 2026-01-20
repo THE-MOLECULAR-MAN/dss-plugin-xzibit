@@ -1,7 +1,7 @@
 {
     "meta" : {
-        "label": "Dataiku API Services dataset",
-        "description": "a dataset describing the API Services of each project",
+        "label": "Dataiku Deployments dataset",
+        "description": "a dataset describing the Deployments of each project",
         "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
     },
     "readable": true,
