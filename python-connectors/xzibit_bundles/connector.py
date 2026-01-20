@@ -69,7 +69,7 @@ class ConnectorBundles(Connector):
                     next_row["exported_timestamp"] = obj_dict.get("exportManifest",{}).get("exportUserInfo",{}).get("exportedOn","")
 
                     next_row["generated_with_dss_version"] = obj_dict.get("exportManifest",{}).get("generatedWithDSSVersion","")
-                    next_row["exported_on_design_node_named"] = obj_dict.get("exportManifest",{}).get("generatedWithDSSVersion","")
+                    next_row["exported_on_design_node_id"] = obj_dict.get("exportManifest",{}).get("designNodeId","")
                     #print(key)
                     #print(value)
                     #pp({key: value})
