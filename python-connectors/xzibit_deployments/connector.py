@@ -51,32 +51,27 @@ class ConnectorAPIServices(Connector):
         # iterate through each object
         for deployment_handle in deployments:
 
-            project_handle = self.__client.get_project(project_key)
 
-            # iterate through each object in the project
-            for obj_handle in project_handle.list_api_services(as_type="objects"):
-                # https://developer.dataiku.com/latest/api-reference/python/api-designer.html#dataikuapi.dss.apiservice.DSSAPIService
+            if records_limit > 0 and records_generated >= records_limit:
+                return
+            try:
+                next_row = {"deployment_id": 'EXCEPTION'} # ju
 
-                if records_limit > 0 and records_generated >= records_limit:
-                    return
-                try:
-                    next_row = {"project_key": project_key} # safe start in case exception happens.
-                    
-                    obj_id =  obj_handle.id
-                    next_row["api_service_id"] = obj_id
-                    
-                    # next_row["url"] = self.get_url(obj_id, project_key)
+                deployment_id =  
+                next_row["api_service_id"] = deployment_handle.id
+
+                # next_row["url"] = self.get_url(obj_id, project_key)
 
 
-                    
-                except Exception as e:
-                    print(
-                        f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION] in project {project_key}: {e}"
-                    )
-                    
-                finally:
-                    records_generated += 1
-                    yield next_row
+
+            except Exception as e:
+                print(
+                    f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION] in project {project_key}: {e}"
+                )
+
+            finally:
+                records_generated += 1
+                yield next_row
 
 
     def get_read_schema(self):
