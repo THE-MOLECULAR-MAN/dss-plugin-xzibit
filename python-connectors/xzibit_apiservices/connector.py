@@ -48,11 +48,8 @@ class ConnectorAPIServices(Connector):
         for project_key in self.__client.list_project_keys():
             project_handle = self.__client.get_project(project_key)
 
-            # .list_exported_bundles() returns a dict, not a list
-            obj_list = project_handle.list_exported_bundles().get("bundles",[])
-            
             # iterate through each object in the project
-            for obj_dict in obj_list:
+            for obj_dict in project_handle.list_api_services(astype="objects"):
 
                 if records_limit > 0 and records_generated >= records_limit:
                     return
