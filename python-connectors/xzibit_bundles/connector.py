@@ -55,8 +55,9 @@ class ConnectorBundles(Connector):
                 try:
                     next_row = {"projectKey": project_key} # safe start in case exception happens.
                     next_row["url"] = self.get_url(project_key)
-                    next_row["name"] = key
-                    
+                    next_row["bundle_name"] = key
+                    next_row["bundle_creator"] = value.get("requester","")
+                    next_row[""]
                     #print("=== DEBUG INFO ===")
                     #print(key)
                     #print(value)
