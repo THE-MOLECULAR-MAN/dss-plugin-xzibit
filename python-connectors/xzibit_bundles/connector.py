@@ -54,7 +54,7 @@ class ConnectorBundles(Connector):
             x = project_handle.list_exported_bundles()
             pp(x)
             for key, value in x.items():
-                print(f"[{self.__object_name}-generate_rows] dict key {key}")
+                #print(f"[{self.__object_name}-generate_rows] dict key {key}")
                 if records_limit > 0 and records_generated >= records_limit:
                     return
                 try:
