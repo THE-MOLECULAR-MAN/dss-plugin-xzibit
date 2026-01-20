@@ -2,7 +2,7 @@
     "meta" : {
         "label": "Dataiku Deployments dataset",
         "description": "a dataset describing the Deployments of each project",
-        "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
+        "icon": "icon-cogs"
     },
     "readable": true,
     "writable": false,
