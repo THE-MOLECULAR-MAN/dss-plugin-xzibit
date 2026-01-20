@@ -1,0 +1,12 @@
+{
+    "meta" : {
+        "label": "Dataiku Bundles dataset",
+        "description": "a dataset describing bundles of each project",
+        "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
+    },
+    "readable": true,
+    "writable": false,
+    "supportAppend": false,
+    "partitioningMode": "NOT_PARTITIONABLE",
+    "params": []
+}
