@@ -43,6 +43,7 @@ class ConnectorBundles(Connector):
     ):
         """TBD"""
         records_generated = 0
+        print(f"[{self.__object_name}-generate_rows] START")
 
         # iterate through each object
         for project_key in self.__client.list_project_keys():
