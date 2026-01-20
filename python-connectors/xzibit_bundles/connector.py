@@ -57,7 +57,7 @@ class ConnectorBundles(Connector):
                     next_row["url"] = self.get_url(project_key)
                     next_row["bundle_name"] = key
                     next_row["bundle_creator"] = value.get("requester","")
-                    next_row[""]
+                    next_row["created"] = value.get("startTime","")
                     #print("=== DEBUG INFO ===")
                     #print(key)
                     #print(value)
