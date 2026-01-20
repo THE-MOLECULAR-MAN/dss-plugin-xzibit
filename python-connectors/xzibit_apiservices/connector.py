@@ -11,7 +11,7 @@ from xzibit.utils import (
 )
 
 
-class ConnectorBundles(Connector):
+class ConnectorAPIServices(Connector):
     """TBD"""
 
     ####################################################################
