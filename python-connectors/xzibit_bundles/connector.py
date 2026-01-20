@@ -51,7 +51,8 @@ class ConnectorBundles(Connector):
             project_handle = self.__client.get_project(project_key)
 
             # .list_exported_bundles() returns a dict, not a list
-            for key, value in project_handle.list_exported_bundles().items(): 
+            for key, value in project_handle.list_exported_bundles().items():
+                print(f"[{self.__object_name}-generate_rows] dict key {key}")
                 if records_limit > 0 and records_generated >= records_limit:
                     return
                 try:
