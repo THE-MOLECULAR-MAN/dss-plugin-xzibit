@@ -55,10 +55,9 @@ class ConnectorAPIServices(Connector):
             if records_limit > 0 and records_generated >= records_limit:
                 return
             try:
-                next_row = {"deployment_id": 'EXCEPTION'} # ju
+                next_row = {"deployment_id": 'EXCEPTION'} # in case
 
-                deployment_id =  
-                next_row["api_service_id"] = deployment_handle.id
+                next_row["deployment_id"] = deployment_handle.id
 
                 # next_row["url"] = self.get_url(obj_id, project_key)
 
