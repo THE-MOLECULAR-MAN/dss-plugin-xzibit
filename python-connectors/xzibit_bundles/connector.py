@@ -28,6 +28,7 @@ class ConnectorBundles(Connector):
         """Create a URL to the DSS object in question in this specific DSS instance.
         Return None if any of the inputs are None."""
         # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/DKU_TSHIRTS/bundles-design/
+        # does need a trailing slash
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, id, project_key)):
             return None
