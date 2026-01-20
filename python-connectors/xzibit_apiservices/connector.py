@@ -71,7 +71,7 @@ class ConnectorAPIServices(Connector):
                     next_row["last_modified_by_user"]   = obj_settings.get("versionTag",{}).get("lastModifiedBy",{}).get("login","")      
                     next_row["num_endpoints"]   = len(obj_settings.get("endpoints",[]))
                     next_row["tags"]   =  obj_settings.get("tags",[])
-                    next_row["names"]   =  obj_settings.get("names","")
+
 
                 except Exception as e:
                     print(
