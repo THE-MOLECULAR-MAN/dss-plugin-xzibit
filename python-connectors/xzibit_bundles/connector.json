@@ -2,7 +2,7 @@
     "meta" : {
         "label": "Dataiku Bundles dataset",
         "description": "a dataset describing bundles of each project",
-        "icon": "dku-icon-chart-horizontal-stack-bar marker-internal-stats"
+        "icon": "icon-cogs"
     },
     "readable": true,
     "writable": false,
