@@ -43,6 +43,7 @@ class ConnectorAPIServices(Connector):
     ):
         """TBD"""
         records_generated = 0
+        
         try:
             deployer = self.__client.get_projectdeployer()
         except:
