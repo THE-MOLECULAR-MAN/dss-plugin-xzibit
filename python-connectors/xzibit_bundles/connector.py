@@ -75,7 +75,6 @@ class ConnectorBundles(Connector):
                     next_row["published_timestamp"] = obj_dict.get("publishedBundleState",{}).get("publishedOn","")
                     next_row["published_by_user"]   = obj_dict.get("publishedBundleState",{}).get("publishedBy","")                    
 
-
                 except Exception as e:
                     print(
                         f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION] with {self.__object_name} in project {project_key}: {e}"
