@@ -37,7 +37,7 @@ def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
             # return f"Deprecated preprocessors found: {found_dep}"
             return list(found_dep)
         print(f"[prepare_recipe_has_deprecated_preprocessors] - E")
-    print(f"[prepare_recipe_has_deprecated_preprocessors] - F")
+    print(f"[prepare_recipe_has_deprecated_preprocessors] - END")
     return []
 
 class ConnectorRecipes(Connector):
