@@ -20,6 +20,9 @@ def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
             if DEBUG:
                 print(f"get_preprocessors_in_prepare_recipe - 10")
             prepare_recipe_payload = recipe_settings_handle.obj_payload
+            if DEBUG:
+                print(f"get_preprocessors_in_prepare_recipe - 20")
+
             steps = prepare_recipe_payload.get("steps",[])
             if DEBUG:
                 print(f"get_preprocessors_in_prepare_recipe - about to call get_unique_types")
