@@ -24,7 +24,7 @@ def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
         return
     
 def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
-    print(f"[prepare_recipe_has_deprecated_preprocessors] - START")
+    print(f"[prepare_recipe_has_deprecated_preprocessors] - START for recipe id: {prepare_recipe_handle.id}")
     deprecated_preprocessors = {'AnonymizerProcessor', 'MemoryEquiJoiner', 'MemoryEquiJoinerFuzzy', 'UseRowAsHeader', 'NearestNeighbourGeoJoiner'}
     preprocessors_unique = get_preprocessors_in_prepare_recipe(prepare_recipe_handle)
     print(f"[prepare_recipe_has_deprecated_preprocessors] - ran get_preprocessors_in_prepare_recipe without exception")
