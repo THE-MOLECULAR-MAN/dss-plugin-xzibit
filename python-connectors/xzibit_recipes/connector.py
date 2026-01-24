@@ -36,7 +36,7 @@ def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
             print(f"[prepare_recipe_has_deprecated_preprocessors] - FOUND SOME, ABOUT TO RETURN")
             # return f"Deprecated preprocessors found: {found_dep}"
             return list(found_dep)
-        print(f"[prepare_recipe_has_deprecated_preprocessors] - E")
+        print(f"[prepare_recipe_has_deprecated_preprocessors] - DIDNT FIND ANY")
     print(f"[prepare_recipe_has_deprecated_preprocessors] - END")
     return []
 
