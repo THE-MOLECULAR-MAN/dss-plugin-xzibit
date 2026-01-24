@@ -33,7 +33,6 @@ def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
     except:
         if DEBUG:
             print(f"get_preprocessors_in_prepare_recipe - exit EXCEPTION")
-
         return
     
 def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
