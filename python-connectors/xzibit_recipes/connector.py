@@ -13,7 +13,8 @@ def get_unique_types(data_list):
 
 def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
     try:
-        print(f"[get_preprocessors_in_prepare_recipe] - START")        
+        print(f"[get_preprocessors_in_prepare_recipe] - START") 
+        # next line is throwing exception!?!
         recipe_settings_handle = recipe_handle.get_settings()
         print(f"[get_preprocessors_in_prepare_recipe] - GOT SETTINGS")        
         recipe_type = recipe_settings_handle.type
