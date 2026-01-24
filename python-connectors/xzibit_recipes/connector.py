@@ -13,24 +13,14 @@ def get_unique_types(data_list):
 
 def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
     try:
-        print(f"[get_preprocessors_in_prepare_recipe] - START") 
-        # next line is throwing exception!?!
         recipe_settings_handle = prepare_recipe_handle.get_settings()
-        print(f"[get_preprocessors_in_prepare_recipe] - GOT SETTINGS")        
         recipe_type = recipe_settings_handle.type
-        print(f"[get_preprocessors_in_prepare_recipe] - GOT TYPE")                
         if recipe_type == 'shaker': # prepare recipe
-            print(f"[get_preprocessors_in_prepare_recipe] - 10")
             prepare_recipe_payload = recipe_settings_handle.obj_payload
-            print(f"[get_preprocessors_in_prepare_recipe] - 20")
             steps = prepare_recipe_payload.get("steps",[])
-            print(f"[get_preprocessors_in_prepare_recipe] - about to call get_unique_types")
             return get_unique_types(steps)
-        print(f"[get_preprocessors_in_prepare_recipe] - safe exit")
         return
     except:
-        # this exception is happening!
-        print(f"[get_preprocessors_in_prepare_recipe] - EXIT WITH EXCEPTION")
         return
     
 def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
