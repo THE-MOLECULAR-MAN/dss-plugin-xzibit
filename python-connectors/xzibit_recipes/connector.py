@@ -152,7 +152,7 @@ class ConnectorRecipes(Connector):
                     "type": "string",
                 },
                 {"meaning": "Text", "name": "last_modified_user", "type": "string"},
-                {"meaning": "Text", "name": "deprecated_prepare_steps_found", "type": "string"},                
+                {"meaning": "Text", "name": "deprecated_prepare_steps_found", "type": "string"},
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
