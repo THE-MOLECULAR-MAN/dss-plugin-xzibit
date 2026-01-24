@@ -118,8 +118,8 @@ class ConnectorRecipes(Connector):
                         )
                         next_row["deprecated_prepare_steps_found"]= "about to run"
                         
-                        next_row["deprecated_prepare_steps_found"] = prepare_recipe_has_deprecated_preprocessors(recipe_handle)
-                        next_row["deprecated_prepare_steps_found"]= "ran without exception"
+                        #next_row["deprecated_prepare_steps_found"] = prepare_recipe_has_deprecated_preprocessors(recipe_handle)
+                        #next_row["deprecated_prepare_steps_found"]= "ran without exception"
                     except Exception as e:
                         next_row["deprecated_prepare_steps_found"] = "exception 1"                        
                         # this occurs often on Dev-Design.
