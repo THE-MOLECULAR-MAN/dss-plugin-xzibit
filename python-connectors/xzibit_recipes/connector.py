@@ -15,7 +15,9 @@ def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
     try:
         print(f"[get_preprocessors_in_prepare_recipe] - START")        
         recipe_settings_handle = recipe_handle.get_settings()
+        print(f"[get_preprocessors_in_prepare_recipe] - GOT SETTINGS")        
         recipe_type = recipe_settings_handle.type
+        print(f"[get_preprocessors_in_prepare_recipe] - GOT TYPE")                
         if recipe_type == 'shaker': # prepare recipe
             print(f"[get_preprocessors_in_prepare_recipe] - 10")
             prepare_recipe_payload = recipe_settings_handle.obj_payload
