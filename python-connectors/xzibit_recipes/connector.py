@@ -26,7 +26,7 @@ def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
         return
     except:
         # this exception is happening!
-        print(f"get_preprocessors_in_prepare_recipe - exit EXCEPTION")
+        print(f"[get_preprocessors_in_prepare_recipe] - EXIT WITH EXCEPTION")
         return
     
 def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
