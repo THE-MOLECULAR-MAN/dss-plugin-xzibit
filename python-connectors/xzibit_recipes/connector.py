@@ -76,8 +76,6 @@ class ConnectorRecipes(Connector):
             for r in proj_recipes:
                 if records_limit > 0 and records_generated >= records_limit:
                     return
-                
-                print(f"[recipes-generate_rows] START LOOP")
 
                 recipe_handle = project_handle.get_recipe(r.id)
                 recipe_settings_handle = recipe_handle.get_settings()
