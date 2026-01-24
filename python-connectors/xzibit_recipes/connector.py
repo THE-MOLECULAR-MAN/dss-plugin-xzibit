@@ -116,16 +116,19 @@ class ConnectorRecipes(Connector):
                         next_row["output_datasets"] = (
                             recipe_settings_handle.get_flat_output_refs()
                         )
-                        next_row["deprecated_prepare_steps_found"]: "e"
+                        next_row["deprecated_prepare_steps_found"]= "about to run"
                         
                         next_row["deprecated_prepare_steps_found"] = prepare_recipe_has_deprecated_preprocessors(recipe_handle)
+                        next_row["deprecated_prepare_steps_found"]= "ran without exception"
                     except Exception as e:
+                        next_row["deprecated_prepare_steps_found"] = "exception 1"                        
                         # this occurs often on Dev-Design.
                         print(
                             f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe output dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
                         )
                 except Exception as e:
                     # this occurs often on Dev-Design.
+                    next_row["deprecated_prepare_steps_found"] = "exception 2"                        
                     print(
                         f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe input dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
                     )
