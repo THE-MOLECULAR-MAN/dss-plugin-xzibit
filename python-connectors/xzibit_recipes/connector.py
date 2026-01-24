@@ -111,6 +111,8 @@ class ConnectorRecipes(Connector):
                         next_row["output_datasets"] = (
                             recipe_settings_handle.get_flat_output_refs()
                         )
+                        
+                        next_row["deprecated_prepare_steps_found"] = prepare_recipe_has_deprecated_preprocessors(recipe_handle)
                     except Exception as e:
                         # this occurs often on Dev-Design.
                         print(
