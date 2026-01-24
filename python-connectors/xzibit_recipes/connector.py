@@ -88,7 +88,7 @@ class ConnectorRecipes(Connector):
                     "recipe_name": recipe_handle.name,
                     "tags": raw_data["tags"],
                     "url": self.get_url(r.id, pk),
-                    "deprecated_prepare_steps_found": "a"
+                    "deprecated_prepare_steps_found": "INITIALIZED"
                 }
                 try:
                     # GUI produces this error message when visiting this recipe's inputs/utputs
