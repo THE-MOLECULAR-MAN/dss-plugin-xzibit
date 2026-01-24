@@ -13,7 +13,7 @@ def get_unique_types(data_list):
 
 def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
     try:
-        DEBUG = (prepare_recipe_handle.id == 'deprecated_preprocessors_prepare_recipe':)
+        DEBUG = (prepare_recipe_handle.id == 'deprecated_preprocessors_prepare_recipe')
         recipe_settings_handle = recipe_handle.get_settings()
         recipe_type = recipe_settings_handle.type
         if recipe_type == 'shaker': # prepare recipe
