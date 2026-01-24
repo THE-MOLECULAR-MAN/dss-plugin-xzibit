@@ -29,9 +29,9 @@ def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
     if isinstance(preprocessors_unique, set):
         found_dep = preprocessors_unique.intersection(deprecated_preprocessors)
         if isinstance(preprocessors_unique, set) and len(found_dep) > 0:
-            return f"Deprecated preprocessors found: {found_dep}"
-    return None
-
+            # return f"Deprecated preprocessors found: {found_dep}"
+            return found_dep
+    return {}
 
 class ConnectorRecipes(Connector):
     """TBD"""
