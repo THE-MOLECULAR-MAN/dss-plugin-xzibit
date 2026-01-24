@@ -88,6 +88,7 @@ class ConnectorRecipes(Connector):
                     "recipe_name": recipe_handle.name,
                     "tags": raw_data["tags"],
                     "url": self.get_url(r.id, pk),
+                    "deprecated_prepare_steps_found": "a"
                 }
                 try:
                     # GUI produces this error message when visiting this recipe's inputs/utputs
@@ -98,19 +99,22 @@ class ConnectorRecipes(Connector):
                     next_row["engine_parameters"] = raw_data.get("params", {}).get(
                         "engineParams", None
                     )
+                    next_row["deprecated_prepare_steps_found"]: "b"
                     next_row["last_modified_user"] = (
                         raw_data.get("versionTag", {})
                         .get("lastModifiedBy", {})
                         .get("login", None)
                     )
-
+                    next_row["deprecated_prepare_steps_found"]: "c"
                     next_row["input_datasets"] = (
                         recipe_settings_handle.get_flat_input_refs()
                     )
+                    next_row["deprecated_prepare_steps_found"]: "d"                    
                     try:
                         next_row["output_datasets"] = (
                             recipe_settings_handle.get_flat_output_refs()
                         )
+                        next_row["deprecated_prepare_steps_found"]: "e"
                         
                         next_row["deprecated_prepare_steps_found"] = prepare_recipe_has_deprecated_preprocessors(recipe_handle)
                     except Exception as e:
