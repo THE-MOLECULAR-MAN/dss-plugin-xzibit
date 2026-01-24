@@ -24,21 +24,13 @@ def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
         return
     
 def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
-    print(f"[prepare_recipe_has_deprecated_preprocessors] - START for recipe id: {prepare_recipe_handle.name}")
     deprecated_preprocessors = {'AnonymizerProcessor', 'MemoryEquiJoiner', 'MemoryEquiJoinerFuzzy', 'UseRowAsHeader', 'NearestNeighbourGeoJoiner'}
     preprocessors_unique = get_preprocessors_in_prepare_recipe(prepare_recipe_handle)
-    print(f"[prepare_recipe_has_deprecated_preprocessors] - ran get_preprocessors_in_prepare_recipe without exception")
-    # getting to here okay
     if isinstance(preprocessors_unique, set):
-        print(f"[prepare_recipe_has_deprecated_preprocessors] - preprocessors_unique is a set")        
         found_dep = preprocessors_unique.intersection(deprecated_preprocessors)
-        print(f"[prepare_recipe_has_deprecated_preprocessors] - calculated intersection")
         if isinstance(preprocessors_unique, set) and len(found_dep) > 0:
-            print(f"[prepare_recipe_has_deprecated_preprocessors] - FOUND SOME, ABOUT TO RETURN")
             # return f"Deprecated preprocessors found: {found_dep}"
             return list(found_dep)
-        print(f"[prepare_recipe_has_deprecated_preprocessors] - DIDNT FIND ANY")
-    print(f"[prepare_recipe_has_deprecated_preprocessors] - END")
     return []
 
 class ConnectorRecipes(Connector):
