@@ -28,7 +28,6 @@ def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
             return get_unique_types(steps)
         if DEBUG:
             print(f"get_preprocessors_in_prepare_recipe - safe exit")
-
         return
     except:
         if DEBUG:
