@@ -121,6 +121,7 @@ class ConnectorRecipes(Connector):
                         #next_row["deprecated_prepare_steps_found"]= "ran without exception"
                     except Exception as e:
                         # this occurs often on Dev-Design.
+                        next_row["deprecated_prepare_steps_found"]= "EXCEPTION 1"
                         print(
                             f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe output dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
                         )
