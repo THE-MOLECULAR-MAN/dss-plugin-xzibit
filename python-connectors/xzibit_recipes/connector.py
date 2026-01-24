@@ -133,33 +133,34 @@ class ConnectorRecipes(Connector):
 
     def get_read_schema(self):
         """Returns the read schema for TBD"""
-        return {
-            "columns": [
-                {"meaning": "Text", "name": "recipe_id", "type": "string"},
-                {"meaning": "Text", "name": "recipe_name", "type": "string"},
-                {"meaning": "Text", "name": "projectKey", "type": "string"},
-                {"meaning": "Text", "name": "recipe_type", "type": "string"},
-                {
-                    "meaning": "JSONArrayMeaning",
-                    "name": "input_datasets",
-                    "type": "string",
-                },
-                {
-                    "meaning": "JSONArrayMeaning",
-                    "name": "output_datasets",
-                    "type": "string",
-                },
-                {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
-                {
-                    "meaning": "JSONObjectMeaning",
-                    "name": "engine_parameters",
-                    "type": "string",
-                },
-                {"meaning": "Text", "name": "last_modified_user", "type": "string"},
-                {"meaning": "Text", "name": "deprecated_prepare_steps_found", "type": "string"},
-                {"meaning": "URL", "name": "url", "type": "string"},
-            ]
-        }
+        return None
+#         return {
+#             "columns": [
+#                 {"meaning": "Text", "name": "recipe_id", "type": "string"},
+#                 {"meaning": "Text", "name": "recipe_name", "type": "string"},
+#                 {"meaning": "Text", "name": "projectKey", "type": "string"},
+#                 {"meaning": "Text", "name": "recipe_type", "type": "string"},
+#                 {
+#                     "meaning": "JSONArrayMeaning",
+#                     "name": "input_datasets",
+#                     "type": "string",
+#                 },
+#                 {
+#                     "meaning": "JSONArrayMeaning",
+#                     "name": "output_datasets",
+#                     "type": "string",
+#                 },
+#                 {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
+#                 {
+#                     "meaning": "JSONObjectMeaning",
+#                     "name": "engine_parameters",
+#                     "type": "string",
+#                 },
+#                 {"meaning": "Text", "name": "last_modified_user", "type": "string"},
+#                 {"meaning": "Text", "name": "deprecated_prepare_steps_found", "type": "string"},
+#                 {"meaning": "URL", "name": "url", "type": "string"},
+#             ]
+#         }
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
