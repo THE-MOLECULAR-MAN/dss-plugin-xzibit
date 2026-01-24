@@ -33,7 +33,7 @@ def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
         found_dep = preprocessors_unique.intersection(deprecated_preprocessors)
         print(f"[prepare_recipe_has_deprecated_preprocessors] - C")
         if isinstance(preprocessors_unique, set) and len(found_dep) > 0:
-            print(f"[prepare_recipe_has_deprecated_preprocessors] - D")
+            print(f"[prepare_recipe_has_deprecated_preprocessors] - FOUND SOME, ABOUT TO RETURN")
             # return f"Deprecated preprocessors found: {found_dep}"
             return list(found_dep)
         print(f"[prepare_recipe_has_deprecated_preprocessors] - E")
