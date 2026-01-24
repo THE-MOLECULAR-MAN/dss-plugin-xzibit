@@ -30,6 +30,7 @@ def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
             print(f"get_preprocessors_in_prepare_recipe - safe exit")
         return
     except:
+        # this exception is happening!
         if DEBUG:
             print(f"get_preprocessors_in_prepare_recipe - exit EXCEPTION")
         return
