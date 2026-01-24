@@ -17,8 +17,13 @@ def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
         recipe_settings_handle = recipe_handle.get_settings()
         recipe_type = recipe_settings_handle.type
         if recipe_type == 'shaker': # prepare recipe
+            if DEBUG:
+                print(f"get_preprocessors_in_prepare_recipe - 10")
             prepare_recipe_payload = recipe_settings_handle.obj_payload
             steps = prepare_recipe_payload.get("steps",[])
+            if DEBUG:
+                print(f"get_preprocessors_in_prepare_recipe - about to call get_unique_types")
+
             return get_unique_types(steps)
         return
     except:
