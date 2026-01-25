@@ -94,7 +94,7 @@ class ConnectorCodeEnvs(Connector):
                         next_row["python_interpreter"]
                         .replace("PYTHON", ""))
                     
-                    # add a . as the second character in 
+                    # add a . as the second character in python_version_formatted
                         
 
                 # next_row["python_version_support_status"] = lookup_python_support(
