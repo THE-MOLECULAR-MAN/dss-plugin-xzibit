@@ -104,6 +104,7 @@ if __name__ == "__main__":
         print(f"\nData Types:\n{support_df.dtypes}")
     except FileNotFoundError as e:
         print(e)
+        
 
 def lookup_python_support(dss_version, python_version, df=load_python_support()):
     """TBD"""
