@@ -27,7 +27,7 @@ class ConnectorAPIServices(Connector):
         # https://honker-design-2.se-platform.dataiku-sandbox.io/project-deployer/projects/DSS_Data_Plugin_Test/bundle/example_bundle1/
         # does need a trailing slash
         # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, id, project_key)):
+        if any(v is None for v in (self.__baseurl, bundle_id, project_key)):
             return None
         return f"{self.__baseurl}/project-deployer/projects/{project_key}/bundle/{id}/"
 
