@@ -150,21 +150,3 @@ def lookup_python_support(
         return row.iloc[0][py_ver]
     else:
         return "Unknown"
-
-
-# # Example Usage
-# if __name__ == "__main__":
-#     # Option 1: Passing the dataframe (Efficient for multiple lookups)
-#     # Assuming load_dss_version_support is defined or we load manually
-#     print("Loading DSS version Python support data...")
-#     df_support_lookup = load_dss_version_support(
-#         "/Users/tim.honker@dataiku.com/Downloads/DSS_version_python_support.csv"
-#     )
-
-#     print("Looking up support statuses...")
-#     status = lookup_python_support("11", "2.7", df_support_lookup)
-#     print(f"DSS 11 with Python 2.7: {status}")  # Output: partial
-
-#     # Option 2: Standalone call (Loads file automatically)
-#     status_14 = lookup_python_support("14", "3.12", df_support_lookup)
-#     print(f"DSS 14 with Python 3.12: {status_14}")  # Output: supported
