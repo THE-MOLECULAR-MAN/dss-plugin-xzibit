@@ -81,15 +81,7 @@ class ConnectorPlugins(Connector):
         # https://github.com/dataiku/dataiku-api-client-python/blob/master/dataikuapi/dssclient.py#L273
         # There's not an easy way to speed up the next, very slow line
 
-        DSS_BUILT_IN_PLUGIN_IDS = [
-            "default-samples",
-            "builtin-macros",
-            "code-studio-blocks",
-            "colorbrewer-palettes",
-            "k8s-metrics-utils",
-            "local-r-dev-setup",
-            "project-standards",
-        ]
+        
 
         # list_plugins does not offer any parameters
         # list_plugins returns a list of dict. Each dict contains at least a ‘id’ field
