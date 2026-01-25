@@ -21,7 +21,7 @@ class ConnectorAPIServices(Connector):
         self.__object_name = "Deployment"
 
     # Bundles do not have a unique page, just a shared page like meanings
-    def get_url(self, id, project_key):
+    def get_url(self, bundle_id, project_key):
         """Create a URL to the DSS object in question in this specific DSS instance.
         Return None if any of the inputs are None."""
         # https://honker-design-2.se-platform.dataiku-sandbox.io/project-deployer/projects/DSS_Data_Plugin_Test/bundle/example_bundle1/
