@@ -108,7 +108,7 @@ def lookup_python_support(
              Returns "DSS Version Not Found" or "Python Version Not Found" if inputs do not match.
     """
     # 1. Load DataFrame if not provided (Low Coupling)
-    if support_df is None:
+    if df_dss_python is None:
         file_path = "DSS_version_python_support.csv"
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"Support file not found at {file_path}")
