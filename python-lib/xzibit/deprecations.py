@@ -80,7 +80,7 @@ def load_python_support(filepath="./DSS_version_python_support.csv"):
 
     return df
 
-def lookup_python_support(package_name, package_version, df=None):
+def lookup_python_support(dss_version, package_version, df=None):
     """TBD"""
     if df is None:
         df = load_python_support()
