@@ -72,5 +72,6 @@ DSS_BUILT_IN_PLUGIN_IDS = [
 
 def load_python_support(filepath="./DSS_version_python_support.csv"):
     """TBD"""
+    if 
     df = pd.read_csv(filepath, dtype=str)
     return df
