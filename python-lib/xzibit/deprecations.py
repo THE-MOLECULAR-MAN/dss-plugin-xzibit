@@ -2,6 +2,8 @@
 Lists of deprecated items for DSS v14+
 """
 
+import pandas as pd
+
 # List of deprecated preprocessor names for DSS v14+
 DEPRECATED_PREPROCESSORS = {
     "AnonymizerProcessor",
@@ -70,7 +72,6 @@ DSS_BUILT_IN_PLUGIN_IDS = [
 
 def load_python_support(filepath="./DSS_version_python_support.csv"):
     """TBD"""
-    
 
     df = pd.read_csv(filepath)
     return df
