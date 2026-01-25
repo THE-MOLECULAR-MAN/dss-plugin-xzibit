@@ -74,5 +74,7 @@ def load_python_support(filepath="./DSS_version_python_support.csv"):
     """TBD"""
     # check if file exists
     try:
+        with open(filepath, "r") as f:
+            pass
     df = pd.read_csv(filepath, dtype=str)
     return df
