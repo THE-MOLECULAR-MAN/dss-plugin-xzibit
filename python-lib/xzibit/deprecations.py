@@ -72,6 +72,7 @@ DSS_BUILT_IN_PLUGIN_IDS = [
 import pandas as pd
 import os
 
+
 def load_dss_version_support(file_path: str) -> pd.DataFrame:
     """
     Loads the DSS Version Python Support CSV into a pandas DataFrame.
@@ -89,7 +90,7 @@ def load_dss_version_support(file_path: str) -> pd.DataFrame:
 
     # Using dtype=str ensures all data is read as strings
     df = pd.read_csv(file_path, dtype=str)
-    
+
     return df
 
 
@@ -109,4 +110,15 @@ def lookup_python_support(dss_version, python_version, df=load_python_support())
     return row.iloc[0]["Support_Status"]
 
 
-df_python_support = load_python_support()
+# Example Usage
+if __name__ == "__main__":
+    # Assuming the file is in the current working directory
+    csv_file = "DSS_version_python_support.csv"
+
+    try:
+        support_df = load_dss_version_support(csv_file)
+        print("Data loaded successfully:")
+        print(support_df.head())
+        print(f"\nData Types:\n{support_df.dtypes}")
+    except FileNotFoundError as e:
+        print(e)
