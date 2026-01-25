@@ -88,7 +88,8 @@ class ConnectorCodeEnvs(Connector):
                 )
                 next_row["path"] = settings_raw.get("path", None)
                 
-                if next_row["code_env_lang"]
+                if next_row["code_env_lang"] == "R":
+                    
 
                 if next_row["python_interpreter"] is not None:
                     # next_row["python_interpreter"] takes the form of PYTHON39 or PYTHON310
