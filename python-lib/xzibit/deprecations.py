@@ -73,6 +73,6 @@ DSS_BUILT_IN_PLUGIN_IDS = [
 def load_python_support(filepath="./DSS_version_python_support.csv"):
     """TBD"""
     # check if file exists
-    
+    try:
     df = pd.read_csv(filepath, dtype=str)
     return df
