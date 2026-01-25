@@ -12,6 +12,7 @@ def get_unique_types(data_list):
     unique_types = {item.get("type") for item in data_list if "type" in item}
     return unique_types
 
+
 def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
     try:
         recipe_settings_handle = prepare_recipe_handle.get_settings()
