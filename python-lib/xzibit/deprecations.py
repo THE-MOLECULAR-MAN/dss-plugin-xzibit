@@ -66,9 +66,3 @@ DSS_BUILT_IN_PLUGIN_IDS = [
     "local-r-dev-setup",
     "project-standards",
 ]
-
-SUPPORTED_PYTHON_VERSIONS = {
-    "12": ["3.6", "3.7", "3.8", "3.9"],
-    "13": ["3.7", "3.8", "3.9", "3.10"],
-    "14": ["3.9", "3.10", "3.11", "3.12", "3.13"],
-}
