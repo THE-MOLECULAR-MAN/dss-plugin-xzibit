@@ -88,7 +88,7 @@ def load_dss_version_support(file_path: str) -> pd.DataFrame:
         raise FileNotFoundError(f"The file at {file_path} was not found.")
 
     # Using dtype=str ensures all data is read as strings
-    df = pd.read_csv(file_path, dtype=str)
+    df_return = pd.read_csv(file_path, dtype=str)
 
     return df
 
