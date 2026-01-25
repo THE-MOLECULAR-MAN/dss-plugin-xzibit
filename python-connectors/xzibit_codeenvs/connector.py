@@ -92,26 +92,30 @@ class ConnectorCodeEnvs(Connector):
                     next_row["python_version_support_status"] = "N/A"
                 else:
 
-                if next_row["python_interpreter"] is not None:
-                    # next_row["python_interpreter"] takes the form of PYTHON39 or PYTHON310
-                    python_version_formatted = next_row["python_interpreter"].replace(
-                        "PYTHON", ""
-                    )
+                    if next_row["python_interpreter"] is not None:
+                        # next_row["python_interpreter"] takes the form of PYTHON39 or PYTHON310
+                        python_version_formatted = next_row[
+                            "python_interpreter"
+                        ].replace("PYTHON", "")
 
-                    # add a . as the second character in python_version_formatted
-                    python_version_formatted = (
-                        python_version_formatted[0] + "." + python_version_formatted[1:]
-                    )
+                        # add a . as the second character in python_version_formatted
+                        python_version_formatted = (
+                            python_version_formatted[0]
+                            + "."
+                            + python_version_formatted[1:]
+                        )
 
-                    next_row["python_version_support_status"] = lookup_python_support(
-                        "14", python_version_formatted, self.__df_dss_python
-                    )
-                else:
-                    next_row["python_version_support_status"] = "Unknown"
+                        next_row["python_version_support_status"] = (
+                            lookup_python_support(
+                                "14", python_version_formatted, self.__df_dss_python
+                            )
+                        )
+                    else:
+                        next_row["python_version_support_status"] = "Unknown"
 
-                # next_row["python_version_support_status"] = lookup_python_support(
-                #     "14", "3.10", self.__df_dss_python
-                # )
+                    # next_row["python_version_support_status"] = lookup_python_support(
+                    #     "14", "3.10", self.__df_dss_python
+                    # )
 
                 if self.__compute_codeenv_disk_space_usage:
                     # get_path_size_megabytes returns 0 if path does not exist
