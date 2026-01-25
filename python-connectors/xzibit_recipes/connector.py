@@ -120,9 +120,9 @@ class ConnectorRecipes(Connector):
                         recipe_settings_handle.get_flat_input_refs()
                     )
 
-                    next_row["recipe_is_deprecated"] = lookup_recipe_deprecation_status(
-                        "14", raw_data.get("type"), self.__df_dss_recipes
-                    )
+                    # next_row["recipe_is_deprecated"] = lookup_recipe_deprecation_status(
+                    #     "14", raw_data.get("type"), self.__df_dss_recipes
+                    # )
 
                     try:
                         next_row["output_datasets"] = (
