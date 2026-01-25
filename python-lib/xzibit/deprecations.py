@@ -121,7 +121,7 @@ def lookup_python_support(
         return f"DSS Version '{dss_ver}' Not Found"
 
     # 4. Locate the Column (Python Version) and Return Value
-    if py_ver in support_df.columns:
+    if py_ver in df_dss_python.columns:
         # iloc[0] takes the first match (should be unique)
         return row.iloc[0][py_ver]
     else:
