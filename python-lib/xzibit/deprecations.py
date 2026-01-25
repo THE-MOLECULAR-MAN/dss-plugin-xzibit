@@ -69,8 +69,6 @@ DSS_BUILT_IN_PLUGIN_IDS = [
     "local-r-dev-setup",
     "project-standards",
 ]
-import pandas as pd
-import os
 
 
 def load_dss_version_support(file_path: str) -> pd.DataFrame:
