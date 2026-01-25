@@ -13,7 +13,7 @@ from pprint import pprint as pp
 from json import dumps as jd
 
 # List of deprecated preprocessor names for DSS v14+
-deprecated_preprocessors = {
+DEPRECATED_PREPROCESSORS = {
     "AnonymizerProcessor",
     "MemoryEquiJoiner",
     "MemoryEquiJoinerFuzzy",
