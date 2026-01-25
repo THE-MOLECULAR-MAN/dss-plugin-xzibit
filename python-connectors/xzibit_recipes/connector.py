@@ -115,6 +115,8 @@ class ConnectorRecipes(Connector):
                     next_row["input_datasets"] = (
                         recipe_settings_handle.get_flat_input_refs()
                     )
+                    
+                    next_row[]
 
                     try:
                         next_row["output_datasets"] = (
