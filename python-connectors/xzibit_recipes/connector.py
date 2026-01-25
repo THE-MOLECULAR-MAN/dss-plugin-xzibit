@@ -132,8 +132,6 @@ class ConnectorRecipes(Connector):
                         next_row["recipe_uses_deprecated_preprocessors"] = (
                             prepare_recipe_has_deprecated_preprocessors(recipe_handle)
                         )
-                        
-                        next_row[]
 
                     except Exception as e:
                         # this occurs often on Dev-Design.
