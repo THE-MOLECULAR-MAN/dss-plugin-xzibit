@@ -29,7 +29,7 @@ class ConnectorAPIServices(Connector):
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, bundle_id, project_key)):
             return None
-        return f"{self.__baseurl}/project-deployer/projects/{project_key}/bundle/{id}/"
+        return f"{self.__baseurl}/project-deployer/projects/{project_key}/bundle/{bundle_id}/"
 
     def generate_rows(
         self,
