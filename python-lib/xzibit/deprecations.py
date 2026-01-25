@@ -68,5 +68,5 @@ DSS_BUILT_IN_PLUGIN_IDS = [
 ]
 
 SUPPORTED_PYTHON_VERSIONS = {
-"DSS_VERSION":
+"DSS_VERSION": {
                              }
