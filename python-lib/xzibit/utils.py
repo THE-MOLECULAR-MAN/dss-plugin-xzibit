@@ -13,8 +13,13 @@ from pprint import pprint as pp
 from json import dumps as jd
 
 
-deprecated_preprocessors = {'AnonymizerProcessor', 'MemoryEquiJoiner', 'MemoryEquiJoinerFuzzy', 'UseRowAsHeader', 'NearestNeighbourGeoJoiner'}
-
+deprecated_preprocessors = {
+    "AnonymizerProcessor",
+    "MemoryEquiJoiner",
+    "MemoryEquiJoinerFuzzy",
+    "UseRowAsHeader",
+    "NearestNeighbourGeoJoiner",
+}
 
 
 JAVA_NOT_IMPLEMENTED = "com.dataiku.dip.utils.NotImplementedException"
