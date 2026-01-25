@@ -132,6 +132,7 @@ def lookup_python_support(
 if __name__ == "__main__":
     # Option 1: Passing the dataframe (Efficient for multiple lookups)
     # Assuming load_dss_version_support is defined or we load manually
+    print("Loading DSS version Python support data...")
     df_support_lookup = load_dss_version_support(
         "/Users/tim.honker@dataiku.com/Downloads/DSS_version_python_support.csv"
     )
