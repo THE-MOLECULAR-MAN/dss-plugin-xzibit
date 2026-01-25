@@ -92,7 +92,7 @@ class ConnectorCodeEnvs(Connector):
                     # next_row["python_interpreter"] takes the form of PYTHON39 or PYTHON310
                     python_version_formatted = (
                         next_row["python_interpreter"]
-                        .replace("PYTHON", " ")
+                        .replace("PYTHON", "")
                         .replace("_", ".")
                         .strip()
                     )
