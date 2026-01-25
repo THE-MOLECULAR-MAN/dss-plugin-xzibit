@@ -69,3 +69,4 @@ DSS_BUILT_IN_PLUGIN_IDS = [
 
 SUPPORTED_PYTHON_VERSIONS = {
     "14": ["3.8", "3.9", "3.10", "3.11"],
+}
