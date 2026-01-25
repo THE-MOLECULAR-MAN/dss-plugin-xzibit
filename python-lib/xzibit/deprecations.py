@@ -138,5 +138,5 @@ if __name__ == "__main__":
     print(f"DSS 11 with Python 2.7: {status}")  # Output: partial
 
     # Option 2: Standalone call (Loads file automatically)
-    status_14 = lookup_python_support("14", "3.12")
+    status_14 = lookup_python_support("14", "3.12", df_support_lookup)
     print(f"DSS 14 with Python 3.12: {status_14}")  # Output: supported
