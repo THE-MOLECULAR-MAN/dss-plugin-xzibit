@@ -12,9 +12,6 @@ from dataikuapi.utils import DataikuException
 from pprint import pprint as pp
 from json import dumps as jd
 
-# List of deprecated preprocessor names for DSS v14+
-
-
 JAVA_NOT_IMPLEMENTED = "com.dataiku.dip.utils.NotImplementedException"
 
 
