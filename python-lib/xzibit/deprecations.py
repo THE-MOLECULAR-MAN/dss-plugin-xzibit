@@ -72,7 +72,7 @@ DSS_BUILT_IN_PLUGIN_IDS = [
 ]
 
 
-def load_dss_version_support(filename: str) -> pd.DataFrame:
+def load_local_csv_as_dataframe(filename: str) -> pd.DataFrame:
     """
     Loads the DSS Version Python Support CSV into a pandas DataFrame.
     Enforces all columns to be read as strings to preserve version formatting
