@@ -122,7 +122,7 @@ def lookup_python_support(dss_version, python_version, df_dss_python):
     Args:
         dss_version (str): The DSS Major Version (e.g., "11", "14").
         python_version (str): The Python version (e.g., "2.7", "3.9").
-        support_df (pd.DataFrame, optional): The loaded support DataFrame.
+        support_df (pd.DataFrame): The loaded support DataFrame.
                                              If None, loads from 'DSS_version_python_support.csv'.
 
     Returns:
