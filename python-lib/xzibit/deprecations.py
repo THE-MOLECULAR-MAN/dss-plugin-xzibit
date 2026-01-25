@@ -98,9 +98,7 @@ def load_local_csv_as_dataframe(filename: str) -> pd.DataFrame:
     return pd.read_csv(file_path, dtype=str)
 
 
-def lookup_recipe_deprecation_status(
-    recipe_type, df_dss_recipes: pd.DataFrame
-):
+def lookup_recipe_deprecation_status(recipe_type, df_dss_recipes):
 
     # 2. Input Validation (Sanitization)
     # Ensure inputs are strings and strip whitespace to prevent matching errors
