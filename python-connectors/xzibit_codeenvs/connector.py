@@ -12,7 +12,7 @@ from xzibit.utils import (
     get_path_size_megabytes,
     pp,
 )
-from xzibit.deprecations import load_dss_version_support, lookup_python_support
+from xzibit.deprecations import load_local_csv_as_dataframe, lookup_python_support
 
 
 class ConnectorCodeEnvs(Connector):
