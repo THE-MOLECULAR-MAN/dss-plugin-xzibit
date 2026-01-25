@@ -153,6 +153,7 @@ class ConnectorRecipes(Connector):
 
     def get_read_schema(self):
         """Returns the read schema for TBD"""
+        return None
         return {
             "columns": [
                 {"meaning": "Text", "name": "recipe_id", "type": "string"},
