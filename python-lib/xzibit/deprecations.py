@@ -1,4 +1,3 @@
-
 DEPRECATED_PREPROCESSORS = {
     "AnonymizerProcessor",
     "MemoryEquiJoiner",
@@ -50,5 +49,5 @@ DEPRECATED_PLUGIN_IDS = {
     "azure-ad-sync",
     "nlp-language-detection",
     "namr-store",
-    "events-aggregator"
+    "events-aggregator",
 }
