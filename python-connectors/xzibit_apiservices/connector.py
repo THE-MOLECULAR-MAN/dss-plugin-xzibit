@@ -5,10 +5,7 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import (
-    get_dss_base_url,
-    pp
-)
+from xzibit.utils import get_dss_base_url, pp
 
 
 class ConnectorAPIServices(Connector):
@@ -55,36 +52,42 @@ class ConnectorAPIServices(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     return
                 try:
-                    next_row = {"project_key": project_key} # safe start in case exception happens.
-                    
-                    obj_id =  obj_handle.id
+                    next_row = {
+                        "project_key": project_key
+                    }  # safe start in case exception happens.
+
+                    obj_id = obj_handle.id
                     next_row["api_service_id"] = obj_id
-                    
+
                     next_row["url"] = self.get_url(obj_id, project_key)
 
                     next_row["num_versions"] = len(obj_handle.list_packages())
-                    
+
                     obj_settings = obj_handle.get_settings().get_raw()
-                    next_row["last_modified_timestamp"] = obj_settings.get("versionTag",{}).get("lastModifiedOn","")
-                    next_row["last_modified_by_user"]   = obj_settings.get("versionTag",{}).get("lastModifiedBy",{}).get("login","")      
-                    next_row["num_endpoints"]   = len(obj_settings.get("endpoints",[]))
-                    next_row["tags"]   =  obj_settings.get("tags",[])
-                    next_row["name"]   =  obj_settings.get("name","")
+                    next_row["last_modified_timestamp"] = obj_settings.get(
+                        "versionTag", {}
+                    ).get("lastModifiedOn", "")
+                    next_row["last_modified_by_user"] = (
+                        obj_settings.get("versionTag", {})
+                        .get("lastModifiedBy", {})
+                        .get("login", "")
+                    )
+                    next_row["num_endpoints"] = len(obj_settings.get("endpoints", []))
+                    next_row["tags"] = obj_settings.get("tags", [])
+                    next_row["name"] = obj_settings.get("name", "")
 
                 except Exception as e:
                     print(
                         f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION] in project {project_key}: {e}"
                     )
-                    
+
                 finally:
                     records_generated += 1
                     yield next_row
 
-
     def get_read_schema(self):
         """TBD"""
         return None
-
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
