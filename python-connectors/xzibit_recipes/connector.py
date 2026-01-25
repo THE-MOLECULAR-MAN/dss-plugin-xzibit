@@ -116,7 +116,7 @@ class ConnectorRecipes(Connector):
                         recipe_settings_handle.get_flat_input_refs()
                     )
                     
-                    next_row["recipe_"]
+                    next_row["recipe_is_deprecated"] = lookup_python_support(
 
                     try:
                         next_row["output_datasets"] = (
