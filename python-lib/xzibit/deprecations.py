@@ -137,6 +137,7 @@ if __name__ == "__main__":
         "/Users/tim.honker@dataiku.com/Downloads/DSS_version_python_support.csv"
     )
 
+    print("Looking up support statuses...")
     status = lookup_python_support("11", "2.7", df_support_lookup)
     print(f"DSS 11 with Python 2.7: {status}")  # Output: partial
 
