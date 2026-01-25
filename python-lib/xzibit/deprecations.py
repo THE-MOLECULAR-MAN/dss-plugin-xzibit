@@ -99,7 +99,7 @@ def load_local_csv_as_dataframe(filename: str) -> pd.DataFrame:
 
 
 def lookup_recipe_deprecation_status(
-    recipe_type: str, df_dss_recipes: pd.DataFrame
+    recipe_type, df_dss_recipes: pd.DataFrame
 ):
 
     # 2. Input Validation (Sanitization)
