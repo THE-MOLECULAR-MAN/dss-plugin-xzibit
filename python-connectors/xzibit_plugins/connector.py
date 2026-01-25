@@ -14,7 +14,7 @@ from xzibit.utils import (
     jd,
 )
 
-from xzibit.deprecations import DEPRECATED_PLUGIN_IDS
+from xzibit.deprecations import DEPRECATED_PLUGIN_IDS, DSS_BUILT_IN_PLUGIN_IDS
 
 
 def extract_allow_keys(d: dict) -> dict:
@@ -80,8 +80,6 @@ class ConnectorPlugins(Connector):
         # even in the source code, no parameters:
         # https://github.com/dataiku/dataiku-api-client-python/blob/master/dataikuapi/dssclient.py#L273
         # There's not an easy way to speed up the next, very slow line
-
-        
 
         # list_plugins does not offer any parameters
         # list_plugins returns a list of dict. Each dict contains at least a ‘id’ field
