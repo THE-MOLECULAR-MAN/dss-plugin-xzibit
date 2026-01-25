@@ -109,7 +109,7 @@ def lookup_recipe_deprecation_status(
 
     # 3. Locate the Row (DSS Version)
     # matching the 'DSS_Major_Version' column
-    row = df_dss_recipes[df_dss_recipes["DSS_Major_Version"] == dss_ver]
+    row = df_dss_recipes[df_dss_recipes["recipe_type"] == dss_ver]
 
     if row.empty:
         return f"DSS Version '{dss_ver}' Not Found"
