@@ -56,3 +56,13 @@ DEPRECATED_PLUGIN_IDS = {
     "namr-store",
     "events-aggregator",
 }
+
+DSS_BUILT_IN_PLUGIN_IDS = [
+    "default-samples",
+    "builtin-macros",
+    "code-studio-blocks",
+    "colorbrewer-palettes",
+    "k8s-metrics-utils",
+    "local-r-dev-setup",
+    "project-standards",
+]
