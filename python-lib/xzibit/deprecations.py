@@ -114,7 +114,7 @@ def lookup_recipe_deprecation_status(
     if row.empty:
         return f"Recipe Type '{rec_type}' Not Found"
     else:
-        return row.iloc[0][rec_type]
+        return row.iloc[0]["DSS_v14_recipe_deprecation_status"]
 
 
 def lookup_python_support(
