@@ -94,7 +94,7 @@ def load_dss_version_support(file_path: str) -> pd.DataFrame:
 
 
 def lookup_python_support(
-    dss_version: str, python_version: str, support_df: pd.DataFrame = None
+    dss_version: str, python_version: str, support_df: pd.DataFrame
 ) -> str:
     """
     Looks up the support status for a specific Python version in a given DSS version.
