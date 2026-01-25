@@ -116,13 +116,6 @@ def lookup_recipe_deprecation_status(
     else:
         return row.iloc[1]
 
-    # 4. Locate the Column (Recipe Type) and Return Value
-    if rec_type in df_dss_recipes.columns:
-        # iloc[0] takes the first match (should be unique)
-        return row.iloc[0][rec_type]
-    else:
-        return "Unknown"
-
 
 def lookup_python_support(
     dss_version: str, python_version: str, df_dss_python: pd.DataFrame
