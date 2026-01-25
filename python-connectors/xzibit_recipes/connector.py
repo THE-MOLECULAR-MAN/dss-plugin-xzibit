@@ -118,7 +118,7 @@ class ConnectorRecipes(Connector):
                             recipe_settings_handle.get_flat_output_refs()
                         )
 
-                        next_row["deprecated_prepare_steps_found"] = (
+                        next_row["recipe_uses_"] = (
                             prepare_recipe_has_deprecated_preprocessors(recipe_handle)
                         )
 
