@@ -116,7 +116,7 @@ def lookup_recipe_deprecation_status(recipe_type, df_dss_recipes):
 
 
 def lookup_python_support(
-    dss_version, python_version: str, df_dss_python: pd.DataFrame
+    dss_version, python_version, df_dss_python: pd.DataFrame
 ) -> str:
     """
     Looks up the support status for a specific Python version in a given DSS version.
