@@ -137,6 +137,10 @@ class ConnectorRecipes(Connector):
                                 )
                             )
 
+                        next_row["output_datasets"] = (
+                            recipe_settings_handle.get_flat_output_refs()
+                        )
+
                     except Exception as e:
                         # this occurs often on Dev-Design.
                         print(
