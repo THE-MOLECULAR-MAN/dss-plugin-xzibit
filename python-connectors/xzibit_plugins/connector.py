@@ -53,7 +53,7 @@ class ConnectorPlugins(Connector):
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, plugin_id)):
             return None
-        return f"{self.__baseurl}/plugins/{id}/summary/"
+        return f"{self.__baseurl}/plugins/{plugin_id}/summary/"
 
     def generate_rows(
         self,
