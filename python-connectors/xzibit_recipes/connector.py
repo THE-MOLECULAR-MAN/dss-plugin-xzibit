@@ -130,7 +130,7 @@ class ConnectorRecipes(Connector):
                         )
 
                         deprecated_preprocessors = (
-                            prepare_recipe_has_deprecated_preprocessors(recipe_handle)
+                            
                         )
 
                         if len(deprecated_preprocessors) > 0:
