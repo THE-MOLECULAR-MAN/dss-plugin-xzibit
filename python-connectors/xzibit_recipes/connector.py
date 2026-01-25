@@ -133,7 +133,7 @@ class ConnectorRecipes(Connector):
                         else:
                             next_row["deprecation_status"] = (
                                 lookup_recipe_deprecation_status(
-                                    next_row["recipe_type"]
+                                    next_row["recipe_type"], 
                                 )
                             )
 
