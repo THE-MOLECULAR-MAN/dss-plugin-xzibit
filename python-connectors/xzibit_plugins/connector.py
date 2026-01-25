@@ -47,7 +47,7 @@ class ConnectorPlugins(Connector):
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
 
-    def get_url(self, id):
+    def get_url(self, plugin_id):
         """Create a URL to the DSS object in question in this specific DSS instance.
         Return None if any of the inputs are None."""
         # at least one is None, return None
