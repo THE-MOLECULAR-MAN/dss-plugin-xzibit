@@ -90,27 +90,7 @@ class ConnectorCodeEnvs(Connector):
 
                 if next_row["python_interpreter"] is not None:
                     # next_row["python_interpreter"] takes the form of PYTHON39 or PYTHON310
-                    # e.g., /opt/dss/code-envs/python-3.10.12/bin/python3.10
-                    py_interpreter_path = next_row["python_interpreter"]
-                    py_version_str = None
-                    try:
-                        # split by '/' and take last part
-                        py_exe_name = py_interpreter_path.split("/")[-1]
-                        # split by 'python' and take last part
-                        py_version_str = py_exe_name.split("python")[-1]
-                    except Exception as e:
-                        print(
-                            f"codeenvs - generate_rows WARNING: Could not parse python version from interpreter path '{py_interpreter_path}' for code env '{code_env_name}'. Error message: {e}"
-                        )
-
-                    if py_version_str is not None:
-                        next_row["python_version_support_status"] = (
-                            lookup_python_support(
-                                "14", py_version_str, self.__df_dss_python
-                            )
-                        )
-                    else:
-                        next_row["python_version_support_status"] = "Unknown"
+                    
 
                 # next_row["python_version_support_status"] = lookup_python_support(
                 #     "14", "3.10", self.__df_dss_python
