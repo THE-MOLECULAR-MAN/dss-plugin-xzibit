@@ -1,5 +1,5 @@
 
-DEPRECATED_PLUGIN{
+DEPRECATED_PLUGIN_IDS = {
     "looker-query",
     "emr-clusters",
     "nlp-nlg-tasks",
