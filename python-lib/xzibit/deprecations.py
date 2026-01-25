@@ -104,7 +104,7 @@ def lookup_recipe_deprecation_status(
 
     # 2. Input Validation (Sanitization)
     # Ensure inputs are strings and strip whitespace to prevent matching errors
-    dss_ver = str(dss_version).strip()
+
     rec_type = str(recipe_type).strip()
 
     # 3. Locate the Row (DSS Version)
