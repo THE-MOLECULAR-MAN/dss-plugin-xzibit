@@ -15,7 +15,7 @@ from xzibit.utils import (
     get_values_for_key,
 )
 
-
+from xzibit.deprecations import DEPRECATED_PREPROCESSORS
 def extract_allow_keys(d: dict) -> dict:
     """
     Filters a dictionary for keys starting with 'allow' and returns a new
