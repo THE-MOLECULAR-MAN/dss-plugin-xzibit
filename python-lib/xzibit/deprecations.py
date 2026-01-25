@@ -99,7 +99,7 @@ def load_local_csv_as_dataframe(filename: str) -> pd.DataFrame:
 
 
 def lookup_recipe_deprecation_status(
-    dss_version: str, recipe_type: str, df_dss_recipes: pd.DataFrame
+    recipe_type: str, df_dss_recipes: pd.DataFrame
 ) -> str:
     """
     Looks up the deprecation status for a specific recipe type in a given DSS version.
