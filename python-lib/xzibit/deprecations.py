@@ -98,6 +98,8 @@ def load_local_csv_as_dataframe(filename: str) -> pd.DataFrame:
     return pd.read_csv(file_path, dtype=str)
 
 
+def lookup_recipe_deprecation_status()
+
 def lookup_python_support(
     dss_version: str, python_version: str, df_dss_python: pd.DataFrame
 ) -> str:
