@@ -79,7 +79,6 @@ def load_python_support(filepath="./DSS_version_python_support.csv"):
     except FileNotFoundError:
         print(f"[load_python_support] File not found: {filepath}")
         df = None
-
     return df
 
 
