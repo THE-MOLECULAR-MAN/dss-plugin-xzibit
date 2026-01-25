@@ -82,18 +82,4 @@ def load_python_support(filepath="./DSS_version_python_support.csv"):
 
 def lookup_python_support(dss_version, python_version, df=None):
     """TBD"""
-    if df is None:
-        df = load_python_support()
-
-    if df is None:
-        return None
-
-    match = df[
-        (df["package_name"] == package_name)
-        & (df["package_version"] == package_version)
-    ]
-
-    if match.empty:
-        return None
-
-    return match.iloc[0].to_dict()
+    
