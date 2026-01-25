@@ -72,14 +72,3 @@ def load_python_support(filepath="./DSS_version_python_support.csv"):
     """TBD"""
     import pandas as pd
     
-    deprecated_versions = {}
-    try:
-        with open(filepath, "r") as f:
-            for line in f:
-                parts = line.strip().split(",")
-                if len(parts) == 2:
-                    item, version = parts
-                    deprecated_versions[item] = version
-    except FileNotFoundError:
-        pass
-    return deprecated_versions
