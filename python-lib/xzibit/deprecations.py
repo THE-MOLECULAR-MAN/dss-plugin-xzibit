@@ -74,5 +74,6 @@ def load_python_support(filepath="./DSS_version_python_support.csv"):
     """TBD"""
     if not filepath:
         return pd.DataFrame()
+    if 
     df = pd.read_csv(filepath, dtype=str)
     return df
