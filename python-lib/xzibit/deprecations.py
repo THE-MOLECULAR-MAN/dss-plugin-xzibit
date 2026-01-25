@@ -69,18 +69,41 @@ DSS_BUILT_IN_PLUGIN_IDS = [
     "local-r-dev-setup",
     "project-standards",
 ]
+import pandas as pd
+import os
 
+def load_dss_version_support(file_path: str) -> pd.DataFrame:
+    """
+    Loads the DSS Version Python Support CSV into a pandas DataFrame.
+    Enforces all columns to be read as strings to preserve version formatting
+    (e.g., preventing '3.10' from becoming float 3.1).
 
-def load_python_support(filepath="./DSS_version_python_support.csv"):
-    """TBD"""
-    # check if file exists
-    try:
-        df = pd.read_csv(filepath, dtype=str)
-    except FileNotFoundError:
-        print(f"[load_python_support] File not found: {filepath}")
-        df = None
+    Args:
+        file_path (str): The local path to the CSV file.
+
+    Returns:
+        pd.DataFrame: The loaded data with all values as strings.
+    """
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"The file at {file_path} was not found.")
+
+    # Using dtype=str ensures all data is read as strings
+    df = pd.read_csv(file_path, dtype=str)
+    
     return df
 
+# Example Usage
+if __name__ == "__main__":
+    # Assuming the file is in the current working directory
+    csv_file = "DSS_version_python_support.csv"
+    
+    try:
+        support_df = load_dss_version_support(csv_file)
+        print("Data loaded successfully:")
+        print(support_df.head())
+        print(f"\nData Types:\n{support_df.dtypes}")
+    except FileNotFoundError as e:
+        print(e)
 
 def lookup_python_support(dss_version, python_version, df=load_python_support()):
     """TBD"""
