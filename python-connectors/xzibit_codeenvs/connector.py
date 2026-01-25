@@ -100,6 +100,8 @@ class ConnectorCodeEnvs(Connector):
                     )
                     
                     next_row["python_version_support_status"] = lookup_python_support(
+                        "14", python_version_formatted, self.__df_dss_python
+                    )
 
                 # next_row["python_version_support_status"] = lookup_python_support(
                 #     "14", "3.10", self.__df_dss_python
