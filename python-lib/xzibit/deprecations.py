@@ -93,7 +93,7 @@ def load_dss_version_support(file_path: str) -> pd.DataFrame:
     return df
 
 
-def lookup_python_support(dss_version, python_version, df=load_dss_version_support()):
+def lookup_python_support(dss_version, python_version):
     """TBD"""
     if df is None:
         return "unknown"
