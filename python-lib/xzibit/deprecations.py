@@ -70,7 +70,3 @@ DSS_BUILT_IN_PLUGIN_IDS = [
 
 def load_python_support():
     """TBD"""
-    import xzibit.utils
-    import xzibit.deprecations
-
-    return True
