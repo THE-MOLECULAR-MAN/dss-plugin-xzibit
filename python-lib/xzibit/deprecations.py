@@ -93,10 +93,6 @@ def load_dss_version_support(file_path: str) -> pd.DataFrame:
     return df
 
 
-import pandas as pd
-import os
-
-
 def lookup_python_support(
     dss_version: str, python_version: str, support_df: pd.DataFrame = None
 ) -> str:
