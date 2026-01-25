@@ -5,10 +5,7 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import (
-    get_dss_base_url,
-    pp
-)
+from xzibit.utils import get_dss_base_url, pp
 
 
 class ConnectorAPIServices(Connector):
@@ -43,7 +40,7 @@ class ConnectorAPIServices(Connector):
     ):
         """TBD"""
         records_generated = 0
-        
+
         try:
             deployer = self.__client.get_projectdeployer()
         except:
@@ -55,23 +52,32 @@ class ConnectorAPIServices(Connector):
             if records_limit > 0 and records_generated >= records_limit:
                 return
             try:
-                next_row = {"deployment_id": 'EXCEPTION'} # just in case
+                next_row = {"deployment_id": "EXCEPTION"}  # just in case
                 next_row["deployment_id"] = deployment_handle.id
-                
+
                 obj_settings = deployment_handle.get_settings().get_raw()
 
-                next_row["bundle_id"] = obj_settings.get("bundleId","")
-                next_row["project_key"] = obj_settings.get("deployedProjectKey","")
-                next_row["infrastructure_id"] = obj_settings.get("infraId","")
-                next_row["deployment_type"] = obj_settings.get("type","")
-                next_row["last_modified_timestamp"] = obj_settings.get("versionTag",{}).get("lastModifiedOn","")
-                next_row["last_modified_user"] = obj_settings.get("versionTag",{}).get("lastModifiedBy",{}).get("login","")
-                
+                next_row["bundle_id"] = obj_settings.get("bundleId", "")
+                next_row["project_key"] = obj_settings.get("deployedProjectKey", "")
+                next_row["infrastructure_id"] = obj_settings.get("infraId", "")
+                next_row["deployment_type"] = obj_settings.get("type", "")
+                next_row["last_modified_timestamp"] = obj_settings.get(
+                    "versionTag", {}
+                ).get("lastModifiedOn", "")
+                next_row["last_modified_user"] = (
+                    obj_settings.get("versionTag", {})
+                    .get("lastModifiedBy", {})
+                    .get("login", "")
+                )
+
                 next_row["health"] = deployment_handle.get_status().get_health()
-                next_row["highest_governance_severity"] = str(deployment_handle.get_governance_status().get("maxSeverity",""))
+                next_row["highest_governance_severity"] = str(
+                    deployment_handle.get_governance_status().get("maxSeverity", "")
+                )
 
-
-                next_row["url"] = self.get_url(next_row["bundle_id"], next_row["project_key"])
+                next_row["url"] = self.get_url(
+                    next_row["bundle_id"], next_row["project_key"]
+                )
             except Exception as e:
                 print(
                     f"[{self.__object_name}-generate_rows] [UNEXPECTED EXCEPTION]: {e}"
@@ -80,11 +86,9 @@ class ConnectorAPIServices(Connector):
                 records_generated += 1
                 yield next_row
 
-
     def get_read_schema(self):
         """TBD"""
         return None
-
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
