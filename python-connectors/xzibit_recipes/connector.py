@@ -22,7 +22,7 @@ def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
             steps = prepare_recipe_payload.get("steps", [])
             return get_unique_types(steps)
         return
-    except Exception as e:
+    except Exception:
         return
 
 
