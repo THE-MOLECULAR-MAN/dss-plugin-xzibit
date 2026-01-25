@@ -106,7 +106,11 @@ def lookup_recipe_deprecation_status(dss_version: str, recipe_type: str, df_dss_
         dss_version (str): The DSS Major Version (e.g., "11", "14").
         recipe_type (str): The recipe type (e.g., "shaker", "python").
         df_dss_recipes (pd.DataFrame): The loaded recipes deprecation DataFrame.
-        
+    Returns:
+        str: The deprecation status (e.g., "deprecated", "supported").
+             Returns "DSS Version Not Found" or "Recipe Type Not Found" if inputs do not match.
+    """ 
+    
 
 def lookup_python_support(
     dss_version: str, python_version: str, df_dss_python: pd.DataFrame
