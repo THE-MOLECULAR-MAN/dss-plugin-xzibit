@@ -112,7 +112,7 @@ def lookup_recipe_deprecation_status(
     row = df_dss_recipes[df_dss_recipes["recipe_type"] == rec_type]
 
     if row.empty:
-        return f"DSS Version '{dss_ver}' Not Found"
+        return f"Recipe Type '{rec_type}' Not Found"
 
     # 4. Locate the Column (Recipe Type) and Return Value
     if rec_type in df_dss_recipes.columns:
