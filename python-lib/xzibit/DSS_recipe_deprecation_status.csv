@@ -1,0 +1,101 @@
+recipe_type,DSS_v14_recipe_deprecation_status,migration_recommendations,resource_links
+CustomCode_compare-dataset-with-model,Deprecated,"Replace DSS v12's ""Compute feature drift of a deployed model
+"" recipe with DSS v14's Drift Analysis feature",https://doc.dataiku.com/dss/latest/mlops/drift-analysis/index.html
+CustomCode_nlp-gpt-tasks,Deprecated,"Replace DSS v12's ""NLG Tasks"" recipe with DSS v14's native Prompt Recipe- no plugin needed.","https://knowledge.dataiku.com/latest/gen-ai/text-processing/tutorial-prompt-recipe.html
+
+https://www.dataiku.com/product/plugins/openai-gpt/"
+CustomCode_nlp-preparation-language-detection,Deprecated,"Replace DSS v12's ""Language Detection"" recipe with the new Text Preparation plugin's Language Detection
+recipe. Install the Text Preparation plugin.",https://www.dataiku.com/product/plugins/nlp-preparation/
+CustomCode_openai-gpt-text-generation-completion,Deprecated,"Replace DSS v12's ""Generate text with OpenAI GPT"" recipe with DSS v14's native Prompt Recipe- no plugin needed.","https://knowledge.dataiku.com/latest/gen-ai/text-processing/tutorial-prompt-recipe.html
+
+https://www.dataiku.com/product/plugins/openai-gpt/"
+CustomCode_timeseries-forecast-1-train-evaluate,Deprecated,TBD1,
+CustomCode_timeseries-forecast-2-predict,Deprecated,TBD2,
+shell,Needs manual checking,"Avoid using Shell scripts unless absolutely necessary since they can be a security problem. If possible, have the end user replace it with a visual recipe or use a Python package in a Python Code Recipe instead of an OS package in a Shell Recipe.
+
+Review the shell script and look for which packages/commands are used. 
+
+DSS v14 deployed via Fleet Manager uses Alma Linux 9.7.
+Verify that those shell commands are still present in AlmaLinux 9.7, and make sure required OS packages are installed in Fleet Manager's instance template. If you make changes to the instance template to add OS packages, then you will need to reprovision the node in Fleet Manager.
+
+Example: a user writes a shell script to use the ""jq"" command to parse JSON files in DSS v12. They had to have their administrator install the jq package in Alma Linux 8.8. There is a simple preprocessor in the Prepare recipe that does the same thing as JQ and eliminates the need for Shell scripts.",https://knowledge.dataiku.com/latest/admin-deploying/setup-actions/how-to-add-new-setup-action.html#install-system-packages
+cpython,Needs manual checking,"""Compatibility with DSS v14 depends on Python code version & code environment. DSS v14 only supports Python versions 3.10 and later. 
+
+Most common changes needed:
+* The Python code may need to be updated to be compatible with Python 3.10 or later.
+* The Python package versions used in the Code Environment may not be compatible with Python 3.10 and may need to be changed. This may require changes in the user's Python code to support changes in the Python modules.""
+
+Use a tool like ""Vermin"" on the Python code to detect compatibility with newer versions of Python. The Python Foundation will be deprecating Python 3.10 in late 2026 so aim for Python 3.11 or later. Aim for compatibility with Python 3.14 to gain the maximum amount of time (Dec 2030) beore it is deprecated.
+Assess the PIP package versions too for the code environment and have a discussion with the original developer to see if they can upgrade to newer module versions.","https://doc.dataiku.com/dss/latest/release_notes/14.html#dataiku-cloud-stacks-removal-of-old-python-versions
+
+https://pypi.org/project/vermin/"
+pyspark,Needs manual checking,"""Compatibility with DSS v14 depends on Python code version & code environment. DSS v14 only supports Python versions 3.10 and later. 
+
+Most common changes needed:
+* The Python code may need to be updated to be compatible with Python 3.10 or later.
+* The Python package versions used in the Code Environment may not be compatible with Python 3.10 and may need to be changed. This may require changes in the user's Python code to support changes in the Python modules.""
+
+Use a tool like ""Vermin"" on the Python code to detect compatibility with newer versions of Python. The Python Foundation will be deprecating Python 3.10 in late 2026 so aim for Python 3.11 or later. Aim for compatibility with Python 3.14 to gain the maximum amount of time (Dec 2030) beore it is deprecated.
+Assess the PIP package versions too for the code environment and have a discussion with the original developer to see if they can upgrade to newer module versions.","https://doc.dataiku.com/dss/latest/release_notes/14.html#dataiku-cloud-stacks-removal-of-old-python-versions
+
+https://pypi.org/project/vermin/"
+python,Needs manual checking,"""Compatibility with DSS v14 depends on Python code version & code environment. DSS v14 only supports Python versions 3.10 and later. 
+
+Most common changes needed:
+* The Python code may need to be updated to be compatible with Python 3.10 or later.
+* The Python package versions used in the Code Environment may not be compatible with Python 3.10 and may need to be changed. This may require changes in the user's Python code to support changes in the Python modules.""
+
+Use a tool like ""Vermin"" on the Python code to detect compatibility with newer versions of Python. The Python Foundation will be deprecating Python 3.10 in late 2026 so aim for Python 3.11 or later. Aim for compatibility with Python 3.14 to gain the maximum amount of time (Dec 2030) beore it is deprecated.
+Assess the PIP package versions too for the code environment and have a discussion with the original developer to see if they can upgrade to newer module versions.","https://doc.dataiku.com/dss/latest/release_notes/14.html#dataiku-cloud-stacks-removal-of-old-python-versions
+
+https://pypi.org/project/vermin/"
+clustering_cluster,Safe,-,
+clustering_training,Safe,-,
+csync,Safe,-,
+generate_features,Safe,-,
+nlp_llm_model_provided_classification,Safe,-,
+nlp_llm_summarization,Safe,-,
+prompt,Safe,-,
+streaming_spark_scala,Safe,-,
+distinct,Safe,-,
+fuzzyjoin,Safe,-,
+geojoin,Safe,-,
+grouping,Safe,-,
+join,Safe,-,
+pivot,Safe,-,
+sampling,Safe,-,
+sort,Safe,-,
+split,Safe,-,
+sync,Safe,-,
+topn,Safe,-,
+vstack,Safe,-,
+window,Safe,-,
+CustomCode_forward_geocoding,Safe,-,
+CustomCode_timeseries-preparation-resampling,Safe,-,
+eda_univariate,Safe,-,
+evaluation,Safe,-,
+export,Safe,-,
+extract_failed_rows,Safe,-,
+nlp_agent_evaluation,Safe,-,
+nlp_llm_evaluation,Safe,-,
+nlp_llm_finetuning,Safe,-,
+nlp_llm_rag_embedding,Safe,-,
+prediction_scoring,Safe,-,
+prediction_training,Safe,-,
+standalone_evaluation,Safe,-,
+update,Safe,-,
+r,Usually safe,"The R language itself is very backwards compatible, but sometimes packages change. Using packges from the Tidyverse (dplyr, tidyr, ggplot2) from before 2020 or 2021 can cause breaking changes when migrating to a new version of R.
+
+DSS v14.3 deployed via Fleet Manager uses R version 4.5.2 (2025-10-31).",
+sparkr,Usually safe,"The R language itself is very backwards compatible, but sometimes packages change. Using packges from the Tidyverse (dplyr, tidyr, ggplot2) from before 2020 or 2021 can cause breaking changes when migrating to a new version of R.
+
+DSS v14.3 deployed via Fleet Manager uses R version 4.5.2 (2025-10-31).",
+spark_sql_query,Usually safe,Most likely safe unless Spark or SQL version changed,
+spark_scala,Usually safe,"Probably fine, but should double check Spark and Scala versions and config",
+shaker,Usually safe,"Probably fine, but a small number of ""preprocessors"" in the Prepare recipe were deprecated and replaced with improved/different ones.
+
+* Join with other dataset (memory-based)
+* Fuzzy join with other dataset (memory-based)
+* Geo-join
+* Anonymize data
+* Use values of a row as column names",
