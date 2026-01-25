@@ -48,6 +48,9 @@ class ConnectorRecipes(Connector):
         self.__client = api_client()
         self.__objects_list = {}
         self.__baseurl = get_dss_base_url()
+        self.__df_dss_recipes = load_local_csv_as_dataframe(
+            "DSS_recipe_deprecation_status.csv"
+        )
 
         for pk in self.__client.list_project_keys():
             project_handle = self.__client.get_project(pk)
