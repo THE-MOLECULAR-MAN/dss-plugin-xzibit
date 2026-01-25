@@ -93,9 +93,7 @@ class ConnectorCodeEnvs(Connector):
                     python_version_formatted = (
                         next_row["python_interpreter"]
                         .replace("PYTHON", "")
-                        .replace("_", ".")
-                        .strip()
-                    )
+                        
 
                 # next_row["python_version_support_status"] = lookup_python_support(
                 #     "14", "3.10", self.__df_dss_python
