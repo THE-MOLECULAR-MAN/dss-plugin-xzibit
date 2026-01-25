@@ -78,5 +78,5 @@ def load_python_support(filepath="./DSS_version_python_support.csv"):
         
     except FileNotFoundError:
         return pd.DataFrame()
-    df = pd.read_csv(filepath, dtype=str)
+    
     return df
