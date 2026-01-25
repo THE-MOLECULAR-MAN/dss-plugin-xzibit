@@ -5,7 +5,6 @@ Lists of deprecated items for DSS v14+
 import pandas as pd
 
 
-
 # List of deprecated preprocessor names for DSS v14+
 DEPRECATED_PREPROCESSORS = {
     "AnonymizerProcessor",
@@ -96,3 +95,6 @@ def lookup_python_support(dss_version, python_version, df=load_python_support())
         return None
 
     return row.iloc[0]["Support_Status"]
+
+
+df_python_support = load_python_support()
