@@ -1,4 +1,12 @@
 
+DEPRECATED_PREPROCESSORS = {
+    "AnonymizerProcessor",
+    "MemoryEquiJoiner",
+    "MemoryEquiJoinerFuzzy",
+    "UseRowAsHeader",
+    "NearestNeighbourGeoJoiner",
+}
+
 DEPRECATED_PLUGIN_IDS = {
     "looker-query",
     "emr-clusters",
