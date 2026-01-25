@@ -15,7 +15,7 @@ from xzibit.utils import (
     get_values_for_key,
 )
 
-from xzibit.deprecations import DEPRECATED_PLUGIN_IDS, DSS_BUILT_IN_PLUGIN_IDS
+from xzibit.deprecations import DEPRECATED_PLUGIN_IDS
 
 
 class ConnectorPlugins(Connector):
