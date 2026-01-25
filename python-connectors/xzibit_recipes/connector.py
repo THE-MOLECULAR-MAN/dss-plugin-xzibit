@@ -133,7 +133,7 @@ class ConnectorRecipes(Connector):
                             prepare_recipe_has_deprecated_preprocessors(recipe_handle)
                         )
 
-                        next_row["recipe_type_deprecation_status"] = (
+                        next_row["deprecation_status"] = (
                             lookup_recipe_deprecation_status(next_row["recipe_type"])
                         )
 
