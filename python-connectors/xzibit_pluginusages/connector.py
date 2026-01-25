@@ -62,7 +62,7 @@ class ConnectorPlugins(Connector):
                         next_row["object_id"] = usage.object_id
                         next_row["object_type"] = usage.object_type
                         next_row["project_key"] = usage.project_key
-                        next_row["is_deprecated_plugin"] = (
+                        next_row["plugin_is_deprecated_plugin"] = (
                             plugin_id in DEPRECATED_PLUGIN_IDS
                         )
 
