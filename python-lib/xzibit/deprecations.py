@@ -125,7 +125,7 @@ def lookup_python_support(
         # iloc[0] takes the first match (should be unique)
         return row.iloc[0][py_ver]
     else:
-        return f"Unknown"
+        return "Unknown"
 
 
 # Example Usage
