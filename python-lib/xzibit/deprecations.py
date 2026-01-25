@@ -1,5 +1,5 @@
 
-{
+DEPRECATED_{
     "looker-query",
     "emr-clusters",
     "nlp-nlg-tasks",
