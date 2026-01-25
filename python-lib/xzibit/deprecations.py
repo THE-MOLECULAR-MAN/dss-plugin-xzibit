@@ -84,5 +84,5 @@ def load_python_support(filepath="./DSS_version_python_support.csv"):
 df_python_support = load_python_support()
 
 
-def lookup_python_support(dss_version, python_version, df=None):
+def lookup_python_support(dss_version, python_version, df=df_python_support):
     """TBD"""
