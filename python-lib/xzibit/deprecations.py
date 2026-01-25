@@ -4,7 +4,7 @@ Lists of deprecated items for DSS v14+
 
 import pandas as pd
 
-df_python_support = load_python_support()
+
 
 # List of deprecated preprocessor names for DSS v14+
 DEPRECATED_PREPROCESSORS = {
