@@ -137,6 +137,7 @@ class ConnectorRecipes(Connector):
                             next_row["deprecation_status"] = (
                                 "Prepare recipe uses deprecated preprocessors"
                             )
+                        else:
 
                         next_row["deprecation_status"] = (
                             lookup_recipe_deprecation_status(next_row["recipe_type"])
