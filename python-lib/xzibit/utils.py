@@ -13,13 +13,7 @@ from pprint import pprint as pp
 from json import dumps as jd
 
 # List of deprecated preprocessor names for DSS v14+
-DEPRECATED_PREPROCESSORS = {
-    "AnonymizerProcessor",
-    "MemoryEquiJoiner",
-    "MemoryEquiJoinerFuzzy",
-    "UseRowAsHeader",
-    "NearestNeighbourGeoJoiner",
-}
+
 
 JAVA_NOT_IMPLEMENTED = "com.dataiku.dip.utils.NotImplementedException"
 
