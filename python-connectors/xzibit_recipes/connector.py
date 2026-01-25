@@ -117,7 +117,7 @@ class ConnectorRecipes(Connector):
                     )
                     
                     next_row["recipe_is_deprecated"] = lookup_python_support(
-                        "14", raw_data.get("type"), self.__df_dss_recipes
+                        "14", raw_data.get("type"), self.__df_dss_recipes   
 
                     try:
                         next_row["output_datasets"] = (
