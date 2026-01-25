@@ -134,7 +134,7 @@ if __name__ == "__main__":
     # Assuming load_dss_version_support is defined or we load manually
     df_support_lookup = load_dss_version_support("DSS_version_python_support.csv")
 
-    status = lookup_python_support("11", "2.7", support_df=df)
+    status = lookup_python_support("11", "2.7", df_support_lookup)
     print(f"DSS 11 with Python 2.7: {status}")  # Output: partial
 
     # Option 2: Standalone call (Loads file automatically)
