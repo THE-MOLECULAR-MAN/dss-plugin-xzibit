@@ -134,7 +134,7 @@ class ConnectorCodeEnvs(Connector):
                     next_row["projectKeys_where_code_env_used"] = []
                     next_row["total_instances_of_code_env"] = -1
 
-                    print(f"starting code env list usages for {code_env_name}")
+                    # print(f"starting code env list usages for {code_env_name}")
                     # next line throws exception on DevDesign:
                     #  jakarta.servlet.ServletException: Handler dispatch failed: java.lang.Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool, caused by: Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool
                     # list_usages() does not take any parameters
