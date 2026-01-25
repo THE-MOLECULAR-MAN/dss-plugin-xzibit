@@ -114,7 +114,7 @@ def lookup_recipe_deprecation_status(
     if row.empty:
         return f"Recipe Type '{rec_type}' Not Found"
     else:
-        return row.i
+        return row.iloc[1]
 
     # 4. Locate the Column (Recipe Type) and Return Value
     if rec_type in df_dss_recipes.columns:
