@@ -3,6 +3,7 @@ Lists of deprecated items for DSS v14+
 """
 
 import pandas as pd
+import os
 
 
 # List of deprecated preprocessor names for DSS v14+
