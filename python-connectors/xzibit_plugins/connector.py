@@ -15,7 +15,8 @@ from xzibit.utils import (
     get_values_for_key,
 )
 
-from xzibit.deprecations import 
+from xzibit.deprecations import DEPRECATED_PLUGIN_IDS
+
 
 def extract_allow_keys(d: dict) -> dict:
     """
