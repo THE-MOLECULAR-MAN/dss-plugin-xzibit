@@ -72,7 +72,7 @@ DSS_BUILT_IN_PLUGIN_IDS = [
 ]
 
 
-def load_dss_version_support(file_path: str) -> pd.DataFrame:
+def load_dss_version_support(filename: str) -> pd.DataFrame:
     """
     Loads the DSS Version Python Support CSV into a pandas DataFrame.
     Enforces all columns to be read as strings to preserve version formatting
@@ -84,6 +84,13 @@ def load_dss_version_support(file_path: str) -> pd.DataFrame:
     Returns:
         pd.DataFrame: The loaded data with all values as strings.
     """
+    try:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+    except NameError:
+        # Fallback for interactive environments (like Jupyter) where __file__ is not defined
+        script_dir = os.getcwd()
+
+    file_path = os.path.join(script_dir, filename)
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"The file at {file_path} was not found.")
 
