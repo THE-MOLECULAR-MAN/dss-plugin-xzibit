@@ -107,7 +107,6 @@ def lookup_python_support(
         str: The support status (e.g., "supported", "partial", "deprecated").
              Returns "DSS Version Not Found" or "Python Version Not Found" if inputs do not match.
     """
-    # 1. Load DataFrame if not provided (Low Coupling)
 
     # 2. Input Validation (Sanitization)
     # Ensure inputs are strings and strip whitespace to prevent matching errors
