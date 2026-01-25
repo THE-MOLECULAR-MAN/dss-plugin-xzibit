@@ -60,10 +60,9 @@ class ConnectorPlugins(Connector):
                         next_row["object_id"] = usage.object_id
                         next_row["object_type"] = usage.object_type
                         next_row["project_key"] = usage.project_key
-                        next_row["is_deprecated_plugin"] = plugin_id in DEPRECATED_PLUGIN_IDS
-                        
-                        from xzibit.deprecations import DEPRECATED_PLUGIN_IDS, DSS_BUILT_IN_PLUGIN_IDS
-
+                        next_row["is_deprecated_plugin"] = (
+                            plugin_id in DEPRECATED_PLUGIN_IDS
+                        )
 
                     except Exception as e:
                         print(
