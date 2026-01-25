@@ -28,7 +28,7 @@ class ConnectorAPIServices(Connector):
         # does need a trailing slash
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, bundle_id, project_key)):
-            return None
+            return """"
         return f"{self.__baseurl}/project-deployer/projects/{project_key}/bundle/{bundle_id}/"
 
     def generate_rows(
