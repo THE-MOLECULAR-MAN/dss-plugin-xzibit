@@ -51,7 +51,7 @@ class ConnectorPlugins(Connector):
         """Create a URL to the DSS object in question in this specific DSS instance.
         Return None if any of the inputs are None."""
         # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, id)):
+        if any(v is None for v in (self.__baseurl, plugin_id)):
             return None
         return f"{self.__baseurl}/plugins/{id}/summary/"
 
