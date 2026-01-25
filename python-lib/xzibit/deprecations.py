@@ -115,7 +115,7 @@ def lookup_python_support(
 
     # 3. Locate the Row (DSS Version)
     # matching the 'DSS_Major_Version' column
-    row = df_dss_python[support_df["DSS_Major_Version"] == dss_ver]
+    row = df_dss_python[df_dss_python["DSS_Major_Version"] == dss_ver]
 
     if row.empty:
         return f"DSS Version '{dss_ver}' Not Found"
