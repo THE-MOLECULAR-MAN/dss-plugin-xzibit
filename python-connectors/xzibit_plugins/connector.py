@@ -101,7 +101,7 @@ class ConnectorPlugins(Connector):
                 settings_raw = plugin_handle.get_settings().get_raw()
                 next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
                 
-                next_row[""]
+                next_row["is"]
 
             except Exception as e:
                 print(
