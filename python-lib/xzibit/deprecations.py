@@ -73,4 +73,4 @@ def load_python_support(filepath="./DSS_version_python_support.csv"):
     import pandas as pd
 
     df = pd.read_csv(filepath)
-    return df[df["is_deprecated"] == True]["plugin_id"].tolist()
+    return df
