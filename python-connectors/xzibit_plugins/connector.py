@@ -52,7 +52,7 @@ class ConnectorPlugins(Connector):
         Return None if any of the inputs are None."""
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, plugin_id)):
-            return None
+            return ""
         return f"{self.__baseurl}/plugins/{plugin_id}/summary/"
 
     def generate_rows(
