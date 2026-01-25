@@ -95,7 +95,12 @@ class ConnectorCodeEnvs(Connector):
                         .replace("PYTHON", ""))
                     
                     # add a . as the second character in python_version_formatted
-                    
+                    if len(python_version_formatted) == 3:
+                        python_version_formatted = (
+                            python_version_formatted[0]
+                            + "."
+                            + python_version_formatted[1:]
+                        )
                         
 
                 # next_row["python_version_support_status"] = lookup_python_support(
