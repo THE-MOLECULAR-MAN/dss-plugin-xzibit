@@ -87,7 +87,7 @@ df_python_support = load_python_support()
 def lookup_python_support(dss_version, python_version, df=load_python_support()):
     """TBD"""
     if df is None:
-        return None
+        return "unknown"
 
     row = df[
         (df["DSS_Version"] == dss_version) & (df["Python_Version"] == python_version)
