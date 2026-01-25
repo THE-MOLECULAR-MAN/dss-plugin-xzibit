@@ -92,7 +92,7 @@ def lookup_python_support(dss_version, python_version, df=load_python_support())
     ]
 
     if row.empty:
-        return "unknown2"
+        return "unknown"
 
     return row.iloc[0]["Support_Status"]
 
