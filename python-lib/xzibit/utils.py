@@ -12,7 +12,7 @@ from dataikuapi.utils import DataikuException
 from pprint import pprint as pp
 from json import dumps as jd
 
-# List of 
+# List of deprecated preprocessor names for DSS v14
 deprecated_preprocessors = {
     "AnonymizerProcessor",
     "MemoryEquiJoiner",
