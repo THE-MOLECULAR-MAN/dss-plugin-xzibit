@@ -12,6 +12,7 @@ from xzibit.utils import (
     get_path_size_megabytes,
     pp,
 )
+from xzibit.deprecations import load_dss_version_support, lookup_python_support
 
 
 class ConnectorCodeEnvs(Connector):
@@ -24,6 +25,10 @@ class ConnectorCodeEnvs(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
+        self.__df_dss_python = load_dss_version_support(
+            "DSS_version_python_support.csv"
+        )
+        print("Loaded DSS_version_python_support.csv:")
 
         # Calculating disk space usage on my personal FM instance:
         #    * took 8 seconds
@@ -83,6 +88,34 @@ class ConnectorCodeEnvs(Connector):
                 )
                 next_row["path"] = settings_raw.get("path", None)
 
+                if next_row["python_interpreter"] is not None:
+                    # determine python version from interpreter path
+                    # e.g., /opt/dss/code-envs/python-3.10.12/bin/python3.10
+                    py_interpreter_path = next_row["python_interpreter"]
+                    py_version_str = None
+                    try:
+                        # split by '/' and take last part
+                        py_exe_name = py_interpreter_path.split("/")[-1]
+                        # split by 'python' and take last part
+                        py_version_str = py_exe_name.split("python")[-1]
+                    except Exception as e:
+                        print(
+                            f"codeenvs - generate_rows WARNING: Could not parse python version from interpreter path '{py_interpreter_path}' for code env '{code_env_name}'. Error message: {e}"
+                        )
+
+                    if py_version_str is not None:
+                        next_row["python_version_support_status"] = (
+                            lookup_python_support(
+                                "14", py_version_str, self.__df_dss_python
+                            )
+                        )
+                    else:
+                        next_row["python_version_support_status"] = "Unknown"
+
+                # next_row["python_version_support_status"] = lookup_python_support(
+                #     "14", "3.10", self.__df_dss_python
+                # )
+
                 if self.__compute_codeenv_disk_space_usage:
                     # get_path_size_megabytes returns 0 if path does not exist
                     next_row["size_in_MB"] = get_path_size_megabytes(next_row["path"])
@@ -132,30 +165,30 @@ class ConnectorCodeEnvs(Connector):
         """TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, Date, FreeText, LongMeaning, DoubleMeaning
-
-        return {
-            "columns": [
-                {"meaning": "Text", "name": "code_env_name", "type": "string"},
-                {"meaning": "Text", "name": "code_env_lang", "type": "string"},
-                {"meaning": "Text", "name": "deployment_mode", "type": "string"},
-                {"meaning": "Text", "name": "owner", "type": "string"},
-                {"meaning": "Text", "name": "python_interpreter", "type": "string"},
-                {"meaning": "Text", "name": "core_packages_set", "type": "string"},
-                {"meaning": "Text", "name": "path", "type": "string"},
-                {"meaning": "DoubleMeaning", "name": "size_in_MB", "type": "double"},
-                {
-                    "name": "projectKeys_where_code_env_used",
-                    "meaning": "JSONArrayMeaning",
-                    "type": "string",
-                },
-                {
-                    "name": "total_instances_of_code_env",
-                    "meaning": "LongMeaning",
-                    "type": "bigint",
-                },
-                {"meaning": "URL", "name": "url", "type": "string"},
-            ]
-        }
+        return None
+        # return {
+        #     "columns": [
+        #         {"meaning": "Text", "name": "code_env_name", "type": "string"},
+        #         {"meaning": "Text", "name": "code_env_lang", "type": "string"},
+        #         {"meaning": "Text", "name": "deployment_mode", "type": "string"},
+        #         {"meaning": "Text", "name": "owner", "type": "string"},
+        #         {"meaning": "Text", "name": "python_interpreter", "type": "string"},
+        #         {"meaning": "Text", "name": "core_packages_set", "type": "string"},
+        #         {"meaning": "Text", "name": "path", "type": "string"},
+        #         {"meaning": "DoubleMeaning", "name": "size_in_MB", "type": "double"},
+        #         {
+        #             "name": "projectKeys_where_code_env_used",
+        #             "meaning": "JSONArrayMeaning",
+        #             "type": "string",
+        #         },
+        #         {
+        #             "name": "total_instances_of_code_env",
+        #             "meaning": "LongMeaning",
+        #             "type": "bigint",
+        #         },
+        #         {"meaning": "URL", "name": "url", "type": "string"},
+        #     ]
+        # }
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
