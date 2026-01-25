@@ -90,8 +90,6 @@ def load_dss_version_support(file_path: str) -> pd.DataFrame:
     # Using dtype=str ensures all data is read as strings
     return pd.read_csv(file_path, dtype=str)
 
-    
-
 
 def lookup_python_support(
     dss_version: str, python_version: str, support_df: pd.DataFrame
