@@ -21,7 +21,6 @@ deprecated_preprocessors = {
     "NearestNeighbourGeoJoiner",
 }
 
-
 JAVA_NOT_IMPLEMENTED = "com.dataiku.dip.utils.NotImplementedException"
 
 
