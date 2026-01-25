@@ -131,8 +131,7 @@ class ConnectorPlugins(Connector):
                 },
                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
                 {"name": "is_built_in_plugin", "type": "boolean", "meaning": "Boolean"},
-                
-                is_deprecated
+                {"name": "is_deprecated", "type": "boolean", "meaning": "Boolean"},
                 {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
