@@ -138,10 +138,11 @@ class ConnectorRecipes(Connector):
                                 "Prepare recipe uses deprecated preprocessors"
                             )
                         else:
-
-                        next_row["deprecation_status"] = (
-                            lookup_recipe_deprecation_status(next_row["recipe_type"])
-                        )
+                            next_row["deprecation_status"] = (
+                                lookup_recipe_deprecation_status(
+                                    next_row["recipe_type"]
+                                )
+                            )
 
                     except Exception as e:
                         # this occurs often on Dev-Design.
