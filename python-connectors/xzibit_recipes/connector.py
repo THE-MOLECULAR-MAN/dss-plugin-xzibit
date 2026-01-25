@@ -121,9 +121,6 @@ class ConnectorRecipes(Connector):
                     )
 
                     try:
-                        next_row["output_datasets"] = (
-                            recipe_settings_handle.get_flat_output_refs()
-                        )
 
                         deprecated_preprocessors = (
                             prepare_recipe_has_deprecated_preprocessors(recipe_handle)
