@@ -1,7 +1,6 @@
 """
-Lists of 
-"""# List of deprecated preprocessor names for DSS v14+
-
+Lists of deprecated items for DSS v14+
+"""  # List of deprecated preprocessor names for DSS v14+
 
 DEPRECATED_PREPROCESSORS = {
     "AnonymizerProcessor",
