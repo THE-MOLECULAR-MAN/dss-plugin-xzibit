@@ -28,7 +28,7 @@ class ConnectorCodeEnvs(Connector):
         self.__df_dss_python = load_local_csv_as_dataframe(
             "DSS_version_python_support.csv"
         )
-        print("Loaded DSS_version_python_support.csv:")
+        # print("Loaded DSS_version_python_support.csv:")
 
         # Calculating disk space usage on my personal FM instance:
         #    * took 8 seconds
