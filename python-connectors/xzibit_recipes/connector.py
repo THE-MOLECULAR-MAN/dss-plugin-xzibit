@@ -5,26 +5,35 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import get_dss_base_url, pp
+from xzibit.utils import get_dss_base_url, DEPRECATED_PREPROCESSORS, pp
+
 
 def get_unique_types(data_list):
-    unique_types = {item.get('type') for item in data_list if 'type' in item}
+    unique_types = {item.get("type") for item in data_list if "type" in item}
     return unique_types
+
 
 def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
     try:
         recipe_settings_handle = prepare_recipe_handle.get_settings()
         recipe_type = recipe_settings_handle.type
-        if recipe_type == 'shaker': # prepare recipe
+        if recipe_type == "shaker":  # prepare recipe
             prepare_recipe_payload = recipe_settings_handle.obj_payload
-            steps = prepare_recipe_payload.get("steps",[])
+            steps = prepare_recipe_payload.get("steps", [])
             return get_unique_types(steps)
         return
     except:
         return
-    
+
+
 def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
-    deprecated_preprocessors = {'AnonymizerProcessor', 'MemoryEquiJoiner', 'MemoryEquiJoinerFuzzy', 'UseRowAsHeader', 'NearestNeighbourGeoJoiner'}
+    deprecated_preprocessors = {
+        "AnonymizerProcessor",
+        "MemoryEquiJoiner",
+        "MemoryEquiJoinerFuzzy",
+        "UseRowAsHeader",
+        "NearestNeighbourGeoJoiner",
+    }
     preprocessors_unique = get_preprocessors_in_prepare_recipe(prepare_recipe_handle)
     if isinstance(preprocessors_unique, set):
         found_dep = preprocessors_unique.intersection(deprecated_preprocessors)
@@ -32,6 +41,7 @@ def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
             # return f"Deprecated preprocessors found: {found_dep}"
             return list(found_dep)
     return []
+
 
 class ConnectorRecipes(Connector):
     """TBD"""
@@ -113,8 +123,10 @@ class ConnectorRecipes(Connector):
                         next_row["output_datasets"] = (
                             recipe_settings_handle.get_flat_output_refs()
                         )
-                        
-                        next_row["deprecated_prepare_steps_found"] = prepare_recipe_has_deprecated_preprocessors(recipe_handle)
+
+                        next_row["deprecated_prepare_steps_found"] = (
+                            prepare_recipe_has_deprecated_preprocessors(recipe_handle)
+                        )
 
                     except Exception as e:
                         # this occurs often on Dev-Design.
@@ -155,7 +167,11 @@ class ConnectorRecipes(Connector):
                     "type": "string",
                 },
                 {"meaning": "Text", "name": "last_modified_user", "type": "string"},
-                {"meaning": "Text", "name": "deprecated_prepare_steps_found", "type": "string"},
+                {
+                    "meaning": "Text",
+                    "name": "deprecated_prepare_steps_found",
+                    "type": "string",
+                },
                 {"meaning": "URL", "name": "url", "type": "string"},
             ]
         }
