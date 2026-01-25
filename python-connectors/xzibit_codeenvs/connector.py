@@ -89,7 +89,7 @@ class ConnectorCodeEnvs(Connector):
                 next_row["path"] = settings_raw.get("path", None)
 
                 if next_row["python_interpreter"] is not None:
-                    # next_row["python_interpreter"] takes the form of 
+                    # next_row["python_interpreter"] takes the form of PYTHONE
                     # e.g., /opt/dss/code-envs/python-3.10.12/bin/python3.10
                     py_interpreter_path = next_row["python_interpreter"]
                     py_version_str = None
