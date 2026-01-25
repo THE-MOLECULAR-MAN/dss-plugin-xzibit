@@ -110,7 +110,24 @@ def lookup_recipe_deprecation_status(dss_version: str, recipe_type: str, df_dss_
         str: The deprecation status (e.g., "deprecated", "supported").
              Returns "DSS Version Not Found" or "Recipe Type Not Found" if inputs do not match.
     """ 
-    
+    # 2. Input Validation (Sanitization)
+    # Ensure inputs are strings and strip whitespace to prevent matching errors
+    dss_ver = str(dss_version).strip()
+    rec_type = str(recipe_type).strip()
+
+    # 3. Locate the Row (DSS Version)
+    # matching the 'DSS_Major_Version' column
+    row = df_dss_recipes[df_dss_recipes["DSS_Major_Version"] == dss_ver]
+
+    if row.empty:
+        return f"DSS Version '{dss_ver}' Not Found"
+
+    # 4. Locate the Column (Recipe Type) and Return Value
+    if rec_type in df_dss_recipes.columns:
+        # iloc[0] takes the first match (should be unique)
+        return row.iloc[0][rec_type]
+    else:
+        return "Unknown"
 
 def lookup_python_support(
     dss_version: str, python_version: str, df_dss_python: pd.DataFrame
