@@ -93,31 +93,63 @@ def load_dss_version_support(file_path: str) -> pd.DataFrame:
     return df
 
 
-def lookup_python_support(dss_version, python_version):
-    """TBD"""
-    if df is None:
-        return "unknown"
+import pandas as pd
+import os
 
-    # check if
-    row = df[
-        (df["DSS_Version"] == dss_version) & (df["Python_Version"] == python_version)
-    ]
+
+def lookup_python_support(
+    dss_version: str, python_version: str, support_df: pd.DataFrame = None
+) -> str:
+    """
+    Looks up the support status for a specific Python version in a given DSS version.
+
+    Args:
+        dss_version (str): The DSS Major Version (e.g., "11", "14").
+        python_version (str): The Python version (e.g., "2.7", "3.9").
+        support_df (pd.DataFrame, optional): The loaded support DataFrame.
+                                             If None, loads from 'DSS_version_python_support.csv'.
+
+    Returns:
+        str: The support status (e.g., "supported", "partial", "deprecated").
+             Returns "DSS Version Not Found" or "Python Version Not Found" if inputs do not match.
+    """
+    # 1. Load DataFrame if not provided (Low Coupling)
+    if support_df is None:
+        file_path = "DSS_version_python_support.csv"
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Support file not found at {file_path}")
+        # Ensure strict string typing for version matching
+        support_df = pd.read_csv(file_path, dtype=str)
+
+    # 2. Input Validation (Sanitization)
+    # Ensure inputs are strings and strip whitespace to prevent matching errors
+    dss_ver = str(dss_version).strip()
+    py_ver = str(python_version).strip()
+
+    # 3. Locate the Row (DSS Version)
+    # matching the 'DSS_Major_Version' column
+    row = support_df[support_df["DSS_Major_Version"] == dss_ver]
 
     if row.empty:
-        return "unknown"
+        return f"DSS Version '{dss_ver}' Not Found"
 
-    return row.iloc[0]["Support_Status"]
+    # 4. Locate the Column (Python Version) and Return Value
+    if py_ver in support_df.columns:
+        # iloc[0] takes the first match (should be unique)
+        return row.iloc[0][py_ver]
+    else:
+        return f"Python Version '{py_ver}' column Not Found"
 
 
 # Example Usage
 if __name__ == "__main__":
-    # Assuming the file is in the current working directory
-    csv_file = "DSS_version_python_support.csv"
+    # Option 1: Passing the dataframe (Efficient for multiple lookups)
+    # Assuming load_dss_version_support is defined or we load manually
+    df = pd.read_csv("DSS_version_python_support.csv", dtype=str)
 
-    try:
-        support_df = load_dss_version_support(csv_file)
-        print("Data loaded successfully:")
-        print(support_df.head())
-        print(f"\nData Types:\n{support_df.dtypes}")
-    except FileNotFoundError as e:
-        print(e)
+    status = lookup_python_support("11", "2.7", support_df=df)
+    print(f"DSS 11 with Python 2.7: {status}")  # Output: partial
+
+    # Option 2: Standalone call (Loads file automatically)
+    status_14 = lookup_python_support("14", "3.12")
+    print(f"DSS 14 with Python 3.12: {status_14}")  # Output: supported
