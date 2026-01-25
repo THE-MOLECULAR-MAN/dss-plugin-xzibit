@@ -92,19 +92,6 @@ def load_dss_version_support(file_path: str) -> pd.DataFrame:
     
     return df
 
-# Example Usage
-if __name__ == "__main__":
-    # Assuming the file is in the current working directory
-    csv_file = "DSS_version_python_support.csv"
-    
-    try:
-        support_df = load_dss_version_support(csv_file)
-        print("Data loaded successfully:")
-        print(support_df.head())
-        print(f"\nData Types:\n{support_df.dtypes}")
-    except FileNotFoundError as e:
-        print(e)
-        
 
 def lookup_python_support(dss_version, python_version, df=load_python_support()):
     """TBD"""
