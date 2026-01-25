@@ -1,3 +1,6 @@
+# List of deprecated preprocessor names for DSS v14+
+
+
 DEPRECATED_PREPROCESSORS = {
     "AnonymizerProcessor",
     "MemoryEquiJoiner",
