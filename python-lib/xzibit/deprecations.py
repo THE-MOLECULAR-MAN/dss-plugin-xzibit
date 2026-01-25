@@ -92,21 +92,17 @@ def load_dss_version_support(file_path: str) -> pd.DataFrame:
 
     return df
 
-
 import pandas as pd
 import os
 
-
-def lookup_python_support(
-    dss_version: str, python_version: str, support_df: pd.DataFrame = None
-) -> str:
+def lookup_python_support(dss_version: str, python_version: str, support_df: pd.DataFrame = None) -> str:
     """
     Looks up the support status for a specific Python version in a given DSS version.
-
+    
     Args:
         dss_version (str): The DSS Major Version (e.g., "11", "14").
         python_version (str): The Python version (e.g., "2.7", "3.9").
-        support_df (pd.DataFrame, optional): The loaded support DataFrame.
+        support_df (pd.DataFrame, optional): The loaded support DataFrame. 
                                              If None, loads from 'DSS_version_python_support.csv'.
 
     Returns:
@@ -128,8 +124,8 @@ def lookup_python_support(
 
     # 3. Locate the Row (DSS Version)
     # matching the 'DSS_Major_Version' column
-    row = support_df[support_df["DSS_Major_Version"] == dss_ver]
-
+    row = support_df[support_df['DSS_Major_Version'] == dss_ver]
+    
     if row.empty:
         return f"DSS Version '{dss_ver}' Not Found"
 
@@ -140,19 +136,18 @@ def lookup_python_support(
     else:
         return f"Python Version '{py_ver}' column Not Found"
 
-
 # Example Usage
 if __name__ == "__main__":
     # Option 1: Passing the dataframe (Efficient for multiple lookups)
     # Assuming load_dss_version_support is defined or we load manually
     df = pd.read_csv("DSS_version_python_support.csv", dtype=str)
-
+    
     status = lookup_python_support("11", "2.7", support_df=df)
     print(f"DSS 11 with Python 2.7: {status}")  # Output: partial
 
     # Option 2: Standalone call (Loads file automatically)
     status_14 = lookup_python_support("14", "3.12")
-    print(f"DSS 14 with Python 3.12: {status_14}")  # Output: supported
+    print(f"DSS 14 with Python 3.12: {status_14}") # Output: supported
 # Example Usage
 if __name__ == "__main__":
     # Assuming the file is in the current working directory
