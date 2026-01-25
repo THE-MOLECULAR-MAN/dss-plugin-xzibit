@@ -90,7 +90,12 @@ class ConnectorCodeEnvs(Connector):
 
                 if next_row["python_interpreter"] is not None:
                     # next_row["python_interpreter"] takes the form of PYTHON39 or PYTHON310
-                    
+                    python_version_formatted = (
+                        next_row["python_interpreter"]
+                        .replace("PYTHON", " ")
+                        .replace("_", ".")
+                        .strip()
+                    )
 
                 # next_row["python_version_support_status"] = lookup_python_support(
                 #     "14", "3.10", self.__df_dss_python
