@@ -43,7 +43,7 @@ class ConnectorAPIServices(Connector):
 
         try:
             deployer = self.__client.get_projectdeployer()
-        except:
+        except Exception:
             print("No deployers connected")
             return None
 
