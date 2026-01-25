@@ -64,7 +64,7 @@ class ConnectorPlugins(Connector):
                         next_row["element_type"] = usage.element_type
                         next_row["object_id"] = usage.object_id
                         next_row["object_type"] = usage.object_type
-                        next_row["project_key"] = usage.project_key
+                        next_row["project_key"] = usage.project_key  # may not have one
 
                     except Exception as e:
                         print(
