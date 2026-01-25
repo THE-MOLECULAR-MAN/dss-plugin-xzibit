@@ -70,4 +70,4 @@ DSS_BUILT_IN_PLUGIN_IDS = [
 
 
 
-def load(dss_version):
+def load_python_
