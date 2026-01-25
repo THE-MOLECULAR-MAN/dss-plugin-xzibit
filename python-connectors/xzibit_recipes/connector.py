@@ -134,7 +134,7 @@ class ConnectorRecipes(Connector):
                         )
                         
                         if len(deprecated_preprocessors) > 0:
-                            next_row["deprecation_status"] = "D"
+                            next_row["deprecation_status"] = "U"
 
                         next_row["deprecation_status"] = (
                             lookup_recipe_deprecation_status(next_row["recipe_type"])
