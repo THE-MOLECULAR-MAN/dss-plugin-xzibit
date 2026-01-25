@@ -101,17 +101,7 @@ def load_local_csv_as_dataframe(filename: str) -> pd.DataFrame:
 def lookup_recipe_deprecation_status(
     recipe_type: str, df_dss_recipes: pd.DataFrame
 ) -> str:
-    """
-    Looks up the deprecation status for a specific recipe type in a given DSS version.
 
-    Args:
-        dss_version (str): The DSS Major Version (e.g., "11", "14").
-        recipe_type (str): The recipe type (e.g., "shaker", "python").
-        df_dss_recipes (pd.DataFrame): The loaded recipes deprecation DataFrame.
-    Returns:
-        str: The deprecation status (e.g., "deprecated", "supported").
-             Returns "DSS Version Not Found" or "Recipe Type Not Found" if inputs do not match.
-    """
     # 2. Input Validation (Sanitization)
     # Ensure inputs are strings and strip whitespace to prevent matching errors
     dss_ver = str(dss_version).strip()
