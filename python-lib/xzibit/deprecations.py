@@ -68,5 +68,5 @@ DSS_BUILT_IN_PLUGIN_IDS = [
 ]
 
 
-def load_python_support(filepath="./DSS_"):
+def load_python_support(filepath="./"):
     """TBD"""
