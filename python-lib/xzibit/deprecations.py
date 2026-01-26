@@ -110,7 +110,7 @@ def lookup_recipe_deprecation_status(recipe_type, df_dss_recipes):
     row = df_dss_recipes[df_dss_recipes["recipe_type"] == rec_type]
 
     if row.empty:
-        return f"Recipe Type '{rec_type}' Not Found"
+        return "Unknown""
     else:
         return row.iloc[0]["DSS_v14_recipe_deprecation_status"]
 
