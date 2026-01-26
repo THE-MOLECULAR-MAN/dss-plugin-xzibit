@@ -87,7 +87,7 @@ class ConnectorPlugins(Connector):
                     return
 
                 plugin_id = item_info.get("id", "NO_PLUGIN_ID")
-                #print(f"[plugins-generate_rows] Start plugin ID: {plugin_id}")
+                # print(f"[plugins-generate_rows] Start plugin ID: {plugin_id}")
 
                 next_row = flatten_dict(item_info, include_keys=keys)
                 next_row = remove_prefix_from_keys(next_row, "meta.")
@@ -99,7 +99,7 @@ class ConnectorPlugins(Connector):
                 settings_raw = plugin_handle.get_settings().get_raw()
                 next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
 
-                # TODO: 
+                # TODO: replace with CSV file method
                 next_row["plugin_is_deprecated"] = plugin_id in DEPRECATED_PLUGIN_IDS
 
             except Exception as e:
