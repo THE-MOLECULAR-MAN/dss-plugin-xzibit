@@ -99,6 +99,7 @@ class ConnectorPlugins(Connector):
                 settings_raw = plugin_handle.get_settings().get_raw()
                 next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
 
+                # TODO: 
                 next_row["plugin_is_deprecated"] = plugin_id in DEPRECATED_PLUGIN_IDS
 
             except Exception as e:
