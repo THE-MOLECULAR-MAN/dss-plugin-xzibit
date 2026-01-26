@@ -66,60 +66,60 @@ class ConnectorDatasets(Connector):
     def get_read_schema(self):
         """TBD"""
         return None
-        return {
-            "columns": [
-                {"meaning": "Text", "name": "id", "type": "string"},
-                {"meaning": "Text", "name": "name", "type": "string"},
-                {"meaning": "Text", "name": "projectKey", "type": "string"},
-                {"meaning": "Text", "name": "type", "type": "string"},
-                {"meaning": "FreeText", "name": "shortDesc", "type": "string"},
-                {"meaning": "FreeText", "name": "description", "type": "string"},
-                {"meaning": "Boolean", "name": "exists", "type": "boolean"},
-                {"meaning": "Text", "name": "formatType", "type": "string"},
-                {"meaning": "Text", "name": "params.connection", "type": "string"},
-                {"meaning": "Boolean", "name": "managed", "type": "boolean"},
-                {"meaning": "Text", "name": "params.mode", "type": "string"},
-                {"meaning": "Text", "name": "params.table", "type": "string"},
-                {"meaning": "Text", "name": "params.schema", "type": "string"},
-                {"meaning": "Text", "name": "params.path", "type": "string"},
-                {
-                    "meaning": "Text",
-                    "name": "creationTag.lastModifiedBy.login",
-                    "type": "string",
-                },
-                {
-                    "meaning": "Text",
-                    "name": "creationTag.lastModifiedOn",
-                    "type": "string",
-                },
-                {
-                    "meaning": "Text",
-                    "name": "versionTag.lastModifiedBy.login",
-                    "type": "string",
-                },
-                {
-                    "meaning": "Text",
-                    "name": "versionTag.lastModifiedOn",
-                    "type": "string",
-                },
-                {
-                    "meaning": "Text",
-                    "name": "params.metastoreDatabaseName",
-                    "type": "string",
-                },
-                {"meaning": "Text", "name": "params.folderSmartId", "type": "string"},
-                {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
-                {"meaning": "Boolean", "name": "featureGroup", "type": "boolean"},
-                {"meaning": "LongMeaning", "name": "num_metrics_checks", "type": "int"},
-                {"meaning": "LongMeaning", "name": "num_columns", "type": "int"},
-                {
-                    "meaning": "JSONArrayMeaning",
-                    "name": "column_names",
-                    "type": "string",
-                },
-                {"meaning": "URL", "name": "url", "type": "string"},
-            ]
-        }
+        # return {
+        #     "columns": [
+        #         {"meaning": "Text", "name": "id", "type": "string"},
+        #         {"meaning": "Text", "name": "name", "type": "string"},
+        #         {"meaning": "Text", "name": "projectKey", "type": "string"},
+        #         {"meaning": "Text", "name": "type", "type": "string"},
+        #         {"meaning": "FreeText", "name": "shortDesc", "type": "string"},
+        #         {"meaning": "FreeText", "name": "description", "type": "string"},
+        #         {"meaning": "Boolean", "name": "exists", "type": "boolean"},
+        #         {"meaning": "Text", "name": "formatType", "type": "string"},
+        #         {"meaning": "Text", "name": "params.connection", "type": "string"},
+        #         {"meaning": "Boolean", "name": "managed", "type": "boolean"},
+        #         {"meaning": "Text", "name": "params.mode", "type": "string"},
+        #         {"meaning": "Text", "name": "params.table", "type": "string"},
+        #         {"meaning": "Text", "name": "params.schema", "type": "string"},
+        #         {"meaning": "Text", "name": "params.path", "type": "string"},
+        #         {
+        #             "meaning": "Text",
+        #             "name": "creationTag.lastModifiedBy.login",
+        #             "type": "string",
+        #         },
+        #         {
+        #             "meaning": "Text",
+        #             "name": "creationTag.lastModifiedOn",
+        #             "type": "string",
+        #         },
+        #         {
+        #             "meaning": "Text",
+        #             "name": "versionTag.lastModifiedBy.login",
+        #             "type": "string",
+        #         },
+        #         {
+        #             "meaning": "Text",
+        #             "name": "versionTag.lastModifiedOn",
+        #             "type": "string",
+        #         },
+        #         {
+        #             "meaning": "Text",
+        #             "name": "params.metastoreDatabaseName",
+        #             "type": "string",
+        #         },
+        #         {"meaning": "Text", "name": "params.folderSmartId", "type": "string"},
+        #         {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
+        #         {"meaning": "Boolean", "name": "featureGroup", "type": "boolean"},
+        #         {"meaning": "LongMeaning", "name": "num_metrics_checks", "type": "int"},
+        #         {"meaning": "LongMeaning", "name": "num_columns", "type": "int"},
+        #         {
+        #             "meaning": "JSONArrayMeaning",
+        #             "name": "column_names",
+        #             "type": "string",
+        #         },
+        #         {"meaning": "URL", "name": "url", "type": "string"},
+        #     ]
+        # }
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
