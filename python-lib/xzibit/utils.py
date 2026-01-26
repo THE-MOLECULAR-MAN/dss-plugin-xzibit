@@ -529,7 +529,7 @@ def clear_pip_tmp():
             os.remove(d)
 
 
-def get_python_recipe_code_env(recipe) -> str:
+def get_python_recipe_code_env(recipe):
     """
     Retrieves the name of the code environment used by a Python recipe
     by inspecting the raw settings payload.
