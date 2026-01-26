@@ -10,6 +10,7 @@ from xzibit.deprecations import (
     DEPRECATED_PREPROCESSORS,
     load_local_csv_as_dataframe,
     lookup_recipe_deprecation_status,
+    get_python_recipe_code_env,
 )
 
 
@@ -121,7 +122,7 @@ class ConnectorRecipes(Connector):
                     )
 
                     try:
-                        next_row["code_env"] =  get_python_recipe_code_env(recipe_handle)
+                        next_row["code_env"] = get_python_recipe_code_env(recipe_handle)
 
                         deprecated_preprocessors = (
                             prepare_recipe_has_deprecated_preprocessors(recipe_handle)
