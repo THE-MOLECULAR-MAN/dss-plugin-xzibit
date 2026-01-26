@@ -527,3 +527,48 @@ def clear_pip_tmp():
             shutil.rmtree(d, ignore_errors=True)
         else:
             os.remove(d)
+
+
+def get_python_recipe_code_env(recipe: DSSRecipe) -> str:
+    """
+    Retrieves the name of the code environment used by a Python recipe
+    by inspecting the raw settings payload.
+    
+    Args:
+        recipe (dataikuapi.dss.recipe.DSSRecipe): The handle to the recipe object.
+        
+    Returns:
+        str: The name of the code environment if the recipe is a 'python' recipe
+             and an environment is explicitly selected. 
+             Returns "" (empty string) if:
+               - It is not a Python recipe.
+               - It uses the project default environment (Inherit).
+               - It uses the DSS built-in environment.
+    """
+    try:
+        # Get the settings handle
+        settings = recipe.get_settings()
+        # Access the underlying JSON dictionary directly to avoid AttributeError
+        # on missing helper methods.
+        payload = settings.get_recipe_raw_definition()
+        
+        # 1. Verify this is a Python recipe
+        if payload.get('type') != 'python':
+            return ""
+            
+        # 2. Navigate the params > envSelection structure
+        # The structure typically looks like: 
+        # { "params": { "envSelection": { "envMode": "EXPLICIT_ENV", "envName": "..." } } }
+        params = payload.get('params', {})
+        env_selection = params.get('envSelection', {})
+        
+        # 3. Check the mode. We only return a name if it's set to EXPLICIT_ENV.
+        # Other modes (INHERIT, DSS_BUILTIN) imply no specific env name to return.
+        #if env_selection.get('envMode','') == 'EXPLICIT_ENV':
+        return env_selection.get('envName', "")
+            
+        #return ""
+        
+    except Exception:
+        # Fail gracefully if the payload structure is unexpected
+        return ""
