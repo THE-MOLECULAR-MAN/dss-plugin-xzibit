@@ -121,7 +121,7 @@ class ConnectorRecipes(Connector):
                     )
 
                     try:
-                        next_row["code_env"] =  get_python_recipe_code_env(recipe)
+                        next_row["code_env"] =  get_python_recipe_code_env(recipe_handle)
 
                         deprecated_preprocessors = (
                             prepare_recipe_has_deprecated_preprocessors(recipe_handle)
