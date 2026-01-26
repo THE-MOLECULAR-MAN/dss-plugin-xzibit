@@ -211,7 +211,7 @@ def safe_extract_dataset_metadata(
             print(
                 f"safe_extract_dataset_metadata - EXCEPTION at dataset_handle.get_info().get_raw()"
             )
-            dataset_metadata["exists"] = "EXCEPTION 1"
+            dataset_metadata["exists"] = False
             return dataset_metadata
 
         try:
