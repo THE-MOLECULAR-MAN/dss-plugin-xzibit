@@ -121,7 +121,7 @@ class ConnectorRecipes(Connector):
                     )
 
                     try:
-                        
+                        next_row[""]
 
                         deprecated_preprocessors = (
                             prepare_recipe_has_deprecated_preprocessors(recipe_handle)
