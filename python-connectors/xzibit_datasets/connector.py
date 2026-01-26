@@ -65,6 +65,7 @@ class ConnectorDatasets(Connector):
 
     def get_read_schema(self):
         """TBD"""
+        return None
         return {
             "columns": [
                 {"meaning": "Text", "name": "id", "type": "string"},
