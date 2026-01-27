@@ -100,15 +100,15 @@ class ConnectorPythonAnalysis(Connector):
             logger.info(
                 f"Successfully fetched handle for Python code env {code_env_name}"
             )
-             "python_interpreter"
-                        ].replace("PYTHON", "")
+            #  "python_interpreter"
+            #             ].replace("PYTHON", "")
 
-                        # add a . as the second character in python_version_formatted
-                        python_version_formatted = (
-                            python_version_formatted[0]
-                            + "."
-                            + python_version_formatted[1:]
-                        )
+            #             # add a . as the second character in python_version_formatted
+            #             python_version_formatted = (
+            #                 python_version_formatted[0]
+            #                 + "."
+            #                 + python_version_formatted[1:]
+            #             )
             return (
                 code_env.get_settings()
                 .get_raw()
