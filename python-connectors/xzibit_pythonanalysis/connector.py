@@ -157,7 +157,7 @@ class ConnectorPythonAnalysis(Connector):
         raise NotImplementedError
 
     def list_partitions(self, partitioning):
-        """TBD"""
+        """Not needed for this connector."""
         return []
 
     def partition_exists(self, partitioning, partition_id):
