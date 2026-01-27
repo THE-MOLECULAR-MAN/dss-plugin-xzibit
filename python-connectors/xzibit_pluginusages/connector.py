@@ -66,6 +66,8 @@ class ConnectorPlugins(Connector):
 
                         dataset_info = dataset_handle.get_definition()
 
+                        yield next_row
+
                 except Exception:
                     print("plugin_usages - Exception occurred")
 
