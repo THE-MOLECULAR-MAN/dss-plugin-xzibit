@@ -25,14 +25,14 @@ class ConnectorPythonAnalysis(Connector):
         """
         recipe = self.project.get_recipe(recipe_name)
         settings = recipe.get_settings()
-        
+
         try:
             return settings.get_code()
         except AttributeError:
-            logger.warning(f"Could not retrieve code for {recipe_name}. It may not be a standard code recipe.")
+            logger.warning(
+                f"Could not retrieve code for {recipe_name}. It may not be a standard code recipe."
+            )
             return ""
-
-
 
     def generate_rows(
         self,
