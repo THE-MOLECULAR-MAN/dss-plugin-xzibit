@@ -94,7 +94,7 @@ class ConnectorPlugins(Connector):
                         }
 
                         next_row["object_id"] = recipe_handle.id
-                        next_row["subtype"] = recipe_handle.get("type
+                        next_row["subtype"] = recipe_handle.get("type", "")
 
                         # recipe_info = recipe_handle.get_definition()
 
