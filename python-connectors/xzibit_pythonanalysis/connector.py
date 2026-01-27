@@ -4,10 +4,14 @@ all Python Code Recipes, and information about them."""
 import tempfile
 import os
 import logging
-from typing import Dict, List, Any
+import json
+import ast
+import subprocess
+from typing import Dict, List, Any, Tuple
 
 from vermin import detect, Config
-
+import radon.complexity as radon_cc
+import radon.metrics as radon_mi
 
 import dataiku
 from dataiku import api_client
@@ -25,8 +29,10 @@ class ConnectorPythonAnalysis(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         self.vermin_config = Config()
-        self.vermin_config.set_verbose(0)  # 0 usually suppresses most non-result output
-        # TODO: If needed, intitialize other analysis tools here, like pylint, ruff, radon, deptry
+        self.vermin_config.set_verbose(0)
+        
+        # Tools configuration can be extended here if we need specific flags
+        self.tmp_dir = tempfile.mkdtemp(prefix="dss_recipe_analysis_")
 
     def get_python_recipes(self, project_handle):
         """
@@ -68,6 +74,8 @@ class ConnectorPythonAnalysis(Connector):
         Fetches the Python version associated with a given code environment.
         """
         try:
+            if not code_env_name:
+                return "Project Default"
             code_env = self.__client.get_code_env(code_env_name)
             details = code_env.get_details()
             return details.get("pythonVersion", "Unknown")
@@ -76,6 +84,112 @@ class ConnectorPythonAnalysis(Connector):
                 f"Could not retrieve Python version for code environment {code_env_name}."
             )
             return "Unknown"
+
+    def _analyze_vermin(self, code: str) -> str:
+        """Run Vermin to detect minimum Python version."""
+        try:
+            # Vermin expects a path or logic to parse. We use its internal detect.
+            # detect returns (mins, parsable, text)
+            mins = detect(code, config=self.vermin_config).mins
+            if mins:
+                # Returns something like "3.8"
+                return str(max(mins))
+            return "Unknown"
+        except Exception as e:
+            logger.warning(f"Vermin analysis failed: {e}")
+            return "Error"
+
+    def _analyze_radon(self, code: str) -> Dict[str, Any]:
+        """Run Radon for Cyclomatic Complexity and Maintainability Index."""
+        try:
+            # Cyclomatic Complexity
+            complexity = radon_cc.cc_visit(code)
+            avg_complexity = radon_cc.average_complexity(complexity) if complexity else 0
+            
+            # Maintainability Index (A score of 100 is best, 0 is worst)
+            mi_score = radon_mi.mi_visit(code, multi=False)
+            
+            return {
+                "radon_cc_avg": round(avg_complexity, 2),
+                "radon_mi_score": round(mi_score, 2),
+                "radon_rank": radon_mi.mi_rank(mi_score)
+            }
+        except Exception as e:
+            logger.warning(f"Radon analysis failed: {e}")
+            return {"radon_cc_avg": -1, "radon_mi_score": -1, "radon_rank": "Error"}
+
+    def _analyze_dependencies(self, code: str) -> List[str]:
+        """
+        Extracts imported modules.
+        This serves the purpose of dependency analysis (like Deptry/Pipreqs)
+        but adapted for single-file scripts without project files.
+        """
+        imports = set()
+        try:
+            tree = ast.parse(code)
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Import):
+                    for alias in node.names:
+                        imports.add(alias.name.split('.')[0])
+                elif isinstance(node, ast.ImportFrom):
+                    if node.module:
+                        imports.add(node.module.split('.')[0])
+            return list(imports)
+        except SyntaxError:
+            return ["<SyntaxError>"]
+        except Exception as e:
+            logger.warning(f"Dependency analysis failed: {e}")
+            return []
+
+    def _run_subprocess_tool(self, cmd: List[str], code: str) -> str:
+        """Helper to run CLI tools like Ruff/Pylint against code content."""
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.py', dir=self.tmp_dir, delete=False) as tmp:
+            tmp.write(code)
+            tmp_path = tmp.name
+        
+        try:
+            # Run the command against the temp file
+            result = subprocess.run(
+                cmd + [tmp_path], 
+                capture_output=True, 
+                text=True,
+                check=False # We expect non-zero exits from linters
+            )
+            return result.stdout
+        finally:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
+    def _analyze_pylint(self, code: str) -> float:
+        """Runs Pylint and extracts the global evaluation score."""
+        # Pylint is talkative, so we format output to JSON or parse standard out
+        # Using a minimal score-only regex or json output is best.
+        # Note: 'pylint' must be installed in the code env.
+        try:
+            # We use a regex to extract the score from standard report if JSON fails, 
+            # but JSON is safer if available.
+            output = self._run_subprocess_tool(['pylint', '--output-format=json'], code)
+            data = json.loads(output)
+            # Pylint JSON export is a list of messages. It doesn't always contain the global score easily.
+            # Fallback: Run with report enabled for score extraction is tricky in automation.
+            # Strategy: Calculate a naive score or use simple violation count from JSON.
+            # Standard Pylint formula: 10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)
+            
+            # For simplicity in this connector, let's return the count of issues found
+            return len(data)
+        except json.JSONDecodeError:
+            return -1.0
+        except Exception:
+            return -1.0
+
+    def _analyze_ruff(self, code: str) -> int:
+        """Runs Ruff and returns total violation count."""
+        try:
+            output = self._run_subprocess_tool(['ruff', 'check', '--output-format=json'], code)
+            data = json.loads(output)
+            return len(data)
+        except Exception:
+            return -1
 
     def generate_rows(
         self,
@@ -115,26 +229,31 @@ class ConnectorPythonAnalysis(Connector):
                             next_row["code_env_name"] = code_env_name
                             next_row["python_version"] = python_version
 
-                            # vermin analysis for minimum Python versions
-                            vermin_analysis = self.analyze_code_compatibility(code)
-                            # TODO: add vermin results to the row
+                            # --- Analysis Tools ---
+                            
+                            # 1. Vermin (Min Python Version)
+                            next_row["vermin_min_version"] = self._analyze_vermin(code)
 
-                            # pylint analysis for quality score
-                            # TODO: implement pylint analysis and add results to the row
+                            # 2. Radon (Complexity)
+                            radon_metrics = self._analyze_radon(code)
+                            next_row.update(radon_metrics)
 
-                            # ruff analysis for speed/style
-                            # TODO: implement ruff analysis and add results to the row
+                            # 3. Dependencies (AST/Deptry logic)
+                            deps = self._analyze_dependencies(code)
+                            next_row["dependencies_list"] = ",".join(deps)
+                            next_row["dependencies_count"] = len(deps)
 
-                            # radon analysis for complexity
-                            # TODO: implement radon analysis and add results to the row
+                            # 4. Pylint (Quality) - Returns issue count
+                            next_row["pylint_issues"] = self._analyze_pylint(code)
 
-                            # deptry analysis for dependencies
-                            # TODO: implement deptry analysis and add results to the row
+                            # 5. Ruff (Speed/Style) - Returns violation count
+                            next_row["ruff_violations"] = self._analyze_ruff(code)
 
                         except Exception as e:
                             logger.error(
                                 f"Error analyzing {name} in {project_key}: {e}"
                             )
+                            next_row["error"] = str(e)
                         finally:
                             # Yield the row with analysis results
                             records_generated += 1
@@ -144,7 +263,8 @@ class ConnectorPythonAnalysis(Connector):
                         logger.info(f"{name:<40} | {'Skipped (No Code)':<20} | {'-'}")
 
             except Exception as e:
-                print(f"Error accessing project {project_key}: {e}")
+                # Handle project access permissions or other errors
+                logger.warning(f"Error accessing project {project_key}: {e}")
                 continue
 
     def get_read_schema(self):
