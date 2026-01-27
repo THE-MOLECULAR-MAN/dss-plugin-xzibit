@@ -57,6 +57,9 @@ class ConnectorPlugins(Connector):
                     }
 
                     next_row["object_id"] = dataset_handle.id
+                    
+                    if obj_uses_plugin:
+                        
 
                     dataset_info = dataset_handle.get_definition()
 
