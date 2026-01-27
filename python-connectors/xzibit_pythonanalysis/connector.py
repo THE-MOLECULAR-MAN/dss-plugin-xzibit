@@ -30,7 +30,7 @@ class ConnectorPythonAnalysis(Connector):
         self.__client = api_client()
         self.vermin_config = Config()
         self.vermin_config.set_verbose(0)
-        
+
         # Tools configuration can be extended here if we need specific flags
         self.tmp_dir = tempfile.mkdtemp(prefix="dss_recipe_analysis_")
 
@@ -104,15 +104,17 @@ class ConnectorPythonAnalysis(Connector):
         try:
             # Cyclomatic Complexity
             complexity = radon_cc.cc_visit(code)
-            avg_complexity = radon_cc.average_complexity(complexity) if complexity else 0
-            
+            avg_complexity = (
+                radon_cc.average_complexity(complexity) if complexity else 0
+            )
+
             # Maintainability Index (A score of 100 is best, 0 is worst)
             mi_score = radon_mi.mi_visit(code, multi=False)
-            
+
             return {
                 "radon_cc_avg": round(avg_complexity, 2),
                 "radon_mi_score": round(mi_score, 2),
-                "radon_rank": radon_mi.mi_rank(mi_score)
+                "radon_rank": radon_mi.mi_rank(mi_score),
             }
         except Exception as e:
             logger.warning(f"Radon analysis failed: {e}")
@@ -130,10 +132,10 @@ class ConnectorPythonAnalysis(Connector):
             for node in ast.walk(tree):
                 if isinstance(node, ast.Import):
                     for alias in node.names:
-                        imports.add(alias.name.split('.')[0])
+                        imports.add(alias.name.split(".")[0])
                 elif isinstance(node, ast.ImportFrom):
                     if node.module:
-                        imports.add(node.module.split('.')[0])
+                        imports.add(node.module.split(".")[0])
             return list(imports)
         except SyntaxError:
             return ["<SyntaxError>"]
@@ -143,17 +145,19 @@ class ConnectorPythonAnalysis(Connector):
 
     def _run_subprocess_tool(self, cmd: List[str], code: str) -> str:
         """Helper to run CLI tools like Ruff/Pylint against code content."""
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.py', dir=self.tmp_dir, delete=False) as tmp:
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".py", dir=self.tmp_dir, delete=False
+        ) as tmp:
             tmp.write(code)
             tmp_path = tmp.name
-        
+
         try:
             # Run the command against the temp file
             result = subprocess.run(
-                cmd + [tmp_path], 
-                capture_output=True, 
+                cmd + [tmp_path],
+                capture_output=True,
                 text=True,
-                check=False # We expect non-zero exits from linters
+                check=False,  # We expect non-zero exits from linters
             )
             return result.stdout
         finally:
@@ -166,15 +170,15 @@ class ConnectorPythonAnalysis(Connector):
         # Using a minimal score-only regex or json output is best.
         # Note: 'pylint' must be installed in the code env.
         try:
-            # We use a regex to extract the score from standard report if JSON fails, 
+            # We use a regex to extract the score from standard report if JSON fails,
             # but JSON is safer if available.
-            output = self._run_subprocess_tool(['pylint', '--output-format=json'], code)
+            output = self._run_subprocess_tool(["pylint", "--output-format=json"], code)
             data = json.loads(output)
             # Pylint JSON export is a list of messages. It doesn't always contain the global score easily.
             # Fallback: Run with report enabled for score extraction is tricky in automation.
             # Strategy: Calculate a naive score or use simple violation count from JSON.
             # Standard Pylint formula: 10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)
-            
+
             # For simplicity in this connector, let's return the count of issues found
             return len(data)
         except json.JSONDecodeError:
@@ -185,7 +189,9 @@ class ConnectorPythonAnalysis(Connector):
     def _analyze_ruff(self, code: str) -> int:
         """Runs Ruff and returns total violation count."""
         try:
-            output = self._run_subprocess_tool(['ruff', 'check', '--output-format=json'], code)
+            output = self._run_subprocess_tool(
+                ["ruff", "check", "--output-format=json"], code
+            )
             data = json.loads(output)
             return len(data)
         except Exception:
@@ -230,7 +236,7 @@ class ConnectorPythonAnalysis(Connector):
                             next_row["python_version"] = python_version
 
                             # --- Analysis Tools ---
-                            
+
                             # 1. Vermin (Min Python Version)
                             next_row["vermin_min_version"] = self._analyze_vermin(code)
 
