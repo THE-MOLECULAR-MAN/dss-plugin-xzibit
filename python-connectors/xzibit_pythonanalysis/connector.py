@@ -268,7 +268,7 @@ class ConnectorPythonAnalysis(Connector):
 
                             # # 3. Dependencies (AST/Deptry logic)
                             deps = self._analyze_dependencies(code)
-                            # dependencies_list returns a syntax error if mor t
+                            # dependencies_list returns a syntax error if mor than 1 import
                             next_row["dependencies_list"] = ",".join(deps)
                             next_row["dependencies_count"] = len(deps)
 
