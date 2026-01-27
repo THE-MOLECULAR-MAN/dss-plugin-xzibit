@@ -82,7 +82,7 @@ class ConnectorPythonAnalysis(Connector):
             code_env = self.__client.get_code_env(code_env_name)
             code_env.get_settings().get_raw().get("desc", {}).get(
                     "pythonInterpreter", None
-                )    
+                )
         
         except Exception:
             logger.warning(
