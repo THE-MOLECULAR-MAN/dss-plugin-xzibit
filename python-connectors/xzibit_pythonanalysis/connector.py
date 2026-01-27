@@ -293,9 +293,9 @@ class ConnectorPythonAnalysis(Connector):
                                 min_python_version_from_vermin
                             )
 
-                            is_python3 = mpvv[0] == 3
+                            is_python3 = 
 
-                            if is_python3:
+                            if mpvv[0] == 3:
 
                                 # 2. Radon (Complexity) - WORKING
                                 radon_metrics = self._analyze_radon(code)
