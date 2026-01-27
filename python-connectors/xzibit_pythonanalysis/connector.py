@@ -113,9 +113,7 @@ class ConnectorPythonAnalysis(Connector):
             return python_version_formatted
 
         except Exception:
-            logger.warning(
-                f"Could not retrieve Python version for code env {code_env_name}."
-            )
+            logger.warning(f"Couldn't get Python version for code env {code_env_name}.")
             return "Exception"
 
     def _analyze_vermin(self, code: str) -> str:
