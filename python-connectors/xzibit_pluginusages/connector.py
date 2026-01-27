@@ -49,6 +49,8 @@ class ConnectorPlugins(Connector):
 
                 try:
                     obj_uses_plugin = False
+                    
+                    # determine if 
 
                     if obj_uses_plugin:
                         next_row = {
