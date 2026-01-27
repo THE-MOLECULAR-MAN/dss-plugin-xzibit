@@ -119,8 +119,9 @@ class ConnectorPythonAnalysis(Connector):
             # Vermin expects a path or logic to parse. We use its internal detect.
             # detect returns (mins, parsable, text)
             mins = detect(code, config=self.vermin_config)
+            print(mins)
             mins = get_tuples_only(mins)
-            
+
             if mins:
                 # return format_version_tuple(max(mins))
                 return tupele(max(mins))
