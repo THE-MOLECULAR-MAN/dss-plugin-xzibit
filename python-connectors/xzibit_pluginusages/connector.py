@@ -52,7 +52,7 @@ class ConnectorPlugins(Connector):
 
                     next_row = {
                         "projectKey": pk,
-                        "dataset_id": dataset_handle.id,
+                        "object_id": dataset_handle.id,
                         "dataset_name": dataset_handle.name,
                         "dataset_type": dataset_info.get("type", None),
                         "is_managed": dataset_info.get("managed", None),
