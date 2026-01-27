@@ -297,7 +297,7 @@ class ConnectorPythonAnalysis(Connector):
                             # # dependencies_list returns a syntax error
                             # next_row["dependencies_count"] = len(deps)
 
-                            # # 4. Pylint (Quality) - Returns issue count
+                            # # 4. Pylint (Quality) - Returns issue count - WORKING
                             next_row["pylint_issues"] = self._analyze_pylint(code)
 
                             # # 5. Ruff (Speed/Style) - Returns violation count
