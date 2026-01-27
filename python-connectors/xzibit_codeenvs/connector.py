@@ -41,7 +41,6 @@ class ConnectorCodeEnvs(Connector):
             "compute_codeenv_disk_space_usage", False
         )
 
-
     def get_url(self, env_name, env_lang="python"):
         """Create a URL to the DSS object in question in this specific DSS instance.
         Return None if any of the inputs are None."""
