@@ -58,7 +58,7 @@ class ConnectorPlugins(Connector):
                     # dataset_info = dataset_handle.get_definition()
 
                 except Exception as e:
-                    dataset_info = {"error": str(e)}
+                    next_row = {"error": str(e)}
 
                 finally:
                     records_generated += 1
