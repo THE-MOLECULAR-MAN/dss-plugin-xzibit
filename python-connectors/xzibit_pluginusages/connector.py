@@ -105,15 +105,15 @@ class ConnectorPlugins(Connector):
             #         print("plugin_usages - Exception occurred")
 
             # DSS v12 does not offer list_plugin_usages() at the project level.
-            for plugin_usage in project_handle.list_plugins_usages():
-                next_row = {
-                    "projectKey": pk,
-                }
+            # for plugin_usage in project_handle.list_plugins_usages():
+            #     next_row = {
+            #         "projectKey": pk,
+            #     }
 
-                next_row["object_id"] = plugin_usage.get("id", "")
-                next_row["subtype"] = plugin_usage.get("type", "")
+            #     next_row["object_id"] = plugin_usage.get("id", "")
+            #     next_row["subtype"] = plugin_usage.get("type", "")
 
-                yield next_row
+            #     yield next_row
 
     def get_read_schema(self):
         """TBD"""
