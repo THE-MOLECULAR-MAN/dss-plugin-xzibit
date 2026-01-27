@@ -31,18 +31,7 @@ class ConnectorPythonAnalysis(Connector):
     ):
         """TBD"""
         records_generated = 0
-        keys = [
-            "projectKey",
-            "ownerLogin",
-            "projectStatus",
-            "contributors",
-            "name",
-            "shortDesc",
-            "description",
-            "tags",
-            "versionTag.lastModifiedOn",
-            "tutorialProject",
-        ]
+    
         # iterate through each object
         for item_info in self.__client.list_projects():
             if records_limit > 0 and records_generated >= records_limit:
