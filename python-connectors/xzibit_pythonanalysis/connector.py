@@ -83,7 +83,7 @@ class ConnectorPythonAnalysis(Connector):
                                 f"Error analyzing {name} in {project_key}: {e}"
                             )
                         finally:
-                            # Build the row
+                            # Re
                             records_generated += 1
                             yield next_row
 
