@@ -286,7 +286,7 @@ class ConnectorPythonAnalysis(Connector):
 
                             # 1. Vermin (Min Python Version) - WORKING
                             mpvv = self._analyze_vermin(code)
-                            min_python_version_from_Vermin = str(mpvv[0]) + "." + mpvv[1]
+                            min_python_version_from_Vermin = str(mpvv[0]) + "." + str(mpvv[1]
                             next_row["min_python_version_from_Vermin"] = ()
 
                             # 2. Radon (Complexity) - WORKING
