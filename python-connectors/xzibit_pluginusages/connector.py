@@ -47,7 +47,7 @@ class ConnectorPlugins(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     return
                 try:
-                dataset_info = dataset_handle.get_definition()
+                    dataset_info = dataset_handle.get_definition()
                 except Exception as e:
                     dataset_info = {"error": str(e)}
 
