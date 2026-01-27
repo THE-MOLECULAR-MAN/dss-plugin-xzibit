@@ -80,8 +80,10 @@ class ConnectorPythonAnalysis(Connector):
             if not code_env_name:
                 return "Project Default"
             code_env = self.__client.get_code_env(code_env_name)
-            details = code_env.get_details()
-            return details.get("pythonVersion", "Unknown")
+         code_env_handle.get_settings().get_raw().get("desc", {}).get(
+                    "pythonInterpreter", None
+                )    
+        
         except Exception:
             logger.warning(
                 f"Could not retrieve Python version for code environment {code_env_name}."
