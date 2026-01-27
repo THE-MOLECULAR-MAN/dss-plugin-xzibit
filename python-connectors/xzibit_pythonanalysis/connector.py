@@ -106,7 +106,7 @@ class ConnectorPythonAnalysis(Connector):
                 .get("desc", {})
                 .get("pythonInterpreter", None)
             )
-            py_interp_version = 
+            py_interp_version = py_interp_version.replace("PYTHON", "")
             #  "python_interpreter"
             #             ].replace("PYTHON", "")
 
