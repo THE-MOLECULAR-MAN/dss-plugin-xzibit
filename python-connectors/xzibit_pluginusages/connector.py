@@ -48,13 +48,14 @@ class ConnectorPlugins(Connector):
                     return
 
                 try:
-                    
 
                     next_row = {
                         "object_type": "dataset",
                         "projectKey": pk,
                         "object_id": dataset_handle.id,
                     }
+
+                    # dataset_info = dataset_handle.get_definition()
 
                 except Exception as e:
                     dataset_info = {"error": str(e)}
