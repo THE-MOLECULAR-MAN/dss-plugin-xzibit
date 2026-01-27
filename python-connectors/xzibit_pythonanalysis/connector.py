@@ -111,7 +111,7 @@ class ConnectorPythonAnalysis(Connector):
                             )
                             next_row["code_env_name"] = code_env_name
                             next_row["python_version"] = python_version
-                            
+
                             # vermin analysis for minimum Python versions
                             vermin_analysis = self.analyze_code_compatibility(code)
 
