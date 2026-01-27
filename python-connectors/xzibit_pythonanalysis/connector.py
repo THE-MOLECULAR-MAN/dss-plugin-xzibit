@@ -109,6 +109,8 @@ class ConnectorPythonAnalysis(Connector):
             py_interp_version = py_interp_version.replace("PYTHON", "")
             python_version_formatted = (
                 py_interp_version[0] + "." + py_interp_version[1:]
+            )
+            return python_version_formatted
             #  "python_interpreter"
             #             ].replace("PYTHON", "")
 
