@@ -47,29 +47,29 @@ class ConnectorPlugins(Connector):
             ##################################################################
             # Datasets
             ##################################################################
-            # for dataset_handle in project_handle.list_datasets(as_type="objects"):
-            #     if records_limit > 0 and records_generated >= records_limit:
-            #         return
+            for dataset_handle in project_handle.list_datasets(as_type="objects"):
+                if records_limit > 0 and records_generated >= records_limit:
+                    return
 
-            #     try:
-            #         obj_uses_plugin = False
+                try:
+                    obj_uses_plugin = False
 
-            #         # determine if dataset uses a plugin
+                    # determine if dataset uses a plugin
 
-            #         if obj_uses_plugin:
-            #             next_row = {
-            #                 "object_type": "dataset",
-            #                 "projectKey": pk,
-            #             }
+                    if obj_uses_plugin:
+                        next_row = {
+                            "object_type": "dataset",
+                            "projectKey": pk,
+                        }
 
-            #             next_row["object_id"] = dataset_handle.id
+                        next_row["object_id"] = dataset_handle.id
 
-            #             dataset_info = dataset_handle.get_definition()
+                        dataset_info = dataset_handle.get_definition()
 
-            #             yield next_row
+                        yield next_row
 
-            #     except Exception:
-            #         print("plugin_usages - Exception occurred")
+                except Exception:
+                    print("plugin_usages - Exception occurred")
 
             ##################################################################
             # Recipes
