@@ -111,16 +111,6 @@ class ConnectorPythonAnalysis(Connector):
                 py_interp_version[0] + "." + py_interp_version[1:]
             )
             return python_version_formatted
-            #  "python_interpreter"
-            #             ].replace("PYTHON", "")
-
-            #             # add a . as the second character in python_version_formatted
-            #             python_version_formatted = (
-            #                 python_version_formatted[0]
-            #                 + "."
-            #                 + python_version_formatted[1:]
-            #             )
-            return ()
 
         except Exception:
             logger.warning(
