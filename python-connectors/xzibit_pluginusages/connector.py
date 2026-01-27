@@ -63,9 +63,7 @@ class ConnectorPlugins(Connector):
                 except Exception:
                     print("plugin_usages - Exception occurred")
 
-                finally:
-                    records_generated += 1
-                    yield next_row
+                
 
     def get_read_schema(self):
         """TBD"""
