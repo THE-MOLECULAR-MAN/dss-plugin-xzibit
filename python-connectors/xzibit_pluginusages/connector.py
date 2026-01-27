@@ -48,6 +48,15 @@ class ConnectorPlugins(Connector):
                     return
                 try:
                     dataset_info = dataset_handle.get_definition()
+                    
+                    next_row = {
+                    "projectKey": pk,
+                    "dataset_id": dataset_handle.id,
+                    "dataset_name": dataset_handle.name,
+                    "dataset_type": dataset_info.get("type", None),
+                    "is_managed": dataset_info.get("managed", None),
+                }
+
                 except Exception as e:
                     dataset_info = {"error": str(e)}
 
