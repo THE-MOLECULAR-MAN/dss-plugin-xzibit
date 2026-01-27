@@ -198,7 +198,7 @@ class ConnectorPythonAnalysis(Connector):
             # For simplicity in this connector, let's return the count of issues found
             return len(data)
         except json.JSONDecodeError:
-            logger.error(f"_analyze_pylint")
+            logger.error(f"_analyze_pylint - JSON decode error")
             return -1.0
         except Exception:
             return -1.0
