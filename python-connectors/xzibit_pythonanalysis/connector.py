@@ -73,6 +73,12 @@ class ConnectorPythonAnalysis(Connector):
 
                         # vermin analysis:
                         vermin_analysis = self.analyze_code_compatibility(code)
+                        
+                        
+                        
+                        records_generated += 1
+            yield next_row
+
 
                     else:
                         logger.info(f"{name:<40} | {'Skipped (No Code)':<20} | {'-'}")
