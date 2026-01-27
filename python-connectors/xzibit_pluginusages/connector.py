@@ -54,7 +54,7 @@ class ConnectorPlugins(Connector):
                         "projectKey": pk,
                     }
 
-                    next_row["object_id"] = dataset_handle.id
+                    next_row["object_id"] = dataset_handle.
 
                     dataset_info = dataset_handle.get_definition()
 
