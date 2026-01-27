@@ -47,7 +47,7 @@ class ConnectorPythonAnalysis(Connector):
         """
         try:
             recipe = project_handle.get_recipe(recipe_name)
-            settings = recipe.get_settings()
+            settings = recipe_handle.get_settings()
             return settings.get_code()
         except AttributeError:
             logger.warning(
