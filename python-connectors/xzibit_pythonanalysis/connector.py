@@ -121,8 +121,7 @@ class ConnectorPythonAnalysis(Connector):
             mins = detect(code, config=self.vermin_config)
             mins = get_tuples_only(mins)
             if mins:
-                m = format_version_tuple(max(mins))
-                return m
+                return format_version_tuple(max(mins))
             return "Unknown"
         except Exception as e:
             logger.warning(f"Vermin analysis failed: {e}")
