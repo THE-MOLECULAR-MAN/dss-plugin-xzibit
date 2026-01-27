@@ -293,7 +293,7 @@ class ConnectorPythonAnalysis(Connector):
                                 min_python_version_from_vermin
                             )
                             
-                            is_python2
+                            is_python2 = False
 
                             # 2. Radon (Complexity) - WORKING
                             radon_metrics = self._analyze_radon(code)
