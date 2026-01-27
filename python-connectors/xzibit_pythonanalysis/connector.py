@@ -55,19 +55,19 @@ class ConnectorPythonAnalysis(Connector):
             )
             return ""
 
-    def get_recipe_code_env_name(self, recipe_handle) -> str:
-        """
-        Fetches the code environment name from a specific recipe.
-        """
-        try:
-            # recipe = self.project.get_recipe(recipe_name)
-            settings = recipe_handle.get_settings()
-            return settings.get_code_env_name()
-        except AttributeError:
-            logger.warning(
-                f"Could not retrieve code environment for {recipe_name}. It may not be a standard code recipe."
-            )
-            return ""
+    # def get_recipe_code_env_name(self, recipe_handle) -> str:
+    #     """
+    #     Fetches the code environment name from a specific recipe.
+    #     """
+    #     try:
+    #         # recipe = self.project.get_recipe(recipe_name)
+    #         settings = recipe_handle.get_settings()
+    #         return settings.get_code_env_name()
+    #     except AttributeError:
+    #         logger.warning(
+    #             f"Could not retrieve code environment for {recipe_name}. It may not be a standard code recipe."
+    #         )
+    #         return ""
 
     def get_code_env_python_version(self, code_env_name: str) -> str:
         """
