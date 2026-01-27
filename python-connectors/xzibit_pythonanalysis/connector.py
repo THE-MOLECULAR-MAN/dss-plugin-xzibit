@@ -31,8 +31,8 @@ class ConnectorPythonAnalysis(Connector):
     ):
         """TBD"""
         records_generated = 0
-    
-        # iterate through each object
+
+        # iterate through each project
         for item_info in self.__client.list_projects():
             if records_limit > 0 and records_generated >= records_limit:
                 return
