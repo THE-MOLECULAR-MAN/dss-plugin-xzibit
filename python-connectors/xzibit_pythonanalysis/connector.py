@@ -53,7 +53,8 @@ class ConnectorPythonAnalysis(Connector):
         partition_id=None,
         records_limit=-1,
     ):
-        """A generator function that yields rows for the dataset."""
+        """A generator function that yields rows for the dataset.
+        Each row rep"""
         records_generated = 0
 
         # iterate through each project
