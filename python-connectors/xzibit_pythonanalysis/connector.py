@@ -40,6 +40,7 @@ class ConnectorPythonAnalysis(Connector):
         
 
         try:
+            settings = recipe.get_settings()
             return settings.get_code()
         except AttributeError:
             logger.warning(
