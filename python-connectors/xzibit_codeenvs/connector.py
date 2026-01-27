@@ -112,10 +112,6 @@ class ConnectorCodeEnvs(Connector):
                     else:
                         next_row["python_version_support_status"] = "Unknown"
 
-                    # next_row["python_version_support_status"] = lookup_python_support(
-                    #     "14", "3.10", self.__df_dss_python
-                    # )
-
                 if self.__compute_codeenv_disk_space_usage:
                     # get_path_size_megabytes returns 0 if path does not exist
                     next_row["size_in_MB"] = get_path_size_megabytes(next_row["path"])
