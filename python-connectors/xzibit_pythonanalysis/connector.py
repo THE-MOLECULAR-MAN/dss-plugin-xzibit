@@ -79,7 +79,7 @@ class ConnectorPythonAnalysis(Connector):
         try:
             if not code_env_name:
                 return "Code Env Name Not Specified"
-            logger.warning(
+            logger.info(
                 f"Could not retrieve Python version for code environment {code_env_name}."
             )
             code_env = self.__client.get_code_env(code_env_name)
