@@ -298,7 +298,7 @@ class ConnectorPythonAnalysis(Connector):
                             # next_row["dependencies_count"] = len(deps)
 
                             # # 4. Pylint (Quality) - Returns issue count - WORKING
-                            next_row["pylint_issues"] = self._analyze_pylint(code)
+                            # next_row["pylint_issues"] = self._analyze_pylint(code)
 
                             # # 5. Ruff (Speed/Style) - Returns violation count
                             # always returns -1.0
