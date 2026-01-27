@@ -293,7 +293,7 @@ class ConnectorPythonAnalysis(Connector):
                                 min_python_version_from_vermin
                             )
 
-                            # only 
+                            # only proceed with further analysis if Python 3.x
 
                             if mpvv[0] == 3:
 
