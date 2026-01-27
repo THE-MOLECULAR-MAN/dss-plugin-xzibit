@@ -86,7 +86,6 @@ class ConnectorPlugins(Connector):
                     raw_data = recipe_settings_handle.get_recipe_raw_definition()
 
                     print("Recipe Raw Data:")
-
                     pp(raw_data)
 
                     if obj_uses_plugin:
