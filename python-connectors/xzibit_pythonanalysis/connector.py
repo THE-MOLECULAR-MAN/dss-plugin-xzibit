@@ -37,14 +37,7 @@ class ConnectorPythonAnalysis(Connector):
             if records_limit > 0 and records_generated >= records_limit:
                 return
 
-            next_row = flatten_dict(item_info, include_keys=keys)
 
-            # custom things for this specific class:
-            next_row = remove_prefix_from_keys(next_row, "versionTag.")
-            next_row["last_modified_timestamp"] = datetime.fromtimestamp(
-                next_row.get("lastModifiedOn", 0) // 1000
-            )
-            next_row["url"] = self.get_url(next_row["projectKey"])
             records_generated += 1
             yield next_row
 
