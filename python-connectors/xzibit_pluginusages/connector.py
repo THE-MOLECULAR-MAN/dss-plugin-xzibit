@@ -99,8 +99,6 @@ class ConnectorPlugins(Connector):
                         next_row["object_id"] = recipe_handle.id
                         next_row["subtype"] = obj_subtype
 
-                        # recipe_info = recipe_handle.get_definition()
-
                         yield next_row
 
                 except Exception:
