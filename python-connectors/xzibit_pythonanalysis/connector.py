@@ -123,7 +123,7 @@ class ConnectorPythonAnalysis(Connector):
                             # TODO: implement pylint analysis and add results to the row
 
                             # ruff analysis for speed/style
-                            # TODO: implement pylint analysis and add results to the row
+                            # TODO: implement ruff analysis and add results to the row
 
                             # radon analysis for complexity
                             # ... (not implemented here, but would go similarly)
