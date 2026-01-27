@@ -216,7 +216,7 @@ class ConnectorPythonAnalysis(Connector):
                 logger.info(f"starting on project {project_key}")
                 project_handle = self.__client.get_project(project_key)
                 logger.info(f"fetching python_recipes for {project_key}")
-                
+
                 python_recipes = self.get_python_recipes(project_handle)
 
                 for recipe_meta in python_recipes:
