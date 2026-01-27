@@ -220,7 +220,7 @@ class ConnectorPythonAnalysis(Connector):
                 python_recipes = self.get_python_recipes(project_handle)
 
                 for recipe_meta in python_recipes:
-                    logger.info(f"Analyzi {project_key}")
+                    logger.info(f"Analyzing Python code for recipe {project_key}")
 
                     name = recipe_meta["name"]
                     code = self.get_recipe_code(name)
