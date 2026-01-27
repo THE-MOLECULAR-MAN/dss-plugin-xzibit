@@ -151,8 +151,8 @@ class ConnectorPythonAnalysis(Connector):
                 "radon_rank": radon_mi.mi_rank(mi_score),
             }
         except Exception as e:
-            logger.error(f"Radon analysis failed: {e}")
-            
+            logger.error(f"Radon analysis failed, code below {e}")
+
             print(code)
             return {"radon_cc_avg": -1, "radon_mi_score": -1, "radon_rank": "Error"}
 
