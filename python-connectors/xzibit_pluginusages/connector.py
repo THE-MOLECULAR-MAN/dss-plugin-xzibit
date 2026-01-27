@@ -91,7 +91,8 @@ class ConnectorPlugins(Connector):
                     print("Recipe Raw Data:")
                     pp(raw_data)
 
-                    if obj_uses_plugin:
+                    if dataset_type.startswith("Custom"):
+            
                         next_row = {
                             "object_type": "recipe",
                             "projectKey": pk,
