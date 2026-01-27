@@ -281,7 +281,7 @@ class ConnectorPythonAnalysis(Connector):
                             # 1. Vermin (Min Python Version) - WORKING
                             # next_row["vermin_min_version"] = self._analyze_vermin(code)
 
-                            # 2. Radon (Complexity)
+                            # 2. Radon (Complexity) - WORKING
                             # radon_rank is often returning Error
                             radon_metrics = self._analyze_radon(code)
                             next_row.update(radon_metrics)
