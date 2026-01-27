@@ -28,6 +28,7 @@ class ConnectorPythonAnalysis(Connector):
                 return
             try:
                 project_handle = self.__client.get_project(project_key)
+                project_recipes = project_handle.list_recipes()
 
             records_generated += 1
             yield next_row
