@@ -71,14 +71,14 @@ class ConnectorPythonAnalysis(Connector):
 
                     if code:
                         try:
-                        next_row = {
-                            "project_key": project_key,
-                            "recipe_name": name,
-                        }
+                            next_row = {
+                                "project_key": project_key,
+                                "recipe_name": name,
+                            }
 
-                        # vermin analysis:
-                        vermin_analysis = self.analyze_code_compatibility(code)
-                        
+                            # vermin analysis:
+                            vermin_analysis = self.analyze_code_compatibility(code)
+                            
                         except Exception as e:
                             logger.error(f"Error analyzing {name} in {project_key}: {e}")
 
