@@ -1,7 +1,6 @@
 """A Dataiku DSS v12 connector to provide a DSS Dataset listing
 all Python Code Recipes, and information about them."""
 
-
 import tempfile
 import os
 import logging
@@ -9,6 +8,8 @@ from typing import Dict, List, Any
 
 from vermin import detect, Config
 
+
+import dataiku
 from dataiku import api_client
 from dataiku.connector import Connector
 
