@@ -294,6 +294,8 @@ class ConnectorPythonAnalysis(Connector):
                             )
 
                             is_python3 = mpvv[0] == 3
+                            
+                            if is_python3:
 
                             # 2. Radon (Complexity) - WORKING
                             radon_metrics = self._analyze_radon(code)
