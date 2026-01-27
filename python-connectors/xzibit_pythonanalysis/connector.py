@@ -121,7 +121,6 @@ class ConnectorPythonAnalysis(Connector):
             logger.info(f"_analyze_vermin start")
             mins = detect(code, config=self.vermin_config)
             mins = get_tuples_only(mins)
-            logger.info(f"detect returned data type: {str(type(mins))}")
             if mins:
                 m = format_version_tuple(max(mins))
                 return m
