@@ -57,7 +57,7 @@ class ConnectorPlugins(Connector):
                     dataset_info = dataset_handle.get_info().get_raw()
                     dataset_type = dataset_info.get("type", "")
 
-                    if dataset_type.startswith("Custom"):
+                    if dataset_type.startswith("Custom",c):
                         next_row = {
                             "object_type": "dataset",
                             "projectKey": pk,
