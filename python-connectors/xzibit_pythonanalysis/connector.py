@@ -35,7 +35,7 @@ class ConnectorPythonAnalysis(Connector):
                 return
             try:
                 project_handle = self.__client.get_project(project_key)
-                project_recipes = project_handle.list_recipes(as_type="objects")
+                project_recipes = self.get_python_recipes(project_handle)
 
             except Exception as e:
                 print(f"Error accessing project {project_key}: {e}")
