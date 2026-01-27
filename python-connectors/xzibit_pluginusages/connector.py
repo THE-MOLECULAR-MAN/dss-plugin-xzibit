@@ -81,7 +81,6 @@ class ConnectorPlugins(Connector):
                     return
 
                 try:
-                    obj_uses_plugin = True
 
                     # determine if recipe uses a plugin
                     recipe_settings_handle = recipe_handle.get_settings()
