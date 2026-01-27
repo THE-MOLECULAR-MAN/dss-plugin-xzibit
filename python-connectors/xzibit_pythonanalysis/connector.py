@@ -7,6 +7,7 @@ import logging
 from typing import Dict, List, Any
 
 from vermin import detect, Config
+
 from dataiku import api_client
 from dataiku.connector import Connector
 
