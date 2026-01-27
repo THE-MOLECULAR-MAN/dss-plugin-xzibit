@@ -81,7 +81,7 @@ class ConnectorPythonAnalysis(Connector):
                             
                         except Exception as e:
                             logger.error(f"Error analyzing {name} in {project_key}: {e}")
-                            
+                        finally:
 
                         # Build the row
                         records_generated += 1
