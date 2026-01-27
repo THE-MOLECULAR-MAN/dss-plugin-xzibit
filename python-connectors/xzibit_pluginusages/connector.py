@@ -85,6 +85,8 @@ class ConnectorPlugins(Connector):
                     recipe_settings_handle = recipe_handle.get_settings()
                     raw_data = recipe_settings_handle.get_recipe_raw_definition()
 
+                    pp(raw_data)
+
                     if obj_uses_plugin:
                         next_row = {
                             "object_type": "recipe",
