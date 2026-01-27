@@ -294,7 +294,6 @@ class ConnectorPythonAnalysis(Connector):
                             )
 
                             # only proceed with further analysis if Python 3.x
-
                             if mpvv[0] == 3:
 
                                 # 2. Radon (Complexity) - WORKING
