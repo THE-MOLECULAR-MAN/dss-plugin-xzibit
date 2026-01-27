@@ -74,35 +74,35 @@ class ConnectorPlugins(Connector):
             ##################################################################
             # Recipes
             ##################################################################
-            for recipe_handle in project_handle.list_recipes(as_type="objects"):
-                if records_limit > 0 and records_generated >= records_limit:
-                    return
+            # for recipe_handle in project_handle.list_recipes(as_type="objects"):
+            #     if records_limit > 0 and records_generated >= records_limit:
+            #         return
 
-                try:
-                    obj_uses_plugin = True
+            #     try:
+            #         obj_uses_plugin = True
 
-                    # determine if recipe uses a plugin
-                    recipe_settings_handle = recipe_handle.get_settings()
-                    raw_data = recipe_settings_handle.get_recipe_raw_definition()
+            #         # determine if recipe uses a plugin
+            #         recipe_settings_handle = recipe_handle.get_settings()
+            #         raw_data = recipe_settings_handle.get_recipe_raw_definition()
 
-                    print("Recipe Raw Data:")
-                    pp(raw_data)
+            #         print("Recipe Raw Data:")
+            #         pp(raw_data)
 
-                    if obj_uses_plugin:
-                        next_row = {
-                            "object_type": "recipe",
-                            "projectKey": pk,
-                        }
+            #         if obj_uses_plugin:
+            #             next_row = {
+            #                 "object_type": "recipe",
+            #                 "projectKey": pk,
+            #             }
 
-                        next_row["object_id"] = recipe_handle.id
-                        next_row["subtype"] = raw_data.get("type", "")
+            #             next_row["object_id"] = recipe_handle.id
+            #             next_row["subtype"] = raw_data.get("type", "")
 
-                        # recipe_info = recipe_handle.get_definition()
+            #             # recipe_info = recipe_handle.get_definition()
 
-                        yield next_row
+            #             yield next_row
 
-                except Exception:
-                    print("plugin_usages - Exception occurred")
+            #     except Exception:
+            #         print("plugin_usages - Exception occurred")
 
     def get_read_schema(self):
         """TBD"""
