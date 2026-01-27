@@ -91,7 +91,7 @@ class ConnectorPythonAnalysis(Connector):
             logger.warning(
                 f"Could not retrieve Python version for code environment {code_env_name}."
             )
-            return "Exception"
+            return "Exception Fetching Code Env"
 
     def _analyze_vermin(self, code: str) -> str:
         """Run Vermin to detect minimum Python version."""
