@@ -71,10 +71,7 @@ class ConnectorPythonAnalysis(Connector):
 
                     if code:
                         try:
-                            next_row = {
-                                "project_key": project_key,
-                                "recipe_name": name,
-                            }
+                            
 
                             # vermin analysis:
                             vermin_analysis = self.analyze_code_compatibility(code)
