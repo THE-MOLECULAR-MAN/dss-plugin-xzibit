@@ -95,7 +95,7 @@ class ConnectorPlugins(Connector):
 
                         next_row["object_id"] = recipe_handle.id
 
-                        recipe_info = recipe_handle.get_definition()
+                        # recipe_info = recipe_handle.get_definition()
 
                         yield next_row
 
