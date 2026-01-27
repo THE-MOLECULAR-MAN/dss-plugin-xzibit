@@ -126,7 +126,7 @@ class ConnectorPythonAnalysis(Connector):
                             # TODO: implement ruff analysis and add results to the row
 
                             # radon analysis for complexity
-                            # ... (not implemented here, but would go similarly)
+                            # TODO: implement pylint analysis and add results to the row
 
                             # deptry analysis for dependencies
                             # ... (not implemented here, but would go similarly)
