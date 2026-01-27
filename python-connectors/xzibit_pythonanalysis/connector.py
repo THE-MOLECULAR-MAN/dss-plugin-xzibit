@@ -89,6 +89,7 @@ class ConnectorPythonAnalysis(Connector):
                             # ... (not implemented here, but would go similarly)
 
                             # deptry analysis for dependencies
+                            # ... (not implemented here, but would go similarly)
 
                         except Exception as e:
                             logger.error(
