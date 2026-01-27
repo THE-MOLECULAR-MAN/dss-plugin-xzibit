@@ -29,7 +29,6 @@ class ConnectorCodeEnvs(Connector):
             "DSS_version_python_support.csv"
         )
 
-
         # Calculating disk space usage on my personal FM instance:
         #    * took 8 seconds
         #    * 94.0 GB of total code environment disk space
