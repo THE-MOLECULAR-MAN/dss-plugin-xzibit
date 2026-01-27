@@ -268,10 +268,10 @@ class ConnectorPythonAnalysis(Connector):
 
                             # # 3. Dependencies (AST/Deptry logic)
                             deps = self._analyze_dependencies(code)
-                            
+
                             next_row["dependencies_list"] = ",".join(deps)
-                            
-                            # dependencies_list returns a syntax error 
+
+                            # dependencies_list returns a syntax error
                             next_row["dependencies_count"] = len(deps)
 
                             # # 4. Pylint (Quality) - Returns issue count
