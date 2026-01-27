@@ -71,7 +71,7 @@ class ConnectorPythonAnalysis(Connector):
 
                     if code:
                         result = self.analyze_code_compatibility(code)
-                        
+
                     else:
                         logger.info(f"{name:<40} | {'Skipped (No Code)':<20} | {'-'}")
 
