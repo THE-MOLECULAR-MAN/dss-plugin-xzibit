@@ -130,7 +130,6 @@ class ConnectorPythonAnalysis(Connector):
     def _analyze_radon(self, code: str) -> Dict[str, Any]:
         """Run Radon for Cyclomatic Complexity and Maintainability Index."""
         try:
-            logger.info(f"_analyze_radon started")
             # invalid syntax (<unknown>, line 1)
             # Cyclomatic Complexity
             # next line throws exception:  invalid syntax (<unknown>, line 1)
