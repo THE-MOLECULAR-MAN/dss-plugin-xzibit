@@ -88,8 +88,8 @@ class ConnectorPlugins(Connector):
                     raw_data = recipe_settings_handle.get_recipe_raw_definition()
                     obj_subtype = raw_data.get("type", "")
 
-                    print("Recipe Raw Data:")
-                    pp(raw_data)
+                    # print("Recipe Raw Data:")
+                    # pp(raw_data)
 
                     if obj_subtype.startswith("Custom"):
 
