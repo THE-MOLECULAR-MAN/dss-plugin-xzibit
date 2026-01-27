@@ -1,7 +1,0 @@
-# Add these to your existing requirements.txt
-vermin==1.6.0
-pylint==3.0.3
-ruff==0.1.14
-radon==6.0.1
-# Note: Deptry is omitted as we used AST for recipe-level dependency extraction
-# because Deptry requires a pyproject.toml context which recipes lack.
