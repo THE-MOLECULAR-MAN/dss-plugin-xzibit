@@ -59,6 +59,9 @@ class ConnectorPythonAnalysis(Connector):
                 f"Could not retrieve code environment for {recipe_name}. It may not be a standard code recipe."
             )
             return ""
+        
+    def get_code_env_python_version(self, code_env_name: str) -> str:
+        
 
     def generate_rows(
         self,
