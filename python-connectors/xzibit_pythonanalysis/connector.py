@@ -78,6 +78,8 @@ class ConnectorPythonAnalysis(Connector):
                         try:
                             # vermin analysis:
                             vermin_analysis = self.analyze_code_compatibility(code)
+                            
+                            # pylint 
 
                         except Exception as e:
                             logger.error(
