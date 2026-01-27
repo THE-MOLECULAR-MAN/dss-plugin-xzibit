@@ -105,7 +105,7 @@ class ConnectorPythonAnalysis(Connector):
             # detect returns (mins, parsable, text)
             logger.info(f"_analyze_vermin start")
             mins = detect(code, config=self.vermin_config).mins
-            logger.info(f"detect returned mins: {mins}")
+            logger.info(f"detect returned mins: {str(type(mins))}")
             if mins:
                 logger.info(f"IF")
                 # Returns something like "3.8"
