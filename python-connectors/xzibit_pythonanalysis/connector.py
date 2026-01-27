@@ -152,7 +152,7 @@ class ConnectorPythonAnalysis(Connector):
             }
         except Exception as e:
             logger.warning(f"Radon analysis failed: {e}")
-            
+            print()
             return {"radon_cc_avg": -1, "radon_mi_score": -1, "radon_rank": "Error"}
 
     def _analyze_dependencies(self, code: str) -> List[str]:
