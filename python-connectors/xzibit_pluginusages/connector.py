@@ -51,8 +51,8 @@ class ConnectorPlugins(Connector):
                     dataset_info = dataset_handle.get_definition()
 
                     next_row = {
-                        "projectKey": pk,
                         "object_type": "dataset",
+                        "projectKey": pk,
                         "object_id": dataset_handle.id,
                         "is_managed": dataset_info.get("managed", None),
                     }
