@@ -209,7 +209,7 @@ class ConnectorPythonAnalysis(Connector):
         records_generated = 0
 
         # iterate through each project
-        for project_key in self.__client.list_projects():
+        for project_key in self.__client.list_projects_keys():
             if records_limit > 0 and records_generated >= records_limit:
                 return
             try:
