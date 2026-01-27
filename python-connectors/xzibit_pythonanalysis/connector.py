@@ -232,7 +232,7 @@ class ConnectorPythonAnalysis(Connector):
     def _analyze_ruff(self, code: str) -> int:
         """Runs Ruff and returns total violation count."""
         try:
-            logger.info(f"")
+            logger.info(f"_analyze_ruff started")
             output = self._run_subprocess_tool(
                 ["ruff", "check", "--output-format=json"], code
             )
