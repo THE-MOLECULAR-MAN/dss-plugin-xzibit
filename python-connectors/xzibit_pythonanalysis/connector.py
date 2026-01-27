@@ -196,7 +196,7 @@ class ConnectorPythonAnalysis(Connector):
                 text=True,
                 check=False,  # We expect non-zero exits from linters
             )
-            
+            logger.info(f"Running subprocess: {' '.join(cmd + [tmp_path])}")
             return result.stdout
         finally:
             if os.path.exists(tmp_path):
