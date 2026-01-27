@@ -124,7 +124,7 @@ class ConnectorPythonAnalysis(Connector):
 
             if mins:
                 return format_version_tuple(max(mins))
-                return tupele(max(mins))
+                return max(mins)
             return "Unknown"
         except Exception as e:
             logger.warning(f"Vermin analysis failed: {e}")
