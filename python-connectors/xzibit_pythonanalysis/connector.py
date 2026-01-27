@@ -292,7 +292,7 @@ class ConnectorPythonAnalysis(Connector):
                             next_row["min_python_version_from_Vermin"] = (
                                 min_python_version_from_vermin
                             )
-                            
+
                             is_python2 = False
 
                             # 2. Radon (Complexity) - WORKING
