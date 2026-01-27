@@ -70,6 +70,7 @@ class ConnectorPythonAnalysis(Connector):
                     code = self.get_recipe_code(name)
 
                     if code:
+                        next_row = {}
 
                         # vermin analysis:
                         vermin_analysis = self.analyze_code_compatibility(code)
