@@ -78,7 +78,7 @@ class ConnectorPythonAnalysis(Connector):
         """
         try:
             if not code_env_name:
-                return "Project Default"
+                return "Code Env Name Not Specified"
             code_env = self.__client.get_code_env(code_env_name)
             return (
                 code_env.get_settings()
