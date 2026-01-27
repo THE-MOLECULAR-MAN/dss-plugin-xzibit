@@ -40,6 +40,7 @@ class ConnectorPythonAnalysis(Connector):
         
 
         try:
+            recipe = self.project.get_recipe(recipe_name)
             settings = recipe.get_settings()
             return settings.get_code()
         except AttributeError:
