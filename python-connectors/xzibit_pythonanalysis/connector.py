@@ -201,6 +201,7 @@ class ConnectorPythonAnalysis(Connector):
             logger.error(f"_analyze_pylint - JSON decode error")
             return -1.0
         except Exception:
+            logger.error(f"_analyze_pylint - JSON decode error")
             return -1.0
 
     def _analyze_ruff(self, code: str) -> int:
