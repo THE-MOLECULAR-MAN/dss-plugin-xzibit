@@ -144,10 +144,6 @@ class ConnectorPythonAnalysis(Connector):
                 print(f"Error accessing project {project_key}: {e}")
                 continue
 
-    ####################################################################
-    # Intentionally not implemented, not needed for this type
-    ####################################################################
-
     def get_read_schema(self):
         """TBD"""
         return None
