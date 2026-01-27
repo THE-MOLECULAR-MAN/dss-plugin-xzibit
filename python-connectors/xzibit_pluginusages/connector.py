@@ -43,7 +43,21 @@ class ConnectorPlugins(Connector):
                 return
 
             project_handle = self.__client.get_project(pk)
-            for dataset_handle in 
+            for dataset_handle in project_handle.list_datasets():
+                if records_limit > 0 and records_generated >= records_limit:
+                    return
+
+                dataset_info = dataset_handle.get_definition()
+                next_row = {
+                    "projectKey": pk,
+                    "dataset_id": dataset_handle.id,
+                    "dataset_name": dataset_handle.name,
+                    "dataset_type": dataset_info.get("type", None),
+                    "is_managed": dataset_info.get("managed", None),
+                }
+
+                records_generated += 1
+                yield next_row
 
     def get_read_schema(self):
         """TBD"""
