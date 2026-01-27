@@ -78,6 +78,8 @@ class ConnectorPythonAnalysis(Connector):
 
                         # vermin analysis:
                         vermin_analysis = self.analyze_code_compatibility(code)
+                        
+                        except Exception as e:
 
                         # Build the row
                         records_generated += 1
