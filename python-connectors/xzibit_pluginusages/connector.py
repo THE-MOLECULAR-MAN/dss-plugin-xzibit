@@ -104,7 +104,7 @@ class ConnectorPlugins(Connector):
             #     except Exception:
             #         print("plugin_usages - Exception occurred")
             
-            list_plugins_usages()
+            project_handle.list_plugins_usages()
 
     def get_read_schema(self):
         """TBD"""
