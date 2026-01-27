@@ -79,7 +79,7 @@ class ConnectorPythonAnalysis(Connector):
                             # vermin analysis:
                             vermin_analysis = self.analyze_code_compatibility(code)
 
-                            # pylint analysis
+                            # pylint analysis for 
                             # ... (not implemented here, but would go similarly)
 
                             # ruff analysis for speed/style
