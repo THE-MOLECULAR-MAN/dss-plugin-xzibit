@@ -54,7 +54,7 @@ class ConnectorPythonAnalysis(Connector):
         records_limit=-1,
     ):
         """A generator function that yields rows for the dataset.
-        Each row rep"""
+        Each row represents a Python code recipe with its analysis."""
         records_generated = 0
 
         # iterate through each project
