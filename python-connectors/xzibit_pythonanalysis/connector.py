@@ -16,8 +16,6 @@ from datetime import datetime
 class ConnectorPythonAnalysis(Connector):
     """A Dataiku DSS v12 connector to provide a DSS Dataset listing all Python Code Recipes, and information about them."""
 
-    ####################################################################
-    # Code that has to be customized for this specific class
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
