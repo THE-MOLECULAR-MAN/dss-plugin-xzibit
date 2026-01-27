@@ -79,9 +79,7 @@ class ConnectorPythonAnalysis(Connector):
         try:
             if not code_env_name:
                 return "Code Env Name Not Specified"
-            logger.info(
-                f"Fetching handle for code env {code_env_name}."
-            )
+            logger.info(f"Fetching handle for code env {code_env_name}")
             code_env = self.__client.get_code_env(code_env_name)
             return (
                 code_env.get_settings()
