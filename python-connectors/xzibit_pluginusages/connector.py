@@ -47,9 +47,8 @@ class ConnectorPlugins(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     return
 
-                
-
                 try:
+                    obj_uses_plugin = False
 
                     if obj_uses_plugin:
                         next_row = {
