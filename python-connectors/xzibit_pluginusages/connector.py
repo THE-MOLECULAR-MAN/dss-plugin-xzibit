@@ -43,8 +43,6 @@ class ConnectorPlugins(Connector):
             
         # iterate through each object
         for pk, proj_recipes in self.__objects_list.items():
-            if records_limit > 0 and records_generated >= records_limit:
-                return
 
             project_handle = self.__client.get_project(pk)
 
