@@ -191,7 +191,7 @@ class ConnectorPythonAnalysis(Connector):
             output = self._run_subprocess_tool(["pylint", "--output-format=json"], code)
             #logger.info(f"finished subprocess for pylint")
             data = json.loads(output)
-            l#ogger.info(f"loaded json for pylint")
+            #logger.info(f"loaded json for pylint")
             # Pylint JSON export is a list of messages. It doesn't always contain the global score easily.
             # Fallback: Run with report enabled for score extraction is tricky in automation.
             # Strategy: Calculate a naive score or use simple violation count from JSON.
