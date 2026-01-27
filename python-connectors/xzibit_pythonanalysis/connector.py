@@ -46,7 +46,7 @@ class ConnectorPythonAnalysis(Connector):
         Fetches the actual Python script content from a specific recipe.
         """
         try:
-            recipe = self.project.get_recipe(recipe_name)
+            recipe = project_handle.get_recipe(recipe_name)
             settings = recipe.get_settings()
             return settings.get_code()
         except AttributeError:
