@@ -110,7 +110,7 @@ class ConnectorPythonAnalysis(Connector):
             python_version_formatted = (
                 py_interp_version[0] + "." + py_interp_version[1:]
             )
-            return python_version_formatted
+            return str(python_version_formatted)
 
         except Exception:
             logger.warning(f"Couldn't get Python version for code env {code_env_name}.")
