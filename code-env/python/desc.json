@@ -1,6 +1,6 @@
 {
     "acceptedPythonInterpreters": [
-"PYTHON310",
+        "PYTHON310",
         "PYTHON310",
         "PYTHON311"],
     "corePackagesSet": "AUTO",
