@@ -14,7 +14,7 @@ from datetime import datetime
 
 
 class ConnectorPythonAnalysis(Connector):
-    """TBD"""
+    """A Dataiku DSS v12 """
 
     ####################################################################
     # Code that has to be customized for this specific class
