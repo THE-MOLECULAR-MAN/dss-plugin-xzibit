@@ -278,7 +278,7 @@ class ConnectorPythonAnalysis(Connector):
 
                             # # 5. Ruff (Speed/Style) - Returns violation count
                             # always returns -1.0
-                            next_row["ruff_violations"] = self._analyze_ruff(code)
+                            # next_row["ruff_violations"] = self._analyze_ruff(code)
 
                         except Exception as e:
                             logger.error(
