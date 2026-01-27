@@ -129,28 +129,28 @@ class ConnectorCodeEnvs(Connector):
                 # the dataset's built time from 2 min 30 sec to 5 hours!!!
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-                if self.__compute_codeenv_usages:
+                # if self.__compute_codeenv_usages:
 
-                    next_row["projectKeys_where_code_env_used"] = []
-                    next_row["total_instances_of_code_env"] = None
+                #     next_row["projectKeys_where_code_env_used"] = []
+                #     next_row["total_instances_of_code_env"] = None
 
-                    print(f"starting code env list usages for {code_env_name}")
-                    # next line throws exception on DevDesign:
-                    #  jakarta.servlet.ServletException: Handler dispatch failed: java.lang.Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool, caused by: Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool
-                    # list_usages() does not take any parameters
-                    usages = code_env_handle.list_usages()
-                    print(f"Finished code env list usages for {code_env_name}")
-                    num_usages = len(usages)
-                    if len(usages) == 0:
-                        pk_usages = None
-                    else:
-                        pk_usages = list(get_values_for_key(usages, "projectKey"))
-                    next_row["projectKeys_where_code_env_used"] = pk_usages
-                    next_row["total_instances_of_code_env"] = num_usages
+                #     print(f"starting code env list usages for {code_env_name}")
+                #     # next line throws exception on DevDesign:
+                #     #  jakarta.servlet.ServletException: Handler dispatch failed: java.lang.Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool, caused by: Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool
+                #     # list_usages() does not take any parameters
+                #     usages = code_env_handle.list_usages()
+                #     print(f"Finished code env list usages for {code_env_name}")
+                #     num_usages = len(usages)
+                #     if len(usages) == 0:
+                #         pk_usages = None
+                #     else:
+                #         pk_usages = list(get_values_for_key(usages, "projectKey"))
+                #     next_row["projectKeys_where_code_env_used"] = pk_usages
+                #     next_row["total_instances_of_code_env"] = num_usages
 
-                else:
-                    next_row["projectKeys_where_code_env_used"] = None
-                    next_row["total_instances_of_code_env"] = None
+                # else:
+                #     next_row["projectKeys_where_code_env_used"] = None
+                #     next_row["total_instances_of_code_env"] = None
 
             except Exception as e:
                 # this is occuring on DevDesign
