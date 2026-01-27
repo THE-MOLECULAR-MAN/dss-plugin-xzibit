@@ -48,7 +48,7 @@ class ConnectorPlugins(Connector):
                     return
 
                 try:
-                    # dataset_info = dataset_handle.get_definition()
+                    
 
                     next_row = {
                         "object_type": "dataset",
