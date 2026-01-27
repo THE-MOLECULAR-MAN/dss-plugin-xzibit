@@ -28,7 +28,7 @@ class ConnectorPythonAnalysis(Connector):
                 return
             try:
                 project_handle = self.__client.get_project(project_key)
-                project_recipes = project_handle.list_recipes()
+                project_recipes = project_handle.list_recipes(as_type="listitems")
                 
                 
             except Exception as e:
