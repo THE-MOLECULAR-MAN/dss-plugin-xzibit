@@ -83,6 +83,7 @@ class ConnectorPythonAnalysis(Connector):
                             # ... (not implemented here, but would go similarly)
 
                             # ruff analysis for speed/style
+                            # 
 
                         except Exception as e:
                             logger.error(
