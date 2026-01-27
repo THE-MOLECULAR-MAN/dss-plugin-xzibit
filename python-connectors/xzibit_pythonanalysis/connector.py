@@ -241,7 +241,7 @@ class ConnectorPythonAnalysis(Connector):
             logger.info(f"loaded json for ruff")
             return len(data)
         except Exception:
-            
+            logger.error(f"_analyze_ruff - General exception")
             return -1
 
     def generate_rows(
