@@ -51,14 +51,7 @@ class ConnectorPlugins(Connector):
                 except Exception as e:
                     dataset_info = {"error": str(e)}
 
-                next_row = {
-                    "projectKey": pk,
-                    "dataset_id": dataset_handle.id,
-                    "dataset_name": dataset_handle.name,
-                    "dataset_type": dataset_info.get("type", None),
-                    "is_managed": dataset_info.get("managed", None),
-                }
-
+                
                 records_generated += 1
                 yield next_row
 
