@@ -66,14 +66,14 @@ class ConnectorPythonAnalysis(Connector):
                 project_recipes = self.get_python_recipes(project_handle)
                 
                 for recipe_meta in python_recipes:
-            name = recipe_meta['name']
-            code = self.get_recipe_code(name)
-            
-            if code:
-                result = self.analyze_code_compatibility(code)
-                logger.info(f"{name:<40} | {result['min_versions']:<20} | {result['incompatible_versions']:<20}")
-            else:
-                logger.info(f"{name:<40} | {'Skipped (No Code)':<20} | {'-'}")
+                    name = recipe_meta['name']
+                    code = self.get_recipe_code(name)
+                    
+                    if code:
+                        result = self.analyze_code_compatibility(code)
+                        logger.info(f"{name:<40} | {result['min_versions']:<20} | {result['incompatible_versions']:<20}")
+                    else:
+                        logger.info(f"{name:<40} | {'Skipped (No Code)':<20} | {'-'}")
 
 
             except Exception as e:
