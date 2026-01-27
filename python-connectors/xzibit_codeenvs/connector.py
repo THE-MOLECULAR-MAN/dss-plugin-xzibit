@@ -154,7 +154,7 @@ class ConnectorCodeEnvs(Connector):
 
             except Exception as e:
                 # this is occuring on DevDesign
-                next_row["total_instances_of_code_env"] = "EXCEPTION"
+                #next_row["total_instances_of_code_env"] = "EXCEPTION"
                 print(
                     f"codeenvs - generate_rows EXCEPTION: CodeEnv: {code_env_name} Error message: {e}"
                 )
