@@ -88,7 +88,7 @@ class ConnectorPythonAnalysis(Connector):
                             # radon analysis for complexity
                             # ... (not implemented here, but would go similarly)
 
-                            # deptry 
+                            # deptry analysis for dependencies
 
                         except Exception as e:
                             logger.error(
