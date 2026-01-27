@@ -5,7 +5,8 @@ from dataiku.connector import Connector
 
 
 class ConnectorPythonAnalysis(Connector):
-    """A Dataiku DSS v12 connector to provide a DSS Dataset listing all Python Code Recipes, and information about them."""
+    """A Dataiku DSS v12 connector to provide a DSS Dataset listing
+    all Python Code Recipes, and information about them."""
 
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
