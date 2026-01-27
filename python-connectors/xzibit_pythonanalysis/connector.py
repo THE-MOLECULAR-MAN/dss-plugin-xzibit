@@ -238,7 +238,7 @@ class ConnectorPythonAnalysis(Connector):
             )
             logger.info(f"finished subprocess for ruff")
             data = json.loads(output)
-            logger.info(f"")
+            logger.info(f"loaded json for ruff")
             return len(data)
         except Exception:
             return -1
