@@ -50,7 +50,7 @@ class ConnectorPlugins(Connector):
                 try:
                     obj_uses_plugin = False
 
-                    # determine if dataset uses a  plugin
+                    # determine if dataset uses a plugin
 
                     if obj_uses_plugin:
                         next_row = {
