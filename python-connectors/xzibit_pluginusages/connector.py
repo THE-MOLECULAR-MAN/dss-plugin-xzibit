@@ -62,7 +62,7 @@ class ConnectorPlugins(Connector):
                     dataset_info = dataset_handle.get_definition()
 
                 except Exception:
-                    print("Exception occurred")
+                    print("plugin_usages - Exception occurred")
                     next_row = {
                         "object_type": "dataset",
                         "projectKey": pk,
