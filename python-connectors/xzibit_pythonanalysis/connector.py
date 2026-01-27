@@ -24,6 +24,7 @@ class ConnectorPythonAnalysis(Connector):
         self.__client = api_client()
         self.vermin_config = Config()
         self.vermin_config.set_verbose(0)  # 0 usually suppresses most non-result output
+        # 
 
     def get_python_recipes(self, project_handle):
         """
