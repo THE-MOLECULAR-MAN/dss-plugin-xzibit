@@ -3,6 +3,7 @@
 ####################################################################
 # Same imports for all dataset Classes
 ####################################################################
+
 from dataiku import api_client
 from dataiku.connector import Connector
 from xzibit.utils import (
@@ -10,6 +11,7 @@ from xzibit.utils import (
     flatten_dict,
     remove_prefix_from_keys,
     list_to_error_dict,
+    pp,
 )
 
 from xzibit.deprecations import DEPRECATED_PLUGIN_IDS, DSS_BUILT_IN_PLUGIN_IDS
@@ -97,6 +99,7 @@ class ConnectorPlugins(Connector):
 
                 plugin_handle = self.__client.get_plugin(plugin_id)
                 settings_raw = plugin_handle.get_settings().get_raw()
+                pp(settings_raw)
                 next_row["code_env_name"] = settings_raw.get("codeEnvName", None)
 
                 # TODO: replace with CSV file method
@@ -107,7 +110,6 @@ class ConnectorPlugins(Connector):
                     f"[plugins-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {next_row['id']}"
                 )
                 next_row = list_to_error_dict(keys)
-                next_row["plugin_used_in_projectkeys"] = ["EXCEPTION"]
             finally:
                 records_generated += 1
                 yield next_row
@@ -123,11 +125,6 @@ class ConnectorPlugins(Connector):
                 {"name": "author", "type": "string", "meaning": "Text"},
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "description", "type": "string", "meaning": "FreeText"},
-                {
-                    "name": "plugin_used_in_projectkeys",
-                    "type": "string",
-                    "meaning": "JSONArrayMeaning",
-                },
                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
                 {"name": "is_built_in_plugin", "type": "boolean", "meaning": "Boolean"},
                 {

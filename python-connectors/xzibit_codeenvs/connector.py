@@ -28,7 +28,6 @@ class ConnectorCodeEnvs(Connector):
         self.__df_dss_python = load_local_csv_as_dataframe(
             "DSS_version_python_support.csv"
         )
-        # print("Loaded DSS_version_python_support.csv:")
 
         # Calculating disk space usage on my personal FM instance:
         #    * took 8 seconds
@@ -40,7 +39,6 @@ class ConnectorCodeEnvs(Connector):
         self.__compute_codeenv_disk_space_usage = self.config.get(
             "compute_codeenv_disk_space_usage", False
         )
-        self.__compute_codeenv_usages = self.config.get("compute_codeenv_usages", False)
 
     def get_url(self, env_name, env_lang="python"):
         """Create a URL to the DSS object in question in this specific DSS instance.
@@ -113,44 +111,11 @@ class ConnectorCodeEnvs(Connector):
                     else:
                         next_row["python_version_support_status"] = "Unknown"
 
-                    # next_row["python_version_support_status"] = lookup_python_support(
-                    #     "14", "3.10", self.__df_dss_python
-                    # )
-
                 if self.__compute_codeenv_disk_space_usage:
                     # get_path_size_megabytes returns 0 if path does not exist
                     next_row["size_in_MB"] = get_path_size_megabytes(next_row["path"])
                 else:
-                    next_row["size_in_MB"] = None
-
-                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                # adding list_usages for code environments on DevDesign (600 code env at an
-                # average of 30 sec per code env to list all its usages across 2,362 projects), increases
-                # the dataset's built time from 2 min 30 sec to 5 hours!!!
-                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-                if self.__compute_codeenv_usages:
-
-                    next_row["projectKeys_where_code_env_used"] = []
-                    next_row["total_instances_of_code_env"] = -1
-
-                    print(f"starting code env list usages for {code_env_name}")
-                    # next line throws exception on DevDesign:
-                    #  jakarta.servlet.ServletException: Handler dispatch failed: java.lang.Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool, caused by: Error: Unknown tool type: Custom_agent_tool_jira-tools_jira-create-issue-tool
-                    # list_usages() does not take any parameters
-                    usages = code_env_handle.list_usages()
-                    print(f"Finished code env list usages for {code_env_name}")
-                    num_usages = len(usages)
-                    if len(usages) == 0:
-                        pk_usages = None
-                    else:
-                        pk_usages = list(get_values_for_key(usages, "projectKey"))
-                    next_row["projectKeys_where_code_env_used"] = pk_usages
-                    next_row["total_instances_of_code_env"] = num_usages
-
-                else:
-                    next_row["projectKeys_where_code_env_used"] = None
-                    next_row["total_instances_of_code_env"] = None
+                    next_row["size_in_MB"] = "DISABLED"
 
             except Exception as e:
                 # this is occuring on DevDesign
