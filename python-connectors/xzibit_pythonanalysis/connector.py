@@ -248,7 +248,6 @@ class ConnectorPythonAnalysis(Connector):
                         }
                         try:
                             # get additional Dataiku metadata
-                            # print("x")
                             code_env_name = get_python_recipe_code_env(recipe_handle)
                             python_version = self.get_code_env_python_version(
                                 code_env_name
