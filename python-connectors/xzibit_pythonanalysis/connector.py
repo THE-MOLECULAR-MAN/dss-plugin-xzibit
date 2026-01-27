@@ -80,6 +80,12 @@ class ConnectorPythonAnalysis(Connector):
             yield next_row
 
 
+
+
+                        records_generated += 1
+            yield next_row
+
+
                     else:
                         logger.info(f"{name:<40} | {'Skipped (No Code)':<20} | {'-'}")
 
