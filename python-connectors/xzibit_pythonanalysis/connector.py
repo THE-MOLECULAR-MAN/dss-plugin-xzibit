@@ -196,6 +196,7 @@ class ConnectorPythonAnalysis(Connector):
                 text=True,
                 check=False,  # We expect non-zero exits from linters
             )
+            
             return result.stdout
         finally:
             if os.path.exists(tmp_path):
