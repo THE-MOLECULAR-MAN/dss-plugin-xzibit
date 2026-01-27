@@ -7,12 +7,6 @@ from dataiku import api_client
 from dataiku.connector import Connector
 
 
-####################################################################
-# Unique imports for this Class
-####################################################################
-from datetime import datetime
-
-
 class ConnectorPythonAnalysis(Connector):
     """A Dataiku DSS v12 connector to provide a DSS Dataset listing all Python Code Recipes, and information about them."""
 
