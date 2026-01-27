@@ -129,7 +129,7 @@ class ConnectorPythonAnalysis(Connector):
                             # TODO: implement radon analysis and add results to the row
 
                             # deptry analysis for dependencies
-                            # TODO: implement pylint analysis and add results to the row
+                            # TODO: implement deptry analysis and add results to the row
 
                         except Exception as e:
                             logger.error(
