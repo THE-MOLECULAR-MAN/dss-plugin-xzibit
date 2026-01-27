@@ -49,8 +49,8 @@ class ConnectorPlugins(Connector):
 
                 try:
                     obj_uses_plugin = False
-                    
-                    # determine if 
+
+                    # determine if dataset uses a deprecated plugin
 
                     if obj_uses_plugin:
                         next_row = {
