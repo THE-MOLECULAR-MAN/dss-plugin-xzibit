@@ -274,7 +274,7 @@ class ConnectorPythonAnalysis(Connector):
                                 code_env_name
                             )
                             next_row["code_env_name"] = code_env_name
-                            next_row["python_version"] = python_version
+                            next_row["code_env_python_version"] = python_version
 
                             # --- Analysis Tools ---
 
