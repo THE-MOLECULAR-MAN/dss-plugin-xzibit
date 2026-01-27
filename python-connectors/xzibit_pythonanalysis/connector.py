@@ -145,7 +145,7 @@ class ConnectorPythonAnalysis(Connector):
                 continue
 
     def get_read_schema(self):
-        """TBD"""
+        """Not neded"""
         return None
 
     def get_records_count(self, partitioning=None, partition_id=None):
