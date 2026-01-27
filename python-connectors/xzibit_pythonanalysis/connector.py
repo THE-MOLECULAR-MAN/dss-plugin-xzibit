@@ -138,7 +138,7 @@ class ConnectorPythonAnalysis(Connector):
             avg_complexity = (
                 radon_cc.average_complexity(complexity) if complexity else 0
             )
-            logger.info(f"_analyze_radon complexity calculated")
+            logger.info(f"_analyze_radon average complexity calculated")
 
             # Maintainability Index (A score of 100 is best, 0 is worst)
             mi_score = radon_mi.mi_visit(code, multi=False)
