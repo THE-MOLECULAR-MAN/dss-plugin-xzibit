@@ -187,6 +187,7 @@ class ConnectorPythonAnalysis(Connector):
             # but JSON is safer if available.
             logger.info(f"_analyze_pylint started")
             # next line is causing exception
+            # sudo dnf install 
             output = self._run_subprocess_tool(["pylint", "--output-format=json"], code)
             logger.info(f"finished subprocess for pylint")
             data = json.loads(output)
