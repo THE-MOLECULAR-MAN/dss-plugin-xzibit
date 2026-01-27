@@ -31,6 +31,14 @@ def get_tuples_only(input_list: list) -> list:
     return [item for item in input_list if isinstance(item, tuple)]
 
 
+def format_version_tuple(version_tuple: tuple[int, int]) -> str:
+    """
+    Takes a tuple of two integers (a, b) and returns a string "a.b".
+    """
+    a, b = version_tuple
+    return f"{a}.{b}"
+
+
 class ConnectorPythonAnalysis(Connector):
     """A Dataiku DSS v12 connector to provide a DSS Dataset listing
     all Python Code Recipes, and information about them."""
