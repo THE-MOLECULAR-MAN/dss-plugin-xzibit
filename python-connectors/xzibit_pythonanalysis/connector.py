@@ -16,7 +16,7 @@ class ConnectorPythonAnalysis(Connector):
         """
         Retrieves a list of all Python code recipes in the current project.
         """
-        recipes = self.project.list_recipes()
+        recipes = project_handle.list_recipes(as_type="objects" )
         return [r for r in recipes if r['type'] == 'python']
 
     def generate_rows(
