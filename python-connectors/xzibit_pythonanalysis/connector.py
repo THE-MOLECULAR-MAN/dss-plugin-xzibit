@@ -55,7 +55,7 @@ class ConnectorPythonAnalysis(Connector):
             )
             return ""
 
-    def get_recipe_code_env_name(self, recipe_name: str) -> str:
+    def get_recipe_code_env_name(self, recipe_handle) -> str:
         """
         Fetches the code environment name from a specific recipe.
         """
