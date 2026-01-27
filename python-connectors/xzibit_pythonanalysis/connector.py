@@ -104,8 +104,6 @@ class ConnectorPythonAnalysis(Connector):
             # Vermin expects a path or logic to parse. We use its internal detect.
             # detect returns (mins, parsable, text)
             logger.info(f"_analyze_vermin start")
-            # next line throwing exception: 'list' object has no attribute 'mins'
-            # mins = detect(code, config=self.vermin_config).mins
             mins = detect(code, config=self.vermin_config)
             # logger.info(f"detect returned data type: {str(type(mins))}")
             if mins:
