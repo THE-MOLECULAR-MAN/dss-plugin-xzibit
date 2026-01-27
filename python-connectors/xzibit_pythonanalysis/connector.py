@@ -60,7 +60,7 @@ class ConnectorPythonAnalysis(Connector):
         Fetches the code environment name from a specific recipe.
         """
         try:
-            recipe = self.project.get_recipe(recipe_name)
+            # recipe = self.project.get_recipe(recipe_name)
             settings = recipe.get_settings()
             return settings.get_code_env_name()
         except AttributeError:
