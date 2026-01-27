@@ -130,6 +130,7 @@ class ConnectorPythonAnalysis(Connector):
     def _analyze_radon(self, code: str) -> Dict[str, Any]:
         """Run Radon for Cyclomatic Complexity and Maintainability Index."""
         try:
+            logger.warning(f"Vermin analysis failed: {e}")
             # invalid syntax (<unknown>, line 1)
             # Cyclomatic Complexity
             complexity = radon_cc.cc_visit(code)
