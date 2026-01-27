@@ -107,7 +107,7 @@ class ConnectorPythonAnalysis(Connector):
             # next line throwing exception: 'list' object has no attribute 'mins'
             # mins = detect(code, config=self.vermin_config).mins
             mins = detect(code, config=self.vermin_config)
-            logger.info(f"detect returned mins: {str(type(mins))}")
+            logger.info(f"detect returned data type: {str(type(mins))}")
             if mins:
                 logger.info(f"IF")
                 # Returns something like "3.8"
