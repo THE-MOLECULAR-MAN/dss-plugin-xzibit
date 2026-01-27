@@ -123,11 +123,7 @@ class ConnectorPythonAnalysis(Connector):
             mins = get_tuples_only(mins)
             logger.info(f"detect returned data type: {str(type(mins))}")
             if mins:
-                # logger.info(f"IF")
-                # Returns something like "3.8"
-                # WARNING Vermin analysis failed: '>' not supported between instances of 'NoneType' and 'tuple'
                 m = format_version_tuple(max(mins))
-                # print(mins)
                 return m
             return "Unknown"
         except Exception as e:
