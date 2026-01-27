@@ -52,7 +52,7 @@ class ConnectorPlugins(Connector):
                     return
 
                 try:
-                    obj_uses_plugin = False
+                    obj_uses_plugin = True
 
                     # determine if dataset uses a plugin
 
