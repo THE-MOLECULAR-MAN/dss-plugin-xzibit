@@ -169,7 +169,7 @@ class ConnectorPythonAnalysis(Connector):
             return ["<SyntaxError>"]
         except Exception as e:
             logger.warning(f"Dependency analysis failed: {e}")
-            return []
+            return ["<Error>"]
 
     def _run_subprocess_tool(self, cmd: List[str], code: str) -> str:
         """Helper to run CLI tools like Ruff/Pylint against code content."""
