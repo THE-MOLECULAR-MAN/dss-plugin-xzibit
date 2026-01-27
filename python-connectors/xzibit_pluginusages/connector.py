@@ -62,11 +62,6 @@ class ConnectorPlugins(Connector):
 
                 except Exception:
                     print("plugin_usages - Exception occurred")
-                    next_row = {
-                        "object_type": "dataset",
-                        "projectKey": pk,
-                        "object_id": "EXCEPTION",
-                    }
 
                 finally:
                     records_generated += 1
