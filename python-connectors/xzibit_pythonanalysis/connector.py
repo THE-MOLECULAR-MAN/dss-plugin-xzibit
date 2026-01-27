@@ -282,8 +282,8 @@ class ConnectorPythonAnalysis(Connector):
                             # next_row["vermin_min_version"] = self._analyze_vermin(code)
 
                             # 2. Radon (Complexity) - WORKING
-                            # radon_metrics = self._analyze_radon(code)
-                            # next_row.update(radon_metrics)
+                            radon_metrics = self._analyze_radon(code)
+                            next_row.update(radon_metrics)
 
                             # # 3. Dependencies (AST/Deptry logic)
                             # deps = self._analyze_dependencies(code)
