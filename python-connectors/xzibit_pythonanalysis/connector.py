@@ -120,7 +120,7 @@ class ConnectorPythonAnalysis(Connector):
                             # TODO: add vermin results to the row
 
                             # pylint analysis for quality score
-                            # TODO: (not implemented here, but would go similarly)
+                            # TODO: im
 
                             # ruff analysis for speed/style
                             # ... (not implemented here, but would go similarly)
