@@ -45,7 +45,7 @@ class ConnectorPlugins(Connector):
             project_handle = self.__client.get_project(pk)
             
             ##################################################################
-            # iterate through each dataset in the project
+            # Datasets
             for dataset_handle in project_handle.list_datasets(as_type="objects"):
                 if records_limit > 0 and records_generated >= records_limit:
                     return
