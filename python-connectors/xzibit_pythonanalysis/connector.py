@@ -134,7 +134,7 @@ class ConnectorPythonAnalysis(Connector):
             # invalid syntax (<unknown>, line 1)
             # Cyclomatic Complexity
             complexity = radon_cc.cc_visit(code)
-            logger.info(f"_analyze_radon started")
+            logger.info(f"_analyze_radon complexity calculated")
             avg_complexity = (
                 radon_cc.average_complexity(complexity) if complexity else 0
             )
