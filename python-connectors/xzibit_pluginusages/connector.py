@@ -56,6 +56,7 @@ class ConnectorPlugins(Connector):
 
                     # determine if dataset uses a plugin
                     dataset_info = dataset_handle.get_info().get_raw()
+                    
 
                     if obj_uses_plugin:
                         next_row = {
