@@ -73,12 +73,9 @@ class ConnectorPythonAnalysis(Connector):
 
                         # vermin analysis:
                         vermin_analysis = self.analyze_code_compatibility(code)
-                        
-                        
-                        
-                        records_generated += 1
-                yield next_row
 
+                        records_generated += 1
+                        yield next_row
 
                     else:
                         logger.info(f"{name:<40} | {'Skipped (No Code)':<20} | {'-'}")
@@ -87,7 +84,6 @@ class ConnectorPythonAnalysis(Connector):
                 print(f"Error accessing project {project_key}: {e}")
                 continue
 
-            
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
