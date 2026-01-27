@@ -107,6 +107,7 @@ class ConnectorPythonAnalysis(Connector):
             mins = detect(code, config=self.vermin_config).mins
             logger.info(f"detect returned mins: {mins}")
             if mins:
+                logger.info(f"_analyze_vermin start")
                 # Returns something like "3.8"
                 return str(max(mins))
             return "Unknown"
