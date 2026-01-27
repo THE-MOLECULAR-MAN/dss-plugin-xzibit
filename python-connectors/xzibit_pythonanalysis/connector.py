@@ -123,7 +123,7 @@ class ConnectorPythonAnalysis(Connector):
             mins = get_tuples_only(mins)
 
             if mins:
-                # return format_version_tuple(max(mins))
+                return format_version_tuple(max(mins))
                 # return tupele(max(mins))
             return "Unknown"
         except Exception as e:
