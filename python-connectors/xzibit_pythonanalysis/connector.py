@@ -46,7 +46,7 @@ class ConnectorPythonAnalysis(Connector):
             )
             return ""
         
-    def get_recipe
+    def get_recipe_code_env
 
     def generate_rows(
         self,
