@@ -271,7 +271,7 @@ class ConnectorPythonAnalysis(Connector):
                             
                             next_row["dependencies_list"] = ",".join(deps)
                             
-                            # dependencies_list returns a syntax error if mor than 1 import
+                            # dependencies_list returns a syntax error 
                             next_row["dependencies_count"] = len(deps)
 
                             # # 4. Pylint (Quality) - Returns issue count
