@@ -60,7 +60,7 @@ class ConnectorPlugins(Connector):
                 except Exception as e:
                     dataset_info = {"error": str(e)}
 
-                
+                finally:
                 records_generated += 1
                 yield next_row
 
