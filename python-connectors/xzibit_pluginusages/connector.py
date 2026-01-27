@@ -61,7 +61,7 @@ class ConnectorPlugins(Connector):
                     next_row = {
                         "object_type": "dataset",
                         "projectKey": pk,
-                        "object_id": "EXCEPTION"",
+                        "object_id": "EXCEPTION",
                     }
 
                 finally:
