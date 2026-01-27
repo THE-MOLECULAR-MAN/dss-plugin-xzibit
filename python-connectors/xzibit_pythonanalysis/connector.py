@@ -142,6 +142,7 @@ class ConnectorPythonAnalysis(Connector):
 
             # Maintainability Index (A score of 100 is best, 0 is worst)
             mi_score = radon_mi.mi_visit(code, multi=False)
+            logger.info(f"_analyze_radon complexity calculated")
 
             return {
                 "radon_cc_avg": round(avg_complexity, 2),
