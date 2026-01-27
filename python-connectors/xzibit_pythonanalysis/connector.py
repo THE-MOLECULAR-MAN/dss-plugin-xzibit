@@ -281,7 +281,7 @@ class ConnectorPythonAnalysis(Connector):
 
                             # # 4. Pylint (Quality) - Returns issue count
                             # FIXED, working.
-                            next_row["pylint_issues"] = self._analyze_pylint(code)
+                            # next_row["pylint_issues"] = self._analyze_pylint(code)
 
                             # # 5. Ruff (Speed/Style) - Returns violation count
                             # always returns -1.0
