@@ -109,6 +109,7 @@ class ConnectorPythonAnalysis(Connector):
             if mins:
                 # logger.info(f"IF")
                 # Returns something like "3.8"
+                # WARNING Vermin analysis failed: '>' not supported between instances of 'NoneType' and 'tuple'
                 return str(max(mins))
             return "Unknown"
         except Exception as e:
