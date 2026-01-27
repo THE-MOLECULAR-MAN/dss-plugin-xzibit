@@ -237,7 +237,6 @@ class ConnectorPythonAnalysis(Connector):
             # output = self._run_subprocess_tool(
             #     ["ruff", "check", "--output-format=json"], code
             # )
-
             logger.info(f"finished subprocess for ruff")
             data = json.loads(output)
             logger.info(f"loaded json for ruff")
