@@ -39,13 +39,15 @@ class ConnectorPlugins(Connector):
         records_generated = 0
 
         for pk in self.__client.list_project_keys():
+            if records_limit > 0 and records_generated >= records_limit:
+                return
+
             project_handle = self.__client.get_project(pk)
-            
+
         # iterate through each object
         for pk, proj_recipes in self.__objects_list.items():
 
             project_handle = self.__client.get_project(pk)
-
 
     def get_read_schema(self):
         """TBD"""
