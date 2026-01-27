@@ -296,8 +296,8 @@ class ConnectorPythonAnalysis(Connector):
                             # only proceed with further analysis if Python 3.x
                             if mpvv[0] == 3:
                                 # 2. Radon (Complexity) - WORKING
-                                #radon_metrics = self._analyze_radon(code)
-                                #next_row.update(radon_metrics)
+                                # radon_metrics = self._analyze_radon(code)
+                                # next_row.update(radon_metrics)
 
                                 # # 3. Dependencies (AST/Deptry logic)
                                 # deps = self._analyze_dependencies(code)
@@ -306,11 +306,11 @@ class ConnectorPythonAnalysis(Connector):
                                 # next_row["dependencies_count"] = len(deps)
 
                                 # # 4. Pylint (Quality) - Returns issue count - WORKING
-                                #next_row["pylint_issues"] = self._analyze_pylint(code)
+                                # next_row["pylint_issues"] = self._analyze_pylint(code)
 
                                 # # 5. Ruff (Speed/Style) - Returns violation count
                                 # always returns -1.0
-                                # next_row["ruff_violations"] = self._analyze_ruff(code)
+                                next_row["ruff_violations"] = self._analyze_ruff(code)
 
                         except Exception as e:
                             logger.error(
