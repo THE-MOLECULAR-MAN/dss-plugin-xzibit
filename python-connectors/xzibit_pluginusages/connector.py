@@ -57,7 +57,7 @@ class ConnectorPlugins(Connector):
 
                     # dataset_info = dataset_handle.get_definition()
 
-                except Exception as e:
+                except Exception:
                     next_row = {
                         "object_type": "dataset",
                         "projectKey": pk,
