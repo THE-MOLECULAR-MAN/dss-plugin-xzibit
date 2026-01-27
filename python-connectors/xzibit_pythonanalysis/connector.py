@@ -267,10 +267,10 @@ class ConnectorPythonAnalysis(Connector):
                             # next_row.update(radon_metrics)
 
                             # # 3. Dependencies (AST/Deptry logic)
-                            deps = self._analyze_dependencies(code)
-                            next_row["dependencies_list"] = ",".join(deps)
-                            # dependencies_list returns a syntax error
-                            next_row["dependencies_count"] = len(deps)
+                            # deps = self._analyze_dependencies(code)
+                            # next_row["dependencies_list"] = ",".join(deps)
+                            # # dependencies_list returns a syntax error
+                            # next_row["dependencies_count"] = len(deps)
 
                             # # 4. Pylint (Quality) - Returns issue count
                             # next_row["pylint_issues"] = self._analyze_pylint(code)
