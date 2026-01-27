@@ -222,8 +222,8 @@ class ConnectorPythonAnalysis(Connector):
                 for recipe_meta in python_recipes:
                     name = recipe_meta["name"]
                     logger.info(f"Analyzing Python code for recipe {name}...")
-                    
-                    
+
+                    recipe_handle = project_handle.get_recipe(name)
 
                     code = self.get_recipe_code(name)
 
