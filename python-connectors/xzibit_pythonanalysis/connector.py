@@ -101,9 +101,7 @@ class ConnectorPythonAnalysis(Connector):
                 f"Successfully fetched handle for Python code env {code_env_name}"
             )
             py_interp_version = code_env.get_settings().get_raw().get("desc", {}).get("pythonInterpreter", None)
-                .get_raw()
-                .get("desc", {})
-                .get("pythonInterpreter", None)
+                
             #  "python_interpreter"
             #             ].replace("PYTHON", "")
 
