@@ -233,6 +233,7 @@ class ConnectorPythonAnalysis(Connector):
         """Runs Ruff and returns total violation count."""
         try:
             logger.info(f"_analyze_ruff started")
+            # sudo dnf install ruff # Alma 8
             output = self._run_subprocess_tool(
                 ["ruff", "check", "--output-format=json"], code
             )
