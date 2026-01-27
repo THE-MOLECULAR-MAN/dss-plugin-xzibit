@@ -248,7 +248,7 @@ class ConnectorPythonAnalysis(Connector):
             if records_limit > 0 and records_generated >= records_limit:
                 return
             try:
-                logger.info(f"starting on project {project_key}")
+                #logger.info(f"starting on project {project_key}")
                 project_handle = self.__client.get_project(project_key)
                 logger.info(f"fetching python_recipes for {project_key}")
 
