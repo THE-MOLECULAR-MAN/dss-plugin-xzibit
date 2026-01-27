@@ -106,7 +106,6 @@ class ConnectorPlugins(Connector):
 
             for plugin_usage in project_handle.list_plugins_usages():
                 next_row = {
-                    "object_type": "plugin_usage",
                     "projectKey": pk,
                 }
 
