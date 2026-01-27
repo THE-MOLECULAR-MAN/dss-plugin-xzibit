@@ -76,7 +76,7 @@ class ConnectorPythonAnalysis(Connector):
                             "recipe_name": name,
                         }
                         try:
-                            # vermin analysis:
+                            # vermin analysis for minimum 
                             vermin_analysis = self.analyze_code_compatibility(code)
 
                             # pylint analysis for quality score
