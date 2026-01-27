@@ -78,14 +78,16 @@ class ConnectorPythonAnalysis(Connector):
 
                             # vermin analysis:
                             vermin_analysis = self.analyze_code_compatibility(code)
-                            
+
                         except Exception as e:
-                            logger.error(f"Error analyzing {name} in {project_key}: {e}")
+                            logger.error(
+                                f"Error analyzing {name} in {project_key}: {e}"
+                            )
                         finally:
 
-                        # Build the row
-                        records_generated += 1
-                        yield next_row
+                            # Build the row
+                            records_generated += 1
+                            yield next_row
 
                     else:
                         logger.info(f"{name:<40} | {'Skipped (No Code)':<20} | {'-'}")
