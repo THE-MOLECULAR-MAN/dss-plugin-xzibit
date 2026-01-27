@@ -12,7 +12,7 @@ class ConnectorPythonAnalysis(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
         
-    def get_python_recipes(self, pr) -> List[Dict[str, Any]]:
+    def get_python_recipes(self, project_handle) -> List[Dict[str, Any]]:
         """
         Retrieves a list of all Python code recipes in the current project.
         """
