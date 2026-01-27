@@ -104,6 +104,7 @@ class ConnectorPlugins(Connector):
             #     except Exception:
             #         print("plugin_usages - Exception occurred")
 
+            # this is not 
             for plugin_usage in project_handle.list_plugins_usages():
                 next_row = {
                     "projectKey": pk,
