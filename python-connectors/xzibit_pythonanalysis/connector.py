@@ -189,6 +189,7 @@ class ConnectorPythonAnalysis(Connector):
 
         try:
             # Run the command against the temp file
+            lo
             result = subprocess.run(
                 cmd + [tmp_path],
                 capture_output=True,
