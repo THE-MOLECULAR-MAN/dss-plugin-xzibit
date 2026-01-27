@@ -71,9 +71,7 @@ class ConnectorPythonAnalysis(Connector):
 
                     if code:
                         result = self.analyze_code_compatibility(code)
-                        logger.info(
-                            f"{name:<40} | {result['min_versions']:<20} | {result['incompatible_versions']:<20}"
-                        )
+                        
                     else:
                         logger.info(f"{name:<40} | {'Skipped (No Code)':<20} | {'-'}")
 
