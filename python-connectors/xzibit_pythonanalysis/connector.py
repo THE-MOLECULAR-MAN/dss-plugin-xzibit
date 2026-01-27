@@ -149,7 +149,7 @@ class ConnectorPythonAnalysis(Connector):
         return None
 
     def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs for anything that I can find."""
+        """Not needed for this connector."""
         return None
 
     def get_partitioning(self):
