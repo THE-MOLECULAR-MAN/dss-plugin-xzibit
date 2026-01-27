@@ -114,7 +114,7 @@ class ConnectorPythonAnalysis(Connector):
 
         except Exception:
             logger.warning(
-                f"Could not retrieve Python version for code environment {code_env_name}."
+                f"Could not retrieve Python version for code env {code_env_name}."
             )
             return "Exception"
 
