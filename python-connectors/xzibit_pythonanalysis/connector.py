@@ -41,7 +41,7 @@ class ConnectorPythonAnalysis(Connector):
         recipes = project_handle.list_recipes()
         return [r for r in recipes if r["type"] == "python"]
 
-    def get_recipe_code(self, recipe_name: str) -> str:
+    def get_recipe_code(self, project_handle, recipe_name: str) -> str:
         """
         Fetches the actual Python script content from a specific recipe.
         """
