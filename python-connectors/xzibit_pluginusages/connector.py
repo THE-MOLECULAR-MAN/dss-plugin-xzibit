@@ -37,10 +37,9 @@ class ConnectorPlugins(Connector):
     ):
         """TBD"""
         records_generated = 0
-        
+
         for pk in self.__client.list_project_keys():
             project_handle = self.__client.get_project(pk)
-        
 
     def get_read_schema(self):
         """TBD"""
