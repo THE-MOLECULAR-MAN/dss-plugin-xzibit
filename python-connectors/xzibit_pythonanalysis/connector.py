@@ -8,7 +8,6 @@ from dataiku.connector import Connector
 from xzibit.utils import pp
 
 
-
 class ConnectorRecipes(Connector):
     """TBD"""
 
@@ -18,7 +17,6 @@ class ConnectorRecipes(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-
 
     def get_url(self, id, project_key):
         """Create a URL to the DSS object in question in this specific DSS instance.
