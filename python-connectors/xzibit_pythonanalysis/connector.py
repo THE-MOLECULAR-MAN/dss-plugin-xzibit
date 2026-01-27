@@ -18,14 +18,6 @@ class ConnectorRecipes(Connector):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
 
-    def get_url(self, id, project_key):
-        """Create a URL to the DSS object in question in this specific DSS instance.
-        Return None if any of the inputs are None."""
-        # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, id, project_key)):
-            return None
-        return f"{self.__baseurl}/projects/{project_key}/recipes/{id}/"
-
     def generate_rows(
         self,
         dataset_schema=None,
