@@ -54,7 +54,6 @@ class ConnectorPlugins(Connector):
                         "object_type": "dataset",
                         "projectKey": pk,
                         "object_id": dataset_handle.id,
-                        "is_managed": dataset_info.get("managed", None),
                     }
 
                 except Exception as e:
