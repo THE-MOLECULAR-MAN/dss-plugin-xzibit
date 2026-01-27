@@ -153,7 +153,7 @@ class ConnectorPythonAnalysis(Connector):
         return None
 
     def get_partitioning(self):
-        """TBD"""
+        """Not needed for this connector."""
         raise NotImplementedError
 
     def list_partitions(self, partitioning):
