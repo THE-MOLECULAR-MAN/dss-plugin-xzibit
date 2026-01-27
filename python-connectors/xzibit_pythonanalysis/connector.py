@@ -82,7 +82,9 @@ class ConnectorPythonAnalysis(Connector):
             logger.info(f"Fetching handle for code env {code_env_name}")
             # next line is causing exception
             code_env = self.__client.get_code_env("PYTHON", code_env_name)
-            logger.info(f"Successfully fetched handle for code env {code_env_name}")
+            logger.info(
+                f"Successfully fetched handle for Python code env {code_env_name}"
+            )
             return (
                 code_env.get_settings()
                 .get_raw()
