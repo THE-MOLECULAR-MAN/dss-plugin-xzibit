@@ -103,7 +103,7 @@ class ConnectorPythonAnalysis(Connector):
         try:
             # Vermin expects a path or logic to parse. We use its internal detect.
             # detect returns (mins, parsable, text)
-            logger.info(f"Analyzing Python code for recipe {name}...")
+            logger.info(f"_analyze_vermin start")
             mins = detect(code, config=self.vermin_config).mins
             if mins:
                 # Returns something like "3.8"
