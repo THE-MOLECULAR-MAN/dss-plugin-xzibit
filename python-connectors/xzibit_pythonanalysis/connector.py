@@ -187,7 +187,7 @@ class ConnectorPythonAnalysis(Connector):
             # but JSON is safer if available.
             logger.info(f"_analyze_pylint started")
             output = self._run_subprocess_tool(["pylint", "--output-format=json"], code)
-            logger.info(f"_analyze_pylint started")
+            logger.info(f"finished subprocess")
             data = json.loads(output)
             # Pylint JSON export is a list of messages. It doesn't always contain the global score easily.
             # Fallback: Run with report enabled for score extraction is tricky in automation.
