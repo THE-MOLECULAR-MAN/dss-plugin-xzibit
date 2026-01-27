@@ -59,9 +59,20 @@ class ConnectorPythonAnalysis(Connector):
                 f"Could not retrieve code environment for {recipe_name}. It may not be a standard code recipe."
             )
             return ""
-        
+
     def get_code_env_python_version(self, code_env_name: str) -> str:
-        
+        """
+        Fetches the Python version associated with a given code environment.
+        """
+        try:
+            code_env = self.__client.get_code_env(code_env_name)
+            details = code_env.get_details()
+            return details.get("pythonVersion", "Unknown")
+        except Exception:
+            logger.warning(
+                f"Could not retrieve Python version for code environment {code_env_name}."
+            )
+            return "Unknown"
 
     def generate_rows(
         self,
