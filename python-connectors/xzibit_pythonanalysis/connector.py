@@ -292,6 +292,8 @@ class ConnectorPythonAnalysis(Connector):
                             next_row["min_python_version_from_Vermin"] = (
                                 min_python_version_from_vermin
                             )
+                            
+                            is_
 
                             # 2. Radon (Complexity) - WORKING
                             radon_metrics = self._analyze_radon(code)
