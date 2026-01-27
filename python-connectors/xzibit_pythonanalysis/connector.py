@@ -81,9 +81,7 @@ class ConnectorPythonAnalysis(Connector):
                 print(f"Error accessing project {project_key}: {e}")
                 continue
 
-            records_generated += 1
-            yield next_row
-
+            
     ####################################################################
     # Intentionally not implemented, not needed for this type
     ####################################################################
