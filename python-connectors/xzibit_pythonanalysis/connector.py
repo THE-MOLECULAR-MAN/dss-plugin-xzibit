@@ -40,13 +40,14 @@ class ConnectorPythonAnalysis(Connector):
             records_generated += 1
             yield next_row
 
+    ####################################################################
+    # Intentionally not implemented, not needed for this type
+    ####################################################################
+
     def get_read_schema(self):
         """TBD"""
         return None
 
-    ####################################################################
-    # Intentionally not implemented, not needed for this type
-    ####################################################################
     def get_records_count(self, partitioning=None, partition_id=None):
         """This never runs for anything that I can find."""
         return None
