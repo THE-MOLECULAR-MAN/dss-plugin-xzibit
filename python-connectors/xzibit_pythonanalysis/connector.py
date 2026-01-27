@@ -45,8 +45,20 @@ class ConnectorPythonAnalysis(Connector):
                 f"Could not retrieve code for {recipe_name}. It may not be a standard code recipe."
             )
             return ""
-        
+
     def get_recipe_code_env_name(self, recipe_name: str) -> str:
+        """
+        Fetches the code environment name from a specific recipe.
+        """
+        try:
+            recipe = self.project.get_recipe(recipe_name)
+            settings = recipe.get_settings()
+            return settings.get_code_env_name()
+        except AttributeError:
+            logger.warning(
+                f"Could not retrieve code environment for {recipe_name}. It may not be a standard code recipe."
+            )
+            return ""
 
     def generate_rows(
         self,
