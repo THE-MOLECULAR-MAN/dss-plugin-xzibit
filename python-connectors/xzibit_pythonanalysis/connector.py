@@ -45,6 +45,8 @@ class ConnectorPythonAnalysis(Connector):
                 f"Could not retrieve code for {recipe_name}. It may not be a standard code recipe."
             )
             return ""
+        
+    def 
 
     def generate_rows(
         self,
