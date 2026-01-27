@@ -104,6 +104,9 @@ class ConnectorPythonAnalysis(Connector):
                             "recipe_name": name,
                         }
                         try:
+                            # get additional Dataiku metadata
+                            
+                            
                             # vermin analysis for minimum Python versions
                             vermin_analysis = self.analyze_code_compatibility(code)
 
