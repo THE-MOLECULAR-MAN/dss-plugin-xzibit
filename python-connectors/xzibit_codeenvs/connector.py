@@ -132,7 +132,7 @@ class ConnectorCodeEnvs(Connector):
                 if self.__compute_codeenv_usages:
 
                     next_row["projectKeys_where_code_env_used"] = []
-                    next_row["total_instances_of_code_env"] = -1
+                    next_row["total_instances_of_code_env"] = None
 
                     print(f"starting code env list usages for {code_env_name}")
                     # next line throws exception on DevDesign:
