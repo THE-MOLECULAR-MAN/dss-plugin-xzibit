@@ -103,8 +103,17 @@ class ConnectorPlugins(Connector):
 
             #     except Exception:
             #         print("plugin_usages - Exception occurred")
-            
-            for plugin_usage in project_handle.list_plugins_usages()
+
+            for plugin_usage in project_handle.list_plugins_usages():
+                next_row = {
+                    "object_type": "plugin_usage",
+                    "projectKey": pk,
+                }
+
+                next_row["object_id"] = plugin_usage.id
+                next_row["subtype"] = plugin_usage.type
+
+                yield next_row
 
     def get_read_schema(self):
         """TBD"""
