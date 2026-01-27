@@ -225,7 +225,7 @@ class ConnectorPythonAnalysis(Connector):
 
                     recipe_handle = project_handle.get_recipe(name)
 
-                    code = self.get_recipe_code(name)
+                    code = self.get_recipe_code(recipe_handle)
 
                     if code:
                         # initialize the next row in case of exceptions
