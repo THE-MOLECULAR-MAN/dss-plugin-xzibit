@@ -47,31 +47,31 @@ class ConnectorPlugins(Connector):
             ##################################################################
             # Datasets
             ##################################################################
-            for dataset_handle in project_handle.list_datasets(as_type="objects"):
-                if records_limit > 0 and records_generated >= records_limit:
-                    return
+            # for dataset_handle in project_handle.list_datasets(as_type="objects"):
+            #     if records_limit > 0 and records_generated >= records_limit:
+            #         return
 
-                try:
+            #     try:
 
-                    # determine if dataset uses a plugin
-                    dataset_info = dataset_handle.get_info().get_raw()
-                    dataset_type = dataset_info.get("type", "")
+            #         # determine if dataset uses a plugin
+            #         dataset_info = dataset_handle.get_info().get_raw()
+            #         dataset_type = dataset_info.get("type", "")
 
-                    if dataset_type.startswith("Custom"):
-                        next_row = {
-                            "object_type": "dataset",
-                            "projectKey": pk,
-                        }
+            #         if dataset_type.startswith("Custom"):
+            #             next_row = {
+            #                 "object_type": "dataset",
+            #                 "projectKey": pk,
+            #             }
 
-                        next_row["object_id"] = dataset_handle.id
-                        next_row["subtype"] = dataset_type
+            #             next_row["object_id"] = dataset_handle.id
+            #             next_row["subtype"] = dataset_type
 
-                        # pp(dataset_info)
+            #             # pp(dataset_info)
 
-                        yield next_row
+            #             yield next_row
 
-                except Exception:
-                    print("plugin_usages - Exception occurred")
+            #     except Exception:
+            #         print("plugin_usages - Exception occurred")
 
             ##################################################################
             # Recipes
