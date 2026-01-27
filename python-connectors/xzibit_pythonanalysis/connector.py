@@ -14,7 +14,7 @@ from datetime import datetime
 
 
 class ConnectorPythonAnalysis(Connector):
-    """A Dataiku DSS v12 connector to list projects and their Python code analysis results."""
+    """A Dataiku DSS v12 connector to provide a DSS Dataset listing all list projects and their Python code analysis results."""
 
     ####################################################################
     # Code that has to be customized for this specific class
