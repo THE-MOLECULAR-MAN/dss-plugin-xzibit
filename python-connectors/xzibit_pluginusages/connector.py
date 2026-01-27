@@ -46,7 +46,7 @@ class ConnectorPlugins(Connector):
             for dataset_handle in project_handle.list_datasets():
                 if records_limit > 0 and records_generated >= records_limit:
                     return
-
+                try:
                 dataset_info = dataset_handle.get_definition()
                 next_row = {
                     "projectKey": pk,
