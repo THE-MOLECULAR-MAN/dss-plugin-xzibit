@@ -108,7 +108,9 @@ class ConnectorPythonAnalysis(Connector):
                             code_env_name = 
                             python_version = 
                             next_row["code_env_name"] = self.get_recipe_code_env_name(name)
-                            next_row["python_version"] = python_version
+                            next_row["python_version"] = self.get_code_env_python_version(
+                                code_env_name
+                            )
 
                             # vermin analysis for minimum Python versions
                             vermin_analysis = self.analyze_code_compatibility(code)
