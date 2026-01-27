@@ -5,40 +5,8 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import get_dss_base_url, pp, get_python_recipe_code_env
-from xzibit.deprecations import (
-    DEPRECATED_PREPROCESSORS,
-    load_local_csv_as_dataframe,
-    lookup_recipe_deprecation_status,
-)
+from xzibit.utils import pp
 
-
-def get_unique_types(data_list):
-    unique_types = {item.get("type") for item in data_list if "type" in item}
-    return unique_types
-
-
-def get_preprocessors_in_prepare_recipe(prepare_recipe_handle):
-    try:
-        recipe_settings_handle = prepare_recipe_handle.get_settings()
-        recipe_type = recipe_settings_handle.type
-        if recipe_type == "shaker":  # prepare recipe
-            prepare_recipe_payload = recipe_settings_handle.obj_payload
-            steps = prepare_recipe_payload.get("steps", [])
-            return get_unique_types(steps)
-        return
-    except Exception:
-        return
-
-
-def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
-    preprocessors_unique = get_preprocessors_in_prepare_recipe(prepare_recipe_handle)
-    if isinstance(preprocessors_unique, set):
-        found_dep = preprocessors_unique.intersection(DEPRECATED_PREPROCESSORS)
-        if isinstance(preprocessors_unique, set) and len(found_dep) > 0:
-            # return f"Deprecated preprocessors found: {found_dep}"
-            return list(found_dep)
-    return []
 
 
 class ConnectorRecipes(Connector):
@@ -50,15 +18,7 @@ class ConnectorRecipes(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        self.__objects_list = {}
-        self.__baseurl = get_dss_base_url()
-        self.__df_dss_recipes = load_local_csv_as_dataframe(
-            "DSS_recipe_deprecation_status.csv"
-        )
 
-        for pk in self.__client.list_project_keys():
-            project_handle = self.__client.get_project(pk)
-            self.__objects_list[pk] = project_handle.list_recipes(as_type="objects")
 
     def get_url(self, id, project_key):
         """Create a URL to the DSS object in question in this specific DSS instance.
