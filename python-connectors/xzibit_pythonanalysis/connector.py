@@ -263,8 +263,8 @@ class ConnectorPythonAnalysis(Connector):
 
                             # 2. Radon (Complexity)
                             # radon_rank is often returning Error
-                            radon_metrics = self._analyze_radon(code)
-                            next_row.update(radon_metrics)
+                            # radon_metrics = self._analyze_radon(code)
+                            # next_row.update(radon_metrics)
 
                             # # 3. Dependencies (AST/Deptry logic)
                             deps = self._analyze_dependencies(code)
