@@ -69,7 +69,6 @@ class RecipeAnalyzer:
             # detect returns a structure; we capture it safely
             vermin_results = detect(code_content, config=self.vermin_config)
 
-            # --- FIX STARTS HERE ---
             # Inspect structure to handle variations in vermin return values
             # Case A: vermin_results is [(2, 0), None] (The 'mins' list itself)
             if isinstance(vermin_results, list):
