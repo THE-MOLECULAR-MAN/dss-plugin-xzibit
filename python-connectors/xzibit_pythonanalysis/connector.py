@@ -189,7 +189,7 @@ class ConnectorPythonAnalysis(Connector):
 
         try:
             # Run the command against the temp file
-            logger.info
+            logger.info(f"Running subprocess: {' '.join(cmd + [tmp_path])}")
             result = subprocess.run(
                 cmd + [tmp_path],
                 capture_output=True,
