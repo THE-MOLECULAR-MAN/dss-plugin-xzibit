@@ -78,7 +78,7 @@ class ConnectorPythonAnalysis(Connector):
         """
         try:
             if not code_env_name:
-                return "Code Env Name Not Specified"
+                return ""
             logger.info(f"Fetching handle for code env {code_env_name}")
             # next line is causing exception
             code_env = self.__client.get_code_env("PYTHON", code_env_name)
