@@ -43,7 +43,7 @@ class ConnectorPlugins(Connector):
                 return
 
             project_handle = self.__client.get_project(pk)
-            for 
+            for dataset_handle in 
 
     def get_read_schema(self):
         """TBD"""
