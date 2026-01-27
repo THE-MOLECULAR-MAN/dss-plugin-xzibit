@@ -185,7 +185,7 @@ class ConnectorPythonAnalysis(Connector):
         try:
             # We use a regex to extract the score from standard report if JSON fails,
             # but JSON is safer if available.
-            #ogger.info(f"_analyze_pylint started")
+            logger.info(f"_analyze_pylint started")
             # next line is causing exception
             # sudo dnf install pylint # Alma 8
             output = self._run_subprocess_tool(["pylint", "--output-format=json"], code)
