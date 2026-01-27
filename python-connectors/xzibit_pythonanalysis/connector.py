@@ -24,6 +24,13 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger()
 
 
+def get_tuples_only(input_list: list) -> list:
+    """
+    Filters a list to return only elements that are of type tuple.
+    """
+    return [item for item in input_list if isinstance(item, tuple)]
+
+
 class ConnectorPythonAnalysis(Connector):
     """A Dataiku DSS v12 connector to provide a DSS Dataset listing
     all Python Code Recipes, and information about them."""
