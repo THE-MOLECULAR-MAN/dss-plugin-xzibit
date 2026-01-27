@@ -72,7 +72,7 @@ class ConnectorPlugins(Connector):
                     print("plugin_usages - Exception occurred")
 
             ##################################################################
-            # Datasets
+            # Recipes
             ##################################################################
 
 
