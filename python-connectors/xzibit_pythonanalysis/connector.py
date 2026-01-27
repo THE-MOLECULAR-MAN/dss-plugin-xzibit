@@ -77,7 +77,7 @@ class ConnectorPythonAnalysis(Connector):
                         
                         
                         records_generated += 1
-            yield next_row
+                yield next_row
 
 
                     else:
