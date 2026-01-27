@@ -37,35 +37,12 @@ class ConnectorPythonAnalysis(Connector):
             if records_limit > 0 and records_generated >= records_limit:
                 return
 
-
             records_generated += 1
             yield next_row
 
     def get_read_schema(self):
         """TBD"""
-        return {
-            "columns": [
-                {"name": "projectKey", "type": "string", "meaning": "Text"},
-                {"name": "name", "type": "string", "meaning": "Text"},
-                {"name": "shortDesc", "type": "string", "meaning": "FreeText"},
-                {"name": "description", "type": "string", "meaning": "FreeText"},
-                {"name": "ownerLogin", "type": "string", "meaning": "Text"},
-                {"name": "projectStatus", "type": "string", "meaning": "Text"},
-                {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
-                {
-                    "name": "last_modified_timestamp",
-                    "type": "string",
-                    "meaning": "Text",
-                },
-                {"name": "tutorialProject", "type": "boolean", "meaning": "Boolean"},
-                {
-                    "name": "contributors",
-                    "type": "string",
-                    "meaning": "JSONArrayMeaning",
-                },
-                {"name": "url", "type": "string", "meaning": "URL"},
-            ]
-        }
+        return None
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
