@@ -86,6 +86,7 @@ class ConnectorPlugins(Connector):
                     # determine if recipe uses a plugin
                     recipe_settings_handle = recipe_handle.get_settings()
                     raw_data = recipe_settings_handle.get_recipe_raw_definition()
+                    raw_data.get("type", "")
 
                     print("Recipe Raw Data:")
                     pp(raw_data)
