@@ -67,7 +67,7 @@ class ConnectorPlugins(Connector):
                         next_row["subtype"] = dataset_type
 
                         # pp(dataset_info)
-
+                        records_generated += 1
                         yield next_row
 
                 except Exception:
