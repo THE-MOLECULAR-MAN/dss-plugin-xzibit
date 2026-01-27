@@ -63,7 +63,7 @@ class ConnectorPythonAnalysis(Connector):
                 return
             try:
                 project_handle = self.__client.get_project(project_key)
-                project_recipes = self.get_python_recipes(project_handle)
+                python_recipes = self.get_python_recipes(project_handle)
 
                 for recipe_meta in python_recipes:
                     name = recipe_meta["name"]
