@@ -27,6 +27,7 @@ class ConnectorPlugins(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
+        # self.__baseurl = get_dss_base_url()
 
     def generate_rows(
         self,
@@ -38,83 +39,44 @@ class ConnectorPlugins(Connector):
         """TBD"""
         records_generated = 0
 
-        for pk in self.__client.list_project_keys():
-            if records_limit > 0 and records_generated >= records_limit:
-                return
-
-            project_handle = self.__client.get_project(pk)
-
-            ##################################################################
-            # Datasets
-            ##################################################################
-            for dataset_handle in project_handle.list_datasets(as_type="objects"):
+        # list_plugins does not offer any parameters
+        # list_plugins returns a list of dict. Each dict contains at least a ‘id’ field
+        for item_info in self.__client.list_plugins():
+            try:
                 if records_limit > 0 and records_generated >= records_limit:
                     return
 
-                try:
+                plugin_id = item_info.get("id", "NO_PLUGIN_ID")
+                plugin_handle = self.__client.get_plugin(plugin_id)
+                # settings_raw = plugin_handle.get_settings().get_raw()
+                list_of_usages = plugin_handle.list_usages()
 
-                    # determine if dataset uses a plugin
-                    dataset_info = dataset_handle.get_info().get_raw()
-                    dataset_type = dataset_info.get("type", "")
+                for usage in list_of_usages.usages:
+                    try:
+                        if records_limit > 0 and records_generated >= records_limit:
+                            return
 
-                    if dataset_type.startswith("Custom"):
-                        next_row = {
-                            "object_type": "dataset",
-                            "projectKey": pk,
-                        }
+                        next_row = {"plugin_id": plugin_id}
+                        next_row["plugin_is_deprecated"] = (
+                            plugin_id in DEPRECATED_PLUGIN_IDS
+                        )
+                        next_row["element_kind"] = usage.element_kind
+                        next_row["element_type"] = usage.element_type
+                        next_row["object_id"] = usage.object_id
+                        next_row["object_type"] = usage.object_type
+                        next_row["project_key"] = usage.project_key  # may not have one
 
-                        next_row["object_id"] = dataset_handle.id
-                        next_row["subtype"] = dataset_type
-
-                        # pp(dataset_info)
+                    except Exception as e:
+                        print(
+                            f"[plugin_usages-generate_rows] ! [UNEXPECTED EXCEPTION] {e} with plugin {plugin_id}"
+                        )
+                    finally:
                         records_generated += 1
                         yield next_row
-
-                except Exception:
-                    print("plugin_usages - Exception occurred")
-
-            ##################################################################
-            # Recipes
-            ##################################################################
-            for recipe_handle in project_handle.list_recipes(as_type="objects"):
-                if records_limit > 0 and records_generated >= records_limit:
-                    return
-
-                try:
-
-                    # determine if recipe uses a plugin
-                    recipe_settings_handle = recipe_handle.get_settings()
-                    raw_data = recipe_settings_handle.get_recipe_raw_definition()
-                    obj_subtype = raw_data.get("type", "")
-
-                    # print("Recipe Raw Data:")
-                    # pp(raw_data)
-
-                    if obj_subtype.startswith("Custom"):
-                        next_row = {
-                            "object_type": "recipe",
-                            "projectKey": pk,
-                        }
-
-                        next_row["object_id"] = recipe_handle.id
-                        next_row["subtype"] = obj_subtype
-
-                        records_generated += 1
-                        yield next_row
-
-                except Exception:
-                    print("plugin_usages - Exception occurred")
-
-            # DSS v12 does not offer list_plugin_usages() at the project level.
-            # for plugin_usage in project_handle.list_plugins_usages():
-            #     next_row = {
-            #         "projectKey": pk,
-            #     }
-
-            #     next_row["object_id"] = plugin_usage.get("id", "")
-            #     next_row["subtype"] = plugin_usage.get("type", "")
-
-            #     yield next_row
+            except Exception as e:
+                print(
+                    f"[plugin_usages-generate_rows] [UNEXPECTED EXCEPTION] {e} with plugin {plugin_id}"
+                )
 
     def get_read_schema(self):
         """TBD"""
