@@ -53,7 +53,7 @@ class ConnectorPythonAnalysis(Connector):
         partition_id=None,
         records_limit=-1,
     ):
-        """TBD"""
+        """A generator function that yields rows for the dataset."""
         records_generated = 0
 
         # iterate through each project
