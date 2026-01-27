@@ -213,7 +213,7 @@ class ConnectorPythonAnalysis(Connector):
             if records_limit > 0 and records_generated >= records_limit:
                 return
             try:
-                logger.warning(f"Dependency analysis failed: {e}")
+                logger.info(f"Dependency analysis failed: {e}")
                 project_handle = self.__client.get_project(project_key)
                 python_recipes = self.get_python_recipes(project_handle)
 
