@@ -109,8 +109,8 @@ class ConnectorPlugins(Connector):
                     "projectKey": pk,
                 }
 
-                next_row["object_id"] = plugin_usage.get("id","")
-                next_row["subtype"] = plugin_usage.type
+                next_row["object_id"] = plugin_usage.get("id", "")
+                next_row["subtype"] = plugin_usage.get("type", "")
 
                 yield next_row
 
