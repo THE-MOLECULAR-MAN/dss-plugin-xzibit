@@ -100,6 +100,7 @@ class ConnectorPythonAnalysis(Connector):
             logger.info(
                 f"Successfully fetched handle for Python code env {code_env_name}"
             )
+            
             #  "python_interpreter"
             #             ].replace("PYTHON", "")
 
