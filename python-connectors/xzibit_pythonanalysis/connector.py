@@ -236,7 +236,7 @@ class ConnectorPythonAnalysis(Connector):
         try:
             logger.info(f"_analyze_ruff started")
             
-            RUFF_
+            RUFF_PATH = "/usr/local/bin/ruff"  # Adjust this path as needed
 
             output = self._run_subprocess_tool(
                 ["ruff", "check", "--output-format=json"], code
