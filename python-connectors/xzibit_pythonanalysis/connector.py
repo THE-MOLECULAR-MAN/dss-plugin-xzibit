@@ -100,8 +100,13 @@ class ConnectorPythonAnalysis(Connector):
             logger.info(
                 f"Successfully fetched handle for Python code env {code_env_name}"
             )
-            py_interp_version = code_env.get_settings().get_raw().get("desc", {}).get("pythonInterpreter", None)
-                
+            py_interp_version = (
+                code_env.get_settings()
+                .get_raw()
+                .get("desc", {})
+                .get("pythonInterpreter", None)
+            )
+
             #  "python_interpreter"
             #             ].replace("PYTHON", "")
 
@@ -111,9 +116,7 @@ class ConnectorPythonAnalysis(Connector):
             #                 + "."
             #                 + python_version_formatted[1:]
             #             )
-            return (
-               
-            )
+            return ()
 
         except Exception:
             logger.warning(
