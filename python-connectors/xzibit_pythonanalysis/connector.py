@@ -11,13 +11,13 @@ class ConnectorPythonAnalysis(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
-        
+
     def get_python_recipes(self, project_handle) -> List[Dict[str, Any]]:
         """
         Retrieves a list of all Python code recipes in the current project.
         """
-        recipes = project_handle.list_recipes(as_type="objects" )
-        return [r for r in recipes if r['type'] == 'python']
+        recipes = project_handle.list_recipes()
+        return [r for r in recipes if r["type"] == "python"]
 
     def generate_rows(
         self,
