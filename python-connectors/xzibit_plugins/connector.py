@@ -123,11 +123,6 @@ class ConnectorPlugins(Connector):
                 {"name": "author", "type": "string", "meaning": "Text"},
                 {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
                 {"name": "description", "type": "string", "meaning": "FreeText"},
-                {
-                    "name": "plugin_used_in_projectkeys",
-                    "type": "string",
-                    "meaning": "JSONArrayMeaning",
-                },
                 {"name": "isDev", "type": "boolean", "meaning": "Boolean"},
                 {"name": "is_built_in_plugin", "type": "boolean", "meaning": "Boolean"},
                 {
