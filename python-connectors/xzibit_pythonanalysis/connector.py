@@ -285,6 +285,7 @@ class ConnectorPythonAnalysis(Connector):
                             # --- Analysis Tools ---
 
                             # 1. Vermin (Min Python Version) - WORKING
+                            self._analyze_vermin(code)
                             next_row["min_python_version_from_Vermin"] = (
                                 
                             )
