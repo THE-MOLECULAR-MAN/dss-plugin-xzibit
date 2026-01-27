@@ -185,7 +185,7 @@ class ConnectorPythonAnalysis(Connector):
         try:
             # We use a regex to extract the score from standard report if JSON fails,
             # but JSON is safer if available.
-            logger.info(f"_analyze_pylint start")
+            logger.info(f"_analyze_pylint started")
             output = self._run_subprocess_tool(["pylint", "--output-format=json"], code)
             data = json.loads(output)
             # Pylint JSON export is a list of messages. It doesn't always contain the global score easily.
