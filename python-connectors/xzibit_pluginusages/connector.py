@@ -51,12 +51,6 @@ class ConnectorPlugins(Connector):
 
                 try:
 
-                    next_row = {
-                        "object_type": "dataset",
-                        "projectKey": pk,
-                    }
-
-                    next_row["object_id"] = dataset_handle.id
                     
                     if obj_uses_plugin:
                         
