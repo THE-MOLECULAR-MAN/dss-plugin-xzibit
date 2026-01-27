@@ -19,6 +19,21 @@ class ConnectorPythonAnalysis(Connector):
         recipes = project_handle.list_recipes()
         return [r for r in recipes if r["type"] == "python"]
 
+    def get_recipe_code(self, recipe_name: str) -> str:
+        """
+        Fetches the actual Python script content from a specific recipe.
+        """
+        recipe = self.project.get_recipe(recipe_name)
+        settings = recipe.get_settings()
+        
+        try:
+            return settings.get_code()
+        except AttributeError:
+            logger.warning(f"Could not retrieve code for {recipe_name}. It may not be a standard code recipe.")
+            return ""
+
+
+
     def generate_rows(
         self,
         dataset_schema=None,
