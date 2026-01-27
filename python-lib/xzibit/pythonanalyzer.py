@@ -162,7 +162,7 @@ class RecipeAnalyzer:
                 logger.info(f"{name:<40} | {'Skipped (No Code)':<20} | {'-'}")
 
 
-# --- Execution Entry Point ---
-if __name__ == "__main__":
-    analyzer = RecipeAnalyzer()
-    analyzer.run()
+# # --- Execution Entry Point ---
+# if __name__ == "__main__":
+#     analyzer = RecipeAnalyzer()
+#     analyzer.run()
