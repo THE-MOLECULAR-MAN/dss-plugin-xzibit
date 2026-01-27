@@ -114,7 +114,6 @@ class RecipeAnalyzer:
                     incomp_ver_list.append(ver_str)
 
             incomp_ver_str = ", ".join(incomp_ver_list) if incomp_ver_list else "None"
-            # --- FIX ENDS HERE ---
 
             return {
                 "min_versions": min_ver_str,
