@@ -43,6 +43,7 @@ class ConnectorPlugins(Connector):
                 return
 
             project_handle = self.__client.get_project(pk)
+            for 
 
     def get_read_schema(self):
         """TBD"""
