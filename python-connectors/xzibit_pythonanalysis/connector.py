@@ -5,15 +5,19 @@
 ####################################################################
 from dataiku import api_client
 from dataiku.connector import Connector
-from xzibit.utils import pp
 
 
-class ConnectorRecipes(Connector):
+####################################################################
+# Unique imports for this Class
+####################################################################
+from datetime import datetime
+
+
+class ConnectorProjects(Connector):
     """TBD"""
 
     ####################################################################
     # Code that has to be customized for this specific class
-    ####################################################################
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
@@ -27,119 +31,59 @@ class ConnectorRecipes(Connector):
     ):
         """TBD"""
         records_generated = 0
+        keys = [
+            "projectKey",
+            "ownerLogin",
+            "projectStatus",
+            "contributors",
+            "name",
+            "shortDesc",
+            "description",
+            "tags",
+            "versionTag.lastModifiedOn",
+            "tutorialProject",
+        ]
         # iterate through each object
-        for pk, proj_recipes in self.__objects_list.items():
+        for item_info in self.__client.list_projects():
             if records_limit > 0 and records_generated >= records_limit:
                 return
 
-            project_handle = self.__client.get_project(pk)
+            next_row = flatten_dict(item_info, include_keys=keys)
 
-            for r in proj_recipes:
-                if records_limit > 0 and records_generated >= records_limit:
-                    return
-
-                recipe_handle = project_handle.get_recipe(r.id)
-                recipe_settings_handle = recipe_handle.get_settings()
-                raw_data = recipe_settings_handle.get_recipe_raw_definition()
-
-                next_row = {
-                    "projectKey": pk,
-                    "recipe_id": r.id,
-                    "recipe_type": raw_data["type"],
-                    "recipe_name": recipe_handle.name,
-                    "tags": raw_data["tags"],
-                    "url": self.get_url(r.id, pk),
-                }
-                try:
-                    # GUI produces this error message when visiting this recipe's inputs/utputs
-                    # An invalid argument has been encountered : Failed to iterate, caused by: IllegalArgumentException: No parameters dataset selected for repeating dataset/recipe
-                    # Seems to happen with the Export To Folder recipe, which exports files to folder.
-                    # if the user has not set the "Parameters dataset" option for this recipe, or maybe if that dataset has been deleted, then it will throw an exception.
-
-                    next_row["engine_parameters"] = raw_data.get("params", {}).get(
-                        "engineParams", None
-                    )
-
-                    next_row["last_modified_user"] = (
-                        raw_data.get("versionTag", {})
-                        .get("lastModifiedBy", {})
-                        .get("login", None)
-                    )
-
-                    next_row["input_datasets"] = (
-                        recipe_settings_handle.get_flat_input_refs()
-                    )
-
-                    try:
-                        next_row["code_env"] = get_python_recipe_code_env(recipe_handle)
-
-                        deprecated_preprocessors = (
-                            prepare_recipe_has_deprecated_preprocessors(recipe_handle)
-                        )
-
-                        if len(deprecated_preprocessors) > 0:
-                            next_row["deprecation_status"] = (
-                                "Prepare recipe uses deprecated preprocessors"
-                            )
-                        else:
-                            next_row["deprecation_status"] = (
-                                lookup_recipe_deprecation_status(
-                                    next_row["recipe_type"], self.__df_dss_recipes
-                                )
-                            )
-
-                        next_row["output_datasets"] = (
-                            recipe_settings_handle.get_flat_output_refs()
-                        )
-
-                    except Exception as e:
-                        # this occurs often on Dev-Design.
-                        print(
-                            f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe output dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
-                        )
-                except Exception as e:
-                    # this occurs often on Dev-Design.
-                    print(
-                        f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe input dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
-                    )
-                finally:
-                    records_generated += 1
-                    yield next_row
+            # custom things for this specific class:
+            next_row = remove_prefix_from_keys(next_row, "versionTag.")
+            next_row["last_modified_timestamp"] = datetime.fromtimestamp(
+                next_row.get("lastModifiedOn", 0) // 1000
+            )
+            next_row["url"] = self.get_url(next_row["projectKey"])
+            records_generated += 1
+            yield next_row
 
     def get_read_schema(self):
-        """Returns the read schema for TBD"""
-        return None
-        # return {
-        #     "columns": [
-        #         {"meaning": "Text", "name": "recipe_id", "type": "string"},
-        #         {"meaning": "Text", "name": "recipe_name", "type": "string"},
-        #         {"meaning": "Text", "name": "projectKey", "type": "string"},
-        #         {"meaning": "Text", "name": "recipe_type", "type": "string"},
-        #         {
-        #             "meaning": "JSONArrayMeaning",
-        #             "name": "input_datasets",
-        #             "type": "string",
-        #         },
-        #         {
-        #             "meaning": "JSONArrayMeaning",
-        #             "name": "output_datasets",
-        #             "type": "string",
-        #         },
-        #         {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
-        #         {
-        #             "meaning": "JSONObjectMeaning",
-        #             "name": "engine_parameters",
-        #             "type": "string",
-        #         },
-        #         {"meaning": "Text", "name": "last_modified_user", "type": "string"},
-        #         {
-        #             "meaning": "Text",
-        #             "name": "recipe_uses_deprecated_preprocessors",
-        #             "type": "string",
-        #         },
-        #         {"meaning": "URL", "name": "url", "type": "string"},
-        #     ]
-        # }
+        """TBD"""
+        return {
+            "columns": [
+                {"name": "projectKey", "type": "string", "meaning": "Text"},
+                {"name": "name", "type": "string", "meaning": "Text"},
+                {"name": "shortDesc", "type": "string", "meaning": "FreeText"},
+                {"name": "description", "type": "string", "meaning": "FreeText"},
+                {"name": "ownerLogin", "type": "string", "meaning": "Text"},
+                {"name": "projectStatus", "type": "string", "meaning": "Text"},
+                {"name": "tags", "type": "string", "meaning": "JSONArrayMeaning"},
+                {
+                    "name": "last_modified_timestamp",
+                    "type": "string",
+                    "meaning": "Text",
+                },
+                {"name": "tutorialProject", "type": "boolean", "meaning": "Boolean"},
+                {
+                    "name": "contributors",
+                    "type": "string",
+                    "meaning": "JSONArrayMeaning",
+                },
+                {"name": "url", "type": "string", "meaning": "URL"},
+            ]
+        }
 
     ####################################################################
     # Intentionally not implemented, not needed for this type
