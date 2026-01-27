@@ -104,7 +104,7 @@ class ConnectorPlugins(Connector):
             #     except Exception:
             #         print("plugin_usages - Exception occurred")
 
-            # this is not 
+            # DSS v12 does not offer list_plugin_usages() at the project level.
             for plugin_usage in project_handle.list_plugins_usages():
                 next_row = {
                     "projectKey": pk,
