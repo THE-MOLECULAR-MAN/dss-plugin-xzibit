@@ -76,7 +76,7 @@ class ConnectorPythonAnalysis(Connector):
                             "recipe_name": name,
                         }
                         try:
-                            # vermin analysis for minimum 
+                            # vermin analysis for minimum and incompatible versions
                             vermin_analysis = self.analyze_code_compatibility(code)
 
                             # pylint analysis for quality score
@@ -87,8 +87,8 @@ class ConnectorPythonAnalysis(Connector):
 
                             # radon analysis for complexity
                             # ... (not implemented here, but would go similarly)
-                            
-                            # 
+
+                            #
 
                         except Exception as e:
                             logger.error(
