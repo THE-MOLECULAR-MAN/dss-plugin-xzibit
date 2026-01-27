@@ -235,8 +235,8 @@ class ConnectorPythonAnalysis(Connector):
         """Runs Ruff and returns total violation count."""
         try:
             logger.info(f"_analyze_ruff started")
-            
-            RUFF_PATH = "~/dss_data/code-envs/python/plugin_xzibit_managed/bin/ruff"  # Adjust this path as needed
+
+            RUFF_PATH = "/data/dataiku/dss_data/code-envs/python/plugin_xzibit_managed/bin/ruff"  # Adjust this path as needed
 
             output = self._run_subprocess_tool(
                 ["ruff", "check", "--output-format=json"], code
