@@ -63,9 +63,9 @@ class ConnectorPlugins(Connector):
                         }
 
                         next_row["object_id"] = dataset_handle.id
-                        
 
                         dataset_info = dataset_handle.get_info().get_raw()
+                        next_row["subtype"] = dataset_info.get("type", "")
                         pp(dataset_info)
 
                         yield next_row
