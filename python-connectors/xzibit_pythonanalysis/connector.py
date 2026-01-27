@@ -82,7 +82,7 @@ class ConnectorPythonAnalysis(Connector):
                             # pylint analysis
                             # ... (not implemented here, but would go similarly)
 
-                            #ruff 
+                            # ruff analysis for 
 
                         except Exception as e:
                             logger.error(
