@@ -283,8 +283,7 @@ class ConnectorPythonAnalysis(Connector):
 
                             # --- Analysis Tools ---
 
-                            # 1. Vermin (Min Python Version)
-                            # working
+                            # 1. Vermin (Min Python Version) - WORKING
                             next_row["vermin_min_version"] = self._analyze_vermin(code)
 
                             # 2. Radon (Complexity)
