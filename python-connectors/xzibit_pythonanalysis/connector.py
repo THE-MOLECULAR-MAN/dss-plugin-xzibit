@@ -237,23 +237,23 @@ class ConnectorPythonAnalysis(Connector):
 
                             # --- Analysis Tools ---
 
-                            # 1. Vermin (Min Python Version)
-                            next_row["vermin_min_version"] = self._analyze_vermin(code)
+                            # # 1. Vermin (Min Python Version)
+                            # next_row["vermin_min_version"] = self._analyze_vermin(code)
 
-                            # 2. Radon (Complexity)
-                            radon_metrics = self._analyze_radon(code)
-                            next_row.update(radon_metrics)
+                            # # 2. Radon (Complexity)
+                            # radon_metrics = self._analyze_radon(code)
+                            # next_row.update(radon_metrics)
 
-                            # 3. Dependencies (AST/Deptry logic)
-                            deps = self._analyze_dependencies(code)
-                            next_row["dependencies_list"] = ",".join(deps)
-                            next_row["dependencies_count"] = len(deps)
+                            # # 3. Dependencies (AST/Deptry logic)
+                            # deps = self._analyze_dependencies(code)
+                            # next_row["dependencies_list"] = ",".join(deps)
+                            # next_row["dependencies_count"] = len(deps)
 
-                            # 4. Pylint (Quality) - Returns issue count
-                            next_row["pylint_issues"] = self._analyze_pylint(code)
+                            # # 4. Pylint (Quality) - Returns issue count
+                            # next_row["pylint_issues"] = self._analyze_pylint(code)
 
-                            # 5. Ruff (Speed/Style) - Returns violation count
-                            next_row["ruff_violations"] = self._analyze_ruff(code)
+                            # # 5. Ruff (Speed/Style) - Returns violation count
+                            # next_row["ruff_violations"] = self._analyze_ruff(code)
 
                         except Exception as e:
                             logger.error(
