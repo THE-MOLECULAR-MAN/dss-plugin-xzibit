@@ -120,7 +120,7 @@ class ConnectorCodeEnvs(Connector):
                     # get_path_size_megabytes returns 0 if path does not exist
                     next_row["size_in_MB"] = get_path_size_megabytes(next_row["path"])
                 else:
-                    next_row["size_in_MB"] = "NOT"
+                    next_row["size_in_MB"] = "NOT_COMPUTED"
 
             except Exception as e:
                 # this is occuring on DevDesign
