@@ -70,6 +70,7 @@ class ConnectorPythonAnalysis(Connector):
                     code = self.get_recipe_code(name)
 
                     if code:
+                        # initialize the next row in case of exceptions
                         next_row = {
                             "project_key": project_key,
                             "recipe_name": name,
