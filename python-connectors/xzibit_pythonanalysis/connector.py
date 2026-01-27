@@ -128,7 +128,7 @@ class ConnectorPythonAnalysis(Connector):
                 # logger.info(f"IF")
                 # Returns something like "3.8"
                 # WARNING Vermin analysis failed: '>' not supported between instances of 'NoneType' and 'tuple'
-                m = max(mins)
+                m = format_version_tuple(max(mins))
                 print(mins)
                 return str(max(mins))
             return "Unknown"
