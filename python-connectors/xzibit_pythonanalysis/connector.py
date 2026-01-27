@@ -11,6 +11,9 @@ from vermin import detect, Config
 from dataiku import api_client
 from dataiku.connector import Connector
 
+logging.basicConfig(level=logging.INFO, format="%(message)s")
+logger = logging.getLogger()
+
 
 class ConnectorPythonAnalysis(Connector):
     """A Dataiku DSS v12 connector to provide a DSS Dataset listing
