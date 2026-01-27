@@ -106,9 +106,7 @@ class ConnectorPythonAnalysis(Connector):
                         try:
                             # get additional Dataiku metadata
                             code_env_name = 
-                            python_version = self.get_code_env_python_version(
-                                code_env_name
-                            )
+                            python_version = 
                             next_row["code_env_name"] = self.get_recipe_code_env_name(name)
                             next_row["python_version"] = python_version
 
