@@ -147,7 +147,7 @@ class ConnectorPythonAnalysis(Connector):
             return {
                 "radon_cc_avg": round(avg_complexity, 2),
                 "radon_mi_score": round(mi_score, 2),
-                # "radon_rank": radon_mi.mi_rank(mi_score),
+                "radon_rank": radon_mi.mi_rank(mi_score),
             }
         except Exception as e:
             logger.warning(f"Radon analysis failed: {e}")
