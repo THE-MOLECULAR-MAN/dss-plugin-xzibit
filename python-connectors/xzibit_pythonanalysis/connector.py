@@ -289,7 +289,7 @@ class ConnectorPythonAnalysis(Connector):
                             min_python_version_from_vermin = (
                                 str(mpvv[0]) + "." + str(mpvv[1])
                             )
-                            next_row["min_python_version_from_vermin"] = (
+                            next_row["min_python_version_from_Vermin"] = (
                                 min_python_version_from_vermin
                             )
 
