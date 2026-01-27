@@ -92,7 +92,6 @@ class ConnectorPlugins(Connector):
                     # pp(raw_data)
 
                     if obj_subtype.startswith("Custom"):
-
                         next_row = {
                             "object_type": "recipe",
                             "projectKey": pk,
