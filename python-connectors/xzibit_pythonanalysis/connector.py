@@ -110,10 +110,7 @@ class ConnectorPythonAnalysis(Connector):
             #                 + python_version_formatted[1:]
             #             )
             return (
-                code_env.get_settings()
-                .get_raw()
-                .get("desc", {})
-                .get("pythonInterpreter", None)
+               
             )
 
         except Exception:
