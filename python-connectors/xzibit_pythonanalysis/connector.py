@@ -138,7 +138,7 @@ class ConnectorPythonAnalysis(Connector):
                 radon_cc.average_complexity(complexity) if complexity else 0
             )
 
-            # Maintainability Index (A score of 100 is best, 0 is worst)
+            # Maintainability Index (score of 100 is best, 0 is worst)
             mi_score = radon_mi.mi_visit(code, multi=False)
 
             return {
