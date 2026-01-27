@@ -13,7 +13,7 @@ from dataiku.connector import Connector
 from datetime import datetime
 
 
-class ConnectorProjects(Connector):
+class ConnectorPythonAnalysis(Connector):
     """TBD"""
 
     ####################################################################
