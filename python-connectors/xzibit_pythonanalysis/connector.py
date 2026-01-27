@@ -26,6 +26,8 @@ class ConnectorPythonAnalysis(Connector):
         for project_key in self.__client.list_projects():
             if records_limit > 0 and records_generated >= records_limit:
                 return
+            try:
+                
 
             records_generated += 1
             yield next_row
