@@ -85,7 +85,10 @@ class ConnectorPythonAnalysis(Connector):
                             # ruff analysis for speed/style
                             # ... (not implemented here, but would go similarly)
 
-                            # radon analysis for complex
+                            # radon analysis for complexity
+                            # ... (not implemented here, but would go similarly)
+                            
+                            # 
 
                         except Exception as e:
                             logger.error(
