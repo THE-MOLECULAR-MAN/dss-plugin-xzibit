@@ -112,6 +112,7 @@ class ConnectorPythonAnalysis(Connector):
             # detect returns (mins, parsable, text)
             logger.info(f"_analyze_vermin start")
             mins = detect(code, config=self.vermin_config)
+            mins = get_tuples_only(mins)
             # [(2, 0), None]
             # [None, (3, 6)]
             logger.info(f"detect returned data type: {str(type(mins))}")
