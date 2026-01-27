@@ -130,7 +130,7 @@ class ConnectorPythonAnalysis(Connector):
                 # WARNING Vermin analysis failed: '>' not supported between instances of 'NoneType' and 'tuple'
                 m = format_version_tuple(max(mins))
                 print(mins)
-                return str(max(mins))
+                return m)
             return "Unknown"
         except Exception as e:
             logger.warning(f"Vermin analysis failed: {e}")
