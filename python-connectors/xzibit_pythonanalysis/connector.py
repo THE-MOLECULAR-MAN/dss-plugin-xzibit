@@ -129,7 +129,7 @@ class ConnectorPythonAnalysis(Connector):
         """Check if the recipe code matches the default template."""
         default_code_contains = [
             "_df = ... # Compute a Pandas dataframe to write into ",
-            ""
+            """"""
         ]
 
         try:
