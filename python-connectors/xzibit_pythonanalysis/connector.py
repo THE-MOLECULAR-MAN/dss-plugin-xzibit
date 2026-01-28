@@ -54,6 +54,7 @@ class ConnectorPythonAnalysis(Connector):
         self.__client = api_client()
         self.vermin_config = Config()
         self.vermin_config.set_verbose(0)
+        self.__baseurl = get_dss_base_url()
         # self.
         # http://10.0.1.238:8080/projects/DEPRECATED_TESTS_DSS_V12/recipes/compute_python39_errors/
 
