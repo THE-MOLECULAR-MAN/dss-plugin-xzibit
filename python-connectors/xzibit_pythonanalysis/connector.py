@@ -14,7 +14,7 @@ from vermin import detect, Config
 # import radon.complexity as radon_cc
 # import radon.metrics as radon_mi
 
-import ast
+
 from typing import Dict, Any
 import radon.complexity as radon_cc
 import radon.metrics as radon_mi
