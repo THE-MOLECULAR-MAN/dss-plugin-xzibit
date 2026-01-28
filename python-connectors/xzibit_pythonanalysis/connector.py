@@ -297,7 +297,7 @@ class ConnectorPythonAnalysis(Connector):
                         )
                         row["num_lines_of_code"] = len(code.splitlines())
 
-                        row["last_modified_by"] = get_recipe_last_modifier_user(
+                        row["last_modified_by_user"] = get_recipe_last_modifier_user(
                             recipe_handle
                         )
 
