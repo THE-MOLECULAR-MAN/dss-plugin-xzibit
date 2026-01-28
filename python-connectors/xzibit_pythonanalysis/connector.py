@@ -366,7 +366,7 @@ from dataiku import pandasutils as pdu
                         )
                         row["num_lines_of_code"] = len(code.splitlines())
                         
-                        # the MD5
+                        # the MD5 hash of the code
 
                         row["code_hashsum"] = hash(code)
 
