@@ -9,7 +9,7 @@ import ast
 import subprocess
 from typing import Dict, List, Any, Tuple
 
-from vermin import detect, Config
+# from vermin import detect, Config
 # import radon.complexity as radon_cc
 # import radon.metrics as radon_mi
 
@@ -122,6 +122,7 @@ class ConnectorPythonAnalysis(Connector):
         except Exception:
             logger.warning(f"Couldn't get Python version for code env {code_env_name}.")
             return "Exception"
+
 
     def _analyze_radon(self, code: str) -> Dict[str, Any]:
         """
