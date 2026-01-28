@@ -12,8 +12,6 @@ import hashlib
 from typing import Dict, List, Any
 
 # import ast
-
-
 # import shutil
 
 from vermin import detect, Config
