@@ -125,7 +125,15 @@ class ConnectorPythonAnalysis(Connector):
     # In-Memory Analysis Tools (Fast)
     # -------------------------------------------------------------------------
     
-    def get_code_sample(self, code)
+    def get_code_sample(self, code: str, max_lines: int = 10) -> str:
+        """Returns the first 'max_lines' lines of code as a sample."""
+        if not code:
+            return ""
+        lines = code.splitlines()
+        sample = "\n".join(lines[:max_lines])
+        if len(lines) > max_lines:
+            sample += "\n..."
+        return sample
 
     def check_default_snippets_presence(self, code: str) -> bool:
         """
