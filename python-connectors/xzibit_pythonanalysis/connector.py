@@ -126,7 +126,7 @@ class ConnectorPythonAnalysis(Connector):
     # -------------------------------------------------------------------------
 
     def check_default_snippets_presence(
-        self, code: str)
+        self, code: str) , default_code_snippets: List[str]
     ) -> bool:
         """
         Checks if any of the items in the list of default_code_snippets are found in "code".
