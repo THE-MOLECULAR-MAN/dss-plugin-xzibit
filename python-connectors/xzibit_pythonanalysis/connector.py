@@ -32,8 +32,13 @@ logger = logging.getLogger()
 def get_recipe_last_modifier_user(recipe_handle) -> str:
     """Fetches the last modifier user of a given recipe."""
     try:
-        metadata = recipe_handle.get_metadata()
-        last_modifier = metadata.get("lastModifierUser", "Unknown")
+        recipe_settings_handle = recipe_handle.get_settings()
+                raw_data = recipe_settings_handle.get_recipe_raw_definition()
+next_row["last_modified_user"] = (
+                        raw_data.get("versionTag", {})
+                        .get("lastModifiedBy", {})
+                        .get("login", None)
+                    )
         return last_modifier
     except Exception:
         return "Unknown"
