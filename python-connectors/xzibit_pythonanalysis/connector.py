@@ -54,8 +54,8 @@ class ConnectorPythonAnalysis(Connector):
         self.__client = api_client()
         self.vermin_config = Config()
         self.vermin_config.set_verbose(0)
-        self.
-        #http://10.0.1.238:8080/projects/DEPRECATED_TESTS_DSS_V12/recipes/compute_python39_errors/
+        # self.
+        # http://10.0.1.238:8080/projects/DEPRECATED_TESTS_DSS_V12/recipes/compute_python39_errors/
 
         # Tools configuration can be extended here if we need specific flags
         self.tmp_dir = tempfile.mkdtemp(prefix="dss_recipe_analysis_")
