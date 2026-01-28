@@ -41,8 +41,8 @@ def get_recipe_last_modifier_user(recipe_handle) -> str:
         return last_modifier
     except Exception:
         return "Unknown"
-    
-    
+
+
 def get_recipe_last_modified_timestamp(recipe_handle) -> str:
     """Fetches the last modified timestamp of a given recipe."""
     try:
