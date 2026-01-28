@@ -235,7 +235,6 @@ class ConnectorPythonAnalysis(Connector):
         """Runs Ruff and returns total violation count."""
         try:
             RUFF_PATH = "/data/dataiku/dss_data/code-envs/python/plugin_xzibit_managed/bin/ruff"  # Adjust this path as needed
-
             output = self._run_subprocess_tool(
                 [RUFF_PATH, "check", "--output-format=json"], code
             )
