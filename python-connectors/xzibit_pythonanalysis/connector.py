@@ -165,7 +165,8 @@ class ConnectorPythonAnalysis(Connector):
             # 3. Get Raw Metrics (SLOC and comments) via tokenization
             # 'sloc' represents the active lines of code you requested
             raw_metrics = radon_raw_analyze(code)
-
+            logger.error(f"_analyze_radon 2")
+            
             # 4. Get Halstead Metrics from the tree (required for MI)
             halstead_metrics = radon_mi.h_visit(tree)
 
