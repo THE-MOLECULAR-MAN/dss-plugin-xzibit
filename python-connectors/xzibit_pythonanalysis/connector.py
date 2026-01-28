@@ -191,7 +191,7 @@ class ConnectorPythonAnalysis(Connector):
 
         except Exception as e:
             # Log the error as per your existing structure
-            logger.error(f"Radon analysis failed: {e}. ")
+            logger.error(f"Radon analysis failed: {e}. Source code:")
             print(code)
             return {
                 "radon_cc_avg": -1,
