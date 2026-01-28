@@ -54,6 +54,7 @@ class ConnectorPythonAnalysis(Connector):
         self.__client = api_client()
         self.vermin_config = Config()
         self.vermin_config.set_verbose(0)
+        self.u
 
         # Tools configuration can be extended here if we need specific flags
         self.tmp_dir = tempfile.mkdtemp(prefix="dss_recipe_analysis_")
