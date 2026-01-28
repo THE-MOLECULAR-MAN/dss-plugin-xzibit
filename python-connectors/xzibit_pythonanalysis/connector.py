@@ -125,9 +125,7 @@ class ConnectorPythonAnalysis(Connector):
     # In-Memory Analysis Tools (Fast)
     # -------------------------------------------------------------------------
 
-    def check_default_snippets_presence(
-        self, code: str) -> bool:
-    ) -> bool:
+    def check_default_snippets_presence(self, code: str) -> bool:
         """
         Checks if any of the items in the list of default_code_snippets are found in "code".
 
