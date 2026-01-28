@@ -326,7 +326,7 @@ class ConnectorPythonAnalysis(Connector):
 
                         # Only run complexity checks if it looks like Python 3
                         # (Vermin returns tuple (major, minor) or int 0 if unknown)
-                        is_py3 = (isinstance(mpvv, tuple) and mpvv[0] >= 3) or (
+                        is_py3 = (isinstance(mpvv, tuple) and mpvv[0].as >= 3) or (
                             isinstance(mpvv, int) and mpvv >= 3
                         )
 
