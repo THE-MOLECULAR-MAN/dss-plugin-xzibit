@@ -70,7 +70,7 @@ class ConnectorPythonAnalysis(Connector):
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, id, project_key)):
             return None
-        return f"{self.__baseurl}/projects/{project_key}/recipes/{id}/"
+        return f"{self.__baseurl}/projects/{project_key}/recipes/{recipe_id}/"
 
     def get_python_recipes(self, project_handle):
         """
