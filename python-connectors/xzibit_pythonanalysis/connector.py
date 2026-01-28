@@ -154,6 +154,7 @@ class ConnectorPythonAnalysis(Connector):
             # Passing the tree object avoids a second 'ast.parse' inside cc_visit
             logger.error(f"_analyze_radon 2")
             complexity_blocks = radon_cc.cc_visit(tree)
+            logger.error(f"_analyze_radon 2")
             avg_complexity = (
                 radon_cc.average_complexity(complexity_blocks)
                 if complexity_blocks
