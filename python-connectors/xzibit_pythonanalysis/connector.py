@@ -488,6 +488,7 @@ from dataiku import pandasutils as pdu
                 {"meaning": "LongMeaning", "name": "ruff_violations", "type": "int"},
                 {"meaning": "LongMeaning", "name": "pylint_issues", "type": "int"},
                 {"meaning": "FreeText", "name": "code_sample", "type": "string"},
+                {"meaning": "Text", "name": "radon_rank", "type": "string"},
             ]
         }
 
