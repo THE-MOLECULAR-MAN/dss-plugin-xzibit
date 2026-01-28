@@ -301,7 +301,7 @@ class ConnectorPythonAnalysis(Connector):
                             recipe_handle
                         )
                         
-                        ro
+                        row["last"]
 
                         # Run In-Memory Analysis immediately (Vermin, Radon)
                         mpvv = self._analyze_vermin(code)
