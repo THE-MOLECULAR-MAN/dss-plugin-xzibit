@@ -366,6 +366,8 @@ from dataiku import pandasutils as pdu
                         )
                         row["num_lines_of_code"] = len(code.splitlines())
 
+                        row["code_hashsum"] = hash(code)
+
                         row["last_modified_by_user"] = get_recipe_last_modifier_user(
                             recipe_handle
                         )
