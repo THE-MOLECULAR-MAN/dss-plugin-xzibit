@@ -173,15 +173,6 @@ from dataiku import pandasutils as pdu
             for snippet in default_code_snippets
         )
 
-    def _is_default_code_recipe(self, code) -> bool:
-        """Check if the recipe code matches the default template."""
-
-        try:
-            code = self.get_recipe_code(recipe_handle)
-            return code.strip() == default_template.strip()
-        except Exception:
-            return False
-
     def _analyze_vermin(self, code: str) -> str:
         """Run Vermin to detect minimum Python version."""
         try:
