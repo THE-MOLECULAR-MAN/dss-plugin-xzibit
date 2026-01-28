@@ -129,7 +129,12 @@ class ConnectorPythonAnalysis(Connector):
         """Check if the recipe code matches the default template."""
         default_code_contains = [
             "_df = ... # Compute a Pandas dataframe to write into ",
-            """"""
+            """# -*- coding: utf-8 -*-
+import dataiku
+import pandas as pd, numpy as np
+from dataiku import pandasutils as pdu
+
+# Read recipe inputs"""
         ]
 
         try:
