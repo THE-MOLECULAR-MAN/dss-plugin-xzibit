@@ -123,7 +123,23 @@ class ConnectorPythonAnalysis(Connector):
             logger.warning(f"Couldn't get Python version for code env {code_env_name}.")
             return "Exception"
 
+    # def _analyze_vermin(self, code: str) -> str:
+    #     """Run Vermin to detect minimum Python version."""
+    #     try:
+    #         # Vermin expects a path or logic to parse. We use its internal detect.
+    #         # detect returns (mins, parsable, text)
+    #         mins = detect(code, config=self.vermin_config)
+    #         print(mins)
+    #         mins = get_tuples_only(mins)
 
+    #         if mins:
+    #             # return format_version_tuple(max(mins))
+    #             return max(mins)
+    #         return "Unknown"
+    #     except Exception as e:
+    #         logger.warning(f"Vermin analysis failed: {e}")
+    #         return "Error"
+    
     def _analyze_radon(self, code: str) -> Dict[str, Any]:
         """
         Efficiently runs Radon analysis by sharing a single AST tree.
@@ -133,20 +149,19 @@ class ConnectorPythonAnalysis(Connector):
             # 1. Parse the AST once (the most computationally expensive part)
             # This satisfies the requirement to avoid redundant expensive calls
             tree = ast.parse(code)
-
+            
             # 2. Extract Cyclomatic Complexity (CC) blocks from the tree
             # Passing the tree object avoids a second 'ast.parse' inside cc_visit
             complexity_blocks = radon_cc.cc_visit(tree)
             avg_complexity = (
-                radon_cc.average_complexity(complexity_blocks)
-                if complexity_blocks
-                else 0
+                radon_cc.average_complexity(complexity_blocks) 
+                if complexity_blocks else 0
             )
-
+            
             # 3. Get Raw Metrics (SLOC and comments) via tokenization
             # 'sloc' represents the active lines of code you requested
             raw_metrics = radon_raw_analyze(code)
-
+            
             # 4. Get Halstead Metrics from the tree (required for MI)
             halstead_metrics = radon_mi.h_visit(tree)
 
@@ -156,24 +171,24 @@ class ConnectorPythonAnalysis(Connector):
                 complexity=sum(b.complexity for b in complexity_blocks),
                 sloc=raw_metrics.sloc,
                 h_volume=halstead_metrics.total.volume,
-                comments=raw_metrics.comments,
+                comments=raw_metrics.comments
             )
 
             return {
                 "radon_cc_avg": round(avg_complexity, 2),
                 "radon_mi_score": round(mi_score, 2),
                 "radon_rank": radon_mi.mi_rank(mi_score),
-                "active_lines": raw_metrics.sloc,
+                "active_lines": raw_metrics.sloc
             }
-
+            
         except Exception as e:
             # Log the error as per your existing structure
             # logger.error(f"Radon analysis failed: {e}")
             return {
-                "radon_cc_avg": -1,
-                "radon_mi_score": -1,
+                "radon_cc_avg": -1, 
+                "radon_mi_score": -1, 
                 "radon_rank": "Error",
-                "active_lines": -1,
+                "active_lines": -1
             }
 
     def _analyze_radon(self, code: str) -> Dict[str, Any]:
