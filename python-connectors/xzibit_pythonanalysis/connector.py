@@ -169,7 +169,7 @@ class ConnectorPythonAnalysis(Connector):
             
             # 4. Get Halstead Metrics from the tree (required for MI)
             halstead_metrics = radon_mi.h_visit(tree)
-            logger.error(f"_analyze_radon 2")
+            logger.error(f"_analyze_radon 6")
 
             # 5. Compute Maintainability Index (MI) manually
             # This replaces the 'radon_mi.mi_visit' call which would re-parse the file
