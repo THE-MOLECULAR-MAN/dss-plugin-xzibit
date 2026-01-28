@@ -127,7 +127,7 @@ class ConnectorPythonAnalysis(Connector):
 
     def _is_default_code_recipe(self, code) -> bool:
         """Check if the recipe code matches the default template."""
-        default_
+        default_code_
         
         try:
             code = self.get_recipe_code(recipe_handle)
