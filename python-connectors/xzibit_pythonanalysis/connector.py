@@ -126,35 +126,35 @@ class ConnectorPythonAnalysis(Connector):
     # -------------------------------------------------------------------------
 
 
-def check_default_snippets_presence(
-    code: str, default_code_snippets: List[str]
-) -> bool:
-    """
-    Checks if any of the items in the list of default_code_snippets are found in "code".
+    def check_default_snippets_presence(
+        code: str, default_code_snippets: List[str]
+    ) -> bool:
+        """
+        Checks if any of the items in the list of default_code_snippets are found in "code".
 
-    Performs newline normalization to ensure compatibility across different
-    operating systems (handling \r\n vs \n).
+        Performs newline normalization to ensure compatibility across different
+        operating systems (handling \r\n vs \n).
 
-    Args:
-        code (str): The full contents of the Python script.
-        default_code_snippets (List[str]): A list of strings, where each string
-                                           contains one or more lines of code.
+        Args:
+            code (str): The full contents of the Python script.
+            default_code_snippets (List[str]): A list of strings, where each string
+                                            contains one or more lines of code.
 
-    Returns:
-        bool: True if any snippet is found in the code, False otherwise.
-    """
-    if not code or not default_code_snippets:
-        return False
+        Returns:
+            bool: True if any snippet is found in the code, False otherwise.
+        """
+        if not code or not default_code_snippets:
+            return False
 
-    # Normalize newlines in the source code to standard Unix style (\n)
-    # This prevents failures if the code has different line endings than the snippets.
-    normalized_code = code.replace("\r\n", "\n")
+        # Normalize newlines in the source code to standard Unix style (\n)
+        # This prevents failures if the code has different line endings than the snippets.
+        normalized_code = code.replace("\r\n", "\n")
 
-    # Generator expression checking for existence of any snippet
-    return any(
-        snippet.replace("\r\n", "\n") in normalized_code
-        for snippet in default_code_snippets
-    )
+        # Generator expression checking for existence of any snippet
+        return any(
+            snippet.replace("\r\n", "\n") in normalized_code
+            for snippet in default_code_snippets
+        )
 
     def _is_default_code_recipe(self, code) -> bool:
         """Check if the recipe code matches the default template."""
