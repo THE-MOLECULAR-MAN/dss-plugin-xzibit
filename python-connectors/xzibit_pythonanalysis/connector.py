@@ -44,6 +44,14 @@ def get_recipe_last_modifier_user(recipe_handle) -> str:
     
     
 def get_recipe_last_modified_timestamp(recipe_handle) -> str:
+    """Fetches the last modified timestamp of a given recipe."""
+    try:
+        recipe_settings_handle = recipe_handle.get_settings()
+        raw_data = recipe_settings_handle.get_recipe_raw_definition()
+        last_modified_ts = raw_data.get("versionTag", {}).get("lastModifiedTimestamp", None)
+        return last_modified_ts
+    except Exception:
+        return "Unknown"
 
 
 def get_tuples_only(input_list: list) -> list:
