@@ -7,7 +7,7 @@ import tempfile
 import os
 import logging
 import json
-import ast
+# import ast
 import subprocess
 import shutil
 import hashlib
