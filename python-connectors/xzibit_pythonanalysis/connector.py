@@ -127,7 +127,7 @@ class ConnectorPythonAnalysis(Connector):
 
     def _is_default_code_recipe(self, code) -> bool:
         """Check if the recipe code matches the default template."""
-        default_code_contains = [
+        default_code_contents = [
             "_df = ... # Compute a Pandas dataframe to write into ",
             """# -*- coding: utf-8 -*-
 import dataiku
