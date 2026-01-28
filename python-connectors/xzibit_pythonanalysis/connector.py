@@ -238,7 +238,6 @@ class ConnectorPythonAnalysis(Connector):
             output = self._run_subprocess_tool(
                 [RUFF_PATH, "check", "--output-format=json"], code
             )
-
             data = json.loads(output)
             return len(data)
         except Exception:
