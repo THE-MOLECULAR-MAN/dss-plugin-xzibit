@@ -160,7 +160,7 @@ class ConnectorPythonAnalysis(Connector):
                 if complexity_blocks
                 else 0
             )
-            logger.error(f"_analyze_radon 2")
+            logger.error(f"_analyze_radon 4")
 
             # 3. Get Raw Metrics (SLOC and comments) via tokenization
             # 'sloc' represents the active lines of code you requested
