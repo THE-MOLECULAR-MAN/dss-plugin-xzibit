@@ -122,22 +122,22 @@ class ConnectorPythonAnalysis(Connector):
             logger.warning(f"Couldn't get Python version for code env {code_env_name}.")
             return "Exception"
 
-    def _analyze_vermin(self, code: str) -> str:
-        """Run Vermin to detect minimum Python version."""
-        try:
-            # Vermin expects a path or logic to parse. We use its internal detect.
-            # detect returns (mins, parsable, text)
-            mins = detect(code, config=self.vermin_config)
-            print(mins)
-            mins = get_tuples_only(mins)
+    # def _analyze_vermin(self, code: str) -> str:
+    #     """Run Vermin to detect minimum Python version."""
+    #     try:
+    #         # Vermin expects a path or logic to parse. We use its internal detect.
+    #         # detect returns (mins, parsable, text)
+    #         mins = detect(code, config=self.vermin_config)
+    #         print(mins)
+    #         mins = get_tuples_only(mins)
 
-            if mins:
-                # return format_version_tuple(max(mins))
-                return max(mins)
-            return "Unknown"
-        except Exception as e:
-            logger.warning(f"Vermin analysis failed: {e}")
-            return "Error"
+    #         if mins:
+    #             # return format_version_tuple(max(mins))
+    #             return max(mins)
+    #         return "Unknown"
+    #     except Exception as e:
+    #         logger.warning(f"Vermin analysis failed: {e}")
+    #         return "Error"
 
     def _analyze_radon(self, code: str) -> Dict[str, Any]:
         """
