@@ -365,9 +365,11 @@ from dataiku import pandasutils as pdu
                         )
 
                         # Run In-Memory Analysis immediately (Vermin, Radon)
-                        
-                        row["is_likely_unaltered_default_code"] = self.check_default_snippets_presence(
-                        
+
+                        row["is_likely_unaltered_default_code"] = (
+                            self.check_default_snippets_presence(code)
+                        )
+
                         mpvv = self._analyze_vermin(code)
                         row["min_python_version_from_Vermin"] = (
                             f"{mpvv[0]}.{mpvv[1]}"
