@@ -6,7 +6,7 @@
 from dataiku import api_client
 from dataiku.connector import Connector
 
-from 
+from xz
 ####################################################################
 # Unique imports for this Class
 ####################################################################
