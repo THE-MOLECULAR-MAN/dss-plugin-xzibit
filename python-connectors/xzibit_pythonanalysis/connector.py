@@ -300,9 +300,11 @@ class ConnectorPythonAnalysis(Connector):
                         row["last_modified_by_user"] = get_recipe_last_modifier_user(
                             recipe_handle
                         )
-                        
-                        row["last_modified_timestamp"] = 
 
+                        row["last_modified_timestamp"] = get_recipe_last_modified_timestamp(
+                            recipe_handle
+                        )
+                        
                         # Run In-Memory Analysis immediately (Vermin, Radon)
                         mpvv = self._analyze_vermin(code)
                         row["min_python_version_from_Vermin"] = (
