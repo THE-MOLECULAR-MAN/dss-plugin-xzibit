@@ -10,6 +10,7 @@ import json
 import ast
 import subprocess
 import shutil
+import hashlib
 from typing import Dict, List, Any
 
 from vermin import detect, Config
@@ -365,10 +366,10 @@ from dataiku import pandasutils as pdu
                             self.get_code_env_python_version(code_env_name)
                         )
                         row["num_lines_of_code"] = len(code.splitlines())
-                        
+
                         # the MD5 hash of the code
-                        
-                        code_hashsum = hashlib.md5(code.encode('utf-8')).hexdigest()
+
+                        code_hashsum = hashlib.md5(code.encode("utf-8")).hexdigest()
 
                         row["code_hashsum"] = code_hashsum
 
