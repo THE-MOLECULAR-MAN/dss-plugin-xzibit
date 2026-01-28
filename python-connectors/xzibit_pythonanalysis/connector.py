@@ -1,5 +1,7 @@
 """A Dataiku DSS v12 connector to provide a DSS Dataset listing
-all Python Code Recipes, and information about them."""
+all Python Code Recipes, and information about them.
+OPTIMIZED: Uses batch processing to reduce subprocess overhead.
+"""
 
 import tempfile
 import os
@@ -7,42 +9,30 @@ import logging
 import json
 import ast
 import subprocess
-from typing import Dict, List, Any, Tuple
+import shutil
+from typing import Dict, List, Any
 
 from vermin import detect, Config
 
-# import radon.complexity as radon_cc
-# import radon.metrics as radon_mi
-
 import radon.complexity as radon_cc
 import radon.metrics as radon_mi
-from radon.raw import analyze as radon_raw_analyze
 
-import dataiku
 from dataiku import api_client
 from dataiku.connector import Connector
 
+# Define path to binaries in the managed code env
+# Note: Adjust if your environment path differs
 BINARY_PATH = "/data/dataiku/dss_data/code-envs/python/plugin_xzibit_managed/bin/"
 
-from xzibit.utils import get_python_recipe_code_env, pp, get_dss_base_url
+from xzibit.utils import get_python_recipe_code_env, get_dss_base_url
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger()
 
 
 def get_tuples_only(input_list: list) -> list:
-    """
-    Filters a list to return only elements that are of type tuple.
-    """
+    """Filters a list to return only elements that are of type tuple."""
     return [item for item in input_list if isinstance(item, tuple)]
-
-
-def format_version_tuple(version_tuple: tuple[int, int]) -> str:
-    """
-    Takes a tuple of two integers (a, b) and returns a string "a.b".
-    """
-    a, b = version_tuple
-    return f"{a}.{b}"
 
 
 class ConnectorPythonAnalysis(Connector):
@@ -55,169 +45,79 @@ class ConnectorPythonAnalysis(Connector):
         self.vermin_config = Config()
         self.vermin_config.set_verbose(0)
         self.__baseurl = get_dss_base_url()
-        # self.
-        # http://10.0.1.238:8080/projects/DEPRECATED_TESTS_DSS_V12/recipes/compute_python39_errors/
 
-        # Tools configuration can be extended here if we need specific flags
-        self.tmp_dir = tempfile.mkdtemp(prefix="dss_recipe_analysis_")
+        # Batch size configuration
+        self.batch_size = 50
 
     def get_url(self, recipe_id, project_key):
-        """Create a URL to the DSS object in question in this specific DSS instance.
-        Return None if any of the inputs are None.
-
-        May be different one day if we want to link other types of objects besides just recipes
-        """
-        # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, id, project_key)):
+        """Create a URL to the DSS object."""
+        if any(v is None for v in (self.__baseurl, recipe_id, project_key)):
             return None
         return f"{self.__baseurl}/projects/{project_key}/recipes/{recipe_id}/"
 
     def get_python_recipes(self, project_handle):
-        """
-        Retrieves a list of all Python code recipes in the current project.
-        """
+        """Retrieves a list of all Python code recipes in the current project."""
         recipes = project_handle.list_recipes()
         return [r for r in recipes if r["type"] == "python"]
 
     def get_recipe_code(self, recipe_handle) -> str:
-        """
-        Fetches the actual Python script content from a specific recipe.
-        """
+        """Fetches the actual Python script content from a specific recipe."""
         try:
-            # recipe = project_handle.get_recipe(recipe_name)
             settings = recipe_handle.get_settings()
             return settings.get_code()
         except AttributeError:
             logger.warning(
-                f"Could not retrieve code for {recipe_name}. It may not be a standard code recipe."
+                "Could not retrieve code. It may not be a standard code recipe."
             )
             return ""
 
-    # def get_recipe_code_env_name(self, recipe_handle) -> str:
-    #     """
-    #     Fetches the code environment name from a specific recipe.
-    #     """
-    #     try:
-    #         # recipe = self.project.get_recipe(recipe_name)
-    #         settings = recipe_handle.get_settings()
-    #         return settings.get_code_env_name()
-    #     except AttributeError:
-    #         logger.warning(
-    #             f"Could not retrieve code environment for {recipe_name}. It may not be a standard code recipe."
-    #         )
-    #         return ""
-
     def get_code_env_python_version(self, code_env_name: str) -> str:
-        """
-        Fetches the Python version associated with a given code environment.
-        """
+        """Fetches the Python version associated with a given code environment."""
         try:
             if not code_env_name:
                 return ""
-            logger.info(f"Fetching handle for code env {code_env_name}")
-            # next line is causing exception
+            # Note: get_code_env can fail if permissions are missing
             code_env = self.__client.get_code_env("PYTHON", code_env_name)
-            logger.info(
-                f"Successfully fetched handle for Python code env {code_env_name}"
+
+            settings = code_env.get_settings().get_raw()
+            py_interp_version = settings.get("desc", {}).get(
+                "pythonInterpreter", "Unknown"
             )
-            py_interp_version = (
-                code_env.get_settings()
-                .get_raw()
-                .get("desc", {})
-                .get("pythonInterpreter", None)
-            )
+
+            # Convert PYTHON39 -> 3.9
             py_interp_version = py_interp_version.replace("PYTHON", "")
-            python_version_formatted = (
-                py_interp_version[0] + "." + py_interp_version[1:]
-            )
-            return str(python_version_formatted)
+            if len(py_interp_version) >= 2:
+                python_version_formatted = (
+                    f"{py_interp_version[0]}.{py_interp_version[1:]}"
+                )
+                return str(python_version_formatted)
+            return py_interp_version
 
         except Exception:
-            logger.warning(f"Couldn't get Python version for code env {code_env_name}.")
-            return "Exception"
+            # Often happens if user doesn't have read access to the code env
+            return "Unknown"
+
+    # -------------------------------------------------------------------------
+    # In-Memory Analysis Tools (Fast)
+    # -------------------------------------------------------------------------
 
     def _analyze_vermin(self, code: str) -> str:
         """Run Vermin to detect minimum Python version."""
         try:
-            # Vermin expects a path or logic to parse. We use its internal detect.
-            # detect returns (mins, parsable, text)
             mins = detect(code, config=self.vermin_config)
-            print(mins)
             mins = get_tuples_only(mins)
 
             if mins:
-                # return format_version_tuple(max(mins))
+                # Returns the highest minimum required version (e.g., 3.9)
                 return max(mins)
             return "Unknown"
         except Exception as e:
             logger.warning(f"Vermin analysis failed: {e}")
             return "Error"
 
-    # def _analyze_radon(self, code: str) -> Dict[str, Any]:
-    #     """
-    #     Efficiently runs Radon analysis by sharing a single AST tree.
-    #     Extracts CC Average, MI Score, and Active Lines of Code (SLOC).
-    #     """
-    #     try:
-    #         # 1. Parse the AST once (the most computationally expensive part)
-    #         # This satisfies the requirement to avoid redundant expensive calls
-    #         logger.error(f"_analyze_radon start")
-    #         tree = ast.parse(code)
-
-    #         # 2. Extract Cyclomatic Complexity (CC) blocks from the tree
-    #         # Passing the tree object avoids a second 'ast.parse' inside cc_visit
-    #         logger.error(f"_analyze_radon 2")
-    #         complexity_blocks = radon_cc.cc_visit(tree)
-    #         logger.error(f"_analyze_radon 3")
-    #         avg_complexity = (
-    #             radon_cc.average_complexity(complexity_blocks)
-    #             if complexity_blocks
-    #             else 0
-    #         )
-    #         logger.error(f"_analyze_radon 4")
-
-    #         # 3. Get Raw Metrics (SLOC and comments) via tokenization
-    #         # 'sloc' represents the active lines of code you requested
-    #         raw_metrics = radon_raw_analyze(code)
-    #         logger.error(f"_analyze_radon 5")
-
-    #         # 4. Get Halstead Metrics from the tree (required for MI)
-    #         halstead_metrics = radon_mi.h_visit(tree)
-    #         logger.error(f"_analyze_radon 6")
-
-    #         # 5. Compute Maintainability Index (MI) manually
-    #         # This replaces the 'radon_mi.mi_visit' call which would re-parse the file
-    #         mi_score = radon_mi.mi_compute(
-    #             complexity=sum(b.complexity for b in complexity_blocks),
-    #             sloc=raw_metrics.sloc,
-    #             h_volume=halstead_metrics.total.volume,
-    #             comments=raw_metrics.comments,
-    #         )
-
-    #         logger.error(f"_analyze_radon end")
-
-    #         return {
-    #             "radon_cc_avg": round(avg_complexity, 2),
-    #             "radon_mi_score": round(mi_score, 2),
-    #             "radon_rank": radon_mi.mi_rank(mi_score),
-    #             "active_lines": raw_metrics.sloc,
-    #         }
-
-    #     except Exception as e:
-    #         # Log the error as per your existing structure
-    #         logger.error(f"Radon analysis failed: {e}. Source code:")
-    #         print(code)
-    #         return {
-    #             "radon_cc_avg": -1,
-    #             "radon_mi_score": -1,
-    #             "radon_rank": "Error",
-    #             "active_lines": -1,
-    #         }
-
     def _analyze_radon(self, code: str) -> Dict[str, Any]:
         """Run Radon for Cyclomatic Complexity and Maintainability Index."""
         try:
-            # invalid syntax (<unknown>, line 1)
             # Cyclomatic Complexity
             complexity = radon_cc.cc_visit(code)
             avg_complexity = (
@@ -231,103 +131,108 @@ class ConnectorPythonAnalysis(Connector):
                 "radon_cc_avg": round(avg_complexity, 2),
                 "radon_mi_score": round(mi_score, 2),
                 "radon_rank": radon_mi.mi_rank(mi_score),
-                # "total_lines": len(code.splitlines()),
             }
         except Exception as e:
-            logger.error(f"Radon analysis failed, code below {e}")
-            print(code)
+            # Syntax errors often cause Radon failure
             return {"radon_cc_avg": -1, "radon_mi_score": -1, "radon_rank": "Error"}
 
-    def _analyze_dependencies(self, code: str) -> List[str]:
+    # -------------------------------------------------------------------------
+    # Batch Processing for Subprocess Tools (Pylint, Ruff)
+    # -------------------------------------------------------------------------
+
+    def _process_batch(self, batch_data: List[Dict[str, Any]]) -> None:
         """
-        Extracts imported modules.
-        This serves the purpose of dependency analysis (like Deptry/Pipreqs)
-        but adapted for single-file scripts without project files.
+        Runs Pylint and Ruff on a batch of files to amortize startup cost.
+        Updates the dictionaries in batch_data in-place.
         """
-        imports = set()
-        try:
-            tree = ast.parse(code)
-            for node in ast.walk(tree):
-                if isinstance(node, ast.Import):
-                    for alias in node.names:
-                        imports.add(alias.name.split(".")[0])
-                elif isinstance(node, ast.ImportFrom):
-                    if node.module:
-                        imports.add(node.module.split(".")[0])
-            return list(imports)
-        except SyntaxError:
-            return ["<SyntaxError>"]
-        except Exception as e:
-            logger.warning(f"Dependency analysis failed: {e}")
-            return ["<Error>"]
+        if not batch_data:
+            return
 
-    def _run_subprocess_tool(self, cmd: List[str], code: str) -> str:
-        """Helper to run CLI tools like Ruff/Pylint against code content."""
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".py", dir=self.tmp_dir, delete=False
-        ) as tmp:
-            tmp.write(code)
-            tmp_path = tmp.name
+        with tempfile.TemporaryDirectory(prefix="dss_batch_analysis_") as tmp_dir:
+            # 1. Write all codes to temp files
+            # Mapping: filename -> index in batch_data
+            file_map = {}
 
-        try:
-            # Run the command against the temp file
-            logger.info(f"Running subprocess: {' '.join(cmd + [tmp_path])}")
-            result = subprocess.run(
-                cmd + [tmp_path],
-                capture_output=True,
-                text=True,
-                check=False,  # We expect non-zero exits from linters
-            )
-            logger.info(f"Finished subprocess with return code {result.returncode}")
-            return result.stdout
-        finally:
-            if os.path.exists(tmp_path):
-                os.remove(tmp_path)
+            for idx, item in enumerate(batch_data):
+                # Sanitize name for filesystem safety
+                safe_name = "".join(
+                    c
+                    for c in item["recipe_name"]
+                    if c.isalnum() or c in (" ", "_", "-")
+                ).strip()
+                safe_name = safe_name.replace(" ", "_")
+                filename = f"{idx}_{safe_name}.py"
+                file_path = os.path.join(tmp_dir, filename)
 
-    def _analyze_pylint(self, code: str) -> float:
-        """Runs Pylint and extracts the global evaluation score."""
-        # Pylint is talkative, so we format output to JSON or parse standard out
-        # Using a minimal score-only regex or json output is best.
-        # Note: 'pylint' must be installed in the code env.
-        try:
-            # We use a regex to extract the score from standard report if JSON fails,
-            # but JSON is safer if available.
-            # logger.info(f"_analyze_pylint started")
-            # next line is causing exception
-            # sudo dnf install pylint # Alma 8
-            PYLINT_PATH = os.path.join(BINARY_PATH, "pylint")
-            output = self._run_subprocess_tool(
-                [PYLINT_PATH, "--output-format=json"], code
-            )
-            # logger.info(f"finished subprocess for pylint")
-            data = json.loads(output)
-            # logger.info(f"loaded json for pylint")
-            # Pylint JSON export is a list of messages. It doesn't always contain the global score easily.
-            # Fallback: Run with report enabled for score extraction is tricky in automation.
-            # Strategy: Calculate a naive score or use simple violation count from JSON.
-            # Standard Pylint formula: 10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)
+                with open(file_path, "w", encoding="utf-8") as f:
+                    f.write(item["_raw_code"])
 
-            # For simplicity in this connector, let's return the count of issues found
-            return len(data)
-        except json.JSONDecodeError:
-            logger.error(f"_analyze_pylint - JSON decode error")
-            return -1.0
-        except Exception:
-            logger.error(f"_analyze_pylint - General exception")
-            return -1.0
+                file_map[filename] = idx
 
-    def _analyze_ruff(self, code: str) -> int:
-        """Runs Ruff and returns total violation count."""
-        try:
-            RUFF_PATH = os.path.join(BINARY_PATH, "ruff")  # Adjust this path as needed
-            output = self._run_subprocess_tool(
-                [RUFF_PATH, "check", "--output-format=json"], code
-            )
-            data = json.loads(output)
-            return len(data)
-        except Exception:
-            logger.error(f"_analyze_ruff - General exception")
-            return -1
+            # 2. Run Ruff on the directory
+            try:
+                RUFF_PATH = os.path.join(BINARY_PATH, "ruff")
+                # Run check on the whole directory
+                cmd = [RUFF_PATH, "check", ".", "--output-format=json"]
+                result = subprocess.run(
+                    cmd, cwd=tmp_dir, capture_output=True, text=True
+                )
+
+                # Ruff returns exit code 1 if violations found, so ignore check=True
+                ruff_data = json.loads(result.stdout)
+
+                # Count violations per file
+                # ruff output has "filename" which is absolute path
+                counts = {i: 0 for i in range(len(batch_data))}
+
+                for violation in ruff_data:
+                    fname = os.path.basename(violation.get("filename", ""))
+                    if fname in file_map:
+                        idx = file_map[fname]
+                        counts[idx] += 1
+
+                # Update batch data
+                for idx, count in counts.items():
+                    batch_data[idx]["ruff_violations"] = count
+
+            except Exception as e:
+                logger.error(f"Batch Ruff failed: {e}")
+                for item in batch_data:
+                    item["ruff_violations"] = -1
+
+            # 3. Run Pylint on the directory
+            try:
+                PYLINT_PATH = os.path.join(BINARY_PATH, "pylint")
+                # --recursive=y ensures it looks at all .py files in dir
+                cmd = [PYLINT_PATH, ".", "--output-format=json", "--recursive=y"]
+                result = subprocess.run(
+                    cmd, cwd=tmp_dir, capture_output=True, text=True
+                )
+
+                try:
+                    pylint_data = json.loads(result.stdout)
+                except json.JSONDecodeError:
+                    # If pylint finds nothing or crashes, stdout might be empty or non-json
+                    pylint_data = []
+
+                # Count issues per file
+                counts = {i: 0 for i in range(len(batch_data))}
+
+                for issue in pylint_data:
+                    # pylint "path" is usually the relative filename (e.g. "0_recipe.py")
+                    fname = os.path.basename(issue.get("path", ""))
+                    if fname in file_map:
+                        idx = file_map[fname]
+                        counts[idx] += 1
+
+                # Update batch data
+                for idx, count in counts.items():
+                    batch_data[idx]["pylint_issues"] = count
+
+            except Exception as e:
+                logger.error(f"Batch Pylint failed: {e}")
+                for item in batch_data:
+                    item["pylint_issues"] = -1
 
     def generate_rows(
         self,
@@ -336,111 +241,119 @@ class ConnectorPythonAnalysis(Connector):
         partition_id=None,
         records_limit=-1,
     ):
-        """A generator function that yields rows for the dataset.
-        Each row represents a Python code recipe with its analysis."""
+        """Generator that yields analysis rows."""
         records_generated = 0
+        current_batch = []
 
-        # iterate through each project
+        # Loop through projects
         for project_key in self.__client.list_project_keys():
             if records_limit > 0 and records_generated >= records_limit:
-                return
+                break
+
             try:
                 project_handle = self.__client.get_project(project_key)
                 python_recipes = self.get_python_recipes(project_handle)
 
                 for recipe_meta in python_recipes:
                     if records_limit > 0 and records_generated >= records_limit:
-                        return
+                        break
+
                     name = recipe_meta["name"]
-                    logger.info(f"Analyzing Python code for recipe {name}...")
 
-                    recipe_handle = project_handle.get_recipe(name)
+                    try:
+                        recipe_handle = project_handle.get_recipe(name)
+                        code = self.get_recipe_code(recipe_handle)
 
-                    code = self.get_recipe_code(recipe_handle)
+                        if not code:
+                            logger.info(f"{name:<40} | {'Skipped (No Code)':<20}")
+                            continue
 
-                    if code:
-                        # initialize the next row in case of exceptions
-                        next_row = {
+                        # Prepare the row object
+                        row = {
                             "project_key": project_key,
                             "recipe_name": name,
+                            "url": self.get_url(recipe_handle.id, project_key),
+                            "_raw_code": code,  # Temporary storage for batching
                         }
-                        try:
 
-                            # get additional Dataiku metadata
-                            code_env_name = get_python_recipe_code_env(recipe_handle)
-                            python_version = self.get_code_env_python_version(
-                                code_env_name
+                        # Metadata
+                        code_env_name = get_python_recipe_code_env(recipe_handle)
+                        row["code_env_name"] = code_env_name
+                        row["code_env_python_version"] = (
+                            self.get_code_env_python_version(code_env_name)
+                        )
+                        row["num_lines_of_code"] = len(code.splitlines())
+
+                        # Run In-Memory Analysis immediately (Vermin, Radon)
+                        mpvv = self._analyze_vermin(code)
+                        row["min_python_version_from_Vermin"] = (
+                            f"{mpvv[0]}.{mpvv[1]}"
+                            if isinstance(mpvv, tuple)
+                            else str(mpvv)
+                        )
+
+                        # Only run complexity checks if it looks like Python 3
+                        # (Vermin returns tuple (major, minor) or int 0 if unknown)
+                        is_py3 = (isinstance(mpvv, tuple) and mpvv[0] >= 3) or (
+                            isinstance(mpvv, int) and mpvv >= 3
+                        )
+
+                        if is_py3:
+                            radon_metrics = self._analyze_radon(code)
+                            row.update(radon_metrics)
+                        else:
+                            row.update(
+                                {
+                                    "radon_cc_avg": None,
+                                    "radon_mi_score": None,
+                                    "radon_rank": "N/A",
+                                }
                             )
-                            next_row["code_env_name"] = code_env_name
-                            next_row["code_env_python_version"] = python_version
-                            next_row["num_lines_of_code"] = len(code.splitlines())
-                            next_row["url"] = self.get_url(
-                                recipe_handle.id, project_key
-                            )
 
-                            # --- Analysis Tools ---
+                        # Add to batch
+                        current_batch.append(row)
 
-                            # 1. Vermin (Min Python Version) - WORKING
-                            mpvv = self._analyze_vermin(code)
-                            min_python_version_from_vermin = (
-                                str(mpvv[0]) + "." + str(mpvv[1])
-                            )
-                            next_row["min_python_version_from_Vermin"] = (
-                                min_python_version_from_vermin
-                            )
+                        # Process Batch if full
+                        if len(current_batch) >= self.batch_size:
+                            self._process_batch(current_batch)
+                            for processed_row in current_batch:
+                                del processed_row["_raw_code"]  # Cleanup large string
+                                records_generated += 1
+                                yield processed_row
+                            current_batch = []
 
-                            # only proceed with further analysis if Python 3.x
-                            if mpvv[0] == 3:
-                                # 2. Radon (Complexity) - WORKING
-                                radon_metrics = self._analyze_radon(code)
-                                next_row.update(radon_metrics)
-
-                                # # 3. Dependencies (AST/Deptry logic)
-                                # deps = self._analyze_dependencies(code)
-                                # next_row["dependencies_list"] = ",".join(deps)
-                                # # dependencies_list returns a syntax error
-                                # next_row["dependencies_count"] = len(deps)
-
-                                # 4. Pylint (Quality) - Returns issue count - WORKING
-                                next_row["pylint_issues"] = self._analyze_pylint(code)
-
-                                # 5. Ruff (Speed/Style) - Returns violation count - WORKING
-                                next_row["ruff_violations"] = self._analyze_ruff(code)
-
-                        except Exception as e:
-                            logger.error(
-                                f"Error analyzing {name} in {project_key}: {e}"
-                            )
-                            next_row["error"] = str(e)
-                        finally:
-                            # Yield the row with analysis results
-                            records_generated += 1
-                            yield next_row
-
-                    else:
-                        logger.info(f"{name:<40} | {'Skipped (No Code)':<20} | {'-'}")
+                    except Exception as e:
+                        logger.error(f"Error preparing {name} in {project_key}: {e}")
+                        # Yield error row immediately
+                        yield {
+                            "project_key": project_key,
+                            "recipe_name": name,
+                            "error": str(e),
+                        }
+                        records_generated += 1
 
             except Exception as e:
-                # Handle project access permissions or other errors
                 logger.warning(f"Error accessing project {project_key}: {e}")
                 continue
 
+        # Process remaining items in the final batch
+        if current_batch:
+            self._process_batch(current_batch)
+            for processed_row in current_batch:
+                del processed_row["_raw_code"]
+                yield processed_row
+
     def get_read_schema(self):
-        """Not needed for this connector."""
         return None
 
     def get_records_count(self, partitioning=None, partition_id=None):
-        """Not needed for this connector."""
         return None
 
     def get_partitioning(self):
-        """Not needed for this connector."""
         raise NotImplementedError
 
     def list_partitions(self, partitioning):
-        """Not needed for this connector."""
         return []
 
     def partition_exists(self, partitioning, partition_id):
-        """Not needed for this connector."""
         raise NotImplementedError
