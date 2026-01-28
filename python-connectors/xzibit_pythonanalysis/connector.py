@@ -369,9 +369,7 @@ from dataiku import pandasutils as pdu
                         row["num_lines_of_code"] = len(code.splitlines())
 
                         # the MD5 hash of the code
-
                         code_hashsum = hashlib.md5(code.encode("utf-8")).hexdigest()
-
                         row["code_hashsum"] = code_hashsum
 
                         row["last_modified_by_user"] = get_recipe_last_modifier_user(
