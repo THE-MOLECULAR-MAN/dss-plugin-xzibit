@@ -17,7 +17,7 @@ import dataiku
 from dataiku import api_client
 from dataiku.connector import Connector
 
-
+BINARY_
 
 from xzibit.utils import get_python_recipe_code_env, pp
 
