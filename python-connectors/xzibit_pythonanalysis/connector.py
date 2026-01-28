@@ -33,7 +33,7 @@ def get_recipe_last_modifier_user(recipe_handle) -> str:
     """Fetches the last modifier user of a given recipe."""
     try:
         recipe_settings_handle = recipe_handle.get_settings()
-                raw_data = recipe_settings_handle.get_recipe_raw_definition()
+        raw_data = recipe_settings_handle.get_recipe_raw_definition()
 next_row["last_modified_user"] = (
                         raw_data.get("versionTag", {})
                         .get("lastModifiedBy", {})
