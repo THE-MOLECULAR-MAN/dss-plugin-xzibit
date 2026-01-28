@@ -125,7 +125,7 @@ class ConnectorPythonAnalysis(Connector):
     # In-Memory Analysis Tools (Fast)
     # -------------------------------------------------------------------------
     
-    def get_code_sample(self, code: str, max_lines: int = 10) -> str:
+    def get_code_sample(self, code: str, max_lines: int = 40) -> str:
         """Returns the first 'max_lines' lines of code as a sample."""
         if not code:
             return ""
