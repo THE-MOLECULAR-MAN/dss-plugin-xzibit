@@ -124,7 +124,7 @@ class ConnectorPythonAnalysis(Connector):
     # -------------------------------------------------------------------------
     # In-Memory Analysis Tools (Fast)
     # -------------------------------------------------------------------------
-    
+
     def _is_default_code_recipe(self, recipe_handle) -> bool:
         """Check if the recipe code matches the default template."""
         default_template = (
@@ -135,11 +135,11 @@ class ConnectorPythonAnalysis(Connector):
             "from dataiku import pandasutils as pdu\n"
             "\n"
             "# Read recipe inputs\n"
-            "# input_dataset = dataiku.Dataset(\"input_dataset\")\n"
+            '# input_dataset = dataiku.Dataset("input_dataset")\n'
             "# df = input_dataset.get_dataframe()\n"
             "\n"
             "# Write recipe outputs\n"
-            "# output_dataset = dataiku.Dataset(\"output_dataset\")\n"
+            '# output_dataset = dataiku.Dataset("output_dataset")\n'
             "# output_dataset.write_with_schema(df)\n"
         )
         try:
