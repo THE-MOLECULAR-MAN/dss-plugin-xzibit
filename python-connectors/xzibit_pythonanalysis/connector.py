@@ -365,6 +365,8 @@ from dataiku import pandasutils as pdu
                             self.get_code_env_python_version(code_env_name)
                         )
                         row["num_lines_of_code"] = len(code.splitlines())
+                        
+                        # 
 
                         row["code_hashsum"] = hash(code)
 
