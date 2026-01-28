@@ -29,7 +29,7 @@ from xzibit.utils import get_python_recipe_code_env, get_dss_base_url
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger()
 
-def get_p
+def get_recipe_
 
 
 def get_tuples_only(input_list: list) -> list:
