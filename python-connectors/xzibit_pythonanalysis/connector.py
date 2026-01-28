@@ -243,7 +243,6 @@ class ConnectorPythonAnalysis(Connector):
             )
 
             data = json.loads(output)
-            logger.info(f"loaded json for ruff")
             return len(data)
         except Exception:
             logger.error(f"_analyze_ruff - General exception")
