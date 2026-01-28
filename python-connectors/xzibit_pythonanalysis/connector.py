@@ -124,6 +124,8 @@ class ConnectorPythonAnalysis(Connector):
     # -------------------------------------------------------------------------
     # In-Memory Analysis Tools (Fast)
     # -------------------------------------------------------------------------
+    
+    def get_code_sample(self, code)
 
     def check_default_snippets_presence(self, code: str) -> bool:
         """
