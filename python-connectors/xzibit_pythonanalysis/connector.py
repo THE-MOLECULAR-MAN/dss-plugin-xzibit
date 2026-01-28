@@ -139,6 +139,65 @@ class ConnectorPythonAnalysis(Connector):
     #     except Exception as e:
     #         logger.warning(f"Vermin analysis failed: {e}")
     #         return "Error"
+    
+import ast
+from typing import Dict, Any
+import radon.complexity as radon_cc
+import radon.metrics as radon_mi
+from radon.raw import analyze as radon_raw_analyze
+
+# ... inside your class ...
+
+    def _analyze_radon(self, code: str) -> Dict[str, Any]:
+        """
+        Efficiently runs Radon analysis by sharing a single AST tree.
+        Extracts CC Average, MI Score, and Active Lines of Code (SLOC).
+        """
+        try:
+            # 1. Parse the AST once (the most computationally expensive part)
+            # This satisfies the requirement to avoid redundant expensive calls
+            tree = ast.parse(code)
+            
+            # 2. Extract Cyclomatic Complexity (CC) blocks from the tree
+            # Passing the tree object avoids a second 'ast.parse' inside cc_visit
+            complexity_blocks = radon_cc.cc_visit(tree)
+            avg_complexity = (
+                radon_cc.average_complexity(complexity_blocks) 
+                if complexity_blocks else 0
+            )
+            
+            # 3. Get Raw Metrics (SLOC and comments) via tokenization
+            # 'sloc' represents the active lines of code you requested
+            raw_metrics = radon_raw_analyze(code)
+            
+            # 4. Get Halstead Metrics from the tree (required for MI)
+            halstead_metrics = radon_mi.h_visit(tree)
+
+            # 5. Compute Maintainability Index (MI) manually
+            # This replaces the 'radon_mi.mi_visit' call which would re-parse the file
+            mi_score = radon_mi.mi_compute(
+                complexity=sum(b.complexity for b in complexity_blocks),
+                sloc=raw_metrics.sloc,
+                h_volume=halstead_metrics.total.volume,
+                comments=raw_metrics.comments
+            )
+
+            return {
+                "radon_cc_avg": round(avg_complexity, 2),
+                "radon_mi_score": round(mi_score, 2),
+                "radon_rank": radon_mi.mi_rank(mi_score),
+                "active_lines": raw_metrics.sloc
+            }
+            
+        except Exception as e:
+            # Log the error as per your existing structure
+            # logger.error(f"Radon analysis failed: {e}")
+            return {
+                "radon_cc_avg": -1, 
+                "radon_mi_score": -1, 
+                "radon_rank": "Error",
+                "active_lines": -1
+            }
 
     def _analyze_radon(self, code: str) -> Dict[str, Any]:
         """Run Radon for Cyclomatic Complexity and Maintainability Index."""
