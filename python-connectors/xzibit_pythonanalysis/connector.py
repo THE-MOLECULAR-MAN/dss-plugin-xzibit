@@ -125,7 +125,7 @@ class ConnectorPythonAnalysis(Connector):
     # In-Memory Analysis Tools (Fast)
     # -------------------------------------------------------------------------
     
-    def _
+    def _is_
 
     def _analyze_vermin(self, code: str) -> str:
         """Run Vermin to detect minimum Python version."""
