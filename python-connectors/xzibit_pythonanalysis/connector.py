@@ -177,7 +177,6 @@ from dataiku import pandasutils as pdu
 
     def _is_default_code_recipe(self, code) -> bool:
         """Check if the recipe code matches the default template."""
-        
 
         try:
             code = self.get_recipe_code(recipe_handle)
