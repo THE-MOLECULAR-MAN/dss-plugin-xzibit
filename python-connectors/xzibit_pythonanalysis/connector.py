@@ -242,7 +242,7 @@ class ConnectorPythonAnalysis(Connector):
             return len(data)
         except Exception:
             logger.error(f"_analyze_ruff - General exception")
-            return "Exception"
+            return -1
 
     def generate_rows(
         self,
