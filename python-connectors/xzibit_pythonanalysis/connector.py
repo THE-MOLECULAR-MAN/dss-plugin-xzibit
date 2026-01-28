@@ -152,7 +152,7 @@ class ConnectorPythonAnalysis(Connector):
 
             # 2. Extract Cyclomatic Complexity (CC) blocks from the tree
             # Passing the tree object avoids a second 'ast.parse' inside cc_visit
-            logger.error(f"_analyze_radon start")
+            logger.error(f"_analyze_radon 2")
             complexity_blocks = radon_cc.cc_visit(tree)
             avg_complexity = (
                 radon_cc.average_complexity(complexity_blocks)
