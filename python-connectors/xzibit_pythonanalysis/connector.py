@@ -8,6 +8,7 @@ import json
 import ast
 import subprocess
 from typing import Dict, List, Any, Tuple
+from typing import Dict, Any
 
 from vermin import detect, Config
 
