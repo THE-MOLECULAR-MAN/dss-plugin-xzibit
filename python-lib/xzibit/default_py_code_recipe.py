@@ -9,9 +9,9 @@ from dataiku import pandasutils as pdu
 # TODO: Write here your actual code that computes the outputs
 # NB: DSS supports several kinds of APIs for reading and writing data. Please see doc.
 
-unaltered_default_python_code_recipe_df = ... # Compute a Pandas dataframe to write into unaltered_default_python_code_recipe
+TEMPLATE_df = ... # Compute a Pandas dataframe to write into TEMPLATE
 
 
 # Write recipe outputs
-unaltered_default_python_code_recipe = dataiku.Dataset("unaltered_default_python_code_recipe")
-unaltered_default_python_code_recipe.write_with_schema(unaltered_default_python_code_recipe_df)
+TEMPLATE = dataiku.Dataset("TEMPLATE")
+TEMPLATE.write_with_schema(TEMPLATE_df)
