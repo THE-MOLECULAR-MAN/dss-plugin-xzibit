@@ -9,9 +9,9 @@ import ast
 import subprocess
 from typing import Dict, List, Any, Tuple
 
-from vermin import detect, Config
-import radon.complexity as radon_cc
-import radon.metrics as radon_mi
+# from vermin import detect, Config
+# import radon.complexity as radon_cc
+# import radon.metrics as radon_mi
 
 import ast
 from typing import Dict, Any
