@@ -41,6 +41,9 @@ def get_recipe_last_modifier_user(recipe_handle) -> str:
         return last_modifier
     except Exception:
         return "Unknown"
+    
+    
+def get_recipe_last_modified_timestamp()
 
 
 def get_tuples_only(input_list: list) -> list:
