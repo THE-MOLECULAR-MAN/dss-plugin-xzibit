@@ -147,7 +147,7 @@ class ConnectorPythonAnalysis(Connector):
         try:
             # 1. Parse the AST once (the most computationally expensive part)
             # This satisfies the requirement to avoid redundant expensive calls
-            logger.error(f"_analyze_radon start ")
+            logger.error(f"_analyze_radon start")
             tree = ast.parse(code)
 
             # 2. Extract Cyclomatic Complexity (CC) blocks from the tree
