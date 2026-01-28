@@ -214,7 +214,7 @@ class ConnectorPythonAnalysis(Connector):
             # logger.info(f"_analyze_pylint started")
             # next line is causing exception
             # sudo dnf install pylint # Alma 8
-            PYLINT_PATH = os.path.join(BINARY_PATH, "ruff") 
+            PYLINT_PATH = os.path.join(BINARY_PATH, "pylint")
             output = self._run_subprocess_tool(["pylint", "--output-format=json"], code)
             # logger.info(f"finished subprocess for pylint")
             data = json.loads(output)
