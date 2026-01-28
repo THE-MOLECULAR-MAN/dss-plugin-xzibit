@@ -3,13 +3,15 @@ import dataiku
 import pandas as pd, numpy as np
 from dataiku import pandasutils as pdu
 
-# Read recipe inputs
-INPUT_PLACEHOLDER = dataiku.Dataset("INPUT_PLACEHOLDER")
-INPUT_PLACEHOLDER_df = INPUT_PLACEHOLDER.get_dataframe()
 
 
+# Compute recipe outputs
+# TODO: Write here your actual code that computes the outputs
+# NB: DSS supports several kinds of APIs for reading and writing data. Please see doc.
+
+unaltered_default_python_code_recipe_df = ... # Compute a Pandas dataframe to write into unaltered_default_python_code_recipe
 
 
 # Write recipe outputs
-OUTPUT_PLACEHOLDER = dataiku.Folder("PLACEHOLDER3")
-OUTPUT_PLACEHOLDER_info = OUTPUT_PLACEHOLDER.get_info()
+unaltered_default_python_code_recipe = dataiku.Dataset("unaltered_default_python_code_recipe")
+unaltered_default_python_code_recipe.write_with_schema(unaltered_default_python_code_recipe_df)
