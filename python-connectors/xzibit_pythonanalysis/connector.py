@@ -428,46 +428,49 @@ from dataiku import pandasutils as pdu
                 del processed_row["_raw_code"]
                 yield processed_row
 
-def get_read_schema(self):
+    def get_read_schema(self):
         """Returns the read schema for TBD"""
         # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
         # Meanings: Text, JSONArrayMeaning, Email, Boolean, DatetimeNoTz, Date, FreeText, LongMeaning
-        return {'columns': [{'meaning': 'Text', 'name': 'project_key', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'recipe_name', 'type': 'string'},
-             {'meaning': 'URL', 'name': 'url', 'type': 'string'},
-             {'meaning': 'Text', 'name': 'code_env_name', 'type': 'string'},
-             {'meaning': 'Text',
-              'name': 'code_env_python_version',
-              'type': 'string'},
-             {'meaning': 'LongMeaning',
-              'name': 'num_lines_of_code',
-              'type': 'int'},
-             {'meaning': 'Text',
-              'name': 'last_modified_by_user',
-              'type': 'string'},
-             {'meaning': 'LongMeaning',
-              'name': 'last_modified_timestamp',
-              'type': 'string'},
-             {'meaning': 'Boolean',
-              'name': 'is_likely_unaltered_default_code',
-              'type': 'boolean'},
-             {'meaning': 'Text',
-              'name': 'min_python_version_from_Vermin',
-              'type': 'string'},
-             {'meaning': 'DoubleMeaning',
-              'name': 'radon_cc_avg',
-              'type': 'double'},
-             {'meaning': 'DoubleMeaning',
-              'name': 'radon_mi_score',
-              'type': 'double'},
-             {'meaning': 'Text', 'name': 'radon_rank', 'type': 'string'},
-             {'meaning': 'LongMeaning',
-              'name': 'ruff_violations',
-              'type': 'int'},
-             {'meaning': 'LongMeaning',
-              'name': 'pylint_issues',
-              'type': 'int'}]}
-
+        return {
+            "columns": [
+                {"meaning": "Text", "name": "project_key", "type": "string"},
+                {"meaning": "Text", "name": "recipe_name", "type": "string"},
+                {"meaning": "URL", "name": "url", "type": "string"},
+                {"meaning": "Text", "name": "code_env_name", "type": "string"},
+                {
+                    "meaning": "Text",
+                    "name": "code_env_python_version",
+                    "type": "string",
+                },
+                {"meaning": "LongMeaning", "name": "num_lines_of_code", "type": "int"},
+                {"meaning": "Text", "name": "last_modified_by_user", "type": "string"},
+                {
+                    "meaning": "LongMeaning",
+                    "name": "last_modified_timestamp",
+                    "type": "string",
+                },
+                {
+                    "meaning": "Boolean",
+                    "name": "is_likely_unaltered_default_code",
+                    "type": "boolean",
+                },
+                {
+                    "meaning": "Text",
+                    "name": "min_python_version_from_Vermin",
+                    "type": "string",
+                },
+                {"meaning": "DoubleMeaning", "name": "radon_cc_avg", "type": "double"},
+                {
+                    "meaning": "DoubleMeaning",
+                    "name": "radon_mi_score",
+                    "type": "double",
+                },
+                {"meaning": "Text", "name": "radon_rank", "type": "string"},
+                {"meaning": "LongMeaning", "name": "ruff_violations", "type": "int"},
+                {"meaning": "LongMeaning", "name": "pylint_issues", "type": "int"},
+            ]
+        }
 
     def get_records_count(self, partitioning=None, partition_id=None):
         return None
