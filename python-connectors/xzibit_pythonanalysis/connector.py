@@ -301,10 +301,10 @@ class ConnectorPythonAnalysis(Connector):
                             recipe_handle
                         )
 
-                        row["last_modified_timestamp"] = get_recipe_last_modified_timestamp(
-                            recipe_handle
+                        row["last_modified_timestamp"] = (
+                            get_recipe_last_modified_timestamp(recipe_handle)
                         )
-                        
+
                         # Run In-Memory Analysis immediately (Vermin, Radon)
                         mpvv = self._analyze_vermin(code)
                         row["min_python_version_from_Vermin"] = (
