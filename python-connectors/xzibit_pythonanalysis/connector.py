@@ -313,7 +313,7 @@ class ConnectorPythonAnalysis(Connector):
                                 # next_row["pylint_issues"] = self._analyze_pylint(code)
 
                                 # # 5. Ruff (Speed/Style) - Returns violation count - WORKING
-                                next_row["ruff_violations"] = self._analyze_ruff(code)
+                                # next_row["ruff_violations"] = self._analyze_ruff(code)
 
                         except Exception as e:
                             logger.error(
