@@ -64,8 +64,9 @@ class ConnectorPythonAnalysis(Connector):
     def get_url(self, id, project_key):
         """Create a URL to the DSS object in question in this specific DSS instance.
         Return None if any of the inputs are None.
-        
-        May be different one day if we want to link """
+
+        May be different one day if we want to link other types of objects besides just recipes
+        """
         # at least one is None, return None
         if any(v is None for v in (self.__baseurl, id, project_key)):
             return None
