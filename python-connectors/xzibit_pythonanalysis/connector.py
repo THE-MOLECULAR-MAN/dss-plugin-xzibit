@@ -127,21 +127,8 @@ class ConnectorPythonAnalysis(Connector):
 
     def _is_default_code_recipe(self, code) -> bool:
         """Check if the recipe code matches the default template."""
-        default_template = (
-            "# This is a Python recipe.\n"
-            "# You can write your code here.\n"
-            "\n"
-            "import dataiku\n"
-            "from dataiku import pandasutils as pdu\n"
-            "\n"
-            "# Read recipe inputs\n"
-            '# input_dataset = dataiku.Dataset("input_dataset")\n'
-            "# df = input_dataset.get_dataframe()\n"
-            "\n"
-            "# Write recipe outputs\n"
-            '# output_dataset = dataiku.Dataset("output_dataset")\n'
-            "# output_dataset.write_with_schema(df)\n"
-        )
+        
+        
         try:
             code = self.get_recipe_code(recipe_handle)
             return code.strip() == default_template.strip()
