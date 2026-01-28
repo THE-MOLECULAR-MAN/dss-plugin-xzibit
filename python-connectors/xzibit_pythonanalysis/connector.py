@@ -8,12 +8,13 @@ import os
 import logging
 import json
 import subprocess
+import hashlib
+from typing import Dict, List, Any
+
 # import ast
 
 
 # import shutil
-import hashlib
-from typing import Dict, List, Any
 
 from vermin import detect, Config
 
