@@ -297,7 +297,7 @@ class ConnectorPythonAnalysis(Connector):
                         )
                         row["num_lines_of_code"] = len(code.splitlines())
                         
-                        row[]
+                        row["last_modified_by"] = get_recipe_last_modifier_user(
 
                         # Run In-Memory Analysis immediately (Vermin, Radon)
                         mpvv = self._analyze_vermin(code)
