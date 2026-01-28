@@ -366,7 +366,7 @@ from dataiku import pandasutils as pdu
 
                         # Run In-Memory Analysis immediately (Vermin, Radon)
                         
-                        row[""]
+                        row["is_default"]
                         
                         mpvv = self._analyze_vermin(code)
                         row["min_python_version_from_Vermin"] = (
