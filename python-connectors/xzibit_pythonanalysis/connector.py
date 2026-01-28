@@ -142,6 +142,26 @@ class ConnectorPythonAnalysis(Connector):
         Returns:
             bool: True if any snippet is found in the code, False otherwise.
         """
+        default_code_snippets = [
+            "_df = ... # Compute a Pandas dataframe to write into ",
+            """# -*- coding: utf-8 -*-
+import dataiku
+import pandas as pd, numpy as np
+from dataiku import pandasutils as pdu
+
+# Read recipe inputs""",
+            """# -*- coding: utf-8 -*-
+import dataiku
+import pandas as pd, numpy as np
+from dataiku import pandasutils as pdu
+
+
+
+# Compute recipe outputs
+# TODO: Write here your actual code that computes the outputs
+# NB: DSS supports several kinds of APIs for reading and writing data. Please see doc.
+""",
+        ]
         if not code or not default_code_snippets:
             return False
 
