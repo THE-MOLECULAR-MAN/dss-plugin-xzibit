@@ -191,28 +191,28 @@ class ConnectorPythonAnalysis(Connector):
                 "active_lines": -1,
             }
 
-    def _analyze_radon(self, code: str) -> Dict[str, Any]:
-        """Run Radon for Cyclomatic Complexity and Maintainability Index."""
-        try:
-            # invalid syntax (<unknown>, line 1)
-            # Cyclomatic Complexity
-            complexity = radon_cc.cc_visit(code)
-            avg_complexity = (
-                radon_cc.average_complexity(complexity) if complexity else 0
-            )
+    # def _analyze_radon(self, code: str) -> Dict[str, Any]:
+    #     """Run Radon for Cyclomatic Complexity and Maintainability Index."""
+    #     try:
+    #         # invalid syntax (<unknown>, line 1)
+    #         # Cyclomatic Complexity
+    #         complexity = radon_cc.cc_visit(code)
+    #         avg_complexity = (
+    #             radon_cc.average_complexity(complexity) if complexity else 0
+    #         )
 
-            # Maintainability Index (score of 100 is best, 0 is worst)
-            mi_score = radon_mi.mi_visit(code, multi=False)
+    #         # Maintainability Index (score of 100 is best, 0 is worst)
+    #         mi_score = radon_mi.mi_visit(code, multi=False)
 
-            return {
-                "radon_cc_avg": round(avg_complexity, 2),
-                "radon_mi_score": round(mi_score, 2),
-                "radon_rank": radon_mi.mi_rank(mi_score),
-            }
-        except Exception as e:
-            logger.error(f"Radon analysis failed, code below {e}")
-            print(code)
-            return {"radon_cc_avg": -1, "radon_mi_score": -1, "radon_rank": "Error"}
+    #         return {
+    #             "radon_cc_avg": round(avg_complexity, 2),
+    #             "radon_mi_score": round(mi_score, 2),
+    #             "radon_rank": radon_mi.mi_rank(mi_score),
+    #         }
+    #     except Exception as e:
+    #         logger.error(f"Radon analysis failed, code below {e}")
+    #         print(code)
+    #         return {"radon_cc_avg": -1, "radon_mi_score": -1, "radon_rank": "Error"}
 
     def _analyze_dependencies(self, code: str) -> List[str]:
         """
