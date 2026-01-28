@@ -30,7 +30,13 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger()
 
 def get_recipe_last_modifier_user(recipe_handle) -> str:
-    
+    """Fetches the last modifier user of a given recipe."""
+    try:
+        metadata = recipe_handle.get_metadata()
+        last_modifier = metadata.get("lastModifierUser", "Unknown")
+        return last_modifier
+    except Exception:
+        return "Unknown"
 
 
 def get_tuples_only(input_list: list) -> list:
