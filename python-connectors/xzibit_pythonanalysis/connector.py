@@ -265,7 +265,7 @@ class ConnectorPythonAnalysis(Connector):
 
                 for recipe_meta in python_recipes:
                     if records_limit > 0 and records_generated >= records_limit:
-                return
+                        return
                     name = recipe_meta["name"]
                     logger.info(f"Analyzing Python code for recipe {name}...")
 
