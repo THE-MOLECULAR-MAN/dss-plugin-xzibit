@@ -61,7 +61,7 @@ class ConnectorPythonAnalysis(Connector):
         # Tools configuration can be extended here if we need specific flags
         self.tmp_dir = tempfile.mkdtemp(prefix="dss_recipe_analysis_")
         
-def get_url(self, id, project_key):
+    def get_url(self, id, project_key):
         """Create a URL to the DSS object in question in this specific DSS instance.
         Return None if any of the inputs are None."""
         # at least one is None, return None
