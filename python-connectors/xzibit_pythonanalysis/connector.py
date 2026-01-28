@@ -17,7 +17,7 @@ import dataiku
 from dataiku import api_client
 from dataiku.connector import Connector
 
-BINARY_
+BINARY_PATH = "/data/dataiku/dss_data/code-envs/python/plugin_xzibit_managed/bin/"
 
 from xzibit.utils import get_python_recipe_code_env, pp
 
