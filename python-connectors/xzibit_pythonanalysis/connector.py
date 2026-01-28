@@ -135,7 +135,7 @@ import pandas as pd, numpy as np
 from dataiku import pandasutils as pdu
 
 # Read recipe inputs""",
-            """# Write recipe outputs
+        """
         ]
 
         try:
