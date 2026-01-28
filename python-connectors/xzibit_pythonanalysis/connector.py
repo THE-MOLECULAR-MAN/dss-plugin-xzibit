@@ -125,7 +125,7 @@ class ConnectorPythonAnalysis(Connector):
     # In-Memory Analysis Tools (Fast)
     # -------------------------------------------------------------------------
 
-    def _is_default_code_recipe(self, recipe_handle) -> bool:
+    def _is_default_code_recipe(self, code) -> bool:
         """Check if the recipe code matches the default template."""
         default_template = (
             "# This is a Python recipe.\n"
