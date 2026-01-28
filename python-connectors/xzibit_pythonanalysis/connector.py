@@ -13,6 +13,12 @@ from vermin import detect, Config
 import radon.complexity as radon_cc
 import radon.metrics as radon_mi
 
+import ast
+from typing import Dict, Any
+import radon.complexity as radon_cc
+import radon.metrics as radon_mi
+from radon.raw import analyze as radon_raw_analyze
+
 import dataiku
 from dataiku import api_client
 from dataiku.connector import Connector
