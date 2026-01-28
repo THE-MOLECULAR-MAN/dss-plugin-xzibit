@@ -291,7 +291,7 @@ class ConnectorPythonAnalysis(Connector):
                             )
                             next_row["code_env_name"] = code_env_name
                             next_row["code_env_python_version"] = python_version
-                            next_row["num_lines"] = python_version
+                            next_row["num_lines"] = len(code.splitlines())
 
                             # --- Analysis Tools ---
 
