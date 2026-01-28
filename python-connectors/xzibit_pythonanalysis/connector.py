@@ -179,6 +179,8 @@ class ConnectorPythonAnalysis(Connector):
                 h_volume=halstead_metrics.total.volume,
                 comments=raw_metrics.comments,
             )
+            
+            logger.error(f"_analyze_radon 2")
 
             return {
                 "radon_cc_avg": round(avg_complexity, 2),
