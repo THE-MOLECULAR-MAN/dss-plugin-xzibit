@@ -147,6 +147,7 @@ from dataiku import pandasutils as pdu
 # NB: DSS supports several kinds of APIs for reading and writing data. Please see doc.
 """,
         ]
+        
 
         try:
             code = self.get_recipe_code(recipe_handle)
