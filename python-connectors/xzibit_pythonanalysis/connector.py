@@ -124,18 +124,20 @@ class ConnectorPythonAnalysis(Connector):
     # -------------------------------------------------------------------------
     # In-Memory Analysis Tools (Fast)
     # -------------------------------------------------------------------------
-    
 
-def check_default_snippets_presence(code: str, default_code_snippets: List[str]) -> bool:
+
+def check_default_snippets_presence(
+    code: str, default_code_snippets: List[str]
+) -> bool:
     """
     Checks if any of the items in the list of default_code_snippets are found in "code".
-    
-    Performs newline normalization to ensure compatibility across different 
+
+    Performs newline normalization to ensure compatibility across different
     operating systems (handling \r\n vs \n).
 
     Args:
         code (str): The full contents of the Python script.
-        default_code_snippets (List[str]): A list of strings, where each string 
+        default_code_snippets (List[str]): A list of strings, where each string
                                            contains one or more lines of code.
 
     Returns:
@@ -146,11 +148,11 @@ def check_default_snippets_presence(code: str, default_code_snippets: List[str])
 
     # Normalize newlines in the source code to standard Unix style (\n)
     # This prevents failures if the code has different line endings than the snippets.
-    normalized_code = code.replace('\r\n', '\n')
+    normalized_code = code.replace("\r\n", "\n")
 
     # Generator expression checking for existence of any snippet
     return any(
-        snippet.replace('\r\n', '\n') in normalized_code 
+        snippet.replace("\r\n", "\n") in normalized_code
         for snippet in default_code_snippets
     )
 
@@ -176,7 +178,6 @@ from dataiku import pandasutils as pdu
 # NB: DSS supports several kinds of APIs for reading and writing data. Please see doc.
 """,
         ]
-        
 
         try:
             code = self.get_recipe_code(recipe_handle)
