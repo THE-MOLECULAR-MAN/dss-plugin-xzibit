@@ -365,7 +365,7 @@ class ConnectorPythonAnalysis(Connector):
                             "recipe_name": name,
                         }
                         try:
-                            next_row["code_env_name"] = get_url(self, recipe_id, project_key)
+                            next_row["url"] = get_url(self, recipe_id, project_key)
                             # get additional Dataiku metadata
                             code_env_name = get_python_recipe_code_env(recipe_handle)
                             python_version = self.get_code_env_python_version(
