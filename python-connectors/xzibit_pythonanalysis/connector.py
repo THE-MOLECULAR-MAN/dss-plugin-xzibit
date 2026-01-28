@@ -379,8 +379,8 @@ from dataiku import pandasutils as pdu
                         row["is_likely_unaltered_default_code"] = (
                             self.check_default_snippets_presence(code)
                         )
-                        
-                        row
+
+                        row["code_sample"] = self.get_code_sample(code)
 
                         mpvv = self._analyze_vermin(code)
                         row["min_python_version_from_Vermin"] = (
