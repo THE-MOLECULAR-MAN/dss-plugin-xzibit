@@ -374,7 +374,9 @@ class ConnectorPythonAnalysis(Connector):
                             next_row["code_env_name"] = code_env_name
                             next_row["code_env_python_version"] = python_version
                             next_row["num_lines_of_code"] = len(code.splitlines())
-                            next_row["url"] = self.get_url(name, project_key)
+                            next_row["url"] = self.get_url(
+                                recipe_handle.id, project_key
+                            )
 
                             # --- Analysis Tools ---
 
