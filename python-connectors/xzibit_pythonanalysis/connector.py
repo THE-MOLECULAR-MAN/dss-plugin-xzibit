@@ -127,10 +127,10 @@ class ConnectorPythonAnalysis(Connector):
 
     def _is_default_code_recipe(self, code) -> bool:
         """Check if the recipe code matches the default template."""
-        default_code_contains =[
-            "_df = ... # Compute a Pandas dataframe to write into "
+        default_code_contains = [
+            "_df = ... # Compute a Pandas dataframe to write into ",
         ]
-        
+
         try:
             code = self.get_recipe_code(recipe_handle)
             return code.strip() == default_template.strip()
