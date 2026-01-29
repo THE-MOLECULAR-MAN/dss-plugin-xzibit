@@ -21,6 +21,16 @@ class ConnectorProjects(Connector):
     def __init__(self, config, plugin_config):
         Connector.__init__(self, config, plugin_config)
         self.__client = api_client()
+        
+        self.__baseurl = get_dss_base_url()
+
+    def get_url(self, project_key):
+        """Create a URL to the object in question in this specific DSS instance.
+        Return None if any of the inputs are None."""
+        # at least one is None, return None
+        if any(v is None for v in (self.__baseurl, project_key)):
+            return None
+        return f"{self.__baseurl}/projects/{project_key}/flow/"
 
     def generate_rows(
         self,
