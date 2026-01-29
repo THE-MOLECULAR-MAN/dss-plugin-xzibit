@@ -10,7 +10,6 @@ from xzibit.utils import (
     flatten_dict,
     remove_prefix_from_keys,
 )
-
 ####################################################################
 # Unique imports for this Class
 ####################################################################
