@@ -15,6 +15,41 @@ from json import dumps as jd
 JAVA_NOT_IMPLEMENTED = "com.dataiku.dip.utils.NotImplementedException"
 
 
+def compare_major_minor_versions(version_a: str, version_b: str) -> int:
+    """
+    Compares two 'major.minor' version strings.
+
+    Args:
+        version_a (str): The first version (e.g., "3.7")
+        version_b (str): The second version (e.g., "3.11")
+
+    Returns:
+        int:
+             1 if version_a > version_b
+             0 if version_a == version_b
+            -1 if version_a < version_b
+
+    Raises:
+        ValueError: If inputs are not in 'int.int' format.
+    """
+    try:
+        # Split by period and convert to tuple of integers
+        # "3.11" -> (3, 11)
+        tuple_a = tuple(map(int, str(version_a).split(".")))
+        tuple_b = tuple(map(int, str(version_b).split(".")))
+
+        if tuple_a > tuple_b:
+            return 1
+        elif tuple_a < tuple_b:
+            return -1
+        else:
+            return 0
+    except ValueError:
+        # Handle cases where version might be "Unknown" or empty
+        # Returning -2 or raising error depends on your failure strategy
+        return -2
+
+
 def extract_keys(d, v=True, key_prefix="allow"):
     """
     Finds keys in dictionary 'd' that start with 'key_prefix' and have value 'v'.

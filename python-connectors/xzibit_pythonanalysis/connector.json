@@ -1,0 +1,12 @@
+{
+    "meta": {
+        "label": "Analyze Python Code recipes",
+        "description": "a dataset describing the style, syntax, and dependencies of Python Code Recipes on this DSS instance",
+        "icon": "icon-cogs"
+    },
+    "readable": true,
+    "writable": false,
+    "supportAppend": false,
+    "params": [],
+    "partitioningMode": "NOT_PARTITIONABLE"
+}

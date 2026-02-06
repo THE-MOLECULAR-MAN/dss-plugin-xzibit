@@ -2,7 +2,7 @@
     "meta": {
         "label": "Dataiku Plugin Usages dataset",
         "description": "a dataset describing instances of where plugins are used",
-        "icon": "icon-cogs"
+        "icon": "icon-code"
     },
     "readable": true,
     "writable": false,
