@@ -25,6 +25,7 @@ from dataiku.connector import Connector
 from xzibit.utils import get_python_recipe_code_env, get_dss_base_url
 
 # Define path to binaries in the managed code env
+# this works for Fleet Manager deployed DSS instances where the code environment name is the default
 # Note: Adjust if your environment path differs
 BINARY_PATH = "/data/dataiku/dss_data/code-envs/python/plugin_xzibit_managed/bin/"
 
