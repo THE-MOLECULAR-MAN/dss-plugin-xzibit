@@ -6,6 +6,7 @@
         "PYTHON312",
         "PYTHON313",
         "PYTHON314",
+        "PYTHON315",
     ],
     "corePackagesSet": "AUTO",
     "forceConda": false,
