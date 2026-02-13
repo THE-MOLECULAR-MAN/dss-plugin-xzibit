@@ -28,6 +28,8 @@ from xzibit.utils import get_python_recipe_code_env, get_dss_base_url
 # this works for Fleet Manager deployed DSS instances where the code environment name is the default
 # Note: Adjust if your environment path differs
 # had to do this to add support for using ruff and pylint
+# ruff and pylint are installed as pip packages but the python packages aren't accessible for some reason
+# maybe I should rewrite to use the 'dev' version?
 BINARY_PATH = "/data/dataiku/dss_data/code-envs/python/plugin_xzibit_managed/bin/"
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
