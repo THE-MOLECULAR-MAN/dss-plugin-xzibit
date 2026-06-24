@@ -4,6 +4,7 @@ import re
 from datetime import datetime
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import get_dss_base_url
@@ -27,7 +28,7 @@ def make_url_friendly(text):
     return text
 
 
-class ConnectorWebApps(XzibitBaseConnector):
+class ConnectorWebApps(XzibitBaseConnector, Connector):
     """Connector that provides a dataset of all Web Apps on the DSS instance."""
 
     def __init__(self, config, plugin_config):

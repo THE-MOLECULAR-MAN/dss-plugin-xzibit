@@ -1,12 +1,13 @@
 """Connector that provides a dataset of all project deployer deployments."""
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import get_dss_base_url, pp
 
 
-class ConnectorDeployments(XzibitBaseConnector):
+class ConnectorDeployments(XzibitBaseConnector, Connector):
     """Connector that provides a dataset of all project deployer deployments."""
 
     def __init__(self, config, plugin_config):

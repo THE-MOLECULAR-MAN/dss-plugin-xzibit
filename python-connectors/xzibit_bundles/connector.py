@@ -1,12 +1,13 @@
 """Connector that provides a dataset of all Bundles across every project."""
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import get_dss_base_url, pp
 
 
-class ConnectorBundles(XzibitBaseConnector):
+class ConnectorBundles(XzibitBaseConnector, Connector):
     """Connector that provides a dataset of all Bundles across every project."""
 
     def __init__(self, config, plugin_config):

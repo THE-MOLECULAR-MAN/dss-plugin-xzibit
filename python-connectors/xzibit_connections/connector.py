@@ -1,6 +1,7 @@
 """Connector that provides a dataset of all Connections on the DSS instance."""
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import (
@@ -12,7 +13,7 @@ from xzibit.utils import (
 )
 
 
-class ConnectorConnections(XzibitBaseConnector):
+class ConnectorConnections(XzibitBaseConnector, Connector):
     """Connector that provides a dataset of all Connections on the DSS instance."""
 
     def __init__(self, config, plugin_config):

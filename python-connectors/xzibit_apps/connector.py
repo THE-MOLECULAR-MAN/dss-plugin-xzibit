@@ -1,12 +1,13 @@
 """Connector that provides a dataset of all Apps on the DSS instance."""
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import flatten_dict, get_dss_base_url
 
 
-class ConnectorApps(XzibitBaseConnector):
+class ConnectorApps(XzibitBaseConnector, Connector):
     """Connector that provides a dataset of all Apps on the DSS instance."""
 
     def __init__(self, config, plugin_config):

@@ -1,6 +1,7 @@
 """Connector that provides a dataset of all Code Environments on the DSS instance."""
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import (
@@ -13,7 +14,7 @@ from xzibit.utils import (
 from xzibit.deprecations import load_local_csv_as_dataframe, lookup_python_support
 
 
-class ConnectorCodeEnvs(XzibitBaseConnector):
+class ConnectorCodeEnvs(XzibitBaseConnector, Connector):
     """Connector that provides a dataset of all Code Environments on the DSS instance."""
 
     def __init__(self, config, plugin_config):

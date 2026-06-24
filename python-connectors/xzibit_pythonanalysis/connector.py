@@ -14,6 +14,7 @@ import radon.complexity as radon_cc
 import radon.metrics as radon_mi
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import get_python_recipe_code_env, get_dss_base_url
@@ -51,7 +52,7 @@ def get_tuples_only(input_list: list) -> list:
     return [item for item in input_list if isinstance(item, tuple)]
 
 
-class ConnectorPythonAnalysis(XzibitBaseConnector):
+class ConnectorPythonAnalysis(XzibitBaseConnector, Connector):
     """Yields one row per Python Code Recipe, annotated with static-analysis
     metrics from Vermin, Radon, Ruff, and Pylint."""
 

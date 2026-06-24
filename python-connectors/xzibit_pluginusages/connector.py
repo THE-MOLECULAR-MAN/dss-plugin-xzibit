@@ -1,6 +1,7 @@
 """Connector that provides a dataset of all plugin usage instances across projects."""
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import pp, jd
@@ -8,7 +9,7 @@ from xzibit.utils import pp, jd
 from xzibit.deprecations import DEPRECATED_PLUGIN_IDS
 
 
-class ConnectorPluginUsages(XzibitBaseConnector):
+class ConnectorPluginUsages(XzibitBaseConnector, Connector):
     """Connector that provides a dataset of all plugin usage instances across projects."""
 
     def __init__(self, config, plugin_config):

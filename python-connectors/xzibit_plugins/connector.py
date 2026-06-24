@@ -1,6 +1,7 @@
 """Connector that provides a dataset of all Plugins installed on the DSS instance."""
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import (
@@ -31,7 +32,7 @@ def extract_allow_keys(d: dict) -> dict:
     return {key[5:]: value for key, value in d.items() if key.startswith("allow")}
 
 
-class ConnectorPlugins(XzibitBaseConnector):
+class ConnectorPlugins(XzibitBaseConnector, Connector):
     """Connector that provides a dataset of all Plugins installed on the DSS instance."""
 
     def __init__(self, config, plugin_config):

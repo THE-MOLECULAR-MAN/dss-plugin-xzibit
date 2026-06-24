@@ -1,6 +1,7 @@
 """Connector that provides a dataset of all custom Meanings on the DSS instance."""
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import flatten_dict
@@ -8,7 +9,7 @@ from xzibit.utils import flatten_dict
 # Meanings do not have URLs in the DSS UI, so get_dss_base_url is not needed.
 
 
-class ConnectorMeanings(XzibitBaseConnector):
+class ConnectorMeanings(XzibitBaseConnector, Connector):
     """Connector that provides a dataset of all custom Meanings on the DSS instance."""
 
     def __init__(self, config, plugin_config):

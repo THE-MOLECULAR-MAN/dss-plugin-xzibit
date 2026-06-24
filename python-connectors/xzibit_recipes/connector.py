@@ -1,6 +1,7 @@
 """Connector that provides a dataset of all recipes across every project."""
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import get_dss_base_url, get_python_recipe_code_env
@@ -38,7 +39,7 @@ def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
     return []
 
 
-class ConnectorRecipes(XzibitBaseConnector):
+class ConnectorRecipes(XzibitBaseConnector, Connector):
     """Connector that provides a dataset of all recipes across every project."""
 
     def __init__(self, config, plugin_config):

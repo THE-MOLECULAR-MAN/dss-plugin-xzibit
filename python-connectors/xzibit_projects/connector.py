@@ -3,12 +3,13 @@
 from datetime import datetime
 
 from dataiku import api_client
+from dataiku.connector import Connector
 
 from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import remove_prefix_from_keys, flatten_dict, get_dss_base_url
 
 
-class ConnectorProjects(XzibitBaseConnector):
+class ConnectorProjects(XzibitBaseConnector, Connector):
     """Connector that provides a dataset of all Projects on the DSS instance."""
 
     def __init__(self, config, plugin_config):
