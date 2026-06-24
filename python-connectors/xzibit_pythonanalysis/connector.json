@@ -7,6 +7,15 @@
     "readable": true,
     "writable": false,
     "supportAppend": false,
-    "params": [],
+    "params": [
+        {
+            "name": "binary_path",
+            "label": "Plugin code-env bin/ directory path",
+            "type": "STRING",
+            "description": "Absolute path to the bin/ directory of the plugin's managed code environment (contains ruff and pylint executables). Leave blank to use the default Fleet Manager path.",
+            "mandatory": false,
+            "defaultValue": "/data/dataiku/dss_data/code-envs/python/plugin_xzibit_managed/bin/"
+        }
+    ],
     "partitioningMode": "NOT_PARTITIONABLE"
 }

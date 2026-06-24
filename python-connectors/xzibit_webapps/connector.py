@@ -38,8 +38,8 @@ def make_url_friendly(text):
     return text
 
 
-class ConnectorProjects(Connector):
-    """TBD"""
+class ConnectorWebApps(Connector):
+    """Connector that provides a dataset of all Web Apps on the DSS instance."""
 
     ####################################################################
     # Code that has to be customized for this specific class

@@ -14,8 +14,8 @@ from xzibit.utils import (
 from xzibit.deprecations import DEPRECATED_PLUGIN_IDS
 
 
-class ConnectorPlugins(Connector):
-    """TBD"""
+class ConnectorPluginUsages(Connector):
+    """Connector that provides a dataset of all plugin usage instances across projects."""
 
     ####################################################################
     # Code that has to be customized for this specific class

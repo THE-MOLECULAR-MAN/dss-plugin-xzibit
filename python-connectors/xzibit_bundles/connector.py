@@ -27,7 +27,7 @@ class ConnectorBundles(Connector):
         # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/DKU_TSHIRTS/bundles-design/
         # does need a trailing slash
         # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, id, project_key)):
+        if any(v is None for v in (self.__baseurl, project_key)):
             return None
         return f"{self.__baseurl}/projects/{project_key}/bundles-design/"
 

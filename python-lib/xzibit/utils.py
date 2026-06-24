@@ -186,16 +186,16 @@ def get_dss_url_from_global_vars():
 
 
 def get_dss_base_url():
-    """returns the base URL for the local node, without a trailing slash"""
+    """Returns the base URL for the local node, without a trailing slash.
+    Returns None if no URL can be determined from any source."""
     res = (
         get_dss_url_from_env()
         or get_dss_external_url()
         or get_dss_url_from_global_vars()
     )
-    if len(res) > 0:
+    if res:
         return res.rstrip("/")
-    else:
-        return None
+    return None
 
 
 def safe_extract_dataset_metadata(
@@ -282,13 +282,10 @@ def safe_extract_dataset_metadata(
     except DataikuException as e:
         print(f"safe_extract_dataset_metadata - Dataiku exception {e}")
         dataset_metadata["exists"] = "EXCEPTION 3"
-        return dataset_metadata
     except Exception as e:
         print(f"safe_extract_dataset_metadata - Generic exception {e}")
         dataset_metadata["exists"] = "EXCEPTION 4"
-        return dataset_metadata
-    finally:
-        return dataset_metadata
+    return dataset_metadata
 
 
 def print_sorted_strings(s):

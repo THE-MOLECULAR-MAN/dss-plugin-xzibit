@@ -8,8 +8,8 @@ from dataiku.connector import Connector
 from xzibit.utils import get_dss_base_url, pp
 
 
-class ConnectorAPIServices(Connector):
-    """TBD"""
+class ConnectorDeployments(Connector):
+    """Connector that provides a dataset of all project deployer deployments."""
 
     ####################################################################
     # Code that has to be customized for this specific class
