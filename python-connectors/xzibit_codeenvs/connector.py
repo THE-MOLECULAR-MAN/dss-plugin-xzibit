@@ -1,10 +1,8 @@
-"""TBD"""
+"""Connector that provides a dataset of all Code Environments on the DSS instance."""
 
-####################################################################
-# Same imports for all dataset Classes
-####################################################################
 from dataiku import api_client
-from dataiku.connector import Connector
+
+from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import (
     get_dss_base_url,
     flatten_dict,
@@ -15,14 +13,11 @@ from xzibit.utils import (
 from xzibit.deprecations import load_local_csv_as_dataframe, lookup_python_support
 
 
-class ConnectorCodeEnvs(Connector):
-    """TBD"""
+class ConnectorCodeEnvs(XzibitBaseConnector):
+    """Connector that provides a dataset of all Code Environments on the DSS instance."""
 
-    ####################################################################
-    # Code that has to be customized for this specific class
-    ####################################################################
     def __init__(self, config, plugin_config):
-        Connector.__init__(self, config, plugin_config)
+        super().__init__(config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
         self.__df_dss_python = load_local_csv_as_dataframe(
@@ -41,12 +36,12 @@ class ConnectorCodeEnvs(Connector):
         )
 
     def get_url(self, env_name, env_lang="python"):
-        """Create a URL to the DSS object in question in this specific DSS instance.
-        Return None if any of the inputs are None."""
-        # at least one is None, return None
+        """Returns the DSS UI URL for the code environment, or None if inputs are missing.
+
+        Code environment URLs require a trailing slash.
+        """
         if any(v is None for v in (self.__baseurl, env_lang, env_name)):
             return None
-        # trailing slash is MANDATORY for Code Envs
         return f"{self.__baseurl}/admin/code-envs/design/{env_lang.lower()}/{env_name}/"
 
     def generate_rows(
@@ -56,7 +51,6 @@ class ConnectorCodeEnvs(Connector):
         partition_id=None,
         records_limit=-1,
     ):
-        """TBD"""
         records_generated = 0
 
         for code_env_handle in self.__client.list_code_envs(as_objects=True):
@@ -75,7 +69,6 @@ class ConnectorCodeEnvs(Connector):
                 next_row["url"] = self.get_url(code_env_name, code_env_lang)
 
                 settings_raw = settings.get_raw()
-                # pp(settings_raw)
                 next_row["deployment_mode"] = settings_raw.get("deploymentMode", None)
                 next_row["python_interpreter"] = settings_raw.get("desc", {}).get(
                     "pythonInterpreter", None
@@ -89,7 +82,6 @@ class ConnectorCodeEnvs(Connector):
                 if next_row["code_env_lang"] == "R":
                     next_row["python_version_support_status"] = "N/A"
                 else:
-
                     if next_row["python_interpreter"] is not None:
                         # next_row["python_interpreter"] takes the form of PYTHON39 or PYTHON310
                         python_version_formatted = next_row[
@@ -118,7 +110,6 @@ class ConnectorCodeEnvs(Connector):
                     next_row["size_in_MB"] = "DISABLED"
 
             except Exception as e:
-                # this is occuring on DevDesign
                 print(
                     f"codeenvs - generate_rows EXCEPTION: CodeEnv: {code_env_name} Error message: {e}"
                 )
@@ -128,49 +119,4 @@ class ConnectorCodeEnvs(Connector):
                 yield next_row
 
     def get_read_schema(self):
-        """TBD"""
-        # Data types: https://developer.dataiku.com/latest/api-reference/python/datasets.html#dataiku.core.dataset.Schema
-        # Meanings: Text, JSONArrayMeaning, Email, Boolean, Date, FreeText, LongMeaning, DoubleMeaning
         return None
-        # return {
-        #     "columns": [
-        #         {"meaning": "Text", "name": "code_env_name", "type": "string"},
-        #         {"meaning": "Text", "name": "code_env_lang", "type": "string"},
-        #         {"meaning": "Text", "name": "deployment_mode", "type": "string"},
-        #         {"meaning": "Text", "name": "owner", "type": "string"},
-        #         {"meaning": "Text", "name": "python_interpreter", "type": "string"},
-        #         {"meaning": "Text", "name": "core_packages_set", "type": "string"},
-        #         {"meaning": "Text", "name": "path", "type": "string"},
-        #         {"meaning": "DoubleMeaning", "name": "size_in_MB", "type": "double"},
-        #         {
-        #             "name": "projectKeys_where_code_env_used",
-        #             "meaning": "JSONArrayMeaning",
-        #             "type": "string",
-        #         },
-        #         {
-        #             "name": "total_instances_of_code_env",
-        #             "meaning": "LongMeaning",
-        #             "type": "bigint",
-        #         },
-        #         {"meaning": "URL", "name": "url", "type": "string"},
-        #     ]
-        # }
-
-    ####################################################################
-    # Intentionally not implemented, not needed for this type
-    ####################################################################
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs for anything that I can find."""
-        return None
-
-    def get_partitioning(self):
-        """TBD"""
-        raise NotImplementedError
-
-    def list_partitions(self, partitioning):
-        """TBD"""
-        return []
-
-    def partition_exists(self, partitioning, partition_id):
-        """TBD"""
-        raise NotImplementedError

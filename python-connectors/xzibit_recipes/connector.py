@@ -1,11 +1,9 @@
-"""TBD"""
+"""Connector that provides a dataset of all recipes across every project."""
 
-####################################################################
-# Same imports for all dataset Classes
-####################################################################
 from dataiku import api_client
-from dataiku.connector import Connector
-from xzibit.utils import get_dss_base_url, pp, get_python_recipe_code_env
+
+from xzibit.base_connector import XzibitBaseConnector
+from xzibit.utils import get_dss_base_url, get_python_recipe_code_env
 from xzibit.deprecations import (
     DEPRECATED_PREPROCESSORS,
     load_local_csv_as_dataframe,
@@ -36,19 +34,15 @@ def prepare_recipe_has_deprecated_preprocessors(prepare_recipe_handle):
     if isinstance(preprocessors_unique, set):
         found_dep = preprocessors_unique.intersection(DEPRECATED_PREPROCESSORS)
         if isinstance(preprocessors_unique, set) and len(found_dep) > 0:
-            # return f"Deprecated preprocessors found: {found_dep}"
             return list(found_dep)
     return []
 
 
-class ConnectorRecipes(Connector):
-    """TBD"""
+class ConnectorRecipes(XzibitBaseConnector):
+    """Connector that provides a dataset of all recipes across every project."""
 
-    ####################################################################
-    # Code that has to be customized for this specific class
-    ####################################################################
     def __init__(self, config, plugin_config):
-        Connector.__init__(self, config, plugin_config)
+        super().__init__(config, plugin_config)
         self.__client = api_client()
         self.__objects_list = {}
         self.__baseurl = get_dss_base_url()
@@ -60,13 +54,69 @@ class ConnectorRecipes(Connector):
             project_handle = self.__client.get_project(pk)
             self.__objects_list[pk] = project_handle.list_recipes(as_type="objects")
 
-    def get_url(self, id, project_key):
-        """Create a URL to the DSS object in question in this specific DSS instance.
-        Return None if any of the inputs are None."""
-        # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, id, project_key)):
+    def get_url(self, recipe_id, project_key):
+        """Returns the DSS UI URL for the recipe, or None if inputs are missing."""
+        if any(v is None for v in (self.__baseurl, recipe_id, project_key)):
             return None
-        return f"{self.__baseurl}/projects/{project_key}/recipes/{id}/"
+        return f"{self.__baseurl}/projects/{project_key}/recipes/{recipe_id}/"
+
+    def _process_single_recipe(self, pk, r, project_handle):
+        """Build a metadata row for a single recipe.
+
+        Inner exceptions are caught and printed so that a failure on one recipe's
+        inputs or outputs does not prevent other recipes from being yielded.
+        """
+        recipe_handle = project_handle.get_recipe(r.id)
+        recipe_settings_handle = recipe_handle.get_settings()
+        raw_data = recipe_settings_handle.get_recipe_raw_definition()
+
+        next_row = {
+            "projectKey": pk,
+            "recipe_id": r.id,
+            "recipe_type": raw_data["type"],
+            "recipe_name": recipe_handle.name,
+            "tags": raw_data["tags"],
+            "url": self.get_url(r.id, pk),
+        }
+        try:
+            # GUI sometimes raises when iterating inputs for certain recipe types
+            # (e.g. Export To Folder with no Parameters dataset configured).
+            next_row["engine_parameters"] = raw_data.get("params", {}).get(
+                "engineParams", None
+            )
+            next_row["last_modified_user"] = (
+                raw_data.get("versionTag", {})
+                .get("lastModifiedBy", {})
+                .get("login", None)
+            )
+            next_row["input_datasets"] = recipe_settings_handle.get_flat_input_refs()
+
+            try:
+                next_row["code_env"] = get_python_recipe_code_env(recipe_handle)
+                deprecated_preprocessors = prepare_recipe_has_deprecated_preprocessors(
+                    recipe_handle
+                )
+                if len(deprecated_preprocessors) > 0:
+                    next_row["deprecation_status"] = (
+                        "Prepare recipe uses deprecated preprocessors"
+                    )
+                else:
+                    next_row["deprecation_status"] = lookup_recipe_deprecation_status(
+                        next_row["recipe_type"], self.__df_dss_recipes
+                    )
+                next_row["output_datasets"] = recipe_settings_handle.get_flat_output_refs()
+            except Exception as e:
+                print(
+                    f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe "
+                    f"output dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
+                )
+        except Exception as e:
+            print(
+                f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe "
+                f"input dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
+            )
+
+        return next_row
 
     def generate_rows(
         self,
@@ -75,9 +125,8 @@ class ConnectorRecipes(Connector):
         partition_id=None,
         records_limit=-1,
     ):
-        """TBD"""
+        """Yields one metadata row per recipe across all projects."""
         records_generated = 0
-        # iterate through each object
         for pk, proj_recipes in self.__objects_list.items():
             if records_limit > 0 and records_generated >= records_limit:
                 return
@@ -88,124 +137,19 @@ class ConnectorRecipes(Connector):
                 if records_limit > 0 and records_generated >= records_limit:
                     return
 
-                recipe_handle = project_handle.get_recipe(r.id)
-                recipe_settings_handle = recipe_handle.get_settings()
-                raw_data = recipe_settings_handle.get_recipe_raw_definition()
-
-                next_row = {
-                    "projectKey": pk,
-                    "recipe_id": r.id,
-                    "recipe_type": raw_data["type"],
-                    "recipe_name": recipe_handle.name,
-                    "tags": raw_data["tags"],
-                    "url": self.get_url(r.id, pk),
-                }
+                # Initialise with safe defaults so the finally block always has
+                # something to yield even if _process_single_recipe raises.
+                next_row = {"projectKey": pk, "recipe_id": r.id}
                 try:
-                    # GUI produces this error message when visiting this recipe's inputs/utputs
-                    # An invalid argument has been encountered : Failed to iterate, caused by: IllegalArgumentException: No parameters dataset selected for repeating dataset/recipe
-                    # Seems to happen with the Export To Folder recipe, which exports files to folder.
-                    # if the user has not set the "Parameters dataset" option for this recipe, or maybe if that dataset has been deleted, then it will throw an exception.
-
-                    next_row["engine_parameters"] = raw_data.get("params", {}).get(
-                        "engineParams", None
-                    )
-
-                    next_row["last_modified_user"] = (
-                        raw_data.get("versionTag", {})
-                        .get("lastModifiedBy", {})
-                        .get("login", None)
-                    )
-
-                    next_row["input_datasets"] = (
-                        recipe_settings_handle.get_flat_input_refs()
-                    )
-
-                    try:
-                        next_row["code_env"] = get_python_recipe_code_env(recipe_handle)
-
-                        deprecated_preprocessors = (
-                            prepare_recipe_has_deprecated_preprocessors(recipe_handle)
-                        )
-
-                        if len(deprecated_preprocessors) > 0:
-                            next_row["deprecation_status"] = (
-                                "Prepare recipe uses deprecated preprocessors"
-                            )
-                        else:
-                            next_row["deprecation_status"] = (
-                                lookup_recipe_deprecation_status(
-                                    next_row["recipe_type"], self.__df_dss_recipes
-                                )
-                            )
-
-                        next_row["output_datasets"] = (
-                            recipe_settings_handle.get_flat_output_refs()
-                        )
-
-                    except Exception as e:
-                        # this occurs often on Dev-Design.
-                        print(
-                            f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe output dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
-                        )
+                    next_row = self._process_single_recipe(pk, r, project_handle)
                 except Exception as e:
-                    # this occurs often on Dev-Design.
                     print(
-                        f"[recipes-generate_rows] [EXPECTED EXCEPTION] Exception in Recipe input dataset, project_key: {pk}, recipe_id: {r.id}: {e}"
+                        f"[recipes-generate_rows] [UNEXPECTED EXCEPTION] "
+                        f"project_key: {pk}, recipe_id: {r.id}: {e}"
                     )
                 finally:
                     records_generated += 1
                     yield next_row
 
     def get_read_schema(self):
-        """Returns the read schema for TBD"""
         return None
-        # return {
-        #     "columns": [
-        #         {"meaning": "Text", "name": "recipe_id", "type": "string"},
-        #         {"meaning": "Text", "name": "recipe_name", "type": "string"},
-        #         {"meaning": "Text", "name": "projectKey", "type": "string"},
-        #         {"meaning": "Text", "name": "recipe_type", "type": "string"},
-        #         {
-        #             "meaning": "JSONArrayMeaning",
-        #             "name": "input_datasets",
-        #             "type": "string",
-        #         },
-        #         {
-        #             "meaning": "JSONArrayMeaning",
-        #             "name": "output_datasets",
-        #             "type": "string",
-        #         },
-        #         {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
-        #         {
-        #             "meaning": "JSONObjectMeaning",
-        #             "name": "engine_parameters",
-        #             "type": "string",
-        #         },
-        #         {"meaning": "Text", "name": "last_modified_user", "type": "string"},
-        #         {
-        #             "meaning": "Text",
-        #             "name": "recipe_uses_deprecated_preprocessors",
-        #             "type": "string",
-        #         },
-        #         {"meaning": "URL", "name": "url", "type": "string"},
-        #     ]
-        # }
-
-    ####################################################################
-    # Intentionally not implemented, not needed for this type
-    ####################################################################
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs for anything that I can find."""
-        return None
-
-    def get_partitioning(self):
-        """TBD"""
-        raise NotImplementedError
-
-    def list_partitions(self, partitioning):
-        """TBD"""
-        return []
-
-    def partition_exists(self, partitioning, partition_id):
-        """TBD"""
-        raise NotImplementedError

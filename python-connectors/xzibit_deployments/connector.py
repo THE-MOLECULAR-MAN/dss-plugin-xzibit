@@ -1,34 +1,27 @@
-"""TBD"""
+"""Connector that provides a dataset of all project deployer deployments."""
 
-####################################################################
-# Same imports for all dataset Classes
-####################################################################
 from dataiku import api_client
-from dataiku.connector import Connector
+
+from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import get_dss_base_url, pp
 
 
-class ConnectorDeployments(Connector):
+class ConnectorDeployments(XzibitBaseConnector):
     """Connector that provides a dataset of all project deployer deployments."""
 
-    ####################################################################
-    # Code that has to be customized for this specific class
-    ####################################################################
     def __init__(self, config, plugin_config):
-        Connector.__init__(self, config, plugin_config)
+        super().__init__(config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
         self.__object_name = "Deployment"
 
-    # Bundles do not have a unique page, just a shared page like meanings
     def get_url(self, bundle_id, project_key):
-        """Create a URL to the DSS object in question in this specific DSS instance.
-        Return None if any of the inputs are None."""
-        # https://honker-design-2.se-platform.dataiku-sandbox.io/project-deployer/projects/DSS_Data_Plugin_Test/bundle/example_bundle1/
-        # does need a trailing slash
-        # at least one is None, return None
+        """Returns the DSS UI URL for the deployment, or None if inputs are missing.
+
+        Deployment URLs require a trailing slash.
+        """
         if any(v is None for v in (self.__baseurl, bundle_id, project_key)):
-            return ""
+            return None
         return f"{self.__baseurl}/project-deployer/projects/{project_key}/bundle/{bundle_id}/"
 
     def generate_rows(
@@ -38,7 +31,6 @@ class ConnectorDeployments(Connector):
         partition_id=None,
         records_limit=-1,
     ):
-        """TBD"""
         records_generated = 0
 
         try:
@@ -47,7 +39,6 @@ class ConnectorDeployments(Connector):
             print("No deployers connected")
             return None
 
-        # iterate through each object
         for deployment_handle in deployer.list_deployments(as_objects=True):
             if records_limit > 0 and records_generated >= records_limit:
                 return
@@ -87,24 +78,4 @@ class ConnectorDeployments(Connector):
                 yield next_row
 
     def get_read_schema(self):
-        """TBD"""
         return None
-
-    ####################################################################
-    # Intentionally not implemented, not needed for this type
-    ####################################################################
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs for anything that I can find."""
-        return None
-
-    def get_partitioning(self):
-        """TBD"""
-        raise NotImplementedError
-
-    def list_partitions(self, partitioning):
-        """TBD"""
-        return []
-
-    def partition_exists(self, partitioning, partition_id):
-        """TBD"""
-        raise NotImplementedError

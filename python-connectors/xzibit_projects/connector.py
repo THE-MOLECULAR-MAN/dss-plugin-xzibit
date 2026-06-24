@@ -1,34 +1,23 @@
-"""TBD"""
+"""Connector that provides a dataset of all Projects on the DSS instance."""
 
-####################################################################
-# Same imports for all dataset Classes
-####################################################################
+from datetime import datetime
+
 from dataiku import api_client
-from dataiku.connector import Connector
 
+from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import remove_prefix_from_keys, flatten_dict, get_dss_base_url
 
 
-####################################################################
-# Unique imports for this Class
-####################################################################
-from datetime import datetime
+class ConnectorProjects(XzibitBaseConnector):
+    """Connector that provides a dataset of all Projects on the DSS instance."""
 
-
-class ConnectorProjects(Connector):
-    """TBD"""
-
-    ####################################################################
-    # Code that has to be customized for this specific class
     def __init__(self, config, plugin_config):
-        Connector.__init__(self, config, plugin_config)
+        super().__init__(config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
 
     def get_url(self, project_key):
-        """Create a URL to the object in question in this specific DSS instance.
-        Return None if any of the inputs are None."""
-        # at least one is None, return None
+        """Returns the DSS UI URL for the project, or None if inputs are missing."""
         if any(v is None for v in (self.__baseurl, project_key)):
             return None
         return f"{self.__baseurl}/projects/{project_key}/flow/"
@@ -40,7 +29,6 @@ class ConnectorProjects(Connector):
         partition_id=None,
         records_limit=-1,
     ):
-        """TBD"""
         records_generated = 0
         keys = [
             "projectKey",
@@ -54,14 +42,11 @@ class ConnectorProjects(Connector):
             "versionTag.lastModifiedOn",
             "tutorialProject",
         ]
-        # iterate through each object
         for item_info in self.__client.list_projects():
             if records_limit > 0 and records_generated >= records_limit:
                 return
 
             next_row = flatten_dict(item_info, include_keys=keys)
-
-            # custom things for this specific class:
             next_row = remove_prefix_from_keys(next_row, "versionTag.")
             next_row["last_modified_timestamp"] = datetime.fromtimestamp(
                 next_row.get("lastModifiedOn", 0) // 1000
@@ -71,7 +56,6 @@ class ConnectorProjects(Connector):
             yield next_row
 
     def get_read_schema(self):
-        """TBD"""
         return {
             "columns": [
                 {"name": "projectKey", "type": "string", "meaning": "Text"},
@@ -95,22 +79,3 @@ class ConnectorProjects(Connector):
                 {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
-
-    ####################################################################
-    # Intentionally not implemented, not needed for this type
-    ####################################################################
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs for anything that I can find."""
-        return None
-
-    def get_partitioning(self):
-        """TBD"""
-        raise NotImplementedError
-
-    def list_partitions(self, partitioning):
-        """TBD"""
-        return []
-
-    def partition_exists(self, partitioning, partition_id):
-        """TBD"""
-        raise NotImplementedError

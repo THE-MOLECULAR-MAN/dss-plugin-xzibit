@@ -1,10 +1,8 @@
-"""TBD"""
+"""Connector that provides a dataset of all Users on the DSS instance."""
 
-####################################################################
-# Same imports for all dataset Classes
-####################################################################
 from dataiku import api_client
-from dataiku.connector import Connector
+
+from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import (
     flatten_dict,
     get_dss_base_url,
@@ -13,24 +11,19 @@ from xzibit.utils import (
 )
 
 
-class ConnectorUsers(Connector):
-    """TBD"""
+class ConnectorUsers(XzibitBaseConnector):
+    """Connector that provides a dataset of all Users on the DSS instance."""
 
-    ####################################################################
-    # Code that has to be customized for this specific class
-    ####################################################################
     def __init__(self, config, plugin_config):
-        Connector.__init__(self, config, plugin_config)
+        super().__init__(config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
 
-    def get_url(self, id):
-        """Create a URL to the DSS object in question in this specific DSS instance.
-        Return None if any of the inputs are None."""
-        # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, id)):
+    def get_url(self, login):
+        """Returns the DSS UI URL for the user's admin page, or None if inputs are missing."""
+        if any(v is None for v in (self.__baseurl, login)):
             return None
-        return f"{self.__baseurl}/admin/security/users/edit/{id}/"
+        return f"{self.__baseurl}/admin/security/users/edit/{login}/"
 
     def generate_rows(
         self,
@@ -39,7 +32,6 @@ class ConnectorUsers(Connector):
         partition_id=None,
         records_limit=-1,
     ):
-        """TBD"""
         records_generated = 0
         unique_id_key_name = "login"
         keys = [
@@ -54,7 +46,6 @@ class ConnectorUsers(Connector):
             "resultingUserProfile",
             "userProfile",
         ]
-        # iterate through each object
         for item_info in self.__client.list_users():
             try:
                 if records_limit > 0 and records_generated >= records_limit:
@@ -62,7 +53,6 @@ class ConnectorUsers(Connector):
 
                 next_row = flatten_dict(item_info, include_keys=keys)
                 item_handle = self.__client.get_user(item_info[unique_id_key_name])
-                # TODO: fix this date mess below
                 next_row["last_successful_login"] = parse_user_datetime(
                     str(item_handle.get_activity().last_successful_login)
                 )
@@ -71,13 +61,10 @@ class ConnectorUsers(Connector):
                 )
                 next_row["url"] = self.get_url(next_row.get("login", None))
 
-                # TODO: bug inside int_to_datetime
                 next_row["created_timestamp"] = int_to_datetime(
                     next_row.get("creationDate", 0)
                 )
-                # pp(item_info)
             except Exception as e:
-                # TODO: figure out why this is getting hit so much
                 print(
                     f"[users-generate_rows] [UNEXPECTED EXCEPTION] {e} with user {next_row.get('login', None)}"
                 )
@@ -86,7 +73,6 @@ class ConnectorUsers(Connector):
                 yield next_row
 
     def get_read_schema(self):
-        """TBD"""
         return {
             "columns": [
                 {"name": "login", "type": "string", "meaning": "Text"},
@@ -98,7 +84,7 @@ class ConnectorUsers(Connector):
                     "meaning": "JSONArrayMeaning",
                 },
                 {"name": "sourceType", "type": "string", "meaning": "Text"},
-                {  # intentionally not setting the meanting=Email b/c email format is not enforced for DSS users, and there are exceptions to this on Dev-Design
+                {  # email format is not enforced for DSS users, so meaning=Text not Email
                     "name": "email",
                     "type": "string",
                     "meaning": "Text",
@@ -115,22 +101,3 @@ class ConnectorUsers(Connector):
                 {"name": "url", "type": "string", "meaning": "URL"},
             ]
         }
-
-    ####################################################################
-    # Intentionally not implemented, not needed for this type
-    ####################################################################
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs for anything that I can find."""
-        return None
-
-    def get_partitioning(self):
-        """TBD"""
-        raise NotImplementedError
-
-    def list_partitions(self, partitioning):
-        """TBD"""
-        return []
-
-    def partition_exists(self, partitioning, partition_id):
-        """TBD"""
-        raise NotImplementedError

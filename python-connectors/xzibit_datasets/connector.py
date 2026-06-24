@@ -1,34 +1,27 @@
-"""TBD"""
+"""Connector that provides a dataset of all Datasets across every project."""
 
-####################################################################
-# Same imports for all dataset Classes
-####################################################################
 from dataiku import api_client
-from dataiku.connector import Connector
+
+from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import (
     safe_extract_dataset_metadata,
     get_dss_base_url,
 )
 
 
-class ConnectorDatasets(Connector):
-    """TBD"""
+class ConnectorDatasets(XzibitBaseConnector):
+    """Connector that provides a dataset of all Datasets across every project."""
 
-    ####################################################################
-    # Code that has to be customized for this specific class
-    ####################################################################
     def __init__(self, config, plugin_config):
-        Connector.__init__(self, config, plugin_config)
+        super().__init__(config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
 
-    def get_url(self, id, project_key):
-        """Create a URL to the DSS object in question in this specific DSS instance.
-        Return None if any of the inputs are None."""
-        # at least one is None, return None
-        if any(v is None for v in (self.__baseurl, id, project_key)):
+    def get_url(self, dataset_id, project_key):
+        """Returns the DSS UI URL for the dataset, or None if inputs are missing."""
+        if any(v is None for v in (self.__baseurl, dataset_id, project_key)):
             return None
-        return f"{self.__baseurl}/projects/{project_key}/datasets/{id}/explore/"
+        return f"{self.__baseurl}/projects/{project_key}/datasets/{dataset_id}/explore/"
 
     def generate_rows(
         self,
@@ -37,10 +30,8 @@ class ConnectorDatasets(Connector):
         partition_id=None,
         records_limit=-1,
     ):
-        """TBD"""
         records_generated = 0
 
-        # iterate through each object
         for pk in self.__client.list_project_keys():
             project_handle = self.__client.get_project(pk)
 
@@ -51,7 +42,6 @@ class ConnectorDatasets(Connector):
                 try:
                     dataset_handle = project_handle.get_dataset(r.id)
                     next_row = safe_extract_dataset_metadata(dataset_handle, pk)
-
                     next_row["url"] = self.get_url(r.id, pk)
 
                 except Exception as e:
@@ -64,78 +54,4 @@ class ConnectorDatasets(Connector):
                     yield next_row
 
     def get_read_schema(self):
-        """TBD"""
         return None
-        # return {
-        #     "columns": [
-        #         {"meaning": "Text", "name": "id", "type": "string"},
-        #         {"meaning": "Text", "name": "name", "type": "string"},
-        #         {"meaning": "Text", "name": "projectKey", "type": "string"},
-        #         {"meaning": "Text", "name": "type", "type": "string"},
-        #         {"meaning": "FreeText", "name": "shortDesc", "type": "string"},
-        #         {"meaning": "FreeText", "name": "description", "type": "string"},
-        #         {"meaning": "Boolean", "name": "exists", "type": "boolean"},
-        #         {"meaning": "Text", "name": "formatType", "type": "string"},
-        #         {"meaning": "Text", "name": "params.connection", "type": "string"},
-        #         {"meaning": "Boolean", "name": "managed", "type": "boolean"},
-        #         {"meaning": "Text", "name": "params.mode", "type": "string"},
-        #         {"meaning": "Text", "name": "params.table", "type": "string"},
-        #         {"meaning": "Text", "name": "params.schema", "type": "string"},
-        #         {"meaning": "Text", "name": "params.path", "type": "string"},
-        #         {
-        #             "meaning": "Text",
-        #             "name": "creationTag.lastModifiedBy.login",
-        #             "type": "string",
-        #         },
-        #         {
-        #             "meaning": "Text",
-        #             "name": "creationTag.lastModifiedOn",
-        #             "type": "string",
-        #         },
-        #         {
-        #             "meaning": "Text",
-        #             "name": "versionTag.lastModifiedBy.login",
-        #             "type": "string",
-        #         },
-        #         {
-        #             "meaning": "Text",
-        #             "name": "versionTag.lastModifiedOn",
-        #             "type": "string",
-        #         },
-        #         {
-        #             "meaning": "Text",
-        #             "name": "params.metastoreDatabaseName",
-        #             "type": "string",
-        #         },
-        #         {"meaning": "Text", "name": "params.folderSmartId", "type": "string"},
-        #         {"meaning": "JSONArrayMeaning", "name": "tags", "type": "string"},
-        #         {"meaning": "Boolean", "name": "featureGroup", "type": "boolean"},
-        #         {"meaning": "LongMeaning", "name": "num_metrics_checks", "type": "int"},
-        #         {"meaning": "LongMeaning", "name": "num_columns", "type": "int"},
-        #         {
-        #             "meaning": "JSONArrayMeaning",
-        #             "name": "column_names",
-        #             "type": "string",
-        #         },
-        #         {"meaning": "URL", "name": "url", "type": "string"},
-        #     ]
-        # }
-
-    ####################################################################
-    # Intentionally not implemented, not needed for this type
-    ####################################################################
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs for anything that I can find."""
-        return None
-
-    def get_partitioning(self):
-        """TBD"""
-        raise NotImplementedError
-
-    def list_partitions(self, partitioning):
-        """TBD"""
-        return []
-
-    def partition_exists(self, partitioning, partition_id):
-        """TBD"""
-        raise NotImplementedError

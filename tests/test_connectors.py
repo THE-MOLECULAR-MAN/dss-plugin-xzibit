@@ -147,12 +147,12 @@ class TestConnectorPluginsGetUrl:
         url = self.conn.get_url("my-plugin")
         assert url == "https://my-dss.example.com/plugins/my-plugin/summary/"
 
-    def test_none_plugin_id_returns_empty_string(self):
-        assert self.conn.get_url(None) == ""
+    def test_none_plugin_id_returns_none(self):
+        assert self.conn.get_url(None) is None
 
-    def test_none_baseurl_returns_empty_string(self):
+    def test_none_baseurl_returns_none(self):
         conn = _make_connector(_plugins_mod.ConnectorPlugins, base_url=None)
-        assert conn.get_url("some-plugin") == ""
+        assert conn.get_url("some-plugin") is None
 
 
 # ── xzibit_pythonanalysis: get_tuples_only ────────────────────────────────
@@ -463,3 +463,56 @@ class TestConnectorAPIServicesGetUrl:
 
     def test_none_project_key_returns_none(self):
         assert self.conn.get_url("svc", None) is None
+
+
+# ── xzibit_deployments: ConnectorDeployments.get_url ─────────────────────
+
+
+class TestConnectorDeploymentsGetUrl:
+    def setup_method(self):
+        self.conn = _make_connector(_deployments_mod.ConnectorDeployments)
+
+    def test_valid_inputs(self):
+        url = self.conn.get_url("bundle1", "MY_PROJECT")
+        assert "MY_PROJECT" in url
+        assert "bundle1" in url
+        assert "project-deployer" in url
+        assert url.endswith("/")
+
+    def test_none_bundle_id_returns_none(self):
+        assert self.conn.get_url(None, "MY_PROJECT") is None
+
+    def test_none_project_key_returns_none(self):
+        assert self.conn.get_url("bundle1", None) is None
+
+    def test_none_baseurl_returns_none(self):
+        conn = _make_connector(_deployments_mod.ConnectorDeployments, base_url=None)
+        assert conn.get_url("bundle1", "MY_PROJECT") is None
+
+
+# ── XzibitBaseConnector: shared partition/count interface ─────────────────
+
+
+class TestXzibitBaseConnectorMethods:
+    """XzibitBaseConnector provides no-op implementations inherited by all connectors."""
+
+    def setup_method(self):
+        # Use ConnectorApps as a representative; any connector would work.
+        self.conn = _make_connector(_apps_mod.ConnectorApps)
+
+    def test_get_records_count_returns_none(self):
+        assert self.conn.get_records_count() is None
+
+    def test_get_records_count_with_args_returns_none(self):
+        assert self.conn.get_records_count(partitioning="x", partition_id="y") is None
+
+    def test_list_partitions_returns_empty_list(self):
+        assert self.conn.list_partitions(None) == []
+
+    def test_get_partitioning_raises_not_implemented(self):
+        with pytest.raises(NotImplementedError):
+            self.conn.get_partitioning()
+
+    def test_partition_exists_raises_not_implemented(self):
+        with pytest.raises(NotImplementedError):
+            self.conn.partition_exists(None, None)

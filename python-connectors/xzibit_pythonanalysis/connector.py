@@ -6,7 +6,7 @@ import os
 import json
 import subprocess
 import hashlib
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 
 from vermin import detect, Config
 
@@ -14,8 +14,8 @@ import radon.complexity as radon_cc
 import radon.metrics as radon_mi
 
 from dataiku import api_client
-from dataiku.connector import Connector
 
+from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import get_python_recipe_code_env, get_dss_base_url
 
 # Default path to the managed code-env bin directory used by the plugin.
@@ -51,12 +51,12 @@ def get_tuples_only(input_list: list) -> list:
     return [item for item in input_list if isinstance(item, tuple)]
 
 
-class ConnectorPythonAnalysis(Connector):
+class ConnectorPythonAnalysis(XzibitBaseConnector):
     """Yields one row per Python Code Recipe, annotated with static-analysis
     metrics from Vermin, Radon, Ruff, and Pylint."""
 
     def __init__(self, config, plugin_config):
-        Connector.__init__(self, config, plugin_config)
+        super().__init__(config, plugin_config)
         self.__client = api_client()
         self.vermin_config = Config()
         self.vermin_config.set_verbose(0)
@@ -179,73 +179,140 @@ from dataiku import pandasutils as pdu
             print(f"WARNING: Radon analysis failed (likely a syntax error): {e}")
             return {"radon_cc_avg": -1, "radon_mi_score": -1, "radon_rank": "Error"}
 
+    def _build_recipe_row(
+        self, project_key: str, recipe_handle, name: str
+    ) -> Optional[Dict[str, Any]]:
+        """Build the base analysis row for a Python recipe (no subprocess analysis).
+
+        Returns None if the recipe has no code to analyze.
+        """
+        code = self.get_recipe_code(recipe_handle)
+        if not code:
+            print(f"{name:<40} | Skipped (No Code)")
+            return None
+
+        code_env_name = get_python_recipe_code_env(recipe_handle)
+        mpvv = self._analyze_vermin(code)
+
+        row: Dict[str, Any] = {
+            "project_key": project_key,
+            "recipe_name": name,
+            "url": self.get_url(recipe_handle.id, project_key),
+            "_raw_code": code,
+            "code_env_name": code_env_name,
+            "code_env_python_version": self.get_code_env_python_version(code_env_name),
+            "num_lines_of_code": len(code.splitlines()),
+            "code_hashsum": hashlib.md5(code.encode("utf-8")).hexdigest(),
+            "last_modified_by_user": get_recipe_last_modifier_user(recipe_handle),
+            "last_modified_timestamp": get_recipe_last_modified_timestamp(recipe_handle),
+            "is_likely_unaltered_default_code": self.check_default_snippets_presence(code),
+            "code_sample": self.get_code_sample(code),
+            "min_python_version_from_Vermin": (
+                f"{mpvv[0]}.{mpvv[1]}" if isinstance(mpvv, tuple) else str(mpvv)
+            ),
+        }
+
+        is_py3 = (isinstance(mpvv, tuple) and mpvv[0] >= 3) or (
+            isinstance(mpvv, int) and mpvv >= 3
+        )
+        if is_py3:
+            row.update(self._analyze_radon(code))
+        else:
+            row.update({"radon_cc_avg": None, "radon_mi_score": None, "radon_rank": "N/A"})
+
+        return row
+
     # -------------------------------------------------------------------------
     # Batch Processing for Subprocess Tools (Pylint, Ruff)
     # -------------------------------------------------------------------------
 
+    def _write_batch_to_tempdir(
+        self, batch_data: List[Dict[str, Any]], tmp_dir: str
+    ) -> Dict[str, int]:
+        """Write each recipe's source code to a uniquely named file in tmp_dir.
+
+        Returns a mapping of filename → batch index so tool output can be
+        attributed back to the originating recipe.
+        """
+        file_map: Dict[str, int] = {}
+        for idx, item in enumerate(batch_data):
+            safe_name = "".join(
+                c for c in item["recipe_name"] if c.isalnum() or c in (" ", "_", "-")
+            ).strip().replace(" ", "_")
+            filename = f"{idx}_{safe_name}.py"
+            file_path = os.path.join(tmp_dir, filename)
+            with open(file_path, "w", encoding="utf-8") as f:
+                f.write(item["_raw_code"])
+            file_map[filename] = idx
+        return file_map
+
+    def _run_ruff_on_batch(
+        self,
+        batch_data: List[Dict[str, Any]],
+        file_map: Dict[str, int],
+        tmp_dir: str,
+    ) -> None:
+        """Run Ruff on all files in tmp_dir; update batch_data with violation counts."""
+        try:
+            ruff_path = os.path.join(self.__binary_path, "ruff")
+            cmd = [ruff_path, "check", ".", "--output-format=json"]
+            result = subprocess.run(cmd, cwd=tmp_dir, capture_output=True, text=True)
+            ruff_data = json.loads(result.stdout)
+
+            counts: Dict[int, int] = {i: 0 for i in range(len(batch_data))}
+            for violation in ruff_data:
+                fname = os.path.basename(violation.get("filename", ""))
+                if fname in file_map:
+                    counts[file_map[fname]] += 1
+            for idx, count in counts.items():
+                batch_data[idx]["ruff_violations"] = count
+
+        except Exception as e:
+            print(f"ERROR: Batch Ruff failed: {e}")
+            for item in batch_data:
+                item["ruff_violations"] = -1
+
+    def _run_pylint_on_batch(
+        self,
+        batch_data: List[Dict[str, Any]],
+        file_map: Dict[str, int],
+        tmp_dir: str,
+    ) -> None:
+        """Run Pylint on all files in tmp_dir; update batch_data with issue counts."""
+        try:
+            pylint_path = os.path.join(self.__binary_path, "pylint")
+            cmd = [pylint_path, ".", "--output-format=json", "--recursive=y"]
+            result = subprocess.run(cmd, cwd=tmp_dir, capture_output=True, text=True)
+
+            try:
+                pylint_data = json.loads(result.stdout)
+            except json.JSONDecodeError:
+                pylint_data = []
+
+            counts: Dict[int, int] = {i: 0 for i in range(len(batch_data))}
+            for issue in pylint_data:
+                fname = os.path.basename(issue.get("path", ""))
+                if fname in file_map:
+                    counts[file_map[fname]] += 1
+            for idx, count in counts.items():
+                batch_data[idx]["pylint_issues"] = count
+
+        except Exception as e:
+            print(f"ERROR: Batch Pylint failed: {e}")
+            for item in batch_data:
+                item["pylint_issues"] = -1
+
     def _process_batch(self, batch_data: List[Dict[str, Any]]) -> None:
-        """Runs Ruff and Pylint on a batch of temp files to amortise startup cost.
-        Updates each dict in batch_data in-place with violation/issue counts."""
+        """Run Ruff and Pylint on a batch of temp files to amortise startup cost.
+
+        Updates each dict in batch_data in-place with violation/issue counts.
+        """
         if not batch_data:
             return
-
         with tempfile.TemporaryDirectory(prefix="dss_batch_analysis_") as tmp_dir:
-            # Write all recipe source files to the temp directory.
-            file_map: Dict[str, int] = {}
-
-            for idx, item in enumerate(batch_data):
-                safe_name = "".join(
-                    c for c in item["recipe_name"] if c.isalnum() or c in (" ", "_", "-")
-                ).strip().replace(" ", "_")
-                filename = f"{idx}_{safe_name}.py"
-                file_path = os.path.join(tmp_dir, filename)
-                with open(file_path, "w", encoding="utf-8") as f:
-                    f.write(item["_raw_code"])
-                file_map[filename] = idx
-
-            # ── Ruff ──────────────────────────────────────────────────────
-            try:
-                ruff_path = os.path.join(self.__binary_path, "ruff")
-                cmd = [ruff_path, "check", ".", "--output-format=json"]
-                result = subprocess.run(cmd, cwd=tmp_dir, capture_output=True, text=True)
-                ruff_data = json.loads(result.stdout)
-
-                counts: Dict[int, int] = {i: 0 for i in range(len(batch_data))}
-                for violation in ruff_data:
-                    fname = os.path.basename(violation.get("filename", ""))
-                    if fname in file_map:
-                        counts[file_map[fname]] += 1
-                for idx, count in counts.items():
-                    batch_data[idx]["ruff_violations"] = count
-
-            except Exception as e:
-                print(f"ERROR: Batch Ruff failed: {e}")
-                for item in batch_data:
-                    item["ruff_violations"] = -1
-
-            # ── Pylint ────────────────────────────────────────────────────
-            try:
-                pylint_path = os.path.join(self.__binary_path, "pylint")
-                cmd = [pylint_path, ".", "--output-format=json", "--recursive=y"]
-                result = subprocess.run(cmd, cwd=tmp_dir, capture_output=True, text=True)
-
-                try:
-                    pylint_data = json.loads(result.stdout)
-                except json.JSONDecodeError:
-                    pylint_data = []
-
-                counts = {i: 0 for i in range(len(batch_data))}
-                for issue in pylint_data:
-                    fname = os.path.basename(issue.get("path", ""))
-                    if fname in file_map:
-                        counts[file_map[fname]] += 1
-                for idx, count in counts.items():
-                    batch_data[idx]["pylint_issues"] = count
-
-            except Exception as e:
-                print(f"ERROR: Batch Pylint failed: {e}")
-                for item in batch_data:
-                    item["pylint_issues"] = -1
+            file_map = self._write_batch_to_tempdir(batch_data, tmp_dir)
+            self._run_ruff_on_batch(batch_data, file_map, tmp_dir)
+            self._run_pylint_on_batch(batch_data, file_map, tmp_dir)
 
     def generate_rows(
         self,
@@ -268,46 +335,12 @@ from dataiku import pandasutils as pdu
                 for recipe_meta in python_recipes:
                     if records_limit > 0 and records_generated >= records_limit:
                         break
-
                     name = recipe_meta["name"]
                     try:
                         recipe_handle = project_handle.get_recipe(name)
-                        code = self.get_recipe_code(recipe_handle)
-
-                        if not code:
-                            print(f"{name:<40} | Skipped (No Code)")
+                        row = self._build_recipe_row(project_key, recipe_handle, name)
+                        if row is None:
                             continue
-
-                        row: Dict[str, Any] = {
-                            "project_key": project_key,
-                            "recipe_name": name,
-                            "url": self.get_url(recipe_handle.id, project_key),
-                            "_raw_code": code,
-                        }
-
-                        code_env_name = get_python_recipe_code_env(recipe_handle)
-                        row["code_env_name"] = code_env_name
-                        row["code_env_python_version"] = self.get_code_env_python_version(code_env_name)
-                        row["num_lines_of_code"] = len(code.splitlines())
-                        row["code_hashsum"] = hashlib.md5(code.encode("utf-8")).hexdigest()
-                        row["last_modified_by_user"] = get_recipe_last_modifier_user(recipe_handle)
-                        row["last_modified_timestamp"] = get_recipe_last_modified_timestamp(recipe_handle)
-                        row["is_likely_unaltered_default_code"] = self.check_default_snippets_presence(code)
-                        row["code_sample"] = self.get_code_sample(code)
-
-                        mpvv = self._analyze_vermin(code)
-                        row["min_python_version_from_Vermin"] = (
-                            f"{mpvv[0]}.{mpvv[1]}" if isinstance(mpvv, tuple) else str(mpvv)
-                        )
-
-                        is_py3 = (isinstance(mpvv, tuple) and mpvv[0] >= 3) or (
-                            isinstance(mpvv, int) and mpvv >= 3
-                        )
-                        if is_py3:
-                            row.update(self._analyze_radon(code))
-                        else:
-                            row.update({"radon_cc_avg": None, "radon_mi_score": None, "radon_rank": "N/A"})
-
                         current_batch.append(row)
 
                         if len(current_batch) >= self.batch_size:
@@ -356,15 +389,3 @@ from dataiku import pandasutils as pdu
                 {"meaning": "Text", "name": "code_hashsum", "type": "string"},
             ]
         }
-
-    def get_records_count(self, partitioning=None, partition_id=None):
-        return None
-
-    def get_partitioning(self):
-        raise NotImplementedError
-
-    def list_partitions(self, partitioning):
-        return []
-
-    def partition_exists(self, partitioning, partition_id):
-        raise NotImplementedError

@@ -1,32 +1,26 @@
-"""TBD"""
+"""Connector that provides a dataset of all Bundles across every project."""
 
-####################################################################
-# Same imports for all dataset Classes
-####################################################################
 from dataiku import api_client
-from dataiku.connector import Connector
+
+from xzibit.base_connector import XzibitBaseConnector
 from xzibit.utils import get_dss_base_url, pp
 
 
-class ConnectorBundles(Connector):
-    """TBD"""
+class ConnectorBundles(XzibitBaseConnector):
+    """Connector that provides a dataset of all Bundles across every project."""
 
-    ####################################################################
-    # Code that has to be customized for this specific class
-    ####################################################################
     def __init__(self, config, plugin_config):
-        Connector.__init__(self, config, plugin_config)
+        super().__init__(config, plugin_config)
         self.__client = api_client()
         self.__baseurl = get_dss_base_url()
         self.__object_name = "bundle"
 
-    # Bundles do not have a unique page, just a shared page like meanings
     def get_url(self, project_key):
-        """Create a URL to the DSS object in question in this specific DSS instance.
-        Return None if any of the inputs are None."""
-        # https://honker-design-2.se-platform.dataiku-sandbox.io/projects/DKU_TSHIRTS/bundles-design/
-        # does need a trailing slash
-        # at least one is None, return None
+        """Returns the DSS UI URL for the project's bundles page, or None if inputs are missing.
+
+        Bundle URLs require a trailing slash.  All bundles in a project share
+        the same page; there is no per-bundle URL.
+        """
         if any(v is None for v in (self.__baseurl, project_key)):
             return None
         return f"{self.__baseurl}/projects/{project_key}/bundles-design/"
@@ -38,19 +32,15 @@ class ConnectorBundles(Connector):
         partition_id=None,
         records_limit=-1,
     ):
-        """TBD"""
         records_generated = 0
 
-        # iterate through each object
         for project_key in self.__client.list_project_keys():
             project_handle = self.__client.get_project(project_key)
 
             # .list_exported_bundles() returns a dict, not a list
             obj_list = project_handle.list_exported_bundles().get("bundles", [])
 
-            # iterate through each object in the project
             for obj_dict in obj_list:
-
                 if records_limit > 0 and records_generated >= records_limit:
                     return
                 try:
@@ -106,24 +96,4 @@ class ConnectorBundles(Connector):
                     yield next_row
 
     def get_read_schema(self):
-        """TBD"""
         return None
-
-    ####################################################################
-    # Intentionally not implemented, not needed for this type
-    ####################################################################
-    def get_records_count(self, partitioning=None, partition_id=None):
-        """This never runs for anything that I can find."""
-        return None
-
-    def get_partitioning(self):
-        """TBD"""
-        raise NotImplementedError
-
-    def list_partitions(self, partitioning):
-        """TBD"""
-        return []
-
-    def partition_exists(self, partitioning, partition_id):
-        """TBD"""
-        raise NotImplementedError

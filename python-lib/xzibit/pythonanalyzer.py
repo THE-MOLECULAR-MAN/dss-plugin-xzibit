@@ -7,7 +7,7 @@ connector flow.  Run it from a DSS notebook or scenario.
 import dataiku
 import tempfile
 import os
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 
 try:
     from vermin import detect, Config
@@ -20,7 +20,7 @@ except ImportError:
 class RecipeAnalyzer:
     """Analyses all Python recipes in a DSS project for Python version compatibility."""
 
-    def __init__(self, project_key: str = None):
+    def __init__(self, project_key: Optional[str] = None):
         """Initialise the analyser.
 
         Args:
